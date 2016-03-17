@@ -6,6 +6,12 @@
 * @Version	 : 1.0
 */
 global $base_url, $language;
+/*redirect link*/
+$q = $_GET['q'];
+if($q == 'user/login' || $q =='user/register' || $q =='search' || $q =='comment' || $q =='comment/reply' || $q =='admin' || $q =='filter/tips'){
+	drupal_goto($base_url);
+	exit();
+}
 
 /*define*/
 define('SITE_VERSION',   '1.0');
@@ -19,9 +25,13 @@ define("SITE_RECORD_PER_PAGE_NEWS", '15');
 define('SITE_SAME_RECORD_NEWS', '10');
 define('base_url_lang', $base_url .'/'. ((!isset($language->language) || $language->language == 'und' || $language->language == 'vi') ? 'vi/' : $language->language.'/'));
 
-/*redirect link*/
-$q = $_GET['q'];
-if($q == 'user/login' || $q =='user/register' || $q =='search' || $q =='comment' || $q =='comment/reply' || $q =='admin' || $q =='filter/tips'){
-	drupal_goto($base_url);
-	exit();
-}
+
+/**
+ * QuynhTM add thêm
+ * ??nh ngh?a các Table cho website
+ */
+define('TABLE_SUPPORT_ONLINE', 'web_support_online');
+
+
+
+

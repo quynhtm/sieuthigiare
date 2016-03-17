@@ -16,12 +16,11 @@ function indexSupportonline(){
 	$dataSearch['category'] = clsAdminLib::getIntParam('category','');
 	$dataSearch['status'] = clsAdminLib::getParam('status','');
 
-	$result = _Supportonline::getSearchListItems($dataSearch,$limit,$totalItem,$pager);
+	$result = Supportonline::getSearchListItems($dataSearch,$limit,$totalItem,$pager);
 	
 	$arrOptionsCategory[0] = t("Danh mục gốc");
-	
 
-	$view = theme('listSupportOnline',array(
+	$view = theme('indexSupportOnline',array(
 								'title'=>'Quản lý Nick Support',
 								'result' => $result,
 								'dataSearch' => $dataSearch,
@@ -94,7 +93,7 @@ function formSupportonlineAction(){
 		}
 	}
 
-	$view = theme('formSupportOnline',$data);
+	$view = theme('addSupportOnline',$data);
 	return $view;
 }
 

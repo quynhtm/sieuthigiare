@@ -12,7 +12,7 @@
  
 function HSSAdmin_menu() {
 	
-	$items["admincp/supportonline"] = array(
+	$items["admincp/supportOnline"] = array(
 		"title" => t('Nick hỗ trợ trực tuyến'),
 		"description" => "HSS Support online",
 		'page callback' => 'router_page',
@@ -28,13 +28,13 @@ function HSSAdmin_menu() {
  */
 function HSSAdmin_theme() {
     return array(
-		
-        'listSupportOnline' => array(
-            'template' => 'View/tpl/supportonline/listSupportOnline'
-        ),
-        'formSupportOnline' => array(
-            'template' => 'View/tpl/supportonline/formSupportOnline'
-        ),
+		//SupportOnline
+        'indexSupportOnline' 	=> array('template' => 'View/tpl/supportOnline/indexSupportOnline'),
+        'addSupportOnline' 		=> array('template' => 'View/tpl/supportOnline/addSupportOnline'),
+
+        //Product
+        //'indexProduct' => array('template' => 'View/tpl/product/indexProduct'),
+        //'addProduct' => array('template' => 'View/tpl/product/addProduct'),
     );
 }
 
@@ -57,8 +57,8 @@ function HSSAdmin_init(){
 		$files = array(
 			
 			/*support online*/
-			'Model/supportonlineModel.php',
-			'Controller/supportonlineController.php',
+			'Model/SupportOnline.php',
+			'Controller/SupportOnlineController.php',
 			
 			/*js*/
 			'View/js/admin.js',
