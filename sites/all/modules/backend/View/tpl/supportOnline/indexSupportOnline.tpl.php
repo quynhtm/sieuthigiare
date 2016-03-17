@@ -2,11 +2,10 @@
 	<div class="wrapp-search-box">
 		<div class="search-box-title"><?php echo t('Tìm kiếm bài viết')?>:</div>
 		<form action="" method="GET" id="frmSearch" class="frmSearch" name="frmSearch">
-			<input type="text" id="keyword" class="keyword" name="keyword" />
+			<input type="text" id="keyword" class="keyword" name="keyword" value="<?php echo $dataSearch['keyword'] ?>"/>
 			<select class="box-select" name="status">
-				<option>--Chọn trạng thái--</option>
-				<option value="0">Ẩn</option>
-				<option value="1">Hiện</option>
+				<option value="0" <?php if($dataSearch['status']==0){?>selected="selected"<?php } ?>>Ẩn</option>
+				<option value="1" <?php if($dataSearch['status']==1){?>selected="selected"<?php } ?>>Hiện</option>
 			</select>
 			<input type="submit" id="btnSearch" class="btnSearch" value="<?php echo t('Tìm kiếm')?>">
 		</form>
@@ -93,6 +92,6 @@
 
 <script>
 	jQuery(document).ready(function(){
-		DELETE_ITEM.init('admincp/supportonline');
+		DELETE_ITEM.init('admincp/supportOnline');
 	});
 </script>

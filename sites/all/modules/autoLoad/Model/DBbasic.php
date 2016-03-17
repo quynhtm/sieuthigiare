@@ -15,15 +15,15 @@ class DB{
             }
 
             /*Begin search*/
-            if($dataSearch['category'] > 0){
+            if(isset($dataSearch['category']) && $dataSearch['category'] > 0){
                 $sql->condition('i.catid', $dataSearch['category'], '=');
             }
 
-            if($dataSearch['status'] != ''){
+            if(isset($dataSearch['status']) && $dataSearch['status'] != ''){
                 $sql->condition('i.status', $dataSearch['status'], '=');
             }
 
-            if($dataSearch['keyword'] != ''){
+            if(isset($dataSearch['keyword']) && $dataSearch['keyword'] != ''){
                 $db_or = db_or();
                 $db_or->condition('i.title', '%'.$dataSearch['keyword'].'%', 'LIKE');
                 $db_or->condition('i.title_alias', '%'.$dataSearch['keyword'].'%', 'LIKE');
@@ -32,14 +32,11 @@ class DB{
             /*End search*/
 
             $totalItem = count($sql->execute()->fetchAll());
-            //$totalItem =0;
-
             $result = $sql->limit($limit)->orderBy('i.id', 'DESC')->execute();
             $arrItem = (array)$result->fetchAll();
 
             $pager = array('#theme' => 'pager','#quantity' => 3);
 
-            //out d? li?u ra
             $data['data'] = $arrItem;
             $data['pager'] = $pager;
             $data['total'] = $totalItem;
@@ -95,6 +92,26 @@ class DB{
 
     public static function updateOneItemByCond($tableAction, $dataFields=array(), $cond=''){
         //dataFields la array co field=>value
+        if(!empty($dataFields)){
+            if($cond != ''){
+                $cond = ' WHERE '.$cond;
+            }
+            $fiels = '';
+            $i = 0;
+            foreach($dataFields as $field => $value){
+                $i++;
+                if($i<count($dataFields))
+                    $fiels .= $field." = '".$value."', ";
+                else{
+                    $fiels .= $field." = '".$value."' ";
+                }
+            }
+        
+            $sql = db_query("UPDATE {$tableAction} SET $fiels ".$cond);
+            if($sql)
+                return true;
+        }
+        return false;
     }
 
     public static function insertOneItem($tableAction, $dataFields=array()){
@@ -121,7 +138,10 @@ class DB{
         if($cond != ''){
             $cond = ' WHERE '.$cond;
             $sql = db_query("DELETE FROM {$tableAction}".$cond);
+            if($sql)
+                return true;
         }
+        return false;
     }
 
     public static function countItem($tableAction, $fields='', $cond='', $groupby='', $oderby=''){

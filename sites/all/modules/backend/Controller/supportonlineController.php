@@ -13,13 +13,12 @@ function indexSupportonline(){
 	$pager = '';
 	$dataSearch = array();
 	$dataSearch['keyword'] = clsAdminLib::getParam('keyword','');
-	$dataSearch['category'] = clsAdminLib::getIntParam('category','');
 	$dataSearch['status'] = clsAdminLib::getParam('status','');
 	$arrFields=array('id', 'title', 'mobile', 'skyper', 'yahoo', 'created', 'order_no', 'status');
 
 	$result = SupportOnline::getSearch($dataSearch, $arrFields, $limit, $totalItem, $pager);
 	$view = theme('indexSupportOnline',array(
-								'title'=>'Quản lý Nick Support',
+								'title'=>'Quản lý bài viết',
 								'result' => $result,
 								'dataSearch' => $dataSearch,
 								'base_url' => $base_url,
@@ -28,7 +27,7 @@ function indexSupportonline(){
 	return $view;
 }
 
-function formSupportonlineAction(){
+function formSupportOnlineAction(){
 	global $base_url, $user;
 
 	$clsStdio = new clsStdio();
@@ -98,7 +97,7 @@ function formSupportonlineAction(){
 	return $view;
 }
 
-function deleteSupportonlineAction(){
+function deleteSupportOnlineAction(){
 	global $base_url;
 	$SupportOnline = new SupportOnline();
 

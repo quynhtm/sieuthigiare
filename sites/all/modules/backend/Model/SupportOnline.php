@@ -34,9 +34,9 @@ class SupportOnline{
 		return array();
 	}
 
-	public static function updateId($update, $id = 0){
-		if($id > 0 && !empty($update)){
-			return DB::updateOneItem(self::$table_action, $update, $id);
+	public static function updateId($dataUpdate, $id = 0){
+		if($id > 0 && !empty($dataUpdate)){
+			return DB::updateOneItem(self::$table_action, $dataUpdate, $id);
 		}
 		return false;
 	}
@@ -54,8 +54,7 @@ class SupportOnline{
 		}
 		return false;
 	}
-
-
+	
 	public static function listInputForm(){
 		$arr_fields = array(
 				'id'=>array('type'=>'hidden', 'label'=>'', 'value'=>'0','require'=>'', 'attr'=>''),
