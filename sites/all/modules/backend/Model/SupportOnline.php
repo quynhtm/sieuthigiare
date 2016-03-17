@@ -27,6 +27,13 @@ class SupportOnline{
 		return $data;
 	}
 
+	public static function getOneSupport($arrFields, $id = 0){
+		if($id > 0){
+			return DB::getOneItem(self::$table_action,$arrFields, $id);
+		}
+		return array();
+	}
+
 	public static function listInputForm(){
 		$arr_fields = array(
 				'id'=>array('type'=>'hidden', 'label'=>'', 'value'=>'0','require'=>'', 'attr'=>''),
