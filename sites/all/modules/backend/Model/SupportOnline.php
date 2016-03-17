@@ -27,12 +27,34 @@ class SupportOnline{
 		return $data;
 	}
 
-	public static function getOneSupport($arrFields, $id = 0){
+	public static function getOne($arrFields, $id = 0){
 		if($id > 0){
 			return DB::getOneItem(self::$table_action,$arrFields, $id);
 		}
 		return array();
 	}
+
+	public static function updateId($update, $id = 0){
+		if($id > 0 && !empty($update)){
+			return DB::updateOneItem(self::$table_action, $update, $id);
+		}
+		return false;
+	}
+
+	public static function insert($dataInsert){
+		if(!empty($dataInsert)){
+			return DB::insertOneItem(self::$table_action, $dataInsert);	
+		}
+		return false;
+	}
+
+	public static function deleteId($id){
+		if($id > 0){
+			return DB::deleteOneItem(self::$table_action, $id);
+		}
+		return false;
+	}
+
 
 	public static function listInputForm(){
 		$arr_fields = array(

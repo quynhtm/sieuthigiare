@@ -88,9 +88,9 @@ class DB{
         if(!empty($dataFields) && $id > 0){
             $sql = db_update($tableAction)->fields($dataFields)->condition('id', (int)$id, '=')->execute();
             if($sql)
-                return 1;
+                return true;
         }
-        return  0;
+        return false;
     }
 
     public static function updateOneItemByCond($tableAction, $dataFields=array(), $cond=''){
@@ -102,19 +102,19 @@ class DB{
         if(!empty($dataFields)){
             $sql = db_insert($tableAction)->fields($dataFields)->execute();
             if($sql)
-                return 1;
+                return true;
         }
-        return  0;
+        return false;
     }
 
     public static function deleteOneItem($tableAction, $id=0){
         if($id > 0){
            $sql = db_delete($tableAction)->condition('id', $id)->execute();
             if($sql)
-                return 1;
+                return true;
         }
         
-        return  0;
+        return false;
     }
 
     public static function deleteOneItemByCond($tableAction, $cond=''){

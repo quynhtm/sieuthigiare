@@ -40,7 +40,7 @@ function formSupportonlineAction(){
 	$param = arg();
 	if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
 		$arrFields = array('id','title', 'yahoo', 'skyper', 'mobile', 'email', 'order_no', 'status');
-		$arrOneItem = SupportOnline::getOneItem(TABLE_SUPPORT_ONLINE, $arrFields, $param[3]);
+		$arrOneItem = SupportOnline::getOne($arrFields, $param[3]);
 		
 		foreach ($data['fields'] as $key => $filed) {
 			$data['fields'][$key]['value']=$arrOneItem[0]->$key;
@@ -78,13 +78,13 @@ function formSupportonlineAction(){
 		}else{
 
 			if($data['fields']['id']['value']>0){
-				SupportOnline::updateOneItem(TABLE_SUPPORT_ONLINE, $data_post, $param[3]);
+				SupportOnline::updateId($data_post, $param[3]);
 				unset($data_post);
 				drupal_set_message('Sửa bài viết thành công.');
 				drupal_goto($base_url.'/admincp/supportOnline');
 			}else{
 				
-				$query = SupportOnline::insertOneItem(TABLE_SUPPORT_ONLINE, $data_post);
+				$query = SupportOnline::insert($data_post);
 				unset($data_post);
 				if($query){
 					drupal_set_message('Thêm bài viết thành công.');
@@ -107,7 +107,7 @@ function deleteSupportonlineAction(){
 		foreach($listId as $item){
 			if($item > 0){
 				
-				$arrName = SupportOnline::getOneItem(TABLE_SUPPORT_ONLINE, $arrFields=array('img'), $item);
+				$arrName = SupportOnline::getOne($arrFields=array('img'), $item);
 
 				$current_path_img='';
 				foreach($arrName as $v){
@@ -120,7 +120,7 @@ function deleteSupportonlineAction(){
 						unlink($dir);
 					}
 				}
-				SupportOnline::deleteOneItem(TABLE_SUPPORT_ONLINE, $item);
+				SupportOnline::deleteId($item);
 			}
 		}
 		unset($listId);
