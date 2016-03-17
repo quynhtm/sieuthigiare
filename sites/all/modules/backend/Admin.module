@@ -1,0 +1,65 @@
+<?php
+/*
+* @Created by: HSS
+* @Author	 : nguyenduypt86@gmail.com
+* @Date 	 : 06/2014
+* @Version	 : 1.0
+*/
+
+/**
+ * Implements hook_menu().
+ */
+ 
+function Admin_menu() {
+	
+	$items["admincp/supportOnline"] = array(
+		"title" => t('Support online'),
+		"description" => "Support online",
+		'page callback' => 'router_page',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+	
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function Admin_theme() {
+    return array(
+		//SupportOnline
+        'indexSupportOnline' 	=> array('template' => 'View/tpl/supportOnline/indexSupportOnline'),
+        'addSupportOnline' 		=> array('template' => 'View/tpl/supportOnline/addSupportOnline'),
+
+        //Product
+        //'indexProduct' => array('template' => 'View/tpl/product/indexProduct'),
+        //'addProduct' => array('template' => 'View/tpl/product/addProduct'),
+    );
+}
+
+/**
+ * Implements hook_permission().
+ */
+function Admin_permission() {
+  return array(
+    'access protected Admin' => array(
+      'title' => t('access protected Admin'),
+    ),
+  );
+}
+/**
+ * Implements hook_init().
+ */
+function Admin_init(){
+	$uri = request_uri();
+	if(preg_match("/(\/admincp)/", $uri)!=0){
+		$files = array(
+			/*support online*/
+			'Model/SupportOnline.php',
+			'Controller/SupportOnlineController.php',
+			
+		);
+		clsLoader::load('Admin', $files);
+	}
+}
