@@ -1,0 +1,69 @@
+<?php
+/*
+* @Created by: HSS
+* @Author	 : nguyenduypt86@gmail.com
+* @Date 	 : 06/2014
+* @Version	 : 1.0
+*/
+
+/**
+ * Implements hook_menu().
+ */
+ 
+function HSSAdmin_menu() {
+	
+	$items["admincp/supportonline"] = array(
+		"title" => t('Nick hỗ trợ trực tuyến'),
+		"description" => "HSS Support online",
+		'page callback' => 'router_page',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+	
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function HSSAdmin_theme() {
+    return array(
+		
+        'listSupportOnline' => array(
+            'template' => 'View/tpl/supportonline/listSupportOnline'
+        ),
+        'formSupportOnline' => array(
+            'template' => 'View/tpl/supportonline/formSupportOnline'
+        ),
+    );
+}
+
+/**
+ * Implements hook_permission().
+ */
+function HSSAdmin_permission() {
+  return array(
+    'access protected HSS Admin' => array(
+      'title' => t('access protected HSS Admin'),
+    ),
+  );
+}
+/**
+ * Implements hook_init().
+ */
+function HSSAdmin_init(){
+	$uri = request_uri();
+	if(preg_match("/(\/admincp)/", $uri)!=0){
+		$files = array(
+			
+			/*support online*/
+			'Model/supportonlineModel.php',
+			'Controller/supportonlineController.php',
+			
+			/*js*/
+			'View/js/admin.js',
+			'View/css/adm.css',
+		);
+		clsLoader::load('HSSAdmin', $files);
+	}
+}
