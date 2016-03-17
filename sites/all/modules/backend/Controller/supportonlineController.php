@@ -33,16 +33,15 @@ function formSupportonlineAction(){
 	global $base_url, $user;
 
 	$clsStdio = new clsStdio();
-	$SupportOnline = new SupportOnline();
 
-	$fields = clsForm::buildItemFields($SupportOnline->listInputForm());
+	$fields = clsForm::buildItemFields(SupportOnline::listInputForm());
 	$data = array('fields'=>$fields);
 
 	//get item update
 	$param = arg();
 	if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
 		$arrFields = array('id','title', 'yahoo', 'skyper', 'mobile', 'email', 'order_no', 'status');
-		$arrOneItem = $SupportOnline::getOneItem(TABLE_SUPPORT_ONLINE, $arrFields, $param[3]);
+		$arrOneItem = SupportOnline::getOneItem(TABLE_SUPPORT_ONLINE, $arrFields, $param[3]);
 		
 		foreach ($data['fields'] as $key => $filed) {
 			$data['fields'][$key]['value']=$arrOneItem[0]->$key;
@@ -80,12 +79,12 @@ function formSupportonlineAction(){
 		}else{
 
 			if($data['fields']['id']['value']>0){
-				$query = $SupportOnline->updateOne($data_post, $data['fields']['id']['value']);
+				SupportOnline::updateOneItem(TABLE_SUPPORT_ONLINE, $data_post, $param[3]);
 				unset($data_post);
 				drupal_set_message('Sửa bài viết thành công.');
 				drupal_goto($base_url.'/admincp/supportOnline');
 			}else{
-				$query = $SupportOnline->insertOne($data_post);
+				$query = SupportOnline::insertOneItem(TABLE_SUPPORT_ONLINE, $data_post);
 				unset($data_post);
 				if($query){
 					drupal_set_message('Thêm bài viết thành công.');
@@ -108,7 +107,8 @@ function deleteSupportonlineAction(){
 		foreach($listId as $item){
 			if($item > 0){
 				
-				$arrName = $SupportOnline->getByCond("img", "id=$item", "", "", "1");
+				$arrName = SupportOnline::getOneItem(TABLE_SUPPORT_ONLINE, $arrFields=array('img'), $item);
+
 				$current_path_img='';
 				foreach($arrName as $v){
 					$current_path_img .= $v->img;
@@ -120,7 +120,7 @@ function deleteSupportonlineAction(){
 						unlink($dir);
 					}
 				}
-				$query = $SupportOnline->deleteOne($item);
+				SupportOnline::deleteOneItem(TABLE_SUPPORT_ONLINE, $item);
 			}
 		}
 		unset($listId);

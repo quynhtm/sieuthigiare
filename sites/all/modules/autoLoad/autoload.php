@@ -36,8 +36,7 @@ function auto_load_file($path=''){
 		require_once($path_scan. '/' .$list_file);
 	}
 }
-auto_load_file(PATH_SCAN.'/Model/database');
-auto_load_file(PATH_SCAN.'/Model/defaultDb');
+auto_load_file(PATH_SCAN.'/Model');
 auto_load_file(PATH_SCAN.'/ClassBasse');
 auto_load_file(PATH_SCAN.'/CodeDefine');
 auto_load_file(PATH_SCAN.'/Controller');

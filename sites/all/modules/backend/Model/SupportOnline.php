@@ -7,7 +7,7 @@
 */
 class SupportOnline extends DbBasic{
 	
-	function listInputForm(){
+	public static function listInputForm(){
 		$arr_fields = array(
 				'id'=>array('type'=>'hidden', 'label'=>'', 'value'=>'0','require'=>'', 'attr'=>''),
 				'title'=>array('type'=>'text', 'label'=>'Name', 'value'=>'','require'=>'require', 'attr'=>''),

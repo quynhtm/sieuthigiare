@@ -55,6 +55,38 @@ class DbBasic{
         return $arrItem;
     }
 
+    public static function updateOneItem($tableAction, $dataFields=array(), $id=0){
+        //dataFields la array co field=>value
+        if(!empty($dataFields)){
+            if($id > 0){
+                $sql = db_update($tableAction)->fields($dataFields)->condition('id', (int)$id, '=')->execute();
+                if($sql)
+                    return 1;
+
+            }
+        }
+        return  0;
+    }
+
+    public static function insertOneItem($tableAction, $dataFields=array()){
+        //dataFields la array co field=>value
+        if(!empty($dataFields)){
+            $sql = db_insert($tableAction)->fields($dataFields)->execute();
+            if($sql)
+                return 1;
+        }
+        return  0;
+    }
+
+    public static function deleteOneItem($tableAction, $id=0){
+        if($id > 0){
+           $sql = db_delete($tableAction)->condition('id', $id)->execute();
+            if($sql)
+                return 1;
+        }
+        
+        return  0;
+    }
 }
 
 
