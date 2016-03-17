@@ -42,8 +42,8 @@ function formSupportonlineAction(){
 	//get item update
 	$param = arg();
 	if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
-		
-		$arrOneItem = $SupportOnline->getOne("*", $param[3]);
+		$arrFields = array('id','title', 'yahoo', 'skyper', 'mobile', 'email', 'order_no', 'status');
+		$arrOneItem = $SupportOnline::getOneItem($arrFields, $param[3]);
 		
 		foreach ($data['fields'] as $key => $filed) {
 			$data['fields'][$key]['value']=$arrOneItem[0]->$key;

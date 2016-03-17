@@ -34,7 +34,7 @@
 				<table class="table table-bordered table-hover table-striped" width="100%" cellpadding="5" cellspacing="1" border="1">
 					<thead>
 					<tr>
-						<th width="3%">STT</th>
+						<th width="1%"><input type="checkbox" id="checkAll"/></th>
 						<th width="10%">Tiêu đề</th>
 						<th width="10%">Mobile</th>
 						<th width="10%">Skype</th>
@@ -50,7 +50,7 @@
 					<tbody>
 					<?php foreach ($result as $key => $item) {?>
 					<tr>
-						<td><?php echo $key+1; ?></td>
+						<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item->id ?>" /></td>
 						<td><?php echo $item->title; ?></td>
 						<td><?php echo $item->mobile; ?></td>
 						<td><?php echo $item->skyper; ?></td>

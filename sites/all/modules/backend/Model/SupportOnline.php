@@ -46,6 +46,22 @@ class SupportOnline extends DbBasic{
 		return $arrItem;
 	}
 
+	public static function getOneItem($arrFields=array(), $id=0){
+		$arrItem = array();
+		if(!empty($arrFields)){
+			$sql = db_select(self::$table_action, 'i');
+			foreach($arrFields as $field){
+				$sql->addField('i', $field, $field);
+			}
+			if($id > 0){
+				$sql->condition('i.id', (int)$id, '=');
+			}
+			$result = $sql->range(0, 1)->orderBy('i.id', 'DESC')->execute();
+			$arrItem = (array)$result->fetchAll();
+		}
+		return $arrItem;
+	}
+
 	function listInputForm(){
 		$arr_fields = array(
 				'id'=>array('type'=>'hidden', 'label'=>'', 'value'=>'0','require'=>'', 'attr'=>''),
