@@ -52,6 +52,7 @@ class DbBasic{
         }
         return $arrItem;
     }
+    
     public static function getItembyCond($tableAction, $fields='', $groupby='', $oderby='', $cond='', $limit=0){
         if($fields != ''){
             $fields = '*';
@@ -83,6 +84,7 @@ class DbBasic{
         }
         return  0;
     }
+
     public static function updateOneItemByCond($tableAction, $dataFields=array(), $cond=''){
         //dataFields la array co field=>value
     }
