@@ -34,18 +34,21 @@ function formSupportonlineAction(){
 	global $base_url, $user;
 
 	$clsStdio = new clsStdio();
-	$_Supportonline = new _Supportonline();
+	$SupportOnline = new SupportOnline();
 
-	$fields = clsForm::buildItemFields($_Supportonline->listInputForm());
+	$fields = clsForm::buildItemFields($SupportOnline->listInputForm());
 	$data = array('fields'=>$fields);
 
 	//get item update
 	$param = arg();
 	if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
-		$arrOneItem = $_Supportonline->getOne("*", $param[3]);
+		
+		$arrOneItem = $SupportOnline->getOne("*", $param[3]);
+		
 		foreach ($data['fields'] as $key => $filed) {
 			$data['fields'][$key]['value']=$arrOneItem[0]->$key;
 		}
+
 	}
 
 	//check post: insert or update
@@ -78,16 +81,16 @@ function formSupportonlineAction(){
 		}else{
 
 			if($data['fields']['id']['value']>0){
-				$query = $_Supportonline->updateOne($data_post, $data['fields']['id']['value']);
+				$query = $SupportOnline->updateOne($data_post, $data['fields']['id']['value']);
 				unset($data_post);
 				drupal_set_message('Sửa bài viết thành công.');
-				drupal_goto($base_url.'/admincp/supportonline');
+				drupal_goto($base_url.'/admincp/supportOnline');
 			}else{
-				$query = $_Supportonline->insertOne($data_post);
+				$query = $SupportOnline->insertOne($data_post);
 				unset($data_post);
 				if($query){
 					drupal_set_message('Thêm bài viết thành công.');
-					drupal_goto($base_url.'/admincp/supportonline');
+					drupal_goto($base_url.'/admincp/supportOnline');
 				}
 			}
 		}
@@ -99,17 +102,14 @@ function formSupportonlineAction(){
 
 function deleteSupportonlineAction(){
 	global $base_url;
-	$_Supportonline = new _Supportonline();
+	$SupportOnline = new SupportOnline();
 
 	if(isset($_POST) && $_POST['txtFormName']=='txtFormName'){
 		$listId = isset($_POST['checkItem'])? $_POST['checkItem'] : 0;
 		foreach($listId as $item){
 			if($item > 0){
 				
-				$clsRecycleBin = new RecycleBin();
-				$clsRecycleBin->addItem($item, "_Supportonline");
-
-				$arrName = $_Supportonline->getByCond("img", "id=$item", "", "", "1");
+				$arrName = $SupportOnline->getByCond("img", "id=$item", "", "", "1");
 				$current_path_img='';
 				foreach($arrName as $v){
 					$current_path_img .= $v->img;
@@ -121,7 +121,7 @@ function deleteSupportonlineAction(){
 						unlink($dir);
 					}
 				}
-				$query = $_Supportonline->deleteOne($item);
+				$query = $SupportOnline->deleteOne($item);
 			}
 		}
 		unset($listId);

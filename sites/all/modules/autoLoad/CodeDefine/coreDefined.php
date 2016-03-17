@@ -27,8 +27,8 @@ define('base_url_lang', $base_url .'/'. ((!isset($language->language) || $langua
 
 
 /**
- * QuynhTM add thêm
- * ??nh ngh?a các Table cho website
+ * QuynhTM add
+ * Dinh nghia cac Table cho website
  */
 define('TABLE_SUPPORT_ONLINE', 'web_support_online');
 

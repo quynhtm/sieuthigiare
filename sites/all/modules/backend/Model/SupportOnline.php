@@ -43,7 +43,6 @@ class SupportOnline extends DbBasic{
 		$arrItem = (array)$result->fetchAll();
 		$pager = array('#theme' => 'pager','#quantity' => 3);
 
-		//$listPage['arrItem'] = $arrItem;
 		return $arrItem;
 	}
 
