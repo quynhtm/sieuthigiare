@@ -127,5 +127,5 @@ function deleteSupportonlineAction(){
 		drupal_set_message('Xóa bài viết thành công.');
 
 	}
-	drupal_goto($base_url.'/admincp/supportonline');
+	drupal_goto($base_url.'/admincp/supportOnline');
 }

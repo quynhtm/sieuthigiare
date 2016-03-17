@@ -41,31 +41,50 @@ class DbBasic{
 
     public static function getOneItem($tableAction, $arrFields=array(), $id=0){
         $arrItem = array();
-        if(!empty($arrFields)){
+        if(!empty($arrFields) && $id > 0){
             $sql = db_select($tableAction, 'i');
             foreach($arrFields as $field){
                 $sql->addField('i', $field, $field);
             }
-            if($id > 0){
-                $sql->condition('i.id', (int)$id, '=');
-            }
+            $sql->condition('i.id', (int)$id, '=');
             $result = $sql->range(0, 1)->orderBy('i.id', 'DESC')->execute();
             $arrItem = (array)$result->fetchAll();
         }
         return $arrItem;
     }
+    public static function getItembyCond($tableAction, $fields='', $groupby='', $oderby='', $cond='', $limit=0){
+        if($fields != ''){
+            $fields = '*';
+        }
+        if($groupby != ''){
+            $groupby = ' GROUP BY '.$groupby;
+        }
+        if($oderby != ''){
+            $oderby = ' ORDER BY '.$oderby;
+        }
+        if($cond != ''){
+            $cond = ' WHERE '.$cond;
+
+        }
+        if($limit > 0){
+            $limit = ' LIMIT 0, '.$limit;
+        }
+        $sql = db_query("SELECT $fields FROM {$tableAction}".$cond.$groupby.$oderby.$limit);
+        $arrItem = $sql->fetchAll();
+        return $arrItem;
+    }
 
     public static function updateOneItem($tableAction, $dataFields=array(), $id=0){
         //dataFields la array co field=>value
-        if(!empty($dataFields)){
-            if($id > 0){
-                $sql = db_update($tableAction)->fields($dataFields)->condition('id', (int)$id, '=')->execute();
-                if($sql)
-                    return 1;
-
-            }
+        if(!empty($dataFields) && $id > 0){
+            $sql = db_update($tableAction)->fields($dataFields)->condition('id', (int)$id, '=')->execute();
+            if($sql)
+                return 1;
         }
         return  0;
+    }
+    public static function updateOneItemByCond($tableAction, $dataFields=array(), $cond=''){
+        //dataFields la array co field=>value
     }
 
     public static function insertOneItem($tableAction, $dataFields=array()){
@@ -86,6 +105,33 @@ class DbBasic{
         }
         
         return  0;
+    }
+
+    public static function deleteOneItemByCond($tableAction, $cond=''){
+        if($cond != ''){
+            $cond = ' WHERE '.$cond;
+            $sql = db_query("DELETE FROM {$tableAction}".$cond);
+        }
+    }
+
+    public static function countItem($tableAction, $fields='', $cond='', $groupby='', $oderby=''){
+       
+        if($fields == ''){
+            $fields = "*";
+        }
+        if($cond != ''){
+            $cond = ' WHERE '.$cond;
+        }
+        if($groupby != ''){
+            $groupby = ' GROUP BY '.$groupby;
+        }
+        if($oderby != ''){
+            $oderby = ' ORDER BY '.$oderby;
+        }
+        $sql = db_query("SELECT $fields FROM {$tableAction}".$cond.$groupby.$oderby);
+        $total = $sql->rowCount();
+
+        return $total;
     }
 }
 
