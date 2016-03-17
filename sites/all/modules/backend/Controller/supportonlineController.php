@@ -9,16 +9,15 @@ function indexSupportonline(){
 	global $base_url;
 	
 	$totalItem = 0;
-	$limit = 1;
+	$limit = SITE_RECORD_PER_PAGE;
 	$pager = '';
 	$dataSearch = array();
 	$dataSearch['keyword'] = clsAdminLib::getParam('keyword','');
 	$dataSearch['category'] = clsAdminLib::getIntParam('category','');
 	$dataSearch['status'] = clsAdminLib::getParam('status','');
+	$arrFields=array('id', 'title', 'mobile', 'skyper', 'yahoo', 'created', 'order_no', 'status');
 
-	$result = Supportonline::getSearchListItems($dataSearch,$limit,$totalItem,$pager);
-	
-	$arrOptionsCategory[0] = t("Danh mục gốc");
+	$result = Supportonline::getSearchListItemsAndPage(TABLE_SUPPORT_ONLINE, $dataSearch, $arrFields, $limit, $totalItem, $pager);
 
 	$view = theme('indexSupportOnline',array(
 								'title'=>'Quản lý Nick Support',
@@ -43,7 +42,7 @@ function formSupportonlineAction(){
 	$param = arg();
 	if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
 		$arrFields = array('id','title', 'yahoo', 'skyper', 'mobile', 'email', 'order_no', 'status');
-		$arrOneItem = $SupportOnline::getOneItem($arrFields, $param[3]);
+		$arrOneItem = $SupportOnline::getOneItem(TABLE_SUPPORT_ONLINE, $arrFields, $param[3]);
 		
 		foreach ($data['fields'] as $key => $filed) {
 			$data['fields'][$key]['value']=$arrOneItem[0]->$key;
