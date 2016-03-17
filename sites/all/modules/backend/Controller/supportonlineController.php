@@ -17,8 +17,7 @@ function indexSupportonline(){
 	$dataSearch['status'] = clsAdminLib::getParam('status','');
 	$arrFields=array('id', 'title', 'mobile', 'skyper', 'yahoo', 'created', 'order_no', 'status');
 
-	$result = Supportonline::getSearchListItemsAndPage(TABLE_SUPPORT_ONLINE, $dataSearch, $arrFields, $limit, $totalItem, $pager);
-
+	$result = SupportOnline::getSearch($dataSearch, $arrFields, $limit, $totalItem, $pager);
 	$view = theme('indexSupportOnline',array(
 								'title'=>'Quản lý Nick Support',
 								'result' => $result,
