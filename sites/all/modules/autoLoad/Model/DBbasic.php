@@ -5,9 +5,8 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0
 */
-class DbBasic{
-
-    public static function getSearchListItemsAndPage($tableAction, $dataSearch=array(), $arrFields=array(), $limit=30, &$totalItem=0, &$pager=array()){
+class DB{
+    public static function getSearchListItemsAndPage($tableAction, $dataSearch=array(), $arrFields=array(), $limit=30){
         $arrItem=array();
         if(!empty($arrFields)){
             $sql = db_select($tableAction, 'i')->extend('PagerDefault');
@@ -31,12 +30,21 @@ class DbBasic{
                 $sql->condition($db_or);
             }
             /*End search*/
+
+            //$totalItem = $sql->rowCount();
+            $totalItem =0;
+
             $result = $sql->limit($limit)->orderBy('i.id', 'DESC')->execute();
             $arrItem = (array)$result->fetchAll();
-            $totalItem = count($arrItem);
+
             $pager = array('#theme' => 'pager','#quantity' => 3);
+
+            //out d? li?u ra
+            $data['data'] = $arrItem;
+            $data['pager'] = $pager;
+            $data['total'] = $totalItem;
         }
-        return $arrItem;
+        return $data;
     }
 
     public static function getOneItem($tableAction, $arrFields=array(), $id=0){

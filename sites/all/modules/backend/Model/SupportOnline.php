@@ -5,8 +5,28 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0
 */
-class SupportOnline extends DbBasic{
-	
+class SupportOnline{
+	static $table_action = TABLE_SUPPORT_ONLINE;
+
+	public static function getSearch($dataSearch, $arrFields, $limit, &$totalItem, &$pager){
+		$result = DB::getSearchListItemsAndPage(self::$table_action,$dataSearch, $arrFields, $limit);
+
+		$totalItem = 0;
+		$pager = $data = array();
+		if(!empty($result)){
+			if(isset($result['pager'])){
+				$pager = $result['pager'];
+			}
+			if(isset($result['total'])){
+				$totalItem = $result['total'];
+			}
+			if(isset($result['data'])){
+				$data = $result['data'];
+			}
+		}
+		return $data;
+	}
+
 	public static function listInputForm(){
 		$arr_fields = array(
 				'id'=>array('type'=>'hidden', 'label'=>'', 'value'=>'0','require'=>'', 'attr'=>''),
