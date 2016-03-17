@@ -31,8 +31,8 @@ class DB{
             }
             /*End search*/
 
-            //$totalItem = $sql->rowCount();
-            $totalItem =0;
+            $totalItem = count($sql->execute()->fetchAll());
+            //$totalItem =0;
 
             $result = $sql->limit($limit)->orderBy('i.id', 'DESC')->execute();
             $arrItem = (array)$result->fetchAll();

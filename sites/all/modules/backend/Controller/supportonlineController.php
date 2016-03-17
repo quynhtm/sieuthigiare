@@ -83,6 +83,7 @@ function formSupportonlineAction(){
 				drupal_set_message('Sửa bài viết thành công.');
 				drupal_goto($base_url.'/admincp/supportOnline');
 			}else{
+				
 				$query = SupportOnline::insertOneItem(TABLE_SUPPORT_ONLINE, $data_post);
 				unset($data_post);
 				if($query){
