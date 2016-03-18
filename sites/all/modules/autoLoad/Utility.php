@@ -6,7 +6,7 @@
 * @Version	 : 1.0
 */
 class Utility{
-
+	static $table_action = TABLE_CONFIG_INFO;
 	/*--------------------------------------set nofollow tag a---------------------------------------------------*/
 	static function setNofollow($str){
 		return preg_replace('/(<a.*?)(rel=[\"|\'].*?[\"|\'])?(.*?\/a>)/i', '$1 rel="nofollow" $3', $str);
@@ -84,7 +84,7 @@ class Utility{
 
 	static function keyword($keyword=''){
 		if($keyword != ''){
-			$arrItem = DB::getItembyCond(TABLE_CONFIG_INFO, 'content', '', 'id ASC', "keyword='".$keyword."'", 1);
+			$arrItem = DB::getItembyCond(self::$table_action, 'content', '', 'id ASC', "keyword='".$keyword."'", 1);
 			if(!empty($arrItem)){
 				return $arrItem[0]->content;
 			}
@@ -94,7 +94,7 @@ class Utility{
 
 	static function keyword_all($keyword=''){
 		if($keyword != ''){
-			$arrItem = DB::getItembyCond(TABLE_CONFIG_INFO, '*', '', 'id ASC', "keyword='".$keyword."'", 1);
+			$arrItem = DB::getItembyCond(self::$table_action, '*', '', 'id ASC', "keyword='".$keyword."'", 1);
 			if(!empty($arrItem)){
 				return $arrItem;
 			}
@@ -104,7 +104,7 @@ class Utility{
 
 	static function keyword_seo($keyword=''){
 		if($keyword != ''){
-			$arrItem = DB::getItembyCond(TABLE_CONFIG_INFO, 'meta_title, meta_keywords, meta_description, img', '', 'id ASC', "keyword='".$keyword."'", 1);
+			$arrItem = DB::getItembyCond(self::$table_action, 'meta_title, meta_keywords, meta_description, img', '', 'id ASC', "keyword='".$keyword."'", 1);
 			if(!empty($arrItem)){
 				return $arrItem;
 			}
