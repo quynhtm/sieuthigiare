@@ -13,4 +13,3 @@ regions[right] 				= 	Right
 regions[footer] 			= 	Footer
 
 stylesheets[all][] = css/style.css
-stylesheets[all][] = css/media.css

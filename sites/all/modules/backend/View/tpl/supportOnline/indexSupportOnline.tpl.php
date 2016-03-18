@@ -22,7 +22,7 @@
 					}
 				?></h5>
 			<span class="tools">
-				<a href="<?php echo $base_url; ?>/admincp/supportOnline/add" title="Add" class="icon-add"></a>
+				<a href="<?php echo $base_url; ?>/admincp/supportonline/add" title="Add" class="icon-add"></a>
                 <a href="javascript:void(0)" title="Delete" id="deleteMoreItem" class="icon-delete"></a>
            </span>
 		</div>
@@ -67,7 +67,7 @@
 							?>
 						</td>
 						<td>
-							<?php $linkEdit = $base_url.'/admincp/supportOnline/edit/'.$item->id; ?>
+							<?php $linkEdit = $base_url.'/admincp/supportonline/edit/'.$item->id; ?>
 							<a class="icon huge" href="<?php echo $linkEdit; ?>"  title="Update Item"><i class="icon-pencil bgLeftIcon"></i></a>
 							<a class="icon huge" id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-remove bgLeftIcon"></i></a>
 						</td>
@@ -92,6 +92,6 @@
 
 <script>
 	jQuery(document).ready(function(){
-		DELETE_ITEM.init('admincp/supportOnline');
+		DELETE_ITEM.init('admincp/supportonline');
 	});
 </script>

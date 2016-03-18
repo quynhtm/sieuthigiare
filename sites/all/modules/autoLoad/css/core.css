@@ -1,6 +1,5 @@
-/*show list pager*/
-.region{}
-.showListPage {
+/*list pager*/
+.showListPage{
     clear: both;
     display: inline-block;
     margin: 12px 0;
@@ -55,7 +54,6 @@
 .page-user #content #block-system-main .title-login-user{
     text-align: center;
 }
-
 .page-user #content #block-system-main .title-login-user span {
     color: #222;
     display: inline-block;
@@ -103,7 +101,6 @@
     display: inline;
     font-weight: normal;
 }
-
 .page-user #content #block-system-main form .link-info {
     margin-left: 275px;
     margin-top: 12px;
@@ -167,11 +164,9 @@
     font-size: 18px;
     font-weight: normal;
 }
-
 .page-user-edit #content #block-system-main {
     width: 50%!important;
 }
-
 .page-user-edit #content #block-system-main form input.form-text {
     width: 100%;
 }
@@ -275,7 +270,7 @@
     width: 100%;
 }
 .list-item-content-global{
-    margin:20px;
+    margin:10px;
     clear:both;
 }
 .item-content-global{
@@ -302,7 +297,6 @@
     font-size:12px;
     text-indent:10px;
 }
-
 .content-item-content-global {
     margin: 10px;
 }
@@ -312,7 +306,6 @@
     width:100%;
     margin-bottom:10px;
 }
-
 .item-global-total span.lb-txt-num {
     display: inline-block;
     width: 70%;

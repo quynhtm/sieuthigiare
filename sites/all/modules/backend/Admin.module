@@ -12,7 +12,7 @@
  
 function Admin_menu() {
 	
-	$items["admincp/supportOnline"] = array(
+	$items["admincp/supportonline"] = array(
 		"title" => t('Support online'),
 		"description" => "Support online",
 		'page callback' => 'router_page',

@@ -2,7 +2,6 @@
 body.page-admincp{
     height: 100%;
     background: #222d32;
-    color: #222;
     overflow-x: hidden;
 }
 .pageWrapper {
@@ -28,7 +27,6 @@ body.page-admincp{
 .user-logout:hover i{
     background: url("../img/top-buttons.png") no-repeat scroll -69px -18px rgba(0, 0, 0, 0);
 }
-
 .user-info {
     display: inline-block;
     float: right;
@@ -37,7 +35,7 @@ body.page-admincp{
     position: relative;
 }
 .user-info:hover{
-    background: none repeat scroll 0 0 #367fa9;
+    background: #367fa9;
 }
 .user-info img {
     border-radius: 50%;
@@ -146,7 +144,6 @@ body.page-admincp{
     width: 100%;
     clear: both;
 }
-
 .show-bottom-info .total-rows {
     color: #222;
     float: left;
@@ -208,7 +205,6 @@ ul.pager .pager-current {
 .search-box input[type="text"] {
     background-color: #fff;
     border: 1px solid #ccc;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
     transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
     border-radius: 2px;
     color: #555;
@@ -223,8 +219,7 @@ ul.pager .pager-current {
     vertical-align: top;
 }
 .search-box input[type="text"]:focus{
-    border-color: rgba(82, 168, 236, 0.8);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(82, 168, 236, 0.6);
+    border: 1px solid #3c8dbc;
     outline: 0 none;
 }
 .search-box select {
@@ -271,14 +266,12 @@ ul.pager .pager-current {
     position: absolute;
     width: 100%;
 }
-
 .wrapp-footer {
     color: #ccc;
     font-size: 13px;
     font-style: italic;
     text-align: center;
 }
-
 .pageWrapper.act .leftRegion{
     display: none;
     transition: all 0.15s ease-in-out 0s;
@@ -348,11 +341,9 @@ body .region-header .wrapper{
     height: 100%;
     padding: 0 15px;
 }
-
 .right-top a.user-logout:hover {
     background: none repeat scroll 0 0 #367fa9;
 }
-/*content admin*/
 /*left box*/
 .leftRegion  {
     color: #e5e5e5;
@@ -364,7 +355,6 @@ body .region-header .wrapper{
 .leftRegion .region.region-left .block.block-admindefault {
     height: 100%;
 }
-
 .leftRegion .region.region-left .block.block-admindefault .content {
     height: 100%;
 }
@@ -500,7 +490,7 @@ body .region-header .wrapper{
     width: 16px;
 }
 .icon-restore {
-    background: url(../img/edit.png) no-repeat;
+    background: url("../img/edit.png") no-repeat;
     border-radius: 100%;
     display: inline-block;
     height: 18px;
@@ -550,6 +540,7 @@ body .region-header .wrapper{
     line-height: 20px;
     padding: 4px;
     vertical-align: middle;
+    outline: 0 none;
 }
 .page-content-box input[type="color"]:focus,
 .page-content-box input[type="date"]:focus,
@@ -567,7 +558,6 @@ body .region-header .wrapper{
 .page-content-box input[type="week"]:focus,
 .page-content-box textarea:focus {
     border:1px solid #3c8dbc;
-    outline: 0 none;
 }
 .page-content-box .controls textarea {
     max-width: 80%;
@@ -604,7 +594,6 @@ body .region-header .wrapper{
 .page-content-box .btn[type="reset"]:hover{
     background: #d3d3d3;
 }
-/*box search*/
 .wrapp-search-box{
     padding: 10px 10px 7px 10px;
 }
@@ -641,7 +630,6 @@ body .region-header .wrapper{
     display: none;
     transition: all 0.15s ease-in-out 0s;
 }
-
 .pageWrapper.act #top .right-top {
     transition: all 0.15s ease-in-out 0s;
     width: 100%;
@@ -671,7 +659,6 @@ body .region-header .wrapper{
 	border: 1px solid #999;
     width: 98%;
 }
-
 .page-header-box {
     padding: 12px 0;
 	font-size:13px;
@@ -701,30 +688,6 @@ body .region-header .wrapper{
     position: absolute;
     right: 0;
     top: 0;
-}
-.wrappButton .btn-add{
-	color:#ffffff;
-	text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);
-	background-color:#5bb75b;*background-color:#51a351;
-	background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#62c462), to(#51a351));
-	background-image:-webkit-linear-gradient(top, #62c462, #51a351);
-	background-image:-o-linear-gradient(top, #62c462, #51a351);
-	background-image:linear-gradient(to bottom, #62c462, #51a351);
-	background-image:-moz-linear-gradient(top, #62c462, #51a351);
-	background-repeat:repeat-x;
-	border-color:#51a351 #51a351 #387038;
-	border-color:rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-	filter:progid:dximagetransform.microsoft.gradient(startColorstr='#ff62c462', endColorstr='#ff51a351', GradientType=0);
-	filter:progid:dximagetransform.microsoft.gradient(enabled=false);
-	border-radius:4px;
-	display: inline-block;
-    font-size: 14px;
-    line-height: 20px;
-    padding: 4px 12px;
-    text-align: center;
-    vertical-align: middle;
-	border:none;
-	position: absolute;
 }
 div#load_file_ajax,
 div#load_file_ajax_gift {
@@ -789,14 +752,14 @@ div#load_file_ajax_gift .rowprocess p{
     border-bottom: none!important;
 }
 .showListItem table tr {
-    background: #fff none repeat scroll 0 0 !important;
+    background: #fff!important;
 }
 .showListItem table tr:hover {
-    background: #eee none repeat scroll 0 0 !important;
+    background: #eee!important;
 }
-.showListItem table tr:first-child,
-.showListItem table tr:first-child:hover {
-    background: #fff none repeat scroll 0 0 !important;
+.showListItem table thead tr:first-child,
+.showListItem table thead tr:first-child:hover {
+    background: #fff!important;
 }
 .box-menu-click {
     display: inline-block;
@@ -821,7 +784,6 @@ div#load_file_ajax_gift .rowprocess p{
     display: inline-block;
     width: 100%;
 }
-
 /*media*/
 @media (max-width: 560px) {
     .contentRegion {
@@ -847,8 +809,6 @@ div#load_file_ajax_gift .rowprocess p{
         overflow-x: scroll;
     }
 }
-
-
 .txtComment{
     clear: both!important;
     margin-bottom: 10px!important;
@@ -868,7 +828,6 @@ div#load_file_ajax_gift .rowprocess p{
     width: 100%;
     border-radius: 2px;
 }
-
 .list-comment li:nth-child(odd) {
     background: #e9eaed;
 }
@@ -954,7 +913,6 @@ div#load_file_ajax_gift .rowprocess p{
     width: 315px;
     text-align: left;
 }
-
 .right.icon-pencil.bgLeftIcon {
     display: inline-block;
     float: right;
@@ -964,7 +922,6 @@ div#load_file_ajax_gift .rowprocess p{
     top: 3px;
     width: 15px;
 }
-
 .box-update_status .list-status {
     clear: both;
     display: block;
@@ -976,7 +933,6 @@ div#load_file_ajax_gift .rowprocess p{
     padding: 2px;
     width: 211px;
 }
-
 #dialog_update_status .full-item-line {
     text-align: center;
 }

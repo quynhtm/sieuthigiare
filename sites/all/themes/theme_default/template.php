@@ -1,6 +1,6 @@
 <?php
 /*
-* @Created by:
+* @Created by:HSS
 * @Author	: nguyenduypt86@gmail.com
 * @Date 	: 2014
 * @Version	: 1.0 
@@ -19,6 +19,4 @@ function theme_default_preprocess_html(&$vars) {
   }
   $vars['head_title_array'] = $head_title;
   $vars['head_title'] = implode('', $head_title);
-	
-	
 }

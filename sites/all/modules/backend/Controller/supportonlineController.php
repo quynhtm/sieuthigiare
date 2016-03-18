@@ -80,14 +80,14 @@ function formSupportOnlineAction(){
 				SupportOnline::updateId($data_post, $param[3]);
 				unset($data_post);
 				drupal_set_message('Sửa bài viết thành công.');
-				drupal_goto($base_url.'/admincp/supportOnline');
+				drupal_goto($base_url.'/admincp/supportonline');
 			}else{
 				
 				$query = SupportOnline::insert($data_post);
 				unset($data_post);
 				if($query){
 					drupal_set_message('Thêm bài viết thành công.');
-					drupal_goto($base_url.'/admincp/supportOnline');
+					drupal_goto($base_url.'/admincp/supportonline');
 				}
 			}
 		}

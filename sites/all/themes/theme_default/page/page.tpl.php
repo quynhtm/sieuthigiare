@@ -1,8 +1,8 @@
 <div id="wrapper">
 	<?php if ($page['header']){ ?>
-		<div id="header">
-			<?php echo render($page['header']); ?>
-		</div>
+	<div id="header">
+		<?php echo render($page['header']); ?>
+	</div>
 	<?php } ?>
 	<div id="content">
 		<div class="wrapper-content">
