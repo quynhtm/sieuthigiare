@@ -40,25 +40,21 @@ function check_login(){
 function router_page(){
 	global $base_url;
 	$param = arg();
-
 	if(check_login()){
-		if($param[0]=='admincp'){
-			if(count($param)==1){
+		if($param[0] == 'admincp'){
+			if(count($param) == 1){
 				$pageAction = 'AdminDefault';
-			}elseif(count($param)==2){
+			}elseif(count($param) == 2){
 				$pageAction = 'index'.ucfirst($param[1]);
 			}else{
-				if(isset($param[2]) && $param[2]!=''){
+				if(isset($param[2]) && $param[2] != ''){
 					if(in_array($param[2], array('add', 'edit'))){
 						$pageAction = 'form'.ucfirst($param[1]).'Action';
-					}elseif(in_array($param[2], array('uploadFile', 'deleteFile', 'deleteDBFile', 'uploadFileGift'))){
-						$pageAction = $param[2].ucfirst($param[1]).'Action';
 					}else{
-						$pageAction = $param[2].ucfirst($param[1]).'Action';
+						$pageAction = $param[2].ucfirst($param[1]).'Action';						
 					}
 				}
 			}
-			//check funtion exists
 			if(function_exists($pageAction)){
 				return $pageAction();
 			}else{

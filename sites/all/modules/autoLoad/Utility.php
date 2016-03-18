@@ -83,35 +83,33 @@ class Utility{
 	}
 
 	static function keyword($keyword=''){
-		$html = '';
-		// if($keyword!=''){
-		// 	$Info = new Info();
-		// 	$arrConfig = $Info->getByCond("content", "keyword='$keyword'", "", "", "1");
-		// 	if(count($arrConfig)>0){
-		// 		foreach($arrConfig as $v){
-		// 			$html = $v->content;
-		// 		}
-		// 	}
-		// }
-		return $html;
+		if($keyword != ''){
+			$arrItem = DB::getItembyCond(TABLE_CONFIG_INFO, 'content', '', 'id ASC', "keyword='".$keyword."'", 1);
+			if(!empty($arrItem)){
+				return $arrItem[0]->content;
+			}
+		}
+		return '';
 	}
 
 	static function keyword_all($keyword=''){
-		$arrItem = array();
-		// if($keyword!=''){
-		// 	$Info = new Info();
-		// 	$arrItem = $Info->getByCond("*", "keyword='$keyword'", "", "", "1");
-		// }
-		return $arrItem;
+		if($keyword != ''){
+			$arrItem = DB::getItembyCond(TABLE_CONFIG_INFO, '*', '', 'id ASC', "keyword='".$keyword."'", 1);
+			if(!empty($arrItem)){
+				return $arrItem;
+			}
+		}
+		return array();
 	}
 
 	static function keyword_seo($keyword=''){
-		$arrItem = array();
-		// if($keyword!=''){
-		// 	$Info = new Info();
-		// 	$arrItem = $Info->getByCond("meta_title, meta_keywords, meta_description, img", "keyword='$keyword'", "", "", "1");
-		// }
-		return $arrItem;
+		if($keyword != ''){
+			$arrItem = DB::getItembyCond(TABLE_CONFIG_INFO, 'meta_title, meta_keywords, meta_description, img', '', 'id ASC', "keyword='".$keyword."'", 1);
+			if(!empty($arrItem)){
+				return $arrItem;
+			}
+		}
+		return array();
 	}
 	
 	static function substring($str, $length = 100, $replacer='...'){

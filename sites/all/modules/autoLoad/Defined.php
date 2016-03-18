@@ -31,6 +31,7 @@ define('base_url_lang', $base_url .'/'. ((!isset($language->language) || $langua
  * Dinh nghia cac Table cho website
  */
 define('TABLE_SUPPORT_ONLINE', 'web_support_online');
+define('TABLE_CONFIG_INFO', 'web_config_info');
 
 
 

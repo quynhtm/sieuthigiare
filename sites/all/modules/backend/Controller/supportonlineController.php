@@ -27,7 +27,7 @@ function indexSupportonline(){
 	return $view;
 }
 
-function formSupportOnlineAction(){
+function formSupportonlineAction(){
 	global $base_url, $user;
 
 	$Stdio = new Stdio();
@@ -78,13 +78,10 @@ function formSupportOnlineAction(){
 
 			if($data['fields']['id']['value']>0){
 				SupportOnline::updateId($data_post, $param[3]);
-				unset($data_post);
 				drupal_set_message('Sửa bài viết thành công.');
 				drupal_goto($base_url.'/admincp/supportonline');
 			}else{
-				
 				$query = SupportOnline::insert($data_post);
-				unset($data_post);
 				if($query){
 					drupal_set_message('Thêm bài viết thành công.');
 					drupal_goto($base_url.'/admincp/supportonline');
@@ -97,7 +94,7 @@ function formSupportOnlineAction(){
 	return $view;
 }
 
-function deleteSupportOnlineAction(){
+function deleteSupportonlineAction(){
 	global $base_url;
 	$SupportOnline = new SupportOnline();
 	if(isset($_POST) && $_POST['txtFormName']=='txtFormName'){
@@ -107,9 +104,7 @@ function deleteSupportOnlineAction(){
 				SupportOnline::deleteId($item);
 			}
 		}
-		unset($listId);
 		drupal_set_message('Xóa bài viết thành công.');
-
 	}
-	drupal_goto($base_url.'/admincp/supportOnline');
+	drupal_goto($base_url.'/admincp/supportonline');
 }

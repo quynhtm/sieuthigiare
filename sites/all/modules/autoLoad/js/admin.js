@@ -31,10 +31,10 @@ DELETE_ITEM={
 		jQuery('a#deleteMoreItem, a#deleteOneItem').click(function(){
 			var total = jQuery( "input:checked" ).length;
 			if(total==0){
-				alert('Please select at least 1 item to delete!');
+				alert('Vui lòng chọn ít nhất 1 bản ghi để xóa!');
 				return false;
 			}else{
-				if (confirm('Do you want to delete[OK]:Yes[Cancel]:No?)')){
+				if (confirm('Bạn muốn xóa [OK]:Đồng ý [Cancel]:Bỏ qua?)')){
 					jQuery('form#formListItem').attr("action", BASEPARAMS.base_url+"/"+path_menu+"/delete");
 					jQuery('form#formListItem').submit();
 					return true;
@@ -51,10 +51,10 @@ RESTORE_ITEM = {
 		jQuery('a#btnRestore').click(function(){
 			var total = jQuery( "input:checked" ).length;
 			if(total==0){
-				alert('Please select at least 1 item to restore!');
+				alert('Vui lòng chọn ít nhất 1 bản ghi để khôi phục!');
 				return false;
 			}else{
-				if (confirm('Do you want to restore[OK]:Yes[Cancel]:No?)')){
+				if (confirm('Bạn muốn khôi phục [OK]:Đồng ý [Cancel]:Bỏ qua?)')){
 					jQuery('form#formListItem').attr("action", BASEPARAMS.base_url+"/admincp/recyclebin/restore");
 					jQuery('form#formListItem').submit();
 					return true;
