@@ -5,7 +5,7 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0 
 */
-class clsStdio{
+class Stdio{
 
     function __construct(){
         //init here

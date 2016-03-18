@@ -28,13 +28,9 @@ function Admin_menu() {
  */
 function Admin_theme() {
     return array(
-		//SupportOnline
         'indexSupportOnline' 	=> array('template' => 'View/tpl/supportOnline/indexSupportOnline'),
         'addSupportOnline' 		=> array('template' => 'View/tpl/supportOnline/addSupportOnline'),
-
-        //Product
-        //'indexProduct' => array('template' => 'View/tpl/product/indexProduct'),
-        //'addProduct' => array('template' => 'View/tpl/product/addProduct'),
+ 		//here
     );
 }
 
@@ -60,6 +56,6 @@ function Admin_init(){
 			'Controller/SupportOnlineController.php',
 			
 		);
-		clsLoader::load('Admin', $files);
+		Loader::load('Admin', $files);
 	}
 }

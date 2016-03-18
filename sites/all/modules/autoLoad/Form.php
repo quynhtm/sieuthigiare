@@ -5,7 +5,7 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0
 */
-class clsForm{
+class Form{
 
 	static function setFieldName($key=null){
 		if($key==''){

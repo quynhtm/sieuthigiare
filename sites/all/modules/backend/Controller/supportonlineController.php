@@ -12,8 +12,8 @@ function indexSupportonline(){
 	$limit = SITE_RECORD_PER_PAGE;
 	$pager = '';
 	$dataSearch = array();
-	$dataSearch['keyword'] = clsAdminLib::getParam('keyword','');
-	$dataSearch['status'] = clsAdminLib::getParam('status','');
+	$dataSearch['keyword'] = AdminLib::getParam('keyword','');
+	$dataSearch['status'] = AdminLib::getParam('status','');
 	$arrFields=array('id', 'title', 'mobile', 'skyper', 'yahoo', 'created', 'order_no', 'status');
 
 	$result = SupportOnline::getSearch($dataSearch, $arrFields, $limit, $totalItem, $pager);
@@ -30,9 +30,9 @@ function indexSupportonline(){
 function formSupportOnlineAction(){
 	global $base_url, $user;
 
-	$clsStdio = new clsStdio();
+	$Stdio = new Stdio();
 
-	$fields = clsForm::buildItemFields(SupportOnline::listInputForm());
+	$fields = Form::buildItemFields(SupportOnline::listInputForm());
 	$data = array('fields'=>$fields);
 
 	//get item update
@@ -56,7 +56,7 @@ function formSupportOnlineAction(){
 		$data_post['created']=time();
 
 		foreach ($data['fields'] as $key => $field) {
-			$data_post[$key] = clsForm::itemPostValue($key);
+			$data_post[$key] = Form::itemPostValue($key);
 			$data['fields'][$key]['value']=$data_post[$key];
 
 			if(isset($field['require']) && $field['require']=='require' && $data_post[$key]==''){
@@ -64,7 +64,7 @@ function formSupportOnlineAction(){
 			}
 
 			if($key=='title'){
-				$data_post['title_alias']=$clsStdio->pregReplaceStringAlias(clsForm::itemPostValue('title'));
+				$data_post['title_alias']=$Stdio->pregReplaceStringAlias(Form::itemPostValue('title'));
 			}
 		 }
 
@@ -100,25 +100,10 @@ function formSupportOnlineAction(){
 function deleteSupportOnlineAction(){
 	global $base_url;
 	$SupportOnline = new SupportOnline();
-
 	if(isset($_POST) && $_POST['txtFormName']=='txtFormName'){
 		$listId = isset($_POST['checkItem'])? $_POST['checkItem'] : 0;
 		foreach($listId as $item){
 			if($item > 0){
-				
-				$arrName = SupportOnline::getOne($arrFields=array('img'), $item);
-
-				$current_path_img='';
-				foreach($arrName as $v){
-					$current_path_img .= $v->img;
-				}
-
-				if($current_path_img!=''){
-					$dir = DRUPAL_ROOT.'/'.$clsUpload->path_image_upload.'/supportonline/'.$current_path_img;
-					if(is_file($dir)){
-						unlink($dir);
-					}
-				}
 				SupportOnline::deleteId($item);
 			}
 		}

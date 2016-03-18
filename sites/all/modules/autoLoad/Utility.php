@@ -5,7 +5,7 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0
 */
-class clsUtility{
+class Utility{
 
 	/*--------------------------------------set nofollow tag a---------------------------------------------------*/
 	static function setNofollow($str){
@@ -85,8 +85,8 @@ class clsUtility{
 	static function keyword($keyword=''){
 		$html = '';
 		// if($keyword!=''){
-		// 	$clsInfo = new Info();
-		// 	$arrConfig = $clsInfo->getByCond("content", "keyword='$keyword'", "", "", "1");
+		// 	$Info = new Info();
+		// 	$arrConfig = $Info->getByCond("content", "keyword='$keyword'", "", "", "1");
 		// 	if(count($arrConfig)>0){
 		// 		foreach($arrConfig as $v){
 		// 			$html = $v->content;
@@ -99,8 +99,8 @@ class clsUtility{
 	static function keyword_all($keyword=''){
 		$arrItem = array();
 		// if($keyword!=''){
-		// 	$clsInfo = new Info();
-		// 	$arrItem = $clsInfo->getByCond("*", "keyword='$keyword'", "", "", "1");
+		// 	$Info = new Info();
+		// 	$arrItem = $Info->getByCond("*", "keyword='$keyword'", "", "", "1");
 		// }
 		return $arrItem;
 	}
@@ -108,12 +108,23 @@ class clsUtility{
 	static function keyword_seo($keyword=''){
 		$arrItem = array();
 		// if($keyword!=''){
-		// 	$clsInfo = new Info();
-		// 	$arrItem = $clsInfo->getByCond("meta_title, meta_keywords, meta_description, img", "keyword='$keyword'", "", "", "1");
+		// 	$Info = new Info();
+		// 	$arrItem = $Info->getByCond("meta_title, meta_keywords, meta_description, img", "keyword='$keyword'", "", "", "1");
 		// }
 		return $arrItem;
 	}
 	
+	static function substring($str, $length = 100, $replacer='...'){
+    	$str = strip_tags($str);
+    	if(strlen($str) <= $length){
+    		return $str;
+    	}
+    	$str = trim(@substr($str,0,$length));
+    	$posSpace = strrpos($str,' ');
+        $replacer="...";
+    	return substr($str,0,$posSpace).$replacer;
+    }
+
 	function cut_link_html($str=''){
 		global $base_url;
 		$match= preg_match('/.html/i', $str);
@@ -128,7 +139,7 @@ class clsUtility{
 	}
 }
 
-clsUtility::add_js_header("BASEPARAMS");
+Utility::add_js_header("BASEPARAMS");
 
 if (!function_exists('bug')){
 	function bug($data,$die=true){

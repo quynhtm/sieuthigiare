@@ -17,7 +17,7 @@ if(isset($_POST)){
 	echo $HSSUpload->upload($_name='image', $_file_ext='rar,flv,mp4', $_max_file_size=150*1024*1024, $_module='news',  $type_json=1);
 }
 */
-class clsUpload{
+class Upload{
 
 	public $path_image_upload = 'uploads/images';
 

@@ -88,24 +88,24 @@ function Core_theme() {
     return array(
 
 		'admin-header' => array(
-            'template' => 'View/tpl/admin/admin-header'
+            'template' => 'tpl/admin/admin-header'
         ),
         'admin-left' => array(
-            'template' => 'View/tpl/admin/admin-left'
+            'template' => 'tpl/admin/admin-left'
         ),
       	'admin-content' => array(
-            'template' => 'View/tpl/admin/admin-content'
+            'template' => 'tpl/admin/admin-content'
         ),
         'admin-footer' => array(
-            'template' => 'View/tpl/admin/admin-footer'
+            'template' => 'tpl/admin/admin-footer'
         ),
 
 		'page_403' => array(
-            'template' => 'View/tpl/page_403'
+            'template' => 'tpl/page_403'
         ),
 
         'page_404' => array(
-            'template' => 'View/tpl/page_404'
+            'template' => 'tpl/page_404'
         )
     );
 }
@@ -160,21 +160,20 @@ function Core_init(){
 	drupal_add_library('system', 'ui.datepicker');
 
 	$files = array(
-		'View/css/core.css',
-		'View/js/jquery.alerts.js',
+		'css/core.css',
+		'js/jquery.alerts.js',
 	);
-	clsLoader::load('Core', $files);
+	Loader::load('Core', $files);
 	
     $uri = request_uri();
     if(preg_match("/(\/admincp)/", $uri)!=0){
-		$files_admin = array(
-			'Controller/admin_default_page.php',
-			'View/css/admin.css',
-			'View/js/admin.js',
-			'View/js/jquery.html5uploader.min.js',
-			'View/js/upload.files.js',
+		$files_admin = array(			
+            'css/admin.css',
+			'js/admin.js',
+			'js/jquery.html5uploader.min.js',
+			'js/upload.files.js',
 		);
-		clsLoader::load('Core', $files_admin);
+		Loader::load('Core', $files_admin);
     }
 
 }
@@ -182,7 +181,7 @@ function Core_init(){
 function page_default(){
 	global $base_url;
     drupal_set_title('Trang chủ');
-    $meta_seo = clsUtility::keyword_seo($keyword='SITE_SEO_HOME');
+    $meta_seo = Utility::keyword_seo($keyword='SITE_SEO_HOME');
     
     if(count($meta_seo)>0){
         foreach($meta_seo as $v){
@@ -201,9 +200,7 @@ function page_default(){
             $meta_description = 'Home';
             $img = '';
     }
-
-    $clsSeo = new clsSeo();
-    $clsSeo->SEO($meta_title, $img, $meta_title, $meta_keywords, $meta_description);
+    $Seo::SEO($meta_title, $img, $meta_title, $meta_keywords, $meta_description);
 
 	return '';
 }

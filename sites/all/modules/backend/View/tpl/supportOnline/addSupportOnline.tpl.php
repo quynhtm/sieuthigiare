@@ -30,7 +30,7 @@
                         }
 
                         if(isset($filed['editor']) && $filed['editor']==1 && $filed['type']=='textarea'){
-                            $field_editor .= clsForm::addEditor($key, $filed);
+                            $field_editor .= Form::addEditor($key, $filed);
                         }
 
                         echo '<div class="control-group">';
@@ -39,28 +39,28 @@
                                 switch ($filed['type']) {
 
                                     case 'text':
-                                        echo clsForm::addInputText($key, $filed);break;
+                                        echo Form::addInputText($key, $filed);break;
 
                                     case 'textarea':
-                                        echo clsForm::addInputTextarea($key, $filed);break;
+                                        echo Form::addInputTextarea($key, $filed);break;
 
                                     case 'password':
-                                        echo clsForm::addInputPassword($key, $filed);break;
+                                        echo Form::addInputPassword($key, $filed);break;
 
                                     case 'file':
-                                        	echo clsForm::addInputFile($key, $filed);break;
+                                        	echo Form::addInputFile($key, $filed);break;
 
                                     case 'hidden':
-                                        echo clsForm::addInputHidden($key, $filed);break;
+                                        echo Form::addInputHidden($key, $filed);break;
 
                                     case 'language':
-                                        echo clsForm::addInputLang($key, $filed);break;
+                                        echo Form::addInputLang($key, $filed);break;
 
                                     case 'option':
-                                        echo clsForm::addSelect($key, $filed);break;
+                                        echo Form::addSelect($key, $filed);break;
 
                                     default:
-                                       echo clsForm::addInputText($key, $filed);break;
+                                       echo Form::addInputText($key, $filed);break;
                                 }
                             echo '</div>';
                         echo '</div>';

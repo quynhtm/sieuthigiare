@@ -5,7 +5,7 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0 
 */
-class clsDate{
+class Date{
 	
 	/*--------------------------------------convert date to int---------------------------------------------------*/
 	public function convertDate($date=''){
