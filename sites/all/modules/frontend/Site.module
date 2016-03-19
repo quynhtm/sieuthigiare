@@ -1,0 +1,97 @@
+<?php
+/*
+* @Created by: HSS
+* @Author	 : nguyenduypt86@gmail.com
+* @Date 	 : 06/2014
+* @Version	 : 1.0
+*/
+function Site_block_info() {
+	$blocks['block-header'] = array(
+		'info' => t('Block header'),
+		'status'	=> TRUE,
+		'region'	=> 'header',
+		'weight'	=> 0,
+		'visibility' => 1,
+	);
+	$blocks['block-slide'] = array(
+		'info' => t('Block slide'),
+		'status'	=> TRUE,
+		'region'	=> 'content',
+		'weight'	=> 0,
+		'visibility' => 1,
+	);
+	$blocks['block-content'] = array(
+		'info' => t('Block content'),
+		'status'	=> TRUE,
+		'region'	=> 'content',
+		'weight'	=> 0,
+		'visibility' => 1,
+	);
+	$blocks['block-footer'] = array(
+		'info' => t('Block footer'),
+		'status'	=> TRUE,
+		'region'	=> 'footer',
+		'weight'	=> 0,
+		'visibility' => 1,
+	);
+
+   return $blocks;
+}
+function Site_theme() {
+	return array(
+	    'block-header' => array(
+	      'template' => 'View/tpl/block-header'
+	    ),
+	    'block-slide' => array(
+	      'template' => 'View/tpl/block-slide'
+	    ),
+	    'block-content' => array(
+	      'template' => 'View/tpl/block-content'
+	    ),
+		'block-footer' => array(
+	      'template' => 'View/tpl/block-footer'
+	    ),
+	);
+}
+function Site_block_view($delta='') {
+	$block = array();
+	switch ($delta) {
+		case 'block-header':
+		  $block['subject'] = t('Block header');
+		  $block['content'] = block_header();
+		  break;
+		 case 'block-slide':
+		  $block['subject'] = t('Block slide');
+		  $block['content'] = block_slide();
+		  break;
+		case 'block-content':
+		  $block['subject'] = t('Block content');
+		  $block['content'] = block_content();
+		  break;
+		case 'block-footer':
+		  $block['subject'] = t('Block footer');
+		  $block['content'] = block_footer();
+		  break;
+	}
+	return $block;
+}
+function Site_init() {
+	$uri = request_uri();
+	if(preg_match("/(\/admin)/", $uri)==0){
+		$files = array(
+			'Model/SiteBlocksModel.php',
+			'Controller/SiteBlockController.php',
+
+			'View/bootstrap/js/bootstrap.min.js',
+			'View/bootstrap/css/bootstrap.css',
+
+			'View/js/site.js',
+			'View/css/site.css',
+			'View/css/media.css',
+
+			'View/js/nivoslider/jquery.nivo.slider.js',
+			'View/js/nivoslider/jquery.nivo.slider.css',
+		);
+		Loader::load('Site', $files);
+	}
+}

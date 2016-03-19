@@ -29,14 +29,31 @@ function user_autocomplete($string = '') {
  */
 function user_pass() {
   global $user;
+  drupal_set_title('Thay đổi mật khẩu');
+
+  $html = '';
+  $html .= '<h3>'.t('Khôi phục mật khẩu').'</h3>';
+  $html .= '<div class="restore-pass-text01">'.t('Nhập địa chỉ email mà bạn đã đăng ký.').'</div>';
+  $string = '';
+  $string .= '<div class="restore-pass-text02">'.t('Bạn sẽ nhận được một email với các chỉ dẫn để phục hồi mật khẩu.').'</div>';  
+  
+  $form['text-restore-pass'] = array(
+    '#type' => 'markup',
+    '#markup' => $html,
+  );
 
   $form['name'] = array(
     '#type' => 'textfield',
-    '#title' => t('Username or e-mail address'),
+    '#title' => t('Email cần khôi phục mật khẩu'),
     '#size' => 60,
     '#maxlength' => max(USERNAME_MAX_LENGTH, EMAIL_MAX_LENGTH),
     '#required' => TRUE,
     '#default_value' => isset($_GET['name']) ? $_GET['name'] : '',
+    '#description' => '<span>'.t('Hãy nhập chính xác địa chỉ email của bạn.').'</span>',
+  );
+  $form['text-restore-send-mail'] = array(
+    '#type' => 'markup',
+    '#markup' => $string,
   );
   // Allow logged in users to request this also.
   if ($user->uid > 0) {
@@ -44,7 +61,7 @@ function user_pass() {
     $form['name']['#value'] = $user->mail;
     $form['mail'] = array(
       '#prefix' => '<p>',
-      '#markup' =>  t('Password reset instructions will be mailed to %email. You must log out to use the password reset link in the e-mail.', array('%email' => $user->mail)),
+      '#markup' =>  t('Bạn sẽ nhận được một email với các chỉ dẫn để phục hồi mật khẩu.', array('%email' => $user->mail)),
       '#suffix' => '</p>',
     );
   }
@@ -72,6 +89,7 @@ function user_pass_validate($form, &$form_state) {
   }
 }
 
+
 function user_pass_submit($form, &$form_state) {
   global $language;
 
@@ -80,7 +98,7 @@ function user_pass_submit($form, &$form_state) {
   $mail = _user_mail_notify('password_reset', $account, $language);
   if (!empty($mail)) {
     watchdog('user', 'Password reset instructions mailed to %name at %email.', array('%name' => $account->name, '%email' => $account->mail));
-    drupal_set_message(t('Further instructions have been sent to your e-mail address.'));
+    drupal_set_message(t('Link khôi phục mật khẩu đã được gửi tới mail của bạn.'));
   }
 
   $form_state['redirect'] = 'user';
@@ -105,10 +123,10 @@ function user_pass_reset($form, &$form_state, $uid, $timestamp, $hashed_pass, $a
       $reset_link_account = user_load($uid);
       if (!empty($reset_link_account)) {
         drupal_set_message(t('Another user (%other_user) is already logged into the site on this computer, but you tried to use a one-time link for user %resetting_user. Please <a href="!logout">logout</a> and try using the link again.',
-          array('%other_user' => $user->name, '%resetting_user' => $reset_link_account->name, '!logout' => url('user/logout'))), 'warning');
+          array('%other_user' => $user->name, '%resetting_user' => $reset_link_account->name, '!logout' => url('user/logout'))));
       } else {
         // Invalid one-time link specifies an unknown user.
-        drupal_set_message(t('The one-time login link you clicked is invalid.'), 'error');
+        drupal_set_message(t('The one-time login link you clicked is invalid.'));
       }
     }
     drupal_goto();
@@ -123,10 +141,10 @@ function user_pass_reset($form, &$form_state, $uid, $timestamp, $hashed_pass, $a
     if ($timestamp <= $current && $account = reset($users)) {
       // No time out for first time login.
       if ($account->login && $current - $timestamp > $timeout) {
-        drupal_set_message(t('You have tried to use a one-time login link that has expired. Please request a new one using the form below.'), 'error');
+        drupal_set_message(t('You have tried to use a one-time login link that has expired. Please request a new one using the form below.'));
         drupal_goto('user/password');
       }
-      elseif ($account->uid && $timestamp >= $account->login && $timestamp <= $current && $hashed_pass == user_pass_rehash($account->pass, $timestamp, $account->login, $account->uid)) {
+      elseif ($account->uid && $timestamp >= $account->login && $timestamp <= $current && $hashed_pass == user_pass_rehash($account->pass, $timestamp, $account->login)) {
         // First stage is a confirmation form, then login
         if ($action == 'login') {
           // Set the new user.
@@ -151,7 +169,7 @@ function user_pass_reset($form, &$form_state, $uid, $timestamp, $hashed_pass, $a
         }
       }
       else {
-        drupal_set_message(t('You have tried to use a one-time login link that has either been used or is no longer valid. Please request a new one using the form below.'), 'error');
+        drupal_set_message(t('You have tried to use a one-time login link that has either been used or is no longer valid. Please request a new one using the form below.'));
         drupal_goto('user/password');
       }
     }

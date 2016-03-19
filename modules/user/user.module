@@ -2098,16 +2098,22 @@ function user_set_authmaps($account, $authmaps) {
  * @ingroup forms
  */
 function user_login($form, &$form_state) {
-  global $user;
+  global $user, $base_url;
 
   // If we are already logged on, go to the user page instead.
   if ($user->uid) {
     drupal_goto('user/' . $user->uid);
   }
 
+  $str1= '<div class="title-login-user"><span>Đăng nhập</span></div>'; 
+  $form['html'] = array(
+   '#type' => 'markup',
+   '#markup' => $str1,
+  );
+
   // Display login form:
   $form['name'] = array('#type' => 'textfield',
-    '#title' => t('Username'),
+    '#title' => t('Tên đăng nhập'),
     '#size' => 60,
     '#maxlength' => USERNAME_MAX_LENGTH,
     '#required' => TRUE,
@@ -2115,13 +2121,32 @@ function user_login($form, &$form_state) {
 
   $form['name']['#description'] = t('Enter your @s username.', array('@s' => variable_get('site_name', 'Drupal')));
   $form['pass'] = array('#type' => 'password',
-    '#title' => t('Password'),
+    '#title' => t('Mật khẩu'),
     '#description' => t('Enter the password that accompanies your username.'),
     '#required' => TRUE,
   );
   $form['#validate'] = user_login_default_validators();
   $form['actions'] = array('#type' => 'actions');
-  $form['actions']['submit'] = array('#type' => 'submit', '#value' => t('Log in'));
+  $form['actions']['submit'] = array('#type' => 'submit', '#value' => t('Đăng nhập'));
+
+  $html1='<div class="remember-login">
+      <input type="checkbox" class="save-login" name="save_login" id="save-login" />
+      <label for="save-login" class="txt-save-login">'.t("Ghi nhớ tài khoản").'</label>
+     </div>';
+   $form['remember'] = array(
+     '#type' => 'markup',
+     '#markup' => $html1,
+  );
+  $html2='<div class="link-info">
+      <div class="registration"><a href="'.$base_url.'/dang-ky">'.t('Đăng ký').'</a></div>
+      <div class="forgot-password"><a href="'.$base_url.'/user/password">'.t('Bạn quên mật khẩu?').'</a></div>
+     </div>';
+  $form['forgot'] = array(
+    '#type' => 'markup',
+    '#markup' => $html2,
+  );
+
+  
 
   return $form;
 }

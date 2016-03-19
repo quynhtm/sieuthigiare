@@ -338,7 +338,7 @@ function _drupal_default_html_head() {
     '#tag' => 'meta',
     '#attributes' => array(
       'name' => 'Generator',
-      'content' => 'Drupal ' . $version . ' (http://drupal.org)',
+      'content' => 'Team Dev 1',
     ),
   );
   // Also send the generator in the HTTP header.
