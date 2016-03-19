@@ -53,6 +53,16 @@ function formSupportonlineAction(){
 		$uid		= $user->uid;
 		$created	= time();
 
+		$check_email = ValidForm::checkRegexEmail($email);
+		if(!$check_email){
+			drupal_set_message('Email sai cấu trúc.Vui lòng thử lại!', 'error');
+			if($param[3]>-1){
+				drupal_goto($base_url.'/admincp/supportonline/edit/'.$param[3]);
+			}else{
+				drupal_goto($base_url.'/admincp/supportonline/add');
+			}
+		}
+
 		$data_post = array(
 					'title'=>$title,
 					'yahoo'=>$yahoo,
