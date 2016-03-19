@@ -32,63 +32,58 @@ function formSupportonlineAction(){
 
 	$Stdio = new Stdio();
 
-	$fields = Form::buildItemFields(SupportOnline::listInputForm());
-	$data = array('fields'=>$fields);
-
-	//get item update
 	$param = arg();
+	$arrOneItem = array();
+
 	if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
 		$arrFields = array('id','title', 'yahoo', 'skyper', 'mobile', 'email', 'order_no', 'status');
 		$arrOneItem = SupportOnline::getOne($arrFields, $param[3]);
-		
-		foreach ($data['fields'] as $key => $filed) {
-			$data['fields'][$key]['value']=$arrOneItem[0]->$key;
-		}
-
 	}
 
-	//check post: insert or update
-	if(!empty($_POST) && $_POST['txtFormName']=='txtFormName'){
-		$require_post = array();
+	if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 
-		$data_post = array();
-		$data_post['uid ']=$user->uid;
-		$data_post['created']=time();
+		$title 	= isset($_POST['title']) ? trim($_POST['title']) : '';
+		$yahoo 	= isset($_POST['yahoo']) ? trim($_POST['yahoo']) : '';
+		$skyper = isset($_POST['skyper']) ? trim($_POST['skyper']) : '';
+		$mobile = isset($_POST['mobile']) ? trim($_POST['mobile']) : '';
+		$email 	= isset($_POST['email']) ? trim($_POST['email']) : '';
+		$order_no	= isset($_POST['order_no']) ? intval($_POST['order_no']) : 1;
+		$status		= isset($_POST['status']) ? intval($_POST['status']) : 0;
 
-		foreach ($data['fields'] as $key => $field) {
-			$data_post[$key] = Form::itemPostValue($key);
-			$data['fields'][$key]['value']=$data_post[$key];
+		$uid		= $user->uid;
+		$created	= time();
 
-			if(isset($field['require']) && $field['require']=='require' && $data_post[$key]==''){
-				$require_post[$key] = t($field['label']).' '.t('không được rỗng!');
-			}
+		$data_post = array(
+					'title'=>$title,
+					'yahoo'=>$yahoo,
+					'skyper'=>$skyper,
+					'mobile'=>$mobile,
+					'email'=>$email,
+					'order_no'=>$order_no,
+					'status'=>$status,
+					'uid'=>$uid,
+					'created'=>$created,
+				);
 
-			if($key=='title'){
-				$data_post['title_alias']=$Stdio->pregReplaceStringAlias(Form::itemPostValue('title'));
-			}
-		 }
+		if($param[3] > 0){
+			unset($data_post['uid']);
+			unset($data_post['created']);
+			SupportOnline::updateId($data_post, $param[3]);
+			drupal_set_message('Sửa bài viết thành công.');
+			drupal_goto($base_url.'/admincp/supportonline');
 
-		unset($_POST);
-		if(count($require_post)>0){
-			foreach ($require_post as $k => $v) {
-				form_set_error($k, $v);
-			}
-			unset($data_post);
 		}else{
-
-			if($data['fields']['id']['value']>0){
-				SupportOnline::updateId($data_post, $param[3]);
-				drupal_set_message('Sửa bài viết thành công.');
+			$query = SupportOnline::insert($data_post);
+			if($query){
+				drupal_set_message('Thêm bài viết thành công.');
 				drupal_goto($base_url.'/admincp/supportonline');
-			}else{
-				$query = SupportOnline::insert($data_post);
-				if($query){
-					drupal_set_message('Thêm bài viết thành công.');
-					drupal_goto($base_url.'/admincp/supportonline');
-				}
 			}
 		}
 	}
+
+	$data = array(
+				'arrOneItem'=>$arrOneItem,				
+			);
 
 	$view = theme('addSupportOnline',$data);
 	return $view;
