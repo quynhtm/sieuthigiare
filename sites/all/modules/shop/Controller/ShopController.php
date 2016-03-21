@@ -10,14 +10,14 @@ function shopRegister(){
 	
 	if(isset($_POST['txtFormNameRegister'])){
 		
-		$txtNameShop	= isset($_POST['txtNameShop']) ? trim($_POST['txtNameShop']) : '';
-		$txtName 		= isset($_POST['txtName']) ? trim($_POST['txtName']) : '';
-		$txtPass 		= isset($_POST['txtPass']) ? trim($_POST['txtPass']) : '';
-		$txtRePass 		= isset($_POST['txtRePass']) ? trim($_POST['txtRePass']) : '';
-		$txtMobile		= isset($_POST['txtMobile']) ? trim($_POST['txtMobile']) : '';
-		$txtEmail		= isset($_POST['txtEmail']) ? trim($_POST['txtEmail']) : '';
-		$txtProvice		= isset($_POST['txtProvice']) ? intval($_POST['txtProvice']) : 0;
-		$created 		= time();
+		$txtNameShop= isset($_POST['txtNameShop']) ? trim($_POST['txtNameShop']) : '';
+		$txtName 	= isset($_POST['txtName']) ? trim($_POST['txtName']) : '';
+		$txtPass 	= isset($_POST['txtPass']) ? trim($_POST['txtPass']) : '';
+		$txtRePass 	= isset($_POST['txtRePass']) ? trim($_POST['txtRePass']) : '';
+		$txtMobile	= isset($_POST['txtMobile']) ? trim($_POST['txtMobile']) : '';
+		$txtEmail	= isset($_POST['txtEmail']) ? trim($_POST['txtEmail']) : '';
+		$txtProvice	= isset($_POST['txtProvice']) ? intval($_POST['txtProvice']) : 0;
+		$created 	= time();
 
 		$errors = '';
 		if($txtNameShop == ''){
@@ -61,11 +61,13 @@ function shopRegister(){
 		}
 		if($errors != ''){
 			drupal_set_message($errors, 'error');
+			drupal_goto($base_url.'/dang-ky.html');
 		}
 		//check user and hash pass
 		$check_user_exists = ShopUser::getUserExists($txtName, $txtEmail);
 		if($check_user_exists){
 			drupal_set_message('Tên đăng nhập hoặc mail đã tồn tại. Vui lòng chọn lại!', 'error');
+			drupal_goto($base_url.'/dang-ky.html');
 		}else{
 			require_once DRUPAL_ROOT . '/' . variable_get('password_inc', 'includes/password.inc');
 			$hash_pass = user_hash_password(trim($txtPass));
@@ -95,6 +97,23 @@ function shopRegister(){
 }
 
 function shopLogin(){
+	if(isset($_POST['txtFormNameLogin'])){
+		$txtName 	= isset($_POST['txtName']) ? trim($_POST['txtName']) : '';
+		$txtPass 	= isset($_POST['txtPass']) ? trim($_POST['txtPass']) : '';
+
+		$errors = '';
+		if($txtName == ''){
+			$errors .= 'Tên đăng nhập không được trống!<br/>';
+		}
+		if($txtPass == ''){
+			$errors .= 'Mật khẩu không được trống!<br/>';
+		}
+		if($errors != ''){
+			drupal_set_message($errors, 'error');
+			drupal_goto($base_url.'/dang-nhập.html');
+		}
+
+	}
 	$view = theme('shop-login');
 	return $view;
 }

@@ -45,7 +45,7 @@ class ValidForm{
 			if(strlen($str) < $length){
 				return false;
 			}else{
-				$regex = '/^[a-zA-Z0-9_@&#%=~,;\{\}\^\$\.\+\*\?\/\ ]*$/';
+				$regex = '/^[a-zA-Z0-9_@&#%=~,;\{\}\(\)\^\$\.\+\*\?\/\ ]*$/';
 				if (!preg_match($regex, $str)){
 			    	return false;
 				}

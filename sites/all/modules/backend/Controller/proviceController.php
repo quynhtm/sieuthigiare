@@ -42,7 +42,6 @@ function formProviceAction(){
 
 		$title 		= isset($_POST['title']) ? trim($_POST['title']) : '';
 		$status		= isset($_POST['status']) ? intval($_POST['status']) : 0;
-
 		$uid		= $user->uid;
 		$created	= time();
 
