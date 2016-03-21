@@ -87,8 +87,10 @@ function shopRegister(){
 			}
 		}
 	}
-	
-	$view = theme('shop-register');
+	$listProvices = ShopUser::getAllProvices(100);
+	$data = array('listProvices' => $listProvices);
+
+	$view = theme('shop-register', $data);
 	return $view;
 }
 

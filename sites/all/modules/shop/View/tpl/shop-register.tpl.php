@@ -36,7 +36,9 @@
 									<div class="form-group">
 										<label class="control-label">Tỉnh/thành<span>(*)</span></label>
 										<select id="txtProvice" name="txtProvice" class="form-control">
-											<option value="1">Hà Nội</option>
+											<?php foreach ($listProvices as $v) { ?>
+											<option value="<?php echo $v->id ?>"><?php echo $v->title ?></option>
+											<?php } ?>
 										</select>
 									</div>
 									<input type="hidden" name="txtFormNameRegister" id="txtFormNameRegister" value="txtFormNameRegister"/>

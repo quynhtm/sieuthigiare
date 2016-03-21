@@ -7,6 +7,7 @@
 */
 class ShopUser{
 	static $table_action = TABLE_USER_SHOP;
+	static $table_action_provice = TABLE_PROVICES;
 
 	public static function insert($dataInsert){
 		if(!empty($dataInsert)){
@@ -21,6 +22,13 @@ class ShopUser{
 		}
 		if($mail != ''){
 			return DB:: getItembyCond(self::$table_action, 'id', '', 'id ASC', "mail='".$mail."'", 1);
+		}
+		return false;
+	}
+
+	public static function getAllProvices($limit=100){
+		if($limit > 0){
+			return DB::getItembyCond(self::$table_action_provice, 'id, title', '', 'id ASC', 'status=1', $limit);
 		}
 		return false;
 	}
