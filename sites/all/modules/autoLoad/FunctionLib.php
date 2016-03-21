@@ -4,7 +4,7 @@
  * Function dùng common trong admin
 */
 
-class AdminLib{
+class FunctionLib{
 	/**
 	 * @param $data
 	 */

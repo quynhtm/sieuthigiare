@@ -9,73 +9,34 @@ function shopRegister(){
 	global $base_url;
 	
 	if(isset($_POST['txtFormNameRegister'])){
-		
-		$txtNameShop	= isset($_POST['txtNameShop']) ? trim($_POST['txtNameShop']) : '';
-		$txtName 		= isset($_POST['txtName']) ? trim($_POST['txtName']) : '';
-		$txtPass 		= isset($_POST['txtPass']) ? trim($_POST['txtPass']) : '';
-		$txtRePass 		= isset($_POST['txtRePass']) ? trim($_POST['txtRePass']) : '';
-		$txtMobile		= isset($_POST['txtMobile']) ? trim($_POST['txtMobile']) : '';
-		$txtEmail		= isset($_POST['txtEmail']) ? trim($_POST['txtEmail']) : '';
-		$txtProvice		= isset($_POST['txtProvice']) ? intval($_POST['txtProvice']) : 0;
+		$dataInput = array();
+		$dataInput ['name_alias'] = FunctionLib::getParam('txtNameShop','');
+		$dataInput ['user_name'] = FunctionLib::getParam('txtName','');
+		$dataInput ['password'] = FunctionLib::getParam('txtPass','');
+		$dataInput ['rep_password'] = FunctionLib::getParam('txtRePass','');
+		$dataInput ['phone'] = FunctionLib::getParam('txtMobile','');
+		$dataInput ['email'] = FunctionLib::getParam('txtEmail','');
+		$dataInput ['provice'] = FunctionLib::getParam('txtProvice','');
 		$created 		= time();
 
-		$errors = '';
-		if($txtNameShop == ''){
-			$errors .= 'Tên gian hàng không được trống!<br/>';
-		}
-		if($txtName == ''){
-			$errors .= 'Tên đăng nhập không được trống!<br/>';
-		}else{
-			$check_name = ValidForm::checkRegexName($txtName);
-			if(!$check_name){
-				$errors .= 'Tên đăng nhập chỉ gồm các chữ cái, số, dấu gạch dưới và @!<br/>';
-			}
-		}
-		if($txtPass == ''){
-			$errors .= 'Mật khẩu ko được trống!<br/>';
-		}else{
-			$check_pass = ValidForm::checkRegexPass($txtPass, 6);
-			if(!$check_pass){
-				$errors .= 'Mật khẩu phải không có dấu và lớn hơn 6 ký tự!<br/>';
-			}
-			if($txtPass != $txtRePass){
-				$errors .= 'Mật khẩu nhập không khớp!<br/>';
-			}
-		}
-		if($txtEmail != ''){
-			$check_email = ValidForm::checkRegexEmail($txtEmail);
-			if(!$check_email){
-				$errors .= 'Email sai cấu trúc!<br/>';		
-			}
-		}
-		if($txtMobile == ''){
-			$errors .= 'Số điện thoại không được trống!<br/>';
-		}elseif($txtMobile != ''){
-			$check_phone = ValidForm::checkRegexPhone($txtMobile);
-			if(!$check_phone){
-				$errors .= 'Số điện thoại sai cấu trúc!<br/>';		
-			}
-		}
-		if($txtProvice == 0){
-			$errors .= 'Bạn chọn vui lòng chọn tỉnh/thành!<br/>';
-		}
+		$errors = ValidForm::validInputData($dataInput);
 		if($errors != ''){
 			drupal_set_message($errors, 'error');
 		}
 		//check user and hash pass
-		$check_user_exists = ShopUser::getUserExists($txtName, $txtEmail);
+		$check_user_exists = ShopUser::getUserExists($dataInput ['user_name'], $dataInput ['email']);
 		if($check_user_exists){
 			drupal_set_message('Tên đăng nhập hoặc mail đã tồn tại. Vui lòng chọn lại!', 'error');
 		}else{
 			require_once DRUPAL_ROOT . '/' . variable_get('password_inc', 'includes/password.inc');
-			$hash_pass = user_hash_password(trim($txtPass));
+			$hash_pass = user_hash_password(trim($dataInput ['password']));
 			$data_post = array(
-				'name_shop'=>$txtNameShop,
-				'name'=>$txtName,
+				'name_shop'=>$dataInput ['name_alias'],
+				'name'=>$dataInput ['user_name'],
 				'pass'=>$hash_pass,
-				'phone'=>$txtMobile,
-				'mail'=>$txtEmail,
-				'provice'=>$txtProvice,
+				'phone'=>$dataInput ['phone'],
+				'mail'=>$dataInput ['mail'],
+				'provice'=>$dataInput ['provice'],
 				'is_shop'=>0,
 				'status'=>0,
 				'created'=>$created,
