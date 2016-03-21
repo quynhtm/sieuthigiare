@@ -11,11 +11,11 @@
 								<form class="formSendRegister" method="post" action="" class="form-inline">
 									<div class="form-group">
 										<label class="control-label">Tên đăng nhập<span>(*)</span></label>
-										<input type="text" id="txtName" class="form-control" name="txtName" value="<?php if(isset($data_post['name'])){ echo $data_post['name']; } ?>">
+										<input type="text" id="user_name" class="form-control" name="user_name">
 									</div>
 									<div class="form-group">
 										<label class="control-label">Mật khẩu<span>(*)</span></label>
-										<input type="password" id="txtPass" class="form-control" name="txtPass" value="<?php if(isset($data_post['pass'])){ echo $data_post['pass']; } ?>">
+										<input type="password" id="password" class="form-control" name="password">
 									</div>
 									<input type="hidden" name="txtFormNameLogin" id="txtFormNameLogin" value="txtFormNameLogin"/>
 									<button type="submit" id="submitLogin" class="btn btn-primary">Đăng nhập</button>

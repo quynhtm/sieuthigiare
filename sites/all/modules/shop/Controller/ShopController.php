@@ -10,13 +10,13 @@ function shopRegister(){
 	
 	if(isset($_POST['txtFormNameRegister'])){
 		$dataInput = array();
-		$dataInput ['name_alias'] = FunctionLib::getParam('txtNameShop','');
-		$dataInput ['user_name'] = FunctionLib::getParam('txtName','');
-		$dataInput ['password'] = FunctionLib::getParam('txtPass','');
-		$dataInput ['rep_password'] = FunctionLib::getParam('txtRePass','');
-		$dataInput ['phone'] = FunctionLib::getParam('txtMobile','');
-		$dataInput ['email'] = FunctionLib::getParam('txtEmail','');
-		$dataInput ['provice'] = FunctionLib::getParam('txtProvice','');
+		$dataInput ['name_alias'] = FunctionLib::getParam('name_alias','');
+		$dataInput ['user_name'] = FunctionLib::getParam('user_name','');
+		$dataInput ['password'] = FunctionLib::getParam('password','');
+		$dataInput ['rep_password'] = FunctionLib::getParam('rep_password','');
+		$dataInput ['phone'] = FunctionLib::getParam('phone','');
+		$dataInput ['email'] = FunctionLib::getParam('email','');
+		$dataInput ['provice'] = FunctionLib::getParam('provice','');
 		$created 		= time();
 		$errors = ValidForm::validInputData($dataInput);
 		if($errors != ''){
@@ -33,8 +33,8 @@ function shopRegister(){
 			$hash_pass = user_hash_password(trim($dataInput ['password']));
 			$data_post = array(
 				'name_shop'=>$dataInput ['name_alias'],
-				'name'=>$dataInput ['user_name'],
-				'pass'=>$hash_pass,
+				'user_name'=>$dataInput ['user_name'],
+				'user_password'=>$hash_pass,
 				'phone'=>$dataInput ['phone'],
 				'mail'=>$dataInput ['mail'],
 				'provice'=>$dataInput ['provice'],
@@ -61,8 +61,8 @@ function shopLogin(){
 	if(isset($_POST['txtFormNameLogin'])){
 		
 		$dataInput = array();
-		$dataInput ['user_name_login'] = FunctionLib::getParam('txtName','');
-		$dataInput ['password_login'] = FunctionLib::getParam('txtPass','');
+		$dataInput ['user_name_login'] = FunctionLib::getParam('user_name','');
+		$dataInput ['password_login'] = FunctionLib::getParam('password','');
 		
 		$errors = ValidForm::validInputData($dataInput);
 		if($errors != ''){
