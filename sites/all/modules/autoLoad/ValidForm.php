@@ -74,7 +74,7 @@ class ValidForm{
 		return $str;
 	}
 
-	public function validInputData($dataInput){
+	public static function validInputData($dataInput){
 		$errors = array();
 		$message = '';
 		if(isset($dataInput['name_alias']) && trim($dataInput['name_alias']) == ''){
