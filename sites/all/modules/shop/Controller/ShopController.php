@@ -59,21 +59,17 @@ function shopRegister(){
 function shopLogin(){
 	global $base_url;
 	if(isset($_POST['txtFormNameLogin'])){
-		$txtName 	= isset($_POST['txtName']) ? trim($_POST['txtName']) : '';
-		$txtPass 	= isset($_POST['txtPass']) ? trim($_POST['txtPass']) : '';
-
-		$errors = '';
-		if($txtName == ''){
-			$errors .= 'Tên đăng nhập không được trống!<br/>';
-		}
-		if($txtPass == ''){
-			$errors .= 'Mật khẩu không được trống!<br/>';
-		}
+		
+		$dataInput = array();
+		$dataInput ['user_name'] = FunctionLib::getParam('txtName','');
+		$dataInput ['password'] = FunctionLib::getParam('txtPass','');
+		
+		$errors = ValidForm::validInputData($dataInput);
 		if($errors != ''){
 			drupal_set_message($errors, 'error');
 			drupal_goto($base_url.'/dang-nhập.html');
 		}else{
-			
+
 		}
 	}
 	$view = theme('shop-login');
