@@ -53,10 +53,20 @@ function formSupportonlineAction(){
 		$uid		= $user->uid;
 		$created	= time();
 
-		$check_email = ValidForm::checkRegexEmail($email);
-		if(!$check_email){
-			drupal_set_message('Email sai cấu trúc.Vui lòng thử lại!', 'error');
-			if($param[3]>-1){
+		$errors = '';
+		if($title==''){
+			$errors .= 'Tiêu đề ko được trống!<br/>';
+		}
+		if($email != ''){
+			$check_email = ValidForm::checkRegexEmail($email);
+			if(!$check_email){
+				$errors .= 'Email sai cấu trúc!<br/>';
+			
+			}
+		}
+		if($errors != ''){
+			drupal_set_message($errors, 'error');
+			if(isset($param[3]) && $param[3]>-1){
 				drupal_goto($base_url.'/admincp/supportonline/edit/'.$param[3]);
 			}else{
 				drupal_goto($base_url.'/admincp/supportonline/add');

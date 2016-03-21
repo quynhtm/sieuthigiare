@@ -37,7 +37,6 @@ function formConfiginfoAction(){
 
 	if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
 		$arrFields=array('id', 'title', 'keyword', 'intro', 'content', 'img', 'created', 'status', 'meta_title', 'meta_keywords', 'meta_description');
-
 		$arrOneItem = ConfigInfo::getOne($arrFields, $param[3]);
 	}
 
@@ -55,6 +54,22 @@ function formConfiginfoAction(){
 
 		$uid		= $user->uid;
 		$created	= time();
+
+		$errors = '';
+		if($title==''){
+			$errors .= 'Tiêu đề ko được trống!<br/>';
+		}
+		if($keyword==''){
+			$errors .= 'Từ khóa ko được trống!<br/>';
+		}
+		if($errors != ''){
+			drupal_set_message($errors, 'error');
+			if(isset($param[3]) && $param[3]>-1){
+				drupal_goto($base_url.'/admincp/configinfo/edit/'.$param[3]);
+			}else{
+				drupal_goto($base_url.'/admincp/configinfo/add');
+			}
+		}
 
 		$data_post = array(
 					'title'=>$title,

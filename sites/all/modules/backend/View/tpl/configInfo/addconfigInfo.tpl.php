@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label">Keyword</label>
+                <label class="control-label">Keyword<span>*</span></label>
                 <div class="controls">
                     <input type="text" name="keyword" value="<?php if(isset($arrOneItem[0]->keyword)){ echo $arrOneItem[0]->keyword; } ?>">
                 </div>
