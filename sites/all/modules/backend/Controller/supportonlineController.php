@@ -66,7 +66,7 @@ function formSupportonlineAction(){
 		}
 		if($errors != ''){
 			drupal_set_message($errors, 'error');
-			if(isset($param[3]) && $param[3]>-1){
+			if(isset($param[3]) && $param[3]>0){
 				drupal_goto($base_url.'/admincp/supportonline/edit/'.$param[3]);
 			}else{
 				drupal_goto($base_url.'/admincp/supportonline/add');
@@ -85,13 +85,12 @@ function formSupportonlineAction(){
 					'created'=>$created,
 				);
 
-		if($param[3] > 0){
+		if(isset($param[3]) && $param[3] > 0){
 			unset($data_post['uid']);
 			unset($data_post['created']);
 			SupportOnline::updateId($data_post, $param[3]);
 			drupal_set_message('Sửa bài viết thành công.');
 			drupal_goto($base_url.'/admincp/supportonline');
-
 		}else{
 			$query = SupportOnline::insert($data_post);
 			if($query){

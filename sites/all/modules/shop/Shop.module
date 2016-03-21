@@ -1,0 +1,40 @@
+<?php
+/*
+* @Created by: HSS
+* @Author	 : nguyenduypt86@gmail.com
+* @Date 	 : 06/2014
+* @Version	 : 1.0
+*/
+function Shop_menu() {
+	
+	$items["dang-ky.html"] = array(
+		"title" => t('Đăng ký shop'),
+		"description" => "Đăng ký shop",
+		'page callback' => 'shopRegister',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+  return $items;
+}
+
+function Shop_theme() {
+	return array(
+	    'shop-register' => array(
+	      'template' => 'View/tpl/shop-register'
+	    ),
+	);
+}
+
+function Shop_init() {
+	$uri = request_uri();
+	if(preg_match("/(\/admin)/", $uri)==0){
+		$files = array(
+			'Model/ShopModel.php',
+			'Controller/ShopController.php',
+
+			'View//css/shop.css',
+			'View/js/shop.js',
+		);
+		Loader::load('Shop', $files);
+	}
+}

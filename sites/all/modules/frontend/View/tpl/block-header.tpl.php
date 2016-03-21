@@ -7,8 +7,8 @@
 		<div class="box-login">
 			<a href="' ?>" class="link-normal">Hướng dẫn mua hàng</a>
 			<?php if($user->uid == 0){?>
-			<a href="<?php echo $base_url.'/user' ?>" class="btnLog" rel="nofollow" >Đăng nhập</a>
-			<a href="' ?>" class="btnLog" rel="nofollow" >Đăng ký</a>
+			<a href="<?php echo $base_url.'/dang-nhap.html' ?>" class="btnLog" rel="nofollow" >Đăng nhập</a>
+			<a href="<?php echo $base_url.'/dang-ky.html' ?>" class="btnLog" rel="nofollow" >Đăng ký</a>
 			<?php }else{ ?>
 			<a href="" rel="nofollow" class="btnLog">Cài đặt</a>
 			<a href="" rel="nofollow" class="btnLog">Thoát</a>
