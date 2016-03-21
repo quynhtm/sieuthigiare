@@ -73,4 +73,58 @@ class ValidForm{
 		$str = htmlspecialchars($str);
 		return $str;
 	}
+
+	public function validInputData($dataInput){
+		$errors = array();
+		$message = '';
+		if(isset($dataInput['name_alias']) && trim($dataInput['name_alias']) == ''){
+			$errors[]= 'Tên gian hàng không ???c tr?ng!';
+		}
+
+		if(isset($dataInput['user_name']) && trim($dataInput['user_name']) == ''){
+			$errors[]= 'Tên ??ng nh?p không ???c tr?ng!';
+		}else{
+			$check_name = ValidForm::checkRegexName($dataInput['user_name']);
+			if(!$check_name){
+				$errors[] = 'Tên ??ng nh?p ch? g?m các ch? cái, s?, d?u g?ch d??i và @!';
+			}
+		}
+		if(isset($dataInput['password']) && trim($dataInput['password']) == ''){
+			$errors[]= 'M?t kh?u ko ???c tr?ng!';
+		}else{
+			$check_pass = ValidForm::checkRegexPass($dataInput['password'], 6);
+			if(!$check_pass){
+				$errors[]= 'M?t kh?u ph?i không có d?u và l?n h?n 6 ký t?!';
+			}
+			if(isset($dataInput['password']) && trim($dataInput['password']) != ''
+				&& isset($dataInput['rep_password']) && trim($dataInput['rep_password']) != ''
+				&& $dataInput['password'] != $dataInput['rep_password']){
+				$errors[]= 'M?t kh?u nh?p không kh?p!';
+			}
+		}
+		if(isset($dataInput['email']) && trim($dataInput['email']) == ''){
+			$check_email = ValidForm::checkRegexEmail($dataInput['email']);
+			if(!$check_email){
+				$errors[]= 'Email sai c?u trúc!';
+			}
+		}
+		if(isset($dataInput['phone']) && trim($dataInput['phone']) == ''){
+			$errors[]= 'S? ?i?n tho?i không ???c tr?ng!';
+		}elseif(isset($dataInput['phone']) && $dataInput['phone'] != ''){
+			$check_phone = ValidForm::checkRegexPhone($dataInput['phone']);
+			if(!$check_phone){
+				$errors[]= 'S? ?i?n tho?i sai c?u trúc!';
+			}
+		}
+		if(isset($dataInput['provice']) && trim($dataInput['provice']) == ''){
+			$errors[]= 'B?n ch?n vui lòng ch?n t?nh/thành!';
+		}
+		//build l?i thành chu?i thông báo
+		if(!empty($errors)){
+			foreach($errors as $msg){
+				$message .= $msg.'<br/>';
+			}
+		}
+		return $message;
+	}
 }
