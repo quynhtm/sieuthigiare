@@ -19,6 +19,13 @@ function Admin_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
+	$items["admincp/configinfo"] = array(
+		"title" => t('Config info'),
+		"description" => "Config info",
+		'page callback' => 'router_page',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
 	
   return $items;
 }
@@ -30,6 +37,8 @@ function Admin_theme() {
     return array(
         'indexSupportOnline' 	=> array('template' => 'View/tpl/supportOnline/indexSupportOnline'),
         'addSupportOnline' 		=> array('template' => 'View/tpl/supportOnline/addSupportOnline'),
+        'indexConfigInfo' 		=> array('template' => 'View/tpl/configInfo/indexConfigInfo'),
+        'addConfigInfo' 		=> array('template' => 'View/tpl/configInfo/addConfigInfo'),
  		//here
     );
 }
@@ -51,10 +60,10 @@ function Admin_init(){
 	$uri = request_uri();
 	if(preg_match("/(\/admincp)/", $uri)!=0){
 		$files = array(
-			/*support online*/
 			'Model/SupportOnline.php',
 			'Controller/SupportOnlineController.php',
-			
+			'Model/ConfigInfo.php',
+			'Controller/ConfigInfoController.php',
 		);
 		Loader::load('Admin', $files);
 	}

@@ -32,6 +32,7 @@ define('base_url_lang', $base_url .'/'. ((!isset($language->language) || $langua
  */
 define('TABLE_SUPPORT_ONLINE', 'web_support_online');
 define('TABLE_CONFIG_INFO', 'web_config_info');
+define('TABLE_USER_SHOP', 'web_user_shop');
 
 
 

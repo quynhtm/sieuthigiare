@@ -16,5 +16,8 @@
         <li <?php if($param[1]=='supportonline'){?> class="active" <?php } ?>>
             <a class="" title="" href="<?php echo $base_url ?>/admincp/supportonline">Nick support</a>
         </li>
+		<li <?php if($param[1]=='configinfo'){?> class="active" <?php } ?>>
+            <a class="" title="" href="<?php echo $base_url ?>/admincp/configinfo">Cấu hình chung</a>
+        </li>
     </ul>
 </div>

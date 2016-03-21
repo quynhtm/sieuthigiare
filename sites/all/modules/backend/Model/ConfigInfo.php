@@ -5,8 +5,8 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0
 */
-class SupportOnline{
-	static $table_action = TABLE_SUPPORT_ONLINE;
+class ConfigInfo{
+	static $table_action = TABLE_CONFIG_INFO;
 
 	public static function getSearch($dataSearch, $arrFields, $limit, &$totalItem, &$pager){
 		$result = DB::getSearchListItemsAndPage(self::$table_action,$dataSearch, $arrFields, $limit);

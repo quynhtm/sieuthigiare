@@ -182,7 +182,7 @@ function page_default(){
 	global $base_url;
     drupal_set_title('Trang chủ');
     $meta_seo = Utility::keyword_seo($keyword='SITE_SEO_HOME');
-    
+
     if(count($meta_seo)>0){
         foreach($meta_seo as $v){
             $meta_title = $v->meta_title;
