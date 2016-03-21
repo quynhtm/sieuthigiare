@@ -12,8 +12,8 @@ function indexProvice(){
 	$limit = SITE_RECORD_PER_PAGE;
 	$pager = '';
 	$dataSearch = array();
-	$dataSearch['keyword'] = AdminLib::getParam('keyword','');
-	$dataSearch['status'] = AdminLib::getParam('status','');
+	$dataSearch['keyword'] = FunctionLib::getParam('keyword','');
+	$dataSearch['status'] = FunctionLib::getParam('status','');
 	$arrFields=array('id', 'title', 'created', 'status');
 
 	$result = Provice::getSearch($dataSearch, $arrFields, $limit, $totalItem, $pager);

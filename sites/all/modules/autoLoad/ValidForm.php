@@ -77,13 +77,22 @@ class ValidForm{
 	public static function validInputData($dataInput){
 		$errors = array();
 		$message = '';
+		
+		if(isset($dataInput['user_name_login']) && trim($dataInput['user_name_login']) == ''){
+			$errors[]= 'Tên đăng nhập không được trống!';
+		}
+		
+		if(isset($dataInput['password_login']) && trim($dataInput['password_login']) == ''){
+			$errors[]= 'Mật khẩu không được trống!';
+		}
+
 		if(isset($dataInput['name_alias']) && trim($dataInput['name_alias']) == ''){
 			$errors[]= 'Tên gian hàng không được trống!';
 		}
 
 		if(isset($dataInput['user_name']) && trim($dataInput['user_name']) == ''){
 			$errors[]= 'Tên đăng nhập không được trống!';
-		}else{
+		}elseif(isset($dataInput['user_name']) && trim($dataInput['user_name']) != ''){
 			$check_name = ValidForm::checkRegexName($dataInput['user_name']);
 			if(!$check_name){
 				$errors[] = 'Tên đăng nhập chỉ gồm những chữ cái, số, dấu gạch dưới và @!';
@@ -91,7 +100,7 @@ class ValidForm{
 		}
 		if(isset($dataInput['password']) && trim($dataInput['password']) == ''){
 			$errors[]= 'Mật khẩu không được trống!';
-		}else{
+		}elseif(isset($dataInput['password']) && trim($dataInput['password']) != ''){
 			$check_pass = ValidForm::checkRegexPass($dataInput['password'], 6);
 			if(!$check_pass){
 				$errors[]= 'Mật khẩu không được có dấu và lớn hơn 6 ký tự!';
@@ -102,6 +111,7 @@ class ValidForm{
 				$errors[]= 'Mật khẩu nhập không khớp!';
 			}
 		}
+
 		if(isset($dataInput['email']) && trim($dataInput['email']) == ''){
 			$check_email = ValidForm::checkRegexEmail($dataInput['email']);
 			if(!$check_email){

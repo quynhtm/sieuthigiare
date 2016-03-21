@@ -61,8 +61,8 @@ function shopLogin(){
 	if(isset($_POST['txtFormNameLogin'])){
 		
 		$dataInput = array();
-		$dataInput ['user_name'] = FunctionLib::getParam('txtName','');
-		$dataInput ['password'] = FunctionLib::getParam('txtPass','');
+		$dataInput ['user_name_login'] = FunctionLib::getParam('txtName','');
+		$dataInput ['password_login'] = FunctionLib::getParam('txtPass','');
 		
 		$errors = ValidForm::validInputData($dataInput);
 		if($errors != ''){

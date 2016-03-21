@@ -12,8 +12,8 @@ function indexConfiginfo(){
 	$limit = SITE_RECORD_PER_PAGE;
 	$pager = '';
 	$dataSearch = array();
-	$dataSearch['keyword'] = AdminLib::getParam('keyword','');
-	$dataSearch['status'] = AdminLib::getParam('status','');
+	$dataSearch['keyword'] = FunctionLib::getParam('keyword','');
+	$dataSearch['status'] = FunctionLib::getParam('status','');
 	$arrFields=array('id', 'title', 'keyword', 'intro', 'content', 'img', 'created', 'status', 'meta_title', 'meta_keywords', 'meta_description');
 
 	$result = ConfigInfo::getSearch($dataSearch, $arrFields, $limit, $totalItem, $pager);
