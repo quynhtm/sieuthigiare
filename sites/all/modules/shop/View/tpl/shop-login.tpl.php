@@ -4,7 +4,7 @@
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="main-view-post">
 				<div class="wrap-main-view">
-					<h1 class="title-head"><a href="<?php echo $base_url?>/dang-nhap.html" title="Đăng ký">Đắng nhập gian hàng</a></h1>
+					<h1 class="title-head"><a href="<?php echo $base_url?>/dang-nhap.html" title="Đăng ký">Đăng nhập gian hàng</a></h1>
 					<div class="view-content-static">
 						<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
