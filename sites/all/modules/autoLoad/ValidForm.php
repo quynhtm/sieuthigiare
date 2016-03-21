@@ -28,6 +28,44 @@ class ValidForm{
 		}
 		return false;
 	}
+	//check regix name login
+	public static function checkRegexName($str=''){
+		if($str != ''){
+			$regex = '/^[a-zA-Z0-9_@]*$/';
+			if (!preg_match($regex, $str)){
+		    	return false;
+			}
+			return true;
+		}
+		return false;
+	}
+	//check regix name login
+	public static function checkRegexPass($str='', $length=6){
+		if($str != '' && $length > 0){
+			if(strlen($str) < $length){
+				return false;
+			}else{
+				$regex = '/^[a-zA-Z0-9_@&#%=~,;\{\}\^\$\.\+\*\?\/\ ]*$/';
+				if (!preg_match($regex, $str)){
+			    	return false;
+				}
+				return true;
+			}
+		}
+		return false;
+	}
+	//check phone number
+	public static function checkRegexPhone($str=''){
+		if($str != ''){
+			$regex = '/^[0-9() -]+$/';
+			if (!preg_match($regex, $str)){
+		    	return false;
+			}
+			return true;
+		}
+		return false;
+	}
+
 	//trim, stripslashes, htmlspecialchars string
 	public static function input($str='') {
 		$str = trim($str);

@@ -109,7 +109,6 @@ function formConfiginfoAction(){
 
 function deleteConfiginfoAction(){
 	global $base_url;
-	$ConfigInfo = new ConfigInfo();
 	if(isset($_POST) && $_POST['txtFormName']=='txtFormName'){
 		$listId = isset($_POST['checkItem'])? $_POST['checkItem'] : 0;
 		foreach($listId as $item){

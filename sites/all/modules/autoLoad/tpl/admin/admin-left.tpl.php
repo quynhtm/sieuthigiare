@@ -13,6 +13,9 @@
         <li <?php echo $dashboard ?>>
         	<a class="" title="<?php echo t('Bảng điều khiển')?>" href="<?php echo $base_url?>/admincp">Bảng điều khiển</a>
         </li>
+        <li <?php if($param[1]=='provice'){?> class="active" <?php } ?>>
+            <a class="" title="" href="<?php echo $base_url ?>/admincp/provice">Tỉnh/thành</a>
+        </li>
         <li <?php if($param[1]=='supportonline'){?> class="active" <?php } ?>>
             <a class="" title="" href="<?php echo $base_url ?>/admincp/supportonline">Nick support</a>
         </li>

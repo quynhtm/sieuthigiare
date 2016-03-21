@@ -14,6 +14,13 @@ function Shop_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
+	$items["dang-nhap.html"] = array(
+		"title" => t('Đăng nhập shop'),
+		"description" => "Đăng nhâp shop",
+		'page callback' => 'shopLogin',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
   return $items;
 }
 
@@ -21,6 +28,9 @@ function Shop_theme() {
 	return array(
 	    'shop-register' => array(
 	      'template' => 'View/tpl/shop-register'
+	    ),
+	     'shop-login' => array(
+	      'template' => 'View/tpl/shop-login'
 	    ),
 	);
 }
