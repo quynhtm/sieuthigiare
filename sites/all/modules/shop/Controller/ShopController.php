@@ -97,6 +97,8 @@ function shopRegister(){
 }
 
 function shopLogin(){
+	global $base_url;
+
 	if(isset($_POST['txtFormNameLogin'])){
 		$txtName 	= isset($_POST['txtName']) ? trim($_POST['txtName']) : '';
 		$txtPass 	= isset($_POST['txtPass']) ? trim($_POST['txtPass']) : '';
@@ -111,6 +113,8 @@ function shopLogin(){
 		if($errors != ''){
 			drupal_set_message($errors, 'error');
 			drupal_goto($base_url.'/dang-nhập.html');
+		}else{
+			
 		}
 
 	}
