@@ -70,7 +70,7 @@ class ShopUser{
 	public static function logoutUserShop(){
 		global $base_url, $user_shop;
 		Session::destroyUserShop();
-		$data_login = array('is_login'=>0);
+		$data_login = array('time_access'=>time(), 'is_login'=>0);
 		DB::updateOneItem(self::$table_action, $data_login, $user_shop->id);
 		drupal_goto($base_url);
 	}
