@@ -1,7 +1,7 @@
 /*site*/
 body{
     overflow-x: hidden;
-    background: #fafafa;
+    background: #fff;
 }
 a{
     color: #333;
@@ -488,8 +488,6 @@ span#logo{
 }
 /*page static*/
 .main-view-post {
-    background: #fff none repeat scroll 0 0;
-    border: 1px solid #f2f2f2;
     min-height: 400px;
     padding: 10px;
 }
