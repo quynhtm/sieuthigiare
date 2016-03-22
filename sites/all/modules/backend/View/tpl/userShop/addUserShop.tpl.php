@@ -19,29 +19,15 @@
 		 <form class="form-horizontal" name="txtForm" action="" method="post" enctype="multipart/form-data">
 		 	
             <div class="control-group">
-                <label class="control-label">Tiêu đề<span>*</span></label>
+                <label class="control-label">Tên shop<span>*</span></label>
                 <div class="controls">
-                    <input type="text" name="title" value="<?php if(isset($arrOneItem[0]->title)){ echo $arrOneItem[0]->title; } ?>">
+                    <input type="text" name="name_shop" value="<?php if(isset($arrOneItem[0]->name_shop)){ echo $arrOneItem[0]->name_shop; } ?>">
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label">Keyword<span>*</span></label>
+                <label class="control-label">Tên đăng nhập<span>*</span></label>
                 <div class="controls">
-                    <input type="text" name="keyword" value="<?php if(isset($arrOneItem[0]->keyword)){ echo $arrOneItem[0]->keyword; } ?>">
-                </div>
-            </div>
-
-            <div class="control-group">
-                <label class="control-label">Mô tả</label>
-                <div class="controls">
-                    <textarea name="intro"><?php if(isset($arrOneItem[0]->intro)){ echo $arrOneItem[0]->intro; } ?></textarea>
-                </div>
-            </div>
-            
-            <div class="control-group">
-                <label class="control-label">Nội dung</label>
-                <div class="controls">
-                    <textarea name="content"><?php if(isset($arrOneItem[0]->content)){ echo $arrOneItem[0]->content; } ?></textarea>
+                    <input type="text" name="user_name" value="<?php if(isset($arrOneItem[0]->user_name)){ echo $arrOneItem[0]->user_name; } ?>">
                 </div>
             </div>
 
@@ -54,25 +40,7 @@
                     </select>
                 </div>
             </div>
-            
-            <div class="control-group">
-                <label class="control-label">Meta title</label>
-                <div class="controls">
-                    <textarea name="meta_title"><?php if(isset($arrOneItem[0]->meta_title)){ echo $arrOneItem[0]->meta_title; } ?></textarea>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label">Meta keywords</label>
-                <div class="controls">
-                    <textarea name="meta_keywords"><?php if(isset($arrOneItem[0]->meta_keywords)){ echo $arrOneItem[0]->meta_keywords; } ?></textarea>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label">Meta description</label>
-                <div class="controls">
-                    <textarea name="meta_description" ><?php if(isset($arrOneItem[0]->meta_description)){ echo $arrOneItem[0]->meta_description; } ?></textarea>
-                </div>
-            </div>
+        
             <div class="form-actions">
                 <input type="hidden" value="txt-form-post" name="txt-form-post">
 				<button type="submit" name="txtSubmit" id="buttonSubmit" class="btn btn-primary">Lưu</button>

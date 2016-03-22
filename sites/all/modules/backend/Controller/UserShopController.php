@@ -25,7 +25,7 @@ function indexUserShop(){
 	return $view;
 }
 
-function formUserShop(){
+function formUserShopAction(){
 	global $base_url, $user;
 
 	$Stdio = new Stdio();
@@ -34,21 +34,19 @@ function formUserShop(){
 	$arrOneItem = array();
 
 	if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
-		$arrFields=array('id', 'title', 'keyword', 'intro', 'content', 'img', 'created', 'status', 'meta_title', 'meta_keywords', 'meta_description');
+		$arrFields = array('id', 'name_shop', 'user_name', 'phone', 'address', 'email', 'provice', 'about', 'is_shop', 'is_login', 'time_access', 'status', 'created');
 		$arrOneItem = UserShop::getOne($arrFields, $param[3]);
 	}
 
 	if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 
-		$title 	= isset($_POST['title']) ? trim($_POST['title']) : '';
-		$keyword 	= isset($_POST['keyword']) ? trim($_POST['keyword']) : '';
-		$intro = isset($_POST['intro']) ? trim($_POST['intro']) : '';
-		$content = isset($_POST['content']) ? trim($_POST['content']) : '';
+		$name_shop 	= isset($_POST['name_shop']) ? trim($_POST['name_shop']) : '';
+		$user_name 	= isset($_POST['user_name']) ? trim($_POST['user_name']) : '';
+		$phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
+		$email = isset($_POST['email']) ? trim($_POST['email']) : '';
+		$address = isset($_POST['address']) ? trim($_POST['address']) : '';
+		$created = time();
 		$status		= isset($_POST['status']) ? intval($_POST['status']) : 0;
-
-		$meta_title			= isset($_POST['meta_title']) ? trim($_POST['meta_title']) : '';
-		$meta_keywords		= isset($_POST['meta_keywords']) ? trim($_POST['meta_keywords']) : '';
-		$meta_description	= isset($_POST['meta_description']) ? trim($_POST['meta_description']) : '';
 
 		$uid		= $user->uid;
 		$created	= time();
@@ -70,20 +68,16 @@ function formUserShop(){
 		}
 
 		$data_post = array(
-					'title'=>$title,
-					'keyword'=>$keyword,
-					'intro'=>$intro,
-					'content'=>$content,
+					'name_shop'=>$name_shop,
+					'user_name'=>$user_name,
+					'phone'=>$phone,
+					'email'=>$email,
 					'status'=>$status,
-					'meta_title'=>$meta_title,
-					'meta_keywords'=>$meta_keywords,
-					'meta_description'=>$meta_description,
-					'uid'=>$uid,
+					'address'=>$address,
 					'created'=>$created,
 				);
 
 		if(isset($param[3]) && $param[3] > 0){
-			unset($data_post['uid']);
 			unset($data_post['created']);
 			UserShop::updateId($data_post, $param[3]);
 			drupal_set_message('Sửa bài viết thành công.');
@@ -105,7 +99,7 @@ function formUserShop(){
 	return $view;
 }
 
-function deleteUserShop(){
+function deleteUserShopAction(){
 	global $base_url;
 	if(isset($_POST) && $_POST['txtFormName']=='txtFormName'){
 		$listId = isset($_POST['checkItem'])? $_POST['checkItem'] : 0;

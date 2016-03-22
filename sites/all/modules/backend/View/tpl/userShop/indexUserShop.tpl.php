@@ -30,7 +30,7 @@
 					}
 				?></h5>
 			<span class="tools">
-				<!--<a href="<?php echo $base_url; ?>/admincp/configinfo/add" title="Add" class="icon-add"></a>-->
+				<a href="<?php echo $base_url; ?>/admincp/usershop/add" title="Add" class="icon-add"></a>
                 <a href="javascript:void(0)" title="Delete" id="deleteMoreItem" class="icon-delete"></a>
            </span>
 		</div>
