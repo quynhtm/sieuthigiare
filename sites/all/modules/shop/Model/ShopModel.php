@@ -18,10 +18,10 @@ class ShopUser{
 
 	public static function getUserExists($name='', $mail=''){
 		if($name != ''){
-			return DB:: getItembyCond(self::$table_action, 'id', '', 'id ASC', "name='".$name."'", 1);
+			return DB:: getItembyCond(self::$table_action, 'id', '', 'id ASC', "user_name='".$name."'", 1);
 		}
 		if($mail != ''){
-			return DB:: getItembyCond(self::$table_action, 'id', '', 'id ASC', "mail='".$mail."'", 1);
+			return DB:: getItembyCond(self::$table_action, 'id', '', 'id ASC', "email='".$mail."'", 1);
 		}
 		return false;
 	}

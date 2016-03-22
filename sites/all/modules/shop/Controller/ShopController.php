@@ -25,8 +25,9 @@ function shopRegister(){
 		}
 		//check user and hash pass
 		$check_user_exists = ShopUser::getUserExists($dataInput ['user_name'], $dataInput ['email']);
+
 		if($check_user_exists){
-			drupal_set_message('Tên đăng nhập hoặc mail đã tồn tại. Vui lòng chọn lại!', 'error');
+			drupal_set_message('Tên đăng nhập hoặc email đã tồn tại. Vui lòng chọn lại!', 'error');
 			drupal_goto($base_url.'/dang-ky.html');
 		}else{
 			require_once DRUPAL_ROOT . '/' . variable_get('password_inc', 'includes/password.inc');
@@ -36,7 +37,7 @@ function shopRegister(){
 				'user_name'=>$dataInput ['user_name'],
 				'user_password'=>$hash_pass,
 				'phone'=>$dataInput ['phone'],
-				'mail'=>$dataInput ['mail'],
+				'email'=>$dataInput ['email'],
 				'provice'=>$dataInput ['provice'],
 				'is_shop'=>0,
 				'status'=>0,
@@ -57,7 +58,7 @@ function shopRegister(){
 }
 
 function shopLogin(){
-	global $base_url;
+	global $base_url, $user_shop;
 	if(isset($_POST['txtFormNameLogin'])){
 		
 		$dataInput = array();
@@ -69,7 +70,36 @@ function shopLogin(){
 			drupal_set_message($errors, 'error');
 			drupal_goto($base_url.'/dang-nhập.html');
 		}else{
+			$arrOneItem = ShopUser::getUserExists($dataInput ['user_name_login']);
+			if(!empty($arrOneItem)){
+				require_once DRUPAL_ROOT . '/' . variable_get('password_inc', 'includes/password.inc');
+				$stored_hash = $arrOneItem[0]->user_password;
+				$type = substr($stored_hash, 0, 3);
+				
+				switch ($type) {
+    				case '$S$':
+    					$hash = _password_crypt('sha512', $dataInput ['password_login'], $stored_hash);
+    					break;
+    				case '$H$':
+      					
+    				case '$P$':
+					      $hash = _password_crypt('md5', $dataInput ['password_login'], $stored_hash);
+					      break;
+			    	default:
+			      		return FALSE;
+			    }
+			    if($hash && $hash==$stored_hash){
+			    	$user_shop = $arrOneItem;
 
+			    }else{
+			    	drupal_set_message('Tên đăng nhập hoặc mật khẩu không đúng!', 'error');
+					drupal_goto($base_url.'/dang-nhập.html');
+			    }
+
+			}else{
+				drupal_set_message('Tên đăng nhập hoặc mật khẩu không đúng!', 'error');
+				drupal_goto($base_url.'/dang-nhập.html');
+			}
 		}
 	}
 	$view = theme('shop-login');
