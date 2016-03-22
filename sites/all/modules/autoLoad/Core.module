@@ -9,13 +9,6 @@
  * Implements hook_menu().
  */
 function Core_menu() {
-    $items = array();
-	$items['trang-chu'] = array(
-        'title' => t('Trang chủ'),
-        'page callback' => 'page_default',
-        'access callback' => TRUE,
-        'type' => MENU_CALLBACK,
-    );
     $items["page-403"] = array(
         "title" => t("page access denied"),
         "description" => t("page access denied"),
@@ -64,34 +57,6 @@ function Core_init(){
 	Loader::load('Core', $files);
 
     $GLOBALS['user_shop'] = Session::setAnonymousUserShop();
-}
-
-function page_default(){
-	global $base_url;
-    drupal_set_title('Trang chủ');
-    $meta_seo = Utility::keyword_seo($keyword='SITE_SEO_HOME');
-
-    if(count($meta_seo)>0){
-        foreach($meta_seo as $v){
-            $meta_title = $v->meta_title;
-            $meta_keywords  = $v->meta_keywords;
-            $meta_description = $v->meta_description;
-            if($v->img != ''){
-                $img = $base_url.'/uploads/images/info/'.$v->img;
-            }else{
-                 $img = '';
-            }
-        }
-    }else{
-            $meta_title = 'Home';
-            $meta_keywords = 'Home';
-            $meta_description = 'Home';
-            $img = '';
-    }
-    $Seo = new Seo();
-    $Seo->SEO($meta_title, $img, $meta_title, $meta_keywords, $meta_description);
-
-	return '';
 }
 function page_403(){
 

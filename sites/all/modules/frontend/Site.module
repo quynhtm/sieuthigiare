@@ -5,6 +5,17 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0
 */
+function Site_menu() {
+    
+	$items['trang-chu'] = array(
+        'title' => t('Trang chủ'),
+        'page callback' => 'page_default',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+  return $items;
+}
+
 function Site_block_info() {
 	$blocks['block-header'] = array(
 		'info' => t('Block header'),
@@ -94,4 +105,32 @@ function Site_init() {
 		);
 		Loader::load('Site', $files);
 	}
+}
+
+function page_default(){
+	global $base_url;
+    drupal_set_title('Trang chủ');
+    $meta_seo = Utility::keyword_seo($keyword='SITE_SEO_HOME');
+
+    if(count($meta_seo)>0){
+        foreach($meta_seo as $v){
+            $meta_title = $v->meta_title;
+            $meta_keywords  = $v->meta_keywords;
+            $meta_description = $v->meta_description;
+            if($v->img != ''){
+                $img = $base_url.'/uploads/images/info/'.$v->img;
+            }else{
+                 $img = '';
+            }
+        }
+    }else{
+            $meta_title = 'Home';
+            $meta_keywords = 'Home';
+            $meta_description = 'Home';
+            $img = '';
+    }
+    $Seo = new Seo();
+    $Seo->SEO($meta_title, $img, $meta_title, $meta_keywords, $meta_description);
+
+	return '';
 }
