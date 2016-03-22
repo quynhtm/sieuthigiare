@@ -27,9 +27,18 @@ function Admin_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
+
 	$items["admincp/configinfo"] = array(
 		"title" => t('Config info'),
 		"description" => "Config info",
+		'page callback' => 'router_page',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
+	$items["admincp/usershop"] = array(
+		"title" => t('Qu?n lý User Shop'),
+		"description" => "Qu?n lý User Shop",
 		'page callback' => 'router_page',
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
@@ -45,8 +54,13 @@ function Admin_theme() {
     return array(
         'indexSupportOnline' 	=> array('template' => 'View/tpl/supportOnline/indexSupportOnline'),
         'addSupportOnline' 		=> array('template' => 'View/tpl/supportOnline/addSupportOnline'),
+
         'indexConfigInfo' 		=> array('template' => 'View/tpl/configInfo/indexConfigInfo'),
         'addConfigInfo' 		=> array('template' => 'View/tpl/configInfo/addConfigInfo'),
+
+		'indexUserShop' 		=> array('template' => 'View/tpl/userShop/indexUserShop'),
+        'addUserShop' 		    => array('template' => 'View/tpl/userShop/addUserShop'),
+
         'indexProvice' 			=> array('template' => 'View/tpl/provice/indexProvice'),
         'addProvice' 			=> array('template' => 'View/tpl/provice/addProvice'),
  		//here
@@ -72,8 +86,13 @@ function Admin_init(){
 		$files = array(
 			'Model/SupportOnline.php',
 			'Controller/SupportOnlineController.php',
+
 			'Model/ConfigInfo.php',
 			'Controller/ConfigInfoController.php',
+
+			'Model/UserShop.php',
+			'Controller/UserShopController.php',
+
 			'Model/Provice.php',
 			'Controller/ProviceController.php',
 		);

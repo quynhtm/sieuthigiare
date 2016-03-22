@@ -22,5 +22,8 @@
 		<li <?php if($param[1]=='configinfo'){?> class="active" <?php } ?>>
             <a class="" title="" href="<?php echo $base_url ?>/admincp/configinfo">Cấu hình chung</a>
         </li>
+        <li <?php if($param[1]=='usershop'){?> class="active" <?php } ?>>
+            <a class="" title="" href="<?php echo $base_url ?>/admincp/usershop">Quản trị User Shop</a>
+        </li>
     </ul>
 </div>
