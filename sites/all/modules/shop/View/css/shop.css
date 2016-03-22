@@ -33,10 +33,15 @@ a.btn-yahoo:hover{
   background-position: -253px -96px;
 }
 .login-other {
-    background: rgba(0, 0, 0, 0) url("../img/line-or.png") no-repeat scroll right 30px;
-    width: 94%;
+    #background: rgba(0, 0, 0, 0) url("../img/line-or.png") no-repeat scroll right 30px;
+    #width: 94%;
+    border-right: 1px solid #ddd;
+    height: 235px;
+    width: 102%;
 }
 .title-login-other {
+    font-size: 18px !important;
+    font-style: italic;
     margin-bottom: 10px;
     margin-top: 12px;
 }
@@ -80,7 +85,6 @@ a.btn-yahoo:hover{
 }
 .box-register .agree {
     margin-left: 135px;
-    width: 195px;
 }
 .box-register  .agree input {
     float: left;
@@ -89,6 +93,12 @@ a.btn-yahoo:hover{
 .box-register .agree span {
     display: inline-block;
     float: left;
-    font-size: 13px !important;
-    width: 170px;
+    font-size: 13px;
+    font-style: italic;
+}
+.box-register .list-action{
+    margin-left: 135px;
+}
+.title-head span {
+    font-size: 14px;
 }

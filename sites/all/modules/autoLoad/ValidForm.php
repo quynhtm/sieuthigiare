@@ -129,6 +129,9 @@ class ValidForm{
 		if(isset($dataInput['provice']) && trim($dataInput['provice']) == ''){
 			$errors[]= 'Bạn vui lòng chọn tỉnh/thành!';
 		}
+		if(isset($dataInput['agree']) && trim($dataInput['agree']) == ''){
+			$errors[]= 'Bạn chưa đồng ý với điều khoản của chúng tôi!';
+		}
 		//build lỗi thành chuỗi thông báo
 		if(!empty($errors)){
 			foreach($errors as $msg){

@@ -13,14 +13,15 @@ function shopRegister(){
 	}
 
 	if(isset($_POST['txtFormNameRegister'])){
+		
 		$dataInput = array();
-		$dataInput ['name_alias'] = FunctionLib::getParam('name_alias','');
 		$dataInput ['user_name'] = FunctionLib::getParam('user_name','');
 		$dataInput ['password'] = FunctionLib::getParam('password','');
 		$dataInput ['rep_password'] = FunctionLib::getParam('rep_password','');
 		$dataInput ['phone'] = FunctionLib::getParam('phone','');
 		$dataInput ['email'] = FunctionLib::getParam('email','');
 		$dataInput ['provice'] = FunctionLib::getParam('provice','');
+		$dataInput ['agree'] = FunctionLib::getParam('agree','');
 		$created 		= time();
 		$errors = ValidForm::validInputData($dataInput);
 		if($errors != ''){
@@ -37,7 +38,6 @@ function shopRegister(){
 			require_once DRUPAL_ROOT . '/' . variable_get('password_inc', 'includes/password.inc');
 			$hash_pass = user_hash_password(trim($dataInput ['password']));
 			$data_post = array(
-				'name_shop'=>$dataInput ['name_alias'],
 				'user_name'=>$dataInput ['user_name'],
 				'user_password'=>$hash_pass,
 				'phone'=>$dataInput ['phone'],
@@ -88,7 +88,10 @@ function shopLogin(){
 			}
 		}
 	}
-	$view = theme('shop-login');
+	$listProvices = ShopUser::getAllProvices(100);
+	$data = array('listProvices' => $listProvices);
+
+	$view = theme('shop-login', $data);
 	return $view;
 }
 
