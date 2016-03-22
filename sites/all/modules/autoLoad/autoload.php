@@ -37,3 +37,4 @@ function auto_load_file($path=''){
 	}
 }
 auto_load_file(PATH_SCAN);
+

@@ -6,8 +6,12 @@
 * @Version	 : 1.0
 */
 function shopRegister(){
-	global $base_url;
+	global $base_url, $user_shop;
 	
+	if($user_shop->id != 0){
+		drupal_goto($base_url);
+	}
+
 	if(isset($_POST['txtFormNameRegister'])){
 		$dataInput = array();
 		$dataInput ['name_alias'] = FunctionLib::getParam('name_alias','');
@@ -59,6 +63,11 @@ function shopRegister(){
 
 function shopLogin(){
 	global $base_url, $user_shop;
+	
+	if($user_shop->id != 0){
+		drupal_goto($base_url);
+	}
+
 	if(isset($_POST['txtFormNameLogin'])){
 		
 		$dataInput = array();
@@ -72,30 +81,7 @@ function shopLogin(){
 		}else{
 			$arrOneItem = ShopUser::getUserExists($dataInput ['user_name_login']);
 			if(!empty($arrOneItem)){
-				require_once DRUPAL_ROOT . '/' . variable_get('password_inc', 'includes/password.inc');
-				$stored_hash = $arrOneItem[0]->user_password;
-				$type = substr($stored_hash, 0, 3);
-				
-				switch ($type) {
-    				case '$S$':
-    					$hash = _password_crypt('sha512', $dataInput ['password_login'], $stored_hash);
-    					break;
-    				case '$H$':
-      					
-    				case '$P$':
-					      $hash = _password_crypt('md5', $dataInput ['password_login'], $stored_hash);
-					      break;
-			    	default:
-			      		return FALSE;
-			    }
-			    if($hash && $hash==$stored_hash){
-			    	$user_shop = $arrOneItem;
-
-			    }else{
-			    	drupal_set_message('Tên đăng nhập hoặc mật khẩu không đúng!', 'error');
-					drupal_goto($base_url.'/dang-nhập.html');
-			    }
-
+				ShopUser::checkLoginUserShop($arrOneItem[0], $dataInput ['password_login']);
 			}else{
 				drupal_set_message('Tên đăng nhập hoặc mật khẩu không đúng!', 'error');
 				drupal_goto($base_url.'/dang-nhập.html');
@@ -104,4 +90,8 @@ function shopLogin(){
 	}
 	$view = theme('shop-login');
 	return $view;
+}
+
+function shopLogout(){
+	ShopUser::logoutUserShop();
 }

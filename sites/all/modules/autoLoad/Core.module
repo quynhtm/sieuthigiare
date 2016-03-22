@@ -175,7 +175,8 @@ function Core_init(){
 		);
 		Loader::load('Core', $files_admin);
     }
-
+    
+    $GLOBALS['user_shop'] = Session::setAnonymousUserShop();
 }
 
 function page_default(){

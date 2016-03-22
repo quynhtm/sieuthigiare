@@ -21,6 +21,13 @@ function Shop_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
+	$items["thoat.html"] = array(
+		"title" => t('Thoat shop'),
+		"description" => "Thoat shop",
+		'page callback' => 'shopLogout',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
   return $items;
 }
 
