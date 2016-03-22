@@ -16,20 +16,6 @@ function Core_menu() {
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
-    $items["admin/admincp"] = array(
-        "title" => t("Trang quản trị"),
-        "description" => t("Administration"),
-        'page callback' => 'admin_redirect',
-        'access callback' => TRUE,
-        'type' => MENU_NORMAL_ITEM,
-    );
-	$items["admincp"] = array(
-        "title" => t("Trang quản trị"),
-        "description" => t("Administration"),
-        'page callback' => 'router_page',
-        'access callback' => TRUE,
-        'type' => MENU_CALLBACK,
-    );
     $items["page-403"] = array(
         "title" => t("page access denied"),
         "description" => t("page access denied"),
@@ -46,100 +32,12 @@ function Core_menu() {
     );
   return $items;
 }
-
-function Core_block_info() {
-
-    $blocks['admin-header'] = array(
-        'info' => t('Block admin header'),
-        'status'	=> TRUE,
-        'region'	=> 'header',
-        'weight'	=> 0,
-        'visibility' => 1,
-    );
-
-    $blocks['admin-left'] = array(
-        'info' => t('Block admin left'),
-        'status'	=> TRUE,
-        'region'	=> 'left',
-        'weight'	=> 0,
-        'visibility' => 1,
-    );
-
-	 $blocks['admin-content'] = array(
-        'info' => t('Block admin content'),
-        'status'	=> TRUE,
-        'region'	=> 'content',
-        'weight'	=> 0,
-        'visibility' => 1,
-    );
-
-    $blocks['admin-footer'] = array(
-        'info' => t('Block admin footer'),
-        'status'	=> TRUE,
-        'region'	=> 'footer',
-        'weight'	=> 0,
-        'visibility' => 1,
-    );
-
-    return $blocks;
-}
-
 function Core_theme() {
     return array(
-
-		'admin-header' => array(
-            'template' => 'tpl/admin/admin-header'
-        ),
-        'admin-left' => array(
-            'template' => 'tpl/admin/admin-left'
-        ),
-      	'admin-content' => array(
-            'template' => 'tpl/admin/admin-content'
-        ),
-        'admin-footer' => array(
-            'template' => 'tpl/admin/admin-footer'
-        ),
-
-		'page_403' => array(
-            'template' => 'tpl/page_403'
-        ),
-
-        'page_404' => array(
-            'template' => 'tpl/page_404'
-        )
+        'page_403' => array('template' => 'tpl/page_403' ),
+        'page_404' => array('template' => 'tpl/page_404'),
     );
 }
-
-/**
- * Implements hook_block_view().
- */
-function Core_block_view($delta='') {
-    $block = array();
-    switch ($delta) {
-        case 'admin-header':
-            $block['subject'] = t('Block admin header');
-            $block['content'] = blockAdminHeader();
-            break;
-
-		case 'admin-left':
-            $block['subject'] = t('Block admin left');
-            $block['content'] = blockAdminLeft();
-            break;
-
-        case 'admin-content':
-            $block['subject'] = t('Block admin content');
-            $block['content'] = blockAdminContent();
-            break;
-
-        case 'admin-footer':
-            $block['subject'] = t('Block admin footer');
-            $block['content'] = blockAdminFooter();
-            break;
-    }
-
-    return $block;
-}
-
 /**
  * Implements hook_permission().
  */
@@ -164,18 +62,7 @@ function Core_init(){
 		'js/jquery.alerts.js',
 	);
 	Loader::load('Core', $files);
-	
-    $uri = request_uri();
-    if(preg_match("/(\/admincp)/", $uri)!=0){
-		$files_admin = array(			
-            'css/admin.css',
-			'js/admin.js',
-			'js/jquery.html5uploader.min.js',
-			'js/upload.files.js',
-		);
-		Loader::load('Core', $files_admin);
-    }
-    
+
     $GLOBALS['user_shop'] = Session::setAnonymousUserShop();
 }
 
@@ -215,8 +102,4 @@ function page_404(){
 
 	$view = theme('page_404');
 	return $view;
-}
-function admin_redirect(){
-    global $base_url;
-    drupal_goto($base_url.'/admincp');
 }

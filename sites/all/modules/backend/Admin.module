@@ -12,6 +12,21 @@
  
 function Admin_menu() {
 	
+	$items["admin/admincp"] = array(
+        "title" => t("Trang quản trị"),
+        "description" => t("Administration"),
+        'page callback' => 'admin_redirect',
+        'access callback' => TRUE,
+        'type' => MENU_NORMAL_ITEM,
+    );
+	$items["admincp"] = array(
+        "title" => t("Trang quản trị"),
+        "description" => t("Administration"),
+        'page callback' => 'router_page',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+
 	$items["admincp/provice"] = array(
 		"title" => t('provice'),
 		"description" => "provice",
@@ -37,8 +52,8 @@ function Admin_menu() {
 	);
 
 	$items["admincp/usershop"] = array(
-		"title" => t('Qu?n l� User Shop'),
-		"description" => "Qu?n l� User Shop",
+		"title" => t('Quản lý User Shop'),
+		"description" => "Quản lý User Shop",
 		'page callback' => 'router_page',
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
@@ -47,11 +62,83 @@ function Admin_menu() {
   return $items;
 }
 
+function Admin_block_info() {
+
+    $blocks['admin-header'] = array(
+        'info' => t('Block admin header'),
+        'status'	=> TRUE,
+        'region'	=> 'header',
+        'weight'	=> 0,
+        'visibility' => 1,
+    );
+
+    $blocks['admin-left'] = array(
+        'info' => t('Block admin left'),
+        'status'	=> TRUE,
+        'region'	=> 'left',
+        'weight'	=> 0,
+        'visibility' => 1,
+    );
+
+	 $blocks['admin-content'] = array(
+        'info' => t('Block admin content'),
+        'status'	=> TRUE,
+        'region'	=> 'content',
+        'weight'	=> 0,
+        'visibility' => 1,
+    );
+
+    $blocks['admin-footer'] = array(
+        'info' => t('Block admin footer'),
+        'status'	=> TRUE,
+        'region'	=> 'footer',
+        'weight'	=> 0,
+        'visibility' => 1,
+    );
+
+    return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function Core_block_view($delta='') {
+    $block = array();
+    switch ($delta) {
+        case 'admin-header':
+            $block['subject'] = t('Block admin header');
+            $block['content'] = blockAdminHeader();
+            break;
+
+		case 'admin-left':
+            $block['subject'] = t('Block admin left');
+            $block['content'] = blockAdminLeft();
+            break;
+
+        case 'admin-content':
+            $block['subject'] = t('Block admin content');
+            $block['content'] = blockAdminContent();
+            break;
+
+        case 'admin-footer':
+            $block['subject'] = t('Block admin footer');
+            $block['content'] = blockAdminFooter();
+            break;
+    }
+
+    return $block;
+}
+
 /**
  * Implements hook_theme().
  */
 function Admin_theme() {
     return array(
+        'admin-header' 	=> array('template' 	=> 'View/tpl/block/admin-header'),
+        'admin-left' 	=> array( 'template' 	=> 'View/tpl/block/admin-left'),
+      	'admin-content' => array('template' 	=> 'View/tpl/block/admin-content'),
+        'admin-footer' 	=> array('template' 	=> 'View/tpl/block/admin-footer'),
+
         'indexSupportOnline' 	=> array('template' => 'View/tpl/supportOnline/indexSupportOnline'),
         'addSupportOnline' 		=> array('template' => 'View/tpl/supportOnline/addSupportOnline'),
 
@@ -84,6 +171,10 @@ function Admin_init(){
 	$uri = request_uri();
 	if(preg_match("/(\/admincp)/", $uri)!=0){
 		$files = array(
+			'View/css/admin.css',
+			'View/js/admin.js',
+			'Controller/BlockController.php',
+			
 			'Model/SupportOnline.php',
 			'Controller/SupportOnlineController.php',
 

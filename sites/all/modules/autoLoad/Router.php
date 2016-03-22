@@ -5,27 +5,6 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0 
 */
-function AdminDefault(){
-    global $base_url;
-    drupal_set_title(t('CMS'));   
-    return '';
-}
-function blockAdminHeader(){
-    $view= theme('admin-header');
-    return $view;
-}
-function blockAdminLeft(){
-	$view= theme('admin-left');
-    return $view;
-}
-function blockAdminContent(){
-	$view= theme('admin-content');
-    return $view;
-}
-function blockAdminFooter(){
-	$view= theme('admin-footer');
-    return $view;
-}
 function check_login(){
 	global $user;
 	$isLogin = 0;
