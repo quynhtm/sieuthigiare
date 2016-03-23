@@ -78,6 +78,24 @@ class ValidForm{
 		$errors = array();
 		$message = '';
 		
+		foreach($dataInput as $k=>$v){
+
+			if(isset($v['require']) && $v['require'] == 1){
+				if(isset($v['value']) && $v['value'] == ''){
+					$errors[] = $v['messages'];
+				}
+			}
+		}
+		//build loi thanh chuoi thong bao
+		if(!empty($errors)){
+			foreach($errors as $msg){
+				$message .= $msg.'<br/>';
+			}
+		}
+		return $message;
+
+
+
 		if(isset($dataInput['user_name_login']) && trim($dataInput['user_name_login']) == ''){
 			$errors[]= 'Tên đăng nhập không được trống!';
 		}
