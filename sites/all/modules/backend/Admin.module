@@ -52,8 +52,16 @@ function Admin_menu() {
 	);
 
 	$items["admincp/usershop"] = array(
-		"title" => t('Quáº£n lÃ½ User Shop'),
-		"description" => "Quáº£n lÃ½ User Shop",
+		"title" => t('Qu?n lý User Shop'),
+		"description" => "Qu?n lý User Shop",
+		'page callback' => 'router_page',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
+    $items["admincp/supplier"] = array(
+		"title" => t('Qu?n lý NCC'),
+		"description" => "Qu?n lý NCC",
 		'page callback' => 'router_page',
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
@@ -148,6 +156,9 @@ function Admin_theme() {
 		'indexUserShop' 		=> array('template' => 'View/tpl/userShop/indexUserShop'),
         'addUserShop' 		    => array('template' => 'View/tpl/userShop/addUserShop'),
 
+        'indexSupplier' 		=> array('template' => 'View/tpl/supplier/indexSupplier'),
+        'addSupplier' 		    => array('template' => 'View/tpl/supplier/addSupplier'),
+
         'indexProvice' 			=> array('template' => 'View/tpl/provice/indexProvice'),
         'addProvice' 			=> array('template' => 'View/tpl/provice/addProvice'),
  		//here
@@ -183,6 +194,9 @@ function Admin_init(){
 
 			'Model/UserShop.php',
 			'Controller/UserShopController.php',
+
+            'Model/Supplier.php',
+			'Controller/SupplierController.php',
 
 			'Model/Provice.php',
 			'Controller/ProviceController.php',

@@ -25,5 +25,8 @@
         <li <?php if($param[1]=='usershop'){?> class="active" <?php } ?>>
             <a class="" title="" href="<?php echo $base_url ?>/admincp/usershop">Quản trị User Shop</a>
         </li>
+        <li <?php if($param[1]=='supplier'){?> class="active" <?php } ?>>
+            <a class="" title="" href="<?php echo $base_url ?>/admincp/supplier">Quản trị NCC</a>
+        </li>
     </ul>
 </div>
