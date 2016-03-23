@@ -2,6 +2,7 @@ jQuery(document).ready(function($){
 	CHECKALL_ITEM.init();
 	HISTORY_BACK.init();
 	HIDDEN_MENU_ADMIN.init();
+	HIDDEN_MENU_ADMIN.menu_left();
 	RESTORE_ITEM.init();
 	INPUT_TIME.config();
 });
@@ -93,6 +94,20 @@ HIDDEN_MENU_ADMIN = {
 			jQuery('.pageWrapper').toggleClass('act');
 		});
 	},
+	menu_left:function(){
+		jQuery(".navigation>ul>li").click(function(event){
+			jQuery('.navigation>ul>li').not(this).removeClass('active');
+			if(jQuery(this).hasClass('active')){
+				jQuery(this).removeClass('active');
+				jQuery(".navigation>ul>li>ul").slideUp();
+				jQuery(this).find('ul').slideUp();
+			}else{
+				jQuery(this).addClass('active');
+				jQuery(".navigation>ul>li>ul").slideUp();
+				jQuery(this).find('ul').slideDown();
+			}
+		});
+	}
 }
 
 INPUT_TIME = {

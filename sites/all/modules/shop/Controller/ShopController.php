@@ -24,6 +24,17 @@ function shopRegister(){
 		$dataInput ['agree'] = FunctionLib::getParam('agree','');
 		$created 		= time();
 		$errors = ValidForm::validInputData($dataInput);
+		
+		$dataInput = array(
+							'user_name'=>array('value'=>FunctionLib::getParam('user_name',''), 'require'=>1, 'messages'=>'Tên đăng nhập không được trống!'),
+							'password'=>array('value'=>FunctionLib::getParam('password',''), 'require'=>1, 'messages'=>'Mật khẩu không được trống!'),
+							'rep_password'=>array('value'=>FunctionLib::getParam('password',''), 'require'=>1, 'messages'=>'Mật khẩu không được trống!'),
+							'email'=>array('value'=>FunctionLib::getParam('password',''), 'require'=>1, 'messages'=>'Mật khẩu không được trống!'),
+							'provice'=>array('value'=>FunctionLib::getParam('password',''), 'require'=>1, 'messages'=>'Mật khẩu không được trống!'),
+							'agree'=>array('value'=>FunctionLib::getParam('password',''), 'require'=>1, 'messages'=>'Mật khẩu không được trống!'),
+							'created'=>array('value'=>time(), 'require'=>1, 'messages'=>'Mật khẩu không được trống!'),
+						);
+
 		if($errors != ''){
 			drupal_set_message($errors, 'error');
 			drupal_goto($base_url.'/dang-ky.html');
@@ -74,14 +85,19 @@ function shopLogin(){
 		$dataInput ['user_name_login'] = FunctionLib::getParam('user_name','');
 		$dataInput ['password_login'] = FunctionLib::getParam('password','');
 		
+		$dataInput = array(
+							'user_name_login'=>array('value'=>FunctionLib::getParam('user_name',''), 'require'=>1, 'messages'=>'Tên đăng nhập không được trống!'),
+							'password_login'=>array('value'=>FunctionLib::getParam('password',''), 'require'=>1, 'messages'=>'Mật khẩu không được trống!'),
+						);
+		
 		$errors = ValidForm::validInputData($dataInput);
 		if($errors != ''){
 			drupal_set_message($errors, 'error');
 			drupal_goto($base_url.'/dang-nhập.html');
 		}else{
-			$arrOneItem = ShopUser::getUserExists($dataInput ['user_name_login']);
+			$arrOneItem = ShopUser::getUserExists($dataInput ['user_name_login']['value']);
 			if(!empty($arrOneItem)){
-				ShopUser::checkLoginUserShop($arrOneItem[0], $dataInput ['password_login']);
+				ShopUser::checkLoginUserShop($arrOneItem[0], $dataInput ['password_login']['value']);
 			}else{
 				drupal_set_message('Tên đăng nhập hoặc mật khẩu không đúng!', 'error');
 				drupal_goto($base_url.'/dang-nhập.html');

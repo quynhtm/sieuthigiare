@@ -1,4 +1,15 @@
 ﻿/*admin*/
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('../fonts/fontawesome-webfont.eot?v=4.4.0');
+    src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.4.0') format('embedded-opentype'), 
+    url('../fonts/fontawesome-webfont.woff2?v=4.4.0') format('woff2'), 
+    url('../fonts/fontawesome-webfont.woff?v=4.4.0') format('woff'), 
+    url('../fonts/fontawesome-webfont.ttf?v=4.4.0') format('truetype'), 
+    url('../fonts/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular') format('svg');
+    font-weight: normal;
+    font-style: normal
+}
 body.page-admincp{
     height: 100%;
     background: #222d32;
@@ -99,6 +110,65 @@ body.page-admincp{
     background: #1a2226;
     color: #fff;
     border-left: 2px solid #3c8dbc;
+}
+.leftRegion .navigation li ul.sub{
+    display: none;
+    background: #2c3b41;
+}
+
+.leftRegion .navigation li:hover ul li a,
+.leftRegion .navigation sub li:hover a{
+    border-left: 2px solid transparent;
+    background: none;
+}
+.icon-circle-o:before{
+    display: inline-block;
+    font-family: FontAwesome;
+    font-weight: normal;
+    width: 2px;
+    height: 2px;
+    content: "";
+    font-style: normal;
+    margin-right: 12px;
+    font-feature-settings: normal;
+    font-kerning: auto;
+    font-language-override: normal;
+    font-size: inherit;
+    font-size-adjust: none;
+    font-stretch: normal;
+    font-style: normal;
+    font-synthesis: weight style;
+    font-variant: normal;
+    font-weight: normal;
+}
+.fa-arrow:before{
+    position: absolute;
+    right: 10px;
+    top: 34%;
+    display: inline-block;
+    font-family: FontAwesome;
+    font-weight: normal;
+    width: 2px;
+    height: 2px;
+    content: "";
+    font-style: normal;
+    margin-right: 12px;
+    font-feature-settings: normal;
+    font-kerning: auto;
+    font-language-override: normal;
+    font-size: inherit;
+    font-size-adjust: none;
+    font-stretch: normal;
+    font-style: normal;
+    font-synthesis: weight style;
+    font-variant: normal;
+    font-weight: normal;
+}
+.leftRegion .navigation li.active .fa-arrow:before{
+    transform: rotate(-90deg);
+    top: 50%;
+    right: 13px;
+    position: absolute;
 }
 /*right box*/
 .showListItem table.sticky-table {
