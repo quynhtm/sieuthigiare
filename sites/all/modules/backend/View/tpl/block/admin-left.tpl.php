@@ -11,31 +11,31 @@
 <div class="navigation">
 	<ul>
         <li <?php echo $dashboard ?>>
-        	<a class="" title="<?php echo t('Bảng điều khiển')?>" href="<?php echo $base_url?>/admincp">Bảng điều khiển</a>
+        	<a title="<?php echo t('Bảng điều khiển')?>" href="<?php echo $base_url?>/admincp"><i class="icon-focus icon-dashboard"></i>Bảng điều khiển</a>
         </li>
         <li <?php if($param[1]=='provice'){?> class="active" <?php } ?>>
-            <a class="" title="" href="javascript:void(0)">Tỉnh/thành <i class="fa-arrow"></i></a>
+            <a title="" href="javascript:void(0)"><i class="icon-focus icon-files-o"></i>Tỉnh/thành <i class="icon-focus fa-arrow"></i></a>
             <ul class="sub">
-                <li><a class="" title="" href="<?php echo $base_url ?>/admincp/provice"><i class="icon-circle-o"></i>Quản lý tỉnh/thành</a></li>
-                <li><a class="" title="" href=""><i class="icon-circle-o"></i>Quản lý comment</a></li>
+                <li><a class="" title="" href="<?php echo $base_url ?>/admincp/provice"><i class="icon-focus icon-circle-o"></i>Quản lý tỉnh/thành</a></li>
+                <li><a class="" title="" href=""><i class="icon-focus icon-circle-o"></i>Quản lý comment</a></li>
             </ul>
         </li>
         <li <?php if($param[1]=='supportonline'){?> class="active" <?php } ?>>
-            <a class="" title="" href="javascript:void(0)">Nick support <i class="fa-arrow"></i></a>
+            <a title="" href="javascript:void(0)"><i class="icon-focus icon-files-o"></i>Nick support <i class="icon-focus fa-arrow"></i></a>
             <ul class="sub">
-                <li><a class="" title="" href="<?php echo $base_url ?>/admincp/supportonline"><i class="icon-circle-o"></i>Quản lý nick</a></li>
-                <li><a class="" title="" href=""><i class="icon-circle-o"></i>Quản lý comment</a></li>
+                <li><a class="" title="" href="<?php echo $base_url ?>/admincp/supportonline"><i class="icon-focus icon-circle-o"></i>Quản lý nick</a></li>
+                <li><a class="" title="" href=""><i class="icon-focus icon-circle-o"></i>Quản lý comment</a></li>
             </ul>
 
         </li>
 		<li <?php if($param[1]=='configinfo'){?> class="active" <?php } ?>>
-            <a class="" title="" href="<?php echo $base_url ?>/admincp/configinfo">Cấu hình chung</a>
+            <a title="" href="<?php echo $base_url ?>/admincp/configinfo"><i class="icon-focus icon-files-o"></i>Cấu hình chung</a>
         </li>
         <li <?php if($param[1]=='usershop'){?> class="active" <?php } ?>>
-            <a class="" title="" href="<?php echo $base_url ?>/admincp/usershop">Quản trị User Shop</a>
+            <a title="" href="<?php echo $base_url ?>/admincp/usershop"><i class="icon-focus icon-files-o"></i>Quản trị User Shop</a>
         </li>
         <li <?php if($param[1]=='supplier'){?> class="active" <?php } ?>>
-            <a class="" title="" href="<?php echo $base_url ?>/admincp/supplier">Quản trị NCC</a>
+            <a title="" href="<?php echo $base_url ?>/admincp/supplier"><i class="icon-focus icon-files-o"></i>Quản trị NCC</a>
         </li>
     </ul>
 </div>

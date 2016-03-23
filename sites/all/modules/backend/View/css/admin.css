@@ -115,19 +115,18 @@ body.page-admincp{
     display: none;
     background: #2c3b41;
 }
-
+.leftRegion .navigation li.active .sub{
+    display: block;
+}
 .leftRegion .navigation li:hover ul li a,
 .leftRegion .navigation sub li:hover a{
     border-left: 2px solid transparent;
     background: none;
 }
-.icon-circle-o:before{
+.icon-focus{
     display: inline-block;
     font-family: FontAwesome;
     font-weight: normal;
-    width: 2px;
-    height: 2px;
-    content: "";
     font-style: normal;
     margin-right: 12px;
     font-feature-settings: normal;
@@ -140,35 +139,31 @@ body.page-admincp{
     font-synthesis: weight style;
     font-variant: normal;
     font-weight: normal;
+    width: 2px;
+    height: 2px;
+    margin-right: 15px;
+}
+.icon-dashboard:before{
+    content: "";
+    display: inline-block;
+}
+.icon-files-o:before {
+    content: "";
+}
+.icon-circle-o:before{
+    content: "";
 }
 .fa-arrow:before{
     position: absolute;
     right: 10px;
     top: 34%;
-    display: inline-block;
-    font-family: FontAwesome;
-    font-weight: normal;
-    width: 2px;
-    height: 2px;
-    content: "";
-    font-style: normal;
-    margin-right: 12px;
-    font-feature-settings: normal;
-    font-kerning: auto;
-    font-language-override: normal;
-    font-size: inherit;
-    font-size-adjust: none;
-    font-stretch: normal;
-    font-style: normal;
-    font-synthesis: weight style;
-    font-variant: normal;
-    font-weight: normal;
+    content: "";   
 }
 .leftRegion .navigation li.active .fa-arrow:before{
-    transform: rotate(-90deg);
-    top: 50%;
-    right: 13px;
     position: absolute;
+    right: 10px;
+    top: 34%;
+    transform: rotate(-90deg);
 }
 /*right box*/
 .showListItem table.sticky-table {
