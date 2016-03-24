@@ -6,44 +6,7 @@
 * @Version	 : 1.0
 */
 class DB{
-    public static function getSearchListItemsAndPage($tableAction, $dataSearch=array(), $arrFields=array(), $limit=30){
-        $arrItem=array();
-        if(!empty($arrFields)){
-            $sql = db_select($tableAction, 'i')->extend('PagerDefault');
-            foreach($arrFields as $field){
-                $sql->addField('i', $field, $field);
-            }
-
-            /*Begin search*/
-            if(isset($dataSearch['category']) && $dataSearch['category'] > 0){
-                $sql->condition('i.catid', $dataSearch['category'], '=');
-            }
-
-            if(isset($dataSearch['status']) && $dataSearch['status'] != ''){
-                $sql->condition('i.status', $dataSearch['status'], '=');
-            }
-
-            if(isset($dataSearch['keyword']) && $dataSearch['keyword'] != ''){
-                $db_or = db_or();
-                $db_or->condition('i.title', '%'.$dataSearch['keyword'].'%', 'LIKE');
-                $db_or->condition('i.title_alias', '%'.$dataSearch['keyword'].'%', 'LIKE');
-                $sql->condition($db_or);
-            }
-            /*End search*/
-
-            $totalItem = count($sql->execute()->fetchAll());
-            $result = $sql->limit($limit)->orderBy('i.id', 'DESC')->execute();
-            $arrItem = (array)$result->fetchAll();
-
-            $pager = array('#theme' => 'pager','#quantity' => 3);
-
-            $data['data'] = $arrItem;
-            $data['pager'] = $pager;
-            $data['total'] = $totalItem;
-        }
-        return $data;
-    }
-
+    
     public static function getOneItem($tableAction, $arrFields=array(), $id=0){
         $arrItem = array();
         if(!empty($arrFields) && $id > 0){

@@ -8,24 +8,49 @@
 class SupportOnline{
 	static $table_action = TABLE_SUPPORT_ONLINE;
 
-	public static function getSearch($dataSearch, $arrFields, $limit, &$totalItem, &$pager){
-		$result = DB::getSearchListItemsAndPage(self::$table_action,$dataSearch, $arrFields, $limit);
+	public static function getSearchListItems($dataSearch=array(), $arrFields=array(), $limit=30){
+        $arrItem=array();
+        
+        if(!empty($arrFields)){
+            $sql = db_select(self::$table_action, 'i')->extend('PagerDefault');
+            foreach($arrFields as $field){
+                $sql->addField('i', $field, $field);
+            }
 
-		$totalItem = 0;
-		$pager = $data = array();
-		if(!empty($result)){
-			if(isset($result['pager'])){
-				$pager = $result['pager'];
-			}
-			if(isset($result['total'])){
-				$totalItem = $result['total'];
-			}
-			if(isset($result['data'])){
-				$data = $result['data'];
-			}
-		}
-		return $data;
-	}
+            /*Begin search*/
+            
+            $cond = '';
+            $arrCond = array();
+            foreach($dataSearch as $k=>$v){
+            	if($k == 'status' && $v != ''){
+            		$sql->condition('i.status', $dataSearch['status'], '=');
+            		array_push($arrCond, 'status ='.$dataSearch["status"]);
+            	}elseif($k == 'title' && $k != ''){
+            		$db_or = db_or();
+	                $db_or->condition('i.title', '%'.$dataSearch['title'].'%', 'LIKE');
+	                $db_or->condition('i.mobile', '%'.$dataSearch['title'].'%', 'LIKE');
+	                $sql->condition($db_or);
+	                array_push($arrCond, "(title LIKE '%". $dataSearch['title'] ."%' OR mobile LIKE '%". $dataSearch['title'] ."%')");
+            	}
+            }
+            if(!empty($arrCond)){
+            	$cond = implode(' AND ', $arrCond);
+            }
+           
+            /*End search*/
+            $totalItem = DB::countItem(self::$table_action, 'id', $cond, '', 'id ASC');
+
+            $result = $sql->limit($limit)->orderBy('i.id', 'DESC')->execute();
+            $arrItem = (array)$result->fetchAll();
+
+            $pager = array('#theme' => 'pager','#quantity' => 3);
+
+            $data['data'] = $arrItem;
+            $data['pager'] = $pager;
+            $data['total'] = $totalItem;
+        }
+        return $data;
+    }
 
 	public static function getOne($arrFields, $id = 0){
 		if($id > 0){
