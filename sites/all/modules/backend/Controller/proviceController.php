@@ -23,6 +23,7 @@ function indexProvice(){
 								'base_url' => $base_url,
 								'totalItem' =>$result['total'],
 								'pager' =>$result['pager']));
+
 	return $view;
 }
 
