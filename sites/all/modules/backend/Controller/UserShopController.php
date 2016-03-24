@@ -5,23 +5,22 @@
 */
 function indexUserShop(){
 	global $base_url;
-	
-	$totalItem = 0;
+
 	$limit = SITE_RECORD_PER_PAGE;
-	$pager = '';
-	$dataSearch = array();
-	$dataSearch['keyword'] = FunctionLib::getParam('keyword','');
-	$dataSearch['status'] = FunctionLib::getParam('status','');
+	
+	$dataSearch['title'] = FunctionLib::getParam('title','');
+	$dataSearch['status'] = FunctionLib::getParam('status', '');
 	$arrFields = array('id', 'name_shop', 'user_name', 'phone', 'address', 'email', 'provice', 'about', 'is_shop', 'is_login', 'time_access', 'status', 'created');
 
-	$result = UserShop::getSearch($dataSearch, $arrFields, $limit, $totalItem, $pager);
+	$result = UserShop::getSearchListItems($dataSearch, $arrFields, $limit);
+	
 	$view = theme('indexUserShop',array(
-								'title'=>'Danh sách các User Shop',
-								'result' => $result,
+								'title'=>'Danh sách nick hỗ trợ trực tuyến',
+								'result' => $result['data'],
 								'dataSearch' => $dataSearch,
 								'base_url' => $base_url,
-								'totalItem' =>$totalItem,
-								'pager' =>$pager,));
+								'totalItem' =>$result['total'],
+								'pager' =>$result['pager']));
 	return $view;
 }
 

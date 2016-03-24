@@ -7,26 +7,23 @@
 */
 function indexSupportonline(){
 	global $base_url;
-	
-	
-	global $base_url;
 
-		$limit = SITE_RECORD_PER_PAGE;
-		
-		$dataSearch['title'] = FunctionLib::getParam('title','');
-		$dataSearch['status'] = FunctionLib::getParam('status', '');
-		$arrFields=array('id', 'title', 'mobile', 'skyper', 'yahoo', 'created', 'order_no', 'status');
+	$limit = SITE_RECORD_PER_PAGE;
+	
+	$dataSearch['title'] = FunctionLib::getParam('title','');
+	$dataSearch['status'] = FunctionLib::getParam('status', '');
+	$arrFields=array('id', 'title', 'mobile', 'skyper', 'yahoo', 'created', 'order_no', 'status');
 
-		$result = SupportOnline::getSearchListItems($dataSearch, $arrFields, $limit);
-		
-		$view = theme('indexSupportOnline',array(
-									'title'=>'Danh sách nick hỗ trợ trực tuyến',
-									'result' => $result['data'],
-									'dataSearch' => $dataSearch,
-									'base_url' => $base_url,
-									'totalItem' =>$result['total'],
-									'pager' =>$result['pager']));
-		return $view;
+	$result = SupportOnline::getSearchListItems($dataSearch, $arrFields, $limit);
+	
+	$view = theme('indexSupportOnline',array(
+								'title'=>'Danh sách nick hỗ trợ trực tuyến',
+								'result' => $result['data'],
+								'dataSearch' => $dataSearch,
+								'base_url' => $base_url,
+								'totalItem' =>$result['total'],
+								'pager' =>$result['pager']));
+	return $view;
 }
 
 function formSupportonlineAction(){

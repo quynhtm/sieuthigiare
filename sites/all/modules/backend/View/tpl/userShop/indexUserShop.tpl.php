@@ -1,16 +1,8 @@
 <div class="search-box">
 	<div class="wrapp-search-box">
-		<div class="search-box-title">
-			<?php
-			if(isset($title)){
-				echo $title;
-			}else{
-				echo t('Quản lý bài viết');
-			}
-			?>
-		</div>
+		<div class="search-box-title">Tìm kiếm</div>
 		<form action="" method="GET" id="frmSearch" class="frmSearch" name="frmSearch">
-			<input type="text" id="keyword" class="keyword" name="keyword" value="<?php echo $dataSearch['keyword'] ?>"/>
+			<input type="text" id="title" class="keyword" name="title" value="<?php echo $dataSearch['title'] ?>"/>
 			<select class="box-select" name="status">
 				<option value="0" <?php if($dataSearch['status']==0){?>selected="selected"<?php } ?>>Ẩn</option>
 				<option value="1" <?php if($dataSearch['status']==1){?>selected="selected"<?php } ?>>Hiện</option>

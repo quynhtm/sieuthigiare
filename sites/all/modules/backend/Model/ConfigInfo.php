@@ -18,7 +18,7 @@ class ConfigInfo{
             }
 
             /*Begin search*/
-            
+   
             $cond = '';
             $arrCond = array();
             foreach($dataSearch as $k=>$v){
@@ -28,9 +28,9 @@ class ConfigInfo{
             	}elseif($k == 'title' && $k != ''){
             		$db_or = db_or();
 	                $db_or->condition('i.title', '%'.$dataSearch['title'].'%', 'LIKE');
-	                $db_or->condition('i.mobile', '%'.$dataSearch['title'].'%', 'LIKE');
+	                $db_or->condition('i.keyword', '%'.$dataSearch['title'].'%', 'LIKE');
 	                $sql->condition($db_or);
-	                array_push($arrCond, "(title LIKE '%". $dataSearch['title'] ."%' OR mobile LIKE '%". $dataSearch['title'] ."%')");
+	                array_push($arrCond, "(title LIKE '%". $dataSearch['title'] ."%' OR keyword LIKE '%". $dataSearch['title'] ."%')");
             	}
             }
             if(!empty($arrCond)){
