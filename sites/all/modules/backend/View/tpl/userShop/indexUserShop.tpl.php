@@ -74,9 +74,9 @@
 						<td>
 							<?php
 								if($item->is_login == 1){
-									echo $is_login ='<span class="bg-status-show">'.t('Online').'</span>';
+									echo $is_login ='<span class="bg-status-show login-on-off" data-id="'.$item->id.'" data-login="1">'.t('Online').'</span>';
 								}else{
-									echo $is_login ='<span class="bg-status-hidden">'.t('Offline').'</span>';
+									echo $is_login ='<span class="bg-status-hidden login-on-off" data-id="'.$item->id.'" data-login="0">'.t('Offline').'</span>';
 								}
 							?>
 						</td>

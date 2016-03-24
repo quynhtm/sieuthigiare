@@ -5,8 +5,8 @@ jQuery(document).ready(function($){
 	HIDDEN_MENU_ADMIN.menu_left();
 	RESTORE_ITEM.init();
 	INPUT_TIME.config();
-
-	$('.table').cardtable();
+	jQuery('.table').cardtable();
+	JAX_ADM.login_on_off();
 });
 
 CHECKALL_ITEM = {
@@ -142,4 +142,26 @@ INPUT_TIME = {
 			jQuery(tagClick).datepicker();
 		}
 	},
+}
+
+JAX_ADM = {
+	login_on_off:function(){
+		jQuery('.login-on-off').click(function(){
+			var itemId = jQuery(this).attr('data-id');
+			var on_off = jQuery(this).attr('data-login');
+
+			var domain = BASEPARAMS.base_url;
+            jQuery.ajax({
+                type: "POST",
+                url: domain + '/admincp/usershop/updateOnOff',
+                data: "itemId=" + encodeURI(itemId) + "&on_off=" + encodeURI(on_off),
+                success: function (data, textStatus, jqXHR) {
+                    if (data != undefined && data != null) {
+                        alert(data);
+                    }
+                }
+            });
+		});
+	},
+
 }

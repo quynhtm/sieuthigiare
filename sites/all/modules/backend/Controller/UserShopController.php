@@ -112,4 +112,8 @@ class UserShopController{
 		}
 		drupal_goto($base_url.'/admincp/usershop');
 	}
+
+	function updateOnOffUserShopAction(){
+		echo "Vao db lay du lieu";die;
+	}
 }
