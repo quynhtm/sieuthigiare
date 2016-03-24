@@ -8,22 +8,21 @@
 function indexConfiginfo(){
 	global $base_url;
 	
-	$totalItem = 0;
-	$limit = SITE_RECORD_PER_PAGE;
-	$pager = '';
-	$dataSearch = array();
-	$dataSearch['keyword'] = FunctionLib::getParam('keyword','');
-	$dataSearch['status'] = FunctionLib::getParam('status','');
-	$arrFields=array('id', 'title', 'keyword', 'intro', 'content', 'img', 'created', 'status', 'meta_title', 'meta_keywords', 'meta_description');
 
-	$result = ConfigInfo::getSearch($dataSearch, $arrFields, $limit, $totalItem, $pager);
+	$limit = SITE_RECORD_PER_PAGE;
+	
+	$dataSearch['title'] = FunctionLib::getParam('title','');
+	$dataSearch['status'] = FunctionLib::getParam('status', '');
+	$arrFields=array('id', 'title', 'keyword', 'intro', 'content', 'img', 'created', 'status', 'meta_title', 'meta_keywords', 'meta_description');
+	$result = ConfigInfo::getSearchListItems($dataSearch, $arrFields, $limit);
+	
 	$view = theme('indexConfigInfo',array(
-								'title'=>'Quản lý bài viết',
-								'result' => $result,
+								'title'=>'Quản lý cài đặt',
+								'result' => $result['data'],
 								'dataSearch' => $dataSearch,
 								'base_url' => $base_url,
-								'totalItem' =>$totalItem,
-								'pager' =>$pager,));
+								'totalItem' =>$result['total'],
+								'pager' =>$result['pager']));
 	return $view;
 }
 

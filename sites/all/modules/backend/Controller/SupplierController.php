@@ -7,22 +7,21 @@
 	function indexSupplier(){
 		global $base_url;
 
-		$totalItem = 0;
 		$limit = SITE_RECORD_PER_PAGE;
-		$pager = '';
-		$dataSearch = array();
-		$dataSearch['keyword'] = FunctionLib::getParam('keyword','');
-		$dataSearch['status'] = FunctionLib::getParam('status','');
+		
+		$dataSearch['supplier_full_name'] = FunctionLib::getParam('supplier_full_name','');
+		$dataSearch['supplier_status'] = FunctionLib::getParam('supplier_status','');
+		
 		$arrFields = array('id', 'supplier_full_name', 'supplier_phone', 'supplier_hot_line', 'supplier_email', 'supplier_website', 'supplier_status', 'supplier_created');
-
-		$result = Supplier::getSearch($dataSearch, $arrFields, $limit, $totalItem, $pager);
+		$result = Supplier::getSearchListItems($dataSearch, $arrFields, $limit);
+		
 		$view = theme('indexSupplier',array(
 									'title'=>'Danh sách các User Shop',
-									'result' => $result,
+									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
 									'base_url' => $base_url,
-									'totalItem' =>$totalItem,
-									'pager' =>$pager,));
+									'totalItem' =>$result['total'],
+									'pager' =>$result['pager']));
 		return $view;
 	}
 

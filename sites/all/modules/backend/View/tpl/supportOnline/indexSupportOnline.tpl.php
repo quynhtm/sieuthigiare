@@ -1,8 +1,8 @@
 <div class="search-box">
 	<div class="wrapp-search-box">
-		<div class="search-box-title"><?php echo t('Tìm kiếm bài viết')?>:</div>
+		<div class="search-box-title">Tìm kiếm</div>
 		<form action="" method="GET" id="frmSearch" class="frmSearch" name="frmSearch">
-			<input type="text" id="keyword" class="keyword" name="keyword" value="<?php echo $dataSearch['keyword'] ?>"/>
+			<input type="text" id="title" class="keyword" name="title" value="<?php echo $dataSearch['title'] ?>"/>
 			<select class="box-select" name="status">
 				<option value="0" <?php if($dataSearch['status']==0){?>selected="selected"<?php } ?>>Ẩn</option>
 				<option value="1" <?php if($dataSearch['status']==1){?>selected="selected"<?php } ?>>Hiện</option>
@@ -33,6 +33,7 @@
 				<table class="table table-bordered table-hover table-striped" width="100%" cellpadding="5" cellspacing="1" border="1">
 					<thead>
 					<tr>
+						<th width="1%">STT</th>
 						<th width="1%"><input type="checkbox" id="checkAll"/></th>
 						<th width="10%">Tiêu đề</th>
 						<th width="10%">Mobile</th>
@@ -49,6 +50,7 @@
 					<tbody>
 					<?php foreach ($result as $key => $item) {?>
 					<tr>
+						<td><?php echo $key+1; ?></td>
 						<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item->id ?>" /></td>
 						<td><?php echo $item->title; ?></td>
 						<td><?php echo $item->mobile; ?></td>
