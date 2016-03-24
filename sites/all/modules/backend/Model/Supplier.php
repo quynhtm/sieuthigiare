@@ -18,10 +18,10 @@ class Supplier{
             $cond = '';
             $arrCond = array();
             foreach($dataSearch as $k=>$v){
-            	if($k == 'supplier_status' && $k != ''){
+            	if($k == 'supplier_status' && $v != ''){
             		$sql->condition('i.supplier_status', $dataSearch['supplier_status'], '=');
             		array_push($arrCond, 'supplier_status='.$dataSearch['supplier_status']);
-            	}elseif($k == 'supplier_full_name' && $k != ''){
+            	}elseif($k == 'supplier_full_name' && $v != ''){
             		$db_or = db_or();
 	                $db_or->condition('i.supplier_full_name', '%'.$dataSearch['supplier_full_name'].'%', 'LIKE');
 	                $db_or->condition('i.supplier_phone', '%'.$dataSearch['supplier_full_name'].'%', 'LIKE');

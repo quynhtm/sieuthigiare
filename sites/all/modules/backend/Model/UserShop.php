@@ -22,7 +22,7 @@ class UserShop{
             	if($k == 'status' && $v != ''){
             		$sql->condition('i.status', $dataSearch['status'], '=');
             		array_push($arrCond, 'status ='.$dataSearch["status"]);
-            	}elseif($k == 'title' && $k != ''){
+            	}elseif($k == 'title' && $v != ''){
             		$db_or = db_or();
 	                $db_or->condition('i.name_shop', '%'.$dataSearch['title'].'%', 'LIKE');
 	                $db_or->condition('i.user_name', '%'.$dataSearch['title'].'%', 'LIKE');

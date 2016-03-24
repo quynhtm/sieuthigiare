@@ -25,7 +25,7 @@ class Provice{
             	if($k == 'status' && $v != ''){
             		$sql->condition('i.status', $dataSearch['status'], '=');
             		array_push($arrCond, 'status ='.$dataSearch["status"]);
-            	}elseif($k == 'title' && $k != ''){
+            	}elseif($k == 'title' && $v != ''){
             		$db_or = db_or();
 	                $db_or->condition('i.title', '%'.$dataSearch['title'].'%', 'LIKE');
 	                $sql->condition($db_or);

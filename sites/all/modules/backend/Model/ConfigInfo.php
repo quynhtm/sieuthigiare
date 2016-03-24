@@ -25,7 +25,7 @@ class ConfigInfo{
             	if($k == 'status' && $v != ''){
             		$sql->condition('i.status', $dataSearch['status'], '=');
             		array_push($arrCond, 'status ='.$dataSearch["status"]);
-            	}elseif($k == 'title' && $k != ''){
+            	}elseif($k == 'title' && $v != ''){
             		$db_or = db_or();
 	                $db_or->condition('i.title', '%'.$dataSearch['title'].'%', 'LIKE');
 	                $db_or->condition('i.keyword', '%'.$dataSearch['title'].'%', 'LIKE');
