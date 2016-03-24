@@ -184,6 +184,8 @@ function Admin_init(){
 		$files = array(
 			'View/css/admin.css',
 			'View/js/admin.js',
+            'View/js/stacktable.min.js',
+
 			'Controller/BlockController.php',
 			
 			'Model/SupportOnline.php',

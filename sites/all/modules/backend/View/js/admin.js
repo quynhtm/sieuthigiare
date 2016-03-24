@@ -5,6 +5,8 @@ jQuery(document).ready(function($){
 	HIDDEN_MENU_ADMIN.menu_left();
 	RESTORE_ITEM.init();
 	INPUT_TIME.config();
+
+	$('.table').cardtable();
 });
 
 CHECKALL_ITEM = {
