@@ -3,7 +3,7 @@
 * QuynhTM
  * Quan ly danh sach cac Shop
 */
-
+class SupplierController{
 	function indexSupplier(){
 		global $base_url;
 
@@ -38,3 +38,4 @@
 		}
 		drupal_goto($base_url.'/admincp/usershop');
 	}
+}

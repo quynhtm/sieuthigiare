@@ -5,11 +5,19 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0
 */
-function AdminDefault(){
-    global $base_url;
-    drupal_set_title(t('CMS'));   
-    return '';
+
+class AdmincpController{
+    function AdminDefault(){
+        global $base_url;
+        drupal_set_title(t('CMS'));   
+        return '';
+    }
 }
+function admin_redirect(){
+    global $base_url;
+    drupal_goto($base_url.'/admincp');
+}
+
 function blockAdminHeader(){
     $view= theme('admin-header');
     return $view;
@@ -25,8 +33,4 @@ function blockAdminContent(){
 function blockAdminFooter(){
 	$view= theme('admin-footer');
     return $view;
-}
-function admin_redirect(){
-    global $base_url;
-    drupal_goto($base_url.'/admincp');
 }

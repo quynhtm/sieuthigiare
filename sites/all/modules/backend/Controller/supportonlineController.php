@@ -5,118 +5,120 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0
 */
-function indexSupportonline(){
-	global $base_url;
+class SupportonlineController{
+	function indexSupportonline(){
+		global $base_url;
 
-	$limit = SITE_RECORD_PER_PAGE;
-	
-	$dataSearch['title'] = FunctionLib::getParam('title','');
-	$dataSearch['status'] = FunctionLib::getParam('status', '');
-	$arrFields=array('id', 'title', 'mobile', 'skyper', 'yahoo', 'created', 'order_no', 'status');
+		$limit = SITE_RECORD_PER_PAGE;
+		
+		$dataSearch['title'] = FunctionLib::getParam('title','');
+		$dataSearch['status'] = FunctionLib::getParam('status', '');
+		$arrFields=array('id', 'title', 'mobile', 'skyper', 'yahoo', 'created', 'order_no', 'status');
 
-	$result = SupportOnline::getSearchListItems($dataSearch, $arrFields, $limit);
-	
-	$view = theme('indexSupportOnline',array(
-								'title'=>'Danh sách nick hỗ trợ trực tuyến',
-								'result' => $result['data'],
-								'dataSearch' => $dataSearch,
-								'base_url' => $base_url,
-								'totalItem' =>$result['total'],
-								'pager' =>$result['pager']));
-	return $view;
-}
-
-function formSupportonlineAction(){
-	global $base_url, $user;
-
-	$Stdio = new Stdio();
-
-	$param = arg();
-	$arrOneItem = array();
-
-	if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
-		$arrFields = array('id','title', 'yahoo', 'skyper', 'mobile', 'email', 'order_no', 'status');
-		$arrOneItem = SupportOnline::getOne($arrFields, $param[3]);
+		$result = SupportOnline::getSearchListItems($dataSearch, $arrFields, $limit);
+		
+		$view = theme('indexSupportOnline',array(
+									'title'=>'Danh sách nick hỗ trợ trực tuyến',
+									'result' => $result['data'],
+									'dataSearch' => $dataSearch,
+									'base_url' => $base_url,
+									'totalItem' =>$result['total'],
+									'pager' =>$result['pager']));
+		return $view;
 	}
 
-	if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
+	function formSupportonlineAction(){
+		global $base_url, $user;
 
-		$title 	= isset($_POST['title']) ? trim($_POST['title']) : '';
-		$yahoo 	= isset($_POST['yahoo']) ? trim($_POST['yahoo']) : '';
-		$skyper = isset($_POST['skyper']) ? trim($_POST['skyper']) : '';
-		$mobile = isset($_POST['mobile']) ? trim($_POST['mobile']) : '';
-		$email 	= isset($_POST['email']) ? trim($_POST['email']) : '';
-		$order_no	= isset($_POST['order_no']) ? intval($_POST['order_no']) : 1;
-		$status		= isset($_POST['status']) ? intval($_POST['status']) : 0;
+		$Stdio = new Stdio();
 
-		$uid		= $user->uid;
-		$created	= time();
+		$param = arg();
+		$arrOneItem = array();
 
-		$errors = '';
-		if($title==''){
-			$errors .= 'Tiêu đề ko được trống!<br/>';
+		if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
+			$arrFields = array('id','title', 'yahoo', 'skyper', 'mobile', 'email', 'order_no', 'status');
+			$arrOneItem = SupportOnline::getOne($arrFields, $param[3]);
 		}
-		if($email != ''){
-			$check_email = ValidForm::checkRegexEmail($email);
-			if(!$check_email){
-				$errors .= 'Email sai cấu trúc!<br/>';
-			
+
+		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
+
+			$title 	= isset($_POST['title']) ? trim($_POST['title']) : '';
+			$yahoo 	= isset($_POST['yahoo']) ? trim($_POST['yahoo']) : '';
+			$skyper = isset($_POST['skyper']) ? trim($_POST['skyper']) : '';
+			$mobile = isset($_POST['mobile']) ? trim($_POST['mobile']) : '';
+			$email 	= isset($_POST['email']) ? trim($_POST['email']) : '';
+			$order_no	= isset($_POST['order_no']) ? intval($_POST['order_no']) : 1;
+			$status		= isset($_POST['status']) ? intval($_POST['status']) : 0;
+
+			$uid		= $user->uid;
+			$created	= time();
+
+			$errors = '';
+			if($title==''){
+				$errors .= 'Tiêu đề ko được trống!<br/>';
 			}
-		}
-		if($errors != ''){
-			drupal_set_message($errors, 'error');
-			if(isset($param[3]) && $param[3]>0){
-				drupal_goto($base_url.'/admincp/supportonline/edit/'.$param[3]);
+			if($email != ''){
+				$check_email = ValidForm::checkRegexEmail($email);
+				if(!$check_email){
+					$errors .= 'Email sai cấu trúc!<br/>';
+				
+				}
+			}
+			if($errors != ''){
+				drupal_set_message($errors, 'error');
+				if(isset($param[3]) && $param[3]>0){
+					drupal_goto($base_url.'/admincp/supportonline/edit/'.$param[3]);
+				}else{
+					drupal_goto($base_url.'/admincp/supportonline/add');
+				}
+			}
+
+			$data_post = array(
+						'title'=>$title,
+						'yahoo'=>$yahoo,
+						'skyper'=>$skyper,
+						'mobile'=>$mobile,
+						'email'=>$email,
+						'order_no'=>$order_no,
+						'status'=>$status,
+						'uid'=>$uid,
+						'created'=>$created,
+					);
+
+			if(isset($param[3]) && $param[3] > 0){
+				unset($data_post['uid']);
+				unset($data_post['created']);
+				SupportOnline::updateId($data_post, $param[3]);
+				drupal_set_message('Sửa bài viết thành công.');
+				drupal_goto($base_url.'/admincp/supportonline');
 			}else{
-				drupal_goto($base_url.'/admincp/supportonline/add');
+				$query = SupportOnline::insert($data_post);
+				if($query){
+					drupal_set_message('Thêm bài viết thành công.');
+					drupal_goto($base_url.'/admincp/supportonline');
+				}
 			}
 		}
 
-		$data_post = array(
-					'title'=>$title,
-					'yahoo'=>$yahoo,
-					'skyper'=>$skyper,
-					'mobile'=>$mobile,
-					'email'=>$email,
-					'order_no'=>$order_no,
-					'status'=>$status,
-					'uid'=>$uid,
-					'created'=>$created,
+		$data = array(
+					'arrOneItem'=>$arrOneItem,				
 				);
 
-		if(isset($param[3]) && $param[3] > 0){
-			unset($data_post['uid']);
-			unset($data_post['created']);
-			SupportOnline::updateId($data_post, $param[3]);
-			drupal_set_message('Sửa bài viết thành công.');
-			drupal_goto($base_url.'/admincp/supportonline');
-		}else{
-			$query = SupportOnline::insert($data_post);
-			if($query){
-				drupal_set_message('Thêm bài viết thành công.');
-				drupal_goto($base_url.'/admincp/supportonline');
-			}
-		}
+		$view = theme('addSupportOnline',$data);
+		return $view;
 	}
 
-	$data = array(
-				'arrOneItem'=>$arrOneItem,				
-			);
-
-	$view = theme('addSupportOnline',$data);
-	return $view;
-}
-
-function deleteSupportonlineAction(){
-	global $base_url;
-	if(isset($_POST) && $_POST['txtFormName']=='txtFormName'){
-		$listId = isset($_POST['checkItem'])? $_POST['checkItem'] : 0;
-		foreach($listId as $item){
-			if($item > 0){
-				SupportOnline::deleteId($item);
+	function deleteSupportonlineAction(){
+		global $base_url;
+		if(isset($_POST) && $_POST['txtFormName']=='txtFormName'){
+			$listId = isset($_POST['checkItem'])? $_POST['checkItem'] : 0;
+			foreach($listId as $item){
+				if($item > 0){
+					SupportOnline::deleteId($item);
+				}
 			}
+			drupal_set_message('Xóa bài viết thành công.');
 		}
-		drupal_set_message('Xóa bài viết thành công.');
+		drupal_goto($base_url.'/admincp/supportonline');
 	}
-	drupal_goto($base_url.'/admincp/supportonline');
 }

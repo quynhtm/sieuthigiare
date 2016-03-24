@@ -34,8 +34,16 @@ function router_page(){
 					}
 				}
 			}
-			if(function_exists($pageAction)){
-				return $pageAction();
+			
+			if(isset($param[1]) && $param[1] != ''){
+				$tmpClass = ucfirst($param[1]).'Controller';
+			}else{
+				$tmpClass = ucfirst($param[0]).'Controller';
+			}
+
+			if(class_exists($tmpClass)){
+				$routerClass = new $tmpClass();
+				return $routerClass->$pageAction();
 			}else{
 				drupal_goto($base_url);
 			}
