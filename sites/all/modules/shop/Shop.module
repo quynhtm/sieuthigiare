@@ -22,7 +22,7 @@ function Shop_menu() {
 		'type' => MENU_CALLBACK,
 	);
 	$items["thoat.html"] = array(
-		"title" => t('Thoat shop'),
+		"title" => t('Thoát shop'),
 		"description" => "Thoat shop",
 		'page callback' => 'shopLogout',
 		'access callback' => TRUE,

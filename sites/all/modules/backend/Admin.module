@@ -52,7 +52,7 @@ function Admin_menu() {
 	);
 
 	$items["admincp/usershop"] = array(
-		"title" => t('Qu?n lý User Shop'),
+		"title" => t('Quản lý User Shop'),
 		"description" => "Qu?n lý User Shop",
 		'page callback' => 'router_page',
 		'access callback' => TRUE,
@@ -60,7 +60,7 @@ function Admin_menu() {
 	);
 
     $items["admincp/supplier"] = array(
-		"title" => t('Qu?n lý NCC'),
+		"title" => t('Quản lý NCC'),
 		"description" => "Qu?n lý NCC",
 		'page callback' => 'router_page',
 		'access callback' => TRUE,
