@@ -16,15 +16,15 @@
         <li <?php if($param[1]=='provice'){?> class="active" <?php } ?>>
             <a title="" href="javascript:void(0)"><i class="icon-focus icon-files-o"></i>Tỉnh/thành <i class="icon-focus fa-arrow"></i></a>
             <ul class="sub">
-                <li><a class="" title="" href="<?php echo $base_url ?>/admincp/provice"><i class="icon-focus icon-circle-o"></i>Quản lý tỉnh/thành</a></li>
-                <li><a class="" title="" href=""><i class="icon-focus icon-circle-o"></i>Quản lý comment</a></li>
+                <li <?php if($param[1]=='provice'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/provice"><i class="icon-focus icon-circle-o"></i>Quản lý tỉnh/thành</a></li>
+                <li><a title="" href=""><i class="icon-focus icon-circle-o"></i>Quản lý comment</a></li>
             </ul>
         </li>
         <li <?php if($param[1]=='supportonline'){?> class="active" <?php } ?>>
             <a title="" href="javascript:void(0)"><i class="icon-focus icon-files-o"></i>Nick support <i class="icon-focus fa-arrow"></i></a>
             <ul class="sub">
-                <li><a class="" title="" href="<?php echo $base_url ?>/admincp/supportonline"><i class="icon-focus icon-circle-o"></i>Quản lý nick</a></li>
-                <li><a class="" title="" href=""><i class="icon-focus icon-circle-o"></i>Quản lý comment</a></li>
+                <li <?php if($param[1]=='supportonline'){?> class="active" <?php } ?>><a title="" href="<?php echo $base_url ?>/admincp/supportonline"><i class="icon-focus icon-circle-o"></i>Quản lý nick</a></li>
+                <li><a title="" href=""><i class="icon-focus icon-circle-o"></i>Quản lý comment</a></li>
             </ul>
 
         </li>

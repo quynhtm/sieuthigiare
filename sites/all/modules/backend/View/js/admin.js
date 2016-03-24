@@ -95,6 +95,7 @@ HIDDEN_MENU_ADMIN = {
 		});
 	},
 	menu_left:function(){
+		jQuery(".navigation>ul>li.active ul").slideDown();
 		jQuery(".navigation>ul>li").click(function(event){
 			jQuery('.navigation>ul>li').not(this).removeClass('active');
 			if(jQuery(this).hasClass('active')){

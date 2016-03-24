@@ -115,13 +115,19 @@ body.page-admincp{
     display: none;
     background: #2c3b41;
 }
-.leftRegion .navigation li.active .sub{
+/*.leftRegion .navigation li.active .sub{
     display: block;
-}
+}*/
 .leftRegion .navigation li:hover ul li a,
 .leftRegion .navigation sub li:hover a{
     border-left: 2px solid transparent;
     background: none;
+}
+.leftRegion .navigation .sub li.active a,
+.leftRegion .navigation .sub li.active a:hover{
+    color: #367fa9;
+    border-left: 2px solid transparent;
+    background:none;
 }
 .icon-focus{
     display: inline-block;
