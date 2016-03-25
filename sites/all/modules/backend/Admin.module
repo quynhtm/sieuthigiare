@@ -183,6 +183,7 @@ function Admin_init(){
 	if(preg_match("/(\/admincp)/", $uri)!=0){
 		$files = array(
 			'View/css/admin.css',
+            'View/css/font-awesome.css',
 			'View/js/admin.js',
             'View/js/stacktable.min.js',
 
