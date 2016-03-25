@@ -557,11 +557,6 @@ body .region-header .wrapper{
 .page-content-box textarea:focus {
     border:1px solid #3c8dbc;
 }
-.page-content-box .controls textarea {
-    max-width: 80%;
-    min-height: 100px;
-    min-width: 80%;
-}
 .page-content-box .form-actions {
     margin-bottom: 20px;
     margin-top: 20px;
@@ -804,6 +799,26 @@ div#load_file_ajax_gift .rowprocess p{
 
     .page-content-box {
         overflow-x: scroll;
+    }
+    .control-group .control-label {
+        float: none;
+        padding-top: 5px;
+        text-align: left!important;
+        width: 100%;
+    }
+
+    .control-group .controls {
+        margin-left: 0;
+        margin-top: 5px;
+        width: 100%;
+        clear: both;
+    }
+    .page-content-box .controls textarea {
+        max-width: 98%;
+        min-width: 98%;
+    }
+    .page-content-box .form-actions{
+        margin: 0px;
     }
 }
 .txtComment{
