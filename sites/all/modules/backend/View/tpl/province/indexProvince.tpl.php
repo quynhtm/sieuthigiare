@@ -11,7 +11,7 @@
 <div class="inner-box">
 	<div class="page-title-box">
 		<div class="wrapper">
-			<h5><?php
+			<h5 class="padding10"><?php
 					if(isset($title)){
 						echo $title;
 					}else{
