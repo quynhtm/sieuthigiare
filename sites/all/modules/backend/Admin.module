@@ -27,9 +27,10 @@ function Admin_menu() {
         'type' => MENU_CALLBACK,
     );
 
-	$items["admincp/provice"] = array(
-		"title" => t('provice'),
-		"description" => "provice",
+    //tinh thanh
+	$items["admincp/province"] = array(
+		"title" => t('province'),
+		"description" => "province",
 		'page callback' => 'router_page',
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
@@ -159,8 +160,9 @@ function Admin_theme() {
         'indexSupplier' 		=> array('template' => 'View/tpl/supplier/indexSupplier'),
         'addSupplier' 		    => array('template' => 'View/tpl/supplier/addSupplier'),
 
-        'indexProvice' 			=> array('template' => 'View/tpl/provice/indexProvice'),
-        'addProvice' 			=> array('template' => 'View/tpl/provice/addProvice'),
+        //T?nh thành
+        'indexProvince' 			=> array('template' => 'View/tpl/province/indexProvince'),
+        'addProvince' 			=> array('template' => 'View/tpl/province/addProvince'),
  		//here
     );
 }
@@ -200,8 +202,8 @@ function Admin_init(){
             'Model/Supplier.php',
 			'Controller/SupplierController.php',
 
-			'Model/Provice.php',
-			'Controller/ProviceController.php',
+			'Model/Province.php',
+			'Controller/ProvinceController.php',
 		);
 		Loader::load('Admin', $files);
 	}

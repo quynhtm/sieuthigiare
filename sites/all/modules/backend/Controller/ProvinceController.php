@@ -1,23 +1,19 @@
 <?php
 /*
-* @Created by: HSS
-* @Author	 : nguyenduypt86@gmail.com
-* @Date 	 : 06/2014
-* @Version	 : 1.0
+* QuynhTM
 */
-class ProviceController{
-	function indexProvice(){
+class ProvinceController{
+	function indexProvince(){
 		global $base_url;
-
 		$limit = SITE_RECORD_PER_PAGE;
-		
-		$dataSearch['title'] = FunctionLib::getParam('title','');
-		$dataSearch['status'] = FunctionLib::getParam('status', '');
-		$arrFields=array('id', 'title', 'created', 'status');
+		//search
+		$dataSearch['province_name'] = FunctionLib::getParam('province_name','');
+		$dataSearch['province_status'] = FunctionLib::getParam('province_status', '');
 
-		$result = Provice::getSearchListItems($dataSearch, $arrFields, $limit);
-		
-		$view = theme('indexProvice',array(
+		$arrFields = array('province_id', 'province_name', 'province_position', 'province_status');
+		$result = Province::getSearchListItems($dataSearch,$limit,$arrFields);
+
+		$view = theme('indexProvince',array(
 									'title'=>'Danh sách tỉnh/thành',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
@@ -28,7 +24,7 @@ class ProviceController{
 		return $view;
 	}
 
-	function formProviceAction(){
+	function formProvinceAction(){
 		global $base_url, $user;
 
 		$param = arg();
@@ -85,11 +81,11 @@ class ProviceController{
 					'arrOneItem'=>$arrOneItem,				
 				);
 
-		$view = theme('addProvice',$data);
+		$view = theme('addProvince',$data);
 		return $view;
 	}
 
-	function deleteProviceAction(){
+	function deleteProvinceAction(){
 		global $base_url;
 		if(isset($_POST) && $_POST['txtFormName']=='txtFormName'){
 			$listId = isset($_POST['checkItem'])? $_POST['checkItem'] : 0;
@@ -100,6 +96,6 @@ class ProviceController{
 			}
 			drupal_set_message('Xóa bài viết thành công.');
 		}
-		drupal_goto($base_url.'/admincp/provice');
+		drupal_goto($base_url.'/admincp/province');
 	}
 }
