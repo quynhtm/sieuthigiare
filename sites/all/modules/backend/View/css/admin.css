@@ -175,13 +175,11 @@ li.active .icon-arrow:before{
 .show-bottom-info .total-rows {
     color: #222;
     float: left;
-    padding-left: 8px;
     width: 30%;
 }
 .show-bottom-info .list-item-page{
     width: 65%;
     float: right;
-    padding-right: 8px;
 }
 .showListPage .item-list .pager {
     clear: both;
