@@ -14,7 +14,7 @@ class ProvinceController{
 		$arrFields = array('province_id', 'province_name', 'province_position', 'province_status');
 		$result = Province::getSearchListItems($dataSearch,$limit,$arrFields);
 
-		//build offtion
+		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['province_status']);
 
 		$view = theme('indexProvince',array(
