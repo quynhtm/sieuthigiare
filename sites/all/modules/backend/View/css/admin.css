@@ -755,7 +755,7 @@ div#load_file_ajax_gift .rowprocess p{
     background: #fff!important;
 }
 .showListItem table tr:hover {
-    background: #eee!important;
+    background: #e0e0e0!important;
 }
 .showListItem table thead tr:first-child,
 .showListItem table thead tr:first-child:hover {
