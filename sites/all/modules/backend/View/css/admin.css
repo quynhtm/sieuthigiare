@@ -936,4 +936,7 @@ form#formListItem {
     border-radius: 0;
 }
 .padding10{padding: 10px}
-
+.wrapp-search-box .btn{
+    height: 30px;
+    padding: 5px 12px;
+}
