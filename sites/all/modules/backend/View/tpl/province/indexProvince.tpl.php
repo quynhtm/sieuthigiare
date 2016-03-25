@@ -22,8 +22,8 @@
 					}
 				?></h5>
 			<span class="tools">
-				<a href="<?php echo $base_url; ?>/admincp/provice/add" title="Add" class="icon-add"></a>
-                <a href="javascript:void(0)" title="Delete" id="deleteMoreItem" class="icon-delete"></a>
+				<a href="<?php echo $base_url; ?>/admincp/provice/add" title="Add" class="icon-focus icon-add"></a>
+                <a href="javascript:void(0)" title="Delete" id="deleteMoreItem" class="icon-focus icon-remove"></a>
            </span>
 		</div>
 	</div>

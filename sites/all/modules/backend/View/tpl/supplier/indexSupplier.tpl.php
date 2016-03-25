@@ -22,7 +22,7 @@
 					}
 				?></h5>
 			<span class="tools">
-                <a href="javascript:void(0)" title="Delete" id="deleteMoreItem" class="icon-delete"></a>
+                <a href="javascript:void(0)" title="Delete" id="deleteMoreItem" class="icon-focus icon-remove"></a>
            </span>
 		</div>
 	</div>
@@ -61,7 +61,7 @@
 						<td><?php echo $item->supplier_website; ?></td>
 						<td><?php echo date('d-m-Y h:i',$item->supplier_created); ?></td>
 						<td>
-							<a class="icon huge" id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-remove bgLeftIcon"></i></a>
+							<a class="icon huge" id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-focus icon-remove"></i></a>
 						</td>
 					</tr>
 					<?php }?>
