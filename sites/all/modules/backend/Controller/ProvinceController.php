@@ -3,6 +3,7 @@
 * QuynhTM
 */
 class ProvinceController{
+	private $arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
 	function indexProvince(){
 		global $base_url;
 		$limit = SITE_RECORD_PER_PAGE;
@@ -13,10 +14,14 @@ class ProvinceController{
 		$arrFields = array('province_id', 'province_name', 'province_position', 'province_status');
 		$result = Province::getSearchListItems($dataSearch,$limit,$arrFields);
 
+		//build offtion
+		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['province_status']);
+
 		$view = theme('indexProvince',array(
 									'title'=>'Danh sách tỉnh/thành',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
+									'optionStatus' => $optionStatus,
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));

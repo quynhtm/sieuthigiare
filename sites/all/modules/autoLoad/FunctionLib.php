@@ -60,4 +60,55 @@ class FunctionLib{
 			return $default;
 		}
 	}
+	/**
+	 * build html select option
+	 *
+	 * @param array $options_array
+	 * @param int $selected
+	 * @param array $disabled
+	 */
+	static function getOption($options_array, $selected, $disabled = array()) {
+		$input = '';
+		if ($options_array)
+			foreach ($options_array as $key => $text) {
+				$input .= '<option value="' . $key . '"';
+				if (!in_array($selected, $disabled)) {
+					if ($key === '' && $selected === '') {
+						$input .= ' selected';
+					} else
+						if ($selected !== '' && $key == $selected) {
+							$input .= ' selected';
+						}
+				}
+				if (!empty($disabled)) {
+					if (in_array($key, $disabled)) {
+						$input .= ' disabled';
+					}
+				}
+				$input .= '>' . $text . '</option>';
+			}
+		return $input;
+	}
+
+	/**
+	 * build html select option mutil
+	 *
+	 * @param array $options_array
+	 * @param array $arrSelected
+	 */
+	static function getOptionMultil($options_array, $arrSelected) {
+		$input = '';
+		if ($options_array)
+			foreach ($options_array as $key => $text) {
+				$input .= '<option value="' . $key . '"';
+				if ($key === '' && empty($arrSelected)) {
+					$input .= ' selected';
+				} else
+					if (!empty($arrSelected) && in_array($key, $arrSelected)) {
+						$input .= ' selected';
+					}
+				$input .= '>' . $text . '</option>';
+			}
+		return $input;
+	}
 }
