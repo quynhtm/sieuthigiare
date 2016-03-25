@@ -111,4 +111,148 @@ class FunctionLib{
 			}
 		return $input;
 	}
+
+	static function numberFormat($number = 0) {
+		if ($number >= 1000) {
+			return number_format($number, 0, ',', '.');
+		}
+		return $number;
+	}
+
+	//cac-ky-sap-xep-gan-nhau
+	static function safe_title($text) {
+		$text = FunctionLib::post_db_parse_html($text);
+		$text = FunctionLib::stripUnicode($text);
+		$text = self::_name_cleaner($text, "-");
+		$text = str_replace("----", "-", $text);
+		$text = str_replace("---", "-", $text);
+		$text = str_replace("--", "-", $text);
+		$text = trim($text, '-');
+
+		if ($text) {
+			return $text;
+		} else {
+			return "shop";
+		}
+	}
+
+	//cackysapxepgannhau
+	static function stringtitle($text) {
+		$text = FunctionLib::post_db_parse_html($text);
+		$text = FunctionLib::stripUnicode($text);
+		$text = self::_name_cleaner($text, "-");
+		$text = str_replace("----", "-", $text);
+		$text = str_replace("---", "-", $text);
+		$text = str_replace("--", "-", $text);
+		$text = str_replace("-", "", $text);
+		$text = trim($text);
+
+		if ($text) {
+			return $text;
+		} else {
+			return "shop";
+		}
+	}
+
+	static function strip_html_tags($string){
+		return preg_replace(array('/\<(script)(.+)>/i', '/\<(.+)(script)>/i', '/\<(style)(.+)>/i', '/\<(.+)(style)>/i'), '', $string);
+	}
+
+	static function cutString($str, $num) {
+		$arr_str = explode(' ', $str);
+		$count = count($arr_str);
+		$arr_str = array_slice($arr_str, 0, $num);
+		$res = implode(' ', $arr_str);
+		if ($count > $num) {
+			$res .= ' ...';
+		}
+		return $res;
+	}
+
+	static function cutString2($str, $num) {
+		$arr_str = explode(' ', $str);
+		$count = count($arr_str);
+		$arr_str = array_slice($arr_str, 0, $num);
+		$res = implode(' ', $arr_str);
+		return $res;
+	}
+
+	public  static function numberToWord($s, $lang = 'vi') {
+		$ds = 0;
+		$so = $hang = array();
+
+		$viN = array("không", "m?t", "hai", "ba", "b?n", "n?m", "sáu", "b?y", "tám", "chín");
+		$viRow = array("", "nghìn", "tri?u", "t?");
+
+		$enN = array("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine");
+		$enRow = array("", "thousand", "million", "billion");
+
+		if ($lang == 'vi') {
+			$so = $viN;
+			$hang = $viRow;
+		} else {
+			$so = $enN;
+			$hang = $enRow;
+		}
+
+		$s = str_replace(",", "", $s);
+		$ds = (int) $s;
+		if ($ds == 0) {
+			return "không ";
+		}
+
+		$i = $j = $donvi = $chuc = $tram = 0;
+		$i = strlen($s);
+
+		$Str = "";
+		if ($i == 0)
+			$Str = "";
+		else {
+			$j = 0;
+			while ($i > 0) {
+				$donvi = substr($s, $i - 1, 1);
+				$i = $i - 1;
+				if ($i > 0) {
+					$chuc = substr($s, $i - 1, 1);
+				} else {
+					$chuc = -1;
+				}
+				$i = $i - 1;
+				if ($i > 0) {
+					$tram = substr($s, $i - 1, 1);
+				} else {
+					$tram = -1;
+				}
+				$i = $i - 1;
+				if ($donvi > 0 || $chuc > 0 || $tram > 0 || $j == 3)
+					$Str = $hang[$j] . " " . $Str;
+				$j = $j + 1;
+				if ($j > 3)
+					$j = 1;
+				if ($donvi == 1 && $chuc > 1)
+					$Str = "m?t" . " " . $Str;
+				else {
+					if ($donvi == 5 && $chuc > 0)
+						$Str = "l?m" . " " . $Str;
+					else if ($donvi > 0)
+						$Str = $so[$donvi] . " " . $Str;
+				}
+				if ($chuc < 0)
+					break;
+				else
+					if ($chuc == 0 && $donvi > 0)
+						$Str = "l?" . " " . $Str;
+				if ($chuc == 1)
+					$Str = "m??i" . " " . $Str;
+				if ($chuc > 1)
+					$Str = $so[$chuc] . " " . "m??i" . " " . $Str;
+				if ($tram < 0)
+					break;
+				else
+					if ($tram > 0 || $chuc > 0 || $donvi > 0)
+						$Str = $so[$tram] . " " . "tr?m" . " " . $Str;
+			}
+		}
+		return strtoupper(substr($Str, 0, 1)) . substr($Str, 1, strlen($Str) - 1) . ($lang == 'vi' ? "??ng" : 'vnd');
+	}
 }
