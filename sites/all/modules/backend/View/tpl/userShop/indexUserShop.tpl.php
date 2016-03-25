@@ -22,9 +22,9 @@
 					}
 				?></h5>
 			<span class="tools">
-				<a href="<?php echo $base_url; ?>/admincp/usershop/add" title="Add" class="icon-add"></a>
-                <a href="javascript:void(0)" title="Delete" id="deleteMoreItem" class="icon-delete"></a>
-           </span>
+				<a href="<?php echo $base_url; ?>/admincp/usershop/add" title="Add" class="icon-focus icon-add"></a>
+                <a href="javascript:void(0)" title="Delete" id="deleteMoreItem" class="icon-focus icon-remove"></a>
+           </span>icon-focus 
 		</div>
 	</div>
 	<div class="page-content-box">
@@ -84,8 +84,8 @@
 						<td><?php echo date('d-m-Y h:i',$item->created); ?></td>
 						<td>
 							<?php $linkEdit = $base_url.'/admincp/usershop/edit/'.$item->id; ?>
-							<a class="icon huge" href="<?php echo $linkEdit; ?>"  title="Update Item"><i class="icon-pencil bgLeftIcon"></i></a>
-							<a class="icon huge" id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-remove bgLeftIcon"></i></a>
+							<a class="icon huge" href="<?php echo $linkEdit; ?>"  title="Update Item"><i class="icon-focus icon-pencil"></i></a>
+							<a class="icon huge" id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-focus icon-remove"></i></a>
 						</td>
 					</tr>
 					<?php }?>

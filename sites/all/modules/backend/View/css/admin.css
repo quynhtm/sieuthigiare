@@ -171,6 +171,14 @@ body.page-admincp{
     top: 34%;
     transform: rotate(-90deg);
 }
+.icon-remove::before {
+    content: "";
+    color: #ff0000 !important;
+}
+.icon-add:before{
+    content: "";
+}
+
 /*right box*/
 .showListItem table.sticky-table {
     border: 1px solid #efefef !important;
@@ -192,16 +200,9 @@ body.page-admincp{
     line-height: normal;
     margin: 4px 0 0;
 }
-.bgLeftIcon {
-    background-image: url("../img/glyphicons-halflings.png");
-}
-.icon-pencil {
-    background-position: -1502px -547px;
-    display: block;
-    float: left;
-    height: 15px;
-    margin-top: -2px;
-    width: 18px;
+.icon-pencil:before {
+   content: "";
+   color: #3c8dbc!important;
 }
 .icon-print {
     background-position: -92px -46px;
@@ -481,25 +482,16 @@ body .region-header .wrapper{
 }
 .showListItem table th a,
 .showListItem table th a:hover {
-    color: #000 !important;
+    color: #222 !important;
     text-decoration: none !important;
 }
-.showListItem table th a {
-    background: url("../img/sort_both.png") no-repeat scroll right center transparent;
-    display: block;
-    width: 100%;
+.showListItem table th a:before{
+    content: "";
 }
 .showListItem table th a img {
     display: none !important;
 }
-.icon-remove {
-    background-position: -1715px 0;
-    display: block;
-    float: left;
-    height: 14px;
-    margin-top: 0;
-    width: 18px;
-}
+
 .bg-status-show {
     background-color: #468847;
      border-radius: 2px;
@@ -544,31 +536,8 @@ body .region-header .wrapper{
 .page-title-box span.tools {
     float: right;
     margin: 0;
-    padding: 0 5px;
     position: relative;
-    top: 4px;
-}
-.icon-add, .icon-add:hover {
-    background: url("../img/add.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
-    display: inline-block;
-    height: 17px;
-    width: 17px;
-}
-.icon-delete, .icon-delete:hover {
-    background: url("../img/delete.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
-    display: inline-block;
-    height: 16px;
-    width: 16px;
-}
-.icon-restore {
-    background: url("../img/edit.png") no-repeat;
-    border-radius: 100%;
-    display: inline-block;
-    height: 18px;
-    position: relative;
-    text-indent: -99999em;
-    top: 1px;
-    width: 18px;
+    top: 0;
 }
 /*form add and edit item*/
 .page-content-box .control-group {
@@ -924,22 +893,6 @@ div#load_file_ajax_gift .rowprocess p{
 .txtupdatestatus:hover {
     background: none repeat scroll 0 0 #a2caff;
 }
-.comment-delete {
-    background: url("../img/delete.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
-    display: inline-block;
-    float: right;
-    height: 16px;
-    position: absolute;
-    right: 0;
-    text-indent: -9999em;
-    top: 5px;
-    width: 16px;
-    display: none;
-    cursor: pointer;
-}
-.list-comment li:hover .comment-delete {
-    display: inline-block;
-}
 .notetxt {
     font-weight: bold;
     text-transform: capitalize;
@@ -983,15 +936,6 @@ div#load_file_ajax_gift .rowprocess p{
     float: left;
     width: 315px;
     text-align: left;
-}
-.right.icon-pencil.bgLeftIcon {
-    display: inline-block;
-    float: right;
-    height: 15px;
-    position: relative;
-    text-indent: -99999em;
-    top: 3px;
-    width: 15px;
 }
 .box-update_status .list-status {
     clear: both;

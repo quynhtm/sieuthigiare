@@ -22,8 +22,8 @@
 					}
 				?></h5>
 			<span class="tools">
-				<a href="<?php echo $base_url; ?>/admincp/supportonline/add" title="Add" class="icon-add"></a>
-                <a href="javascript:void(0)" title="Delete" id="deleteMoreItem" class="icon-delete"></a>
+				<a href="<?php echo $base_url; ?>/admincp/supportonline/add" class="icon-focus icon-add" title="Add"></a>
+                <a href="javascript:void(0)" id="deleteMoreItem" class="icon-focus icon-remove" title="Delete" ></a>
            </span>
 		</div>
 	</div>
@@ -70,8 +70,8 @@
 						</td>
 						<td>
 							<?php $linkEdit = $base_url.'/admincp/supportonline/edit/'.$item->id; ?>
-							<a class="icon huge" href="<?php echo $linkEdit; ?>"  title="Update Item"><i class="icon-pencil bgLeftIcon"></i></a>
-							<a class="icon huge" id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-remove bgLeftIcon"></i></a>
+							<a class="icon huge" href="<?php echo $linkEdit; ?>"  title="Update Item"><i class="icon-focus icon-pencil"></i></a>
+							<a class="icon huge" id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-focus icon-remove"></i></a>
 						</td>
 					</tr>
 					<?php }?>
