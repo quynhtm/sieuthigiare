@@ -23,7 +23,7 @@ class Province{
             $arrCond = array();
 			if(!empty($dataSearch)){
 				foreach($dataSearch as $field =>$value){
-					if($field === 'province_status' && $value != ''){
+					if($field === 'province_status' && $value != -1){
 						$sql->condition('i.'.$field, $value, '=');
 						array_push($arrCond, $field.' = '.$value);
 					}

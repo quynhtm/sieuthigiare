@@ -927,3 +927,13 @@ div#load_file_ajax_gift .rowprocess p{
 .stacktable.small-only tr:first-child {
     background: #ddd none repeat scroll 0 0 !important;
 }
+
+/*Quynh TM
+fix kich thuong icon trong admin*/
+.icon-admin{
+    font-size: 20px; padding: 5px;
+}
+.green{color: green}
+.red{color: red}
+
+.menu_tools{float: right;  margin-right: 4px;}

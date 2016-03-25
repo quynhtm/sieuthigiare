@@ -9,7 +9,7 @@ class ProvinceController{
 		$limit = SITE_RECORD_PER_PAGE;
 		//search
 		$dataSearch['province_name'] = FunctionLib::getParam('province_name','');
-		$dataSearch['province_status'] = FunctionLib::getParam('province_status', '');
+		$dataSearch['province_status'] = FunctionLib::getParam('province_status', -1);
 
 		$arrFields = array('province_id', 'province_name', 'province_position', 'province_status');
 		$result = Province::getSearchListItems($dataSearch,$limit,$arrFields);

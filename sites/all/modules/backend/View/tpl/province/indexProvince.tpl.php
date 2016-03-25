@@ -3,9 +3,7 @@
 		<div class="search-box-title">Tìm kiếm</div>
 		<form action="" method="GET" id="frmSearch" class="frmSearch" name="frmSearch">
 			<input type="text" id="province_name" class="keyword" name="province_name" value="<?php echo $dataSearch['province_name'] ?>"/>
-			<select class="box-select" name="province_status">
-				<?php echo $optionStatus;?>
-			</select>
+			<select class="box-select" name="province_status"><?php echo $optionStatus;?></select>
 			<input type="submit" id="btnSearch" class="btnSearch" value="<?php echo t('Tìm kiếm')?>">
 		</form>
 	</div>
@@ -20,9 +18,9 @@
 						echo t('Quản lý bài viết');
 					}
 				?></h5>
-			<span class="tools">
-				<a href="<?php echo $base_url; ?>/admincp/provice/add" title="Add" class="icon-plus"></a>
-                <a href="javascript:void(0)" title="Delete" id="deleteMoreItem" class="icon-remove"></a>
+			<span class="menu_tools">
+				<a href="<?php echo $base_url; ?>/admincp/provice/add" title="Add" class="icon-plus icon-admin green"></a>
+                <a href="javascript:void(0)" title="Delete" id="deleteMoreItem" class="icon-trash icon-admin red"></a>
            </span>
 		</div>
 	</div>
@@ -37,14 +35,15 @@
 		</div>
 		<form id="formListItem"  name="txtForm" action="" method="post">
 			<div class="showListItem">
-				<table class="table table-bordered table-hover table-striped" width="100%" cellpadding="5" cellspacing="1" border="1">
+				<table class="table taicon-adminble-bordered table-hover table-striped" width="100%" cellpadding="5" cellspacing="1" border="1">
 					<thead>
 					<tr>
 						<th width="2%">STT</th>
 						<th width="1%"><input type="checkbox" id="checkAll"/></th>
-						<th width="77%">Tên</th>
+						<th width="70%">Tên tỉnh thành</th>
 						<th width="10%">Vị trí</th>
-						<th width="15%">Action</th>
+						<th width="5%">Status</th>
+						<th width="20%">Action</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -57,15 +56,17 @@
 						<td>
 							<?php
 							if($item->province_status == 1){
-								$status='<span class="bg-status-show">'.t('Hiện').'</span>';
+								$status='<i class="icon-ok icon-admin green "></i>';
 							}else{
-								$status='<span class="bg-status-hidden">'.t('Ẩn').'</span>';
+								$status='<i class="icon-remove icon-admin red "></i></a>';
 							}
 							echo $status;
 							?>
+						</td>
+						<td>
 							<?php $linkEdit = $base_url.'/admincp/province/edit/'.$item->province_id; ?>
-							<a class="icon huge" href="<?php echo $linkEdit; ?>"  title="Update Item"><i class="icon-ok"></i></a>
-							<a class="icon huge" id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-remove bgLeftIcon"></i></a>
+							<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit icon-admin green "></i></a>
+							<a id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-trash icon-admin red"></i></a>
 						</td>
 					</tr>
 					<?php }?>
