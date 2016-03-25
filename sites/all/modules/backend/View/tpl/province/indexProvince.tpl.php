@@ -5,6 +5,11 @@
 			<input type="text" id="province_name" class="keyword" name="province_name" value="<?php echo $dataSearch['province_name'] ?>"/>
 			<select class="box-select" name="province_status"><?php echo $optionStatus;?></select>
 			<input type="submit" id="btnSearch" class="btnSearch" value="<?php echo t('Tìm kiếm')?>">
+			<select class="box-select" name="province_status">
+				<option value="0" <?php if($dataSearch['province_status']==0){?>selected="selected"<?php } ?>>Ẩn</option>
+				<option value="1" <?php if($dataSearch['province_status']==1){?>selected="selected"<?php } ?>>Hiện</option>
+			</select>
+			<input type="submit" id="btnSearch" class="btn btn-primary" value="<?php echo t('Tìm kiếm')?>">
 		</form>
 	</div>
 </div>

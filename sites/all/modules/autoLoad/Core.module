@@ -51,6 +51,8 @@ function Core_init(){
 	drupal_add_library('system', 'ui.datepicker');
 
 	$files = array(
+        'bootstrap/js/bootstrap.min.js',
+        'bootstrap/css/bootstrap.css',
 		'css/core.css',
 		'js/jquery.alerts.js',
 	);

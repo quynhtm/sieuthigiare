@@ -7,7 +7,7 @@
 				<option value="0" <?php if($dataSearch['supplier_status']==0){?>selected="selected"<?php } ?>>Ẩn</option>
 				<option value="1" <?php if($dataSearch['supplier_status']==1){?>selected="selected"<?php } ?>>Hiện</option>
 			</select>
-			<input type="submit" id="btnSearch" class="btnSearch" value="<?php echo t('Tìm kiếm')?>">
+			<input type="submit" id="btnSearch" class="btn btn-primary" value="<?php echo t('Tìm kiếm')?>">
 		</form>
 	</div>
 </div>

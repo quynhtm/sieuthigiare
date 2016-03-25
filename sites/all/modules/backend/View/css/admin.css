@@ -175,15 +175,11 @@ li.active .icon-arrow:before{
 .show-bottom-info .total-rows {
     color: #222;
     float: left;
-    padding-left: 8px;
-    padding-top: 15px;
     width: 30%;
 }
 .show-bottom-info .list-item-page{
     width: 65%;
     float: right;
-    padding-top: 3px;
-    padding-right: 8px;
 }
 .showListPage .item-list .pager {
     clear: both;
@@ -238,8 +234,6 @@ ul.pager .pager-current {
     color: #555;
     display: inline-block;
     font-size: 14px;
-    height: 20px;
-    line-height: 20px;
     padding: 4px 6px;
     vertical-align: middle;
     width: 210px;
@@ -264,27 +258,8 @@ ul.pager .pager-current {
     padding: 2px 0px;
     text-indent: 5px;
 }
-.search-box .btnSearch{
-    background: #fefefe;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) #b3b3b3;
-    border-image: none;
-    border-radius: 2px;
-    border-style: solid;
-    border-width: 1px;
-    color: #333;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 14px;
+#btnSearch{
     height: 30px;
-    line-height: 28px;
-    margin-bottom: 0;
-    padding: 0 10px;
-    text-align: center;
-    vertical-align: top;
-}
-.search-box .btnSearch:hover,
-.search-box .btnSearch:active{
-    background: #f8f8f8;
 }
 /*footer*/
 .footerRegion {
@@ -456,7 +431,7 @@ body .region-header .wrapper{
     font-size: 11.84px;
     font-weight: 700;
     line-height: 14px;
-    max-width: 30px;
+    min-width: 10%;
     padding: 2px 10px;
     text-align: center;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
@@ -536,8 +511,6 @@ body .region-header .wrapper{
     color: #555;
     display: inline-block;
     font-size: 14px;
-    height: 20px;
-    line-height: 20px;
     padding: 4px;
     vertical-align: middle;
     outline: 0 none;
@@ -558,11 +531,6 @@ body .region-header .wrapper{
 .page-content-box input[type="week"]:focus,
 .page-content-box textarea:focus {
     border:1px solid #3c8dbc;
-}
-.page-content-box .controls textarea {
-    max-width: 80%;
-    min-height: 100px;
-    min-width: 80%;
 }
 .page-content-box .form-actions {
     margin-bottom: 20px;
@@ -802,11 +770,30 @@ div#load_file_ajax_gift .rowprocess p{
     }
     .rightRegion {
         margin: 0 0 20px 0;
-        min-width: 450px;
     }
 
     .page-content-box {
         overflow-x: scroll;
+    }
+    .control-group .control-label {
+        float: none;
+        padding-top: 5px;
+        text-align: left!important;
+        width: 100%;
+    }
+
+    .control-group .controls {
+        margin-left: 0;
+        margin-top: 5px;
+        width: 100%;
+        clear: both;
+    }
+    .page-content-box .controls textarea {
+        max-width: 98%;
+        min-width: 98%;
+    }
+    .page-content-box .form-actions{
+        margin: 0px;
     }
 }
 .txtComment{
@@ -937,3 +924,11 @@ fix kich thuong icon trong admin*/
 .red{color: red}
 
 .menu_tools{float: right;  margin-right: 4px;}
+.list-item-page .showListPage{
+    margin: 0px;
+}
+form#formListItem {
+    display: inline-block;
+    margin-bottom: 10px;
+    width: 100%;
+}
