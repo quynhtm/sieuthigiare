@@ -366,9 +366,9 @@ body .region-header .wrapper{
     margin: 0 0 0 13%;
 }
 .page-title-box {
-    background: #ecf0f5;
-    height: 30px;
-    line-height: 30px;
+    background: #ecf0f5 none repeat scroll 0 0;
+    height: 32px;
+    line-height: 32px;
 }
 .page-title-box h5 {
     color: #4c4c4c;
@@ -386,6 +386,7 @@ body .region-header .wrapper{
     border-bottom: none;
     border-left: none;
     border-right: none;
+    width: 100%;
 }
 .sticky-enabled.tableheader-processed.sticky-table td,
 .sticky-enabled.tableheader-processed.sticky-table th {
@@ -464,13 +465,13 @@ body .region-header .wrapper{
     padding: 0 !important;
     text-align: center;
 }
-.page-title-box span.tools {
+.page-title-box span.menu_tools {
     float: right;
     margin-right: 4px;
     position: relative;
-    top: 2px;
+    top: 3px;
 }
-.page-title-box span.tools a{
+.page-title-box span.menu_tools a{
     font-size: 20px;
     margin-right: 2px;
 }
