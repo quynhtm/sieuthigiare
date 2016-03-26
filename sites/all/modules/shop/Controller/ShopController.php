@@ -14,27 +14,18 @@ function shopRegister(){
 
 	if(isset($_POST['txtFormNameRegister'])){
 		
-		$dataInput = array();
-		$dataInput ['user_name'] = FunctionLib::getParam('user_name','');
-		$dataInput ['password'] = FunctionLib::getParam('password','');
-		$dataInput ['rep_password'] = FunctionLib::getParam('rep_password','');
-		$dataInput ['phone'] = FunctionLib::getParam('phone','');
-		$dataInput ['email'] = FunctionLib::getParam('email','');
-		$dataInput ['provice'] = FunctionLib::getParam('provice','');
-		$dataInput ['agree'] = FunctionLib::getParam('agree','');
-		$created 		= time();
-		$errors = ValidForm::validInputData($dataInput);
-		
 		$dataInput = array(
 							'user_name'=>array('value'=>FunctionLib::getParam('user_name',''), 'require'=>1, 'messages'=>'Tên đăng nhập không được trống!'),
 							'password'=>array('value'=>FunctionLib::getParam('password',''), 'require'=>1, 'messages'=>'Mật khẩu không được trống!'),
-							'rep_password'=>array('value'=>FunctionLib::getParam('password',''), 'require'=>1, 'messages'=>'Mật khẩu không được trống!'),
-							'email'=>array('value'=>FunctionLib::getParam('password',''), 'require'=>1, 'messages'=>'Mật khẩu không được trống!'),
-							'provice'=>array('value'=>FunctionLib::getParam('password',''), 'require'=>1, 'messages'=>'Mật khẩu không được trống!'),
-							'agree'=>array('value'=>FunctionLib::getParam('password',''), 'require'=>1, 'messages'=>'Mật khẩu không được trống!'),
-							'created'=>array('value'=>time(), 'require'=>1, 'messages'=>'Mật khẩu không được trống!'),
+							'rep_password'=>array('value'=>FunctionLib::getParam('rep_password',''), 'require'=>1, 'messages'=>'Nhập lại mật khẩu không được trống!'),
+							'phone'=>array('value'=>FunctionLib::getParam('phone',''), 'require'=>1, 'messages'=>'Số điện thoại không được trống!'),
+							'email'=>array('value'=>FunctionLib::getParam('password',''), 'require'=>1, 'messages'=>'Email được trống!'),
+							'provice'=>array('value'=>FunctionLib::getParam('password',''), 'require'=>1, 'messages'=>'Chọn 1 tỉnh thành!'),
+							'agree'=>array('value'=>FunctionLib::getParam('password',''), 'require'=>1, 'messages'=>'Bạn chưa đồng ý với điều khoản của chúng tôi!'),
+							'created'=>array('value'=>time(), 'require'=>0, 'messages'=>''),
 						);
-
+		
+		$errors = ValidForm::validInputData($dataInput);
 		if($errors != ''){
 			drupal_set_message($errors, 'error');
 			drupal_goto($base_url.'/dang-ky.html');
@@ -80,10 +71,6 @@ function shopLogin(){
 	}
 
 	if(isset($_POST['txtFormNameLogin'])){
-		
-		$dataInput = array();
-		$dataInput ['user_name_login'] = FunctionLib::getParam('user_name','');
-		$dataInput ['password_login'] = FunctionLib::getParam('password','');
 		
 		$dataInput = array(
 							'user_name_login'=>array('value'=>FunctionLib::getParam('user_name',''), 'require'=>1, 'messages'=>'Tên đăng nhập không được trống!'),

@@ -6,25 +6,31 @@
 * @Version	 : 1.0
 */
 class ConfiginfoController{
-	public function indexConfiginfo(){
-		global $base_url;
-		
+	private $arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
 
-		$limit = SITE_RECORD_PER_PAGE;
+	public function indexConfiginfo(){
 		
-		$dataSearch['title'] = FunctionLib::getParam('title','');
-		$dataSearch['status'] = FunctionLib::getParam('status', '');
-		$arrFields=array('id', 'title', 'keyword', 'intro', 'content', 'img', 'created', 'status', 'meta_title', 'meta_keywords', 'meta_description');
-		$result = ConfigInfo::getSearchListItems($dataSearch, $arrFields, $limit);
-		
-		$view = theme('indexConfigInfo',array(
-									'title'=>'Quản lý cài đặt',
-									'result' => $result['data'],
-									'dataSearch' => $dataSearch,
-									'base_url' => $base_url,
-									'totalItem' =>$result['total'],
-									'pager' =>$result['pager']));
-		return $view;
+	global $base_url;
+	$limit = SITE_RECORD_PER_PAGE;
+	//search
+	$dataSearch['title'] = FunctionLib::getParam('title','');
+	$dataSearch['status'] = FunctionLib::getParam('status', -1);
+
+	$arrFields = array('id', 'title', 'keyword', 'intro', 'content', 'img', 'created', 'status', 'meta_title', 'meta_keywords', 'meta_description');
+	$result = ConfigInfo::getSearchListItems($dataSearch,$limit,$arrFields);
+
+	//build option
+	$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['status']);
+
+	$view = theme('indexConfigInfo',array(
+								'title'=>'Cấu hình chung',
+								'result' => $result['data'],
+								'dataSearch' => $dataSearch,
+								'optionStatus' => $optionStatus,
+								'base_url' => $base_url,
+								'totalItem' =>$result['total'],
+								'pager' =>$result['pager']));
+	return $view;
 	}
 
 	public function formConfiginfoAction(){
@@ -42,26 +48,21 @@ class ConfiginfoController{
 
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 
-			$title 	= isset($_POST['title']) ? trim($_POST['title']) : '';
-			$keyword 	= isset($_POST['keyword']) ? trim($_POST['keyword']) : '';
-			$intro = isset($_POST['intro']) ? trim($_POST['intro']) : '';
-			$content = isset($_POST['content']) ? trim($_POST['content']) : '';
-			$status		= isset($_POST['status']) ? intval($_POST['status']) : 0;
+			$data = array(
+							'title'=>array('value'=>FunctionLib::getParam('title',0), 'require'=>1, 'messages'=>'Tiêu đề không được trống!'),
+							'keyword'=>array('value'=>FunctionLib::getParam('keyword',''), 'require'=>1, 'messages'=>'Từ khóa không được trống!'),
+							'intro'=>array('value'=>FunctionLib::getParam('intro',''), 'require'=>0, 'messages'=>''),
+							'content'=>array('value'=>FunctionLib::getParam('content',''), 'require'=>0, 'messages'=>''),
+							'status'=>array('value'=>FunctionLib::getParam('status',''), 'require'=>0, 'messages'=>''),
+							'meta_title'=>array('value'=>FunctionLib::getParam('meta_title',''), 'require'=>0, 'messages'=>''),
+							'meta_keywords'=>array('value'=>FunctionLib::getParam('meta_keywords',''), 'require'=>0, 'messages'=>''),
+							'meta_description'=>array('value'=>FunctionLib::getParam('meta_description',''), 'require'=>0, 'messages'=>''),
+							'uid'=>array('value'=>$user->uid, 'require'=>0, 'messages'=>''),
+							'created'=>array('value'=>time(), 'require'=>0, 'messages'=>''),
+						);
 
-			$meta_title			= isset($_POST['meta_title']) ? trim($_POST['meta_title']) : '';
-			$meta_keywords		= isset($_POST['meta_keywords']) ? trim($_POST['meta_keywords']) : '';
-			$meta_description	= isset($_POST['meta_description']) ? trim($_POST['meta_description']) : '';
+			$errors = ValidForm::validInputData($data);
 
-			$uid		= $user->uid;
-			$created	= time();
-
-			$errors = '';
-			if($title==''){
-				$errors .= 'Tiêu đề ko được trống!<br/>';
-			}
-			if($keyword==''){
-				$errors .= 'Từ khóa ko được trống!<br/>';
-			}
 			if($errors != ''){
 				drupal_set_message($errors, 'error');
 				if(isset($param[3]) && $param[3] > 0){
@@ -70,23 +71,18 @@ class ConfiginfoController{
 					drupal_goto($base_url.'/admincp/configinfo/add');
 				}
 			}
-
-			$data_post = array(
-						'title'=>$title,
-						'keyword'=>$keyword,
-						'intro'=>$intro,
-						'content'=>$content,
-						'status'=>$status,
-						'meta_title'=>$meta_title,
-						'meta_keywords'=>$meta_keywords,
-						'meta_description'=>$meta_description,
-						'uid'=>$uid,
-						'created'=>$created,
-					);
+			$data_post = array();
+			if(!empty($data)){
+				foreach($data as $key=>$val){
+					$data_post[$key] = $val['value'];
+				}
+			}
 
 			if(isset($param[3]) && $param[3] > 0){
+				
 				unset($data_post['uid']);
 				unset($data_post['created']);
+				
 				ConfigInfo::updateId($data_post, $param[3]);
 				drupal_set_message('Sửa bài viết thành công.');
 				drupal_goto($base_url.'/admincp/configinfo');
