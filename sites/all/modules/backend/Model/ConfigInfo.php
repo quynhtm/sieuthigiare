@@ -80,4 +80,35 @@ class ConfigInfo{
 		}
 		return false;
 	}
+
+    public static function save($errors='', $data=array(), $id=0){
+       global $base_url, $user;
+        if($errors != ''){
+            drupal_set_message($errors, 'error');
+            if($id > 0){
+                drupal_goto($base_url.'/admincp/configinfo/edit/'.$id);
+            }else{
+                drupal_goto($base_url.'/admincp/configinfo/add');
+            }
+        }
+        $data_post = array();
+        if(!empty($data)){
+            foreach($data as $key=>$val){
+                $data_post[$key] = $val['value'];
+            }
+        }
+        if($id > 0){
+            unset($data_post['uid']);
+            unset($data_post['created']);
+            self::updateId($data_post, $id);
+            drupal_set_message('Sửa bài viết thành công.');
+            drupal_goto($base_url.'/admincp/configinfo');
+        }else{
+            $query = self::insert($data_post);
+            if($query){
+                drupal_set_message('Thêm bài viết thành công.');
+                drupal_goto($base_url.'/admincp/configinfo');
+            }
+        }
+    }
 }

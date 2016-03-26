@@ -36,68 +36,37 @@ class ConfiginfoController{
 	public function formConfiginfoAction(){
 		global $base_url, $user;
 
-		$Stdio = new Stdio();
 		$param = arg();
+		$id = 0;
 		$arrOneItem = array();
 
 		if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
 			$arrFields=array('id', 'title', 'keyword', 'intro', 'content', 'img', 'created', 'status', 'meta_title', 'meta_keywords', 'meta_description');
 			$arrOneItem = ConfigInfo::getOne($arrFields, $param[3]);
+			$id = $param[3];
 		}
 
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 
 			$data = array(
-							'title'=>array('value'=>FunctionLib::getParam('title',0), 'require'=>1, 'messages'=>'Tiêu đề không được trống!'),
-							'keyword'=>array('value'=>FunctionLib::getParam('keyword',''), 'require'=>1, 'messages'=>'Từ khóa không được trống!'),
-							'intro'=>array('value'=>FunctionLib::getParam('intro',''), 'require'=>0, 'messages'=>''),
-							'content'=>array('value'=>FunctionLib::getParam('content',''), 'require'=>0, 'messages'=>''),
-							'status'=>array('value'=>FunctionLib::getParam('status',''), 'require'=>0, 'messages'=>''),
-							'meta_title'=>array('value'=>FunctionLib::getParam('meta_title',''), 'require'=>0, 'messages'=>''),
-							'meta_keywords'=>array('value'=>FunctionLib::getParam('meta_keywords',''), 'require'=>0, 'messages'=>''),
-							'meta_description'=>array('value'=>FunctionLib::getParam('meta_description',''), 'require'=>0, 'messages'=>''),
-							'uid'=>array('value'=>$user->uid, 'require'=>0, 'messages'=>''),
-							'created'=>array('value'=>time(), 'require'=>0, 'messages'=>''),
-						);
+						'title'=>array('value'=>FunctionLib::getParam('title',0), 'require'=>1, 'messages'=>'Tiêu đề không được trống!'),
+						'keyword'=>array('value'=>FunctionLib::getParam('keyword',''), 'require'=>1, 'messages'=>'Từ khóa không được trống!'),
+						'intro'=>array('value'=>FunctionLib::getParam('intro',''), 'require'=>0, 'messages'=>''),
+						'content'=>array('value'=>FunctionLib::getParam('content',''), 'require'=>0, 'messages'=>''),
+						'status'=>array('value'=>FunctionLib::getParam('status',''), 'require'=>0, 'messages'=>''),
+						'meta_title'=>array('value'=>FunctionLib::getParam('meta_title',''), 'require'=>0, 'messages'=>''),
+						'meta_keywords'=>array('value'=>FunctionLib::getParam('meta_keywords',''), 'require'=>0, 'messages'=>''),
+						'meta_description'=>array('value'=>FunctionLib::getParam('meta_description',''), 'require'=>0, 'messages'=>''),
+						'uid'=>array('value'=>$user->uid, 'require'=>0, 'messages'=>''),
+						'created'=>array('value'=>time(), 'require'=>0, 'messages'=>''),
+					);
 
 			$errors = ValidForm::validInputData($data);
-
-			if($errors != ''){
-				drupal_set_message($errors, 'error');
-				if(isset($param[3]) && $param[3] > 0){
-					drupal_goto($base_url.'/admincp/configinfo/edit/'.$param[3]);
-				}else{
-					drupal_goto($base_url.'/admincp/configinfo/add');
-				}
-			}
-
-			$data_post = array();
-			if(!empty($data)){
-				foreach($data as $key=>$val){
-					$data_post[$key] = $val['value'];
-				}
-			}
-
-			if(isset($param[3]) && $param[3] > 0){
-				unset($data_post['uid']);
-				unset($data_post['created']);
-				ConfigInfo::updateId($data_post, $param[3]);
-				drupal_set_message('Sửa bài viết thành công.');
-				drupal_goto($base_url.'/admincp/configinfo');
-			}else{
-				$query = ConfigInfo::insert($data_post);
-				if($query){
-					drupal_set_message('Thêm bài viết thành công.');
-					drupal_goto($base_url.'/admincp/configinfo');
-				}
-			}
+			ConfigInfo::save($errors, $data, $id);	
 		}
-
-		$data = array(
-					'arrOneItem'=>$arrOneItem,				
-				);
-
-		$view = theme('addConfigInfo',$data);
+		$view = theme('addConfigInfo',array(
+										'arrOneItem'=>$arrOneItem,				
+									));
 		return $view;
 	}
 
