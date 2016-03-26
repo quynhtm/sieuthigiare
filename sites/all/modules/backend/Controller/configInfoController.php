@@ -21,8 +21,7 @@ class ConfiginfoController{
 
 	//build option
 	$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['status']);
-
-	$view = theme('indexConfigInfo',array(
+	return $view = theme('indexConfigInfo',array(
 								'title'=>'Cấu hình chung',
 								'result' => $result['data'],
 								'dataSearch' => $dataSearch,
@@ -30,7 +29,6 @@ class ConfiginfoController{
 								'base_url' => $base_url,
 								'totalItem' =>$result['total'],
 								'pager' =>$result['pager']));
-	return $view;
 	}
 
 	public function formConfiginfoAction(){
@@ -47,7 +45,6 @@ class ConfiginfoController{
 		}
 
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
-
 			$data = array(
 						'title'=>array('value'=>FunctionLib::getParam('title',0), 'require'=>1, 'messages'=>'Tiêu đề không được trống!'),
 						'keyword'=>array('value'=>FunctionLib::getParam('keyword',''), 'require'=>1, 'messages'=>'Từ khóa không được trống!'),
@@ -62,12 +59,19 @@ class ConfiginfoController{
 					);
 
 			$errors = ValidForm::validInputData($data);
-			ConfigInfo::save($errors, $data, $id);	
+			if($errors != ''){
+				drupal_set_message($errors, 'error');
+				if($id > 0){
+					drupal_goto($base_url.'/admincp/configinfo/edit/'.$id);
+				}else{
+					drupal_goto($base_url.'/admincp/configinfo/add');
+				}
+			}else{
+				ConfigInfo::save($data, $id);
+				drupal_goto($base_url.'/admincp/configinfo');
+			}
 		}
-		$view = theme('addConfigInfo',array(
-										'arrOneItem'=>$arrOneItem,				
-									));
-		return $view;
+		return $view = theme('addConfigInfo',array('arrOneItem'=>$arrOneItem));
 	}
 
 	public function deleteConfiginfoAction(){

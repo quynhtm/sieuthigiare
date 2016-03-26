@@ -222,7 +222,7 @@ ul.pager .pager-current {
     clear: both;
     display: inline-block;
     width: 100%;
-    padding: 5px 0;
+    padding: 25px 0;
 	border-bottom: 1px solid #d4d4d4;
     background: #ecf0f5;
 }
@@ -570,9 +570,10 @@ body .region-header .wrapper{
     clear: both;
     display: inline-block;
     position: relative;
-    text-transform: uppercase;
     top: -10px;
     width: 100%;
+    font-size: 16px;
+    font-weight: bold;
 }
 /*footer*/
 .footerRegion {
@@ -915,7 +916,13 @@ div#load_file_ajax_gift .rowprocess p{
 .stacktable.small-only tr:first-child {
     background: #ddd none repeat scroll 0 0 !important;
 }
-
+.wrapp-search-box .btn{
+    height: 30px;
+    padding: 5px 12px;
+}
+.list-item-page .showListPage{
+    margin: 0px;
+}
 /*Quynh TM
 http://fortawesome.github.io/Font-Awesome/3.2.1/icons/
 fix kich thuong icon trong admin*/
@@ -926,9 +933,6 @@ fix kich thuong icon trong admin*/
 .red{color: red}
 
 .menu_tools{float: right;  margin-right: 4px;}
-.list-item-page .showListPage{
-    margin: 0px;
-}
 form#formListItem {
     display: inline-block;
     width: 100%;
@@ -938,7 +942,7 @@ form#formListItem {
     border-radius: 0;
 }
 .padding10{padding: 10px}
-.wrapp-search-box .btn{
-    height: 30px;
-    padding: 5px 12px;
-}
+.padding20{padding: 20px}
+
+.paddingTop30{padding-top: 30px}
+

@@ -11,13 +11,13 @@ class ProvinceController{
 		$dataSearch['province_name'] = FunctionLib::getParam('province_name','');
 		$dataSearch['province_status'] = FunctionLib::getParam('province_status', -1);
 
-		$arrFields = array('province_id', 'province_name', 'province_position', 'province_status');
-		$result = Province::getSearchListItems($dataSearch,$limit,$arrFields);
+		$getFields = array('province_id', 'province_name', 'province_position', 'province_status');
+		$result = Province::getSearchListItems($dataSearch,$limit,$getFields);
 
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['province_status']);
 
-		$view = theme('indexProvince',array(
+		return $view = theme('indexProvince',array(
 									'title'=>'Danh sách tỉnh/thành',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
@@ -26,80 +26,60 @@ class ProvinceController{
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));
 
-		return $view;
 	}
 
 	function formProvinceAction(){
-		global $base_url, $user;
-
+		global $base_url;
 		$param = arg();
-		$arrOneItem = array();
-
+		$arrItem = array();
+		$item_id = 0;
 		if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
-			$arrFields=array('id', 'title', 'status');
-			$arrOneItem = Provice::getOne($arrFields, $param[3]);
+			$item_id = (int)$param[3];
+			$getFields = array('province_id', 'province_name', 'province_position', 'province_status');
+			$arrItem = Province::getItemById($getFields, $item_id);
+			//FunctionLib::Debug($arrItem);
 		}
 
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
+			$dataInput = array(
+				'province_name'=>array('value'=>FunctionLib::getParam('province_name',''), 'require'=>1, 'messages'=>'Tên tỉnh thành không được trống!'),
+				'province_position'=>array('value'=>FunctionLib::getParam('province_position',100)),
+				'province_status'=>array('value'=>FunctionLib::getParam('province_status','')),
+			);
 
-			$title 		= isset($_POST['title']) ? trim($_POST['title']) : '';
-			$status		= isset($_POST['status']) ? intval($_POST['status']) : 0;
-			$uid		= $user->uid;
-			$created	= time();
-
-			$errors = '';
-			if($title==''){
-				$errors .= 'Tên tỉnh ko được trống!<br/>';
-			}
+			$errors = ValidForm::validInputData($dataInput);
 			if($errors != ''){
 				drupal_set_message($errors, 'error');
-				if(isset($param[3]) && $param[3] > 0){
-					drupal_goto($base_url.'/admincp/provice/edit/'.$param[3]);
+				if($item_id > 0){
+					drupal_goto($base_url.'/admincp/province/edit/'.$item_id);
 				}else{
-					drupal_goto($base_url.'/admincp/provice/add');
+					drupal_goto($base_url.'/admincp/province/add');
 				}
-			}
-
-			$data_post = array(
-						'title'=>$title,
-						'status'=>$status,
-						'uid'=>$uid,
-						'created'=>$created,
-					);
-
-			if(isset($param[3]) && $param[3] > 0){
-				unset($data_post['uid']);
-				unset($data_post['created']);
-				Provice::updateId($data_post, $param[3]);
-				drupal_set_message('Sửa bài viết thành công.');
-				drupal_goto($base_url.'/admincp/provice');
 			}else{
-				$query = Provice::insert($data_post);
-				if($query){
-					drupal_set_message('Thêm bài viết thành công.');
-					drupal_goto($base_url.'/admincp/provice');
-				}
+				Province::save($dataInput, $item_id);
+				drupal_goto($base_url.'/admincp/province');
 			}
 		}
-
-		$data = array(
-					'arrOneItem'=>$arrOneItem,				
-				);
-
-		$view = theme('addProvince',$data);
-		return $view;
+		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->province_status) ? $arrItem->province_status: -1);
+		return $view = theme('addProvince',
+			array('arrItem'=>$arrItem,
+				'item_id'=>$item_id,
+				'title'=>'tỉnh/thành',
+				'optionStatus'=>$optionStatus));
 	}
 
 	function deleteProvinceAction(){
 		global $base_url;
 		if(isset($_POST) && $_POST['txtFormName']=='txtFormName'){
-			$listId = isset($_POST['checkItem'])? $_POST['checkItem'] : 0;
-			foreach($listId as $item){
-				if($item > 0){
-					Provice::deleteId($item);
+			$listId = isset($_POST['checkItem'])? $_POST['checkItem'] : array();
+			if(!empty($listId)){
+				foreach($listId as $item_id){
+					if($item_id > 0){
+						Province::deleteId($item_id);
+					}
 				}
+				drupal_set_message('Xóa bài viết thành công.');
 			}
-			drupal_set_message('Xóa bài viết thành công.');
 		}
 		drupal_goto($base_url.'/admincp/province');
 	}

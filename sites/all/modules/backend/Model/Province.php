@@ -53,30 +53,48 @@ class Province{
         return array('data' => array(),'total' => 0,'pager' => array(),);
     }
 
-	public static function getOne($arrFields, $id = 0){
+	public static function getItemById($arrFields, $id = 0){
+		$result = array();
 		if($id > 0){
-			return DB::getOneItem(self::$table_action,$arrFields, $id);
+			$result = DB::getItemById(self::$table_action,self::$primary_key, $arrFields, $id);
 		}
-		return array();
+		return !empty($result)? $result[0]: array();
 	}
 
-	public static function updateId($dataUpdate, $id = 0){
-		if($id > 0 && !empty($dataUpdate)){
-			return DB::updateOneItem(self::$table_action, $dataUpdate, $id);
+	public static function save($data=array(), $id = 0){
+		$data_post = array();
+		if(!empty($data)){
+			foreach($data as $key=>$val){
+				$data_post[$key] = $val['value'];
+			}
+		}
+		//update
+		if($id > 0){
+			self::updateId($data_post, $id);
+			drupal_set_message('Upadate success.');
+			return true;
+		}
+		//insert
+		else{
+			$query = self::insert($data_post);
+			if($query){
+				drupal_set_message('Insert success.');
+				return true;
+			}
 		}
 		return false;
 	}
 
-	public static function insert($dataInsert){
-		if(!empty($dataInsert)){
-			return DB::insertOneItem(self::$table_action, $dataInsert);	
+	public static function updateId($dataUpdate, $id = 0){
+		if($id > 0 && !empty($dataUpdate)){
+			return DB::updateId(self::$table_action, self::$primary_key, $dataUpdate, $id);
 		}
 		return false;
 	}
 
 	public static function deleteId($id){
 		if($id > 0){
-			return DB::deleteOneItem(self::$table_action, $id);
+			return DB::deleteOneItem(self::$table_action, self::$primary_key, $id);
 		}
 		return false;
 	}

@@ -77,9 +77,7 @@ class ValidForm{
 	public static function validInputData($dataInput){
 		$errors = array();
 		$message = '';
-		
 		foreach($dataInput as $k=>$v){
-
 			if(isset($v['require']) && $v['require'] == 1){
 				if(isset($v['value']) && $v['value'] == ''){
 					$errors[] = $v['messages'];

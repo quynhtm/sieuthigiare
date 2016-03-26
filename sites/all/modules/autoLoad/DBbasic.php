@@ -6,7 +6,65 @@
 * @Version	 : 1.0
 */
 class DB{
-    
+
+    /**
+     * QuynhTM
+     * @param $tableAction
+     * @param string $primary_key:
+     * @param array $arrFields
+     * @param int $id
+     * @return array
+     */
+    public static function getItemById($tableAction, $primary_key = 'id', $arrFields = array(), $id = 0){
+        $arrItem = array();
+        if(!empty($arrFields) && $id > 0){
+            $sql = db_select($tableAction, 'i');
+            foreach($arrFields as $field){
+                $sql->addField('i', $field, $field);
+            }
+            $sql->condition('i.'.$primary_key, (int)$id, '=');
+            $result = $sql->execute();
+            $arrItem = (array)$result->fetchAll();
+        }
+        return $arrItem;
+    }
+
+    /**
+     * QuynhTM
+     * @param $tableAction
+     * @param string $primary_key
+     * @param array $dataFields
+     * @param int $id
+     * @return bool
+     */
+    public static function updateId($tableAction, $primary_key = 'id', $dataFields=array(), $id=0){
+        //dataFields la array co field=>value
+        if(!empty($dataFields) && $id > 0){
+            $sql = db_update($tableAction)->fields($dataFields)->condition($primary_key, (int)$id, '=')->execute();
+            if($sql)
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * QuynhTM
+     * @param $tableAction
+     * @param string $primary_key
+     * @param int $id
+     * @return bool
+     */
+    public static function deleteId($tableAction,$primary_key = 'id', $id=0){
+        if($id > 0){
+            $sql = db_delete($tableAction)->condition($primary_key, $id)->execute();
+            if($sql)
+                return true;
+        }
+        return false;
+    }
+
+
+
     public static function getOneItem($tableAction, $arrFields=array(), $id=0){
         $arrItem = array();
         if(!empty($arrFields) && $id > 0){
@@ -42,6 +100,8 @@ class DB{
         $arrItem = $sql->fetchAll();
         return $arrItem;
     }
+
+
 
     public static function updateOneItem($tableAction, $dataFields=array(), $id=0){
         //dataFields la array co field=>value
@@ -93,7 +153,6 @@ class DB{
             if($sql)
                 return true;
         }
-        
         return false;
     }
 

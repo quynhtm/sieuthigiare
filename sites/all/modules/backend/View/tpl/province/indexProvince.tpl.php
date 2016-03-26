@@ -1,26 +1,30 @@
 <div class="search-box">
 	<div class="wrapp-search-box">
-		<div class="search-box-title">Tìm kiếm</div>
-		<form action="" method="GET" id="frmSearch" class="frmSearch" name="frmSearch">
-			<input type="text" placeholder ="Tên tỉnh thành" id="province_name" class="keyword" name="province_name" value="<?php echo $dataSearch['province_name'] ?>"/>
-			<select class="box-select" name="province_status"><?php echo $optionStatus;?></select>
-			<button class="btn btn-primary" name="submit" value="1">Tìm kiếm</button>
-		</form>
+		<div class="search-box-title">Thông tin tìm kiếm</div>
+			<form action="" method="GET" id="frmSearch" class="frmSearch" name="frmSearch">
+				<div class="col-lg-3">
+					<label class="control-label">Tên tỉnh thành</label>
+					<div><input type="text" placeholder ="Tên tỉnh thành" id="province_name" class="keyword" name="province_name" value="<?php echo $dataSearch['province_name'] ?>"/></div>
+				</div>
+				<div class="col-lg-3">
+					<label class="control-label">Trạng thái</label>
+					<div><select class="box-select" name="province_status"><?php echo $optionStatus;?></select></div>
+				</div>
+				<div class="col-lg-3">
+					<label class="control-label">&nbsp;</label>
+					<div><button class="btn btn-primary" name="submit" value="1">Tìm kiếm</button></div>
+				</div>
+			</form>
 	</div>
 </div>
+
 <div class="inner-box">
 	<div class="page-title-box">
 		<div class="wrapper">
-			<h5 class="padding10"><?php
-					if(isset($title)){
-						echo $title;
-					}else{
-						echo t('Quản lý bài viết');
-					}
-				?></h5>
+			<h5 class="padding10"><?php echo (isset($title)) ? $title: t('Quản lý bài viết');?></h5>
 			<span class="menu_tools">
-				<a href="<?php echo $base_url; ?>/admincp/provice/add" title="Add" class="icon-plus icon-admin green"></a>
-                <a href="javascript:void(0)" title="Delete" id="deleteMoreItem" class="icon-trash icon-admin red"></a>
+				<a href="<?php echo $base_url; ?>/admincp/province/add" title="Thêm mới" class="icon-plus icon-admin green"></a>
+                <a href="javascript:void(0)" title="Xóa item" id="deleteMoreItem" class="icon-trash icon-admin red"></a>
            </span>
 		</div>
 	</div>
@@ -54,14 +58,7 @@
 						<td><?php echo $item->province_name; ?></td>
 						<td><?php echo $item->province_position; ?></td>
 						<td>
-							<?php
-							if($item->province_status == 1){
-								$status='<i class="icon-ok icon-admin green "></i>';
-							}else{
-								$status='<i class="icon-remove icon-admin red "></i></a>';
-							}
-							echo $status;
-							?>
+							<?php echo ($item->province_status == 1)? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
 						</td>
 						<td>
 							<?php $linkEdit = $base_url.'/admincp/province/edit/'.$item->province_id; ?>
@@ -72,7 +69,6 @@
 					<?php }?>
 					</tbody>
 				</table>
-
 				<input  type="hidden" name="txtFormName" value="txtFormName"/>
 			</div>
 		</form>

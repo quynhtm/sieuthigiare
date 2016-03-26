@@ -8,7 +8,7 @@ class FunctionLib{
 	/**
 	 * @param $data
 	 */
-	static function FunctionDebug($data){
+	static function Debug($data){
 		echo '<pre>';
 			print_r($data);
 		echo '</pre>';
