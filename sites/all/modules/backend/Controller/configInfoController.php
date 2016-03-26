@@ -37,7 +37,6 @@ class ConfiginfoController{
 		global $base_url, $user;
 
 		$Stdio = new Stdio();
-
 		$param = arg();
 		$arrOneItem = array();
 
@@ -71,6 +70,7 @@ class ConfiginfoController{
 					drupal_goto($base_url.'/admincp/configinfo/add');
 				}
 			}
+
 			$data_post = array();
 			if(!empty($data)){
 				foreach($data as $key=>$val){
@@ -79,10 +79,8 @@ class ConfiginfoController{
 			}
 
 			if(isset($param[3]) && $param[3] > 0){
-				
 				unset($data_post['uid']);
 				unset($data_post['created']);
-				
 				ConfigInfo::updateId($data_post, $param[3]);
 				drupal_set_message('Sửa bài viết thành công.');
 				drupal_goto($base_url.'/admincp/configinfo');
