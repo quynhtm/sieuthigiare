@@ -4,11 +4,11 @@
 			<form action="" method="GET" id="frmSearch" class="frmSearch" name="frmSearch">
 				<div class="col-lg-3">
 					<label class="control-label">Tên tỉnh thành</label>
-					<div><input type="text" placeholder ="Tên tỉnh thành" id="province_name" class="keyword" name="province_name" value="<?php echo $dataSearch['province_name'] ?>"/></div>
+					<div><input type="text" class="form-control input-sm" placeholder ="Tên tỉnh thành" id="province_name" class="keyword" name="province_name" value="<?php echo $dataSearch['province_name'] ?>"/></div>
 				</div>
 				<div class="col-lg-3">
 					<label class="control-label">Trạng thái</label>
-					<div><select class="box-select" name="province_status"><?php echo $optionStatus;?></select></div>
+					<div><select class="form-control input-sm" name="province_status"><?php echo $optionStatus;?></select></div>
 				</div>
 				<div class="col-lg-3">
 					<label class="control-label">&nbsp;</label>

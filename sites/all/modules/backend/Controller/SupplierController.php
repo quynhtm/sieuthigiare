@@ -4,25 +4,29 @@
  * Quan ly danh sach cac Shop
 */
 class SupplierController{
+
+	private $arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
 	function indexSupplier(){
 		global $base_url;
-
 		$limit = SITE_RECORD_PER_PAGE;
-		
-		$dataSearch['supplier_full_name'] = FunctionLib::getParam('supplier_full_name','');
-		$dataSearch['supplier_status'] = FunctionLib::getParam('supplier_status','');
-		
-		$arrFields = array('id', 'supplier_full_name', 'supplier_phone', 'supplier_hot_line', 'supplier_email', 'supplier_website', 'supplier_status', 'supplier_created');
-		$result = Supplier::getSearchListItems($dataSearch, $arrFields, $limit);
-		
-		$view = theme('indexSupplier',array(
-									'title'=>'Danh sách các User Shop',
-									'result' => $result['data'],
-									'dataSearch' => $dataSearch,
-									'base_url' => $base_url,
-									'totalItem' =>$result['total'],
-									'pager' =>$result['pager']));
-		return $view;
+		//search
+		$dataSearch['supplier_name'] = FunctionLib::getParam('supplier_name','');
+		$dataSearch['supplier_phone'] = FunctionLib::getParam('supplier_phone','');
+		$dataSearch['supplier_email'] = FunctionLib::getParam('supplier_email','');
+		$dataSearch['supplier_status'] = FunctionLib::getParam('supplier_status',-1);
+
+		$result = Supplier::getSearchListItems($dataSearch,$limit,array());
+
+		//build option
+		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['supplier_status']);
+		return $view = theme('indexSupplier',array(
+			'title'=>'Danh sách NCC',
+			'result' => $result['data'],
+			'dataSearch' => $dataSearch,
+			'optionStatus' => $optionStatus,
+			'base_url' => $base_url,
+			'totalItem' =>$result['total'],
+			'pager' =>$result['pager']));
 	}
 
 	function deleteSupplierAction(){
@@ -34,8 +38,8 @@ class SupplierController{
 					Supplier::deleteId($item);
 				}
 			}
-			drupal_set_message('Xóa bài viết thành công.');
+			drupal_set_message('Xóa Item thành công.');
 		}
-		drupal_goto($base_url.'/admincp/usershop');
+		drupal_goto($base_url.'/admincp/supplier');
 	}
 }

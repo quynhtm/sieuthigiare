@@ -10,21 +10,21 @@
             <div class="control-group">
                 <label class="control-label">Tên tỉnh thành<span>*</span></label>
                 <div class="controls">
-                    <input type="text" name="province_name" value="<?php if(isset($arrItem->province_name)){ echo $arrItem->province_name; } ?>">
+                    <input type="text" class="form-control input-sm" name="province_name" value="<?php if(isset($arrItem->province_name)){ echo $arrItem->province_name; } ?>">
                 </div>
             </div>
 
              <div class="control-group">
                 <label class="control-label">Vị trí</label>
                 <div class="controls">
-                    <input type="text" name="province_position" value="<?php if(isset($arrItem->province_position)){ echo $arrItem->province_position; } ?>">
+                    <input type="text"class="form-control input-sm" name="province_position" value="<?php if(isset($arrItem->province_position)){ echo $arrItem->province_position; } ?>">
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label">Trạng thái</label>
                 <div class="controls">
-                    <select name="province_status">
+                    <select class="form-control input-sm" name="province_status">
                         <?php echo $optionStatus;?>
                     </select>
                 </div>
