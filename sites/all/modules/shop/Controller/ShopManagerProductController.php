@@ -25,7 +25,6 @@ function shopManagerProduct(){
 								'title'=>'Cấu hình chung',
 								'result' => $result['data'],
 								'dataSearch' => $dataSearch,
-								'optionStatus' => $optionStatus,
 								'totalItem' =>$result['total'],
 								'pager' =>$result['pager']));
 
