@@ -7,8 +7,9 @@
 */
 class ShopManagerProduct{
 	static $table_action = TABLE_PRODUCT;
+    static $primary_key = 'id';
+    
 	static $table_action_provice = TABLE_PROVINCE;
-	static $primary_key_product = 'id';
 	static $primary_key_province = 'province_id';
 
 	 public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
