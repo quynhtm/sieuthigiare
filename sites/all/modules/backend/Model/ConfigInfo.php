@@ -52,17 +52,18 @@ class ConfigInfo{
         }
         return array('data' => array(),'total' => 0,'pager' => array(),);
     }
-
-	public static function getOne($arrFields, $id = 0){
-		if($id > 0){
-			return DB::getOneItem(self::$table_action,$arrFields, $id);
-		}
-		return array();
-	}
+    
+    public static function getItemById($arrFields, $id = 0){
+        $result = array();
+        if($id > 0){
+            $result = DB::getItemById(self::$table_action,self::$primary_key, $arrFields, $id);
+        }
+        return !empty($result)? $result[0]: array();
+    }
 
 	public static function updateId($dataUpdate, $id = 0){
 		if($id > 0 && !empty($dataUpdate)){
-			return DB::updateOneItem(self::$table_action, $dataUpdate, $id);
+            return DB::updateId(self::$table_action, self::$primary_key, $dataUpdate, $id);
 		}
 		return false;
 	}
@@ -75,9 +76,9 @@ class ConfigInfo{
 	}
 
 	public static function deleteId($id){
-		if($id > 0){
-			return DB::deleteOneItem(self::$table_action, $id);
-		}
+        if($id > 0){
+            return DB::deleteId(self::$table_action, self::$primary_key, $id);
+        }
 		return false;
 	}
 

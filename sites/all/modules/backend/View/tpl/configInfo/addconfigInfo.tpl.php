@@ -14,27 +14,27 @@
             <div class="control-group">
                 <label class="control-label">Tiêu đề<span>*</span></label>
                 <div class="controls">
-                    <input type="text" name="title" value="<?php if(isset($arrOneItem[0]->title)){ echo $arrOneItem[0]->title; } ?>">
+                    <input type="text" name="title" value="<?php if(isset($arrOneItem->title)){ echo $arrOneItem->title; } ?>">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Keyword<span>*</span></label>
                 <div class="controls">
-                    <input type="text" name="keyword" value="<?php if(isset($arrOneItem[0]->keyword)){ echo $arrOneItem[0]->keyword; } ?>">
+                    <input type="text" name="keyword" value="<?php if(isset($arrOneItem->keyword)){ echo $arrOneItem->keyword; } ?>">
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label">Mô tả</label>
                 <div class="controls">
-                    <textarea name="intro"><?php if(isset($arrOneItem[0]->intro)){ echo $arrOneItem[0]->intro; } ?></textarea>
+                    <textarea name="intro"><?php if(isset($arrOneItem->intro)){ echo $arrOneItem->intro; } ?></textarea>
                 </div>
             </div>
             
             <div class="control-group">
                 <label class="control-label">Nội dung</label>
                 <div class="controls">
-                    <textarea name="content"><?php if(isset($arrOneItem[0]->content)){ echo $arrOneItem[0]->content; } ?></textarea>
+                    <textarea name="content"><?php if(isset($arrOneItem->content)){ echo $arrOneItem->content; } ?></textarea>
                 </div>
             </div>
 
@@ -42,8 +42,8 @@
                 <label class="control-label">Trạng thái</label>
                 <div class="controls">
                     <select name="status">
-                        <option value="0" <?php if(isset($arrOneItem[0]->status) && $arrOneItem[0]->status == 0){ ?>selected="selected"<?php } ?>>Ẩn</option>
-                        <option value="1" <?php if(isset($arrOneItem[0]->status) && $arrOneItem[0]->status == 1){ ?>selected="selected"<?php } ?>>Hiện</option>
+                        <option value="0" <?php if(isset($arrOneItem->status) && $arrOneItem->status == 0){ ?>selected="selected"<?php } ?>>Ẩn</option>
+                        <option value="1" <?php if(isset($arrOneItem->status) && $arrOneItem->status == 1){ ?>selected="selected"<?php } ?>>Hiện</option>
                     </select>
                 </div>
             </div>
@@ -51,19 +51,19 @@
             <div class="control-group">
                 <label class="control-label">Meta title</label>
                 <div class="controls">
-                    <textarea name="meta_title"><?php if(isset($arrOneItem[0]->meta_title)){ echo $arrOneItem[0]->meta_title; } ?></textarea>
+                    <textarea name="meta_title"><?php if(isset($arrOneItem->meta_title)){ echo $arrOneItem->meta_title; } ?></textarea>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Meta keywords</label>
                 <div class="controls">
-                    <textarea name="meta_keywords"><?php if(isset($arrOneItem[0]->meta_keywords)){ echo $arrOneItem[0]->meta_keywords; } ?></textarea>
+                    <textarea name="meta_keywords"><?php if(isset($arrOneItem->meta_keywords)){ echo $arrOneItem->meta_keywords; } ?></textarea>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Meta description</label>
                 <div class="controls">
-                    <textarea name="meta_description" ><?php if(isset($arrOneItem[0]->meta_description)){ echo $arrOneItem[0]->meta_description; } ?></textarea>
+                    <textarea name="meta_description" ><?php if(isset($arrOneItem->meta_description)){ echo $arrOneItem->meta_description; } ?></textarea>
                 </div>
             </div>
             <div class="form-actions">

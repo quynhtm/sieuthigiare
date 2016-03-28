@@ -66,7 +66,7 @@ function shopRegister(){
 function shopLogin(){
 	global $base_url, $user_shop;
 	
-	if($user_shop->id != 0){
+	if($user_shop->shop_id != 0){
 		drupal_goto($base_url);
 	}
 

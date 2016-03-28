@@ -6,6 +6,8 @@
 * @Version	 : 1.0
 */
 class SupportonlineController{
+	private $arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
+
 	function indexSupportonline(){
 		global $base_url;
 
@@ -13,14 +15,18 @@ class SupportonlineController{
 		
 		$dataSearch['title'] = FunctionLib::getParam('title','');
 		$dataSearch['status'] = FunctionLib::getParam('status', '');
+		
 		$arrFields=array('id', 'title', 'mobile', 'skyper', 'yahoo', 'created', 'order_no', 'status');
-
 		$result = SupportOnline::getSearchListItems($dataSearch, $arrFields, $limit);
 		
+		//build option
+		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['status']);
+
 		$view = theme('indexSupportOnline',array(
 									'title'=>'Danh sách nick hỗ trợ trực tuyến',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
+									'optionStatus' => $optionStatus,
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));
@@ -30,82 +36,52 @@ class SupportonlineController{
 	function formSupportonlineAction(){
 		global $base_url, $user;
 
-		$Stdio = new Stdio();
-
 		$param = arg();
+		$id = 0;
 		$arrOneItem = array();
 
 		if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
 			$arrFields = array('id','title', 'yahoo', 'skyper', 'mobile', 'email', 'order_no', 'status');
-			$arrOneItem = SupportOnline::getOne($arrFields, $param[3]);
+			$arrOneItem = SupportOnline::getItemById($arrFields, $param[3]);
+			$id = $param[3];
 		}
 
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 
-			$title 	= isset($_POST['title']) ? trim($_POST['title']) : '';
-			$yahoo 	= isset($_POST['yahoo']) ? trim($_POST['yahoo']) : '';
-			$skyper = isset($_POST['skyper']) ? trim($_POST['skyper']) : '';
-			$mobile = isset($_POST['mobile']) ? trim($_POST['mobile']) : '';
-			$email 	= isset($_POST['email']) ? trim($_POST['email']) : '';
-			$order_no	= isset($_POST['order_no']) ? intval($_POST['order_no']) : 1;
-			$status		= isset($_POST['status']) ? intval($_POST['status']) : 0;
+			$data = array(
+						'title'=>array('value'=>FunctionLib::getParam('title',''), 'require'=>1, 'messages'=>'Tiêu đề không được trống!'),
+						'yahoo'=>array('value'=>FunctionLib::getParam('yahoo',''), 'require'=>0, 'messages'=>''),
+						'skyper'=>array('value'=>FunctionLib::getParam('skyper',''), 'require'=>0, 'messages'=>''),
+						'mobile'=>array('value'=>FunctionLib::getParam('mobile',''), 'require'=>0, 'messages'=>''),
+						'email'=>array('value'=>FunctionLib::getParam('email',''), 'require'=>0, 'messages'=>''),
+						'order_no'=>array('value'=>FunctionLib::getParam('order_no',''), 'require'=>0, 'messages'=>''),
+						'status'=>array('value'=>FunctionLib::getParam('status',''), 'require'=>0, 'messages'=>''),
+						'uid'=>array('value'=>$user->uid, 'require'=>0, 'messages'=>''),
+						'created'=>array('value'=>time(), 'require'=>0, 'messages'=>''),
+					);
 
-			$uid		= $user->uid;
-			$created	= time();
-
-			$errors = '';
-			if($title==''){
-				$errors .= 'Tiêu đề ko được trống!<br/>';
-			}
-			if($email != ''){
-				$check_email = ValidForm::checkRegexEmail($email);
+			$errors = ValidForm::validInputData($data);
+			if($data['email']['value'] != ''){
+				$check_email = ValidForm::checkRegexEmail($data['email']['value']);
 				if(!$check_email){
 					$errors .= 'Email sai cấu trúc!<br/>';
-				
 				}
 			}
+
 			if($errors != ''){
 				drupal_set_message($errors, 'error');
-				if(isset($param[3]) && $param[3]>0){
-					drupal_goto($base_url.'/admincp/supportonline/edit/'.$param[3]);
+				if($id > 0){
+					drupal_goto($base_url.'/admincp/supportonline/edit/'.$id);
 				}else{
 					drupal_goto($base_url.'/admincp/supportonline/add');
 				}
-			}
-
-			$data_post = array(
-						'title'=>$title,
-						'yahoo'=>$yahoo,
-						'skyper'=>$skyper,
-						'mobile'=>$mobile,
-						'email'=>$email,
-						'order_no'=>$order_no,
-						'status'=>$status,
-						'uid'=>$uid,
-						'created'=>$created,
-					);
-
-			if(isset($param[3]) && $param[3] > 0){
-				unset($data_post['uid']);
-				unset($data_post['created']);
-				SupportOnline::updateId($data_post, $param[3]);
-				drupal_set_message('Sửa bài viết thành công.');
-				drupal_goto($base_url.'/admincp/supportonline');
 			}else{
-				$query = SupportOnline::insert($data_post);
-				if($query){
-					drupal_set_message('Thêm bài viết thành công.');
-					drupal_goto($base_url.'/admincp/supportonline');
-				}
+				SupportOnline::save($data, $id);
+				drupal_goto($base_url.'/admincp/supportonline');
 			}
+			
 		}
-
-		$data = array(
-					'arrOneItem'=>$arrOneItem,				
-				);
-
-		$view = theme('addSupportOnline',$data);
-		return $view;
+		return $view = theme('addSupportOnline',array('arrOneItem'=>$arrOneItem));
 	}
 
 	function deleteSupportonlineAction(){

@@ -8,6 +8,7 @@
 class ShopUser{
 	static $table_action = TABLE_USER_SHOP;
 	static $table_action_provice = TABLE_PROVINCE;
+	static $primary_key_user_shop = 'shop_id';
 
 	public static function insert($dataInsert){
 		if(!empty($dataInsert)){
@@ -18,10 +19,10 @@ class ShopUser{
 
 	public static function getUserExists($name='', $mail=''){
 		if($name != ''){
-			return DB:: getItembyCond(self::$table_action, 'shop_id', '', 'shop_id ASC', "user_shop='".$name."'", 1);
+			return DB:: getItembyCond(self::$table_action, self::$primary_key_user_shop, '', 'shop_id ASC', "user_shop='".$name."'", 1);
 		}
 		if($mail != ''){
-			return DB:: getItembyCond(self::$table_action, 'shop_id', '', 'shop_id ASC', "shop_email='".$mail."'", 1);
+			return DB:: getItembyCond(self::$table_action, self::$primary_key_user_shop, '', 'shop_id ASC', "shop_email='".$mail."'", 1);
 		}
 		return false;
 	}
@@ -35,6 +36,7 @@ class ShopUser{
 
 	public static function checkLoginUserShop($user_shop = null, $password = ''){
 		global $base_url;
+		
 		if(is_object($user_shop) && !empty($user_shop) && $password != ''){
 			require_once DRUPAL_ROOT . '/' . variable_get('password_inc', 'includes/password.inc');
 
@@ -55,7 +57,7 @@ class ShopUser{
 		    if($hash && $hash == $stored_hash){
 		    	$GLOBALS['user_shop'] = Session::createUserShop($user_shop);
 		    	$data_login = array('time_access'=>time(), 'is_login'=>1);
-		    	DB::updateOneItem(self::$table_action, $data_login, $user_shop->shop_id);
+		    	DB::updateId(self::$table_action, self::$primary_key_user_shop, $data_login, $user_shop->shop_id);
 		    	drupal_goto($base_url);
 		    }else{
 		    	drupal_set_message('Tên đăng nhập hoặc mật khẩu không đúng!', 'error');
@@ -71,7 +73,7 @@ class ShopUser{
 		global $base_url, $user_shop;
 		Session::destroyUserShop();
 		$data_login = array('time_access'=>time(), 'is_login'=>0);
-		DB::updateOneItem(self::$table_action, $data_login, $user_shop->shop_id);
+		DB::updateId(self::$table_action, self::$primary_key_user_shop, $data_login, $user_shop->shop_id);
 		drupal_goto($base_url);
 	}
 

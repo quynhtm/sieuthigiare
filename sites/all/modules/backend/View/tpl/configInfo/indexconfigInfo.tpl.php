@@ -2,9 +2,18 @@
 	<div class="wrapp-search-box">
 		<div class="search-box-title">Tìm kiếm</div>
 		<form action="" method="GET" id="frmSearch" class="frmSearch" name="frmSearch">
-			<input type="text" placeholder ="Tiêu đề" id="title" class="keyword" name="title" value="<?php echo $dataSearch['title'] ?>"/>
-			<select class="box-select" name="status"><?php echo $optionStatus;?></select>
-			<button class="btn btn-primary" name="submit" value="1">Tìm kiếm</button>
+			<div class="col-lg-3">
+				<label class="control-label">Tên tỉnh thành</label>
+				<div><input type="text" placeholder ="Tiêu đề" id="title" class="form-control input-sm" name="title" value="<?php echo $dataSearch['title'] ?>"/></div>
+			</div>
+			<div class="col-lg-3">
+				<label class="control-label">Trạng thái</label>
+				<div><select class="form-control input-sm" name="province_status"><?php echo $optionStatus;?></select></div>
+			</div>
+			<div class="col-lg-3">
+				<label class="control-label">&nbsp;</label>
+				<div><button class="btn btn-primary" name="submit" value="1">Tìm kiếm</button></div>
+			</div>
 		</form>
 	</div>
 </div>
@@ -72,7 +81,6 @@
 					<?php }?>
 					</tbody>
 				</table>
-
 				<input  type="hidden" name="txtFormName" value="txtFormName"/>
 			</div>
 		</form>

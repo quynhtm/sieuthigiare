@@ -21,41 +21,41 @@
             <div class="control-group">
                 <label class="control-label">Name<span>*</span></label>
                 <div class="controls">
-                    <input type="text" name="title" value="<?php if(isset($arrOneItem[0]->title)){ echo $arrOneItem[0]->title; } ?>">
+                    <input type="text" name="title" value="<?php if(isset($arrOneItem->title)){ echo $arrOneItem->title; } ?>">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Yahoo</label>
                 <div class="controls">
-                    <input type="text" name="yahoo" value="<?php if(isset($arrOneItem[0]->yahoo)){ echo $arrOneItem[0]->yahoo; } ?>">
+                    <input type="text" name="yahoo" value="<?php if(isset($arrOneItem->yahoo)){ echo $arrOneItem->yahoo; } ?>">
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label">Skyper</label>
                 <div class="controls">
-                    <input type="text" name="skyper" value="<?php if(isset($arrOneItem[0]->skyper)){ echo $arrOneItem[0]->skyper; } ?>">
+                    <input type="text" name="skyper" value="<?php if(isset($arrOneItem->skyper)){ echo $arrOneItem->skyper; } ?>">
                 </div>
             </div>
             
             <div class="control-group">
                 <label class="control-label">Mobile</label>
                 <div class="controls">
-                    <input type="text" name="mobile" value="<?php if(isset($arrOneItem[0]->mobile)){ echo $arrOneItem[0]->mobile; } ?>">
+                    <input type="text" name="mobile" value="<?php if(isset($arrOneItem->mobile)){ echo $arrOneItem->mobile; } ?>">
                 </div>
             </div>
             
             <div class="control-group">
                 <label class="control-label">Email</label>
                 <div class="controls">
-                    <input type="text" name="email" value="<?php if(isset($arrOneItem[0]->email)){ echo $arrOneItem[0]->email; } ?>">
+                    <input type="text" name="email" value="<?php if(isset($arrOneItem->email)){ echo $arrOneItem->email; } ?>">
                 </div>
             </div>
 
             <div class="control-group">
                 <label class="control-label">Số thứ tự</label>
                 <div class="controls">
-                    <input type="text" name="order_no" value="<?php if(isset($arrOneItem[0]->order_no)){ echo $arrOneItem[0]->order_no; } ?>">
+                    <input type="text" name="order_no" value="<?php if(isset($arrOneItem->order_no)){ echo $arrOneItem->order_no; } ?>">
                 </div>
             </div>
 
@@ -63,8 +63,8 @@
                 <label class="control-label">Trạng thái</label>
                 <div class="controls">
                     <select name="status">
-                        <option value="0" <?php if(isset($arrOneItem[0]->status) && $arrOneItem[0]->status == 0){ ?>selected="selected"<?php } ?>>Ẩn</option>
-                        <option value="1" <?php if(isset($arrOneItem[0]->status) && $arrOneItem[0]->status == 1){ ?>selected="selected"<?php } ?>>Hiện</option>
+                        <option value="0" <?php if(isset($arrOneItem->status) && $arrOneItem->status == 0){ ?>selected="selected"<?php } ?>>Ẩn</option>
+                        <option value="1" <?php if(isset($arrOneItem->status) && $arrOneItem->status == 1){ ?>selected="selected"<?php } ?>>Hiện</option>
                     </select>
                 </div>
             </div>

@@ -63,8 +63,6 @@ class DB{
         return false;
     }
 
-
-
     public static function getOneItem($tableAction, $arrFields=array(), $id=0){
         $arrItem = array();
         if(!empty($arrFields) && $id > 0){
@@ -101,18 +99,7 @@ class DB{
         return $arrItem;
     }
 
-
-
-    public static function updateOneItem($tableAction, $dataFields=array(), $id=0){
-        //dataFields la array co field=>value
-        if(!empty($dataFields) && $id > 0){
-            $sql = db_update($tableAction)->fields($dataFields)->condition('id', (int)$id, '=')->execute();
-            if($sql)
-                return true;
-        }
-        return false;
-    }
-
+   
     public static function updateOneItemByCond($tableAction, $dataFields=array(), $cond=''){
         //dataFields la array co field=>value
         if(!empty($dataFields)){
@@ -147,15 +134,7 @@ class DB{
         return false;
     }
 
-    public static function deleteOneItem($tableAction, $id=0){
-        if($id > 0){
-           $sql = db_delete($tableAction)->condition('id', $id)->execute();
-            if($sql)
-                return true;
-        }
-        return false;
-    }
-
+    
     public static function deleteOneItemByCond($tableAction, $cond=''){
         if($cond != ''){
             $cond = ' WHERE '.$cond;

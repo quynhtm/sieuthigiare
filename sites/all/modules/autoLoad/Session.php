@@ -11,7 +11,7 @@ class Session{
 	public static function setAnonymousUserShop() {
 		$user_shop = new stdClass();
 		if(!isset($_SESSION['user_shop'])){
-			$user_shop->id = 0;
+			$user_shop->shop_id = 0;
 			$user_shop->is_login = 0;
 		}else{
 			$user_shop = $_SESSION['user_shop'];
@@ -22,7 +22,7 @@ class Session{
 	public static function createUserShop($obj=null){
 		if($obj != null){
 			$_SESSION['user_shop'] = $obj;
-			return $_SESSION['user_shop'];
+			return true;
 		}
 		return false;
 	}

@@ -17,7 +17,7 @@ class ConfiginfoController{
 	$dataSearch['status'] = FunctionLib::getParam('status', -1);
 
 	$arrFields = array('id', 'title', 'keyword', 'intro', 'content', 'img', 'created', 'status', 'meta_title', 'meta_keywords', 'meta_description');
-	$result = ConfigInfo::getSearchListItems($dataSearch,$limit,$arrFields);
+	$result = ConfigInfo::getSearchListItems($dataSearch, $limit, $arrFields);
 
 	//build option
 	$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['status']);
@@ -40,13 +40,13 @@ class ConfiginfoController{
 
 		if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
 			$arrFields=array('id', 'title', 'keyword', 'intro', 'content', 'img', 'created', 'status', 'meta_title', 'meta_keywords', 'meta_description');
-			$arrOneItem = ConfigInfo::getOne($arrFields, $param[3]);
+			$arrOneItem = ConfigInfo::getItemById($arrFields, $param[3]);
 			$id = $param[3];
 		}
 
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 			$data = array(
-						'title'=>array('value'=>FunctionLib::getParam('title',0), 'require'=>1, 'messages'=>'Tiêu đề không được trống!'),
+						'title'=>array('value'=>FunctionLib::getParam('title',''), 'require'=>1, 'messages'=>'Tiêu đề không được trống!'),
 						'keyword'=>array('value'=>FunctionLib::getParam('keyword',''), 'require'=>1, 'messages'=>'Từ khóa không được trống!'),
 						'intro'=>array('value'=>FunctionLib::getParam('intro',''), 'require'=>0, 'messages'=>''),
 						'content'=>array('value'=>FunctionLib::getParam('content',''), 'require'=>0, 'messages'=>''),
