@@ -57,8 +57,7 @@ function Core_init(){
 		'js/jquery.alerts.js',
 	);
 	Loader::load('Core', $files);
-
-    $GLOBALS['user_shop'] = Session::setAnonymousUserShop();
+    Session::setAnonymousUserShop();
 }
 function page_403(){
 

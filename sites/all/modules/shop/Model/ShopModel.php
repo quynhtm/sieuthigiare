@@ -9,6 +9,7 @@ class ShopUser{
 	static $table_action = TABLE_USER_SHOP;
 	static $table_action_provice = TABLE_PROVINCE;
 	static $primary_key_user_shop = 'shop_id';
+	static $primary_key_province_shop = 'province_id';
 
 	public static function insert($dataInsert){
 		if(!empty($dataInsert)){
@@ -19,17 +20,17 @@ class ShopUser{
 
 	public static function getUserExists($name='', $mail=''){
 		if($name != ''){
-			return DB:: getItembyCond(self::$table_action, self::$primary_key_user_shop, '', 'shop_id ASC', "user_shop='".$name."'", 1);
+			return DB:: getItembyCond(self::$table_action, self::$primary_key_user_shop, '', self::$primary_key_user_shop.' ASC', "user_shop='".$name."'", 1);
 		}
 		if($mail != ''){
-			return DB:: getItembyCond(self::$table_action, self::$primary_key_user_shop, '', 'shop_id ASC', "shop_email='".$mail."'", 1);
+			return DB:: getItembyCond(self::$table_action, self::$primary_key_user_shop, '', self::$primary_key_user_shop.' ASC', "shop_email='".$mail."'", 1);
 		}
 		return false;
 	}
 
 	public static function getAllProvices($limit=100){
 		if($limit > 0){
-			return DB::getItembyCond(self::$table_action_provice, 'province_id, province_name', '', 'province_id ASC', 'province_status=1', $limit);
+			return DB::getItembyCond(self::$table_action_provice, 'province_id, province_name', '', self::$primary_key_province_shop.' ASC', 'province_status=1', $limit);
 		}
 		return false;
 	}
@@ -55,7 +56,7 @@ class ShopUser{
 		      		return FALSE;
 		    }
 		    if($hash && $hash == $stored_hash){
-		    	$GLOBALS['user_shop'] = Session::createUserShop($user_shop);
+		    	Session::createUserShop($user_shop);
 		    	$data_login = array('time_access'=>time(), 'is_login'=>1);
 		    	DB::updateId(self::$table_action, self::$primary_key_user_shop, $data_login, $user_shop->shop_id);
 		    	drupal_goto($base_url);

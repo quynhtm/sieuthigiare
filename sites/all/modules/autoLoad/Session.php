@@ -7,20 +7,35 @@
 */
 
 class Session{
+	static $session_time_out = 3600;
 	
 	public static function setAnonymousUserShop() {
-		$user_shop = new stdClass();
+		global $user_shop;
+
 		if(!isset($_SESSION['user_shop'])){
+			$user_shop = new stdClass();
 			$user_shop->shop_id = 0;
 			$user_shop->is_login = 0;
 		}else{
 			$user_shop = $_SESSION['user_shop'];
+			if(isset($user_shop->expires) && self::$session_time_out <= time() - $user_shop->expires){
+				$user_shop = new stdClass();
+				$user_shop->shop_id = 0;
+				$user_shop->is_login = 0;
+				session_destroy();
+			}else{
+				$user_shop->expires = time() + self::$session_time_out;
+				$_SESSION['user_shop'] = $user_shop;
+			}
 		}
 		return $user_shop;
 	}
 
 	public static function createUserShop($obj=null){
 		if($obj != null){
+			if(!isset($obj->expires)){
+				$obj->expires = time() + self::$session_time_out;
+			}
 			$_SESSION['user_shop'] = $obj;
 			return true;
 		}

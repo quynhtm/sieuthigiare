@@ -8,7 +8,7 @@
 function shopRegister(){
 	global $base_url, $user_shop;
 	
-	if($user_shop->id != 0){
+	if($user_shop->shop_id != 0){
 		drupal_goto($base_url);
 	}
 
@@ -80,14 +80,14 @@ function shopLogin(){
 		$errors = ValidForm::validInputData($dataInput);
 		if($errors != ''){
 			drupal_set_message($errors, 'error');
-			drupal_goto($base_url.'/dang-nhập.html');
+			drupal_goto($base_url.'/dang-nhap.html');
 		}else{
 			$arrOneItem = ShopUser::getUserExists($dataInput ['user_shop_login']['value']);
 			if(!empty($arrOneItem)){
 				ShopUser::checkLoginUserShop($arrOneItem[0], $dataInput ['password_shop_login']['value']);
 			}else{
 				drupal_set_message('Tên đăng nhập hoặc mật khẩu không đúng!', 'error');
-				drupal_goto($base_url.'/dang-nhập.html');
+				drupal_goto($base_url.'/dang-nhap.html');
 			}
 		}
 	}
