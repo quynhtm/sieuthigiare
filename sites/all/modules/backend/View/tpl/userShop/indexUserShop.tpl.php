@@ -1,36 +1,45 @@
 <div class="search-box">
 	<div class="wrapp-search-box">
-		<div class="search-box-title">Tìm kiếm</div>
+		<div class="search-box-title">Thông tin tìm kiếm</div>
 		<form action="" method="GET" id="frmSearch" class="frmSearch" name="frmSearch">
-			<input type="text" id="title" class="keyword" name="title" value="<?php echo $dataSearch['title'] ?>"/>
-			<select class="box-select" name="status">
-				<option value="0" <?php if($dataSearch['status']==0){?>selected="selected"<?php } ?>>Ẩn</option>
-				<option value="1" <?php if($dataSearch['status']==1){?>selected="selected"<?php } ?>>Hiện</option>
-			</select>
-			<input type="submit" id="btnSearch" class="btn btn-primary" value="<?php echo t('Tìm kiếm')?>">
+			<div class="col-lg-3">
+				<label class="control-label">Tên tỉnh thành</label>
+				<div><input type="text" class="form-control input-sm" placeholder ="Tên tỉnh thành" id="province_name" class="keyword" name="province_name" value="<?php echo $dataSearch['province_name'] ?>"/></div>
+			</div>
+			<div class="col-lg-3">
+				<label class="control-label">Trạng thái</label>
+				<div><select class="form-control input-sm" name="province_status"><?php echo $optionStatus;?></select></div>
+			</div>
+			<div class="col-lg-3">
+				<label class="control-label">&nbsp;</label>
+				<div><button class="btn btn-primary" name="submit" value="1">Tìm kiếm</button></div>
+			</div>
 		</form>
 	</div>
 </div>
+
 <div class="inner-box">
 	<div class="page-title-box">
 		<div class="wrapper">
-			<h5><?php
-					if(isset($title)){
-						echo $title;
-					}else{
-						echo t('Quản lý bài viết');
-					}
-				?></h5>
-			<span class="tools">
-				<a href="<?php echo $base_url; ?>/admincp/usershop/add" title="Add" class="icon-plus"></a>
-                <a href="javascript:void(0)" title="Delete" id="deleteMoreItem" class="icon-remove"></a>
+			<h5 class="padding10"><?php echo (isset($title)) ? $title: t('Quản lý bài viết');?></h5>
+			<span class="menu_tools">
+				<a href="<?php echo $base_url; ?>/admincp/usershop/add" title="Thêm mới" class="icon-plus icon-admin green"></a>
+                <a href="javascript:void(0)" title="Xóa item" id="deleteMoreItem" class="icon-trash icon-admin red"></a>
            </span>
 		</div>
 	</div>
 	<div class="page-content-box">
+		<div class="show-bottom-info">
+			<div class="total-rows"><b><?php echo t('Tổng số: ')?> <?php echo $totalItem ?></b></div>
+			<div class="list-item-page">
+				<div class="showListPage">
+					<?php print render($pager); ?>
+				</div>
+			</div>
+		</div>
 		<form id="formListItem"  name="txtForm" action="" method="post">
 			<div class="showListItem">
-				<table class="table table-bordered table-hover table-striped" width="100%" cellpadding="5" cellspacing="1" border="1">
+				<table class="table taicon-adminble-bordered table-hover table-striped" width="100%" cellpadding="5" cellspacing="1" border="1">
 					<thead>
 					<tr>
 						<th width="1%">STT</th>
@@ -47,56 +56,39 @@
 					</thead>
 					<tbody>
 					<?php foreach ($result as $key => $item) {?>
-					<tr>
-						<td><?php echo $key+1; ?></td>
-						<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item->id ?>" /></td>
-						<td>
-							<?php
-								echo $item->user_name;
-								echo '<br/>'.$item->phone;
-								echo '<br/>'.$item->email;
-							?>
-						</td>
-						<td><?php echo $item->name_shop; ?></td>
-						<td><?php echo $item->address; ?></td>
-
-						<td>
-							<?php
-								if($item->status == 1){
-									echo $status='<span class="bg-status-show">'.t('Action').'</span>';
-								}elseif($item->status == 2){
-									echo $status='<span class="bg-status-hidden">'.t('Khóa').'</span>';
-								}elseif($item->status == 0){
-									echo $status='<span class="bg-status-hidden">'.t('Ẩn').'</span>';
-								}
-							?>
-						</td>
-						<td>
-							<?php
-								if($item->is_login == 1){
-									echo $is_login ='<span class="bg-status-show login-on-off" data-id="'.$item->id.'" data-login="1">'.t('Online').'</span>';
-								}else{
-									echo $is_login ='<span class="bg-status-hidden login-on-off" data-id="'.$item->id.'" data-login="0">'.t('Offline').'</span>';
-								}
-							?>
-						</td>
-
-						<td><?php echo date('d-m-Y h:i',$item->created); ?></td>
-						<td>
-							<?php $linkEdit = $base_url.'/admincp/usershop/edit/'.$item->id; ?>
-							<a class="icon huge" href="<?php echo $linkEdit; ?>"  title="Update Item"><i class="icon-pencil"></i></a>
-							<a class="icon huge" id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-remove"></i></a>
-						</td>
-					</tr>
+						<tr>
+							<td><?php echo $key+1 ?></td>
+							<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item->shop_id ?>" /></td>
+							<td>
+								<?php
+									echo $item->user_shop;
+									echo '<br/>'.$item->shop_phone;
+									echo '<br/>'.$item->shop_email;
+								?>
+							</td>
+							<td><?php echo $item->shop_name; ?></td>
+							<td><?php echo $item->shop_address; ?></td>
+							<td>
+								<?php echo ($item->shop_status == 1)? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
+							</td>
+							<td>
+								<?php echo ($item->is_login == 1)? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
+							</td>
+							<td><?php echo date('d-m-Y h:i:s',$item->shop_created); ?></td>
+							<td>
+								<?php $linkEdit = $base_url.'/admincp/usershop/edit/'.$item->shop_id; ?>
+								<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit icon-admin green "></i></a>
+								<a id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-trash icon-admin red"></i></a>
+							</td>
+						</tr>
 					<?php }?>
 					</tbody>
 				</table>
-
 				<input  type="hidden" name="txtFormName" value="txtFormName"/>
 			</div>
 		</form>
 		<div class="show-bottom-info">
-			<div class="total-rows"><?php echo t('Tổng số item ')?> <?php echo $totalItem ?></div>
+			<div class="total-rows"><b><?php echo t('Tổng số: ')?> <?php echo $totalItem ?></b></div>
 			<div class="list-item-page">
 				<div class="showListPage">
 					<?php print render($pager); ?>

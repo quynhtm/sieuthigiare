@@ -4,25 +4,29 @@
  * Quan ly danh sach cac Shop
 */
 class UserShopController{
+
+	private $arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
 	function indexUserShop(){
 		global $base_url;
-
 		$limit = SITE_RECORD_PER_PAGE;
-		
-		$dataSearch['title'] = FunctionLib::getParam('title','');
-		$dataSearch['status'] = FunctionLib::getParam('status', '');
-		$arrFields = array('id', 'name_shop', 'user_name', 'phone', 'address', 'email', 'provice', 'about', 'is_shop', 'is_login', 'time_access', 'status', 'created');
+		//search
+		$dataSearch['province_name'] = FunctionLib::getParam('province_name','');
+		$dataSearch['province_status'] = FunctionLib::getParam('province_status', -1);
 
-		$result = UserShop::getSearchListItems($dataSearch, $arrFields, $limit);
-		
-		$view = theme('indexUserShop',array(
-									'title'=>'Danh sách nick hỗ trợ trực tuyến',
-									'result' => $result['data'],
-									'dataSearch' => $dataSearch,
-									'base_url' => $base_url,
-									'totalItem' =>$result['total'],
-									'pager' =>$result['pager']));
-		return $view;
+		$result = UserShop::getSearchListItems($dataSearch,$limit,array());
+
+		//build option
+		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['province_status']);
+
+		return $view = theme('indexUserShop',array(
+			'title'=>'Danh sách tỉnh/thành',
+			'result' => $result['data'],
+			'dataSearch' => $dataSearch,
+			'optionStatus' => $optionStatus,
+			'base_url' => $base_url,
+			'totalItem' =>$result['total'],
+			'pager' =>$result['pager']));
+
 	}
 
 	function formUserShopAction(){
@@ -108,7 +112,7 @@ class UserShopController{
 					UserShop::deleteId($item);
 				}
 			}
-			drupal_set_message('Xóa bài viết thành công.');
+			drupal_set_message('Xóa Item thành công.');
 		}
 		drupal_goto($base_url.'/admincp/usershop');
 	}
