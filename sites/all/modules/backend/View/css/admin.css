@@ -226,38 +226,7 @@ ul.pager .pager-current {
 	border-bottom: 1px solid #d4d4d4;
     background: #ecf0f5;
 }
-.search-box input[type="text"] {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
-    border-radius: 2px;
-    color: #555;
-    display: inline-block;
-    font-size: 14px;
-    padding: 4px 6px;
-    vertical-align: middle;
-    width: 210px;
-    display: inline-block;
-    vertical-align: top;
-}
-.search-box input[type="text"]:focus{
-    border: 1px solid #3c8dbc;
-    outline: 0 none;
-}
-.search-box select {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 2px;
-    height: 30px;
-    line-height: 30px;
-    width: 210px;
-    display: inline-block;
-    vertical-align: top;
-}
-.search-box select option{
-    padding: 2px 0px;
-    text-indent: 5px;
-}
+
 #btnSearch{
     height: 30px;
 }

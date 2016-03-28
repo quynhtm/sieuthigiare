@@ -94,7 +94,7 @@ class Province{
 
 	public static function deleteId($id){
 		if($id > 0){
-			return DB::deleteOneItem(self::$table_action, self::$primary_key, $id);
+			return DB::deleteId(self::$table_action, self::$primary_key, $id);
 		}
 		return false;
 	}

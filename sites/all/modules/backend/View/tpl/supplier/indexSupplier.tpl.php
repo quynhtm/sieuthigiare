@@ -1,32 +1,49 @@
 <div class="search-box">
 	<div class="wrapp-search-box">
-		<div class="search-box-title">Tìm kiếm</div>
+		<div class="search-box-title">Thông tin tìm kiếm</div>
 		<form action="" method="GET" id="frmSearch" class="frmSearch" name="frmSearch">
-			<input type="text" id="supplier_full_name" class="keyword" name="supplier_full_name" value="<?php echo $dataSearch['supplier_full_name'] ?>"/>
-			<select class="box-select" name="supplier_status">
-				<option value="0" <?php if($dataSearch['supplier_status']==0){?>selected="selected"<?php } ?>>Ẩn</option>
-				<option value="1" <?php if($dataSearch['supplier_status']==1){?>selected="selected"<?php } ?>>Hiện</option>
-			</select>
-			<input type="submit" id="btnSearch" class="btn btn-primary" value="<?php echo t('Tìm kiếm')?>">
+			<div class="col-lg-2">
+				<label class="control-label">Tên NCC</label>
+				<div><input type="text" class="form-control input-sm" placeholder ="Tên nhà cung cấp" id="supplier_name" name="supplier_name" value="<?php echo $dataSearch['supplier_name'] ?>"/></div>
+			</div>
+			<div class="col-lg-2">
+				<label class="control-label">Email NCC</label>
+				<div><input type="text"class="form-control input-sm"  placeholder ="Email nhà cung cấp" id="supplier_email" name="supplier_email" value="<?php echo $dataSearch['supplier_email'] ?>"/></div>
+			</div>
+			<div class="col-lg-2">
+				<label class="control-label">Phone NCC</label>
+				<div><input type="text" class="form-control input-sm" placeholder ="Phone nhà cung cấp" id="supplier_phone" name="supplier_phone" value="<?php echo $dataSearch['supplier_phone'] ?>"/></div>
+			</div>
+			<div class="col-lg-2">
+				<label class="control-label">Trạng thái</label>
+				<div><select class="form-control input-sm" name="supplier_status"><?php echo $optionStatus;?></select></div>
+			</div>
+			<div class="col-lg-2">
+				<label class="control-label">&nbsp;</label>
+				<div><button class="btn btn-primary" name="submit" value="1">Tìm kiếm</button></div>
+			</div>
 		</form>
 	</div>
 </div>
+
 <div class="inner-box">
 	<div class="page-title-box">
 		<div class="wrapper">
-			<h5><?php
-					if(isset($title)){
-						echo $title;
-					}else{
-						echo t('Quản lý bài viết');
-					}
-				?></h5>
-			<span class="tools">
-                <a href="javascript:void(0)" title="Delete" id="deleteMoreItem" class="icon-remove"></a>
+			<h5 class="padding10"><?php echo (isset($title)) ? $title: t('Quản lý bài viết');?></h5>
+			<span class="menu_tools">
+                <a href="javascript:void(0)" title="Xóa item" id="deleteMoreItem" class="icon-trash icon-admin red"></a>
            </span>
 		</div>
 	</div>
 	<div class="page-content-box">
+		<div class="show-bottom-info">
+			<div class="total-rows"><b><?php echo t('Tổng số: ')?> <?php echo $totalItem ?></b></div>
+			<div class="list-item-page">
+				<div class="showListPage">
+					<?php print render($pager); ?>
+				</div>
+			</div>
+		</div>
 		<form id="formListItem"  name="txtForm" action="" method="post">
 			<div class="showListItem">
 				<table class="table table-bordered table-hover table-striped" width="100%" cellpadding="5" cellspacing="1" border="1">
@@ -46,33 +63,33 @@
 					</thead>
 					<tbody>
 					<?php foreach ($result as $key => $item) {?>
-					<tr>
-						<td><?php echo $key+1; ?></td>
-						<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item->id ?>" /></td>
-						<td>
-							<?php
-								echo $item->supplier_full_name;
-							?>
-						</td>
-						<td><?php echo $item->supplier_phone; ?></td>
-						<td><?php echo $item->supplier_hot_line; ?></td>
+						<tr>
+							<td><?php echo $key+1; ?></td>
+							<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item->supplier_id ?>" /></td>
+							<td>
+								<?php
+								echo $item->supplier_name;
+								?>
+							</td>
+							<td><?php echo $item->supplier_phone; ?></td>
+							<td><?php echo $item->supplier_hot_line; ?></td>
 
-						<td><?php echo $item->supplier_email; ?></td>
-						<td><?php echo $item->supplier_website; ?></td>
-						<td><?php echo date('d-m-Y h:i',$item->supplier_created); ?></td>
-						<td>
-							<a class="icon huge" id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-remove"></i></a>
-						</td>
-					</tr>
+							<td><?php echo $item->supplier_email; ?></td>
+							<td><?php echo $item->supplier_website; ?></td>
+							<td><?php echo date('d-m-Y h:i',$item->supplier_created); ?></td>
+							<td>
+								<?php echo ($item->supplier_status == 1)? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
+								<a id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-trash icon-admin red"></i></a>
+							</td>
+						</tr>
 					<?php }?>
 					</tbody>
 				</table>
-
 				<input  type="hidden" name="txtFormName" value="txtFormName"/>
 			</div>
 		</form>
 		<div class="show-bottom-info">
-			<div class="total-rows"><?php echo t('Tổng số item ')?> <?php echo $totalItem ?></div>
+			<div class="total-rows"><b><?php echo t('Tổng số: ')?> <?php echo $totalItem ?></b></div>
 			<div class="list-item-page">
 				<div class="showListPage">
 					<?php print render($pager); ?>

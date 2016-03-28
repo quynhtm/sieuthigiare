@@ -3,6 +3,7 @@
 * QuynhTM
 */
 class ProvinceController{
+
 	private $arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
 	function indexProvince(){
 		global $base_url;
