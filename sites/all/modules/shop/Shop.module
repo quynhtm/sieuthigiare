@@ -53,6 +53,9 @@ function Shop_theme() {
 	    'shopLogin' => array(
 	      'template' => 'View/tpl/shopLogin'
 	    ),
+	    'shopManagerProduct' => array(
+	      'template' => 'View/tpl/shopManagerProduct'
+	    ),
 	    'shopPostProduct' => array(
 	      'template' => 'View/tpl/shopPostProduct'
 	    ),
