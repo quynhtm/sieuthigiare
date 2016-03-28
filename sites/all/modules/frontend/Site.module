@@ -130,3 +130,20 @@ function page_default(){
 
 	return '';
 }
+
+function block_header(){
+	$view= theme('block-header');
+	return $view;
+}
+function block_slide(){
+	$view= theme('block-slide');
+	return $view;
+}
+function block_content(){
+	$view= theme('block-content');
+	return $view;
+}
+function block_footer(){
+	$view= theme('block-footer');
+	return $view;
+}
