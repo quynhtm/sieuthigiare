@@ -5,14 +5,7 @@
 <div class="inner-box">
 	<div class="page-title-box">
 		<div class="wrapper">
-			<h5>
-				<?php 
-					if($param[2]=='add')
-						echo 'Thêm bài mới';
-					else
-						echo 'Sửa bài viết';
-				?>
-			</h5>
+			<h5 class="padding10"><?php if($param[2]=='add')echo 'Thêm bài mới';else echo 'Sửa bài viết';?></h5>
 		</div>
 	</div>
 	<div class="page-content-box">

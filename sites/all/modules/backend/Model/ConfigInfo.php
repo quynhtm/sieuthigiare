@@ -93,14 +93,14 @@ class ConfigInfo{
             unset($data_post['uid']);
             unset($data_post['created']);
             self::updateId($data_post, $id);
-            drupal_set_message('C?p nh?t thành công.');
+            drupal_set_message('Cáº­p nháº­t thÃ nh cÃ´ng.');
             return true;
         }
         //insert
         else{
             $query = self::insert($data_post);
             if($query){
-                drupal_set_message('Thêm m?i thành công.');
+                drupal_set_message('ThÃªm má»›i thÃ nh cÃ´ng.');
                 return true;
             }
         }

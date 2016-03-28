@@ -7,7 +7,7 @@
 */
 class ShopUser{
 	static $table_action = TABLE_USER_SHOP;
-	static $table_action_provice = TABLE_PROVICES;
+	static $table_action_provice = TABLE_PROVICE;
 
 	public static function insert($dataInsert){
 		if(!empty($dataInsert)){
