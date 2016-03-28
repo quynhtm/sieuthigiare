@@ -13,14 +13,14 @@
 									<!-- <a class="btn-face" href="javascript:;"></a>
 									<a class="btn-google" href="javascript:;"></a>
 									<a class="btn-yahoo" href="javascript:;"></a> -->
-									<form class="formSendRegister" method="post" action="<?php echo $base_url?>/dang-nhap.html" class="form-inline">
+									<form class="formSendLogin" method="post" action="<?php echo $base_url?>/dang-nhap.html" class="form-inline">
 										<div class="form-group">
 											<label class="control-label">Tên đăng nhập<span>(*)</span></label>
-											<input type="text" id="user_name" class="form-control" name="user_name">
+											<input type="text" id="user_shop_login" class="form-control" name="user_shop_login">
 										</div>
 										<div class="form-group">
 											<label class="control-label">Mật khẩu<span>(*)</span></label>
-											<input type="password" id="password" class="form-control" name="password">
+											<input type="password" id="password_shop_login" class="form-control" name="password_shop_login">
 										</div>
 										<input type="hidden" name="txtFormNameLogin" id="txtFormNameLogin" value="txtFormNameLogin"/>
 										<button type="submit" id="submitLogin" class="btn btn-primary">Đăng nhập</button>
@@ -33,31 +33,31 @@
 									<div class="form-left-reg">
 										<div class="form-group">
 											<label class="control-label">Tên đăng nhập<span>(*)</span></label>
-											<input type="text" id="user_name" class="form-control" name="user_name">
+											<input type="text" id="user_shop" class="form-control" name="user_shop">
 										</div>
 										<div class="form-group">
 											<label class="control-label">Mật khẩu<span>(*)</span></label>
-											<input type="password" id="password" class="form-control" name="password">
+											<input type="password" id="user_password" class="form-control" name="user_password">
 										</div>
 										<div class="form-group">
 											<label class="control-label">Nhập lại mật khẩu<span>(*)</span></label>
-											<input type="password" id="rep_password" class="form-control" name="rep_password">
+											<input type="password" id="rep_user_password" class="form-control" name="rep_user_password">
 										</div>
 									</div>
 									<div class="form-right-reg">
 										<div class="form-group">
 											<label class="control-label">Số điện thoại<span>(*)</span></label>
-											<input type="text" id="phone" name="phone" class="form-control">
+											<input type="text" id="shop_phone" name="shop_phone" class="form-control">
 										</div>
 										<div class="form-group">
 											<label class="control-label">Email<span>(*)</span></label>
-											<input type="text" id="email" name="email" class="form-control">
+											<input type="text" id="shop_email" name="shop_email" class="form-control">
 										</div>
 										<div class="form-group">
 											<label class="control-label">Tỉnh/thành<span>(*)</span></label>
-											<select id="provice" name="provice" class="form-control">
+											<select id="shop_province" name="shop_province" class="form-control">
 												<?php foreach ($listProvices as $v) { ?>
-												<option value="<?php echo $v->id ?>"><?php echo $v->title ?></option>
+												<option value="<?php echo $v->province_id ?>"><?php echo $v->province_name ?></option>
 												<?php } ?>
 											</select>
 										</div>
