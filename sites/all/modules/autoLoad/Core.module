@@ -49,14 +49,20 @@ require_once 'autoload.php';
 function Core_init(){
 	drupal_add_library('system', 'ui.dialog');
 	drupal_add_library('system', 'ui.datepicker');
+    $param = arg();
 
-	$files = array(
-        'bootstrap/js/bootstrap.min.js',
-        'bootstrap/css/bootstrap.css',
-		'css/core.css',
-		'js/jquery.alerts.js',
-	);
-	Loader::load('Core', $files);
+    if(isset($param[0]) && $param[0] != 'admin'){
+    	$files = array(
+            'bootstrap/js/bootstrap.min.js',
+            'bootstrap/css/bootstrap.css',
+            'css/font-awesome.css',
+            'css/core.css',
+    		'js/core.js',
+            'js/jquery.alerts.js',
+
+    	);
+	   Loader::load('Core', $files);
+    }
     Session::setAnonymousUserShop();
 }
 function page_403(){

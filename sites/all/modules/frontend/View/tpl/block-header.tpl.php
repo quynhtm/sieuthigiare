@@ -10,7 +10,7 @@
 			<a href="<?php echo $base_url.'/dang-nhap.html' ?>" class="btnLog" rel="nofollow" >Đăng nhập</a>
 			<a href="<?php echo $base_url.'/dang-ky.html' ?>" class="btnLog" rel="nofollow" >Đăng ký</a>
 			<?php }else{ ?>
-			<a href="" rel="nofollow" class="btnLog">Cài đặt</a>
+			<a href="<?php echo $base_url.'/quan-ly-gian-hang.html' ?>" rel="nofollow" class="btnLog">Quản lý gian hàng</a>
 			<a href="<?php echo $base_url.'/thoat.html' ?>" rel="nofollow" class="btnLog">Thoát</a>
 			<?php } ?>
 		</div>

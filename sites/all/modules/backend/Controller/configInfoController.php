@@ -10,25 +10,25 @@ class ConfiginfoController{
 
 	public function indexConfiginfo(){
 		
-	global $base_url;
-	$limit = SITE_RECORD_PER_PAGE;
-	//search
-	$dataSearch['title'] = FunctionLib::getParam('title','');
-	$dataSearch['status'] = FunctionLib::getParam('status', -1);
+		global $base_url;
+		$limit = SITE_RECORD_PER_PAGE;
+		//search
+		$dataSearch['title'] = FunctionLib::getParam('title','');
+		$dataSearch['status'] = FunctionLib::getParam('status', -1);
 
-	$arrFields = array('id', 'title', 'keyword', 'intro', 'content', 'img', 'created', 'status', 'meta_title', 'meta_keywords', 'meta_description');
-	$result = ConfigInfo::getSearchListItems($dataSearch, $limit, $arrFields);
+		$arrFields = array('id', 'title', 'keyword', 'intro', 'content', 'img', 'created', 'status', 'meta_title', 'meta_keywords', 'meta_description');
+		$result = ConfigInfo::getSearchListItems($dataSearch, $limit, $arrFields);
 
-	//build option
-	$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['status']);
-	return $view = theme('indexConfigInfo',array(
-								'title'=>'Cấu hình chung',
-								'result' => $result['data'],
-								'dataSearch' => $dataSearch,
-								'optionStatus' => $optionStatus,
-								'base_url' => $base_url,
-								'totalItem' =>$result['total'],
-								'pager' =>$result['pager']));
+		//build option
+		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['status']);
+		return $view = theme('indexConfigInfo',array(
+									'title'=>'Cấu hình chung',
+									'result' => $result['data'],
+									'dataSearch' => $dataSearch,
+									'optionStatus' => $optionStatus,
+									'base_url' => $base_url,
+									'totalItem' =>$result['total'],
+									'pager' =>$result['pager']));
 	}
 
 	public function formConfiginfoAction(){

@@ -28,16 +28,33 @@ function Shop_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
+	$items["quan-ly-gian-hang.html"] = array(
+		"title" => t('Đăng sản phẩm'),
+		"description" => "Đăng sản phẩm",
+		'page callback' => 'shopManagerProduct',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+	$items["dang-san-pham.html"] = array(
+		"title" => t('Đăng sản phẩm'),
+		"description" => "Đăng sản phẩm",
+		'page callback' => 'shopPostProduct',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
   return $items;
 }
 
 function Shop_theme() {
 	return array(
-	    'shop-register' => array(
-	      'template' => 'View/tpl/shop-register'
+	    'shopRegister' => array(
+	      'template' => 'View/tpl/shopRegister'
 	    ),
-	     'shop-login' => array(
-	      'template' => 'View/tpl/shop-login'
+	    'shopLogin' => array(
+	      'template' => 'View/tpl/shopLogin'
+	    ),
+	    'shopPostProduct' => array(
+	      'template' => 'View/tpl/shopPostProduct'
 	    ),
 	);
 }
@@ -46,8 +63,10 @@ function Shop_init() {
 	$uri = request_uri();
 	if(preg_match("/(\/admin)/", $uri)==0){
 		$files = array(
-			'Model/ShopModel.php',
-			'Controller/ShopController.php',
+			'Model/ShopRegModel.php',
+			'Controller/ShopRegController.php',
+
+			'Controller/ShopManagerProduct.php',
 
 			'View//css/shop.css',
 			'View/js/shop.js',
