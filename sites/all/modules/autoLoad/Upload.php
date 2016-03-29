@@ -19,13 +19,9 @@ if(isset($_POST)){
 */
 class Upload{
 
-	public $path_image_upload = 'uploads/images';
+	public static $path_image_upload = 'uploads';
 
-	function __construct(){
-		//init
-	}
-
-	function upload($_name='', $_file_ext='', $_max_file_size='50*1024*1024', $_module='', $type_json=1){
+	public static function uploadFile($_name='', $_file_ext='', $_max_file_size='50*1024*1024', $_module='', $type_json=1){
 		global $base_url;
 		
 		if($_file_ext != ''){
@@ -33,7 +29,7 @@ class Upload{
 		}else{
 			$_file_ext=array("jpg","jpeg","png","gif");
 		}
-
+		
 		if($_name!='' && isset($_FILES[$_name]) && count($_FILES[$_name])>0){
 			if($_max_file_size){
 				$max_file_size = $_max_file_size;
@@ -47,7 +43,7 @@ class Upload{
 			$file_ext = @end(explode('.',$file_name));
 			$ext=0;
 			$month = date('m-Y');
-			$name = date('h-i-s-d-m-Y',time()).'-'.$this->preg_replace_string_upload($file_name);
+			$name = date('h-i-s-d-m-Y',time()).'-'.self::preg_replace_string_upload($file_name);
 			$link = $name ? $month.'/'.$name : '';
 			
 			if(!in_array($file_ext, $_file_ext)){
@@ -58,9 +54,9 @@ class Upload{
 			
 			if($file_name!='' && $ext==1 && $file_size <= $max_file_size){
 				if($_module!=''){
-				 	$folder_upload = DRUPAL_ROOT.'/'.$this->path_image_upload.'/'.$_module.'/'.$month;
+				 	$folder_upload = DRUPAL_ROOT.'/'.self::$path_image_upload.'/'.$_module.'/'.$month;
 				}else{
-				 	$folder_upload = DRUPAL_ROOT.'/'.$this->path_image_upload.'/'.$month;
+				 	$folder_upload = DRUPAL_ROOT.'/'.self::$path_image_upload.'/'.$month;
 				}
 
 				if(!is_dir($folder_upload)){
@@ -82,7 +78,7 @@ class Upload{
 		}
 	}
 	//rename file upload
-	function preg_replace_string_upload($str=''){
+	public static function preg_replace_string_upload($str=''){
 		if(!$str) return '';
 		if($str !=''){
             $str = str_replace(array('^', '$', '\\', '/', '(', ')', '|', '?', '+', '_', '*', '[', ']', '{', '}', ',', '%', '<', '>', '=', '"', '“', '”', '!', ':', ';', '&', '~', '#', '`', "'", '@' ), array(''), trim($str));
@@ -112,15 +108,14 @@ class Upload{
 
             return strtolower($str);
         }
-
 	}
 	//check upload and unlink img current
-	function check_upload_file($name_input_file, $current_path_img='', $name_module=''){
+	public static function check_upload_file($name_input_file, $current_path_img='', $name_module=''){
 		$path_img='';
-		$path_img = $this->upload($_name=$name_input_file, $_file_ext='jpg,jpeg,png,gif,swf', $_max_file_size=20*1024*1024, $name_module,  $type_json=0);
+		$path_img = self::uploadFile($_name=$name_input_file, $_file_ext='jpg,jpeg,png,gif,swf', $_max_file_size=20*1024*1024, $name_module,  $type_json=0);
 		if($path_img!=''){
 			if($current_path_img!=''){
-				$dir = DRUPAL_ROOT.'/'.$this->path_image_upload.'/'.$name_module.'/'.$current_path_img;
+				$dir = DRUPAL_ROOT.'/'.self::$path_image_upload.'/'.$name_module.'/'.$current_path_img;
 				if(is_file($dir)){
 					unlink($dir);
 				}
@@ -128,15 +123,13 @@ class Upload{
 		}
 		return $path_img;
 	}
-
-
 	//check upload and unlink img current
-	function check_upload_file_download($name_input_file, $current_path_img='', $name_module=''){
+	public static function check_upload_file_download($name_input_file, $current_path_img='', $name_module=''){
 		$path_img='';
-		$path_img = $this->upload($_name=$name_input_file, $_file_ext='xls,xlsx,doc,docx,pdf,rar,zip,tar', $_max_file_size=20*1024*1024, $name_module,  $type_json=0);
+		$path_img = self::uploadFile($_name=$name_input_file, $_file_ext='xls,xlsx,doc,docx,pdf,rar,zip,tar', $_max_file_size=20*1024*1024, $name_module,  $type_json=0);
 		if($path_img!=''){
 			if($current_path_img!=''){
-				$dir = DRUPAL_ROOT.'/'.$this->path_image_upload.'/'.$name_module.'/'.$current_path_img;
+				$dir = DRUPAL_ROOT.'/'.self::$path_image_upload.'/'.$name_module.'/'.$current_path_img;
 				if(is_file($dir)){
 					unlink($dir);
 				}
