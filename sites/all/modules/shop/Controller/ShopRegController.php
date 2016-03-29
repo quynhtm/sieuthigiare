@@ -122,7 +122,7 @@ function shopEditInfo(){
 					'shop_address'=>array('value'=>FunctionLib::getParam('shop_address',''), 'require'=>0, 'messages'=>''),
 					'shop_email'=>array('value'=>FunctionLib::getParam('shop_email',''), 'require'=>1, 'messages'=>'Email không được trống!'),
 					'shop_about'=>array('value'=>FunctionLib::getParam('shop_about',''), 'require'=>0, 'messages'=>''),
-					'shop_province'=>array('value'=>FunctionLib::getParam('shop_province',''), 'require'=>0, 'messages'=>'Chọn 1 tỉnh thành!'),
+					'shop_province'=>array('value'=>FunctionLib::getIntParam('shop_province',''), 'require'=>0, 'messages'=>'Chọn 1 tỉnh thành!'),
 				);
 		$errors = ValidForm::validInputData($dataInput);
 		if($errors != ''){
@@ -135,7 +135,7 @@ function shopEditInfo(){
 			'shop_address'=>$dataInput ['shop_address']['value'],
 			'shop_email'=>$dataInput ['shop_email']['value'],
 			'shop_about'=>$dataInput ['shop_about']['value'],
-			'shop_province'=>0,
+			'shop_province'=>$dataInput ['shop_province']['value'],
 		);
 
 		$query = ShopUser::updateId($data_post, $user_shop->shop_id);
@@ -144,7 +144,8 @@ function shopEditInfo(){
 			drupal_goto($base_url.'/quan-ly-gian-hang.html');
 		}
 	}
-	return $view = theme('shopEditInfo');
+	$listProvince = ShopUser::getAllProvices($limit=200);
+	return $view = theme('shopEditInfo', array('listProvince'=>$listProvince));
 }
 
 function shopEditPassword(){

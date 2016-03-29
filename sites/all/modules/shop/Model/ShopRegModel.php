@@ -32,7 +32,7 @@ class ShopUser{
 		return false;
 	}
 
-	public static function getAllProvices($limit=100){
+	public static function getAllProvices($limit=200){
 		if($limit > 0){
 			return DB::getItembyCond(self::$table_action_provice, 'province_id, province_name', '', self::$primary_key_province_shop.' ASC', 'province_status=1', $limit);
 		}

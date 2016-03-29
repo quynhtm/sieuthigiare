@@ -8,7 +8,9 @@
 
 class Session{
 	static $session_time_out = 3600;
-	
+	static $table_user_shop = TABLE_USER_SHOP;
+	static $primary_key_user_shop = 'shop_id';
+
 	public static function setAnonymousUserShop() {
 		global $user_shop;
 
@@ -24,6 +26,10 @@ class Session{
 				$user_shop->is_login = 0;
 				session_destroy();
 			}else{
+				$get_user_shop = DB::getItembyCond(self::$table_user_shop, '*', '', self::$primary_key_user_shop.' ASC', self::$primary_key_user_shop.'='.$user_shop->shop_id, 1);
+				if(!empty($get_user_shop)){
+					$user_shop = $get_user_shop[0];
+				}
 				$user_shop->expires = time() + self::$session_time_out;
 				$_SESSION['user_shop'] = $user_shop;
 			}
