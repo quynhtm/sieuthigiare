@@ -11,8 +11,12 @@ class ShopManagerProduct{
     
 	static $table_action_provice = TABLE_PROVINCE;
 	static $primary_key_province = 'province_id';
+    static $primary_key_user_shop = 'user_shop_id';
+
 
 	 public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
+        global $user_shop;
+
         if(empty($arrFields))
             $arrFields = self::$arrFields;
         
@@ -21,6 +25,7 @@ class ShopManagerProduct{
             foreach($arrFields as $field){
                 $sql->addField('i', $field, $field);
             }
+            $sql->condition('i.'.self::$primary_key_user_shop, $user_shop->shop_id, '=');
             /*Begin search*/
             $cond = '';
             $arrCond = array();
@@ -37,7 +42,9 @@ class ShopManagerProduct{
                         array_push($arrCond, "(".$field." LIKE '%". $value ."%')");
                     }
                 }
+                array_push($arrCond, self::$primary_key_user_shop.' = '.$user_shop->shop_id);
                 if(!empty($arrCond)){
+                    
                     $cond = implode(' AND ', $arrCond);
                 }
             }

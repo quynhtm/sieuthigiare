@@ -28,6 +28,20 @@ function Shop_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
+	$items["sua-thong-tin-gian-hang.html"] = array(
+		"title" => t('Sửa thông tin gian hàng'),
+		"description" => "Sửa thông tin gian hàng",
+		'page callback' => 'shopEditInfo',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+	$items["doi-mat-khau.html"] = array(
+		"title" => t('Đổi mật khẩu'),
+		"description" => "Đổi mật khẩu",
+		'page callback' => 'shopEditPassword',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
 	$items["quan-ly-gian-hang.html"] = array(
 		"title" => t('Đăng sản phẩm'),
 		"description" => "Đăng sản phẩm",
@@ -52,6 +66,15 @@ function Shop_theme() {
 	    ),
 	    'shopLogin' => array(
 	      'template' => 'View/tpl/shopLogin'
+	    ),
+	    'shopEditInfo' => array(
+	      'template' => 'View/tpl/shopEditInfo'
+	    ),
+	    'shopEditPassword' => array(
+	      'template' => 'View/tpl/shopEditPassword'
+	    ),
+	    'shopManagerProduct' => array(
+	      'template' => 'View/tpl/shopManagerProduct'
 	    ),
 	    'shopPostProduct' => array(
 	      'template' => 'View/tpl/shopPostProduct'

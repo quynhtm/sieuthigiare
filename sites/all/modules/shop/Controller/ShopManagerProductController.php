@@ -18,10 +18,10 @@ function shopManagerProduct(){
 	$dataSearch['title'] = FunctionLib::getParam('title','');
 	$dataSearch['status'] = FunctionLib::getParam('status', -1);
 
-	$arrFields = array('id', 'product_name',);
+	$arrFields = array('id', 'product_name', 'product_price_sell', 'time_created', 'status');
 	$result = ShopManagerProduct::getSearchListItems($dataSearch, $limit, $arrFields);
 
-	return $view = theme('shopPostProduct',array(
+	return $view = theme('shopManagerProduct',array(
 								'title'=>'Cấu hình chung',
 								'result' => $result['data'],
 								'dataSearch' => $dataSearch,
