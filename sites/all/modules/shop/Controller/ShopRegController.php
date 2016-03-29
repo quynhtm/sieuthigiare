@@ -28,11 +28,11 @@ function shopRegister(){
 		$errors = ValidForm::validInputData($dataInput);
 		$check_valid_name = ValidForm::checkRegexName($dataInput ['user_shop']['value']);
 		if(!$check_valid_name){
-			$errors .= 'Tên đăng nhập không được có dấu!';
+			$errors .= 'Tên đăng nhập không được có dấu!<br/>';
 		}
 		$check_valid_mail = ValidForm::checkRegexEmail($dataInput ['shop_email']['value']);
 		if(!$check_valid_mail){
-			$errors .= 'Email không đúng định dạng!';
+			$errors .= 'Email không đúng định dạng!<br/>';
 		}
 		if($errors != ''){
 			drupal_set_message($errors, 'error');
@@ -140,7 +140,7 @@ function shopEditInfo(){
 		$errors = ValidForm::validInputData($dataInput);
 		$check_valid_mail = ValidForm::checkRegexEmail($dataInput ['shop_email']['value']);
 		if(!$check_valid_mail){
-			$errors .= 'Email không đúng định dạng!';
+			$errors .= 'Email không đúng định dạng!<br/>';
 		}
 		//check phone, mail
 		$check_valid_mail_phone = ShopUser::checkMailPhoneOfUser($user_shop->shop_id, $dataInput ['shop_email']['value'], $dataInput ['shop_phone']['value']);
