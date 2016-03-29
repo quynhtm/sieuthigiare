@@ -133,11 +133,15 @@ a.btn-yahoo:hover{
 .left-head-shop .navigator ul{
 
 }
-.left-head-shop .navigator ul li{
-
+.left-head-shop .navigator ul li {
+    display: inline-block;
+    margin-right: 20px;
 }
 .left-head-shop .navigator ul li a{
     color: #fff;
+}
+.left-head-shop .navigator ul li a:hover{
+    text-decoration: underline;
 }
 .main-manager-shop .header .right-head-shop {
     color: #fff;
@@ -256,4 +260,10 @@ a.btn-yahoo:hover{
     text-align: left;
     vertical-align: middle !important;
     background: #fff;
+}
+.font-size-20{
+    font-size: 20px;
+}
+.green{
+    color: green;
 }

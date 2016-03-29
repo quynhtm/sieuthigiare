@@ -18,12 +18,16 @@ class ShopUser{
 		return false;
 	}
 
-	public static function getUserExists($name='', $mail=''){
+	public static function getUserExists($name=''){
 		if($name != ''){
 			return DB:: getItembyCond(self::$table_action, self::$primary_key_user_shop, '', self::$primary_key_user_shop.' ASC', "user_shop='".$name."'", 1);
 		}
-		if($mail != ''){
-			return DB:: getItembyCond(self::$table_action, self::$primary_key_user_shop, '', self::$primary_key_user_shop.' ASC', "shop_email='".$mail."'", 1);
+		return false;
+	}
+
+	public static function updateId($dataUpdate, $id = 0){
+		if($id > 0 && !empty($dataUpdate)){
+            return DB::updateId(self::$table_action, self::$primary_key_user_shop, $dataUpdate, $id);
 		}
 		return false;
 	}
@@ -59,7 +63,7 @@ class ShopUser{
 		    	Session::createUserShop($user_shop);
 		    	$data_login = array('time_access'=>time(), 'is_login'=>1);
 		    	DB::updateId(self::$table_action, self::$primary_key_user_shop, $data_login, $user_shop->shop_id);
-		    	drupal_goto($base_url);
+		    	drupal_goto($base_url.'/quan-ly-gian-hang.html');
 		    }else{
 		    	drupal_set_message('Tên đăng nhập hoặc mật khẩu không đúng!', 'error');
 				drupal_goto($base_url.'/dang-nhap.html');

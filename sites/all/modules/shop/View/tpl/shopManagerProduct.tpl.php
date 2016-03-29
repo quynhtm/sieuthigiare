@@ -3,31 +3,7 @@
 ?>
 <div class="main-manager-shop">
 	<div class="header">
-		<div class="wrapp-shop">	
-			<div class="left-head-shop">
-				<i class="icon-dashboard"></i>
-				<div class="navigator">
-					<ul>
-						<li><a href="">Quản lý Shop</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="right-head-shop">
-				<?php 
-					if($user_shop->shop_id != 0){
-						echo ucfirst($user_shop->user_shop);
-				 	} 
-				 ?>
-				<i class="icon-caret-down"></i>
-				<div class="panel-user-shop">
-					<ul>
-						<li><a rel="nofollow" href="">Sửa thông tin</a></li>
-						<li><a rel="nofollow" href="">Đổi mật khẩu</a></li>
-						<li><a rel="nofollow" href="<?php echo $base_url?>/thoat.html">Thoát</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
+		<?php require_once(DRUPAL_ROOT.'/'.path_to_theme().'/View/tpl/shopHeader.tpl.php') ?>
 	</div>
 	<div class="content">
 		<div class="wrapp-shop">
@@ -92,18 +68,9 @@
 			<div class="list-shop-show">
 				<div class="title-table-shop-shop">Danh sách sản phẩm đăng bán</div>
 				<div class="show-box-paging">
-					<div class="total-rows"><b>Tổng số:  65</b></div>
+					<div class="total-rows"><b><?php echo t('Tổng số: ')?> <?php echo $totalItem ?></b></div>
 					<div class="showListPage">
-						<h2 class="element-invisible">Pages</h2>
-						<div class="item-list">
-							<ul class="pager">
-								<li class="pager-current first">1</li>
-								<li class="pager-item"><a href="" title="Go to page 2">2</a></li>
-								<li class="pager-item"><a href="" title="Go to page 3">3</a></li>
-								<li class="pager-next"><a href="">Sau ›</a></li>
-								<li class="pager-last last"><a href="">Trang cuối »</a></li>
-							</ul>
-						</div>
+						<?php print render($pager); ?>
 					</div>
 				</div>
 				<div class="showListItem">
@@ -115,9 +82,10 @@
 							<th width="">[Mã SP] Tên sản phẩm</th>
 							<th width="">Danh mục</th>
 							<th width="">Tỉnh thành</th>
-							<th width="">Giá sản phẩm</th>
+							<th width="">Giá thị trường</th>
 							<th width="">Giá bán</th>
 							<th width="">Giảm</th>
+							<th width="">Mô tả</th>
 							<th width="">Ngày tạo</th>
 							<th width="">Trạng thái</th>
 							<th width="">Thao tác</th>
@@ -128,33 +96,38 @@
 							<tr>
 								<td></td>
 								<td><input type="checkbox" value="<?php echo $v->id?>"/></td>
-								<td></td>
+								<td><?php echo $v->product_name ?></td>
 								<td></td>
 								<td></td>
 								<td></td>
 								<td><?php number_format($v->product_price_sell)?></td>
 								<td></td>
+								<td></td>
 								<td><?php echo date('d/m/Y h:i', $v->time_created)?></td>
-								<td></td>
-								<td></td>
+								<td>
+									<?php
+									if($v->status == 1){
+										$status='<i class="icon-ok font-size-20 green "></i>';
+									}else{
+										$v='<i class="icon-remove font-size-20 red "></i></a>';
+									}
+									echo $status;
+									?>
+								</td>
+								<td>
+								<?php $linkEdit = $base_url.'/cap-nhat-san-pham/'.$v->id; ?>
+								<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit green font-size-20"></i></a>
+								<a id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-trash font-size-20 red"></i></a>
+								</td>
 							</tr>
 							<?php } ?>
 						</tbody>
 					</table>
 				</div>
 				<div class="show-box-paging">
-					<div class="total-rows"><b>Tổng số:  65</b></div>
+					<div class="total-rows"><b><?php echo t('Tổng số: ')?> <?php echo $totalItem ?></b></div>
 					<div class="showListPage">
-						<h2 class="element-invisible">Pages</h2>
-						<div class="item-list">
-							<ul class="pager">
-								<li class="pager-current first">1</li>
-								<li class="pager-item"><a href="" title="Go to page 2">2</a></li>
-								<li class="pager-item"><a href="" title="Go to page 3">3</a></li>
-								<li class="pager-next"><a href="">Sau ›</a></li>
-								<li class="pager-last last"><a href="">Trang cuối »</a></li>
-							</ul>
-						</div>
+						<?php print render($pager); ?>
 					</div>
 				</div>
 			</div>
