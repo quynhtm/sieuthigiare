@@ -24,6 +24,43 @@ class ShopUser{
 		}
 		return false;
 	}
+	public static function checkNameMailPhone($name='', $mail='', $phone=''){
+		$errors = '';
+		if($name != '' && $phone != '' && $mail != ''){
+			$check_name = DB::getItembyCond(self::$table_action, self::$primary_key_user_shop, '', self::$primary_key_user_shop.' ASC', "user_shop='".$name."'", 1);
+			$check_mail = DB::getItembyCond(self::$table_action, self::$primary_key_user_shop, '', self::$primary_key_user_shop.' ASC', "shop_email='".$mail."'", 1);
+			$check_phone = DB::getItembyCond(self::$table_action, self::$primary_key_user_shop, '', self::$primary_key_user_shop.' ASC', "shop_phone='".$phone."'", 1);
+			
+			if(!empty($check_name)){
+				$errors .= 'Tên đăng nhập này đã tồn tại. Vui lòng nhập lại! <br/>';
+			}
+			if(!empty($check_mail)){
+				$errors .= 'Email này đã tồn tại. Vui lòng nhập lại! <br/>';
+			}
+			if(!empty($check_phone)){
+				$errors .= 'Số điện thoại này đã tồn tại. Vui lòng nhập lại! <br/>';
+			}
+		}else{
+			$errors .= 'Bạn vui lòng nhập các trường có dấu (*)! <br/>';
+		}
+		return $errors;
+	}
+	public static function checkMailPhoneOfUser($shop_id=0, $mail='', $phone=''){
+		$errors = '';
+		if($shop_id >0 && $phone != '' && $mail != ''){
+			$check_mail = DB::getItembyCond(self::$table_action, self::$primary_key_user_shop, '', self::$primary_key_user_shop.' ASC', "shop_email='".$mail."' AND ".self::$primary_key_user_shop.'<>'.$shop_id, 1);
+			$check_phone = DB::getItembyCond(self::$table_action, self::$primary_key_user_shop, '', self::$primary_key_user_shop.' ASC', "shop_phone='".$phone."' AND ".self::$primary_key_user_shop.'<>'.$shop_id, 1);
+			if(!empty($check_mail)){
+				$errors .= 'Email này đã tồn tại. Vui lòng nhập lại! <br/>';
+			}
+			if(!empty($check_phone)){
+				$errors .= 'Số điện thoại này đã tồn tại. Vui lòng nhập lại! <br/>';
+			}
+		}else{
+			$errors .= 'Bạn vui lòng nhập các trường có dấu (*)! <br/>';
+		}
+		return $errors;
+	}
 	public static function getUserbyCond($name=''){
 		if($name != ''){
 			return DB::getItembyCond(self::$table_action, $fields='*', '', self::$primary_key_user_shop.' ASC', 'user_shop='."'".$name."'", 1);

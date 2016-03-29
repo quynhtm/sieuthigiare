@@ -19,27 +19,35 @@ function shopRegister(){
 						'user_password'=>array('value'=>FunctionLib::getParam('user_password',''), 'require'=>1, 'messages'=>'Mật khẩu không được trống!'),
 						'rep_user_password'=>array('value'=>FunctionLib::getParam('rep_user_password',''), 'require'=>1, 'messages'=>'Nhập lại mật khẩu không được trống!'),
 						'shop_phone'=>array('value'=>FunctionLib::getParam('shop_phone',''), 'require'=>1, 'messages'=>'Số điện thoại không được trống!'),
-						'shop_email'=>array('value'=>FunctionLib::getParam('shop_email',''), 'require'=>1, 'messages'=>'Email được trống!'),
+						'shop_email'=>array('value'=>FunctionLib::getParam('shop_email',''), 'require'=>1, 'messages'=>'Email không được trống!'),
 						'shop_province'=>array('value'=>FunctionLib::getParam('shop_province',''), 'require'=>1, 'messages'=>'Chọn 1 tỉnh thành!'),
 						'agree'=>array('value'=>FunctionLib::getParam('agree',''), 'require'=>1, 'messages'=>'Bạn chưa đồng ý với điều khoản của chúng tôi!'),
 						'shop_created'=>array('value'=>time(), 'require'=>0, 'messages'=>''),
 					);
 		
 		$errors = ValidForm::validInputData($dataInput);
+		$check_valid_name = ValidForm::checkRegexName($dataInput ['user_shop']['value']);
+		if(!$check_valid_name){
+			$errors .= 'Tên đăng nhập không được có dấu!';
+		}
+		$check_valid_mail = ValidForm::checkRegexEmail($dataInput ['shop_email']['value']);
+		if(!$check_valid_mail){
+			$errors .= 'Email không đúng định dạng!';
+		}
 		if($errors != ''){
 			drupal_set_message($errors, 'error');
 			drupal_goto($base_url.'/dang-ky.html');
 		}
-		//check user and hash pass
-		$check_user_exists = ShopUser::getUserExists($dataInput ['user_shop']['value']);
 
-		if($check_user_exists){
-			drupal_set_message('Tên đăng nhập hoặc email đã tồn tại. Vui lòng chọn lại!', 'error');
+		//check user and hash pass
+		$check_user_exists = ShopUser::checkNameMailPhone($dataInput ['user_shop']['value'], $dataInput ['shop_email']['value'], $dataInput ['shop_phone']['value']);
+		if($check_user_exists != ''){
+			drupal_set_message($check_user_exists, 'error');
 			drupal_goto($base_url.'/dang-ky.html');
 		}else{
 			if($dataInput['user_password']['value'] == $dataInput['rep_user_password']['value']){
-				$check_valide = ValidForm::checkRegexPass($dataInput['user_password']['value'], 6);
-				if($check_valide){
+				$check_valid_pass = ValidForm::checkRegexPass($dataInput['user_password']['value'], 6);
+				if($check_valid_pass){
 					require_once DRUPAL_ROOT . '/' . variable_get('password_inc', 'includes/password.inc');
 					$hash_pass = user_hash_password(trim($dataInput ['user_password']['value']));
 					$data_post = array(
@@ -130,6 +138,15 @@ function shopEditInfo(){
 					'shop_province'=>array('value'=>FunctionLib::getIntParam('shop_province',''), 'require'=>0, 'messages'=>'Chọn 1 tỉnh thành!'),
 				);
 		$errors = ValidForm::validInputData($dataInput);
+		$check_valid_mail = ValidForm::checkRegexEmail($dataInput ['shop_email']['value']);
+		if(!$check_valid_mail){
+			$errors .= 'Email không đúng định dạng!';
+		}
+		//check phone, mail
+		$check_valid_mail_phone = ShopUser::checkMailPhoneOfUser($user_shop->shop_id, $dataInput ['shop_email']['value'], $dataInput ['shop_phone']['value']);
+		if($check_valid_mail_phone != ''){
+			$errors .= $check_valid_mail_phone;
+		}
 		if($errors != ''){
 			drupal_set_message($errors, 'error');
 			drupal_goto($base_url.'/sua-thong-tin-gian-hang.html');
@@ -144,10 +161,8 @@ function shopEditInfo(){
 		);
 
 		$query = ShopUser::updateId($data_post, $user_shop->shop_id);
-		if($query){
-			drupal_set_message('Cập nhật thông tin gian hàng thành công!');
-			drupal_goto($base_url.'/quan-ly-gian-hang.html');
-		}
+		drupal_set_message('Cập nhật thông tin gian hàng thành công!');
+		drupal_goto($base_url.'/quan-ly-gian-hang.html');
 	}
 	$listProvince = ShopUser::getAllProvices($limit=200);
 	return $view = theme('shopEditInfo', array('listProvince'=>$listProvince));
@@ -175,8 +190,8 @@ function shopEditPassword(){
 		$arrUser = ShopUser::getUserExists($dataInput['user_shop_login']['value']);
 		if(!empty($arrUser) && $arrUser[0]->shop_id == $user_shop->shop_id){
 			if($dataInput['user_shop_password']['value'] == $dataInput['user_shop_rep_password']['value']){
-				$check_valide = ValidForm::checkRegexPass($dataInput['user_shop_password']['value'], 6);
-				if($check_valide){
+				$check_valid_pass = ValidForm::checkRegexPass($dataInput['user_shop_password']['value'], 6);
+				if($check_valid_pass){
 					require_once DRUPAL_ROOT . '/' . variable_get('password_inc', 'includes/password.inc');
 					$hash_pass = user_hash_password($dataInput['user_shop_password']['value']);
 					$data_post = array(

@@ -78,7 +78,7 @@ class DB{
     }
     
     public static function getItembyCond($tableAction, $fields='', $groupby='', $oderby='', $cond='', $limit=0){
-        if($fields != ''){
+        if($fields == ''){
             $fields = '*';
         }
         if($groupby != ''){
