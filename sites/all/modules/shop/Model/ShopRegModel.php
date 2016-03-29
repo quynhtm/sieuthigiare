@@ -20,7 +20,7 @@ class ShopUser{
 
 	public static function getUserExists($name=''){
 		if($name != ''){
-			return DB:: getItembyCond(self::$table_action, self::$primary_key_user_shop, '', self::$primary_key_user_shop.' ASC', "user_shop='".$name."'", 1);
+			return DB:: getItembyCond(self::$table_action, '', '', self::$primary_key_user_shop.' ASC', "user_shop='".$name."'", 1);
 		}
 		return false;
 	}
