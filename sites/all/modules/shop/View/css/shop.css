@@ -267,3 +267,15 @@ a.btn-yahoo:hover{
 .green{
     color: green;
 }
+.control-group {
+    clear: both;
+    margin-bottom: 15px;
+}
+.control-label span{
+    color: #ff0000;
+}
+.line-full{
+    clear: both;
+    display: inline-block;
+    width: 100%;
+}
