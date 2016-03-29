@@ -54,8 +54,13 @@ function shopRegister(){
 					);
 					$query = ShopUser::insert($data_post);
 					if($query){
+						$getItemUserShop = ShopUser::getUserbyCond($dataInput ['user_shop']['value']);
+						if(!empty($getItemUserShop)){
+							$user_shop = $getItemUserShop[0];
+							Session::createSessionUserShop($user_shop);
+						}
 						drupal_set_message('Đăng ký gian hàng thành công!');
-						drupal_goto($base_url);
+						drupal_goto($base_url.'/sua-thong-tin-gian-hang.html');
 					}
 				}else{
 					drupal_set_message('Mật khẩu không được có dấu và phải lớn hơn 6 ký tự!', 'error');

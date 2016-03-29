@@ -24,7 +24,13 @@ class ShopUser{
 		}
 		return false;
 	}
-
+	public static function getUserbyCond($name=''){
+		if($name != ''){
+			return DB::getItembyCond(self::$table_action, $fields='*', '', self::$primary_key_user_shop.' ASC', 'user_shop='."'".$name."'", 1);
+		}
+		return false;
+	}
+	
 	public static function updateId($dataUpdate, $id = 0){
 		if($id > 0 && !empty($dataUpdate)){
             return DB::updateId(self::$table_action, self::$primary_key_user_shop, $dataUpdate, $id);
@@ -60,7 +66,7 @@ class ShopUser{
 		      		return FALSE;
 		    }
 		    if($hash && $hash == $stored_hash){
-		    	Session::createUserShop($user_shop);
+		    	Session::createSessionUserShop($user_shop);
 		    	$data_login = array('time_access'=>time(), 'is_login'=>1);
 		    	DB::updateId(self::$table_action, self::$primary_key_user_shop, $data_login, $user_shop->shop_id);
 		    	drupal_goto($base_url.'/quan-ly-gian-hang.html');
@@ -76,7 +82,7 @@ class ShopUser{
 
 	public static function logoutUserShop(){
 		global $base_url, $user_shop;
-		Session::destroyUserShop();
+		Session::destroySessionUserShop();
 		$data_login = array('time_access'=>time(), 'is_login'=>0);
 		DB::updateId(self::$table_action, self::$primary_key_user_shop, $data_login, $user_shop->shop_id);
 		drupal_goto($base_url);

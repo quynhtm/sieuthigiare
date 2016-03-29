@@ -63,7 +63,7 @@ function Core_init(){
     	);
 	   Loader::load('Core', $files);
     }
-    Session::setAnonymousUserShop();
+    Session::setSessionAnonymousUserShop();
 }
 function page_403(){
 

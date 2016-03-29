@@ -11,7 +11,7 @@ class Session{
 	static $table_user_shop = TABLE_USER_SHOP;
 	static $primary_key_user_shop = 'shop_id';
 
-	public static function setAnonymousUserShop() {
+	public static function setSessionAnonymousUserShop() {
 		global $user_shop;
 
 		if(!isset($_SESSION['user_shop'])){
@@ -37,7 +37,7 @@ class Session{
 		return $user_shop;
 	}
 
-	public static function createUserShop($obj=null){
+	public static function createSessionUserShop($obj=null){
 		if($obj != null){
 			if(!isset($obj->expires)){
 				$obj->expires = time() + self::$session_time_out;
@@ -48,7 +48,7 @@ class Session{
 		return false;
 	}
 
-	public static function destroyUserShop(){
+	public static function destroySessionUserShop(){
 	  	session_destroy();
 	}
 }
