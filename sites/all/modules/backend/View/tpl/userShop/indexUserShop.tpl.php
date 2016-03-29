@@ -47,7 +47,7 @@
 						<th width="20%">Thông tin shop</th>
 						<th width="20%">Tên shop</th>
 						<th width="20%">Địa chỉ</th>
-
+						<th width="20%">Loại gian hàng</th>
 						<th width="10%">Trạng thái</th>
 						<th width="9%">Online</th>
 						<th width="10%">Ngày tạo</th>
@@ -68,6 +68,7 @@
 							</td>
 							<td><?php echo $item->shop_name; ?></td>
 							<td><?php echo $item->shop_address; ?></td>
+							<td><?php echo ($item->is_shop == 1)? '<i class="green">Vip</i>': '<i class="red">Thường</i>'; ?></td>
 							<td>
 								<?php echo ($item->shop_status == 1)? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
 							</td>

@@ -35,72 +35,51 @@ class UserShopController{
 		$Stdio = new Stdio();
 
 		$param = arg();
+		$id = 0;
 		$arrOneItem = array();
 
 		if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
-			$arrFields = array('id', 'name_shop', 'user_name', 'phone', 'address', 'email', 'provice', 'about', 'is_shop', 'is_login', 'time_access', 'status', 'created');
-			$arrOneItem = UserShop::getOne($arrFields, $param[3]);
+			$arrFields = array('shop_id', 'shop_name', 'user_shop', 'shop_phone', 'shop_email', 'shop_address', 'shop_status','number_limit_product', 'is_shop');
+			$arrOneItem = UserShop::getItemById($arrFields, $param[3]);
+			$id = $param[3];
 		}
 
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 
-			$name_shop 	= isset($_POST['name_shop']) ? trim($_POST['name_shop']) : '';
-			$user_name 	= isset($_POST['user_name']) ? trim($_POST['user_name']) : '';
-			$phone = isset($_POST['phone']) ? trim($_POST['phone']) : '';
-			$email = isset($_POST['email']) ? trim($_POST['email']) : '';
-			$address = isset($_POST['address']) ? trim($_POST['address']) : '';
-			$created = time();
-			$status		= isset($_POST['status']) ? intval($_POST['status']) : 0;
+			$data = array(
+						'shop_name'=>array('value'=>FunctionLib::getParam('shop_name',''), 'require'=>1, 'messages'=>'Tiêu đề không được trống!'),
+						'user_shop'=>array('value'=>FunctionLib::getParam('user_shop',''), 'require'=>0, 'messages'=>''),
+						'shop_phone'=>array('value'=>FunctionLib::getParam('shop_phone',''), 'require'=>0, 'messages'=>''),
+						'shop_email'=>array('value'=>FunctionLib::getParam('shop_email',''), 'require'=>0, 'messages'=>''),
+						'shop_address'=>array('value'=>FunctionLib::getParam('shop_address',''), 'require'=>0, 'messages'=>''),
+						'shop_status'=>array('value'=>FunctionLib::getParam('shop_status',''), 'require'=>0, 'messages'=>''),
+						'number_limit_product'=>array('value'=>FunctionLib::getIntParam('number_limit_product',12), 'require'=>1, 'messages'=>'Nhập giới hạn sản phẩm ở gian hàng!'),
+						'is_shop'=>array('value'=>FunctionLib::getIntParam('is_shop',0), 'require'=>0, 'messages'=>''),
+					);
 
-			$uid		= $user->uid;
-			$created	= time();
+			$errors = ValidForm::validInputData($data);
+			if($data['shop_email']['value'] != ''){
+				$check_email = ValidForm::checkRegexEmail($data['shop_email']['value']);
+				if(!$check_email){
+					$errors .= 'Email sai cấu trúc!<br/>';
+				}
+			}
 
-			$errors = '';
-			if($title==''){
-				$errors .= 'Tiêu đề ko được trống!<br/>';
-			}
-			if($keyword==''){
-				$errors .= 'Từ khóa ko được trống!<br/>';
-			}
 			if($errors != ''){
 				drupal_set_message($errors, 'error');
-				if(isset($param[3]) && $param[3] > 0){
-					drupal_goto($base_url.'/admincp/usershop/edit/'.$param[3]);
+				if($id > 0){
+					drupal_goto($base_url.'/admincp/usershop/edit/'.$id);
 				}else{
 					drupal_goto($base_url.'/admincp/usershop/add');
 				}
-			}
-
-			$data_post = array(
-						'name_shop'=>$name_shop,
-						'user_name'=>$user_name,
-						'phone'=>$phone,
-						'email'=>$email,
-						'status'=>$status,
-						'address'=>$address,
-						'created'=>$created,
-					);
-
-			if(isset($param[3]) && $param[3] > 0){
-				unset($data_post['created']);
-				UserShop::updateId($data_post, $param[3]);
-				drupal_set_message('Sửa bài viết thành công.');
-				drupal_goto($base_url.'/admincp/usershop');
 			}else{
-				$query = UserShop::insert($data_post);
-				if($query){
-					drupal_set_message('Thêm bài viết thành công.');
-					drupal_goto($base_url.'/admincp/usershop');
-				}
+				UserShop::save($data, $id);
+				drupal_goto($base_url.'/admincp/usershop');
 			}
+			
 		}
-
-		$data = array(
-					'arrOneItem'=>$arrOneItem,				
-				);
-
-		$view = theme('addUserShop',$data);
-		return $view;
+		return $view = theme('addUserShop',array('arrOneItem'=>$arrOneItem));
+		
 	}
 
 	function deleteUserShopAction(){
