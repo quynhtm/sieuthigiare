@@ -43,8 +43,8 @@ function Shop_menu() {
 		'type' => MENU_CALLBACK,
 	);
 	$items["quan-ly-gian-hang.html"] = array(
-		"title" => t('Đăng sản phẩm'),
-		"description" => "Đăng sản phẩm",
+		"title" => t('Quản lý sản phẩm'),
+		"description" => "Quản lý sản phẩm",
 		'page callback' => 'shopManagerProduct',
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
