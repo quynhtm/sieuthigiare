@@ -15,7 +15,7 @@
 	<div class="right-head-shop">
 		<?php 
 			if($user_shop->shop_id != 0){
-				echo ucfirst($user_shop->user_shop);
+				echo 'Chào: '.ucfirst($user_shop->user_shop);
 		 	} 
 		 ?>
 		<i class="icon-caret-down"></i>
