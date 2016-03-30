@@ -36,8 +36,7 @@ class ProvinceController{
 		$item_id = 0;
 		if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
 			$item_id = (int)$param[3];
-			$getFields = array('province_id', 'province_name', 'province_position', 'province_status');
-			$arrItem = Province::getItemById($getFields, $item_id);
+			$arrItem = Province::getItemById(array(), $item_id);
 			//FunctionLib::Debug($arrItem);
 		}
 

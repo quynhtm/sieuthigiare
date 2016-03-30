@@ -36,6 +36,7 @@ define('TABLE_PRODUCT', 'web_product');
 define('TABLE_USER_SHOP', 'web_user_shop');
 define('TABLE_SUPPLIER', 'web_supplier');
 define('TABLE_PROVINCE', 'web_province');
+define('TABLE_CATEGORY', 'web_category');
 
 
 

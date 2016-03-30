@@ -23,11 +23,11 @@
             </ul>
         </li>
 
-        <li <?php if($param[1]=='product' || $param[1]=='product_category' || $param[1]=='product_comment'){?> class="active" <?php } ?>>
+        <li <?php if($param[1]=='product' || $param[1]=='category' || $param[1]=='product_comment'){?> class="active" <?php } ?>>
             <a title="" href="javascript:void(0)"><i class="icon-cogs"></i> Quản lý Sản phẩm<i class="icon-arrow"></i></a>
             <ul class="sub">
                 <li <?php if($param[1]=='product'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/product"><i class="icon-minus"></i> Sản phẩm</a></li>
-                <li <?php if($param[1]=='product_category'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/product_category"><i class="icon-minus"></i> Danh mục sản phẩm</a></li>
+                <li <?php if($param[1]=='category'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/category"><i class="icon-minus"></i> Danh mục sản phẩm</a></li>
                 <li <?php if($param[1]=='product_comment'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/product_comment"><i class="icon-minus"></i> QL Bình luận</a></li>
             </ul>
         </li>

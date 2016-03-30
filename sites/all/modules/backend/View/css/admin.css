@@ -910,6 +910,7 @@ form#formListItem {
 .showListPage .pager li > span{
     border-radius: 0;
 }
+.td_list{background-color: #ECF0F5!important;}
 .padding10{padding: 10px}
 .padding20{padding: 20px}
 

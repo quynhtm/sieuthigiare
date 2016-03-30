@@ -53,16 +53,23 @@ function Admin_menu() {
 	);
 
 	$items["admincp/usershop"] = array(
-		"title" => t('Quáº£n lÃ½ User Shop'),
-		"description" => "Qu?n lÃ½ User Shop",
+		"title" => t('Qu?n lý User Shop'),
+		"description" => "Qu?n lý User Shop",
 		'page callback' => 'router_page',
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
 
     $items["admincp/supplier"] = array(
-		"title" => t('Quáº£n lÃ½ NCC'),
-		"description" => "Qu?n lÃ½ NCC",
+		"title" => t('Qu?n lý NCC'),
+		"description" => "Qu?n lý NCC",
+		'page callback' => 'router_page',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+    $items["admincp/category"] = array(
+		"title" => t('Danh m?c s?n ph?m'),
+		"description" => "Danh m?c s?n ph?m",
 		'page callback' => 'router_page',
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
@@ -163,6 +170,10 @@ function Admin_theme() {
         //T?nh thành
         'indexProvince' 			=> array('template' => 'View/tpl/province/indexProvince'),
         'addProvince' 			=> array('template' => 'View/tpl/province/addProvince'),
+
+        //danh muc
+        'indexCategory' 			=> array('template' => 'View/tpl/category/indexCategory'),
+        'addCategory' 			=> array('template' => 'View/tpl/category/addCategory'),
  		//here
     );
 }
@@ -204,6 +215,9 @@ function Admin_init(){
 
 			'Model/Province.php',
 			'Controller/ProvinceController.php',
+
+            'Model/Category.php',
+			'Controller/CategoryController.php',
 		);
 		Loader::load('Admin', $files);
 	}

@@ -2,10 +2,10 @@
 /*
 * QuynhTM
 */
-class Province{
-	static $table_action = TABLE_PROVINCE;
-	static $primary_key = 'province_id';
-	static $arrFields = array('province_id', 'province_name', 'province_position', 'province_status', 'province_area');
+class Category{
+	static $table_action = TABLE_CATEGORY;
+	static $primary_key = 'category_id';
+	static $arrFields = array('category_id', 'category_name', 'category_parent_id', 'category_status', 'category_order');
 
 	public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
 		//n?u get field rong thi lay all
@@ -23,11 +23,15 @@ class Province{
             $arrCond = array();
 			if(!empty($dataSearch)){
 				foreach($dataSearch as $field =>$value){
-					if($field === 'province_status' && $value != -1){
+					if($field === 'category_parent_id' && $value != -1){
 						$sql->condition('i.'.$field, $value, '=');
 						array_push($arrCond, $field.' = '.$value);
 					}
-					if($field === 'province_name' && $value != ''){
+					if($field === 'category_status' && $value != -1){
+						$sql->condition('i.'.$field, $value, '=');
+						array_push($arrCond, $field.' = '.$value);
+					}
+					if($field === 'category_name' && $value != ''){
 						$db_or = db_or();
 						$db_or->condition('i.'.$field, '%'.$value.'%', 'LIKE');
 						$sql->condition($db_or);
@@ -98,5 +102,20 @@ class Province{
 			return DB::deleteId(self::$table_action, self::$primary_key, $id);
 		}
 		return false;
+	}
+
+	public static function getCategoryParent(){
+		$query = db_select(self::$table_action, 'c')
+			->condition('c.category_parent_id', 0, '=')
+			->condition('c.category_status', 1, '=')
+			->fields('c', self::$arrFields);
+		$data = $query->execute();
+		$result = array();
+		if(!empty($data)){
+			foreach($data as $k=> $cate){
+				$result[$cate->category_id] = $cate->category_name;
+			}
+		}
+		return $result;
 	}
 }
