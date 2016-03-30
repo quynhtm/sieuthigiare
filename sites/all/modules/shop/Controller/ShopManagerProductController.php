@@ -69,3 +69,6 @@ function shopPostProduct(){
 	}
 	return $view = theme('shopPostProduct',array());
 }
+function shopEditProduct(){
+	
+}

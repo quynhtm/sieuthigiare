@@ -117,7 +117,7 @@
 									?>
 								</td>
 								<td>
-								<?php $linkEdit = $base_url.'/cap-nhat-san-pham/'.$v->id; ?>
+								<?php $linkEdit = $base_url.'/sua-san-pham/'.$v->id; ?>
 								<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit green font-size-20"></i></a>
 								<a id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-trash font-size-20 red"></i></a>
 								</td>

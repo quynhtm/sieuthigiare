@@ -56,6 +56,13 @@ function Shop_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
+	$items["sua-san-pham/%"] = array(
+		"title" => t('Sửa sản phẩm'),
+		"description" => "Sửa sản phẩm",
+		'page callback' => 'shopEditProduct',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
   return $items;
 }
 
