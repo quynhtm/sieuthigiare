@@ -11,7 +11,7 @@ class Common(){
 	public static $table_action_province = TABLE_PROVINCE;
 	public static static $primary_key_category = 'province_id';
 	
-	public static getListCategory($parent_id=0, $sub=0){
+	public static function getListCategory($parent_id=0, $sub=0){
 		//code here
 
 	}
