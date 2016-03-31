@@ -74,6 +74,13 @@ function Admin_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
+    $items["admincp/news"] = array(
+		"title" => t('Qu?n lý tin t?c'),
+		"description" => "Qu?n lý tin t?c",
+		'page callback' => 'router_page',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
 	
   return $items;
 }
@@ -174,6 +181,10 @@ function Admin_theme() {
         //danh muc
         'indexCategory' 			=> array('template' => 'View/tpl/category/indexCategory'),
         'addCategory' 			=> array('template' => 'View/tpl/category/addCategory'),
+
+        //tin t?c
+        'indexNews' 			=> array('template' => 'View/tpl/category/indexNews'),
+        'addNews' 			=> array('template' => 'View/tpl/category/addNews'),
  		//here
     );
 }
@@ -218,6 +229,9 @@ function Admin_init(){
 
             'Model/Category.php',
 			'Controller/CategoryController.php',
+
+            'Model/News.php',
+			'Controller/NewsController.php',
 		);
 		Loader::load('Admin', $files);
 	}

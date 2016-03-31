@@ -32,6 +32,13 @@
             </ul>
         </li>
 
+        <li <?php if($param[1]=='news'){?> class="active" <?php } ?>>
+            <a title="" href="javascript:void(0)"><i class="icon-cogs"></i> Quản lý nội dung<i class="icon-arrow"></i></a>
+            <ul class="sub">
+                <li <?php if($param[1]=='news'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/news"><i class="icon-minus"></i> Quản lý Tin tức</a></li>
+            </ul>
+        </li>
+
         <li <?php if($param[1]=='usershop'){?> class="active" <?php } ?>>
             <a title="" href="<?php echo $base_url ?>/admincp/usershop"><i class="icon-home"></i> Quản trị User Shop</a>
         </li>
