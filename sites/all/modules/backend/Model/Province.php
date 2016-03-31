@@ -85,6 +85,12 @@ class Province{
 		}
 		return false;
 	}
+	public static function insert($dataInsert){
+		if(!empty($dataInsert)){
+			return DB::insertOneItem(self::$table_action, $dataInsert);
+		}
+		return false;
+	}
 
 	public static function updateId($dataUpdate, $id = 0){
 		if($id > 0 && !empty($dataUpdate)){

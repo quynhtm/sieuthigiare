@@ -42,10 +42,15 @@ class NewsController{
 
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 			$dataInput = array(
-				'category_name'=>array('value'=>FunctionLib::getParam('category_name',''), 'require'=>1, 'messages'=>'Tên danh mục không được trống!'),
-				'category_parent_id'=>array('value'=>FunctionLib::getParam('category_parent_id',''), 'require'=>1, 'messages'=>'Chưa chọn danh mục cha!'),
-				'category_status'=>array('value'=>FunctionLib::getParam('category_status',0)),
-				'category_order'=>array('value'=>FunctionLib::getParam('category_order',0)),
+				'news_title'=>array('value'=>FunctionLib::getParam('news_title',''), 'require'=>1, 'messages'=>'Tiêu đề tin bài không được trống!'),
+				'news_desc_sort'=>array('value'=>FunctionLib::getParam('news_desc_sort','')),
+				'news_image_other'=>array('value'=>FunctionLib::getParam('news_image_other','')),
+				'news_image'=>array('value'=>FunctionLib::getParam('news_image','')),
+				'news_content'=>array('value'=>FunctionLib::getParam('news_content','')),
+				'news_status'=>array('value'=>FunctionLib::getParam('news_status',0)),
+				'news_category'=>array('value'=>FunctionLib::getParam('news_category',0)),
+				'news_create'=>array('value'=>FunctionLib::getParam('news_create',0)),
+				'news_type'=>array('value'=>FunctionLib::getParam('news_type',0)),
 			);
 
 			$errors = ValidForm::validInputData($dataInput);

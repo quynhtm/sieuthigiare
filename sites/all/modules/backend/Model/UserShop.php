@@ -102,6 +102,12 @@ class UserShop{
 		return false;
 	}
 
+	public static function insert($dataInsert){
+		if(!empty($dataInsert)){
+			return DB::insertOneItem(self::$table_action, $dataInsert);
+		}
+		return false;
+	}
 	public static function updateId($dataUpdate, $id = 0){
 		if($id > 0 && !empty($dataUpdate)){
 			return DB::updateId(self::$table_action, self::$primary_key, $dataUpdate, $id);
