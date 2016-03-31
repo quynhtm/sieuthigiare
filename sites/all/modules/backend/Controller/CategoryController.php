@@ -8,7 +8,7 @@ class CategoryController{
 	private $arrCategoryParent = array();
 
 	public function __construct(){
-		$this->arrCategoryParent = Category::getCategoryParent();
+		$this->arrCategoryParent = DataCommon::getListCategoryParent();
 	}
 	function indexCategory(){
 		global $base_url;
