@@ -130,13 +130,17 @@ function shopEditInfo(){
 	}
 	if(!empty($_POST['frmChangeInfo'])){
 		$dataInput = array(
+					'shop_category'=>array('value'=>FunctionLib::getIntParam('shop_category',''), 'require'=>1, 'messages'=>'Chọn danh mục sản phẩm!'),
 					'shop_name'=>array('value'=>FunctionLib::getParam('shop_name',''), 'require'=>1, 'messages'=>'Tên gian hàng không được trống!'),
 					'shop_phone'=>array('value'=>FunctionLib::getParam('shop_phone',''), 'require'=>1, 'messages'=>'Số điện thoại không được trống!'),
 					'shop_address'=>array('value'=>FunctionLib::getParam('shop_address',''), 'require'=>0, 'messages'=>''),
 					'shop_email'=>array('value'=>FunctionLib::getParam('shop_email',''), 'require'=>1, 'messages'=>'Email không được trống!'),
 					'shop_about'=>array('value'=>FunctionLib::getParam('shop_about',''), 'require'=>0, 'messages'=>''),
-					'shop_province'=>array('value'=>FunctionLib::getIntParam('shop_province',''), 'require'=>0, 'messages'=>'Chọn 1 tỉnh thành!'),
+					'shop_province'=>array('value'=>FunctionLib::getIntParam('shop_province',''), 'require'=>0, 'messages'=>'Chọn tỉnh thành!'),
+					'shop_transfer'=>array('value'=>FunctionLib::getParam('shop_transfer',''), 'require'=>0, 'messages'=>''),
+
 				);
+
 		$errors = ValidForm::validInputData($dataInput);
 		$check_valid_mail = ValidForm::checkRegexEmail($dataInput ['shop_email']['value']);
 		if(!$check_valid_mail){
@@ -152,12 +156,14 @@ function shopEditInfo(){
 			drupal_goto($base_url.'/sua-thong-tin-gian-hang.html');
 		}
 		$data_post = array(
+			'shop_category'=>$dataInput ['shop_category']['value'],
 			'shop_name'=>$dataInput ['shop_name']['value'],
 			'shop_phone'=>$dataInput ['shop_phone']['value'],
 			'shop_address'=>$dataInput ['shop_address']['value'],
 			'shop_email'=>$dataInput ['shop_email']['value'],
 			'shop_about'=>$dataInput ['shop_about']['value'],
 			'shop_province'=>$dataInput ['shop_province']['value'],
+			'shop_transfer'=>$dataInput ['shop_transfer']['value'],
 		);
 
 		$query = ShopUser::updateId($data_post, $user_shop->shop_id);
@@ -165,7 +171,11 @@ function shopEditInfo(){
 		drupal_goto($base_url.'/quan-ly-gian-hang.html');
 	}
 	$listProvince = ShopUser::getAllProvices($limit=200);
-	return $view = theme('shopEditInfo', array('listProvince'=>$listProvince));
+	$arrCategoryParent = DataCommon::getListCategoryParent();
+	$dataCategory['shop_category'] = $user_shop->shop_category;
+	$optionCategoryParent = FunctionLib::getOption(array(-1=>'Chọn danh mục cha') + $arrCategoryParent, $dataCategory['shop_category']);
+
+	return $view = theme('shopEditInfo', array('listProvince'=>$listProvince, 'optionCategoryParent'=>$optionCategoryParent));
 }
 
 function shopEditPassword(){

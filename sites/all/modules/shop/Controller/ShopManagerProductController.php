@@ -67,6 +67,7 @@ function shopPostProduct(){
 			drupal_goto($base_url.'/quan-ly-gian-hang.html');
 		}
 	}
+
 	return $view = theme('shopPostProduct',array());
 }
 function shopEditProduct(){

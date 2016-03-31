@@ -10,6 +10,7 @@ class ShopUser{
 	static $table_action_provice = TABLE_PROVINCE;
 	static $primary_key_user_shop = 'shop_id';
 	static $primary_key_province_shop = 'province_id';
+	static $arrCategoryParent;
 
 	public static function insert($dataInsert){
 		if(!empty($dataInsert)){
