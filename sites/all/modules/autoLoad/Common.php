@@ -5,7 +5,7 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0 
 */
-class Common(){
+class Common{
 	public static $table_action_category = TABLE_CATEGORY;
 	
 	public static $table_action_province = TABLE_PROVINCE;
