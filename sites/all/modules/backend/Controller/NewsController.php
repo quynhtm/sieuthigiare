@@ -110,9 +110,9 @@ class NewsController{
 		if(isset($_POST) && $_POST['txtFormName']=='txtFormName'){
 			$listId = isset($_POST['checkItem'])? $_POST['checkItem'] : array();
 			if(!empty($listId)){
-				foreach($listId as $item_id){
-					if($item_id > 0){
-						News::deleteId($item_id);
+				foreach($listId as $id){
+					if($id > 0){
+						News::deleteOne($id);
 					}
 				}
 				drupal_set_message('Xóa bài viết thành công.');

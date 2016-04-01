@@ -111,4 +111,26 @@ class News{
 		}
 		return false;
 	}
+	public static function deleteOne($id=0){
+		if($id > 0){
+			$arrItem = DB::getItemById(self::$table_action, self::$primary_key, array('news_image_other'), $id);
+			if(!empty($arrItem)){
+				if($arrItem[0]->news_image_other != ''){
+					$news_image_other  = unserialize($arrItem[0]->news_image_other);
+					if(!empty($news_image_other)){
+						$path = DRUPAL_ROOT.'/uploads/news/'.$id;
+						foreach($news_image_other as $v){
+		                	if(is_file($path.'/'.$v)){
+		                    	@unlink($path.'/'.$v);
+		                	}
+		            	}
+			            if(is_dir($path)) {
+		                    @rmdir($path);
+		                }
+					}
+				}
+				self::deleteId($id);
+			}
+		}
+	}
 }
