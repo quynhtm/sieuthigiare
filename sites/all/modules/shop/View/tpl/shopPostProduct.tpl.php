@@ -65,7 +65,7 @@
 					        <div class="row">
 					        	<div class="col-sm-6">
 						        	<div class="control-group">
-						                <label class="control-label">Chi tiết</label>
+						                <label class="control-label">Chi tiết<span>(*)</span></label>
 						                <div class="controls">
 						                	<textarea name="product_content" class="form-control input-sm" cols="30" rows="10"></textarea>
 						                </div>
