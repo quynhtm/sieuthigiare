@@ -1,6 +1,4 @@
 <?php global $base_url;?>
-<script type="text/javascript" src="<?php echo $base_url?>/sites/all/modules/autoLoad/js/ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="<?php echo $base_url?>/sites/all/modules/autoLoad/js/ckeditor/config.js"></script>
 <div class="pageWrapper">
     <?php if ($page['header']){ ?>
     <div class="headerRegion">
