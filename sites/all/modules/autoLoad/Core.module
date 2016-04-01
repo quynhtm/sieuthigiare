@@ -53,7 +53,7 @@ function Core_init(){
 
     if(isset($param[0]) && $param[0] != 'admin'){
     	$files = array(
-            'bootstrap/js/bootstrap.min.js',
+            //'bootstrap/js/bootstrap.min.js',
             'bootstrap/css/bootstrap.css',
             'css/font-awesome.css',
             'css/core.css',
@@ -61,11 +61,14 @@ function Core_init(){
             'js/jquery.alerts.js',
 
     	);
-	   Loader::load('Core', $files);
-    }
+	    Loader::load('Core', $files);
+        $files = array(
+            'js/ckeditor/ckeditor.js',
+            'js/ckeditor/config.js',
 
-    drupal_add_js(Loader::$path.'/js/ckeditor/ckeditor.js', array('group'=>JS_DEFAULT, 'every_page'=>FALSE, 'scope' => 'header',));
-    drupal_add_js(Loader::$path.'/js/ckeditor/config.js', array('group'=>JS_DEFAULT, 'every_page'=>FALSE, 'scope' => 'header',));
+        );
+        Loader::loadJSExt('Core', $files);
+    }
 
     Session::setSessionAnonymousUserShop();
 }

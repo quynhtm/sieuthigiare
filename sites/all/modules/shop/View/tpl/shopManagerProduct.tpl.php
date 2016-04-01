@@ -1,6 +1,4 @@
-<?php 
-	global $base_url, $user_shop;
-?>
+<?php global $base_url;?>
 <div class="main-manager-shop">
 	<div class="header">
 		<?php require_once(DRUPAL_ROOT.'/'.path_to_theme().'/View/tpl/shopHeader.tpl.php') ?>
@@ -13,22 +11,30 @@
 					<form action="" method="GET" id="frmSearch" class="frmSearch" name="frmSearch">
 						<div class="col-lg-3">
 							<div class="form-group">
-								<label class="control-label">Tên Sản phẩm</label>
-								<div><input type="text" class="form-control input-sm" placeholder ="Tên sản phẩm" name="product"/></div>
+								<label class="control-label">Mã sản phẩm</label>
+								<div><input type="text" class="form-control input-sm" placeholder ="Mã sản phẩm" name="product_code" value="<?php echo $dataSearch['product_code'] ?>"/></div>
 							</div>
 							<div class="form-group">
-								<label class="control-label">Giá sản phẩm</label>
-								<div><input type="text" class="form-control input-sm" placeholder ="Giá sản phẩm" name="price"/></div>
+								<label class="control-label">Tên Sản phẩm</label>
+								<div><input type="text" class="form-control input-sm" placeholder ="Tên sản phẩm" name="product_name" value="<?php echo $dataSearch['product_name'] ?>"/></div>
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="form-group">
 								<label class="control-label">Danh mục</label>
-								<div><select class="form-control input-sm" name="category"></select></div>
+								<div>
+									<select class="form-control input-sm" name="category_id">
+										<?php echo $optionCategoryChildren ?>	
+									</select>
+								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label">Trạng thái</label>
-								<div><select class="form-control input-sm" name="status"></select></div>
+								<div>
+									<select class="form-control input-sm" name="status">
+										<?php echo $optionStatus ?>	
+									</select>
+								</div>
 							</div>
 						</div>
 						<div class="col-lg-3">
@@ -67,7 +73,7 @@
 						<tr>
 							<th width="5%">Ảnh</th>
 							<th width="2%">Chọn<br/><input type="checkbox" id="checkAll"/></th>
-							<th width="">Tên sản phẩm</th>
+							<th width="">[Mã] Tên sản phẩm</th>
 							<th width="">Danh mục</th>
 							<th width="">Giá thị trường</th>
 							<th width="">Giá bán</th>
@@ -82,7 +88,7 @@
 							<tr>
 								<td></td>
 								<td><input type="checkbox" value="<?php echo $v->id?>"/></td>
-								<td><?php echo $v->product_name ?></td>
+								<td><?php echo '['.$v->product_code.'] '.$v->product_name ?></td>
 								<td></td>
 								<td>
 									<?php 
@@ -117,7 +123,7 @@
 									?>
 								</td>
 								<td>
-								<?php $linkEdit = $base_url.'/sua-san-pham/'.$v->id; ?>
+								<?php $linkEdit = $base_url.'/sua-san-pham/'.$v->id.'/'.Stdio::pregReplaceStringAlias($v->product_name).'.html' ?>
 								<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit green font-size-20"></i></a>
 								<a id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-trash font-size-20 red"></i></a>
 								</td>

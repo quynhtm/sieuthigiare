@@ -56,7 +56,7 @@ function Shop_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
-	$items["sua-san-pham/%"] = array(
+	$items["sua-san-pham/%/%"] = array(
 		"title" => t('Sửa sản phẩm'),
 		"description" => "Sửa sản phẩm",
 		'page callback' => 'shopEditProduct',
@@ -86,6 +86,9 @@ function Shop_theme() {
 	    'shopPostProduct' => array(
 	      'template' => 'View/tpl/shopPostProduct'
 	    ),
+	    'shopEditProduct' => array(
+	      'template' => 'View/tpl/shopEditProduct'
+	    ),
 	);
 }
 
@@ -95,11 +98,10 @@ function Shop_init() {
 		$files = array(
 			'Model/ShopRegModel.php',
 			'Controller/ShopRegController.php',
-
 			'Model/ShopManagerProductModel.php',
 			'Controller/ShopManagerProductController.php',
 
-			'View//css/shop.css',
+			'View/css/shop.css',
 			'View/js/shop.js',
 		);
 		Loader::load('Shop', $files);
