@@ -31,7 +31,7 @@ class ShopManagerProduct{
             if(!empty($dataSearch)){
                 foreach($dataSearch as $field =>$value){
                     
-                    if($field === 'category_id' && $value != -1){
+                    if($field === 'category_id' && $value != ''){
                         $sql->condition('i.'.$field, $value, '=');
                         array_push($arrCond, $field.' = '.$value);
                     }
@@ -60,6 +60,7 @@ class ShopManagerProduct{
                     $cond = implode(' AND ', $arrCond);
                 }
             }
+            
             /*End search*/
             $totalItem = DB::countItem(self::$table_action, self::$primary_key , $cond, '', self::$primary_key.' ASC');
             $result = $sql->limit($limit)->orderBy('i.'.self::$primary_key, 'DESC')->execute();
