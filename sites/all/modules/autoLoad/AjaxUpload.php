@@ -8,6 +8,7 @@
 class AjaxUpload{
 	static $primary_key_news = 'news_id';
     static $primary_key_project = 'id';
+
 	function playme(){
 		$code = FunctionLib::getParam('code', '');
 
@@ -41,10 +42,10 @@ class AjaxUpload{
         
         switch( $type ){
             case 1://img news
-                $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_NEWS, 'news');
+                $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_NEWS, 'news', 'news_image_other', self::$primary_key_news);
                 break;
             case 2 ://img product
-                $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_PRODUCT, 'product');
+                $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_PRODUCT, 'product', 'product_image_other', self::$primary_key_project);
                 break;
             default:
                 break;
@@ -53,20 +54,26 @@ class AjaxUpload{
 		exit();
 	}
 
-	function uploadImageToFolder($dataImg, $id_hiden, $table_action, $folder){
+	function uploadImageToFolder($dataImg, $id_hiden, $table_action, $folder, $field_img_other='', $primary_key){
         global $base_url;
         $aryData = array();
         $aryData['intIsOK'] = -1;
-        $aryData['msg'] = "Data not exists!";
+        $aryData['msg'] = "Upload Img!";
 
         if (!empty($dataImg)) {
             if($id_hiden == 0){
-                $new_row['news_create'] = TIME_NOW;
-                $new_row['news_status'] = 13;
+                if($field_img_other == 'news_image_other'){
+                    $new_row['news_create'] = time();
+                    $new_row['news_status'] = 0;
+                }elseif($field_img_other == 'product_image_other'){
+                    $new_row['time_created'] = time();
+                    $new_row['status'] = 0;
+                }
                 $id = DB::insertOneItem($table_action, $new_row);
             }elseif($id_hiden > 0){
                 $id = $id_hiden;
             }
+
             $aryError = $tmpImg = array();
             $old_file = '';
             
@@ -76,21 +83,21 @@ class AjaxUpload{
 	                           $_folder = $folder.'/'.$id,
 	                           $type_json=0
                            );
-             
+            
             if ($file_name != '' && empty($aryError)) {
                 $tmpImg['name_img'] = $file_name;
                 $tmpImg['id_key'] = rand(10000, 99999);
-              
+               
                 $tmpImg['src'] = $base_url.'/uploads/'.$folder.'/'.$id_hiden.'/'.$file_name;
-                
-                $listImageTempOther = DB::getItemById($table_action, self::$primary_key_news, array('news_image_other'), $id);
-                
-                if(!empty($listImageTempOther)){
-                	$aryTempImages = ($listImageTempOther[0]->news_image_other !='')? unserialize($listImageTempOther[0]->news_image_other): array();
-               	}
-                $aryTempImages[] = $file_name;
-                $new_row['news_image_other'] = serialize($aryTempImages);
-                DB::updateId($table_action, self::$primary_key_news, $new_row, $id);
+                if($field_img_other != ''){
+                    $listImageTempOther = DB::getItemById($table_action, $primary_key, array($field_img_other), $id);
+                    if(!empty($listImageTempOther)){
+                    	$aryTempImages = ($listImageTempOther[0]->$field_img_other !='')? unserialize($listImageTempOther[0]->$field_img_other): array();
+                   	}
+                    $aryTempImages[] = $file_name;
+                    $new_row[$field_img_other] = serialize($aryTempImages);
+                    DB::updateId($table_action, $primary_key, $new_row, $id);
+                }
             }
             $aryData['intIsOK'] = 1;
             $aryData['id_item'] = $id;
@@ -106,16 +113,17 @@ class AjaxUpload{
 
         $aryData = array();
         $aryData['intIsOK'] = -1;
+        $aryData['msg'] = "Remove Img!";
         $aryData['nameImage'] = $nameImage;
         switch( $type ){
             case 1://anh tin tuc
                 $folder_image = 'uploads/news';
                 $table_action = TABLE_NEWS;
                 if($id > 0 && $nameImage != '' && $folder_image != ''){
-                    $delete_action = $this->delete_image_item($table_action, self::$primary_key_news, $id, array('news_image_other'), $nameImage, $folder_image);
+                    $delete_action = $this->delete_image_item($table_action, self::$primary_key_news, $id, 'news_image_other', $nameImage, $folder_image);
                     if($delete_action == 1){
                         $aryData['intIsOK'] = 1;
-                        $aryData['msg'] = "Da xoa thanh cong!";
+                        $aryData['msg'] = "Remove Img!";
                     }
                 }
                 break;
@@ -123,10 +131,9 @@ class AjaxUpload{
                 $folder_image = 'uploads/product';
                 $table_action = TABLE_PRODUCT;
                 if($id > 0 && $nameImage != '' && $folder_image != ''){
-                    $delete_action = $this->delete_image_item($table_action, self::$primary_key_project, $id, array('product_image_other'), $nameImage, $folder_image);
+                    $delete_action = $this->delete_image_item($table_action, self::$primary_key_project, $id, 'product_image_other', $nameImage, $folder_image);
                     if($delete_action == 1){
                         $aryData['intIsOK'] = 1;
-                        $aryData['msg'] = "Da xoa thanh cong!";
                     }
                 }
                 break;
@@ -138,15 +145,25 @@ class AjaxUpload{
         exit();
     }
 
-    function delete_image_item($table_action, $primary_key, $id, $arrField=array(), $nameImage, $folder_image){
+    function delete_image_item($table_action, $primary_key, $id, $field = '', $nameImage, $folder_image){
         $delete_action = 0;
-        //lay ten anh trong db va xoa di
-        $listImageOther = DB::getItemById($table_action, $primary_key, $arrField, $id);
-        $aryImages = unserialize($listImageOther[0]->news_image_other);
+        $aryImages  = array();
+        //get img in DB and remove it
+        if($field != ''){
+            $listImageOther = DB::getItemById($table_action, $primary_key, array($field), $id);
+            $aryImages = unserialize($listImageOther[0]->$field);
+        }
         if(is_array($aryImages) && count($aryImages) > 0) {
             foreach ($aryImages as $k => $v) {
                 if($v === $nameImage){
                     $this->unlinkFileAndFolder($nameImage, $id, $folder_image, true);
+                    unset($aryImages[$k]);
+                    if(!empty($aryImages)){
+                        $aryImages = serialize($aryImages);
+                    }else{
+                        $aryImages = '';
+                    }
+                    DB::updateId($table_action, $primary_key, array($field=>$aryImages), $id);
                     $delete_action = 1;
                     break;
                 }
