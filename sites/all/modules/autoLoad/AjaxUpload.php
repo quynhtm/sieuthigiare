@@ -5,22 +5,12 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0
 */
-
-/*
-<form name="frmUpload" method="post" enctype="multipart/form-data">
-	<input type="file" name="image"/>
-	<input type="submit" value="upload" />
-</form>
-
-if(isset($_POST)){
-	$HSSUpload = new HSSUpload();
-	echo $HSSUpload->upload($_name='image', $_file_ext='rar,flv,mp4', $_max_file_size=150*1024*1024, $_module='news',  $type_json=1);
-}
-*/
 class AjaxUpload{
 	static $primary_key_news = 'news_id';
+    static $primary_key_project = 'id';
 	function playme(){
-		$code = FunctionLib::getIntParam('code', '');
+		$code = FunctionLib::getParam('code', '');
+
 		switch( $code ){
             case 'upload_image' :
 				$this->upload_image();
@@ -38,7 +28,6 @@ class AjaxUpload{
 		}
 	}
 	function home(){
-		global $display;
 		die("Nothing to do...");
 	}
 
@@ -84,7 +73,7 @@ class AjaxUpload{
             $file_name = Upload::uploadFile('multipleFile', 
 	                           $_file_ext = 'jpg,jpeg,png,gif', 
 	                           $_max_file_size = 10*1024*1024, 
-	                           $_folder = $folder, 
+	                           $_folder = $folder.'/'.$id,
 	                           $type_json=0
                            );
              
@@ -92,7 +81,7 @@ class AjaxUpload{
                 $tmpImg['name_img'] = $file_name;
                 $tmpImg['id_key'] = rand(10000, 99999);
               
-                $tmpImg['src'] = $base_url.'/uploads/product/'.$file_name;
+                $tmpImg['src'] = $base_url.'/uploads/'.$folder.'/'.$id_hiden.'/'.$file_name;
                 
                 $listImageTempOther = DB::getItemById($table_action, self::$primary_key_news, array('news_image_other'), $id);
                 
@@ -108,5 +97,93 @@ class AjaxUpload{
             $aryData['info'] = $tmpImg;
         }
         return $aryData;
+    }
+    function remove_image(){
+        
+        $id = FunctionLib::getIntParam('id', 0);
+        $nameImage = FunctionLib::getParam('nameImage', '');
+        $type = FunctionLib::getIntParam('type', 1);
+
+        $aryData = array();
+        $aryData['intIsOK'] = -1;
+        $aryData['nameImage'] = $nameImage;
+        switch( $type ){
+            case 1://anh tin tuc
+                $folder_image = 'uploads/news';
+                $table_action = TABLE_NEWS;
+                if($id > 0 && $nameImage != '' && $folder_image != ''){
+                    $delete_action = $this->delete_image_item($table_action, self::$primary_key_news, $id, array('news_image_other'), $nameImage, $folder_image);
+                    if($delete_action == 1){
+                        $aryData['intIsOK'] = 1;
+                        $aryData['msg'] = "Da xoa thanh cong!";
+                    }
+                }
+                break;
+            case 1://anh tin tuc
+                $folder_image = 'uploads/product';
+                $table_action = TABLE_PRODUCT;
+                if($id > 0 && $nameImage != '' && $folder_image != ''){
+                    $delete_action = $this->delete_image_item($table_action, self::$primary_key_project, $id, array('product_image_other'), $nameImage, $folder_image);
+                    if($delete_action == 1){
+                        $aryData['intIsOK'] = 1;
+                        $aryData['msg'] = "Da xoa thanh cong!";
+                    }
+                }
+                break;
+            default:
+                $folder_image = '';
+                break;
+        }
+        echo json_encode($aryData);
+        exit();
+    }
+
+    function delete_image_item($table_action, $primary_key, $id, $arrField=array(), $nameImage, $folder_image){
+        $delete_action = 0;
+        //lay ten anh trong db va xoa di
+        $listImageOther = DB::getItemById($table_action, $primary_key, $arrField, $id);
+        $aryImages = unserialize($listImageOther[0]->news_image_other);
+        if(is_array($aryImages) && count($aryImages) > 0) {
+            foreach ($aryImages as $k => $v) {
+                if($v === $nameImage){
+                    $this->unlinkFileAndFolder($nameImage, $id, $folder_image, true);
+                    $delete_action = 1;
+                    break;
+                }
+            }
+        }
+        //xoa khi chua update vao db, anh moi up load
+        if($delete_action == 0){
+            $this->unlinkFileAndFolder($nameImage, $id, $folder_image, true);
+            $delete_action = 1;
+        }
+        return $delete_action;
+    }
+
+    function unlinkFileAndFolder($file_name = '', $id = 0, $folder = '', $is_delDir = 0){
+       
+        if($file_name != '') {
+            //Xoa anh goc
+            $paths = '';
+            if($folder != '' && $id >0){
+                $path = DRUPAL_ROOT.'/'.$folder.'/'.$id;
+            }
+
+            if($file_name != ''){
+                if($path != ''){
+                    if(is_file($path.'/'.$file_name)){
+                        @unlink($path.'/'.$file_name);
+                    }
+                }
+            }
+            //Xoa thu muc
+            if($is_delDir) {
+                if($path != ''){
+                    if(is_dir($path)) {
+                        @rmdir($path);
+                    }
+                }  
+            }
+        }
     }
 }

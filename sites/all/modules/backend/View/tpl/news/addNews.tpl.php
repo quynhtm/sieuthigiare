@@ -1,3 +1,4 @@
+<?php global $base_url ?>
 <div class="inner-box">
 	<div class="page-title-box">
 		<div class="wrapper">
@@ -20,8 +21,34 @@
                      <a href="javascript:;"class="btn btn-primary" onclick="Common_admin.uploadMultipleImages(1);">Upload ảnh </a>
                  </div>
             </div>
-
-             <div class="control-group">
+            <!--hien thi anh-->
+            <?php if(isset($arrItem->news_image_other)){?>
+            <ul id="sys_drag_sort" class="ul_drag_sort">
+                <?php 
+                    if($arrItem->news_image_other != ''){
+                        $list_news_image_other = unserialize($arrItem->news_image_other);
+                        foreach($list_news_image_other as $k=>$v){      
+                ?>
+                <li id="sys_div_img_other_<?php echo $k ?>">
+                    <div class="div_img_upload">
+                        <img src="<?php echo $base_url.'/uploads/news/'.$arrItem->news_id.'/'.$v?>" height="80" width="80">
+                        <input type="hidden" id="sys_img_other_<?php echo $k ?>" name="img_other[]" value="<?php echo $v ?>" class="sys_img_other">
+                        <div class='clear'></div>
+                        <input type="radio" id="chẹcked_image_<?php echo $k ?>" name="chẹcked_image" value="<?php echo $k ?>" onclick="Common_admin.checkedImage('<?php echo $v ?>','<?php echo $k ?>');">
+                        <label for="chẹcked_image_{$key}" style='font-weight:normal'>Ảnh đại diện</label>
+                        <br/><a href="javascript:void(0);" id="sys_delete_img_other_<?php echo $k ?>"onclick="Common_admin.removeImage('<?php echo $k ?>','<?php if(isset($arrItem->news_id)){ echo $arrItem->news_id; } ?>','<?php echo $v ?>','1');">Xóa ảnh</a>
+                        <span style="display: none"><b><?php echo $k ?></b></span>
+                    </div>
+                </li>
+                <?php 
+                    } 
+                        } 
+                ?>
+            </ul>
+            <input name="list1SortOrder" id ='list1SortOrder' type="hidden" />
+            <?php } ?>
+            <!--ket thuc hien thi anh-->    
+            <div class="control-group">
                 <label class="control-label">Mô tả ngắn</label>
                 <div class="controls">
                     <input type="text"class="form-control input-sm" name="news_desc_sort" value="<?php if(isset($arrItem->news_desc_sort)){ echo $arrItem->news_desc_sort; } ?>">
