@@ -13,14 +13,14 @@
 function Admin_menu() {
 	
 	$items["admin/admincp"] = array(
-        "title" => t("Trang quáº£n trá»‹"),
+        "title" => t("CMS"),
         "description" => t("Administration"),
         'page callback' => 'admin_redirect',
         'access callback' => TRUE,
         'type' => MENU_NORMAL_ITEM,
     );
 	$items["admincp"] = array(
-        "title" => t("Trang quáº£n trá»‹"),
+        "title" => t("CMS"),
         "description" => t("Administration"),
         'page callback' => 'router_page',
         'access callback' => TRUE,
@@ -53,30 +53,30 @@ function Admin_menu() {
 	);
 
 	$items["admincp/usershop"] = array(
-		"title" => t('Qu?n lý User Shop'),
-		"description" => "Qu?n lý User Shop",
+		"title" => t('User Shop'),
+		"description" => "User Shop",
 		'page callback' => 'router_page',
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
 
     $items["admincp/supplier"] = array(
-		"title" => t('Qu?n lý NCC'),
-		"description" => "Qu?n lý NCC",
+		"title" => t('NCC'),
+		"description" => "NCC",
 		'page callback' => 'router_page',
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
     $items["admincp/category"] = array(
-		"title" => t('Danh m?c s?n ph?m'),
-		"description" => "Danh m?c s?n ph?m",
+		"title" => t('Category'),
+		"description" => "Category",
 		'page callback' => 'router_page',
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
     $items["admincp/news"] = array(
-		"title" => t('Qu?n lý tin t?c'),
-		"description" => "Qu?n lý tin t?c",
+		"title" => t('News'),
+		"description" => "News",
 		'page callback' => 'router_page',
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
@@ -174,7 +174,7 @@ function Admin_theme() {
         'indexSupplier' 		=> array('template' => 'View/tpl/supplier/indexSupplier'),
         'addSupplier' 		    => array('template' => 'View/tpl/supplier/addSupplier'),
 
-        //T?nh thành
+        //T?nh thÃ nh
         'indexProvince' 		=> array('template' => 'View/tpl/province/indexProvince'),
         'addProvince' 			=> array('template' => 'View/tpl/province/addProvince'),
 
