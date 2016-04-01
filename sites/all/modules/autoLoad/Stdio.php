@@ -6,13 +6,8 @@
 * @Version	 : 1.0 
 */
 class Stdio{
-
-    function __construct(){
-        //init here
-    }
-   
-    //function replace a string to alias string
-    function pregReplaceStringAlias($str=''){
+    //Convert alias
+    public static function pregReplaceStringAlias($str=''){
         if(!$str) return '';
         if($str !=''){
             $str = str_replace(array('^', '$', '\\', '/', '(', ')', '|', '?', '+', '_', '*', '[', ']', '{', '}', ',', '.', '%', '<', '>', '=', '"', '“', '”', '!', ':', ';', '&', '~', '#', '`', "'", '@' ), array(''), html_entity_decode(trim($str)));

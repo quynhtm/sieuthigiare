@@ -30,11 +30,24 @@ class ShopManagerProduct{
             $arrCond = array();
             if(!empty($dataSearch)){
                 foreach($dataSearch as $field =>$value){
+                    
+                    if($field === 'category_id' && $value != -1){
+                        $sql->condition('i.'.$field, $value, '=');
+                        array_push($arrCond, $field.' = '.$value);
+                    }
+
                     if($field === 'status' && $value != -1){
                         $sql->condition('i.'.$field, $value, '=');
                         array_push($arrCond, $field.' = '.$value);
                     }
                     if($field === 'product_name' && $value != ''){
+                        $db_or = db_or();
+                        $db_or->condition('i.'.$field, '%'.$value.'%', 'LIKE');
+                        $sql->condition($db_or);
+                        array_push($arrCond, "(".$field." LIKE '%". $value ."%')");
+                    }
+
+                    if($field === 'product_code' && $value != ''){
                         $db_or = db_or();
                         $db_or->condition('i.'.$field, '%'.$value.'%', 'LIKE');
                         $sql->condition($db_or);

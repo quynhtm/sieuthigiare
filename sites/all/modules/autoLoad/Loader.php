@@ -53,6 +53,15 @@ class Loader{
 		}
 	}
 
+	public static function loadJSExt($module, $js){
+		$path = drupal_get_path('module', $module);
+		foreach ($js as $item) {
+			if(file_exists(DRUPAL_ROOT.'/'.self::$path.'/'.$item)){
+				drupal_add_js($path.'/'.$item, array('group'=>JS_DEFAULT, 'every_page'=>FALSE, 'scope' => 'header',));
+			}
+		}
+	}
+
 	private static function loadINC($inc){
 		foreach ($inc as $item) {
 			$ext = explode('.', $item);

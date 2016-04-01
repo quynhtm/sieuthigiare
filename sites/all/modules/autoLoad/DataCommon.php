@@ -23,4 +23,22 @@ class DataCommon{
 		}
 		return $result;
 	}
+
+	public static function getListCategoryChildren($catid=0){
+		if($catid>0){
+			$query = db_select(self::$table_category, 'c')
+					->condition('c.category_parent_id', $catid, '=')
+					->condition('c.category_status', 1, '=')
+					->fields('c', array('category_id','category_name'));
+			$data = $query->execute();
+			$result = array();
+			if(!empty($data)){
+				foreach($data as $k=> $cate){
+					$result[$cate->category_id] = $cate->category_name;
+				}
+			}
+			return $result;
+		}
+		return array();
+	}
 }

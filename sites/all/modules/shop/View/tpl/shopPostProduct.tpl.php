@@ -18,14 +18,20 @@
 						                <label class="control-label">Danh mục<span>(*)</span></label>
 						                <div class="controls">
 						                    <select class="form-control input-sm" name="category_id">
-						                    	<option value="">Quần áo</option>
+						                    	<?php echo $optionCategoryChildren ?>
 						                    </select>
 						                </div>
 						            </div>
 									<div class="control-group">
-						                <label class="control-label">Tên Sản phẩm<span>(*)</span></label>
+						                <label class="control-label">Mã sản phẩm<span>(*)</span></label>
 						                <div class="controls">
-						                    <input type="text" class="form-control input-sm" placeholder="Tên Sản phẩm" name="product_name" value="">
+						                    <input type="text" class="form-control input-sm" placeholder="Mã sản phẩm" name="product_code" value="">
+						                </div>
+						            </div>
+									<div class="control-group">
+						                <label class="control-label">Tên sản phẩm<span>(*)</span></label>
+						                <div class="controls">
+						                    <input type="text" class="form-control input-sm" placeholder="Tên sản phẩm" name="product_name" value="">
 						                </div>
 						            </div>
 						             <div class="control-group">
