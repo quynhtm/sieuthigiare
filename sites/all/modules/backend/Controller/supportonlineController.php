@@ -8,6 +8,25 @@
 class SupportonlineController{
 	private $arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
 
+	public function __construct(){
+			
+        $files = array(
+            'bootstrap/css/bootstrap.css',
+            'css/font-awesome.css',
+            'css/core.css',
+        );
+        Loader::load('Core', $files);
+
+        $files = array(
+        	'View/css/admin.css',
+
+            'View/js/admin.js',
+        	'View/js/stacktable.min.js',
+        );
+        Loader::load('Admin', $files);
+	}
+
+
 	function indexSupportonline(){
 		global $base_url;
 

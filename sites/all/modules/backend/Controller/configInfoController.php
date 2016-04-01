@@ -8,6 +8,30 @@
 class ConfiginfoController{
 	private $arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
 
+		public function __construct(){
+		
+			$files = array(
+		       'bootstrap/lib/ckeditor/ckeditor.js',
+		       'bootstrap/lib/ckeditor/config.js',
+		    );
+		    Loader::loadJSExt('Core', $files);
+
+	        $files = array(
+	            'bootstrap/css/bootstrap.css',
+	            'css/font-awesome.css',
+	            'css/core.css',
+	        );
+	        Loader::load('Core', $files);
+
+	        $files = array(
+	        	'View/css/admin.css',
+
+	            'View/js/admin.js',
+	        	'View/js/stacktable.min.js',
+	        );
+	        Loader::load('Admin', $files);
+	}
+
 	public function indexConfiginfo(){
 		
 		global $base_url;

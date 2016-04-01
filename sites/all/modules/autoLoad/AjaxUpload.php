@@ -119,7 +119,7 @@ class AjaxUpload{
                     }
                 }
                 break;
-            case 1://anh tin tuc
+            case 1://anh san pham
                 $folder_image = 'uploads/product';
                 $table_action = TABLE_PRODUCT;
                 if($id > 0 && $nameImage != '' && $folder_image != ''){

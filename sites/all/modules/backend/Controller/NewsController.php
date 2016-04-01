@@ -5,6 +5,36 @@
 class NewsController{
 	private $arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
 
+	public function __construct(){
+		
+			$files = array(
+		       'bootstrap/lib/ckeditor/ckeditor.js',
+		       'bootstrap/lib/ckeditor/config.js',
+		    );
+		    Loader::loadJSExt('Core', $files);
+
+	        $files = array(
+	            'bootstrap/lib/upload/cssUpload.css',
+	            'bootstrap/css/bootstrap.css',
+	            'css/font-awesome.css',
+	            'css/core.css',
+	            
+	            'bootstrap/js/bootstrap.min.js',
+	            'bootstrap/lib/upload/jquery.uploadfile.js',
+	            'js/common_admin.js',
+
+	        );
+	        Loader::load('Core', $files);
+
+	        $files = array(
+	        	'View/css/admin.css',
+
+	            'View/js/admin.js',
+	        	'View/js/stacktable.min.js',
+	        );
+	        Loader::load('Admin', $files);
+	}
+
 	function indexNews(){
 		global $base_url;
 		$limit = SITE_RECORD_PER_PAGE;
@@ -31,6 +61,7 @@ class NewsController{
 
 	function formNewsAction(){
 		global $base_url;
+	
 		$param = arg();
 		$arrItem = array();
 		$item_id = 0;

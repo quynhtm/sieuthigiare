@@ -9,6 +9,21 @@ class CategoryController{
 
 	public function __construct(){
 		$this->arrCategoryParent = DataCommon::getListCategoryParent();
+		
+        $files = array(
+            'bootstrap/css/bootstrap.css',
+            'css/font-awesome.css',
+            'css/core.css',
+        );
+        Loader::load('Core', $files);
+
+        $files = array(
+        	'View/css/admin.css',
+
+            'View/js/admin.js',
+        	'View/js/stacktable.min.js',
+        );
+        Loader::load('Admin', $files);
 	}
 	function indexCategory(){
 		global $base_url;

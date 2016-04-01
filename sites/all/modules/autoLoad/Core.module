@@ -5,9 +5,6 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0
 */
-/**
- * Implements hook_menu().
- */
 function Core_menu() {
     $items["page-403"] = array(
         "title" => t("page access denied"),
@@ -38,9 +35,7 @@ function Core_theme() {
         'page_404' => array('template' => 'tpl/page_404'),
     );
 }
-/**
- * Implements hook_permission().
- */
+
 function Core_permission() {
   return array(
     'access protected Core' => array(
@@ -48,36 +43,20 @@ function Core_permission() {
     ),
   );
 }
-/**
- * Implementation of hook_init().
- */
+
 require_once 'autoload.php';
 
 function Core_init(){
-	drupal_add_library('system', 'ui.dialog');
-	drupal_add_library('system', 'ui.datepicker');
-    $param = arg();
-
-    if(isset($param[0]) && $param[0] != 'admin'){
-    	$files = array(
-            //'bootstrap/js/bootstrap.min.js',
+    Session::setSessionAnonymousUserShop();
+    $uri = request_uri();
+    if(preg_match("/(\/admin)/", $uri)==0){
+        $files = array(
             'bootstrap/css/bootstrap.css',
             'css/font-awesome.css',
             'css/core.css',
-    		'js/core.js',
-            'js/jquery.alerts.js',
-
-    	);
-	    Loader::load('Core', $files);
-        $files = array(
-            'js/ckeditor/ckeditor.js',
-            'js/ckeditor/config.js',
-
         );
-        Loader::loadJSExt('Core', $files);
+        Loader::load('Core', $files);
     }
-
-    Session::setSessionAnonymousUserShop();
 }
 function page_403(){
 
@@ -96,8 +75,6 @@ function CoreAjax(){
                 "index" => "index",
                 "upload_image" => "ajax_upload_image",
             );
-
-
     $action = FunctionLib::getParam('act', '');
 
     if (!isset($choice[$action])) {
@@ -110,5 +87,4 @@ function CoreAjax(){
     }else{
         echo "Access denied!";
     }
-
 }

@@ -6,10 +6,6 @@
 * @Version	 : 1.0
 */
 
-/**
- * Implements hook_menu().
- */
- 
 function Admin_menu() {
 	
 	$items["admin/admincp"] = array(
@@ -27,7 +23,6 @@ function Admin_menu() {
         'type' => MENU_CALLBACK,
     );
 
-    //tinh thanh
 	$items["admincp/province"] = array(
 		"title" => t('province'),
 		"description" => "province",
@@ -122,9 +117,6 @@ function Admin_block_info() {
     return $blocks;
 }
 
-/**
- * Implements hook_block_view().
- */
 function Core_block_view($delta='') {
     $block = array();
     switch ($delta) {
@@ -152,46 +144,38 @@ function Core_block_view($delta='') {
     return $block;
 }
 
-/**
- * Implements hook_theme().
- */
 function Admin_theme() {
     return array(
+        //block
         'admin-header' 	=> array('template' 	=> 'View/tpl/block/admin-header'),
         'admin-left' 	=> array( 'template' 	=> 'View/tpl/block/admin-left'),
       	'admin-content' => array('template' 	=> 'View/tpl/block/admin-content'),
         'admin-footer' 	=> array('template' 	=> 'View/tpl/block/admin-footer'),
-
+        //nick support online
         'indexSupportOnline' 	=> array('template' => 'View/tpl/supportOnline/indexSupportOnline'),
         'addSupportOnline' 		=> array('template' => 'View/tpl/supportOnline/addSupportOnline'),
-
+        //cau hinh
         'indexConfigInfo' 		=> array('template' => 'View/tpl/configInfo/indexConfigInfo'),
         'addConfigInfo' 		=> array('template' => 'View/tpl/configInfo/addConfigInfo'),
-
+        //user shop
 		'indexUserShop' 		=> array('template' => 'View/tpl/userShop/indexUserShop'),
         'addUserShop' 		    => array('template' => 'View/tpl/userShop/addUserShop'),
-
+        //ncc
         'indexSupplier' 		=> array('template' => 'View/tpl/supplier/indexSupplier'),
         'addSupplier' 		    => array('template' => 'View/tpl/supplier/addSupplier'),
-
-        //T?nh thành
+        //tinh thanh
         'indexProvince' 		=> array('template' => 'View/tpl/province/indexProvince'),
         'addProvince' 			=> array('template' => 'View/tpl/province/addProvince'),
-
         //danh muc
         'indexCategory' 		=> array('template' => 'View/tpl/category/indexCategory'),
         'addCategory' 			=> array('template' => 'View/tpl/category/addCategory'),
-
-        //tin t?c
+        //tin tuc
         'indexNews' 		=> array('template' => 'View/tpl/news/indexNews'),
         'addNews' 			=> array('template' => 'View/tpl/news/addNews'),
  		//here
     );
 }
 
-/**
- * Implements hook_permission().
- */
 function Admin_permission() {
   return array(
     'access protected Admin' => array(
@@ -199,49 +183,33 @@ function Admin_permission() {
     ),
   );
 }
-/**
- * Implements hook_init().
- */
+
 function Admin_init(){
-	$uri = request_uri();
-	if(preg_match("/(\/admincp)/", $uri)!=0){
-		$files = array(
-			'View/css/admin.css',
-			'View/js/admin.js',
-            'View/js/stacktable.min.js',
+	
+	$files = array(
+		
+		'Controller/BlockController.php',
+		
+		'Model/SupportOnline.php',
+		'Controller/SupportOnlineController.php',
 
-			'Controller/BlockController.php',
-			
-			'Model/SupportOnline.php',
-			'Controller/SupportOnlineController.php',
+		'Model/ConfigInfo.php',
+		'Controller/ConfigInfoController.php',
 
-			'Model/ConfigInfo.php',
-			'Controller/ConfigInfoController.php',
+		'Model/UserShop.php',
+		'Controller/UserShopController.php',
 
-			'Model/UserShop.php',
-			'Controller/UserShopController.php',
+        'Model/Supplier.php',
+		'Controller/SupplierController.php',
 
-            'Model/Supplier.php',
-			'Controller/SupplierController.php',
+		'Model/Province.php',
+		'Controller/ProvinceController.php',
 
-			'Model/Province.php',
-			'Controller/ProvinceController.php',
+        'Model/Category.php',
+		'Controller/CategoryController.php',
 
-            'Model/Category.php',
-			'Controller/CategoryController.php',
-
-            'Model/News.php',
-			'Controller/NewsController.php',
-		);
-		Loader::load('Admin', $files);
-
-        //upload
-        $files = array(
-            'bootstrap/js/bootstrap.min.js',
-            'bootstrap/lib/upload/cssUpload.css',
-            'bootstrap/lib/upload/jquery.uploadfile.js',
-            'js/common_admin.js',
-        );
-        Loader::load('Core', $files);
-	}
+        'Model/News.php',
+		'Controller/NewsController.php',
+	);
+	Loader::load('Admin', $files);
 }
