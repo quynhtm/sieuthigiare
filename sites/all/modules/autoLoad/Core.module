@@ -23,6 +23,13 @@ function Core_menu() {
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
+    $items["ajax"] = array(
+        "title" => t("Ajax"),
+        "description" => t("Ajax"),
+        'page callback' => 'CoreAjax',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
   return $items;
 }
 function Core_theme() {
@@ -81,4 +88,21 @@ function page_404(){
 
 	$view = theme('page_404');
 	return $view;
+}
+function CoreAjax(){
+    global $base_url;
+
+    $choice = array(
+                "upload_image" => "ajax_upload_image",
+            );
+
+    print_r($choice);die;
+            $action = isset($_POST['act']) ? trim($_POST['act']) : '';
+            echo $action;die;
+            if($action != ''){
+                echo $action;die;
+            }else{
+                echo "Bạn không có quyền truy cập!";
+            }
+
 }

@@ -234,5 +234,14 @@ function Admin_init(){
 			'Controller/NewsController.php',
 		);
 		Loader::load('Admin', $files);
+
+        //upload
+        $files = array(
+            'bootstrap/js/bootstrap.min.js',
+            'bootstrap/lib/upload/cssUpload.css',
+            'bootstrap/lib/upload/jquery.uploadfile.js',
+            'js/common_admin.js',
+        );
+        Loader::load('Core', $files);
 	}
 }

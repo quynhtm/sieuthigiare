@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
     //hover view anh
     jQuery(".imge_hover").mouseover(function() {
         var id = jQuery(this).attr('id');
@@ -30,7 +30,7 @@ var Common_admin = {
         var boolCheck = true;
         var form=document.EditForm;
          if(type == 1){
-             var title_news = $("#title_news").val();
+             var title_news = jQuery("#title_news").val();
              if(title_news == '' && title_news !='undefined'){
                  alert('Vui lòng nhập vào tên');
                  boolCheck = false;
@@ -38,33 +38,33 @@ var Common_admin = {
              }
          }else if(type == 2){
              //giá bán
-             var price = $('#price').val();
+             var price = jQuery('#price').val();
              if (price == '' && price !='undefined') {
                  alert('Vui lòng nhập giá bán');
                  boolCheck = false;
                  form.price.focus();
              }else if(price != ''){
-                 $("#price_hide").val($("#price").autoNumeric("get"));
+                 jQuery("#price_hide").val(jQuery("#price").autoNumeric("get"));
              }
 
              //giá nhập
-             var price_input = $('#price_input').val();
+             var price_input = jQuery('#price_input').val();
              if (price_input == '' && price_input !='undefined') {
                  alert('Vui lòng nhập giá nhập');
                  boolCheck = false;
                  form.price_input.focus();
              }else if(price_input != ''){
-                 $("#price_input_hide").val($("#price_input").autoNumeric("get"));
+                 jQuery("#price_input_hide").val(jQuery("#price_input").autoNumeric("get"));
              }
 
              //giá thị trường
-             var price_market = $('#price_market').val();
+             var price_market = jQuery('#price_market').val();
              if (price_market == '' && price_market !='undefined') {
                  alert('Vui lòng nhập giá thị trường');
                  boolCheck = false;
                  form.price_market.focus();
              }else if(price_market != ''){
-                 $("#price_market_hide").val($("#price_market").autoNumeric("get"));
+                 jQuery("#price_market_hide").val(jQuery("#price_market").autoNumeric("get"));
              }
          }
         if(boolCheck){
@@ -174,9 +174,9 @@ var Common_admin = {
     },
 
     uploadMultipleImages: function(type) {
-        $('#sys_PopupUploadImgOtherPro').modal('show');
-        $('.ajax-upload-dragdrop').remove();
-        var urlAjaxUpload = 'ajax.php?act=upload_image&code=upload_image';
+        jQuery('#sys_PopupUploadImgOtherPro').modal('show');
+        jQuery('.ajax-upload-dragdrop').remove();
+        var urlAjaxUpload = BASEPARAMS.base_url+'/ajax?act=upload_image&code=upload_image';
         var id_hiden = document.getElementById('id_hiden').value;
         var settings = {
             url: urlAjaxUpload,
@@ -189,10 +189,10 @@ var Common_admin = {
                 dataResult = JSON.parse(xhr);
                 if(dataResult.intIsOK === 1){
                     /*var imagePopup = "<img style='float:left;margin: 5px; 10px; width:100px; height: 100px;' id='sys_new_img_" + dataResult.info.id_key + "' width='100px' height='100px' src='" + dataResult.info.src + "'/>";
-                    $('#div_image').append(imagePopup);*/
+                    jQuery('#div_image').append(imagePopup);*/
 
                     //gan lai id item cho id hiden: dung cho them moi, sua item
-                    $('#id_hiden').val(dataResult.id_item);
+                    jQuery('#id_hiden').val(dataResult.id_item);
 
                     //add vao list sản sản phẩm khác
                     var checked_img_pro = "<div class='clear'></div><input type='radio' id='chẹcked_image_"+dataResult.info.id_key+"' name='chẹcked_image' value='"+dataResult.info.id_key+"' onclick='Common_admin.checkedImage(\""+dataResult.info.name_img+"\",\"" + dataResult.info.id_key + "\")'><label for='chẹcked_image_"+dataResult.info.id_key+"' style='font-weight:normal'>Ảnh đại diện</label><br/>";
@@ -206,59 +206,60 @@ var Common_admin = {
                     html += delete_img;
                     html +="</div></li>";
 
-                    $('#sys_drag_sort').append(html);
-                    $('#sys_PopupUploadImgOtherPro').modal('hide');
+                    jQuery('#sys_drag_sort').append(html);
+                    jQuery('#sys_PopupUploadImgOtherPro').modal('hide');
 
                     //thanh cong
-                    $("#status").html("<font color='green'>Upload is success</font>");
+                    jQuery("#status").html("<font color='green'>Upload is success</font>");
                     setTimeout( "jQuery('.ajax-file-upload-statusbar').hide();",5000 );
                     setTimeout( "jQuery('#status').hide();",5000 );
                 }
             },
             onError: function(files,status,errMsg){
-                $("#status").html("<font color='red'>Upload is Failed</font>");
+                jQuery("#status").html("<font color='red'>Upload is Failed</font>");
             }
         }
-        $("#sys_mulitplefileuploader").uploadFile(settings);
+        jQuery("#sys_mulitplefileuploader").uploadFile(settings);
     },
 
     checkedImage: function(nameImage,key){
         if (confirm('Bạn có muốn chọn ảnh này làm ảnh đại diện?')) {
-            $('#image_primary').val(nameImage);
-            $('#sys_delete_img_other_'+key).hide();
+            jQuery('#image_primary').val(nameImage);
+            jQuery('#sys_delete_img_other_'+key).hide();
 
             //luu lại key anh chính
             var key_pri = document.getElementById('sys_key_image_primary').value;
-            $('#sys_delete_img_other_'+key_pri).show();
-            $('#sys_key_image_primary').val(key);
+            jQuery('#sys_delete_img_other_'+key_pri).show();
+            jQuery('#sys_key_image_primary').val(key);
 
         }
     },
 
     removeImage: function(key,id,nameImage,type){
         if (confirm('Bạn có chắc xóa ảnh này?')) {
-            $.ajax({
+            var urlAjaxUpload = BASEPARAMS.base_url+'/ajax?act=upload_image&code=remove_image';
+            jQuery.ajax({
                 type: "POST",
-                url: 'ajax.php?act=upload_image&code=remove_image',
+                url: urlAjaxUpload,
                 data: {id : id, nameImage : nameImage, type: type},
                 responseType: 'json',
                 success: function(data) {
                     dataResult = JSON.parse(data);
                     if(dataResult.intIsOK === 1){
-                        $('#sys_div_img_other_'+key).hide();
-                        $('#sys_img_other_'+key).val('');
-                        $('#sys_new_img_'+key).hide();
+                        jQuery('#sys_div_img_other_'+key).hide();
+                        jQuery('#sys_img_other_'+key).val('');
+                        jQuery('#sys_new_img_'+key).hide();
                     }else{
-                        $('#sys_msg_return').html(data.msg);
+                        jQuery('#sys_msg_return').html(data.msg);
                     }
                 }
             });
         }
     },
     insertImageContent: function(type) {
-        $('#sys_PopupImgOtherInsertContent').modal('show');
-        $('.ajax-upload-dragdrop').remove();
-        var urlAjaxUpload = 'ajax.php?act=upload_image&code=upload_image_insert_content';
+        jQuery('#sys_PopupImgOtherInsertContent').modal('show');
+        jQuery('.ajax-upload-dragdrop').remove();
+        var urlAjaxUpload = BASEPARAMS.base_url+'/ajax?act=upload_image&code=upload_image_insert_content';
         var id_hiden = document.getElementById('id_hiden').value;
         var settings = {
             url: urlAjaxUpload,
@@ -274,36 +275,37 @@ var Common_admin = {
                     var insert_img = "<a class='img_item' href='javascript:void(0);' onclick='insertImgContent(\""+dataResult.info.src_700+"\")' >";
                     imagePopup += insert_img;
                     imagePopup += "<img width='80' height=80 src='" + dataResult.info.src + "'/> </a>";
-                    $('#div_image').append(imagePopup);
+                    jQuery('#div_image').append(imagePopup);
 
-                    //$('#sys_PopupImgOtherInsertContent').modal('hide');
+                    //jQuery('#sys_PopupImgOtherInsertContent').modal('hide');
                     //thanh cong
-                    $("#status").html("<font color='green'>Upload is success</font>");
+                    jQuery("#status").html("<font color='green'>Upload is success</font>");
                     setTimeout( "jQuery('.ajax-file-upload-statusbar').hide();",5000 );
                     setTimeout( "jQuery('#status').hide();",5000 );
                 }
             },
             onError: function(files,status,errMsg){
-                $("#status").html("<font color='red'>Upload is Failed</font>");
+                jQuery("#status").html("<font color='red'>Upload is Failed</font>");
             }
         }
-        $("#sys_mulitplefileuploader_insertContent").uploadFile(settings);
+        jQuery("#sys_mulitplefileuploader_insertContent").uploadFile(settings);
     },
     actionImportProduct: function(key,id,nameImage,type){
         if (confirm('Bạn có chắc xóa ảnh này?')) {
-            $.ajax({
+            var urlAjaxUpload = BASEPARAMS.base_url+'/ajax?act=upload_image&code=remove_image';
+            jQuery.ajax({
                 type: "POST",
-                url: 'ajax.php?act=upload_image&code=remove_image',
+                url: urlAjaxUpload,
                 data: {id : id, nameImage : nameImage, type: type},
                 responseType: 'json',
                 success: function(data) {
                     dataResult = JSON.parse(data);
                     if(dataResult.intIsOK === 1){
-                        $('#sys_div_img_other_'+key).hide();
-                        $('#sys_img_other_'+key).val('');
-                        $('#sys_new_img_'+key).hide();
+                        jQuery('#sys_div_img_other_'+key).hide();
+                        jQuery('#sys_img_other_'+key).val('');
+                        jQuery('#sys_new_img_'+key).hide();
                     }else{
-                        $('#sys_msg_return').html(data.msg);
+                        jQuery('#sys_msg_return').html(data.msg);
                     }
                 }
             });
