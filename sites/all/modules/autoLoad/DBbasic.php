@@ -129,7 +129,7 @@ class DB{
         if(!empty($dataFields)){
             $sql = db_insert($tableAction)->fields($dataFields)->execute();
             if($sql)
-                return true;
+                return $sql;
         }
         return false;
     }

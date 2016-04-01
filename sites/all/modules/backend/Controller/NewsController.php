@@ -37,15 +37,15 @@ class NewsController{
 		if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
 			$item_id = (int)$param[3];
 			$arrItem = News::getItemById(array(), $item_id);
-			//FunctionLib::Debug($arrItem);
 		}
 
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
+			$item_id = FunctionLib::getParam('id', 0);
 			$dataInput = array(
 				'news_title'=>array('value'=>FunctionLib::getParam('news_title',''), 'require'=>1, 'messages'=>'Tiêu đề tin bài không được trống!'),
 				'news_desc_sort'=>array('value'=>FunctionLib::getParam('news_desc_sort','')),
-				'news_image_other'=>array('value'=>FunctionLib::getParam('news_image_other','')),
-				'news_image'=>array('value'=>FunctionLib::getParam('news_image','')),
+				//'news_image_other'=>array('value'=>FunctionLib::getParam('news_image_other','')),
+				//'news_image'=>array('value'=>FunctionLib::getParam('news_image','')),
 				'news_content'=>array('value'=>FunctionLib::getParam('news_content','')),
 				'news_status'=>array('value'=>FunctionLib::getParam('news_status',0)),
 				'news_category'=>array('value'=>FunctionLib::getParam('news_category',0)),

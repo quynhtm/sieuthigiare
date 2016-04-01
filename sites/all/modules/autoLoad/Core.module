@@ -93,16 +93,22 @@ function CoreAjax(){
     global $base_url;
 
     $choice = array(
+                "index" => "index",
                 "upload_image" => "ajax_upload_image",
             );
 
-    print_r($choice);die;
-            $action = isset($_POST['act']) ? trim($_POST['act']) : '';
-            echo $action;die;
-            if($action != ''){
-                echo $action;die;
-            }else{
-                echo "Bạn không có quyền truy cập!";
-            }
+
+    $action = FunctionLib::getParam('act', '');
+
+    if (!isset($choice[$action])) {
+        $choice[$action] = "index";
+    }
+
+    if($action != ''){
+        $AjaxUpload = new AjaxUpload();
+        $AjaxUpload->playme();
+    }else{
+        echo "Access denied!";
+    }
 
 }

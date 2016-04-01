@@ -25,7 +25,11 @@ define("SITE_RECORD_PER_PAGE_NEWS", '15');
 define('SITE_SAME_RECORD_NEWS', '10');
 define('base_url_lang', $base_url .'/'. ((!isset($language->language) || $language->language == 'und' || $language->language == 'vi') ? 'vi/' : $language->language.'/'));
 
+define('TIME_NOW',time());
 
+define('OPT_UPLOAD_IMAGE', 	0);
+define('OPT_GET_IMAGE', 	1);
+define('OPT_DELETE_IMAGE', 	2);
 /**
  * QuynhTM add
  * Dinh nghia cac Table cho website
