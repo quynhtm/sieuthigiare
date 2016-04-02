@@ -10,6 +10,10 @@ class NewsController{
 			$files = array(
 		       'bootstrap/lib/ckeditor/ckeditor.js',
 		       'bootstrap/lib/ckeditor/config.js',
+
+		       'js/jquery.js',// dang bi loi o day: dong vao thi up dc anh nhung ko săp xep dc, bo ra ko up dc anh nhung sap xep dc
+
+				'bootstrap/lib/dragsort/jquery.dragsort.js',
 		    );
 		    Loader::loadJSExt('Core', $files);
 
@@ -44,7 +48,16 @@ class NewsController{
 		$dataSearch['news_category'] = FunctionLib::getParam('news_category', -1);
 
 		$result = News::getSearchListItems($dataSearch,$limit,array());
+		if(isset($result['data']) && !empty($result['data'])){
+			foreach($result['data'] as $k => &$value){
+				if( isset($value->news_image) && trim($value->news_image) != ''){
+					$value->url_image = FunctionLib::getThumbImage($value->news_image,$value->news_id,FOLDER_NEWS,60,60);
+					$value->url_image_hover = FunctionLib::getThumbImage($value->news_image,$value->news_id,FOLDER_NEWS,300,150);
+				}
+			}
+		}
 
+		//FunctionLib::Debug($result['data']);
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['news_status']);
 
@@ -75,14 +88,32 @@ class NewsController{
 			$dataInput = array(
 				'news_title'=>array('value'=>FunctionLib::getParam('news_title',''), 'require'=>1, 'messages'=>'Tiêu đề tin bài không được trống!'),
 				'news_desc_sort'=>array('value'=>FunctionLib::getParam('news_desc_sort','')),
-				//'news_image_other'=>array('value'=>FunctionLib::getParam('news_image_other','')),
-				//'news_image'=>array('value'=>FunctionLib::getParam('news_image','')),
+				'news_image'=>array('value'=>FunctionLib::getParam('image_primary','')),
 				'news_content'=>array('value'=>FunctionLib::getParam('news_content','')),
 				'news_status'=>array('value'=>FunctionLib::getParam('news_status',0)),
 				'news_category'=>array('value'=>FunctionLib::getParam('news_category',0)),
 				'news_create'=>array('value'=>FunctionLib::getParam('news_create',0)),
 				'news_type'=>array('value'=>FunctionLib::getParam('news_type',0)),
 			);
+
+			//lấy lại vị trí sắp xếp của ảnh khác
+			$arrInputImgOther = array();
+			$getImgOther = FunctionLib::getParam('img_other',array());
+
+			if(!empty($getImgOther)){
+				foreach($getImgOther as $k=>$val){
+					if($val !=''){
+						$arrInputImgOther[] = $val;
+					}
+				}
+			}
+			if (!empty($arrInputImgOther) && count($arrInputImgOther) > 0) {
+				//nếu không chọn ảnh chính, lấy ảnh chính là cái đầu tiên
+				if($dataInput['news_image']['value'] == ''){
+					$dataInput['news_image']['value'] = $arrInputImgOther[0];
+				}
+				$dataInput['news_image_other']['value'] = serialize($arrInputImgOther);
+			}
 
 			$errors = ValidForm::validInputData($dataInput);
 			if($errors != ''){
@@ -93,6 +124,7 @@ class NewsController{
 					drupal_goto($base_url.'/admincp/news/add');
 				}
 			}else{
+				//FunctionLib::Debug($dataInput);
 				News::save($dataInput, $item_id);
 				drupal_goto($base_url.'/admincp/news');
 			}
@@ -101,7 +133,7 @@ class NewsController{
 		return $view = theme('addNews',
 			array('arrItem'=>$arrItem,
 				'item_id'=>$item_id,
-				'title'=>'danh mục sản phẩm',
+				'title'=>'tin tức',
 				'optionStatus'=>$optionStatus));
 	}
 

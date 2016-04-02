@@ -46,6 +46,7 @@
 					<tr>
 						<th width="2%"class="td_list">STT</th>
 						<th width="1%" class="td_list"><input type="checkbox" id="checkAll"/></th>
+						<th width="5%" class="td_list">Ảnh</th>
 						<th width="60%" class="td_list">Tên bài viết</th>
 						<th width="10%" class="td_list">Loại tin</th>
 						<th width="10%" class="td_list">Thuộc danh mục</th>
@@ -59,6 +60,20 @@
 						<tr>
 							<td><?php echo $key+1 ?></td>
 							<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item->news_id ?>" /></td>
+							<td>
+								<?php if( isset($item->url_image) && isset($item->url_image_hover)) {?>
+								<div style="position: relative;">
+									<div style="position: relative; z-index: 10">
+										<img src="<?php echo $item->url_image ?>" class='imge_hover' id='<?php echo $item->news_id ?>'/>
+									</div>
+									<div id='div_hover_<?php echo $item->news_id ?>'style="position: absolute; bottom: 30px; left: 40px; border: 2px solid #ccc; padding: 5px; background: #F4F9FF; z-index: 1000; display: none">
+										<img src="<?php echo $item->url_image_hover ?>"/>
+									</div>
+								</div>
+								<?php } else{?>
+									<img src=""/>
+								<?php }?>
+							</td>
 							<td><?php echo $item->news_title; ?></td>
 							<td><?php echo $item->news_type; ?></td>
 							<td><?php echo $item->news_category; ?></td>
@@ -91,6 +106,18 @@
 
 <script>
 	jQuery(document).ready(function(){
+		jQuery(document).ready(function() {
+			//hover view anh
+			jQuery(".imge_hover").mouseover(function() {
+				var id = jQuery(this).attr('id');
+				jQuery("#div_hover_" + id).show();
+			});
+			jQuery(".imge_hover").mouseout(function() {
+				var id = jQuery(this).attr('id');
+				jQuery("#div_hover_" + id).hide();
+			});
+		});
+
 		DELETE_ITEM.init('admincp/news');
 	});
 </script>

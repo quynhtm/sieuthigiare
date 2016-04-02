@@ -5,6 +5,7 @@
 */
 
 class FunctionLib{
+
 	/**
 	 * @param $data
 	 */
@@ -22,16 +23,16 @@ class FunctionLib{
 	 */
 	static function getParam($name, $default = ''){
 		if (isset($_POST[$name])){
-			return trim($_POST[$name]);
+			return $_POST[$name];
 		}
 		elseif(isset($_GET[$name])){
-			return trim($_GET[$name]);
+			return $_GET[$name];
 		}
 		elseif (isset($_REQUEST[$name])){
-			return trim($_REQUEST[$name]);
+			return $_REQUEST[$name];
 		}
 		elseif(isset($_COOKIE[$name])){
-			return trim($_COOKIE[$name]);
+			return $_COOKIE[$name];
 		}
 		else{
 			return $default;
@@ -254,5 +255,21 @@ class FunctionLib{
 			}
 		}
 		return strtoupper(substr($Str, 0, 1)) . substr($Str, 1, strlen($Str) - 1) . ($lang == 'vi' ? "??ng" : 'vnd');
+	}
+
+	static function getThumbImage($fname = '', $id = 0, $folder = FOLDER_DEFAULT,$thum_w = 0,$thum_h = 0,$cropratio = '') {
+		global $base_url;
+		if($fname != '' && $id > 0) {
+			$directory  = self::getFolderByID($id, $folder);
+			$string_crop = ($cropratio != '') ? '&cropratio='.$cropratio : '';
+			$paths_image = $base_url.'/uploads/'.$directory.'/'.$fname;
+			$url_image = $base_url."/thumb_img/image.php?width={$thum_w}&height={$thum_h}{$string_crop}&image=".$paths_image;
+			return $url_image;
+		}
+		return false;
+	}
+
+	static function getFolderByID($id = 0, $folder = FOLDER_DEFAULT) {
+		return  $folder . '/' . $id . '/';
 	}
 }

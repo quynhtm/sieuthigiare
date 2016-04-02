@@ -42,10 +42,10 @@ class AjaxUpload{
         
         switch( $type ){
             case 1://img news
-                $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_NEWS, 'news', 'news_image_other', self::$primary_key_news);
+                $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_NEWS, FOLDER_NEWS, 'news_image_other', self::$primary_key_news);
                 break;
             case 2 ://img product
-                $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_PRODUCT, 'product', 'product_image_other', self::$primary_key_project);
+                $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_PRODUCT, FOLDER_PRODUCT, 'product_image_other', self::$primary_key_project);
                 break;
             default:
                 break;
@@ -117,7 +117,7 @@ class AjaxUpload{
         $aryData['nameImage'] = $nameImage;
         switch( $type ){
             case 1://anh tin tuc
-                $folder_image = 'uploads/news';
+                $folder_image = 'uploads/'.FOLDER_NEWS;
                 $table_action = TABLE_NEWS;
                 if($id > 0 && $nameImage != '' && $folder_image != ''){
                     $delete_action = $this->delete_image_item($table_action, self::$primary_key_news, $id, 'news_image_other', $nameImage, $folder_image);
@@ -128,7 +128,7 @@ class AjaxUpload{
                 }
                 break;
             case 1://anh san pham
-                $folder_image = 'uploads/product';
+                $folder_image = 'uploads/'.FOLDER_PRODUCT;
                 $table_action = TABLE_PRODUCT;
                 if($id > 0 && $nameImage != '' && $folder_image != ''){
                     $delete_action = $this->delete_image_item($table_action, self::$primary_key_project, $id, 'product_image_other', $nameImage, $folder_image);

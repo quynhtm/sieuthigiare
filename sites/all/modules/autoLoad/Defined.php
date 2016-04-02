@@ -38,6 +38,13 @@ define('TABLE_PROVINCE', 'web_province');
 define('TABLE_CATEGORY', 'web_category');
 define('TABLE_NEWS', 'web_news');
 
+//dinh nghia thu muc chua anh
+define('FOLDER_DEFAULT', 'img_other');
+define('FOLDER_PRODUCT', 'product');
+define('FOLDER_NEWS', 'news');
+
+
+
 
 
 

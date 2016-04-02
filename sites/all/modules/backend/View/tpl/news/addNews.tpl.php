@@ -19,35 +19,45 @@
                  <label for="textName" class="control-label marginTop_15">Ảnh đại diện</label>
                  <div class="col-lg-8">
                      <a href="javascript:;"class="btn btn-primary" onclick="Common_admin.uploadMultipleImages(1);">Upload ảnh </a>
+                     <input name="image_primary" type="hidden" id="image_primary" value="<?php if(isset($arrItem->news_image)){ echo $arrItem->news_image; } ?>">
                  </div>
             </div>
             <!--hien thi anh-->
-            <?php if(isset($arrItem->news_image_other)){?>
-            <ul id="sys_drag_sort" class="ul_drag_sort">
-                <?php 
-                    if($arrItem->news_image_other != ''){
-                        $list_news_image_other = unserialize($arrItem->news_image_other);
-                        foreach($list_news_image_other as $k=>$v){      
+            <?php if(isset($arrItem->news_image_other)){
+                $key_primary = -1;
+                $image_primary = $arrItem->news_image;
                 ?>
-                <li id="sys_div_img_other_<?php echo $k ?>">
-                    <div class="div_img_upload">
-                        <img src="<?php echo $base_url.'/uploads/news/'.$arrItem->news_id.'/'.$v?>" height="80" width="80">
-                        <input type="hidden" id="sys_img_other_<?php echo $k ?>" name="img_other[]" value="<?php echo $v ?>" class="sys_img_other">
-                        <div class='clear'></div>
-                        <input type="radio" id="chẹcked_image_<?php echo $k ?>" name="chẹcked_image" value="<?php echo $k ?>" onclick="Common_admin.checkedImage('<?php echo $v ?>','<?php echo $k ?>');">
-                        <label for="chẹcked_image_{$key}" style='font-weight:normal'>Ảnh đại diện</label>
-                        <br/><a href="javascript:void(0);" id="sys_delete_img_other_<?php echo $k ?>"onclick="Common_admin.removeImage('<?php echo $k ?>','<?php if(isset($arrItem->news_id)){ echo $arrItem->news_id; } ?>','<?php echo $v ?>','1');">Xóa ảnh</a>
-                        <span style="display: none"><b><?php echo $k ?></b></span>
-                    </div>
-                </li>
-                <?php 
-                    } 
-                        } 
-                ?>
+                    <ul id="sys_drag_sort" class="ul_drag_sort">
+                    <?php
+                        if(trim($arrItem->news_image_other) != ''){
+                            $list_news_image_other = unserialize($arrItem->news_image_other);
+                            foreach($list_news_image_other as $k=>$v){ ?>
+                                <li id="sys_div_img_other_<?php echo $k ?>">
+                                    <div class="div_img_upload">
+                                        <img src="<?php echo $base_url.'/uploads/news/'.$arrItem->news_id.'/'.$v?>" height="80" width="80">
+                                        <input type="hidden" id="sys_img_other_<?php echo $k ?>" name="img_other[]" value="<?php echo $v ?>" class="sys_img_other">
+                                        <div class='clear'></div>
+                                        <input type="radio" id="chẹcked_image_<?php echo $k ?>" name="chẹcked_image" value="<?php echo $k ?>"
+                                               <?php if (isset($image_primary) && ($image_primary == $v)){ ?> checked="checked" <?php }?>
+                                        onclick="Common_admin.checkedImage('<?php echo $v ?>','<?php echo $k ?>');">
+                                        <label for="chẹcked_image_{$key}" style='font-weight:normal'>Ảnh đại diện</label>
+                                        <br/><a href="javascript:void(0);" id="sys_delete_img_other_<?php echo $k ?>"onclick="Common_admin.removeImage('<?php echo $k ?>','<?php if(isset($arrItem->news_id)){ echo $arrItem->news_id; } ?>','<?php echo $v ?>','1');">Xóa ảnh</a>
+                                        <span style="display: none"><b><?php echo $k ?></b></span>
+                                    </div>
+                                    <?php
+                                        if(isset($image_primary) && $image_primary == $v){
+                                            $key_primary = $k;
+                                        }
+                                    ?>
+                                </li>
+                            <?php }?>
+                            <input type="hidden" id="sys_key_image_primary" name="sys_key_image_primary" value="<?php echo $key_primary ?>">
+                        <?php } ?>
             </ul>
             <input name="list1SortOrder" id ='list1SortOrder' type="hidden" />
             <?php } ?>
-            <!--ket thuc hien thi anh-->    
+            <!--ket thuc hien thi anh-->
+
             <div class="control-group">
                 <label class="control-label">Mô tả ngắn</label>
                 <div class="controls">
@@ -106,6 +116,34 @@
 <!--Popup upload ảnh-->
 
 <script>
+
+
 CKEDITOR.replace('news_desc_sort');
 CKEDITOR.replace('news_content');
+</script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        /*//set time
+        // thong tin: http://xdsoft.net/jqplugins/datetimepicker/
+        $('#start_time').datetimepicker({
+            dayOfWeekStart : 1,
+            format:'d-m-Y H:i',
+            lang:'en'
+        });
+        $('#end_time').datetimepicker({
+            dayOfWeekStart : 1,
+            format:'d-m-Y H:i',
+            lang:'en'
+        });*/
+    });
+    //kéo thả ảnh
+    $("#sys_drag_sort").dragsort({ dragSelector: "div", dragBetween: true, dragEnd: saveOrder });
+    function saveOrder() {
+        var data = $("#sys_drag_sort li div span").map(function() { return $(this).children().html(); }).get();
+        $("input[name=list1SortOrder]").val(data.join(","));
+    };
+    function insertImgContent(src){
+        CKEDITOR.instances.content.insertHtml('<img src="'+src+'"/>');
+    }
 </script>
