@@ -925,7 +925,9 @@ form#formListItem {
     border: 1px solid #ddd;
     display: inline-block;
     float: left;
+    height: 130px;
     margin: 0 5px;
+    overflow: hidden;
     padding: 3px;
 }
 #sys_drag_sort .div_img_upload img {
