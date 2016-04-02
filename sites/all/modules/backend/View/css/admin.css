@@ -915,4 +915,19 @@ form#formListItem {
 .padding20{padding: 20px}
 
 .paddingTop30{padding-top: 30px}
-
+#sys_drag_sort {
+    display: inline-block;
+    float: left;
+    margin-left: 170px;
+    max-width: 80%;
+}
+#sys_drag_sort li {
+    border: 1px solid #ddd;
+    display: inline-block;
+    float: left;
+    margin: 0 5px;
+    padding: 3px;
+}
+#sys_drag_sort .div_img_upload img {
+    border-bottom: 1px solid #ddd;
+}
