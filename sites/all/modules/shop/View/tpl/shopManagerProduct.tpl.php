@@ -89,7 +89,7 @@
 								<td></td>
 								<td><input type="checkbox" value="<?php echo $v->id?>"/></td>
 								<td><?php echo '['.$v->product_code.'] '.$v->product_name ?></td>
-								<td></td>
+								<td><?php echo $v->category_name ?></td>
 								<td>
 									<?php 
 										$price_market = number_format($v->product_price_market);
