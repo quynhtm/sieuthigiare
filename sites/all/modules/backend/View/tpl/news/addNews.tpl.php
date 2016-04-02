@@ -51,7 +51,7 @@
             <div class="control-group">
                 <label class="control-label">Mô tả ngắn</label>
                 <div class="controls">
-                    <input type="text"class="form-control input-sm" name="news_desc_sort" value="<?php if(isset($arrItem->news_desc_sort)){ echo $arrItem->news_desc_sort; } ?>">
+                    <textarea name="news_desc_sort"><?php if(isset($arrOneItem->news_desc_sort)){ echo $arrOneItem->news_desc_sort; } ?></textarea>
                 </div>
             </div>
             <div class="control-group">
@@ -106,5 +106,6 @@
 <!--Popup upload ảnh-->
 
 <script>
-    CKEDITOR.replace('news_content');
+CKEDITOR.replace('news_desc_sort');
+CKEDITOR.replace('news_content');
 </script>
