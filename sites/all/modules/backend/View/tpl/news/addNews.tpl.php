@@ -51,13 +51,13 @@
             <div class="control-group">
                 <label class="control-label">Mô tả ngắn</label>
                 <div class="controls">
-                    <textarea name="news_desc_sort"><?php if(isset($arrOneItem->news_desc_sort)){ echo $arrOneItem->news_desc_sort; } ?></textarea>
+                    <textarea name="news_desc_sort"><?php if(isset($arrItem->news_desc_sort)){ echo $arrItem->news_desc_sort; } ?></textarea>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Nội dung</label>
                 <div class="controls">
-                    <textarea name="news_content"><?php if(isset($arrOneItem->news_content)){ echo $arrOneItem->news_content; } ?></textarea>
+                    <textarea name="news_content"><?php if(isset($arrItem->news_content)){ echo $arrItem->news_content; } ?></textarea>
                 </div>
             </div>
         
