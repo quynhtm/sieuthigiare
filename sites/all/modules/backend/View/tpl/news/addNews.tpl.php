@@ -54,8 +54,14 @@
                     <input type="text"class="form-control input-sm" name="news_desc_sort" value="<?php if(isset($arrItem->news_desc_sort)){ echo $arrItem->news_desc_sort; } ?>">
                 </div>
             </div>
-
-             <div class="control-group">
+            <div class="control-group">
+                <label class="control-label">Nội dung</label>
+                <div class="controls">
+                    <textarea name="news_content"><?php if(isset($arrOneItem->news_content)){ echo $arrOneItem->news_content; } ?></textarea>
+                </div>
+            </div>
+        
+            <div class="control-group">
                 <label class="control-label">Trạng thái</label>
                 <div class="controls">
                     <select class="form-control input-sm" name="news_status">
@@ -98,3 +104,7 @@
     </div>
 </div>
 <!--Popup upload ảnh-->
+
+<script>
+    CKEDITOR.replace('news_content');
+</script>
