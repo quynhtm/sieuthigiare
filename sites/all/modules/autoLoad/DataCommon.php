@@ -25,7 +25,7 @@ class DataCommon{
 	}
 
 	public static function getListCategoryChildren($catid=0){
-		if($catid>0){
+		if($catid > 0){
 			$query = db_select(self::$table_category, 'c')
 					->condition('c.category_parent_id', $catid, '=')
 					->condition('c.category_status', 1, '=')
