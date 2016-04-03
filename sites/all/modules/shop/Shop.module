@@ -52,14 +52,14 @@ function Shop_menu() {
 	$items["dang-san-pham.html"] = array(
 		"title" => t('Đăng sản phẩm'),
 		"description" => "Đăng sản phẩm",
-		'page callback' => 'shopPostProduct',
+		'page callback' => 'shopFormProduct',
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
 	$items["sua-san-pham/%/%"] = array(
 		"title" => t('Sửa sản phẩm'),
 		"description" => "Sửa sản phẩm",
-		'page callback' => 'shopEditProduct',
+		'page callback' => 'shopFormProduct',
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -90,11 +90,8 @@ function Shop_theme() {
 	    'shopManagerProduct' => array(
 	      'template' => 'View/tpl/shopManagerProduct'
 	    ),
-	    'shopPostProduct' => array(
-	      'template' => 'View/tpl/shopPostProduct'
-	    ),
-	    'shopEditProduct' => array(
-	      'template' => 'View/tpl/shopEditProduct'
+	    'shopFormProduct' => array(
+	      'template' => 'View/tpl/shopFormProduct'
 	    ),
 	);
 }

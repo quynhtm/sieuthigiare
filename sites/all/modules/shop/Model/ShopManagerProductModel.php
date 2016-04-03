@@ -127,7 +127,6 @@ class ShopManagerProduct{
         }
         //update
         if($id > 0){
-            unset($data_post['user_shop_id']);
             unset($data_post['time_created']);
             self::updateId($data_post, $id);
             drupal_set_message('Cập nhật thành công.');

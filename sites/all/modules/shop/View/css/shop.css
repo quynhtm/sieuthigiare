@@ -286,15 +286,16 @@ a.btn-yahoo:hover{
     display: inline-block;
     float: left;
     margin-left: 10px;
-    margin-top: 20px;
-    max-width: 80%;
+    margin-top: 10px;
+    max-width: 95%;
+    clear: both;
 }
 #sys_drag_sort li {
     border: 1px solid #ddd;
     display: inline-block;
     float: left;
     height: 130px;
-    margin: 0 5px;
+    margin: 5px 5px;
     overflow: hidden;
     padding: 3px;
 }
