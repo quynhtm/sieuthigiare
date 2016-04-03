@@ -69,7 +69,7 @@
 				</div>
 				<form id="formListItem" method="post" action='<?php echo $base_url?>/xoa-san-pham'>
 					<div class="showListItem">
-						<table class="table taicon-adminble-bordered table-hover table-striped" width="100%" cellpadding="5" cellspacing="1" border="1">
+						<table class="table" width="100%" cellpadding="5" cellspacing="1" border="1">
 							<thead>
 							<tr>
 								<th width="5%">Ảnh</th>
@@ -161,7 +161,7 @@
 <script>
 	jQuery(document).ready(function($){
 		jQuery('a.deleteItem').click(function(){
-			var total = jQuery( "input:checked" ).length;
+			var total = jQuery( ".showListItem tbody input:checked" ).length;
 			if(total==0){
 				alert('Vui lòng chọn ít nhất 1 bản ghi để xóa!');
 				return false;
