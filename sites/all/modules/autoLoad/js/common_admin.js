@@ -196,6 +196,10 @@ var Common_admin = {
 
                     //add vao list sản sản phẩm khác
                     var checked_img_pro = "<div class='clear'></div><input type='radio' id='chẹcked_image_"+dataResult.info.id_key+"' name='chẹcked_image' value='"+dataResult.info.id_key+"' onclick='Common_admin.checkedImage(\""+dataResult.info.name_img+"\",\"" + dataResult.info.id_key + "\")'><label for='chẹcked_image_"+dataResult.info.id_key+"' style='font-weight:normal'>Ảnh đại diện</label><br/>";
+                    if(type==2){
+                        var checked_img_pro = checked_img_pro + "<input type='radio' id='chẹcked_image_hover"+dataResult.info.id_key+"' name='chẹcked_image_hover' value='"+dataResult.info.id_key+"' onclick='Common_admin.checkedImageHover(\""+dataResult.info.name_img+"\",\"" + dataResult.info.id_key + "\")'><label for='chẹcked_image_hover"+dataResult.info.id_key+"' style='font-weight:normal'>Ảnh Hover</label><br/>";
+                    }
+
                     var delete_img = "<a href='javascript:void(0);' id='sys_delete_img_other_" + dataResult.info.id_key + "' onclick='Common_admin.removeImage(\""+dataResult.info.id_key+"\",\""+dataResult.id_item+"\",\""+dataResult.info.name_img+"\",\""+type+"\")' >Xóa ảnh</a>";
 
                     var html= "<li id='sys_div_img_other_" + dataResult.info.id_key + "'>";
@@ -233,6 +237,10 @@ var Common_admin = {
             jQuery('#sys_key_image_primary').val(key);
 
         }
+    },
+
+    checkedImageHover: function(nameImage,key){
+        jQuery('#image_primary_hover').val(nameImage);
     },
 
     removeImage: function(key,id,nameImage,type){

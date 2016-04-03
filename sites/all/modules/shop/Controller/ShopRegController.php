@@ -128,6 +128,13 @@ function shopEditInfo(){
 	if($user_shop->shop_id == 0){
 		drupal_goto($base_url);
 	}
+
+	$files = array(
+       'bootstrap/lib/ckeditor/ckeditor.js',
+       'bootstrap/lib/ckeditor/config.js',
+    );
+    Loader::loadJSExt('Core', $files);
+
 	if(!empty($_POST['frmChangeInfo'])){
 		$dataInput = array(
 					'shop_category'=>array('value'=>FunctionLib::getIntParam('shop_category',''), 'require'=>1, 'messages'=>'Chọn danh mục sản phẩm!'),

@@ -76,6 +76,11 @@
 						                                        onclick="Common_admin.checkedImage('<?php echo $v ?>','<?php echo $k ?>');">
 						                                        <label for="chẹcked_image_<?php echo $k ?>" style='font-weight:normal'>Ảnh đại diện</label>
 						                                        <br/>
+						                                        <input type="radio" id="chẹcked_image_hover<?php echo $k ?>" name="chẹcked_image_hover" value="<?php echo $k ?>"
+						                                               <?php if (isset($image_primary_hover) && ($image_primary_hover == $v)){ ?> checked="checked" <?php }?>
+						                                        onclick="Common_admin.checkedImageHover('<?php echo $v ?>','<?php echo $k ?>');">
+						                                        <label for="chẹcked_image_hover<?php echo $k ?>" style='font-weight:normal'>Ảnh Hover</label>
+						                                        <br/>
 						                                        <a href="javascript:void(0);" id="sys_delete_img_other_<?php echo $k ?>"onclick="Common_admin.removeImage('<?php echo $k ?>','<?php if(isset($arrItem->id)){ echo $arrItem->id; } ?>','<?php echo $v ?>','1');">Xóa ảnh</a>
 						                                        <span style="display: none"><b><?php echo $k ?></b></span>
 						                                    </div>
