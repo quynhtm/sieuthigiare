@@ -49,17 +49,16 @@
 						        </div>
 						        <div class="col-sm-3">
 						        	<div class="control-group">
-						                <label class="control-label">Ảnh chính</label>
-						                <div class="controls btn btn-default btn-file">
-						                	<input type="file" name="product_image">
-						                </div>
+						                 <div class="col-lg-8">
+						                     <a href="javascript:;"class="btn btn-primary" onclick="Common_admin.uploadMultipleImages(2);">Upload ảnh</a>
+						                     <input name="image_primary" type="hidden" id="image_primary" value="">
+						                 </div>
 						            </div>
-						             <div class="control-group">
-						                <label class="control-label">Ảnh phụ</label>
-						                <div class="controls btn btn-default btn-file">
-						                	<input type="file" name="product_image_hover">
-						                </div>
-						            </div>
+									<ul id="sys_drag_sort" class="ul_drag_sort">
+										
+									</ul>
+									<input name="list1SortOrder" id ='list1SortOrder' type="hidden" />
+						             
 						        </div>
 							</div>
 					        <div class="row">
@@ -71,6 +70,7 @@
 						                </div>
 						            </div>
 						            <div class="form-actions">
+						                <input type="hidden" id="id_hiden" name="id"/>
 						                <input type="hidden" value="txt-form-post" name="txt-form-post">
 										<button type="submit" name="submit" id="buttonSubmit" class="btn btn-primary" value="1">Lưu</button>
 						                <button type="reset" class="btn">Bỏ qua</button>
@@ -84,6 +84,44 @@
 		</div>
 	</div>
 </div>
+
+<!--Popup upload ảnh-->
+<div class="modal fade" id="sys_PopupUploadImgOtherPro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Upload ảnh</h4>
+            </div>
+            <div class="modal-body">
+                <form name="uploadImage" method="post" action="#" enctype="multipart/form-data">
+                    <div class="form_group">
+                        <div id="sys_mulitplefileuploader" class="btn btn-primary">Upload ảnh</div>
+                        <div id="status"></div>
+
+                        <div class="clearfix"></div>
+                        <div class="clearfix" style='margin: 5px 10px; width:100%;'>
+                            <div id="div_image"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Popup upload ảnh-->
+
 <script>
 	CKEDITOR.replace('product_content');
+</script>
+<script type="text/javascript">
+    //keo tha anh
+   jQuery("#sys_drag_sort").dragsort({ dragSelector: "div", dragBetween: true, dragEnd: saveOrder });
+    function saveOrder() {
+        var data = jQuery("#sys_drag_sort li div span").map(function() { return jQuery(this).children().html(); }).get();
+        jQuery("input[name=list1SortOrder]").val(data.join(","));
+    };
+    function insertImgContent(src){
+        CKEDITOR.instances.content.insertHtml('<img src="'+src+'"/>');
+    }
 </script>

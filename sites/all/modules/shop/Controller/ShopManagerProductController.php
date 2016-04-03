@@ -48,20 +48,49 @@ function shopPostProduct(){
 	$files = array(
        'bootstrap/lib/ckeditor/ckeditor.js',
        'bootstrap/lib/ckeditor/config.js',
+       'bootstrap/lib/dragsort/jquery.dragsort.js',
     );
     Loader::loadJSExt('Core', $files);
+    $files = array(
+	    'bootstrap/lib/upload/cssUpload.css',
+	    'bootstrap/js/bootstrap.min.js',
+	    'bootstrap/lib/upload/jquery.uploadfile.js',
+	    'js/common_admin.js',
+
+	);
+	Loader::load('Core', $files);
 
 	if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 		$data = array(
+				'id'=>array('value'=>FunctionLib::getIntParam('id',''), 'require'=>1, 'messages'=>''),
 				'category_id'=>array('value'=>FunctionLib::getIntParam('category_id',''), 'require'=>1, 'messages'=>''),
 				'product_code'=>array('value'=>FunctionLib::getParam('product_code',''), 'require'=>1, 'messages'=>'Mã sản phẩm không được trống!'),
 				'product_name'=>array('value'=>FunctionLib::getParam('product_name',''), 'require'=>1, 'messages'=>'Tên sản phẩm không được trống!'),
 				'product_price_sell'=>array('value'=>FunctionLib::getParam('product_price_sell',''), 'require'=>0, 'messages'=>''),
 				'product_price_market'=>array('value'=>FunctionLib::getParam('product_price_market',''), 'require'=>0, 'messages'=>''),
 				'product_content'=>array('value'=>FunctionLib::getParam('product_content',''), 'require'=>1, 'messages'=>'Chi tiết sản phẩm không được trống!'),
+				'product_image'=>array('value'=>FunctionLib::getParam('image_primary','')),
 				'user_shop_id'=>array('value'=>$user_shop->shop_id, 'require'=>0, 'messages'=>''),
 				'time_created'=>array('value'=>time(), 'require'=>0, 'messages'=>''),
 			);
+		//lay lai vi tri sap xep cua anh khac
+		$arrInputImgOther = array();
+		$getImgOther = FunctionLib::getParam('img_other',array());
+
+		if(!empty($getImgOther)){
+			foreach($getImgOther as $k=>$val){
+				if($val !=''){
+					$arrInputImgOther[] = $val;
+				}
+			}
+		}
+		if (!empty($arrInputImgOther) && count($arrInputImgOther) > 0) {
+			//neu ko co anh chinh, lay anh chinh la cai anh dau tien
+			if($data['product_image']['value'] == ''){
+				$data['product_image']['value'] = $arrInputImgOther[0];
+			}
+			$data['product_image_other']['value'] = serialize($arrInputImgOther);
+		}
 
 		$errors = ValidForm::validInputData($data);
 		if($errors != ''){
@@ -81,7 +110,7 @@ function shopPostProduct(){
 			if($data['category_id']['value'] > 0){
 				$data['category_name']['value'] = ShopManagerProduct::getNameCategory($data['category_id']['value']);
 			}
-			ShopManagerProduct::save($data, 0);
+			ShopManagerProduct::save($data, $data['id']['value']);
 			drupal_goto($base_url.'/quan-ly-gian-hang.html');
 		}
 	}

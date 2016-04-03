@@ -7,7 +7,7 @@
 */
 class AjaxUpload{
 	static $primary_key_news = 'news_id';
-    static $primary_key_project = 'id';
+    static $primary_key_product = 'id';
 
 	function playme(){
 		$code = FunctionLib::getParam('code', '');
@@ -45,7 +45,7 @@ class AjaxUpload{
                 $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_NEWS, FOLDER_NEWS, 'news_image_other', self::$primary_key_news);
                 break;
             case 2 ://img product
-                $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_PRODUCT, FOLDER_PRODUCT, 'product_image_other', self::$primary_key_project);
+                $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_PRODUCT, FOLDER_PRODUCT, 'product_image_other', self::$primary_key_product);
                 break;
             default:
                 break;
@@ -128,11 +128,11 @@ class AjaxUpload{
                     }
                 }
                 break;
-            case 1://anh san pham
+            case 2://anh san pham
                 $folder_image = 'uploads/'.FOLDER_PRODUCT;
                 $table_action = TABLE_PRODUCT;
                 if($id > 0 && $nameImage != '' && $folder_image != ''){
-                    $delete_action = $this->delete_image_item($table_action, self::$primary_key_project, $id, 'product_image_other', $nameImage, $folder_image);
+                    $delete_action = $this->delete_image_item($table_action, self::$primary_key_product, $id, 'product_image_other', $nameImage, $folder_image);
                     if($delete_action == 1){
                         $aryData['intIsOK'] = 1;
                     }
