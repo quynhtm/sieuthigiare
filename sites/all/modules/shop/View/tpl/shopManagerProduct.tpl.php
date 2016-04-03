@@ -39,11 +39,11 @@
 						</div>
 						<div class="col-lg-3">
 							<div class="form-group">
-								<label class="control-label">Ngày bắt đầu</label>
+								<label class="control-label">Từ ngày</label>
 								<div><input type="text" class="form-control input-sm date" placeholder ="Ngày bắt đầu" name="date_start"/></div>
 							</div>
 							<div class="form-group">
-								<label class="control-label">Ngày kết thúc</label>
+								<label class="control-label">Tới ngày</label>
 								<div><input type="text" class="form-control input-sm date" placeholder ="Ngày kết thúc" name="date_end"/></div>
 							</div>
 						</div>
@@ -69,11 +69,11 @@
 				</div>
 				<form id="formListItem" method="post" action='<?php echo $base_url?>/xoa-san-pham'>
 					<div class="showListItem">
-						<table class="table taicon-adminble-bordered table-hover table-striped" width="100%" cellpadding="5" cellspacing="1" border="1">
+						<table class="table" width="100%" cellpadding="5" cellspacing="1" border="1">
 							<thead>
 							<tr>
 								<th width="5%">Ảnh</th>
-								<th width="2%">Chọn<br/><input type="checkbox" id="checkAll"/></th>
+								<th width="2%">Chọn<br/><input type="checkbox" id="checkAll" onclick="CHECKALL_ITEM.init();"/></th>
 								<th width="">[Mã] Tên sản phẩm</th>
 								<th width="">Danh mục</th>
 								<th width="">Giá thị trường</th>
@@ -102,7 +102,7 @@
 										<?php }?>
 
 									</td>
-									<td><input type="checkbox" name="id[]" value="<?php echo $v->id?>"/></td>
+									<td><input type="checkbox" class="checkItem" name="id[]" value="<?php echo $v->id?>"/></td>
 									<td><?php echo '['.$v->product_code.'] '.$v->product_name ?></td>
 									<td><?php echo $v->category_name ?></td>
 									<td>
@@ -139,8 +139,8 @@
 									</td>
 									<td>
 									<?php $linkEdit = $base_url.'/sua-san-pham/'.$v->id.'/'.Stdio::pregReplaceStringAlias($v->product_name).'.html' ?>
-									<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit green font-size-20"></i></a>
-									<a id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-trash font-size-20 red"></i></a>
+									<a href="<?php echo $linkEdit; ?>" title="sửa"><i class="icon-edit green font-size-20"></i></a>
+									<a href="javascript:void(0)" class="deleteItem" title="Xóa"><i class="icon-trash font-size-20 red"></i></a>
 									</td>
 								</tr>
 								<?php } ?>
@@ -160,8 +160,8 @@
 </div>
 <script>
 	jQuery(document).ready(function($){
-		jQuery('a#deleteMoreItem, a#deleteOneItem').click(function(){
-			var total = jQuery( "input:checked" ).length;
+		jQuery('a.deleteItem').click(function(){
+			var total = jQuery( ".showListItem tbody input:checked" ).length;
 			if(total==0){
 				alert('Vui lòng chọn ít nhất 1 bản ghi để xóa!');
 				return false;
@@ -173,16 +173,6 @@
 				}
 				return false;
 			}
-		});
-
-		//hover view anh
-		jQuery(".imge_hover").mouseover(function() {
-			var id = jQuery(this).attr('id');
-			jQuery("#div_hover_" + id).show();
-		});
-		jQuery(".imge_hover").mouseout(function() {
-			var id = jQuery(this).attr('id');
-			jQuery("#div_hover_" + id).hide();
 		});
 	});
 </script>

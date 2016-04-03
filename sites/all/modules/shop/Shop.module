@@ -70,6 +70,13 @@ function Shop_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
+	$items["gian-hang/%/%"] = array(
+		"title" => t('Gian hàng'),
+		"description" => "Gian hàng",
+		'page callback' => 'shopshowProduct',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
   return $items;
 }
 
@@ -102,8 +109,11 @@ function Shop_init() {
 		$files = array(
 			'Model/ShopRegModel.php',
 			'Controller/ShopRegController.php',
+			
 			'Model/ShopManagerProductModel.php',
 			'Controller/ShopManagerProductController.php',
+			'Model/ShopShowProductModel.php',
+			'Controller/ShopShowProductController.php',
 
 			'View/css/shop.css',
 			'View/js/shop.js',
