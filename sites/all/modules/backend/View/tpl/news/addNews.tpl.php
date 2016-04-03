@@ -151,17 +151,13 @@
     </div>
 </div>
 <!-- chen anh vào noi dung-->
+
 <script>
-
-
-CKEDITOR.replace('news_desc_sort');
-CKEDITOR.replace('news_content');
+    CKEDITOR.replace('news_desc_sort');
+    CKEDITOR.replace('news_content', {height:800});
 </script>
 
 <script type="text/javascript">
-    jQuery(document).ready(function() {
-        CKEDITOR.instances.news_content.resize('100%',1000);
-    });
     //kéo thả ảnh
    jQuery("#sys_drag_sort").dragsort({ dragSelector: "div", dragBetween: true, dragEnd: saveOrder });
     function saveOrder() {
