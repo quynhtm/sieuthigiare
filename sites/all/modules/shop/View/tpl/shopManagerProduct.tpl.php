@@ -87,7 +87,21 @@
 							<tbody>
 								<?php foreach($result as $k=>$v) {?>
 								<tr>
-									<td></td>
+									<td>
+										<?php if( isset($v->url_image) && isset($v->url_image_hover)) {?>
+										<div style="position: relative;">
+											<div style="position: relative; z-index: 10">
+												<img src="<?php echo $v->url_image ?>" class='imge_hover' id='<?php echo $v->id ?>'/>
+											</div>
+											<div id='div_hover_<?php echo $v->id ?>'style="position: absolute; bottom: 30px; left: 40px; border: 2px solid #ccc; padding: 5px; background: #F4F9FF; z-index: 1000; display: none">
+												<img src="<?php echo $v->url_image_hover ?>"/>
+											</div>
+										</div>
+										<?php } else{?>
+											<img src=""/>
+										<?php }?>
+
+									</td>
 									<td><input type="checkbox" name="id[]" value="<?php echo $v->id?>"/></td>
 									<td><?php echo '['.$v->product_code.'] '.$v->product_name ?></td>
 									<td><?php echo $v->category_name ?></td>
@@ -159,6 +173,16 @@
 				}
 				return false;
 			}
+		});
+
+		//hover view anh
+		jQuery(".imge_hover").mouseover(function() {
+			var id = jQuery(this).attr('id');
+			jQuery("#div_hover_" + id).show();
+		});
+		jQuery(".imge_hover").mouseout(function() {
+			var id = jQuery(this).attr('id');
+			jQuery("#div_hover_" + id).hide();
 		});
 	});
 </script>

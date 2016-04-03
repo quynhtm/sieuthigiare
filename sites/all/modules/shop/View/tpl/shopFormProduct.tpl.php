@@ -52,6 +52,7 @@
 						                 <div class="col-lg-8">
 						                     <a href="javascript:;"class="btn btn-primary" onclick="Common_admin.uploadMultipleImages(2);">Upload ảnh</a>
 						                     <input name="image_primary" type="hidden" id="image_primary" value="">
+						                     <input name="image_primary_hover" type="hidden" id="image_primary_hover" value="">
 						                 </div>
 						            </div>
 									<!--hien thi anh-->
@@ -59,6 +60,7 @@
 						            <?php if(isset($arrItem->product_image_other)){
 						                $key_primary = -1;
 						                $image_primary = $arrItem->product_image;
+						                $image_primary_hover = $arrItem->product_image_hover;
 						                ?>
 						                    <?php
 						                        if(trim($arrItem->product_image_other) != ''){
@@ -72,8 +74,9 @@
 						                                        <input type="radio" id="chẹcked_image_<?php echo $k ?>" name="chẹcked_image" value="<?php echo $k ?>"
 						                                               <?php if (isset($image_primary) && ($image_primary == $v)){ ?> checked="checked" <?php }?>
 						                                        onclick="Common_admin.checkedImage('<?php echo $v ?>','<?php echo $k ?>');">
-						                                        <label for="chẹcked_image_{$key}" style='font-weight:normal'>Ảnh đại diện</label>
-						                                        <br/><a href="javascript:void(0);" id="sys_delete_img_other_<?php echo $k ?>"onclick="Common_admin.removeImage('<?php echo $k ?>','<?php if(isset($arrItem->id)){ echo $arrItem->id; } ?>','<?php echo $v ?>','1');">Xóa ảnh</a>
+						                                        <label for="chẹcked_image_<?php echo $k ?>" style='font-weight:normal'>Ảnh đại diện</label>
+						                                        <br/>
+						                                        <a href="javascript:void(0);" id="sys_delete_img_other_<?php echo $k ?>"onclick="Common_admin.removeImage('<?php echo $k ?>','<?php if(isset($arrItem->id)){ echo $arrItem->id; } ?>','<?php echo $v ?>','1');">Xóa ảnh</a>
 						                                        <span style="display: none"><b><?php echo $k ?></b></span>
 						                                    </div>
 						                                    <?php

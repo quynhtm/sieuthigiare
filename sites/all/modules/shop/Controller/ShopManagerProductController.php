@@ -20,8 +20,17 @@ function shopManagerProduct(){
 	$dataSearch['category_id'] = FunctionLib::getParam('category_id','');
 	$dataSearch['status'] = FunctionLib::getParam('status', -1);
 
-	$arrFields = array('id', 'category_name', 'product_code','product_name', 'product_price_sell', 'product_price_market', 'product_content', 'time_created', 'status');
+	$arrFields = array('id', 'category_name', 'product_code','product_name', 'product_price_sell', 'product_price_market', 'product_content', 'product_image', 'product_image_hover', 'time_created', 'status');
 	$result = ShopManagerProduct::getSearchListItems($dataSearch, $limit, $arrFields);
+
+	if(isset($result['data']) && !empty($result['data'])){
+			foreach($result['data'] as $k => &$value){
+				if( isset($value->product_image) && trim($value->product_image) != ''){
+					$value->url_image = FunctionLib::getThumbImage($value->product_image,$value->id,FOLDER_PRODUCT,60,60);
+					$value->url_image_hover = FunctionLib::getThumbImage($value->product_image_hover,$value->id,FOLDER_PRODUCT,300,150);
+				}
+			}
+		}
 
 	$arrCategoryChildren = DataCommon::getListCategoryChildren($user_shop->shop_category);
 	$optionCategoryChildren = FunctionLib::getOption(array(-1=>'Chọn danh mục sản phẩm') + $arrCategoryChildren, $dataSearch['category_id']);
@@ -90,6 +99,7 @@ function shopFormProduct(){
 				'product_price_market'=>array('value'=>FunctionLib::getParam('product_price_market',''), 'require'=>0, 'messages'=>''),
 				'product_content'=>array('value'=>FunctionLib::getParam('product_content',''), 'require'=>1, 'messages'=>'Chi tiết sản phẩm không được trống!'),
 				'product_image'=>array('value'=>FunctionLib::getParam('image_primary','')),
+				'product_image_hover'=>array('value'=>FunctionLib::getParam('image_primary_hover','')),
 				'user_shop_id'=>array('value'=>$user_shop->shop_id, 'require'=>0, 'messages'=>''),
 				'user_shop_name'=>array('value'=>$user_shop->shop_name, 'require'=>0, 'messages'=>''),
 				'shop_province'=>array('value'=>$user_shop->shop_province, 'require'=>0, 'messages'=>''),
@@ -118,6 +128,10 @@ function shopFormProduct(){
 				$data['product_image']['value'] = $arrInputImgOther[0];
 			}
 			$data['product_image_other']['value'] = serialize($arrInputImgOther);
+			//neu ko co anh hove, lay anh hove la cai anh dau tien
+			if($data['product_image_hover']['value'] == ''){
+				$data['product_image_hover']['value'] = $arrInputImgOther[0];
+			}
 		}
 
 		$errors = ValidForm::validInputData($data);

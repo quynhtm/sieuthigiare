@@ -106,18 +106,15 @@
 
 <script>
 	jQuery(document).ready(function(){
-		jQuery(document).ready(function() {
-			//hover view anh
-			jQuery(".imge_hover").mouseover(function() {
-				var id = jQuery(this).attr('id');
-				jQuery("#div_hover_" + id).show();
-			});
-			jQuery(".imge_hover").mouseout(function() {
-				var id = jQuery(this).attr('id');
-				jQuery("#div_hover_" + id).hide();
-			});
+		//hover view anh
+		jQuery(".imge_hover").mouseover(function() {
+			var id = jQuery(this).attr('id');
+			jQuery("#div_hover_" + id).show();
 		});
-
+		jQuery(".imge_hover").mouseout(function() {
+			var id = jQuery(this).attr('id');
+			jQuery("#div_hover_" + id).hide();
+		});
 		DELETE_ITEM.init('admincp/news');
 	});
 </script>
