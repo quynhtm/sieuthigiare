@@ -11,7 +11,11 @@ class ShopManagerProduct{
     
 	static $table_action_provice = TABLE_PROVINCE;
 	static $primary_key_province = 'province_id';
+
     static $primary_key_user_shop = 'user_shop_id';
+
+    static $table_action_category = TABLE_CATEGORY;
+    static $primary_key_cagegory = 'category_id';
 
 	public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
         global $user_shop;
@@ -74,6 +78,15 @@ class ShopManagerProduct{
         }
         return array('data' => array(),'total' => 0,'pager' => array(),);
     }
+
+    public static function getItembyCond($fields = '', $cond=''){
+        $result = array();
+        if($cond != ''){
+           $result = DB::getItembyCond(self::$table_action, $fields, '', self::$primary_key.' ASC', $cond, 1);
+        }
+        return !empty($result)? $result[0]: array();
+    }
+
     public static function updateId($dataUpdate, $id = 0){
         if($id > 0 && !empty($dataUpdate)){
             return DB::updateId(self::$table_action, self::$primary_key, $dataUpdate, $id);
@@ -94,6 +107,17 @@ class ShopManagerProduct{
         }
         return false;
     }
+
+    public static function getNameCategory($catid=0){
+        if($catid > 0){
+            $arrItem =  DB::getItemById(self::$table_action_category, self::$primary_key_cagegory, array('category_name'), $catid);
+            if(!empty($arrItem)){
+                return $arrItem[0]->category_name;
+            }
+        }
+        return '';
+    }
+
 	public static function save($data=array(), $id = 0){
         $data_post = array();
         if(!empty($data)){

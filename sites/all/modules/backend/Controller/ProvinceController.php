@@ -17,9 +17,7 @@ class ProvinceController{
 
         $files = array(
         	'View/css/admin.css',
-
             'View/js/admin.js',
-        	'View/js/stacktable.min.js',
         );
         Loader::load('Admin', $files);
 	}

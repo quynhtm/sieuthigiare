@@ -22,22 +22,28 @@
 						                    </select>
 						                </div>
 						            </div>
+						            <div class="control-group">
+						                <label class="control-label">Mã sản phẩm<span>(*)</span></label>
+						                <div class="controls">
+						                    <input type="text" class="form-control input-sm" placeholder="Mã sản phẩm" name="product_code" value="<?php if(isset($arrItem->product_code)) { echo $arrItem->product_code; } ?>">
+						                </div>
+						            </div>
 									<div class="control-group">
 						                <label class="control-label">Tên Sản phẩm<span>(*)</span></label>
 						                <div class="controls">
-						                    <input type="text" class="form-control input-sm" placeholder="Tên Sản phẩm" name="product_name" value="">
+						                    <input type="text" class="form-control input-sm" placeholder="Tên Sản phẩm" name="product_name" value="<?php if(isset($arrItem->product_name)) { echo $arrItem->product_name; } ?>">
 						                </div>
 						            </div>
 						             <div class="control-group">
 						                <label class="control-label">Giá bán</label>
 						                <div class="controls">
-						                    <input type="text" class="form-control input-sm" placeholder="Giá bán" name="product_price_sell" value="">
+						                    <input type="text" class="form-control input-sm" placeholder="Giá bán" name="product_price_sell" value="<?php if(isset($arrItem->product_price_sell)) { echo $arrItem->product_price_sell; } ?>">
 						                </div>
 						            </div>
 						            <div class="control-group">
 						                <label class="control-label">Giá thị trường</label>
 						                <div class="controls">
-						                    <input type="text" class="form-control input-sm" placeholder="Giá thị trường" name="product_price_market" value="">
+						                    <input type="text" class="form-control input-sm" placeholder="Giá thị trường" name="product_price_market" value="<?php if(isset($arrItem->product_price_market)) { echo $arrItem->product_price_market; } ?>">
 						                </div>
 						            </div>
 						        </div>
@@ -61,7 +67,7 @@
 						        	<div class="control-group">
 						                <label class="control-label">Chi tiết</label>
 						                <div class="controls">
-						                	<textarea name="product_content" class="form-control input-sm" cols="30" rows="10"></textarea>
+						                	<textarea name="product_content" class="form-control input-sm" cols="30" rows="10"><?php if(isset($arrItem->product_content)) { echo $arrItem->product_content; } ?></textarea>
 						                </div>
 						            </div>
 						            <div class="form-actions">

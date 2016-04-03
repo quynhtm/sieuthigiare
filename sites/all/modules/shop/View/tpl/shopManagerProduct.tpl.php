@@ -67,71 +67,73 @@
 						<?php print render($pager); ?>
 					</div>
 				</div>
-				<div class="showListItem">
-					<table class="table taicon-adminble-bordered table-hover table-striped" width="100%" cellpadding="5" cellspacing="1" border="1">
-						<thead>
-						<tr>
-							<th width="5%">Ảnh</th>
-							<th width="2%">Chọn<br/><input type="checkbox" id="checkAll"/></th>
-							<th width="">[Mã] Tên sản phẩm</th>
-							<th width="">Danh mục</th>
-							<th width="">Giá thị trường</th>
-							<th width="">Giá bán</th>
-							<th width="">Mô tả</th>
-							<th width="">Ngày tạo</th>
-							<th width="">Trạng thái</th>
-							<th width="">Thao tác</th>
-						</tr>
-						</thead>
-						<tbody>
-							<?php foreach($result as $k=>$v) {?>
+				<form id="formListItem" method="post" action='<?php echo $base_url?>/xoa-san-pham'>
+					<div class="showListItem">
+						<table class="table taicon-adminble-bordered table-hover table-striped" width="100%" cellpadding="5" cellspacing="1" border="1">
+							<thead>
 							<tr>
-								<td></td>
-								<td><input type="checkbox" value="<?php echo $v->id?>"/></td>
-								<td><?php echo '['.$v->product_code.'] '.$v->product_name ?></td>
-								<td></td>
-								<td>
-									<?php 
-										$price_market = number_format($v->product_price_market);
-										if($price_market == 0){
-											echo "Không có";
-										}else{
-											echo $price_market;
-										}
-									?>
-								</td>
-								<td>
-									<?php 
-										$price_sell = number_format($v->product_price_sell);
-										if($price_sell == 0){
-											echo "Liên hệ";
-										}else{
-											echo $price_sell;
-										}
-									?>
-								</td>
-								<td><?php echo $v->product_content ?></td>
-								<td><?php echo date('d/m/Y h:i', $v->time_created)?></td>
-								<td>
-									<?php
-									if($v->status == 1){
-										$status='<i class="icon-ok font-size-20 green "></i>';
-									}else{
-										$v='<i class="icon-remove font-size-20 red "></i></a>';
-									}
-									echo $status;
-									?>
-								</td>
-								<td>
-								<?php $linkEdit = $base_url.'/sua-san-pham/'.$v->id.'/'.Stdio::pregReplaceStringAlias($v->product_name).'.html' ?>
-								<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit green font-size-20"></i></a>
-								<a id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-trash font-size-20 red"></i></a>
-								</td>
+								<th width="5%">Ảnh</th>
+								<th width="2%">Chọn<br/><input type="checkbox" id="checkAll"/></th>
+								<th width="">[Mã] Tên sản phẩm</th>
+								<th width="">Danh mục</th>
+								<th width="">Giá thị trường</th>
+								<th width="">Giá bán</th>
+								<th width="">Mô tả</th>
+								<th width="">Ngày tạo</th>
+								<th width="">Trạng thái</th>
+								<th width="">Thao tác</th>
 							</tr>
-							<?php } ?>
-						</tbody>
-					</table>
-				</div>
+							</thead>
+							<tbody>
+								<?php foreach($result as $k=>$v) {?>
+								<tr>
+									<td></td>
+									<td><input type="checkbox" name="id[]" value="<?php echo $v->id?>"/></td>
+									<td><?php echo '['.$v->product_code.'] '.$v->product_name ?></td>
+									<td><?php echo $v->category_name ?></td>
+									<td>
+										<?php 
+											$price_market = number_format($v->product_price_market);
+											if($price_market == 0){
+												echo "Không có";
+											}else{
+												echo $price_market;
+											}
+										?>
+									</td>
+									<td>
+										<?php 
+											$price_sell = number_format($v->product_price_sell);
+											if($price_sell == 0){
+												echo "Liên hệ";
+											}else{
+												echo $price_sell;
+											}
+										?>
+									</td>
+									<td><?php echo $v->product_content ?></td>
+									<td><?php echo date('d/m/Y h:i', $v->time_created)?></td>
+									<td>
+										<?php
+										if($v->status == 1){
+											$status='<i class="icon-ok font-size-20 green "></i>';
+										}else{
+											$v='<i class="icon-remove font-size-20 red "></i></a>';
+										}
+										echo $status;
+										?>
+									</td>
+									<td>
+									<?php $linkEdit = $base_url.'/sua-san-pham/'.$v->id.'/'.Stdio::pregReplaceStringAlias($v->product_name).'.html' ?>
+									<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit green font-size-20"></i></a>
+									<a id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-trash font-size-20 red"></i></a>
+									</td>
+								</tr>
+								<?php } ?>
+							</tbody>
+						</table>
+					</div>
+				</form>
 				<div class="show-box-paging">
 					<div class="total-rows"><b><?php echo t('Tổng số: ')?> <?php echo $totalItem ?></b></div>
 					<div class="showListPage">
@@ -142,3 +144,21 @@
 		</div>
 	</div>
 </div>
+<script>
+	jQuery(document).ready(function($){
+		jQuery('a#deleteMoreItem, a#deleteOneItem').click(function(){
+			var total = jQuery( "input:checked" ).length;
+			if(total==0){
+				alert('Vui lòng chọn ít nhất 1 bản ghi để xóa!');
+				return false;
+			}else{
+				if (confirm('Bạn muốn xóa [OK]:Đồng ý [Cancel]:Bỏ qua?)')){
+					jQuery('form#formListItem').attr("action", BASEPARAMS.base_url+"/xoa-san-pham");
+					jQuery('form#formListItem').submit();
+					return true;
+				}
+				return false;
+			}
+		});
+	});
+</script>
