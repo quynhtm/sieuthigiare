@@ -157,5 +157,14 @@ function shopEditProduct(){
 		drupal_set_message('Không tồn tại liên kết này!', 'error');
 		drupal_goto($base_url.'/quan-ly-gian-hang.html');
 	}
+}
+function shopDeleteProduct(){
+	global $base_url, $user_shop;
 
+	if($user_shop->shop_id == 0){
+		drupal_set_message('Bạn không có quyền truy cập. Vui lòng đăng nhập tài khoản!', 'error');
+		drupal_goto($base_url);
+	}
+	$listId =  $_POST['id'];
+	bug($listId);
 }
