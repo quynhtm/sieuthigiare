@@ -244,6 +244,14 @@ var Common_admin = {
     },
 
     removeImage: function(key,id,nameImage,type){
+        //product
+        if(jQuery("#image_primary_hover").length ){
+            var img_hover = jQuery("#image_primary_hover").val();
+            if(img_hover == nameImage){
+                jQuery("#image_primary_hover").val('');
+            }
+        }
+
         if (confirm('Bạn có chắc xóa ảnh này?')) {
             var urlAjaxUpload = BASEPARAMS.base_url+'/ajax?act=upload_image&code=remove_image';
             jQuery.ajax({
