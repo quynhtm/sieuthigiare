@@ -43,6 +43,8 @@ define('FOLDER_DEFAULT', 'img_other');
 define('FOLDER_PRODUCT', 'product');
 define('FOLDER_NEWS', 'news');
 
+define('IMAGE_ERROR', 113); // dung sau quet cac item up ?nh nhung ko cap nhat DB
+
 
 
 
