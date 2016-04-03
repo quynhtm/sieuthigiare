@@ -142,4 +142,31 @@ class ShopManagerProduct{
         }
         return false;
     }
+
+    public static function deleteOne($id=0){
+        global $user_shop;
+
+        if($id > 0){
+            $fields = 'product_image_other';
+            $cond = 'id='.$id.' AND user_shop_id='.$user_shop->shop_id;
+            $arrItem = self::getItembyCond($fields, $cond);
+            if(!empty($arrItem)){
+                if($arrItem[0]->product_image_other != ''){
+                    $product_image_other  = unserialize($arrItem[0]->product_image_other);
+                    if(!empty($product_image_other)){
+                        $path = DRUPAL_ROOT.'/uploads/product/'.$id;
+                        foreach($product_image_other as $v){
+                            if(is_file($path.'/'.$v)){
+                                @unlink($path.'/'.$v);
+                            }
+                        }
+                        if(is_dir($path)) {
+                            @rmdir($path);
+                        }
+                    }
+                }
+                self::deleteId($id);
+            }
+        }
+    }
 }

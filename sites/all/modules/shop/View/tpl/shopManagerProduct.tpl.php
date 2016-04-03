@@ -98,7 +98,7 @@
 											</div>
 										</div>
 										<?php } else{?>
-											<img src=""/>
+											<img src="<?php echo IMAGE_DEFAULT ?>" width="80px"/>
 										<?php }?>
 
 									</td>

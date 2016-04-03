@@ -44,7 +44,7 @@ define('FOLDER_PRODUCT', 'product');
 define('FOLDER_NEWS', 'news');
 
 define('IMAGE_ERROR', 113); // dung sau quet cac item up ?nh nhung ko cap nhat DB
-
+define('IMAGE_DEFAULT', $base_url.'/sites/all/modules/autoLoad/img/default.png');
 
 
 
