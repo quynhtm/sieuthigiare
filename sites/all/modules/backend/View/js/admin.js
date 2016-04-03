@@ -4,7 +4,6 @@ jQuery(document).ready(function($){
 	HIDDEN_MENU_ADMIN.init();
 	HIDDEN_MENU_ADMIN.menu_left();
 	RESTORE_ITEM.init();
-	jQuery('.table').cardtable();
 });
 
 CHECKALL_ITEM = {

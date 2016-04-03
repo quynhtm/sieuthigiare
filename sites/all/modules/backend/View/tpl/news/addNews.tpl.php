@@ -138,10 +138,10 @@ CKEDITOR.replace('news_content');
         });*/
     });
     //kéo thả ảnh
-    $("#sys_drag_sort").dragsort({ dragSelector: "div", dragBetween: true, dragEnd: saveOrder });
+   jQuery("#sys_drag_sort").dragsort({ dragSelector: "div", dragBetween: true, dragEnd: saveOrder });
     function saveOrder() {
-        var data = $("#sys_drag_sort li div span").map(function() { return $(this).children().html(); }).get();
-        $("input[name=list1SortOrder]").val(data.join(","));
+        var data = jQuery("#sys_drag_sort li div span").map(function() { return jQuery(this).children().html(); }).get();
+        jQuery("input[name=list1SortOrder]").val(data.join(","));
     };
     function insertImgContent(src){
         CKEDITOR.instances.content.insertHtml('<img src="'+src+'"/>');
