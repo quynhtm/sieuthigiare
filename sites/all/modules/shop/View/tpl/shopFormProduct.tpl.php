@@ -8,7 +8,7 @@
 	<div class="content">
 		<div class="wrapp-shop">
 			<div class="box-shop-search">
-				<div class="title-box-shop-search">Thêm mới sản phẩm</div>
+				<div class="title-box-shop-search"><?php echo $title ?></div>
 				<div class="content-box-shop-search">
 					<div class="wrapp-box-info">
 						<form action="" method="post" id="frmformShop" class="frmformShop" name="frmformShop" enctype="multipart/form-data">

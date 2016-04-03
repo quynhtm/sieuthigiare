@@ -39,11 +39,11 @@
 						</div>
 						<div class="col-lg-3">
 							<div class="form-group">
-								<label class="control-label">Ngày bắt đầu</label>
+								<label class="control-label">Từ ngày</label>
 								<div><input type="text" class="form-control input-sm date" placeholder ="Ngày bắt đầu" name="date_start"/></div>
 							</div>
 							<div class="form-group">
-								<label class="control-label">Ngày kết thúc</label>
+								<label class="control-label">Tới ngày</label>
 								<div><input type="text" class="form-control input-sm date" placeholder ="Ngày kết thúc" name="date_end"/></div>
 							</div>
 						</div>
