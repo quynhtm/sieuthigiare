@@ -150,9 +150,10 @@ class ShopManagerProduct{
             $fields = 'product_image_other';
             $cond = 'id='.$id.' AND user_shop_id='.$user_shop->shop_id;
             $arrItem = self::getItembyCond($fields, $cond);
+         
             if(!empty($arrItem)){
-                if($arrItem[0]->product_image_other != ''){
-                    $product_image_other  = unserialize($arrItem[0]->product_image_other);
+                if($arrItem->product_image_other != ''){
+                    $product_image_other  = unserialize($arrItem->product_image_other);
                     if(!empty($product_image_other)){
                         $path = DRUPAL_ROOT.'/uploads/product/'.$id;
                         foreach($product_image_other as $v){
