@@ -8,11 +8,8 @@ class NewsController{
 	public function __construct(){
 		
 			$files = array(
-		       'bootstrap/lib/ckeditor/ckeditor.js',
-		       'bootstrap/lib/ckeditor/config.js',
-
-		       'js/jquery.js',// dang bi loi o day: dong vao thi up dc anh nhung ko săp xep dc, bo ra ko up dc anh nhung sap xep dc
-
+				'bootstrap/lib/ckeditor/ckeditor.js',
+				'bootstrap/lib/ckeditor/config.js',
 				'bootstrap/lib/dragsort/jquery.dragsort.js',
 		    );
 		    Loader::loadJSExt('Core', $files);
