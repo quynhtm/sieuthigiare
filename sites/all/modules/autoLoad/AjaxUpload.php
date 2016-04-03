@@ -31,7 +31,9 @@ class AjaxUpload{
 	function home(){
 		die("Nothing to do...");
 	}
-
+    /*
+     * Upload ?nh news, product
+     * */
 	function upload_image() {
         $id_hiden = FunctionLib::getIntParam('id', 0);
         $type = FunctionLib::getIntParam('type', 1);
@@ -53,7 +55,6 @@ class AjaxUpload{
 		echo json_encode($aryData);
 		exit();
 	}
-
 	function uploadImageToFolder($dataImg, $id_hiden, $table_action, $folder, $field_img_other='', $primary_key){
         global $base_url;
         $aryData = array();
@@ -106,8 +107,8 @@ class AjaxUpload{
         }
         return $aryData;
     }
+
     function remove_image(){
-        
         $id = FunctionLib::getIntParam('id', 0);
         $nameImage = FunctionLib::getParam('nameImage', '');
         $type = FunctionLib::getIntParam('type', 1);
@@ -145,7 +146,6 @@ class AjaxUpload{
         echo json_encode($aryData);
         exit();
     }
-
     function delete_image_item($table_action, $primary_key, $id, $field = '', $nameImage, $folder_image){
         $delete_action = 0;
         $aryImages  = array();
@@ -177,7 +177,6 @@ class AjaxUpload{
         }
         return $delete_action;
     }
-
     function unlinkFileAndFolder($file_name = '', $id = 0, $folder = '', $is_delDir = 0){
        
         if($file_name != '') {

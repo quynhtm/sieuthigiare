@@ -178,6 +178,7 @@ var Common_admin = {
         jQuery('.ajax-upload-dragdrop').remove();
         var urlAjaxUpload = BASEPARAMS.base_url+'/ajax?act=upload_image&code=upload_image';
         var id_hiden = document.getElementById('id_hiden').value;
+
         var settings = {
             url: urlAjaxUpload,
             method: "POST",
@@ -185,23 +186,23 @@ var Common_admin = {
             fileName: "multipleFile",
             formData: {id: id_hiden,type: type},
             multiple: (id_hiden==0)? false: true,
+            onSubmit:function(){
+                jQuery( "#sys_show_button_upload").hide();
+                jQuery("#status").html("<font color='green'>Đang upload...</font>");
+            },
             onSuccess:function(files,xhr,data){
                 dataResult = JSON.parse(xhr);
                 if(dataResult.intIsOK === 1){
-                    /*var imagePopup = "<img style='float:left;margin: 5px; 10px; width:100px; height: 100px;' id='sys_new_img_" + dataResult.info.id_key + "' width='100px' height='100px' src='" + dataResult.info.src + "'/>";
-                    jQuery('#div_image').append(imagePopup);*/
-
                     //gan lai id item cho id hiden: dung cho them moi, sua item
                     jQuery('#id_hiden').val(dataResult.id_item);
+                    jQuery( "#sys_show_button_upload").show();
 
                     //add vao list sản sản phẩm khác
                     var checked_img_pro = "<div class='clear'></div><input type='radio' id='chẹcked_image_"+dataResult.info.id_key+"' name='chẹcked_image' value='"+dataResult.info.id_key+"' onclick='Common_admin.checkedImage(\""+dataResult.info.name_img+"\",\"" + dataResult.info.id_key + "\")'><label for='chẹcked_image_"+dataResult.info.id_key+"' style='font-weight:normal'>Ảnh đại diện</label><br/>";
-                    if(type==2){
-                        var checked_img_pro = checked_img_pro + "<input type='radio' id='chẹcked_image_hover"+dataResult.info.id_key+"' name='chẹcked_image_hover' value='"+dataResult.info.id_key+"' onclick='Common_admin.checkedImageHover(\""+dataResult.info.name_img+"\",\"" + dataResult.info.id_key + "\")'><label for='chẹcked_image_hover"+dataResult.info.id_key+"' style='font-weight:normal'>Ảnh Hover</label><br/>";
+                    if( type == 2){
+                        var checked_img_pro = checked_img_pro + "<input type='radio' id='chẹcked_image_hover"+dataResult.info.id_key+"' name='chẹcked_image_hover' value='"+dataResult.info.id_key+"' onclick='Common_admin.checkedImageHover(\""+dataResult.info.name_img+"\",\"" + dataResult.info.id_key + "\")'><label for='chẹcked_image_hover"+dataResult.info.id_key+"' style='font-weight:normal'>Ảnh hover</label><br/>";
                     }
-
                     var delete_img = "<a href='javascript:void(0);' id='sys_delete_img_other_" + dataResult.info.id_key + "' onclick='Common_admin.removeImage(\""+dataResult.info.id_key+"\",\""+dataResult.id_item+"\",\""+dataResult.info.name_img+"\",\""+type+"\")' >Xóa ảnh</a>";
-
                     var html= "<li id='sys_div_img_other_" + dataResult.info.id_key + "'>";
                     html += "<div class='div_img_upload' >";
                     html += "<img height='80' width='80' src='" + dataResult.info.src + "'/>";
@@ -209,14 +210,13 @@ var Common_admin = {
                     html += checked_img_pro;
                     html += delete_img;
                     html +="</div></li>";
-
                     jQuery('#sys_drag_sort').append(html);
-                    jQuery('#sys_PopupUploadImgOtherPro').modal('hide');
 
                     //thanh cong
                     jQuery("#status").html("<font color='green'>Upload is success</font>");
-                    setTimeout( "jQuery('.ajax-file-upload-statusbar').hide();",5000 );
-                    setTimeout( "jQuery('#status').hide();",5000 );
+                    setTimeout( "jQuery('.ajax-file-upload-statusbar').hide();",2000 );
+                    setTimeout( "jQuery('#status').hide();",2000 );
+                    setTimeout( "jQuery('#sys_PopupUploadImgOtherPro').modal('hide');",2500 );
                 }
             },
             onError: function(files,status,errMsg){

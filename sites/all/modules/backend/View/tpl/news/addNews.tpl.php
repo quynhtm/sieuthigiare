@@ -67,6 +67,7 @@
             </div>
             <div class="control-group">
                 <label class="control-label">Nội dung</label>
+                <div class="controls"><button type="button" onclick="Common_admin.insertImageContent(1)" class="btn btn-primary">Chèn ảnh vào nội dung</button></div>
                 <div class="controls">
                     <textarea name="news_content"><?php if(isset($arrItem->news_content)){ echo $arrItem->news_content; } ?></textarea>
                 </div>
@@ -101,7 +102,9 @@
             <div class="modal-body">
                 <form name="uploadImage" method="post" action="#" enctype="multipart/form-data">
                     <div class="form_group">
-                        <div id="sys_mulitplefileuploader" class="btn btn-primary">Upload ảnh</div>
+                        <div id="sys_show_button_upload">
+                            <div id="sys_mulitplefileuploader" class="btn btn-primary">Upload ảnh</div>
+                        </div>
                         <div id="status"></div>
 
                         <div class="clearfix"></div>
@@ -116,6 +119,38 @@
 </div>
 <!--Popup upload ảnh-->
 
+
+<!--Popup anh khac de chen vao noi dung bai viet-->
+<div class="modal fade" id="sys_PopupImgOtherInsertContent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Click ảnh để chèn vào nội dung</h4>
+            </div>
+            <div class="modal-body">
+                <form name="uploadImage" method="post" action="#" enctype="multipart/form-data">
+                    <div class="form_group">
+                        <div class="clearfix"></div>
+                        <div class="clearfix" style='margin: 5px 10px; width:100%;'>
+                            <div id="div_image" class="float_left">
+                                <?php if (isset($arrImageOther) && count($arrImageOther) > 0) {?>
+                                <?php foreach($arrImageOther as $kk => $img_other) {?>
+                                    <span class="float_left image_insert_content">
+                                        <a class="img_item" href="javascript:void(0);" onclick="insertImgContent('<?php echo $img_other['image_big']?>')" >
+                                            <img src="<?php echo $img_other['image_small']?>" width="80" height="80">
+                                        </a>
+                                    </span>
+                                <?php } } ?>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- chen anh vào noi dung-->
 <script>
 
 
@@ -125,18 +160,7 @@ CKEDITOR.replace('news_content');
 
 <script type="text/javascript">
     jQuery(document).ready(function() {
-        /*//set time
-        // thong tin: http://xdsoft.net/jqplugins/datetimepicker/
-        $('#start_time').datetimepicker({
-            dayOfWeekStart : 1,
-            format:'d-m-Y H:i',
-            lang:'en'
-        });
-        $('#end_time').datetimepicker({
-            dayOfWeekStart : 1,
-            format:'d-m-Y H:i',
-            lang:'en'
-        });*/
+        CKEDITOR.instances.news_content.resize('100%',1000);
     });
     //kéo thả ảnh
    jQuery("#sys_drag_sort").dragsort({ dragSelector: "div", dragBetween: true, dragEnd: saveOrder });
@@ -145,6 +169,6 @@ CKEDITOR.replace('news_content');
         jQuery("input[name=list1SortOrder]").val(data.join(","));
     };
     function insertImgContent(src){
-        CKEDITOR.instances.content.insertHtml('<img src="'+src+'"/>');
+        CKEDITOR.instances.news_content.insertHtml('<img src="'+src+'"/>');
     }
 </script>

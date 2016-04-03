@@ -71,11 +71,25 @@ class NewsController{
 		global $base_url;
 	
 		$param = arg();
-		$arrItem = array();
+		$arrItem = $arrImageOther = array();
 		$item_id = 0;
 		if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
 			$item_id = (int)$param[3];
 			$arrItem = News::getItemById(array(), $item_id);
+
+			//lấy mảng ảnh khách của item để chèn vào nội dung
+			if(!empty($arrItem)){
+				if(isset($arrItem->news_image_other) && trim($arrItem->news_image_other) != ''){
+					$arrOther = unserialize($arrItem->news_image_other);
+					foreach($arrOther as $k =>$val_other){
+						$arrImageOther[] = array(
+							'image_small'=> FunctionLib::getThumbImage($val_other,$arrItem->news_id,FOLDER_NEWS,80,80),
+							'image_big'=> FunctionLib::getThumbImage($val_other,$arrItem->news_id,FOLDER_NEWS,700,700),
+						);
+					}
+				}
+			}
+			//FunctionLib::Debug($arrImageOther);
 		}
 
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
@@ -124,10 +138,11 @@ class NewsController{
 				drupal_goto($base_url.'/admincp/news');
 			}
 		}
-		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->category_status) ? $arrItem->category_status: -1);
+		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->news_status) ? $arrItem->news_status: 0);
 		return $view = theme('addNews',
 			array('arrItem'=>$arrItem,
 				'item_id'=>$item_id,
+				'arrImageOther'=>$arrImageOther,
 				'title'=>'tin tức',
 				'optionStatus'=>$optionStatus));
 	}

@@ -270,6 +270,6 @@ class FunctionLib{
 	}
 
 	static function getFolderByID($id = 0, $folder = FOLDER_DEFAULT) {
-		return  $folder . '/' . $id . '/';
+		return  $folder . '/' . $id;
 	}
 }
