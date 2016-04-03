@@ -173,6 +173,15 @@ function shopDeleteProduct(){
 		drupal_set_message('Bạn không có quyền truy cập. Vui lòng đăng nhập tài khoản!', 'error');
 		drupal_goto($base_url);
 	}
-	$listId =  $_POST['id'];
-	bug($listId);
+	$listId =  FunctionLib::getParam('id',array());
+	if(!empty($listId)){
+		foreach($listId as $id){
+			if($id > 0){
+				ShopManagerProduct::deleteOne($id);
+			}
+		}
+		drupal_set_message('Xóa bài viết thành công.');
+	}
+	drupal_set_message('Xóa sản phẩm thành công!');
+	drupal_goto($base_url.'/quan-ly-gian-hang.html');
 }
