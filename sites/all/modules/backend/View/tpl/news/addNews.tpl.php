@@ -80,7 +80,7 @@
                 </div>
             </div>
             <div class="form-actions">
-                 <input type="hidden" id="id_hiden" name="id" value="<?php if(isset($arrItem->news_id)){ echo $arrItem->news_id; } ?>"/>
+                <input type="hidden" id="id_hiden" name="id" value="<?php if(isset($arrItem->news_id)){ echo $arrItem->news_id; } ?>"/>
                 <input type="hidden" value="txt-form-post" name="txt-form-post">
 				<button type="submit" name="txtSubmit" id="buttonSubmit" class="btn btn-primary">Lưu lại</button>
                 <button type="reset" class="btn">Bỏ qua</button>
