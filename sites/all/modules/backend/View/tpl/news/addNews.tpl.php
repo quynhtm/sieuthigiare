@@ -40,7 +40,7 @@
                                         <input type="radio" id="chẹcked_image_<?php echo $k ?>" name="chẹcked_image" value="<?php echo $k ?>"
                                                <?php if (isset($image_primary) && ($image_primary == $v)){ ?> checked="checked" <?php }?>
                                         onclick="Common_admin.checkedImage('<?php echo $v ?>','<?php echo $k ?>');">
-                                        <label for="chẹcked_image_{$key}" style='font-weight:normal'>Ảnh đại diện</label>
+                                        <label for="chẹcked_image_<?php echo $k ?>" style='font-weight:normal'>Ảnh đại diện</label>
                                         <br/><a href="javascript:void(0);" id="sys_delete_img_other_<?php echo $k ?>"onclick="Common_admin.removeImage('<?php echo $k ?>','<?php if(isset($arrItem->news_id)){ echo $arrItem->news_id; } ?>','<?php echo $v ?>','1');">Xóa ảnh</a>
                                         <span style="display: none"><b><?php echo $k ?></b></span>
                                     </div>
