@@ -135,7 +135,7 @@ class NewsController{
 	function deleteNewsAction(){
 		global $base_url;
 		if(isset($_POST) && $_POST['txtFormName']=='txtFormName'){
-			$listId = isset($_POST['checkItem'])? $_POST['checkItem'] : array();
+			$listId = FunctionLib::getParam('checkItem',array());
 			if(!empty($listId)){
 				foreach($listId as $id){
 					if($id > 0){
