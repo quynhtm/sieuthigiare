@@ -12,6 +12,11 @@ function shopManagerProduct(){
 		drupal_set_message('Bạn không có quyền truy cập. Vui lòng đăng nhập tài khoản!', 'error');
 		drupal_goto($base_url);
 	}
+	
+	$files = array(
+	    'js/common_admin.js',
+	);
+	Loader::load('Core', $files);
 
 	$limit = SITE_RECORD_PER_PAGE;
 	//search

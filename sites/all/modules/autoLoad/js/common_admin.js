@@ -1,4 +1,5 @@
 jQuery(document).ready(function($) {
+    CHECKALL_ITEM.init();
     //hover view anh
     jQuery(".imge_hover").mouseover(function() {
         var id = jQuery(this).attr('id');
@@ -8,6 +9,8 @@ jQuery(document).ready(function($) {
         var id = jQuery(this).attr('id');
         jQuery("#div_hover_" + id).hide();
     });
+
+
 });
 
 var Common_admin = {
@@ -329,3 +332,24 @@ var Common_admin = {
     },
 
 };//class
+
+CHECKALL_ITEM = {
+    init:function(){
+        jQuery("input#checkAll").click(function(){
+            var checkedStatus = this.checked;
+            jQuery("input.checkItem").each(function(){
+                this.checked = checkedStatus;
+            });
+        });
+    },
+    check_all:function(strs){
+        if(strs != ''){
+            jQuery("input.all_" + strs).click(function(){
+                var checkedStatus = this.checked;
+                jQuery("input.item_" + strs).each(function(){
+                    this.checked = checkedStatus;
+                });
+            });
+        }
+    },
+}
