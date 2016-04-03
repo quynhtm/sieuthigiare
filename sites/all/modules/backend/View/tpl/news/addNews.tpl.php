@@ -23,11 +23,11 @@
                  </div>
             </div>
             <!--hien thi anh-->
+            <ul id="sys_drag_sort" class="ul_drag_sort">
             <?php if(isset($arrItem->news_image_other)){
                 $key_primary = -1;
                 $image_primary = $arrItem->news_image;
                 ?>
-                    <ul id="sys_drag_sort" class="ul_drag_sort">
                     <?php
                         if(trim($arrItem->news_image_other) != ''){
                             $list_news_image_other = unserialize($arrItem->news_image_other);
@@ -53,9 +53,10 @@
                             <?php }?>
                             <input type="hidden" id="sys_key_image_primary" name="sys_key_image_primary" value="<?php echo $key_primary ?>">
                         <?php } ?>
-            </ul>
-            <input name="list1SortOrder" id ='list1SortOrder' type="hidden" />
+
             <?php } ?>
+                    </ul>
+             <input name="list1SortOrder" id ='list1SortOrder' type="hidden" />
             <!--ket thuc hien thi anh-->
 
             <div class="control-group">

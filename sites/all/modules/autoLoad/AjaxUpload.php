@@ -59,6 +59,7 @@ class AjaxUpload{
         $aryData = array();
         $aryData['intIsOK'] = -1;
         $aryData['msg'] = "Upload Img!";
+        $item_id = 0; // id doi tuong dang upload
 
         if (!empty($dataImg)) {
             if($id_hiden == 0){
@@ -69,9 +70,9 @@ class AjaxUpload{
                     $new_row['time_created'] = time();
                     $new_row['status'] = 0;
                 }
-                $id = DB::insertOneItem($table_action, $new_row);
+                $item_id = DB::insertOneItem($table_action, $new_row);
             }elseif($id_hiden > 0){
-                $id = $id_hiden;
+                $item_id = $id_hiden;
             }
 
             $aryError = $tmpImg = array();
@@ -80,7 +81,7 @@ class AjaxUpload{
             $file_name = Upload::uploadFile('multipleFile', 
 	                           $_file_ext = 'jpg,jpeg,png,gif', 
 	                           $_max_file_size = 10*1024*1024, 
-	                           $_folder = $folder.'/'.$id,
+	                           $_folder = $folder.'/'.$item_id,
 	                           $type_json=0
                            );
             
@@ -88,19 +89,19 @@ class AjaxUpload{
                 $tmpImg['name_img'] = $file_name;
                 $tmpImg['id_key'] = rand(10000, 99999);
                
-                $tmpImg['src'] = $base_url.'/uploads/'.$folder.'/'.$id_hiden.'/'.$file_name;
+                $tmpImg['src'] = $base_url.'/uploads/'.$folder.'/'.$item_id.'/'.$file_name;
                 if($field_img_other != ''){
-                    $listImageTempOther = DB::getItemById($table_action, $primary_key, array($field_img_other), $id);
+                    $listImageTempOther = DB::getItemById($table_action, $primary_key, array($field_img_other), $item_id);
                     if(!empty($listImageTempOther)){
                     	$aryTempImages = ($listImageTempOther[0]->$field_img_other !='')? unserialize($listImageTempOther[0]->$field_img_other): array();
                    	}
                     $aryTempImages[] = $file_name;
                     $new_row[$field_img_other] = serialize($aryTempImages);
-                    DB::updateId($table_action, $primary_key, $new_row, $id);
+                    DB::updateId($table_action, $primary_key, $new_row, $item_id);
                 }
             }
             $aryData['intIsOK'] = 1;
-            $aryData['id_item'] = $id;
+            $aryData['id_item'] = $item_id;
             $aryData['info'] = $tmpImg;
         }
         return $aryData;
