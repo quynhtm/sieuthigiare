@@ -18,7 +18,7 @@ class ShopManagerProduct{
     static $primary_key_cagegory = 'category_id';
 
 	public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
-        global $user_shop;
+        global $base_url, $user_shop;
 
         if(empty($arrFields))
             $arrFields = self::$arrFields;
@@ -32,6 +32,9 @@ class ShopManagerProduct{
             /*Begin search*/
             $cond = '';
             $arrCond = array();
+            $date_start = '';
+            $date_end = '';
+
             if(!empty($dataSearch)){
                 foreach($dataSearch as $field =>$value){
                     
@@ -57,10 +60,29 @@ class ShopManagerProduct{
                         $sql->condition($db_or);
                         array_push($arrCond, "(".$field." LIKE '%". $value ."%')");
                     }
+
+                    if($field == 'date_start' && $value != ''){
+                        $date_start = CDate::convertDate($value.' 00:00:00');
+                    }
+                    if($field == 'date_end' && $value != ''){
+                        $date_end = CDate::convertDate($value.' 23:59:59');
+                    }  
+
                 }
+
+                if($date_start != '' && $date_end != ''){
+                    if($date_end >= $date_start){
+                        $sql->condition('i.time_created', array($date_start, $date_end), 'BETWEEN');
+                        array_push($arrCond, ' (time_created BETWEEN '.$date_start.' AND '.$date_end.')');
+
+                    }else{
+                        drupal_set_message("Thời gian chọn chưa hợp lý!");
+                        drupal_goto($base_url.'/quan-ly-gian-hang.html');
+                    }
+                }
+
                 array_push($arrCond, self::$primary_key_user_shop.' = '.$user_shop->shop_id);
                 if(!empty($arrCond)){
-                    
                     $cond = implode(' AND ', $arrCond);
                 }
             }

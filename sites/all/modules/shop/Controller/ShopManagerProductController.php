@@ -15,6 +15,8 @@ function shopManagerProduct(){
 	}
 	
 	$files = array(
+		'bootstrap/lib/datetimepicker/datetimepicker.css',
+		'bootstrap/lib/datetimepicker/jquery.datetimepicker.js',
 	    'js/common_admin.js',
 	);
 	Loader::load('Core', $files);
@@ -26,6 +28,9 @@ function shopManagerProduct(){
 	$dataSearch['category_id'] = FunctionLib::getParam('category_id','');
 	$dataSearch['status'] = FunctionLib::getParam('status', -1);
 
+	$dataSearch['date_start'] = FunctionLib::getParam('date_start', '');
+	$dataSearch['date_end'] = FunctionLib::getParam('date_end', '');
+	
 	$arrFields = array('id', 'category_name', 'product_code','product_name', 'product_price_sell', 'product_price_market', 'product_content', 'product_image', 'product_image_hover', 'time_created', 'status');
 	$result = ShopManagerProduct::getSearchListItems($dataSearch, $limit, $arrFields);
 
