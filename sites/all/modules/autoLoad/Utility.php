@@ -135,6 +135,24 @@ class Utility{
 		}
 		return $str;
 	}
+
+	public static function headerReferer(){
+		header('Access-Control-Allow-Origin: '.$_SERVER['HTTP_ORIGIN']);
+	    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+	    header('Access-Control-Max-Age: 1000');
+	    header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+		header("Content-Type: text/html; charset=utf-8");
+	}
+	public static function pageNotRound(){
+	    header("HTTP/1.0 404 Not Found");
+		echo "Not Found";
+		die;
+	}
+	public static function pageAccessDenied(){
+		 header("HTTP/1.0 403 Forbidden");
+		 echo "Forbidden";
+		 die;
+	}
 }
 
 Utility::add_js_header("BASEPARAMS");

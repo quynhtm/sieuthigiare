@@ -6,7 +6,14 @@
 * @Version	 : 1.0
 */
 function Shop_menu() {
-	
+	$items["ajax-check-user-reg-exist"] = array(
+		"title" => t('Đăng ký shop'),
+		"description" => "Đăng ký shop",
+		'page callback' => 'ajaxCheckShopRegExist',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
 	$items["dang-ky.html"] = array(
 		"title" => t('Đăng ký shop'),
 		"description" => "Đăng ký shop",

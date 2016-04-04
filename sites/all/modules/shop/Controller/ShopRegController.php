@@ -238,3 +238,26 @@ function shopEditPassword(){
 function shopLogout(){
 	ShopUser::logoutUserShop();
 }
+
+function ajaxCheckShopRegExist(){
+	global $base_url, $user_shop;
+	
+	if($user_shop->shop_id != 0){
+		drupal_goto($base_url);
+	}
+	if(empty($_POST)){
+		drupal_goto($base_url);
+	}
+	Utility::headerReferer();
+	$html='';
+	$Referrer = 'sieuthigiare.vn';
+	if(!preg_match(AJAX_DOMAIN, $Referrer, $Matches)){
+    	Utility::pageAccessDenied();
+    }else{
+    	$user_shop = FunctionLib::getParam('user_shop','');
+    	$shop_phone = FunctionLib::getParam('shop_phone','');
+    	$shop_email = FunctionLib::getParam('shop_email','');
+    	$err = ShopUser::ajaxCheckNameMailPhone($user_shop, $shop_phone, $shop_email);
+    	echo json_encode($err);die;
+    }
+}

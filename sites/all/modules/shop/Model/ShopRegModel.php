@@ -46,6 +46,30 @@ class ShopUser{
 		}
 		return $errors;
 	}
+
+	public static function ajaxCheckNameMailPhone($name='', $mail='', $phone=''){
+		$errors = array();
+		if($name != ''){
+			$check_name = DB::getItembyCond(self::$table_action, self::$primary_key_user_shop, '', self::$primary_key_user_shop.' ASC', "user_shop='".$name."'", 1);
+			if(!empty($check_name)){
+				$errors['check_name'] = 'Tên này đã tồn tại!';
+			}
+		}
+		if($mail != ''){
+			$check_mail = DB::getItembyCond(self::$table_action, self::$primary_key_user_shop, '', self::$primary_key_user_shop.' ASC', "shop_email='".$mail."'", 1);	
+			if(!empty($check_mail)){
+				$errors['check_mail'] = 'Email này đã tồn tại!';
+			}
+		}
+		if($phone != ''){
+			$check_phone = DB::getItembyCond(self::$table_action, self::$primary_key_user_shop, '', self::$primary_key_user_shop.' ASC', "shop_phone='".$phone."'", 1);	
+			if(!empty($check_phone)){
+				$errors['check_phone'] = 'Số điện thoại này đã tồn tại!';
+			}
+		}
+		return $errors;
+	}
+
 	public static function checkMailPhoneOfUser($shop_id=0, $mail='', $phone=''){
 		$errors = '';
 		if($shop_id >0 && $phone != '' && $mail != ''){

@@ -462,3 +462,13 @@ a.btn-yahoo:hover{
 .body-list-item .item:hover .item-banner{
     display: block;
 }
+
+.form-group span.show-error {
+    clear: both;
+    color: #ff0000 !important;
+    display: inline-block;
+    font-size: 12px;
+    font-style: italic;
+    margin-left: 134px;
+    width: 100%;
+}

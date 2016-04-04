@@ -28,6 +28,7 @@ check_valid_form = {
 		});
 	},
 	check_reg_shop:function(){
+
 		jQuery("#submitRegister").click(function(){
 			var name = jQuery('.formSendRegister input[name="user_shop"]'),
 				pass = jQuery('.formSendRegister input[name="user_password"]'),
@@ -229,4 +230,35 @@ check_valid_form = {
 			}
 		});
 	},
+	ajax_check_shop_reg_exist:function(user_shop, shop_phone, shop_email){
+		var url = BASEPARAMS.base_url+'/ajax-check-user-reg-exist';
+		jQuery.ajax({
+			type: "POST",
+			url: url,
+			data: "user_shop="+encodeURI(user_shop) + "&shop_phone="+encodeURI(shop_phone)+ "&shop_email="+encodeURI(shop_email),
+			success: function(data){
+				if(data != ''){
+					var obj = jQuery.parseJSON(data);
+					if(typeof obj.check_name != 'undefined') {
+  						jQuery('.formSendRegister input[name="user_shop"]').addClass('error').after('<span class="show-error">'+obj.check_name+'</span>');
+
+					}else{
+						jQuery('.formSendRegister input[name="user_shop"]').removeClass('error').nextAll('span.show-error').remove();
+					}
+					if(typeof obj.check_phone != 'undefined') {
+  						jQuery('.formSendRegister input[name="shop_phone"]').addClass('error').after('<span class="show-error">'+obj.check_phone+'</span>');
+
+					}else{
+						jQuery('.formSendRegister input[name="shop_phone"]').removeClass('error').nextAll('span.show-error').remove();
+					}
+					if(typeof obj.check_mail != 'undefined') {
+  						jQuery('.formSendRegister input[name="shop_email"]').addClass('error').after('<span class="show-error">'+obj.check_mail+'</span>');
+
+					}else{
+						jQuery('.formSendRegister input[name="shop_email"]').removeClass('error').nextAll('span.show-error').remove();
+					}
+				}
+			}
+		});
+	}
 }

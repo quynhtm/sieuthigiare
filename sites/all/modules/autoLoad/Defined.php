@@ -24,7 +24,7 @@ define("PATH_IMAGE_UPLOAD", 'uploads/images');
 define("SITE_RECORD_PER_PAGE_NEWS", '15');
 define('SITE_SAME_RECORD_NEWS', '10');
 define('base_url_lang', $base_url .'/'. ((!isset($language->language) || $language->language == 'und' || $language->language == 'vi') ? 'vi/' : $language->language.'/'));
-
+define('AJAX_DOMAIN', '/sieuthigiare.vn/');
 /**
  * QuynhTM add
  * Dinh nghia cac Table cho website
