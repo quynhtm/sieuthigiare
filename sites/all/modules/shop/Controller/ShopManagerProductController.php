@@ -31,7 +31,7 @@ function shopManagerProduct(){
 	$dataSearch['date_start'] = FunctionLib::getParam('date_start', '');
 	$dataSearch['date_end'] = FunctionLib::getParam('date_end', '');
 	
-	$arrFields = array('id', 'category_name', 'product_code', 'product_order','product_name', 'product_price_sell', 'product_price_market', 'product_content', 'product_image', 'product_image_hover', 'time_created', 'status');
+	$arrFields = array('product_id', 'category_name', 'product_code', 'product_order','product_name', 'product_price_sell', 'product_price_market', 'product_content', 'product_image', 'product_image_hover', 'time_created', 'status');
 	$result = ShopManagerProduct::getSearchListItems($dataSearch, $limit, $arrFields);
 
 	if(isset($result['data']) && !empty($result['data'])){
