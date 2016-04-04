@@ -11,7 +11,7 @@ function shopRegister(){
 	if($user_shop->shop_id != 0){
 		drupal_goto($base_url);
 	}
-
+	
 	if(isset($_POST['txtFormNameRegister'])){
 		
 		$dataInput = array(
