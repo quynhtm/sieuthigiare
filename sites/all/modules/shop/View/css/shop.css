@@ -394,3 +394,32 @@ a.btn-yahoo:hover{
     padding-left: 8px;
     padding-right: 8px;
 }
+.item-rating {
+    margin-top: 8px;
+    overflow: hidden;
+}
+.rating-box {
+    background: transparent url("../img/bg-rating.png") repeat-x scroll 0 0;
+    display: block;
+    font-size: 0;
+    height: 12px;
+    margin-right: 5px;
+    margin-top: 0;
+    text-indent: -999em;
+    width: 50px;
+}
+.rating-box .rating {
+    background: transparent url("../img/bg-rating.png") repeat-x scroll 0 100%;
+    display: block;
+    height: 12px;
+}
+
+.item-banner{
+    background: url("../img/bg-cart.jpg") no-repeat 0 0;
+    display: none;
+    height: 44px;
+    margin-top: 8px;
+}
+.body-list-item .item:hover .item-banner{
+    display: block;
+}

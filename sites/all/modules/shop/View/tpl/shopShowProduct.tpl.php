@@ -23,38 +23,25 @@
 							<div class="col-lg-4 col-xs-4">
 								<div class="item">
 									<div class="post-thumb">
-										<img src="https://cdn02.static-adayroi.com/resize/240_240/100/0/2016/03/09/1457494557934_5874653.jpg" 
-										alt="USB 2.0 Toshiba Hayabusa 16GB Trắng" data-other-src="https://cdn02.static-adayroi.com/resize/240_240/100/0/2016/03/09/1457494558533_4904465.jpg" 
-										class="lazy imglist" style="display: inline-block;">
+										<img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/1.jpg" alt="Cốc tự nguấy Self Stirring MUG 2015 (Đen)">
 									</div>
 									<div class="item-content">
 										<div class="title-info">
-											<h4 class="post-title"><a title="USB 2.0 Toshiba Hayabusa 16GB Trắng" href="/usb-2-0-toshiba-hayabusa-16gb-trang-p-ppQKG-f1-2?pi=DzRLl&amp;w=K6ll">USB 2.0 Toshiba Hayabusa 16GB Trắng</a></h4>
+											<h4 class="post-title"><a title="Cốc tự nguấy Self Stirring MUG 2015 (Đen)" href="">Cốc tự nguấy Self Stirring MUG 2015 (Đen)</a></h4>
 											<div class="item-price">
 	                                    		<span class="amount-1">99.000đ</span>
 												<span class="amount-2">160.000đ</span>
                                     			<span class="sale-off">-38%</span>
                                     		</div>
 										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-xs-4">
-								<div class="item">
-									<div class="post-thumb">
-										<img src="https://cdn02.static-adayroi.com/resize/240_240/100/0/2016/03/09/1457494557934_5874653.jpg" 
-										alt="USB 2.0 Toshiba Hayabusa 16GB Trắng" data-other-src="https://cdn02.static-adayroi.com/resize/240_240/100/0/2016/03/09/1457494558533_4904465.jpg" 
-										class="lazy imglist" style="display: inline-block;">
-									</div>
-									<div class="item-content">
-										<div class="title-info">
-											<h4 class="post-title"><a title="USB 2.0 Toshiba Hayabusa 16GB Trắng" href="/usb-2-0-toshiba-hayabusa-16gb-trang-p-ppQKG-f1-2?pi=DzRLl&amp;w=K6ll">USB 2.0 Toshiba Hayabusa 16GB Trắng</a></h4>
-											<div class="item-price">
-	                                    		<span class="amount-1">99.000đ</span>
-												<span class="amount-2">160.000đ</span>
-                                    			<span class="sale-off">-38%</span>
-                                    		</div>
-										</div>
+										<div class="item-rating">
+				                            <div class="rating-box">
+				                                <div class="rating" style="width:0%" id="rate-1"></div>
+				                            </div>
+				                        </div>
+				                        <div class="item-banner">
+				                        	
+				                        </div>
 									</div>
 								</div>
 							</div>
