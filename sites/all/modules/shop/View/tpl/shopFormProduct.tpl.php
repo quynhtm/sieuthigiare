@@ -13,7 +13,14 @@
 					<div class="wrapp-box-info">
 						<form action="" method="post" id="frmformShop" class="frmformShop" name="frmformShop" enctype="multipart/form-data">
 							<div class="row">
+								<!--Block 1-->
 								<div class="col-sm-3">
+									<div class="control-group">
+										<label class="control-label">Tên Sản phẩm<span>(*)</span></label>
+										<div class="controls">
+											<input type="text" class="form-control input-sm" placeholder="Tên Sản phẩm" name="product_name" value="<?php if(isset($arrItem->product_name)) { echo $arrItem->product_name; } ?>">
+										</div>
+									</div>
 									<div class="control-group">
 						                <label class="control-label">Danh mục<span>(*)</span></label>
 						                <div class="controls">
@@ -22,16 +29,40 @@
 						                    </select>
 						                </div>
 						            </div>
+
 									<div class="control-group">
-						                <label class="control-label">Mã sản phẩm<span>(*)</span></label>
-						                <div class="controls">
-						                    <input type="text" class="form-control input-sm" placeholder="Mã sản phẩm" name="product_code" value="<?php if(isset($arrItem->product_code)) { echo $arrItem->product_code; } ?>">
-						                </div>
-						            </div>
+										<label class="control-label">Loại sản phẩm</label>
+										<div class="controls">
+											<select class="form-control input-sm" name="product_is_hot">
+												<?php echo $optionCategoryChildren ?>
+											</select>
+										</div>
+									</div>
 									<div class="control-group">
-						                <label class="control-label">Tên Sản phẩm<span>(*)</span></label>
+										<label class="control-label">Thứ tự hiển thị</label>
+										<div class="controls">
+											<input type="text" class="form-control input-sm" placeholder="Thứ tự hiển thị" name="product_order" value="<?php if(isset($arrItem->product_order)) { echo $arrItem->product_order; } ?>">
+										</div>
+									</div>
+
+									<div class="control-group">
+										<label class="control-label">Trạng thái ẩn/hiện</label>
+										<div class="controls">
+											<select class="form-control input-sm" name="status">
+												<?php echo $optionCategoryChildren ?>
+											</select>
+										</div>
+									</div>
+						        </div>
+
+								<!--Block 2-->
+								<div class="col-sm-3">
+									<div class="control-group">
+						                <label class="control-label">Kiểu hiển thị giá</label>
 						                <div class="controls">
-						                    <input type="text" class="form-control input-sm" placeholder="Tên Sản phẩm" name="product_name" value="<?php if(isset($arrItem->product_name)) { echo $arrItem->product_name; } ?>">
+						                    <select class="form-control input-sm" name="product_type_price">
+						                    	<?php echo $optionCategoryChildren ?>
+						                    </select>
 						                </div>
 						            </div>
 						             <div class="control-group">
@@ -46,8 +77,22 @@
 						                    <input type="text" class="form-control input-sm" placeholder="Giá thị trường" name="product_price_market" value="<?php if(isset($arrItem->product_price_market)) { echo $arrItem->product_price_market; } ?>">
 						                </div>
 						            </div>
+									<div class="control-group">
+						                <label class="control-label">Giá nhập</label>
+						                <div class="controls">
+						                    <input type="text" class="form-control input-sm" placeholder="Giá nhập" name="product_price_input" value="<?php if(isset($arrItem->product_price_input)) { echo $arrItem->product_price_input; } ?>">
+						                </div>
+						            </div>
+									<div class="control-group">
+						                <label class="control-label">Thông tin khuyến mại</label>
+						                <div class="controls">
+						                    <input type="text" class="form-control input-sm" placeholder="Thông tin khuyến mại" name="product_selloff" value="<?php if(isset($arrItem->product_selloff)) { echo $arrItem->product_selloff; } ?>">
+						                </div>
+						            </div>
 						        </div>
-						        <div class="col-sm-9">
+
+								<!--Block 3-->
+						        <div class="col-sm-6">
 						        	<div class="control-group">
 						                 <div class="col-lg-8">
 						                     <a href="javascript:;"class="btn btn-primary" onclick="Common_admin.uploadMultipleImages(2);">Upload ảnh</a>
@@ -100,10 +145,19 @@
 						            <!--ket thuc hien thi anh-->
 						        </div>
 							</div>
+
 					        <div class="row">
-					        	<div class="col-sm-6">
+					        	<div class="col-sm-7">
 						        	<div class="control-group">
-						                <label class="control-label">Chi tiết<span>(*)</span></label>
+						                <label class="control-label">Mô tả ngắn<span>(*)</span></label>
+						                <div class="controls product_content">
+						                	<textarea id="product_sort_desc" name="product_sort_desc" class="form-control input-sm" cols="30" rows="10"><?php if(isset($arrItem->product_sort_desc)) { echo $arrItem->product_sort_desc; } ?></textarea>
+						                </div>
+						            </div>
+						        </div>
+								<div class="col-sm-10">
+						        	<div class="control-group">
+						                <label class="control-label">Chi tiết sản phẩm<span>(*)</span></label>
 						                 <div class="controls"><button type="button" onclick="Common_admin.insertImageContent(2)" class="btn btn-primary">Chèn ảnh vào nội dung</button></div>
 						                <div class="controls product_content">
 						                	<textarea name="product_content" class="form-control input-sm" cols="30" rows="10"><?php if(isset($arrItem->product_content)) { echo $arrItem->product_content; } ?></textarea>
@@ -184,9 +238,32 @@
 <!-- chen anh vào noi dung-->
 
 <script>
-	CKEDITOR.replace('product_content',{height:600});
+	//CKEDITOR.replace('product_sort_desc',{height:400});
+	CKEDITOR.replace('product_content',{height:650});
 </script>
 <script type="text/javascript">
+	CKEDITOR.replace(
+		'product_sort_desc',
+		{
+			toolbar: [
+				{ name: 'document',    items : [ 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' ] },
+				//{ name: 'clipboard',   items : [ 'Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo' ] },
+				//{ name: 'editing',     items : [ 'Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt' ] },
+				//{ name: 'forms',       items : [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
+				//'/',
+				{ name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
+				//{ name: 'paragraph',   items : [ 'NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl' ] },
+				//{ name: 'links',       items : [ 'Link','Unlink','Anchor' ] },
+				//{ name: 'insert',      items : [ 'Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak' ] },
+				//'/',
+				//{ name: 'styles',      items : [ 'Styles','Format','Font','FontSize' ] },
+				{ name: 'colors',      items : [ 'TextColor','BGColor' ] },
+				//{ name: 'tools',       items : [ 'Maximize', 'ShowBlocks','-','About' ] }
+			],
+		},
+		{height:400}
+	);
+
     //keo tha anh
    jQuery("#sys_drag_sort").dragsort({ dragSelector: "div", dragBetween: true, dragEnd: saveOrder });
     function saveOrder() {

@@ -7,7 +7,7 @@
 */
 class ShopManagerProduct{
 	static $table_action = TABLE_PRODUCT;
-    static $primary_key = 'id';
+    static $primary_key = 'product_id';
     
 	static $table_action_provice = TABLE_PROVINCE;
 	static $primary_key_province = 'province_id';
@@ -170,7 +170,7 @@ class ShopManagerProduct{
 
         if($id > 0){
             $fields = 'product_image_other';
-            $cond = 'id='.$id.' AND user_shop_id='.$user_shop->shop_id;
+            $cond = 'product_id ='.$id.' AND user_shop_id='.$user_shop->shop_id;
             $arrItem = self::getItembyCond($fields, $cond);
          
             if(!empty($arrItem)){

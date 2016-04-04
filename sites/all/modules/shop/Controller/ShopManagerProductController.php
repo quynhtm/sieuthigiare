@@ -31,14 +31,14 @@ function shopManagerProduct(){
 	$dataSearch['date_start'] = FunctionLib::getParam('date_start', '');
 	$dataSearch['date_end'] = FunctionLib::getParam('date_end', '');
 	
-	$arrFields = array('id', 'category_name', 'product_code','product_name', 'product_price_sell', 'product_price_market', 'product_content', 'product_image', 'product_image_hover', 'time_created', 'status');
+	$arrFields = array('id', 'category_name', 'product_code', 'product_order','product_name', 'product_price_sell', 'product_price_market', 'product_content', 'product_image', 'product_image_hover', 'time_created', 'status');
 	$result = ShopManagerProduct::getSearchListItems($dataSearch, $limit, $arrFields);
 
 	if(isset($result['data']) && !empty($result['data'])){
 			foreach($result['data'] as $k => &$value){
 				if( isset($value->product_image) && trim($value->product_image) != ''){
-					$value->url_image = FunctionLib::getThumbImage($value->product_image,$value->id,FOLDER_PRODUCT,60,60);
-					$value->url_image_hover = FunctionLib::getThumbImage($value->product_image_hover,$value->id,FOLDER_PRODUCT,300,150);
+					$value->url_image = FunctionLib::getThumbImage($value->product_image,$value->product_id,FOLDER_PRODUCT,60,60);
+					$value->url_image_hover = FunctionLib::getThumbImage($value->product_image_hover,$value->product_id,FOLDER_PRODUCT,300,150);
 				}
 			}
 		}
@@ -89,8 +89,8 @@ function shopFormProduct(){
 	$arrImageOther  = array();
 	if(isset($param[0]) && isset($param[1]) && isset($param[2]) && $param[0] == 'sua-san-pham' && $param[1] > 0 && $param[2] != ''){
 		$id = intval($param[1]);
-		$fields = 'id, category_id, product_code, product_name, product_price_sell, product_price_market, product_content, product_image, product_image_hover, product_image_other, user_shop_id, status';
-		$cond = 'id='.$id.' AND user_shop_id='.$user_shop->shop_id;
+		$fields = 'product_id, category_id, product_code, product_name, product_price_sell, product_price_market, product_content, product_image, product_image_hover, product_image_other, user_shop_id, status';
+		$cond = 'product_id ='.$id.' AND user_shop_id='.$user_shop->shop_id;
 		$arrItem = ShopManagerProduct::getItembyCond($fields, $cond);
 		
 		if(empty($arrItem)){
@@ -107,8 +107,8 @@ function shopFormProduct(){
 				$arrOther = unserialize($arrItem->product_image_other);
 				foreach($arrOther as $k =>$val_other){
 					$arrImageOther[] = array(
-						'image_small'=> FunctionLib::getThumbImage($val_other,$arrItem->id,FOLDER_PRODUCT,80,80),
-						'image_big'=> FunctionLib::getThumbImage($val_other,$arrItem->id,FOLDER_PRODUCT,700,700),
+						'image_small'=> FunctionLib::getThumbImage($val_other,$arrItem->product_id,FOLDER_PRODUCT,80,80),
+						'image_big'=> FunctionLib::getThumbImage($val_other,$arrItem->product_id,FOLDER_PRODUCT,700,700),
 					);
 				}
 			}
@@ -188,7 +188,11 @@ function shopFormProduct(){
 
 	$arrCategoryChildren = DataCommon::getListCategoryChildren($user_shop->shop_category);
 	$optionCategoryChildren = FunctionLib::getOption(array(-1=>'Chọn danh mục sản phẩm') + $arrCategoryChildren, $category_id);
-	return theme('shopFormProduct',array('optionCategoryChildren'=>$optionCategoryChildren, 'arrItem'=>$arrItem, 'title'=>$title, 'arrImageOther'=>$arrImageOther,));
+	return theme('shopFormProduct',
+		array('optionCategoryChildren'=>$optionCategoryChildren,
+			'arrItem'=>$arrItem,
+			'title'=>$title,
+			'arrImageOther'=>$arrImageOther,));
 }
 
 function shopDeleteProduct(){
