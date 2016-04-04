@@ -68,7 +68,7 @@
 						                            foreach($list_product_image_other as $k=>$v){ ?>
 						                                <li id="sys_div_img_other_<?php echo $k ?>">
 						                                    <div class="div_img_upload">
-						                                        <img src="<?php echo $base_url.'/uploads/product/'.$arrItem->id.'/'.$v?>" height="80" width="80">
+						                                        <img src="<?php echo $base_url.'/uploads/product/'.$arrItem->product_id.'/'.$v?>" height="80" width="80">
 						                                        <input type="hidden" id="sys_img_other_<?php echo $k ?>" name="img_other[]" value="<?php echo $v ?>" class="sys_img_other">
 						                                        <div class='clear'></div>
 						                                        <input type="radio" id="chẹcked_image_<?php echo $k ?>" name="chẹcked_image" value="<?php echo $k ?>"
@@ -81,7 +81,7 @@
 						                                        onclick="Common_admin.checkedImageHover('<?php echo $v ?>','<?php echo $k ?>');">
 						                                        <label for="chẹcked_image_hover<?php echo $k ?>" style='font-weight:normal'>Ảnh Hover</label>
 						                                        <br/>
-						                                        <a href="javascript:void(0);" id="sys_delete_img_other_<?php echo $k ?>"onclick="Common_admin.removeImage('<?php echo $k ?>','<?php if(isset($arrItem->id)){ echo $arrItem->id; } ?>','<?php echo $v ?>','1');">Xóa ảnh</a>
+						                                        <a href="javascript:void(0);" id="sys_delete_img_other_<?php echo $k ?>"onclick="Common_admin.removeImage('<?php echo $k ?>','<?php if(isset($arrItem->product_id)){ echo $arrItem->product_id; } ?>','<?php echo $v ?>','1');">Xóa ảnh</a>
 						                                        <span style="display: none"><b><?php echo $k ?></b></span>
 						                                    </div>
 						                                    <?php
@@ -110,7 +110,7 @@
 						                </div>
 						            </div>
 						            <div class="form-actions">
-						                <input type="hidden" id="id_hiden" name="id" value="<?php if(isset($arrItem->id)) { echo $arrItem->id; } ?>"/>
+						                <input type="hidden" id="id_hiden" name="id" value="<?php if(isset($arrItem->product_id)) { echo $arrItem->product_id; } ?>"/>
 						                <input type="hidden" value="txt-form-post" name="txt-form-post">
 										<button type="submit" name="submit" id="buttonFormShopSubmit" class="btn btn-primary" value="1">Lưu</button>
 						                <button type="reset" class="btn">Bỏ qua</button>

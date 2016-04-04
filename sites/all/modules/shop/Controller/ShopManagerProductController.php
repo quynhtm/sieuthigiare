@@ -89,8 +89,8 @@ class ShopManagerProductController{
 		$arrImageOther  = array();
 		if(isset($param[0]) && isset($param[1]) && isset($param[2]) && $param[0] == 'sua-san-pham' && $param[1] > 0 && $param[2] != ''){
 			$id = intval($param[1]);
-			$fields = 'id, category_id, product_code, product_name, product_price_sell, product_price_market, product_content, product_image, product_image_hover, product_image_other, user_shop_id, status';
-			$cond = 'id='.$id.' AND user_shop_id='.$user_shop->shop_id;
+			$fields = 'product_id, category_id, product_code, product_name, product_price_sell, product_price_market, product_content, product_image, product_image_hover, product_image_other, user_shop_id, status';
+			$cond = 'product_id='.$id.' AND user_shop_id='.$user_shop->shop_id;
 			$arrItem = ShopManagerProduct::getItembyCond($fields, $cond);
 			
 			if(empty($arrItem)){
@@ -107,8 +107,8 @@ class ShopManagerProductController{
 					$arrOther = unserialize($arrItem->product_image_other);
 					foreach($arrOther as $k =>$val_other){
 						$arrImageOther[] = array(
-							'image_small'=> FunctionLib::getThumbImage($val_other,$arrItem->id,FOLDER_PRODUCT,80,80),
-							'image_big'=> FunctionLib::getThumbImage($val_other,$arrItem->id,FOLDER_PRODUCT,700,700),
+							'image_small'=> FunctionLib::getThumbImage($val_other,$arrItem->product_id,FOLDER_PRODUCT,80,80),
+							'image_big'=> FunctionLib::getThumbImage($val_other,$arrItem->product_id,FOLDER_PRODUCT,700,700),
 						);
 					}
 				}
@@ -176,7 +176,7 @@ class ShopManagerProductController{
 				}
 				
 				if(!empty($arrItem)){
-					if($arrItem->id != $id){
+					if($arrItem->product_id != $id){
 						drupal_set_message('Bạn không có quyền sửa tin đăng này!', 'error');
 						drupal_goto($base_url.'/quan-ly-gian-hang.html');
 					}
