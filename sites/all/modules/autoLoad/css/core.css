@@ -488,3 +488,6 @@
     color: #ff0000;
     font-size: 15px;
 }
+.error {
+    border: 1px solid #ff0000!important;
+}
