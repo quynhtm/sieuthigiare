@@ -105,14 +105,14 @@
 						        	<div class="control-group">
 						                <label class="control-label">Chi tiết<span>(*)</span></label>
 						                 <div class="controls"><button type="button" onclick="Common_admin.insertImageContent(2)" class="btn btn-primary">Chèn ảnh vào nội dung</button></div>
-						                <div class="controls">
+						                <div class="controls product_content">
 						                	<textarea name="product_content" class="form-control input-sm" cols="30" rows="10"><?php if(isset($arrItem->product_content)) { echo $arrItem->product_content; } ?></textarea>
 						                </div>
 						            </div>
 						            <div class="form-actions">
 						                <input type="hidden" id="id_hiden" name="id" value="<?php if(isset($arrItem->id)) { echo $arrItem->id; } ?>"/>
 						                <input type="hidden" value="txt-form-post" name="txt-form-post">
-										<button type="submit" name="submit" id="buttonSubmit" class="btn btn-primary" value="1">Lưu</button>
+										<button type="submit" name="submit" id="buttonFormShopSubmit" class="btn btn-primary" value="1">Lưu</button>
 						                <button type="reset" class="btn">Bỏ qua</button>
 						            </div>
 						        </div>
