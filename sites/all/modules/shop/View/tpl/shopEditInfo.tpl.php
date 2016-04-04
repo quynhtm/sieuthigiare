@@ -64,7 +64,7 @@
 										<label class="control-label">&nbsp;</label>
 										<div>
 											<input type="hidden" name="frmChangeInfo" id="frmChangeInfo" value="frmChangeInfo"/>
-											<button class="btn btn-primary" name="submit" value="1">Sửa</button>
+											<button id="btnChangeInfo" class="btn btn-primary" name="submit" value="1">Sửa</button>
 										</div>
 									</div>
 								</div>

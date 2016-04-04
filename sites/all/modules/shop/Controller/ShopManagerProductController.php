@@ -118,12 +118,11 @@ function shopFormProduct(){
 	
 	if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 		$data = array(
-				'id'=>array('value'=>FunctionLib::getIntParam('id',''), 'require'=>1, 'messages'=>''),
 				'category_id'=>array('value'=>FunctionLib::getIntParam('category_id',''), 'require'=>1, 'messages'=>''),
 				'product_code'=>array('value'=>FunctionLib::getParam('product_code',''), 'require'=>1, 'messages'=>'Mã sản phẩm không được trống!'),
 				'product_name'=>array('value'=>FunctionLib::getParam('product_name',''), 'require'=>1, 'messages'=>'Tên sản phẩm không được trống!'),
-				'product_price_sell'=>array('value'=>FunctionLib::getParam('product_price_sell',''), 'require'=>0, 'messages'=>''),
-				'product_price_market'=>array('value'=>FunctionLib::getParam('product_price_market',''), 'require'=>0, 'messages'=>''),
+				'product_price_sell'=>array('value'=>FunctionLib::getIntParam('product_price_sell',''), 'require'=>0, 'messages'=>''),
+				'product_price_market'=>array('value'=>FunctionLib::getIntParam('product_price_market',''), 'require'=>0, 'messages'=>''),
 				'product_content'=>array('value'=>FunctionLib::getParam('product_content',''), 'require'=>1, 'messages'=>'Chi tiết sản phẩm không được trống!'),
 				'product_image'=>array('value'=>FunctionLib::getParam('image_primary','')),
 				'product_image_hover'=>array('value'=>FunctionLib::getParam('image_primary_hover','')),
@@ -162,6 +161,7 @@ function shopFormProduct(){
 		}
 
 		$errors = ValidForm::validInputData($data);
+		
 		if($errors != ''){
 			if(!empty($arrItem)){
 				drupal_set_message($errors, 'error');
@@ -174,14 +174,12 @@ function shopFormProduct(){
 			if($data['category_id']['value'] > 0 ){
 				$data['category_name']['value'] = ShopManagerProduct::getNameCategory($data['category_id']['value']);
 			}
-
+			
 			if(!empty($arrItem)){
-				if($data['id']['value'] != $id){
+				if($arrItem->id != $id){
 					drupal_set_message('Bạn không có quyền sửa tin đăng này!', 'error');
 					drupal_goto($base_url.'/quan-ly-gian-hang.html');
 				}
-			}else{
-				$id = $data['id']['value'];
 			}
 			ShopManagerProduct::save($data, $id);
 			drupal_goto($base_url.'/quan-ly-gian-hang.html');

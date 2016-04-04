@@ -25,8 +25,8 @@
 								<div><input type="password" class="form-control input-sm" placeholder ="Nhập lại mật khẩu" name="user_shop_rep_password"/></div>
 							</div>
 							<div class="form-group">
-								<input type="hidden" name="frmEditPass" id="frmEditPass" value="frmEditPass"/>
-								<button class="btn btn-primary" name="submit" value="1">Sửa</button>
+								<input type="hidden" name="frmEditPass" value="frmEditPass"/>
+								<button id="btnEditPass" class="btn btn-primary" name="submit" value="1">Sửa</button>
 							</div>
 						</div>
 					</form>
