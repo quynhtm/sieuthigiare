@@ -37,8 +37,8 @@ class ShopManagerProductController{
 		if(isset($result['data']) && !empty($result['data'])){
 				foreach($result['data'] as $k => &$value){
 					if( isset($value->product_image) && trim($value->product_image) != ''){
-						$value->url_image = FunctionLib::getThumbImage($value->product_image,$value->id,FOLDER_PRODUCT,60,60);
-						$value->url_image_hover = FunctionLib::getThumbImage($value->product_image_hover,$value->id,FOLDER_PRODUCT,300,150);
+						$value->url_image = FunctionLib::getThumbImage($value->product_image,$value->product_id,FOLDER_PRODUCT,60,60);
+						$value->url_image_hover = FunctionLib::getThumbImage($value->product_image_hover,$value->product_id,FOLDER_PRODUCT,300,150);
 					}
 				}
 			}

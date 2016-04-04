@@ -91,9 +91,9 @@
 										<?php if( isset($v->url_image) && isset($v->url_image_hover)) {?>
 										<div style="position: relative;">
 											<div style="position: relative; z-index: 10">
-												<img src="<?php echo $v->url_image ?>" class='imge_hover' id='<?php echo $v->id ?>'/>
+												<img src="<?php echo $v->url_image ?>" class='imge_hover' id='<?php echo $v->product_id ?>'/>
 											</div>
-											<div id='div_hover_<?php echo $v->id ?>'style="position: absolute; bottom: 30px; left: 40px; border: 2px solid #ccc; padding: 5px; background: #F4F9FF; z-index: 1000; display: none">
+											<div id='div_hover_<?php echo $v->product_id ?>'style="position: absolute; bottom: 30px; left: 40px; border: 2px solid #ccc; padding: 5px; background: #F4F9FF; z-index: 1000; display: none">
 												<img src="<?php echo $v->url_image_hover ?>"/>
 											</div>
 										</div>
@@ -102,7 +102,7 @@
 										<?php }?>
 
 									</td>
-									<td><input type="checkbox" class="checkItem" name="id[]" value="<?php echo $v->id?>"/></td>
+									<td><input type="checkbox" class="checkItem" name="id[]" value="<?php echo $v->product_id?>"/></td>
 									<td><?php echo '['.$v->product_code.'] '.$v->product_name ?></td>
 									<td><?php echo $v->category_name ?></td>
 									<td>
@@ -138,7 +138,7 @@
 										?>
 									</td>
 									<td>
-									<?php $linkEdit = $base_url.'/sua-san-pham/'.$v->id.'/'.Stdio::pregReplaceStringAlias($v->product_name).'.html' ?>
+									<?php $linkEdit = $base_url.'/sua-san-pham/'.$v->product_id.'/'.Stdio::pregReplaceStringAlias($v->product_name).'.html' ?>
 									<a href="<?php echo $linkEdit; ?>" title="sửa"><i class="icon-edit green font-size-20"></i></a>
 									<a href="javascript:void(0)" class="deleteItem" title="Xóa"><i class="icon-trash font-size-20 red"></i></a>
 									</td>

@@ -7,7 +7,7 @@
 */
 class ShopManagerProduct{
 	static $table_action = TABLE_PRODUCT;
-    static $primary_key = 'id';
+    static $primary_key = 'product_id';
     
 	static $table_action_provice = TABLE_PROVINCE;
 	static $primary_key_province = 'province_id';
