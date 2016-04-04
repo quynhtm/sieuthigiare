@@ -13,7 +13,6 @@ function Shop_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
-
 	$items["dang-ky.html"] = array(
 		"title" => t('Đăng ký shop'),
 		"description" => "Đăng ký shop",
