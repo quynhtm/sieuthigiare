@@ -37,7 +37,7 @@ check_valid_form = {
 				email = jQuery('.formSendRegister input[name="shop_email"]'),
 				province = jQuery('.formSendRegister select[name="shop_province"]'),
 				agree = jQuery('.formSendRegister input[name="agree"]');
-
+			
 			if(name.val() == ''){
 				jAlert('Tên đăng nhập không được trống!', 'Cảnh báo');
 				name.addClass('error').focus();
@@ -101,6 +101,8 @@ check_valid_form = {
 				agree.addClass('error').focus();
 				return false;
 			}
+			//check_valid_form.ajax_check_shop_reg_exist(name.val(), phone.val(), email.val());
+			//return false
 		});
 	},
 	change_pass:function(){
@@ -231,6 +233,7 @@ check_valid_form = {
 		});
 	},
 	ajax_check_shop_reg_exist:function(user_shop, shop_phone, shop_email){
+		jQuery("span.show-error").remove();
 		var url = BASEPARAMS.base_url+'/ajax-check-user-reg-exist';
 		jQuery.ajax({
 			type: "POST",
@@ -257,6 +260,7 @@ check_valid_form = {
 					}else{
 						jQuery('.formSendRegister input[name="shop_email"]').removeClass('error').nextAll('span.show-error').remove();
 					}
+					return false;
 				}
 			}
 		});

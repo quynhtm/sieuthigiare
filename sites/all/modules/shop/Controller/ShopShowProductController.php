@@ -5,7 +5,9 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0
 */
-function shopshowProduct(){
-	
-	return theme('shopShowProduct');
+class ShopShowProductController{
+	public static function shopshowProduct(){
+		
+		return theme('shopShowProduct');
+	}
 }

@@ -5,208 +5,209 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0
 */
+class ShopManagerProductController{
+	public static function shopManagerProduct(){
+		global $base_url, $user_shop;
 
-function shopManagerProduct(){
-	global $base_url, $user_shop;
+		if($user_shop->shop_id == 0){
+			drupal_set_message('Bạn không có quyền truy cập. Vui lòng đăng nhập tài khoản!', 'error');
+			drupal_goto($base_url);
+		}
+		
+		$files = array(
+			'bootstrap/lib/datetimepicker/datetimepicker.css',
+			'bootstrap/lib/datetimepicker/jquery.datetimepicker.js',
+		    'js/common_admin.js',
+		);
+		Loader::load('Core', $files);
 
-	if($user_shop->shop_id == 0){
-		drupal_set_message('Bạn không có quyền truy cập. Vui lòng đăng nhập tài khoản!', 'error');
-		drupal_goto($base_url);
-	}
-	
-	$files = array(
-		'bootstrap/lib/datetimepicker/datetimepicker.css',
-		'bootstrap/lib/datetimepicker/jquery.datetimepicker.js',
-	    'js/common_admin.js',
-	);
-	Loader::load('Core', $files);
+		$limit = SITE_RECORD_PER_PAGE;
+		//search
+		$dataSearch['product_code'] = FunctionLib::getParam('product_code','');
+		$dataSearch['product_name'] = FunctionLib::getParam('product_name','');
+		$dataSearch['category_id'] = FunctionLib::getParam('category_id','');
+		$dataSearch['status'] = FunctionLib::getParam('status', -1);
 
-	$limit = SITE_RECORD_PER_PAGE;
-	//search
-	$dataSearch['product_code'] = FunctionLib::getParam('product_code','');
-	$dataSearch['product_name'] = FunctionLib::getParam('product_name','');
-	$dataSearch['category_id'] = FunctionLib::getParam('category_id','');
-	$dataSearch['status'] = FunctionLib::getParam('status', -1);
+		$dataSearch['date_start'] = FunctionLib::getParam('date_start', '');
+		$dataSearch['date_end'] = FunctionLib::getParam('date_end', '');
+		
+		$arrFields = array('id', 'category_name', 'product_code','product_name', 'product_price_sell', 'product_price_market', 'product_content', 'product_image', 'product_image_hover', 'time_created', 'status');
+		$result = ShopManagerProduct::getSearchListItems($dataSearch, $limit, $arrFields);
 
-	$dataSearch['date_start'] = FunctionLib::getParam('date_start', '');
-	$dataSearch['date_end'] = FunctionLib::getParam('date_end', '');
-	
-	$arrFields = array('id', 'category_name', 'product_code','product_name', 'product_price_sell', 'product_price_market', 'product_content', 'product_image', 'product_image_hover', 'time_created', 'status');
-	$result = ShopManagerProduct::getSearchListItems($dataSearch, $limit, $arrFields);
-
-	if(isset($result['data']) && !empty($result['data'])){
-			foreach($result['data'] as $k => &$value){
-				if( isset($value->product_image) && trim($value->product_image) != ''){
-					$value->url_image = FunctionLib::getThumbImage($value->product_image,$value->id,FOLDER_PRODUCT,60,60);
-					$value->url_image_hover = FunctionLib::getThumbImage($value->product_image_hover,$value->id,FOLDER_PRODUCT,300,150);
+		if(isset($result['data']) && !empty($result['data'])){
+				foreach($result['data'] as $k => &$value){
+					if( isset($value->product_image) && trim($value->product_image) != ''){
+						$value->url_image = FunctionLib::getThumbImage($value->product_image,$value->id,FOLDER_PRODUCT,60,60);
+						$value->url_image_hover = FunctionLib::getThumbImage($value->product_image_hover,$value->id,FOLDER_PRODUCT,300,150);
+					}
 				}
 			}
-		}
 
-	$arrCategoryChildren = DataCommon::getListCategoryChildren($user_shop->shop_category);
-	$optionCategoryChildren = FunctionLib::getOption(array(-1=>'Chọn danh mục sản phẩm') + $arrCategoryChildren, $dataSearch['category_id']);
+		$arrCategoryChildren = DataCommon::getListCategoryChildren($user_shop->shop_category);
+		$optionCategoryChildren = FunctionLib::getOption(array(-1=>'Chọn danh mục sản phẩm') + $arrCategoryChildren, $dataSearch['category_id']);
 
-	$arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
-	$optionStatus = FunctionLib::getOption(array(-1=>'Chọn trạng thái') + $arrStatus, $dataSearch['status']);
-	return theme('shopManagerProduct',array(
-								'title'=>'Cấu hình chung',
-								'result' => $result['data'],
-								'dataSearch' => $dataSearch,
-								'totalItem' =>$result['total'],
-								'pager' =>$result['pager'],
-								'optionStatus' =>$optionStatus,
-								'optionCategoryChildren'=>$optionCategoryChildren));
-}
-
-function shopFormProduct(){
-	global $base_url, $user_shop;
-
-	if($user_shop->shop_id == 0){
-		drupal_set_message('Bạn không có quyền truy cập. Vui lòng đăng nhập tài khoản!', 'error');
-		drupal_goto($base_url);
+		$arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
+		$optionStatus = FunctionLib::getOption(array(-1=>'Chọn trạng thái') + $arrStatus, $dataSearch['status']);
+		return theme('shopManagerProduct',array(
+									'title'=>'Cấu hình chung',
+									'result' => $result['data'],
+									'dataSearch' => $dataSearch,
+									'totalItem' =>$result['total'],
+									'pager' =>$result['pager'],
+									'optionStatus' =>$optionStatus,
+									'optionCategoryChildren'=>$optionCategoryChildren));
 	}
 
-	$files = array(
-       'bootstrap/lib/ckeditor/ckeditor.js',
-       'bootstrap/lib/ckeditor/config.js',
-       'bootstrap/lib/dragsort/jquery.dragsort.js',
-    );
-    Loader::loadJSExt('Core', $files);
-    $files = array(
-	    'bootstrap/lib/upload/cssUpload.css',
-	    'bootstrap/js/bootstrap.min.js',
-	    'bootstrap/lib/upload/jquery.uploadfile.js',
-	    'js/common_admin.js',
+	public static function shopFormProduct(){
+		global $base_url, $user_shop;
 
-	);
-	Loader::load('Core', $files);
-
-	$param = arg();
-	$arrItem = array();
-	$id = 0;
-	$category_id = 0;
-	$title = 'Thêm mới sản phẩm';
-	$arrImageOther  = array();
-	if(isset($param[0]) && isset($param[1]) && isset($param[2]) && $param[0] == 'sua-san-pham' && $param[1] > 0 && $param[2] != ''){
-		$id = intval($param[1]);
-		$fields = 'id, category_id, product_code, product_name, product_price_sell, product_price_market, product_content, product_image, product_image_hover, product_image_other, user_shop_id, status';
-		$cond = 'id='.$id.' AND user_shop_id='.$user_shop->shop_id;
-		$arrItem = ShopManagerProduct::getItembyCond($fields, $cond);
-		
-		if(empty($arrItem)){
-			drupal_set_message('Bạn không có quyền truy cập. Đây không phải là tin đăng của bạn!', 'error');
-			drupal_goto($base_url.'/quan-ly-gian-hang.html');
+		if($user_shop->shop_id == 0){
+			drupal_set_message('Bạn không có quyền truy cập. Vui lòng đăng nhập tài khoản!', 'error');
+			drupal_goto($base_url);
 		}
 
-		$category_id = $arrItem->category_id;
-		$title = 'Sửa sản phẩm';
+		$files = array(
+	       'bootstrap/lib/ckeditor/ckeditor.js',
+	       'bootstrap/lib/ckeditor/config.js',
+	       'bootstrap/lib/dragsort/jquery.dragsort.js',
+	    );
+	    Loader::loadJSExt('Core', $files);
+	    $files = array(
+		    'bootstrap/lib/upload/cssUpload.css',
+		    'bootstrap/js/bootstrap.min.js',
+		    'bootstrap/lib/upload/jquery.uploadfile.js',
+		    'js/common_admin.js',
 
-		//lay mang anh de chen vao noi dung
-		if(!empty($arrItem)){
-			if(isset($arrItem->product_image_other) && trim($arrItem->product_image_other) != ''){
-				$arrOther = unserialize($arrItem->product_image_other);
-				foreach($arrOther as $k =>$val_other){
-					$arrImageOther[] = array(
-						'image_small'=> FunctionLib::getThumbImage($val_other,$arrItem->id,FOLDER_PRODUCT,80,80),
-						'image_big'=> FunctionLib::getThumbImage($val_other,$arrItem->id,FOLDER_PRODUCT,700,700),
-					);
-				}
+		);
+		Loader::load('Core', $files);
+
+		$param = arg();
+		$arrItem = array();
+		$id = 0;
+		$category_id = 0;
+		$title = 'Thêm mới sản phẩm';
+		$arrImageOther  = array();
+		if(isset($param[0]) && isset($param[1]) && isset($param[2]) && $param[0] == 'sua-san-pham' && $param[1] > 0 && $param[2] != ''){
+			$id = intval($param[1]);
+			$fields = 'id, category_id, product_code, product_name, product_price_sell, product_price_market, product_content, product_image, product_image_hover, product_image_other, user_shop_id, status';
+			$cond = 'id='.$id.' AND user_shop_id='.$user_shop->shop_id;
+			$arrItem = ShopManagerProduct::getItembyCond($fields, $cond);
+			
+			if(empty($arrItem)){
+				drupal_set_message('Bạn không có quyền truy cập. Đây không phải là tin đăng của bạn!', 'error');
+				drupal_goto($base_url.'/quan-ly-gian-hang.html');
 			}
-		}
 
-	}
-	
-	if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
-		$data = array(
-				'category_id'=>array('value'=>FunctionLib::getIntParam('category_id',''), 'require'=>1, 'messages'=>''),
-				'product_code'=>array('value'=>FunctionLib::getParam('product_code',''), 'require'=>1, 'messages'=>'Mã sản phẩm không được trống!'),
-				'product_name'=>array('value'=>FunctionLib::getParam('product_name',''), 'require'=>1, 'messages'=>'Tên sản phẩm không được trống!'),
-				'product_price_sell'=>array('value'=>FunctionLib::getIntParam('product_price_sell',''), 'require'=>0, 'messages'=>''),
-				'product_price_market'=>array('value'=>FunctionLib::getIntParam('product_price_market',''), 'require'=>0, 'messages'=>''),
-				'product_content'=>array('value'=>FunctionLib::getParam('product_content',''), 'require'=>1, 'messages'=>'Chi tiết sản phẩm không được trống!'),
-				'product_image'=>array('value'=>FunctionLib::getParam('image_primary','')),
-				'product_image_hover'=>array('value'=>FunctionLib::getParam('image_primary_hover','')),
-				'user_shop_id'=>array('value'=>$user_shop->shop_id, 'require'=>0, 'messages'=>''),
-				'user_shop_name'=>array('value'=>$user_shop->shop_name, 'require'=>0, 'messages'=>''),
-				'shop_province'=>array('value'=>$user_shop->shop_province, 'require'=>0, 'messages'=>''),
-				'status'=>array('value'=>1, 'require'=>0, 'messages'=>''),
-			);
-		
-		if(!empty($arrItem)){
-			$data['time_update']['value'] = time();
-		}else{
-			$data['time_created']['value'] = time();
-		}
-		//lay lai vi tri sap xep cua anh khac
-		$arrInputImgOther = array();
-		$getImgOther = FunctionLib::getParam('img_other',array());
+			$category_id = $arrItem->category_id;
+			$title = 'Sửa sản phẩm';
 
-		if(!empty($getImgOther)){
-			foreach($getImgOther as $k=>$val){
-				if($val !=''){
-					$arrInputImgOther[] = $val;
-				}
-			}
-		}
-		if (!empty($arrInputImgOther) && count($arrInputImgOther) > 0) {
-			//neu ko co anh chinh, lay anh chinh la cai anh dau tien
-			if($data['product_image']['value'] == ''){
-				$data['product_image']['value'] = $arrInputImgOther[0];
-			}
-			//neu ko co anh hove, lay anh hove la cai anh dau tien
-			if($data['product_image_hover']['value'] == ''){
-				$data['product_image_hover']['value'] = $arrInputImgOther[0];
-			}
-			$data['product_image_other']['value'] = serialize($arrInputImgOther);
-		}
-
-		$errors = ValidForm::validInputData($data);
-		
-		if($errors != ''){
+			//lay mang anh de chen vao noi dung
 			if(!empty($arrItem)){
-				drupal_set_message($errors, 'error');
-				drupal_goto($base_url.'/sua-san-pham/'.$id.'/'.Stdio::pregReplaceStringAlias($arrItem->product_name).'.html');
-			}else{
-				drupal_set_message($errors, 'error');
-				drupal_goto($base_url.'/dang-san-pham.html');
+				if(isset($arrItem->product_image_other) && trim($arrItem->product_image_other) != ''){
+					$arrOther = unserialize($arrItem->product_image_other);
+					foreach($arrOther as $k =>$val_other){
+						$arrImageOther[] = array(
+							'image_small'=> FunctionLib::getThumbImage($val_other,$arrItem->id,FOLDER_PRODUCT,80,80),
+							'image_big'=> FunctionLib::getThumbImage($val_other,$arrItem->id,FOLDER_PRODUCT,700,700),
+						);
+					}
+				}
 			}
-		}else{
-			if($data['category_id']['value'] > 0 ){
-				$data['category_name']['value'] = ShopManagerProduct::getNameCategory($data['category_id']['value']);
-			}
+
+		}
+		
+		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
+			$data = array(
+					'category_id'=>array('value'=>FunctionLib::getIntParam('category_id',''), 'require'=>1, 'messages'=>''),
+					'product_code'=>array('value'=>FunctionLib::getParam('product_code',''), 'require'=>1, 'messages'=>'Mã sản phẩm không được trống!'),
+					'product_name'=>array('value'=>FunctionLib::getParam('product_name',''), 'require'=>1, 'messages'=>'Tên sản phẩm không được trống!'),
+					'product_price_sell'=>array('value'=>FunctionLib::getIntParam('product_price_sell',''), 'require'=>0, 'messages'=>''),
+					'product_price_market'=>array('value'=>FunctionLib::getIntParam('product_price_market',''), 'require'=>0, 'messages'=>''),
+					'product_content'=>array('value'=>FunctionLib::getParam('product_content',''), 'require'=>1, 'messages'=>'Chi tiết sản phẩm không được trống!'),
+					'product_image'=>array('value'=>FunctionLib::getParam('image_primary','')),
+					'product_image_hover'=>array('value'=>FunctionLib::getParam('image_primary_hover','')),
+					'user_shop_id'=>array('value'=>$user_shop->shop_id, 'require'=>0, 'messages'=>''),
+					'user_shop_name'=>array('value'=>$user_shop->shop_name, 'require'=>0, 'messages'=>''),
+					'shop_province'=>array('value'=>$user_shop->shop_province, 'require'=>0, 'messages'=>''),
+					'status'=>array('value'=>1, 'require'=>0, 'messages'=>''),
+				);
 			
 			if(!empty($arrItem)){
-				if($arrItem->id != $id){
-					drupal_set_message('Bạn không có quyền sửa tin đăng này!', 'error');
-					drupal_goto($base_url.'/quan-ly-gian-hang.html');
+				$data['time_update']['value'] = time();
+			}else{
+				$data['time_created']['value'] = time();
+			}
+			//lay lai vi tri sap xep cua anh khac
+			$arrInputImgOther = array();
+			$getImgOther = FunctionLib::getParam('img_other',array());
+
+			if(!empty($getImgOther)){
+				foreach($getImgOther as $k=>$val){
+					if($val !=''){
+						$arrInputImgOther[] = $val;
+					}
 				}
 			}
-			ShopManagerProduct::save($data, $id);
-			drupal_goto($base_url.'/quan-ly-gian-hang.html');
-		}
-	}
+			if (!empty($arrInputImgOther) && count($arrInputImgOther) > 0) {
+				//neu ko co anh chinh, lay anh chinh la cai anh dau tien
+				if($data['product_image']['value'] == ''){
+					$data['product_image']['value'] = $arrInputImgOther[0];
+				}
+				//neu ko co anh hove, lay anh hove la cai anh dau tien
+				if($data['product_image_hover']['value'] == ''){
+					$data['product_image_hover']['value'] = $arrInputImgOther[0];
+				}
+				$data['product_image_other']['value'] = serialize($arrInputImgOther);
+			}
 
-	$arrCategoryChildren = DataCommon::getListCategoryChildren($user_shop->shop_category);
-	$optionCategoryChildren = FunctionLib::getOption(array(-1=>'Chọn danh mục sản phẩm') + $arrCategoryChildren, $category_id);
-	return theme('shopFormProduct',array('optionCategoryChildren'=>$optionCategoryChildren, 'arrItem'=>$arrItem, 'title'=>$title, 'arrImageOther'=>$arrImageOther,));
-}
-
-function shopDeleteProduct(){
-	global $base_url, $user_shop;
-
-	if($user_shop->shop_id == 0){
-		drupal_set_message('Bạn không có quyền truy cập. Vui lòng đăng nhập tài khoản!', 'error');
-		drupal_goto($base_url);
-	}
-	$listId =  FunctionLib::getParam('id',array());
-	if(!empty($listId)){
-		foreach($listId as $id){
-			if($id > 0){
-				ShopManagerProduct::deleteOne($id);
+			$errors = ValidForm::validInputData($data);
+			
+			if($errors != ''){
+				if(!empty($arrItem)){
+					drupal_set_message($errors, 'error');
+					drupal_goto($base_url.'/sua-san-pham/'.$id.'/'.Stdio::pregReplaceStringAlias($arrItem->product_name).'.html');
+				}else{
+					drupal_set_message($errors, 'error');
+					drupal_goto($base_url.'/dang-san-pham.html');
+				}
+			}else{
+				if($data['category_id']['value'] > 0 ){
+					$data['category_name']['value'] = ShopManagerProduct::getNameCategory($data['category_id']['value']);
+				}
+				
+				if(!empty($arrItem)){
+					if($arrItem->id != $id){
+						drupal_set_message('Bạn không có quyền sửa tin đăng này!', 'error');
+						drupal_goto($base_url.'/quan-ly-gian-hang.html');
+					}
+				}
+				ShopManagerProduct::save($data, $id);
+				drupal_goto($base_url.'/quan-ly-gian-hang.html');
 			}
 		}
-		drupal_set_message('Xóa bài viết thành công.');
+
+		$arrCategoryChildren = DataCommon::getListCategoryChildren($user_shop->shop_category);
+		$optionCategoryChildren = FunctionLib::getOption(array(-1=>'Chọn danh mục sản phẩm') + $arrCategoryChildren, $category_id);
+		return theme('shopFormProduct',array('optionCategoryChildren'=>$optionCategoryChildren, 'arrItem'=>$arrItem, 'title'=>$title, 'arrImageOther'=>$arrImageOther,));
 	}
-	drupal_set_message('Xóa sản phẩm thành công!');
-	drupal_goto($base_url.'/quan-ly-gian-hang.html');
+
+	public static function shopDeleteProduct(){
+		global $base_url, $user_shop;
+
+		if($user_shop->shop_id == 0){
+			drupal_set_message('Bạn không có quyền truy cập. Vui lòng đăng nhập tài khoản!', 'error');
+			drupal_goto($base_url);
+		}
+		$listId =  FunctionLib::getParam('id',array());
+		if(!empty($listId)){
+			foreach($listId as $id){
+				if($id > 0){
+					ShopManagerProduct::deleteOne($id);
+				}
+			}
+			drupal_set_message('Xóa bài viết thành công.');
+		}
+		drupal_set_message('Xóa sản phẩm thành công!');
+		drupal_goto($base_url.'/quan-ly-gian-hang.html');
+	}
 }
