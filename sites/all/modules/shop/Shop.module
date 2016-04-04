@@ -100,6 +100,10 @@ function Shop_theme() {
 	    'shopFormProduct' => array(
 	      'template' => 'View/tpl/shopFormProduct'
 	    ),
+	    'shopShowProduct' => array(
+	      'template' => 'View/tpl/shopShowProduct'
+	    ),
+	    
 	);
 }
 

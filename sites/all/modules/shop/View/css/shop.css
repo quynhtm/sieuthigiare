@@ -302,3 +302,95 @@ a.btn-yahoo:hover{
 #sys_drag_sort .div_img_upload img {
     border-bottom: 1px solid #ddd;
 }
+.left-category-shop{
+    background: #f3f3f3;
+    border-radius: 2px;
+    padding: 12px 15px 15px;
+    border: 1px solid #eee;
+}
+.title-category-parent {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+.left-category-shop ul{
+    margin: 0 10px;
+}
+.left-category-shop ul li{
+    clear: both;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.left-category-shop ul li a{
+    color: #333;
+}
+.left-category-shop ul li a:hover{
+    color: #0388cd;
+}
+.body-list-item > div{
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-bottom: 30px;
+}
+.body-list-item > div:hover {
+    box-shadow: 0 0 2px rgba(87, 87, 87, 0.6);
+}
+.body-list-item .item {
+    padding-top: 8px;
+    height: 428px;
+    
+}
+.body-list-item  .post-thumb {
+    display: block;
+    text-align: center;
+    margin-bottom: 8px;
+    position: relative;
+    height: 240px;
+    line-height: 240px;
+    overflow: hidden;
+}
+.body-list-item .title-info {
+    margin-bottom: 8px;
+    min-height: 65px;
+}
+.body-list-item .post-title {
+    font-size: 12px;
+    height: 36px;
+    line-height: 1;
+    margin: 0 0 8px;
+    overflow: hidden;
+}
+.body-list-item .post-title a{
+    color: #666;
+    font-size: 13px;
+    line-height: 18px;
+}
+.body-list-item .post-title a:hover{
+    color: #0388cd;
+}
+.item-price {
+    height: 18px;
+    letter-spacing: -0.8px;
+    line-height: 18px;
+}
+.amount-1 {
+    color: #c63829;
+    font-size: 18px;
+    font-weight: 400 !important;
+    margin-right: 4px;
+}
+.amount-2 {
+    color: #666 !important;
+    position: relative;
+     text-decoration: line-through;
+}
+.sale-off {
+    background: #d60c0c none repeat scroll 0 0;
+    border-radius: 2px;
+    color: #fff;
+    font-family: Roboto-Medium,sans-serif;
+    font-weight: 400 !important;
+    margin-left: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
+}

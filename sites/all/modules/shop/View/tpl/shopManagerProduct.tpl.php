@@ -125,7 +125,7 @@
 											}
 										?>
 									</td>
-									<td><?php echo $v->product_content ?></td>
+									<td><?php echo Utility::substring($v->product_content, $length = 100, $replacer='...')?></td>
 									<td><?php echo date('d/m/Y h:i', $v->time_created)?></td>
 									<td>
 										<?php

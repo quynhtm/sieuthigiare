@@ -8,6 +8,9 @@ a{
     outline: medium none;
     text-decoration: none;
 }
+.container {
+    width: 1270px;
+}
 .link-top-head{
     background-color: #f7f7f7;
     border-bottom: 1px solid #d8d8d8;
@@ -921,13 +924,7 @@ ul.list-same-post li span {
     float: left;
     width: 62%;
 }
-.item-price {
-    background: #cc0000 none repeat scroll 0 0;
-    padding: 6px 15px;
-    border-radius: 2px;
-    display: inline-block;
-    width: 100%;
-}
+
 .title-group .thread-details-price .item-price-title {
     color: #fff;
     display: inline-block;
@@ -1625,20 +1622,6 @@ form#txtFormPaymentCart {
 .wrap-main-view .content-post-line{
     border: none;
     margin-top: 0;
-}
-.sale-off{
-    background: rgba(0, 0, 0, 0) url("../img/bg.png") no-repeat scroll -155px -357px;
-    color: #fff;
-    display: inline-block;
-    font: 700 15px/25px "arial";
-    height: 43px;
-    position: absolute;
-    right: 4px;
-    text-align: center;
-    text-indent: 3px;
-    top: -4px;
-    width: 40px;
-    z-index: 2;
 }
 .size-product-right .product-size {
     display: inline-block;

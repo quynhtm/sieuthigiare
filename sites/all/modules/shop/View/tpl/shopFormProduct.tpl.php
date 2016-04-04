@@ -104,6 +104,7 @@
 					        	<div class="col-sm-6">
 						        	<div class="control-group">
 						                <label class="control-label">Chi tiết<span>(*)</span></label>
+						                 <div class="controls"><button type="button" onclick="Common_admin.insertImageContent(2)" class="btn btn-primary">Chèn ảnh vào nội dung</button></div>
 						                <div class="controls">
 						                	<textarea name="product_content" class="form-control input-sm" cols="30" rows="10"><?php if(isset($arrItem->product_content)) { echo $arrItem->product_content; } ?></textarea>
 						                </div>
@@ -150,8 +151,40 @@
 </div>
 <!--Popup upload ảnh-->
 
+<!--Popup anh khac de chen vao noi dung bai viet-->
+<div class="modal fade" id="sys_PopupImgOtherInsertContent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Click ảnh để chèn vào nội dung</h4>
+            </div>
+            <div class="modal-body">
+                <form name="uploadImage" method="post" action="#" enctype="multipart/form-data">
+                    <div class="form_group">
+                        <div class="clearfix"></div>
+                        <div class="clearfix" style='margin: 5px 10px; width:100%;'>
+                            <div id="div_image" class="float_left">
+                                <?php if (isset($arrImageOther) && count($arrImageOther) > 0) {?>
+                                <?php foreach($arrImageOther as $kk => $img_other) {?>
+                                    <span class="float_left image_insert_content">
+                                        <a class="img_item" href="javascript:void(0);" onclick="insertImgContent('<?php echo $img_other['image_big']?>')" >
+                                            <img src="<?php echo $img_other['image_small']?>" width="80" height="80">
+                                        </a>
+                                    </span>
+                                <?php } } ?>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- chen anh vào noi dung-->
+
 <script>
-	CKEDITOR.replace('product_content');
+	CKEDITOR.replace('product_content',{height:600});
 </script>
 <script type="text/javascript">
     //keo tha anh
@@ -161,6 +194,6 @@
         jQuery("input[name=list1SortOrder]").val(data.join(","));
     };
     function insertImgContent(src){
-        CKEDITOR.instances.content.insertHtml('<img src="'+src+'"/>');
+        CKEDITOR.instances.product_content.insertHtml('<img src="'+src+'"/>');
     }
 </script>

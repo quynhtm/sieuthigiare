@@ -81,6 +81,7 @@ function shopFormProduct(){
 	$id = 0;
 	$category_id = 0;
 	$title = 'Thêm mới sản phẩm';
+	$arrImageOther  = array();
 	if(isset($param[0]) && isset($param[1]) && isset($param[2]) && $param[0] == 'sua-san-pham' && $param[1] > 0 && $param[2] != ''){
 		$id = intval($param[1]);
 		$fields = 'id, category_id, product_code, product_name, product_price_sell, product_price_market, product_content, product_image, product_image_hover, product_image_other, user_shop_id, status';
@@ -94,6 +95,20 @@ function shopFormProduct(){
 
 		$category_id = $arrItem->category_id;
 		$title = 'Sửa sản phẩm';
+
+		//lay mang anh de chen vao noi dung
+		if(!empty($arrItem)){
+			if(isset($arrItem->product_image_other) && trim($arrItem->product_image_other) != ''){
+				$arrOther = unserialize($arrItem->product_image_other);
+				foreach($arrOther as $k =>$val_other){
+					$arrImageOther[] = array(
+						'image_small'=> FunctionLib::getThumbImage($val_other,$arrItem->id,FOLDER_PRODUCT,80,80),
+						'image_big'=> FunctionLib::getThumbImage($val_other,$arrItem->id,FOLDER_PRODUCT,700,700),
+					);
+				}
+			}
+		}
+
 	}
 	
 	if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
@@ -170,7 +185,7 @@ function shopFormProduct(){
 
 	$arrCategoryChildren = DataCommon::getListCategoryChildren($user_shop->shop_category);
 	$optionCategoryChildren = FunctionLib::getOption(array(-1=>'Chọn danh mục sản phẩm') + $arrCategoryChildren, $category_id);
-	return theme('shopFormProduct',array('optionCategoryChildren'=>$optionCategoryChildren, 'arrItem'=>$arrItem, 'title'=>$title));
+	return theme('shopFormProduct',array('optionCategoryChildren'=>$optionCategoryChildren, 'arrItem'=>$arrItem, 'title'=>$title, 'arrImageOther'=>$arrImageOther,));
 }
 
 function shopDeleteProduct(){
