@@ -7,7 +7,7 @@
 */
 class AjaxUpload{
 	static $primary_key_news = 'news_id';
-    static $primary_key_product = 'id';
+    static $primary_key_product = 'product_id';
 
 	function playme(){
 		$code = FunctionLib::getParam('code', '');
