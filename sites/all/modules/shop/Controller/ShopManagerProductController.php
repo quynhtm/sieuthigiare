@@ -6,7 +6,7 @@
 * @Version	 : 1.0
 */
 class ShopManagerProductController{
-	public static function shopManagerProduct(){
+	public function shopManagerProduct(){
 		global $base_url, $user_shop;
 
 		if($user_shop->shop_id == 0){
@@ -58,7 +58,7 @@ class ShopManagerProductController{
 									'optionCategoryChildren'=>$optionCategoryChildren));
 	}
 
-	public static function shopFormProduct(){
+	public function shopFormProduct(){
 		global $base_url, $user_shop;
 
 		if($user_shop->shop_id == 0){
@@ -191,7 +191,7 @@ class ShopManagerProductController{
 		return theme('shopFormProduct',array('optionCategoryChildren'=>$optionCategoryChildren, 'arrItem'=>$arrItem, 'title'=>$title, 'arrImageOther'=>$arrImageOther,));
 	}
 
-	public static function shopDeleteProduct(){
+	public function shopDeleteProduct(){
 		global $base_url, $user_shop;
 
 		if($user_shop->shop_id == 0){

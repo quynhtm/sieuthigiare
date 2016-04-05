@@ -6,7 +6,7 @@
 * @Version	 : 1.0
 */
 class ShopShowProductController{
-	public static function shopshowProduct(){
+	public function shopshowProduct(){
 		
 		return theme('shopShowProduct');
 	}

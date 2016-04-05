@@ -9,77 +9,88 @@ function Shop_menu() {
 	$items["ajax-check-user-reg-exist"] = array(
 		"title" => t('Đăng ký shop'),
 		"description" => "Đăng ký shop",
-		'page callback' => 'ShopShowProductController::ajaxCheckShopRegExist',
+		'page callback' => 'menuLoad',
+		'page arguments' => array('ShopRegController/ajaxCheckShopRegExist'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
 	$items["dang-ky.html"] = array(
 		"title" => t('Đăng ký shop'),
 		"description" => "Đăng ký shop",
-		'page callback' => 'ShopRegController::shopRegister',
+		'page callback' => 'menuLoad',
+		'page arguments' => array('ShopRegController/shopRegister'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
 	$items["dang-nhap.html"] = array(
 		"title" => t('Đăng nhập shop'),
 		"description" => "Đăng nhâp shop",
-		'page callback' => 'ShopRegController::shopLogin',
+		'page callback' => 'menuLoad',
+		'page arguments' => array('ShopRegController/shopLogin'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
 	$items["thoat.html"] = array(
 		"title" => t('Thoát shop'),
 		"description" => "Thoat shop",
-		'page callback' => 'ShopRegController::shopLogout',
+		'page callback' => 'menuLoad',
+		'page arguments' => array('ShopRegController/shopLogout'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
 	$items["sua-thong-tin-gian-hang.html"] = array(
 		"title" => t('Sửa thông tin gian hàng'),
 		"description" => "Sửa thông tin gian hàng",
-		'page callback' => 'ShopRegController::shopEditInfo',
+		'page callback' => 'menuLoad',
+		'page arguments' => array('ShopRegController/shopEditInfo'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
 	$items["doi-mat-khau.html"] = array(
 		"title" => t('Đổi mật khẩu'),
 		"description" => "Đổi mật khẩu",
-		'page callback' => 'ShopRegController::shopEditPassword',
+		'page callback' => 'menuLoad',
+		'page arguments' => array('ShopRegController/shopEditPassword'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
 	$items["quan-ly-gian-hang.html"] = array(
 		"title" => t('Quản lý sản phẩm'),
 		"description" => "Quản lý sản phẩm",
-		'page callback' => 'ShopManagerProductController::shopManagerProduct',
+		'page callback' => 'menuLoad',
+		'page arguments' => 'ShopManagerProductController/shopManagerProduct',
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
 	$items["dang-san-pham.html"] = array(
 		"title" => t('Đăng sản phẩm'),
 		"description" => "Đăng sản phẩm",
-		'page callback' => 'ShopManagerProductController::shopFormProduct',
+		'page callback' => 'menuLoad',
+		'page arguments' => 'ShopManagerProductController/shopFormProduct',
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
 	$items["sua-san-pham/%/%"] = array(
 		"title" => t('Sửa sản phẩm'),
 		"description" => "Sửa sản phẩm",
-		'page callback' => 'ShopManagerProductController::shopFormProduct',
+		'page callback' => 'menuLoad',
+		'page arguments' => 'ShopManagerProductController/shopFormProduct',
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
 	$items["xoa-san-pham"] = array(
 		"title" => t('xóa sản phẩm'),
 		"description" => "Xóa sản phẩm",
-		'page callback' => 'ShopManagerProductController::shopDeleteProduct',
+		'page callback' => 'menuLoad',
+		'page arguments' => 'ShopManagerProductController/shopDeleteProduct',
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
 	$items["gian-hang/%/%"] = array(
 		"title" => t('Gian hàng'),
 		"description" => "Gian hàng",
-		'page callback' => 'ShopShowProductController::shopshowProduct',
+		'page callback' => 'menuLoad',
+		'page arguments' => 'ShopShowProductController/shopshowProduct',
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);

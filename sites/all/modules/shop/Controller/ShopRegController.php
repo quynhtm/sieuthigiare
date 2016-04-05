@@ -6,7 +6,7 @@
 * @Version	 : 1.0
 */
 class ShopRegController{
-	public static function shopRegister(){
+	public function shopRegister(){
 		global $base_url, $user_shop;
 		
 		if($user_shop->shop_id != 0){
@@ -89,7 +89,7 @@ class ShopRegController{
 		return $view;
 	}
 
-	public static function shopLogin(){
+	public function shopLogin(){
 		global $base_url, $user_shop;
 		
 		if($user_shop->shop_id != 0){
@@ -124,7 +124,7 @@ class ShopRegController{
 		return $view;
 	}
 
-	public static function shopEditInfo(){
+	public function shopEditInfo(){
 		global $base_url, $user_shop;
 		if($user_shop->shop_id == 0){
 			drupal_goto($base_url);
@@ -186,7 +186,7 @@ class ShopRegController{
 		return $view = theme('shopEditInfo', array('listProvince'=>$listProvince, 'optionCategoryParent'=>$optionCategoryParent));
 	}
 
-	public static function shopEditPassword(){
+	public function shopEditPassword(){
 		global $base_url, $user_shop;
 
 		if($user_shop->shop_id == 0){
@@ -236,11 +236,11 @@ class ShopRegController{
 		return $view = theme('shopEditPassword');
 	}
 
-	public static function shopLogout(){
+	public function shopLogout(){
 		ShopUser::logoutUserShop();
 	}
 
-	public static function ajaxCheckShopRegExist(){
+	public function ajaxCheckShopRegExist(){
 		global $base_url, $user_shop;
 		
 		if($user_shop->shop_id != 0){
