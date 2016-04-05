@@ -58,7 +58,7 @@ function Shop_menu() {
 		"title" => t('Quản lý sản phẩm'),
 		"description" => "Quản lý sản phẩm",
 		'page callback' => 'menuLoad',
-		'page arguments' => 'ShopManagerProductController/shopManagerProduct',
+		'page arguments' => array('ShopManagerProductController/shopManagerProduct'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -66,7 +66,7 @@ function Shop_menu() {
 		"title" => t('Đăng sản phẩm'),
 		"description" => "Đăng sản phẩm",
 		'page callback' => 'menuLoad',
-		'page arguments' => 'ShopManagerProductController/shopFormProduct',
+		'page arguments' => array('ShopManagerProductController/shopFormProduct'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -74,7 +74,7 @@ function Shop_menu() {
 		"title" => t('Sửa sản phẩm'),
 		"description" => "Sửa sản phẩm",
 		'page callback' => 'menuLoad',
-		'page arguments' => 'ShopManagerProductController/shopFormProduct',
+		'page arguments' => array('ShopManagerProductController/shopFormProduct'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -82,7 +82,7 @@ function Shop_menu() {
 		"title" => t('xóa sản phẩm'),
 		"description" => "Xóa sản phẩm",
 		'page callback' => 'menuLoad',
-		'page arguments' => 'ShopManagerProductController/shopDeleteProduct',
+		'page arguments' => array('ShopManagerProductController/shopDeleteProduct'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -90,7 +90,7 @@ function Shop_menu() {
 		"title" => t('Gian hàng'),
 		"description" => "Gian hàng",
 		'page callback' => 'menuLoad',
-		'page arguments' => 'ShopShowProductController/shopshowProduct',
+		'page arguments' => array('ShopShowProductController/shopshowProduct'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -133,6 +133,7 @@ function Shop_init() {
 			
 			'Model/ShopManagerProductModel.php',
 			'Controller/ShopManagerProductController.php',
+			
 			'Model/ShopShowProductModel.php',
 			'Controller/ShopShowProductController.php',
 
