@@ -214,12 +214,16 @@ var Common_admin = {
                     html += delete_img;
                     html +="</div></li>";
                     jQuery('#sys_drag_sort').append(html);
-
+                    
+                    jQuery('#sys_PopupImgOtherInsertContent #div_image').html('');
+                    Common_admin.getInsertImageContent(type);
+                    
                     //thanh cong
                     jQuery("#status").html("<font color='green'>Upload is success</font>");
                     setTimeout( "jQuery('.ajax-file-upload-statusbar').hide();",2000 );
                     setTimeout( "jQuery('#status').hide();",2000 );
                     setTimeout( "jQuery('#sys_PopupUploadImgOtherPro').modal('hide');",2500 );
+
                 }
             },
             onError: function(files,status,errMsg){
@@ -274,14 +278,13 @@ var Common_admin = {
                 }
             });
         }
+        jQuery('#sys_PopupImgOtherInsertContent #div_image').html('');
+        Common_admin.getInsertImageContent(type);
     },
     insertImageContent: function(type) {
         jQuery('#sys_PopupImgOtherInsertContent').modal('show');
         jQuery('.ajax-upload-dragdrop').remove();
         
-        jQuery('#sys_PopupImgOtherInsertContent #div_image').html('');
-        Common_admin.getInsertImageContent(type);
-
         var urlAjaxUpload = BASEPARAMS.base_url+'/ajax?act=upload_image&code=upload_image_insert_content';
         var id_hiden = document.getElementById('id_hiden').value;
         var settings = {
