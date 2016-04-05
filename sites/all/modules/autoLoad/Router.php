@@ -52,3 +52,20 @@ function router_page(){
 		drupal_goto($base_url);
 	}
 }
+
+function menuLoad($class_controller=''){
+	global $base_url;
+
+	if($class_controller != ''){
+		$arrPath = explode('/', $class_controller);
+		if(count($arrPath) == 2){
+			if(class_exists($arrPath[0])){
+				$routerClass = new $arrPath[0]();
+				if($arrPath[1] != ''){
+					return $routerClass->$arrPath[1]();
+				}
+			}
+		}
+	}
+	drupal_goto($base_url);
+}
