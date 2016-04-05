@@ -23,7 +23,10 @@ class AjaxUpload{
             case 'remove_image' :
 				$this->remove_image();
 				break;
-			default:
+			case 'get_image_insert_content' :
+                $this->get_image_insert_content();
+                break;
+            default:
 				$this->home();
 				break;
 		}
@@ -201,6 +204,46 @@ class AjaxUpload{
                     }
                 }  
             }
+        }
+    }
+    
+    function get_image_insert_content(){
+        $id_hiden = FunctionLib::getIntParam('id_hiden', 0);
+        $type = FunctionLib::getIntParam('type', 1);
+        $aryData = array();
+        $aryData['intIsOK'] = -1;
+        $aryData['msg'] = "Data not exists!";
+        if($id_hiden > 0){
+            switch( $type ){
+                case 1://img news
+                    $aryData = $this->getImgContent($id_hiden, TABLE_NEWS, FOLDER_NEWS, 'news_image_other', self::$primary_key_news);
+                    break;
+                case 2 ://img product
+                    $aryData = $this->getImgContent($id_hiden, TABLE_PRODUCT, FOLDER_PRODUCT, 'product_image_other', self::$primary_key_product);
+                    break;
+                default:
+                    break;
+            }
+        }
+        echo json_encode($aryData);
+        exit();
+    }
+    function getImgContent($id_hiden, $table_action, $folder, $field_img_other='', $primary_key){
+        global $base_url;
+
+        $listImageTempOther = DB::getItemById($table_action, $primary_key, array($field_img_other), $id_hiden);
+        if(!empty($listImageTempOther)){
+            $aryTempImages = ($listImageTempOther[0]->$field_img_other !='')? unserialize($listImageTempOther[0]->$field_img_other): array();
+            
+            $aryData = array();
+            if(!empty($aryTempImages)){
+                foreach($aryTempImages as $k => $item){
+                    $aryData['item'][$k] = FunctionLib::getThumbImage($item,$id_hiden,FOLDER_NEWS,700,700);
+                }
+            }
+            $aryData['intIsOK'] = 1;
+            $aryData['msg'] = "Data exists!";
+            return $aryData;
         }
     }
 }

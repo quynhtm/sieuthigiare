@@ -71,7 +71,7 @@
 									</div>
 								</div>
 								<?php } else{?>
-									<img src=""/>
+									<img src="<?php echo IMAGE_DEFAULT ?>" width="60px"/>
 								<?php }?>
 							</td>
 							<td><?php echo $item->news_title; ?></td>

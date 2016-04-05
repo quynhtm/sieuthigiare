@@ -278,6 +278,10 @@ var Common_admin = {
     insertImageContent: function(type) {
         jQuery('#sys_PopupImgOtherInsertContent').modal('show');
         jQuery('.ajax-upload-dragdrop').remove();
+        
+        jQuery('#sys_PopupImgOtherInsertContent #div_image').html('');
+        Common_admin.getInsertImageContent(type);
+
         var urlAjaxUpload = BASEPARAMS.base_url+'/ajax?act=upload_image&code=upload_image_insert_content';
         var id_hiden = document.getElementById('id_hiden').value;
         var settings = {
@@ -330,7 +334,29 @@ var Common_admin = {
             });
         }
     },
-
+    getInsertImageContent: function(type) {
+        var urlAjaxUpload = BASEPARAMS.base_url+'/ajax?act=upload_image&code=get_image_insert_content';
+        var id_hiden = document.getElementById('id_hiden').value;
+        
+        jQuery.ajax({
+            type: "POST",
+            url: urlAjaxUpload,
+            data: "id_hiden=" + encodeURI(id_hiden) + "&type=" + encodeURI(type),
+            success: function(data){
+                dataResult = JSON.parse(data);
+                if(dataResult.intIsOK === 1){
+                    var imagePopup = '';
+                    for(var i = 0; i < dataResult['item'].length; i++) {
+                        imagePopup += "<span class='float_left image_insert_content'>";
+                        var insert_img = "<a class='img_item' href='javascript:void(0);' onclick='insertImgContent(\""+dataResult['item'][i]+"\")' >";
+                        imagePopup += insert_img;
+                        imagePopup += "<img width='80' height=80 src='" + dataResult['item'][i] + "'/> </a>";
+                    }
+                    jQuery('#sys_PopupImgOtherInsertContent #div_image').append(imagePopup);
+                }
+            }
+        });
+    },
 };//class
 
 CHECKALL_ITEM = {
