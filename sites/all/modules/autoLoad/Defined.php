@@ -43,6 +43,17 @@ define('FOLDER_DEFAULT', 'img_other');
 define('FOLDER_PRODUCT', 'product');
 define('FOLDER_NEWS', 'news');
 
+//common
+define('STASTUS_HIDE', 0);
+define('STASTUS_SHOW', 1);
+
+define('TYPE_PRICE_NUMBER', 1);
+define('TYPE_PRICE_CONTACT', 2);
+
+define('PRODUCT_NOMAL', 1);
+define('PRODUCT_HOT', 2);
+define('PRODUCT_SELLOFF', 3);
+
 define('IMAGE_ERROR', 113); // dung sau quet cac item up ?nh nhung ko cap nhat DB
 define('IMAGE_DEFAULT', $base_url.'/sites/all/modules/autoLoad/img/default.png');
 

@@ -5,13 +5,19 @@
 	<div class="header">
 		<?php require_once(DRUPAL_ROOT.'/'.path_to_theme().'/View/tpl/shopHeader.tpl.php') ?>
 	</div>
+	<form action="" method="post" id="frmformShop" class="frmformShop" name="frmformShop" enctype="multipart/form-data">
 	<div class="content">
 		<div class="wrapp-shop">
 			<div class="box-shop-search">
-				<div class="title-box-shop-search"><?php echo $title ?></div>
+				<div class="title-box-shop-search"><?php echo $title ?>
+						<span style="float: right; margin-right:50px ">
+							<button type="submit" name="submit" id="buttonFormShopSubmit" class="btn btn-primary" value="1" onc>Lưu</button>
+   							<button type="reset" class="btn btn-danger">Bỏ qua</button>
+						</span>
+				</div>
 				<div class="content-box-shop-search">
 					<div class="wrapp-box-info">
-						<form action="" method="post" id="frmformShop" class="frmformShop" name="frmformShop" enctype="multipart/form-data">
+
 							<div class="row">
 								<!--Block 1-->
 								<div class="col-sm-3">
@@ -24,7 +30,7 @@
 									<div class="control-group">
 						                <label class="control-label">Danh mục<span>(*)</span></label>
 						                <div class="controls">
-						                    <select class="form-control input-sm" name="category_id">
+						                    <select class="form-control input-sm" name="category_id" id="category_id">
 						                    	<?php echo $optionCategoryChildren ?>
 						                    </select>
 						                </div>
@@ -34,7 +40,7 @@
 										<label class="control-label">Loại sản phẩm</label>
 										<div class="controls">
 											<select class="form-control input-sm" name="product_is_hot">
-												<?php echo $optionCategoryChildren ?>
+												<?php echo $optionTypeProduct ?>
 											</select>
 										</div>
 									</div>
@@ -48,8 +54,8 @@
 									<div class="control-group">
 										<label class="control-label">Trạng thái ẩn/hiện</label>
 										<div class="controls">
-											<select class="form-control input-sm" name="status">
-												<?php echo $optionCategoryChildren ?>
+											<select class="form-control input-sm" name="product_status">
+												<?php echo $optionStatus ?>
 											</select>
 										</div>
 									</div>
@@ -61,26 +67,29 @@
 						                <label class="control-label">Kiểu hiển thị giá</label>
 						                <div class="controls">
 						                    <select class="form-control input-sm" name="product_type_price">
-						                    	<?php echo $optionCategoryChildren ?>
+						                    	<?php echo $optionTypePrice ?>
 						                    </select>
 						                </div>
 						            </div>
 						             <div class="control-group">
-						                <label class="control-label">Giá bán</label>
+						                <label class="control-label">Giá bán<span>(*)</span></label>
 						                <div class="controls">
-						                    <input type="text" class="form-control input-sm" placeholder="Giá bán" name="product_price_sell" value="<?php if(isset($arrItem->product_price_sell)) { echo $arrItem->product_price_sell; } ?>">
+											<input type="text" placeholder="Giá bán" id="product_price_sell" name="product_price_sell" class="formatMoney text-right form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="<?php if(isset($arrItem->product_price_sell)) { echo $arrItem->product_price_sell; } ?>">
+											<input type="hidden" id="product_price_sell_hide" name="product_price_sell_hide" value="0">
 						                </div>
 						            </div>
 						            <div class="control-group">
 						                <label class="control-label">Giá thị trường</label>
 						                <div class="controls">
-						                    <input type="text" class="form-control input-sm" placeholder="Giá thị trường" name="product_price_market" value="<?php if(isset($arrItem->product_price_market)) { echo $arrItem->product_price_market; } ?>">
+											<input type="text" placeholder="Giá thị trường" name="product_price_market" id="product_price_market" class="formatMoney text-right form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="<?php if(isset($arrItem->product_price_market)) { echo $arrItem->product_price_market; } ?>">
+											<input type="hidden" id="product_price_market_hide" name="product_price_market_hide" value="0">
 						                </div>
 						            </div>
 									<div class="control-group">
 						                <label class="control-label">Giá nhập</label>
 						                <div class="controls">
-						                    <input type="text" class="form-control input-sm" placeholder="Giá nhập" name="product_price_input" value="<?php if(isset($arrItem->product_price_input)) { echo $arrItem->product_price_input; } ?>">
+											<input type="text" placeholder="Giá nhập" name="product_price_input" id="product_price_input" class="formatMoney text-right form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="<?php if(isset($arrItem->product_price_sell)) { echo $arrItem->product_price_sell; } ?>">
+											<input type="hidden" id="product_price_input_hide" name="product_price_input_hide" value="0">
 						                </div>
 						            </div>
 									<div class="control-group">
@@ -96,8 +105,8 @@
 						        	<div class="control-group">
 						                 <div class="col-lg-8">
 						                     <a href="javascript:;"class="btn btn-primary" onclick="Common_admin.uploadMultipleImages(2);">Upload ảnh</a>
-						                     <input name="image_primary" type="hidden" id="image_primary" value="">
-						                     <input name="image_primary_hover" type="hidden" id="image_primary_hover" value="">
+						                     <input name="image_primary" type="hidden" id="image_primary" value="<?php if(isset($arrItem->product_image)) { echo $arrItem->product_image; } ?>">
+						                     <input name="image_primary_hover" type="hidden" id="image_primary_hover" value="<?php if(isset($arrItem->product_image_hover)) { echo $arrItem->product_image_hover; } ?>">
 						                 </div>
 						            </div>
 									<!--hien thi anh-->
@@ -160,23 +169,24 @@
 						                <label class="control-label">Chi tiết sản phẩm<span>(*)</span></label>
 						                 <div class="controls"><button type="button" onclick="Common_admin.insertImageContent(2)" class="btn btn-primary">Chèn ảnh vào nội dung</button></div>
 						                <div class="controls product_content">
-						                	<textarea name="product_content" class="form-control input-sm" cols="30" rows="10"><?php if(isset($arrItem->product_content)) { echo $arrItem->product_content; } ?></textarea>
+						                	<textarea name="product_content" id="product_content" class="form-control input-sm" cols="30" rows="10"><?php if(isset($arrItem->product_content)) { echo $arrItem->product_content; } ?></textarea>
 						                </div>
 						            </div>
 						            <div class="form-actions">
 						                <input type="hidden" id="id_hiden" name="id" value="<?php if(isset($arrItem->product_id)) { echo $arrItem->product_id; } ?>"/>
 						                <input type="hidden" value="txt-form-post" name="txt-form-post">
-										<button type="submit" name="submit" id="buttonFormShopSubmit" class="btn btn-primary" value="1">Lưu</button>
-						                <button type="reset" class="btn">Bỏ qua</button>
+										<button type="submit" name="submit" id="buttonFormShopSubmit" class="btn btn-primary" value="1" onc>Lưu</button>
+						                <button type="reset" class="btn btn-danger">Bỏ qua</button>
 						            </div>
 						        </div>
 					        </div>
-						</form>
+
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	</form>
 </div>
 
 <!--Popup upload ảnh-->
@@ -242,6 +252,9 @@
 	CKEDITOR.replace('product_content',{height:650});
 </script>
 <script type="text/javascript">
+	//dịnh dạng giá
+	jQuery('.formatMoney').autoNumeric('init');
+
 	CKEDITOR.replace(
 		'product_sort_desc',
 		{

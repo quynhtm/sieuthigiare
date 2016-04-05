@@ -43,7 +43,7 @@ class ShopManagerProduct{
                         array_push($arrCond, $field.' = '.$value);
                     }
 
-                    if($field === 'status' && $value != -1){
+                    if($field === 'product_status' && $value != -1){
                         $sql->condition('i.'.$field, $value, '=');
                         array_push($arrCond, $field.' = '.$value);
                     }

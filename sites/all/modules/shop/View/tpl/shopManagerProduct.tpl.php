@@ -31,7 +31,7 @@
 							<div class="form-group">
 								<label class="control-label">Trạng thái</label>
 								<div>
-									<select class="form-control input-sm" name="status">
+									<select class="form-control input-sm" name="product_status">
 										<?php echo $optionStatus ?>	
 									</select>
 								</div>
@@ -76,8 +76,8 @@
 								<th width="2%">Chọn<br/><input type="checkbox" id="checkAll" onclick="CHECKALL_ITEM.init();"/></th>
 								<th width="">[Mã] Tên sản phẩm</th>
 								<th width="">Danh mục</th>
-								<th width="">Giá thị trường</th>
 								<th width="">Giá bán</th>
+								<th width="">Giá thị trường</th>
 								<th width="">Mô tả</th>
 								<th width="">Ngày tạo</th>
 								<th width="">Trạng thái</th>
@@ -107,7 +107,7 @@
 									<td><?php echo $v->category_name ?></td>
 									<td>
 										<?php 
-											$price_market = number_format($v->product_price_market);
+											$price_market = number_format($v->product_price_sell);
 											if($price_market == 0){
 												echo "Không có";
 											}else{
@@ -117,7 +117,7 @@
 									</td>
 									<td>
 										<?php 
-											$price_sell = number_format($v->product_price_sell);
+											$price_sell = number_format($v->product_price_market);
 											if($price_sell == 0){
 												echo "Liên hệ";
 											}else{
@@ -129,12 +129,13 @@
 									<td><?php echo date('d/m/Y h:i', $v->time_created)?></td>
 									<td>
 										<?php
-										if($v->status == 1){
-											$status='<i class="icon-ok font-size-20 green "></i>';
-										}else{
-											$v='<i class="icon-remove font-size-20 red "></i></a>';
-										}
-										echo $status;
+											$status = '';
+											if($v->product_status == 1){
+												$status ='<i class="icon-ok font-size-20 green "></i>';
+											}else{
+												$status ='<i class="icon-remove font-size-20 red "></i></a>';
+											}
+											echo $status;
 										?>
 									</td>
 									<td>

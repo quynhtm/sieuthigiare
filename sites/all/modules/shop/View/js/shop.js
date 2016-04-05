@@ -192,10 +192,45 @@ check_valid_form = {
 	},
 	post_product:function(){
 		jQuery("#buttonFormShopSubmit").click(function(){
-			var category = jQuery('#frmformShop select[name="category_id"]'),
-				code = jQuery('#frmformShop input[name="product_code"]'),
+			var category = jQuery('#category_id'),
+				product_price_sell = jQuery('#product_price_sell'),
+				product_price_market = jQuery('#product_price_market'),
+				product_price_input = jQuery('#product_price_input'),
 				name = jQuery('#frmformShop input[name="product_name"]');
-				content = CKEDITOR.instances.product_content.getData();
+				var product_content = CKEDITOR.instances.product_content.getData();
+				var product_sort_desc = CKEDITOR.instances.product_sort_desc.getData();
+
+			//giá bán
+			if(parseInt(product_price_sell.val()) <= 0){
+				jAlert('Giá bán không được bỏ trống, phải lớn hơn 0!', 'Cảnh báo');
+				product_price_sell.addClass('error').focus();
+				return false;
+			}else{
+				product_price_sell.removeClass('error');
+				jQuery("#product_price_sell_hide").val(jQuery("#product_price_sell").autoNumeric("get"));
+			}
+
+			//giá thị trường
+			if(parseInt(product_price_market.val()) > 0){
+				jQuery("#product_price_market_hide").val(jQuery("#product_price_market").autoNumeric("get"));
+				jQuery("#product_price_sell_hide").val(jQuery("#product_price_sell").autoNumeric("get"));
+
+				var price_sell = jQuery('#product_price_sell_hide').val(),
+					price_market = jQuery('#product_price_market_hide').val();
+
+				if(price_market < price_sell){
+					jAlert('Giá thị trường phải LỚN hơn giá bán', 'Cảnh báo');
+					product_price_market.addClass('error').focus();
+					return false;
+				}else{
+					product_price_market.removeClass('error');
+				}
+			}
+			//giá nhập
+			if(parseInt(product_price_input.val()) > 0){
+				jQuery("#product_price_input_hide").val(jQuery("#product_price_input").autoNumeric("get"));
+			}
+
 
 			if(category.val() <= 0){
 				jAlert('Danh mục không được trống!', 'Cảnh báo');
@@ -203,14 +238,7 @@ check_valid_form = {
 				return false;
 			}else{
 				category.removeClass('error');
-			}
-			
-			if(code.val() == ''){
-				jAlert('Mã sản phẩm không được trống!', 'Cảnh báo');
-				code.addClass('error').focus();
-				return false;
-			}else{
-				code.removeClass('error');
+
 			}
 
 			if(name.val() == ''){
@@ -221,12 +249,19 @@ check_valid_form = {
 				name.removeClass('error');
 			}
 
-			if(content == ''){
+			if(product_content == ''){
 				jAlert('Chi tiết sản phẩm không được trống!', 'Cảnh báo');
 				jQuery(".product_content").addClass('error');
 				return false;
 			}else{
 				jQuery(".product_content").removeClass('error');
+			}
+			if(product_sort_desc == ''){
+				jAlert('Mô tả ngắn của sản phẩm không được trống!', 'Cảnh báo');
+				jQuery(".product_sort_desc").addClass('error');
+				return false;
+			}else{
+				jQuery(".product_sort_desc").removeClass('error');
 			}
 		});
 	},
