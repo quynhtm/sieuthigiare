@@ -94,7 +94,7 @@
 												<img src="<?php echo $v->url_image ?>" class='imge_hover' id='<?php echo $v->product_id ?>'/>
 											</div>
 											<div id='div_hover_<?php echo $v->product_id ?>'style="position: absolute; bottom: 30px; left: 40px; border: 2px solid #ccc; padding: 5px; background: #F4F9FF; z-index: 1000; display: none">
-												<img src="<?php echo $v->url_image_hover ?>"/>
+												<img src="<?php echo $v->url_image ?>"/>
 											</div>
 										</div>
 										<?php } else{?>
@@ -103,7 +103,7 @@
 
 									</td>
 									<td><input type="checkbox" class="checkItem" name="id[]" value="<?php echo $v->product_id?>"/></td>
-									<td><?php echo '['.$v->product_code.'] '.$v->product_name ?></td>
+									<td><?php echo $v->product_name ?></td>
 									<td><?php echo $v->category_name ?></td>
 									<td>
 										<?php 
