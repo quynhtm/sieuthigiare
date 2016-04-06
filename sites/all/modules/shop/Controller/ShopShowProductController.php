@@ -10,4 +10,9 @@ class ShopShowProductController{
 		
 		return theme('shopShowProduct');
 	}
+	public function shopDetailProduct(){
+
+
+		return theme('shopDetailProduct');
+	}
 }

@@ -452,7 +452,6 @@ a.btn-yahoo:hover{
     display: block;
     height: 12px;
 }
-
 .item-banner{
     background: url("../img/bg-cart.jpg") no-repeat 0 0;
     display: none;
@@ -462,7 +461,6 @@ a.btn-yahoo:hover{
 .body-list-item .item:hover .item-banner{
     display: block;
 }
-
 .form-group span.show-error {
     clear: both;
     color: #ff0000 !important;
@@ -471,4 +469,80 @@ a.btn-yahoo:hover{
     font-style: italic;
     margin-left: 134px;
     width: 100%;
+}
+/*detail*/
+.left-slider-img {
+    display: inline-block;
+    float: left;
+    width: 480px;
+}
+.list-thumb-img {
+    height: 540px;
+    overflow: hidden;
+    float: left;
+    width: 60px;
+}
+.list-thumb-img li {
+    margin: 0 0 10px;
+    display: inline-block;
+    width: 100%;
+}
+.list-thumb-img li a {
+    border: 1px solid #d1d1d1;
+    display: block;
+    max-height: 80px;
+    min-height: 50px;
+    overflow: hidden;
+    width: 50px;
+}
+.list-thumb-img a img {
+    transition-duration: 0.2s;
+    width: 100%;
+}
+.left-slider-img .max-thumb-img {
+    float: left;
+    position: relative;
+    width: 400px;
+}
+.left-slider-img .max-thumb-img img{
+    width: 100%;
+}
+.right-des-product {
+    display: inline-block;
+    float: left;
+    width: 500px;
+}
+.right-des-product h1 {
+    color: #444;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 28px;
+    margin: 0 0 10px;
+    position: relative;
+}
+.row-price .lbl-row {
+    color: #888;
+    float: left;
+    margin-top: 3px;
+    width: 100px;
+}
+ .row-price .price-origin {
+    color: #555;
+    font-size: 16px;
+    text-decoration: line-through;
+}
+ .row-price .price-origin {
+    color: #555;
+    font-size: 16px;
+    text-decoration: line-through;
+}
+.row-price .price-sale {
+    color: #ac0000;
+    display: inline-block;
+    float: left;
+    font-size: 24px;
+    font-weight: bold;
+}
+.row-price .lbl-row.lbl-price-sale {
+    margin-top: 10px;
 }
