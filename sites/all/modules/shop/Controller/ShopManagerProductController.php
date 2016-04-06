@@ -115,6 +115,7 @@ class ShopManagerProductController{
 		}
 		
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
+			$id = FunctionLib::getParam('id', 0);
 			$data = array(
 					'category_id'=>array('value'=>FunctionLib::getIntParam('category_id',''), 'require'=>1, 'messages'=>'Chưa chọn danh mục sản phẩm'),
 					'product_name'=>array('value'=>FunctionLib::getParam('product_name',''), 'require'=>1, 'messages'=>'Tên sản phẩm không được trống!'),
