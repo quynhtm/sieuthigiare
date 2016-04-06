@@ -12,7 +12,7 @@
 						<div class="col-lg-3">
 							<div class="form-group">
 								<label class="control-label">Mã sản phẩm</label>
-								<div><input type="text" class="form-control input-sm" placeholder ="Mã sản phẩm" name="product_code" value="<?php echo $dataSearch['product_code'] ?>"/></div>
+								<div><input type="text" class="form-control input-sm" placeholder ="Mã sản phẩm" name="product_id" value="<?php echo $dataSearch['product_id'] ?>"/></div>
 							</div>
 							<div class="form-group">
 								<label class="control-label">Tên Sản phẩm</label>
@@ -88,13 +88,13 @@
 								<?php foreach($result as $k=>$v) {?>
 								<tr>
 									<td>
-										<?php if( isset($v->url_image) && isset($v->url_image_hover)) {?>
+										<?php if( isset($v->url_image)) {?>
 										<div style="position: relative;">
 											<div style="position: relative; z-index: 10">
-												<img src="<?php echo $v->url_image ?>" class='imge_hover' id='<?php echo $v->product_id ?>'/>
+												<img src="<?php echo $v->url_image; ?>" class='imge_hover' id='<?php echo $v->product_id ?>'/>
 											</div>
 											<div id='div_hover_<?php echo $v->product_id ?>'style="position: absolute; bottom: 30px; left: 40px; border: 2px solid #ccc; padding: 5px; background: #F4F9FF; z-index: 1000; display: none">
-												<img src="<?php echo $v->url_image ?>"/>
+												<img src="<?php echo $v->url_image; ?>" height="200" width="200"/>
 											</div>
 										</div>
 										<?php } else{?>
@@ -109,7 +109,7 @@
 										<?php 
 											$price_market = number_format($v->product_price_sell);
 											if($price_market == 0){
-												echo "Không có";
+												echo "Liên hệ với shop";
 											}else{
 												echo $price_market;
 											}
