@@ -18,11 +18,7 @@ define('SITE_VERSION',   '1.0');
 define("SITE_RECORD_PER_PAGE", '30');
 define('SITE_SCROLL_PAGE', '3');
 define('SITE_SAME_RECORD', '5');
-define("PATH_UPLOAD", DRUPAL_ROOT.'/uploads/images');
-define("PATH_IMAGE_UPLOAD", 'uploads/images');
-
-define("SITE_RECORD_PER_PAGE_NEWS", '15');
-define('SITE_SAME_RECORD_NEWS', '10');
+define("PATH_UPLOAD", DRUPAL_ROOT.'/uploads');
 define('base_url_lang', $base_url .'/'. ((!isset($language->language) || $language->language == 'und' || $language->language == 'vi') ? 'vi/' : $language->language.'/'));
 define('AJAX_DOMAIN', '/sieuthigiare.vn/');
 /**

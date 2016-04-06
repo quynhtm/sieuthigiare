@@ -18,9 +18,7 @@ if(isset($_POST)){
 }
 */
 class Upload{
-
-	public static $path_image_upload = 'uploads';
-
+	
 	public static function uploadFile($_name='', $_file_ext='', $_max_file_size='50*1024*1024', $_folder='', $type_json=1){
 		global $base_url;
 		
@@ -53,9 +51,9 @@ class Upload{
 			
 			if($file_name!='' && $ext==1 && $file_size <= $max_file_size){
 				if($_folder!=''){
-				 	$folder_upload = DRUPAL_ROOT.'/'.self::$path_image_upload.'/'.$_folder;
+				 	$folder_upload = PATH_UPLOAD.'/'.$_folder;
 				}else{
-				 	$folder_upload = DRUPAL_ROOT.'/'.self::$path_image_upload;
+				 	$folder_upload = PATH_UPLOAD;
 				}
 
 				if(!is_dir($folder_upload)){
@@ -114,7 +112,7 @@ class Upload{
 		$path_img = self::uploadFile($_name=$name_input_file, $_file_ext='jpg,jpeg,png,gif,swf', $_max_file_size=20*1024*1024, $name_folder,  $type_json=0);
 		if($path_img!=''){
 			if($current_path_img!=''){
-				$dir = DRUPAL_ROOT.'/'.self::$path_image_upload.'/'.$name_folder.'/'.$current_path_img;
+				$dir = PATH_UPLOAD.'/'.$name_folder.'/'.$current_path_img;
 				if(is_file($dir)){
 					unlink($dir);
 				}
@@ -128,7 +126,7 @@ class Upload{
 		$path_img = self::uploadFile($_name=$name_input_file, $_file_ext='xls,xlsx,doc,docx,pdf,rar,zip,tar', $_max_file_size=20*1024*1024, $name_folder,  $type_json=0);
 		if($path_img!=''){
 			if($current_path_img!=''){
-				$dir = DRUPAL_ROOT.'/'.self::$path_image_upload.'/'.$name_folder.'/'.$current_path_img;
+				$dir = PATH_UPLOAD.'/'.$name_folder.'/'.$current_path_img;
 				if(is_file($dir)){
 					unlink($dir);
 				}
