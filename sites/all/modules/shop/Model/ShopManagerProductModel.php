@@ -170,19 +170,20 @@ class ShopManagerProduct{
 
         if($id > 0){
             $fields = 'product_image_other';
-            $cond = 'id='.$id.' AND user_shop_id='.$user_shop->shop_id;
+            $cond = 'product_id='.$id.' AND user_shop_id='.$user_shop->shop_id;
             $arrItem = self::getItembyCond($fields, $cond);
          
             if(!empty($arrItem)){
                 if($arrItem->product_image_other != ''){
                     $product_image_other  = unserialize($arrItem->product_image_other);
                     if(!empty($product_image_other)){
-                        $path = DRUPAL_ROOT.'/uploads/product/'.$id;
+                        $path = PATH_UPLOAD.'/'.FOLDER_PRODUCT.'/'.$id;
                         foreach($product_image_other as $v){
                             if(is_file($path.'/'.$v)){
                                 @unlink($path.'/'.$v);
                             }
                         }
+                        FunctionLib::delteImageCacheItem(FOLDER_PRODUCT, $id);
                         if(is_dir($path)) {
                             @rmdir($path);
                         }

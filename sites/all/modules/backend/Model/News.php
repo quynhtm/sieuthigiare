@@ -118,12 +118,13 @@ class News{
 				if($arrItem[0]->news_image_other != ''){
 					$news_image_other  = unserialize($arrItem[0]->news_image_other);
 					if(!empty($news_image_other)){
-						$path = DRUPAL_ROOT.'/uploads/news/'.$id;
+						$path = PATH_UPLOAD.'/'.FOLDER_NEWS.'/'.$id;
 						foreach($news_image_other as $v){
 		                	if(is_file($path.'/'.$v)){
 		                    	@unlink($path.'/'.$v);
 		                	}
 		            	}
+		            	FunctionLib::delteImageCacheItem(FOLDER_NEWS, $id);
 			            if(is_dir($path)) {
 		                    @rmdir($path);
 		                }

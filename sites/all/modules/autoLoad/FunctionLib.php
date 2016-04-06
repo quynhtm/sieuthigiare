@@ -272,4 +272,26 @@ class FunctionLib{
 	static function getFolderByID($id = 0, $folder = FOLDER_DEFAULT) {
 		return  $folder . '/' . $id;
 	}
+
+	static function delteImageCacheItem($folder=FOLDER_DEFAULT, $id=0){
+		if($id>0){
+			$path = PATH_UPLOAD.'/'.$folder.'/'.$id.'/imagecache/';
+			if (is_dir($path)) {
+				if ($dh = opendir($path)) {
+					while (($file = readdir($dh)) !== false) {
+						if ($file != '.' && $file != '..') {
+							unlink(realpath($path . $file));
+						}
+					}
+					closedir($dh);
+				}
+				if(is_dir($path)) {
+	                @rmdir($path);
+	            }
+			}
+			
+		}
+	}
+
+
 }
