@@ -41,8 +41,8 @@ class ShopManagerProductController{
 
 		$limit = SITE_RECORD_PER_PAGE;
 		//search
-		$dataSearch['product_code'] = FunctionLib::getParam('product_code','');
-		$dataSearch['product_name'] = FunctionLib::getParam('product_name','');
+		$dataSearch['product_id'] = FunctionLib::getParam('product_id',0);
+		$dataSearch['product_name'] = trim(FunctionLib::getParam('product_name',''));
 		$dataSearch['category_id'] = FunctionLib::getParam('category_id','');
 		$dataSearch['product_status'] = FunctionLib::getParam('product_status', -1);
 		$dataSearch['date_start'] = FunctionLib::getParam('date_start', '');

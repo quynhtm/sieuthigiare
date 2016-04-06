@@ -66,7 +66,7 @@
 									<div class="control-group">
 						                <label class="control-label">Kiểu hiển thị giá</label>
 						                <div class="controls">
-						                    <select class="form-control input-sm" name="product_type_price">
+						                    <select class="form-control input-sm" name="product_type_price" id="product_type_price">
 						                    	<?php echo $optionTypePrice ?>
 						                    </select>
 						                </div>
