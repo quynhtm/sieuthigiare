@@ -72,7 +72,7 @@ class AjaxUpload{
                     $new_row['news_status'] = IMAGE_ERROR;
                 }elseif($field_img_other == 'product_image_other'){
                     $new_row['time_created'] = time();
-                    $new_row['status'] = IMAGE_ERROR;
+                    $new_row['product_status'] = IMAGE_ERROR;
                 }
                 $item_id = DB::insertOneItem($table_action, $new_row);
             }elseif($id_hiden > 0){

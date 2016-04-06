@@ -62,10 +62,17 @@ if (!isset($_GET['image']))
 	exit();
 }
 
+if (!isset($_GET['directory']))
+{
+	header('HTTP/1.1 400 Bad Request');
+	echo 'Error: no image was specified';
+	exit();
+}
+
 define('MEMORY_TO_ALLOCATE',	'100M');
 define('DEFAULT_QUALITY',		90);
 define('CURRENT_DIR',			dirname(__FILE__));
-define('CACHE_DIR_NAME',		'/imagecache/');
+define('CACHE_DIR_NAME',		'/uploads/'.$_GET['directory'].'/imagecache/');
 define('CACHE_DIR',				CURRENT_DIR . CACHE_DIR_NAME);
 define('DOCUMENT_ROOT',			$_SERVER['DOCUMENT_ROOT']);
 
