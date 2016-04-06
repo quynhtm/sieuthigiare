@@ -263,7 +263,7 @@ class FunctionLib{
 			$directory  = self::getFolderByID($id, $folder);
 			$string_crop = ($cropratio != '') ? '&cropratio='.$cropratio : '';
 			$paths_image = $base_url.'/uploads/'.$directory.'/'.$fname;
-			$url_image = $base_url."/image.php?width={$thum_w}&height={$thum_h}{$string_crop}&image=".$paths_image."&directory=".$directory;
+			$url_image = $base_url.'/image.php?type_dir='.$folder.'&id='.$id."&width={$thum_w}&height={$thum_h}{$string_crop}&image=".$paths_image;
 			return $url_image;
 		}
 		return false;

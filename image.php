@@ -55,24 +55,26 @@
 // CODE STARTS HERE
 /////////////////////
 
-if (!isset($_GET['image']))
-{
+if (!isset($_GET['image'])){
 	header('HTTP/1.1 400 Bad Request');
 	echo 'Error: no image was specified';
 	exit();
 }
-
-if (!isset($_GET['directory']))
-{
+if (!isset($_GET['type_dir'])){
 	header('HTTP/1.1 400 Bad Request');
-	echo 'Error: no image was specified';
+	echo 'Error: no directory was specified';
+	exit();
+}
+if (!isset($_GET['id'])){
+	header('HTTP/1.1 400 Bad Request');
+	echo 'Error: no directory was specified';
 	exit();
 }
 
 define('MEMORY_TO_ALLOCATE',	'100M');
 define('DEFAULT_QUALITY',		90);
 define('CURRENT_DIR',			dirname(__FILE__));
-define('CACHE_DIR_NAME',		'/uploads/'.$_GET['directory'].'/imagecache/');
+define('CACHE_DIR_NAME',		'/uploads/'.$_GET['type_dir'].'/'.$_GET['id'].'/imagecache/');
 define('CACHE_DIR',				CURRENT_DIR . CACHE_DIR_NAME);
 define('DOCUMENT_ROOT',			$_SERVER['DOCUMENT_ROOT']);
 
