@@ -3,7 +3,9 @@
 * QuynhTM
 */
 class ProductController{
-	private $arrProductStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
+	private $arrProductStatus = array(-1 => 'Tất cả', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
+	private $arrIsBlock = array(-1 => 'Tất cả', BLOCK_TRUE => 'Không khóa', BLOCK_FALSE => 'Đang khóa');
+	private $arrIsShop = array(-1 => 'Tất cả', SHOP_FREE => 'Shop Free', SHOP_NOMAL => 'Shop thường', SHOP_VIP => 'Shop VIP');
 	public function __construct(){
 		$files = array(
 			'bootstrap/lib/ckeditor/ckeditor.js',
@@ -36,12 +38,16 @@ class ProductController{
 		//search
 		$dataSearch['product_status'] = FunctionLib::getParam('product_status', -1);
 		$dataSearch['product_id'] = FunctionLib::getParam('product_id', -1);
-
-		$result = Product::getSearchListItems($dataSearch,$limit,array());
+		$arrField = array('product_id', 'product_name',
+			'product_price_sell', 'product_price_market', 'product_price_input','product_type_price',
+			'product_selloff', 'product_is_hot','product_image', 'product_image_hover','product_image_other',
+			'category_id', 'category_name',	'product_status', 'is_block','user_shop_id', 'user_shop_name','is_shop', 'shop_province','time_created', 'time_update');
+		$result = Product::getSearchListItems($dataSearch,$limit,$arrField);
 		if(isset($result['data']) && !empty($result['data'])){
 			foreach($result['data'] as $k => &$value){
 				if( isset($value->product_image) && trim($value->product_image) != ''){
-					$value->url_image = FunctionLib::getThumbImage($value->product_image,$value->product_id,FOLDER_PRODUCT,60,60);
+					$value->url_image = FunctionLib::getThumbImage($value->product_image,$value->product_id,FOLDER_PRODUCT,80,80);
+					$value->url_image_hover = FunctionLib::getThumbImage($value->product_image,$value->product_id,FOLDER_PRODUCT,450,200);
 				}
 			}
 		}
@@ -56,6 +62,8 @@ class ProductController{
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,
 									'arrProductStatus' => $this->arrProductStatus,
+									'arrIsShop' => $this->arrIsShop,
+									'arrIsBlock' => $this->arrIsBlock,
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));
