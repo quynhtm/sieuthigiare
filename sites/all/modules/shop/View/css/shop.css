@@ -604,3 +604,14 @@ a.btn-yahoo:hover{
     width: auto!important;
     cursor: pointer;
 }
+.bottom-content-view{
+    clear: both;
+    display: inline-block;
+    margin-top: 20px;
+    width: 100%;
+}
+.bottom-content-view .tab li {
+    display: inline-block;
+    font-weight: bold;
+    padding: 5px 20px;
+}
