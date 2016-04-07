@@ -43,23 +43,165 @@
 									- Dáng Regular<br>
 									- Không co giãn<br>
 								</div>
+								<div class="box-promotion">
+									<div class="lbl-point">Thông tin khuyến mãi</div>
+									<div class="-box-content-promotion">
+										Tặng thắt lưng da khi có thẻ thành viên đến ngày 8/4
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="right-des-product">
-							<div class="order-number">
-								<label for="buy-number">Số lượng</label>
-								<select class="sl-number" id="buy-number" name="">
-	                                <option value="1">1</option>
-	                            </select>
+							<div class="content-right-product">
+								<div class="order-number">
+									<label for="buy-number">Số lượng</label>
+									<select class="sl-number" id="buy-number" name="">
+		                                <option value="1">1</option>
+		                            </select>
+								</div>
+								<div class="buynow">Mua ngay</div>
 							</div>
-							<div class="buynow">Mua ngay</div>
+							<div class="content-right-product">
+								<div class="order-number-phone">
+									<p>Quý khách muốn đặt qua điện thoại</p>
+									<div class="number-phone">
+										<div class="icon-phone"></div>
+										0913.922.986
+									</div>
+									<a href="#" title>Shop Teen</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="center-content-view">
+						<div class="title-center-content-view">Sản phẩm bán bởi "<a href="" title>Siêu thị giá rẻ</a>" </div>
+						<div class="content-center-content-view">
+							<div class="jcarousel-wrapper">
+								<div class="jcarousel">
+									<ul>
+										<li>
+											<a class="img-thumb" href="" title="">
+												<img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/p1.jpg" alt="">
+											</a>
+											<a class="item-name" href="" title="">Điện thoại iPhone 6S Plus Rose Gold 16GB</a>
+											<div class="item-price">
+												<p class="price-sale">
+													20.790.000 <span>đ</span>
+													<i>(21.790.000đ)</i>
+												</p>
+											</div>
+										</li>
+										<li>
+											<a class="img-thumb" href="" title="">
+												<img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/p1.jpg" alt="">
+											</a>
+											<a class="item-name" href="" title="">Điện thoại iPhone 6S Plus Rose Gold 16GB</a>
+											<div class="item-price">
+												<p class="price-sale">
+													20.790.000 <span>đ</span>
+													<i>(21.790.000đ)</i>
+												</p>
+											</div>
+										</li>
+										<li>
+											<a class="img-thumb" href="" title="">
+												<img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/p1.jpg" alt="">
+											</a>
+											<a class="item-name" href="" title="">Điện thoại iPhone 6S Plus Rose Gold 16GB</a>
+											<div class="item-price">
+												<p class="price-sale">
+													20.790.000 <span>đ</span>
+													<i>(21.790.000đ)</i>
+												</p>
+											</div>
+										</li>
+										<li>
+											<a class="img-thumb" href="" title="">
+												<img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/p1.jpg" alt="">
+											</a>
+											<a class="item-name" href="" title="">Điện thoại iPhone 6S Plus Rose Gold 16GB</a>
+											<div class="item-price">
+												<p class="price-sale">
+													20.790.000 <span>đ</span>
+													<i>(21.790.000đ)</i>
+												</p>
+											</div>
+										</li>
+										<li>
+											<a class="img-thumb" href="" title="">
+												<img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/p1.jpg" alt="">
+											</a>
+											<a class="item-name" href="" title="">Điện thoại iPhone 6S Plus Rose Gold 16GB</a>
+											<div class="item-price">
+												<p class="price-sale">
+													20.790.000 <span>đ</span>
+													<i>(21.790.000đ)</i>
+												</p>
+											</div>
+										</li>
+										<li>
+											<a class="img-thumb" href="" title="">
+												<img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/p1.jpg" alt="">
+											</a>
+											<a class="item-name" href="" title="">Điện thoại iPhone 6S Plus Rose Gold 16GB</a>
+											<div class="item-price">
+												<p class="price-sale">
+													20.790.000 <span>đ</span>
+													<i>(21.790.000đ)</i>
+												</p>
+											</div>
+										</li>
+									</ul>
+								</div>
+								<a href="#" class="jcarousel-control-prev">&lsaquo;</a> 
+								<a href="#" class="jcarousel-control-next">&rsaquo;</a>
+							</div>
 						</div>
 					</div>
 					<div class="bottom-content-view">
-						<ul class="tab">
-							<li>Chi tiết sản phẩm</li>
-							<li>Nhận xét</li>
-						</ul>
+						<div class="left-bottom-content-view">
+							<ul class="tab">
+								<li class="act" data-tab="1">Chi tiết sản phẩm</li>
+								<li data-tab="2">Chính sách giao nhận</li>
+								<li data-tab="3">Nhận xét</li>
+							</ul>
+							<div class="content-bottom-content-view">
+								<div class="act show-tab show-tab-1">Testing1...</div>
+								<div class="show-tab show-tab-2">Testing2...</div>
+								<div class="show-tab show-tab-3">Testing3...</div>
+							</div>
+						</div>
+						<div class="right-bottom-content-view">
+							<div class="title-hot"><span>Sản phẩm nổi bật</span></div>
+							<div class="content-right-bottom-content-view">
+								<ul>
+									<li>
+										<a class="i-thumb" href="" title="">
+											<img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/p1.jpg" alt="">
+										</a>
+										<a class="item-name" href="" title="">Điện thoại iPhone 6S Plus Rose Gold 16GB</a>
+										<div class="item-price">
+											<p class="price-sale">
+												20.790.000 <span>đ</span>
+												<i>(21.790.000đ)</i>
+											</p>
+										</div>
+									</li>
+									<li>
+										<a class="i-thumb" href="" title="">
+											<img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/p1.jpg" alt="">
+										</a>
+										<a class="item-name" href="" title="">Điện thoại iPhone 6S Plus Rose Gold 16GB</a>
+										<div class="item-price">
+											<p class="price-sale">
+												20.790.000 <span>đ</span>
+												<i>(21.790.000đ)</i>
+											</p>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

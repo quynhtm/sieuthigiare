@@ -4,6 +4,8 @@ jQuery(document).ready(function($){
 	check_valid_form.change_pass();
 	check_valid_form.change_info();
 	check_valid_form.post_product();
+
+	TAB_SELECT.detail_tab();
 });
 check_valid_form = {
 	check_login:function(){
@@ -296,6 +298,18 @@ check_valid_form = {
 					}
 				}
 			}
+		});
+	}
+}
+
+TAB_SELECT= {
+	detail_tab:function(){
+		jQuery(".left-bottom-content-view .tab li").click(function(){
+			jQuery(".left-bottom-content-view .tab li").removeClass("act");
+			jQuery(this).addClass('act');
+			var datatab = jQuery(this).attr('data-tab');
+			jQuery('.left-bottom-content-view .show-tab').removeClass('act');
+			jQuery('.left-bottom-content-view .show-tab-'+datatab).addClass('act');
 		});
 	}
 }
