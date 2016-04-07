@@ -901,6 +901,9 @@ fix kich thuong icon trong admin*/
 .green{color: green}
 .red{color: red}
 
+.font_9{font-size: 9px}
+.price_sell{color: red; font-weight:bold }
+
 .menu_tools{float: right;  margin-right: 4px;}
 form#formListItem {
     display: inline-block;

@@ -360,6 +360,9 @@ var Common_admin = {
             }
         });
     },
+    showImagesProduct: function(product_id) {
+        jQuery('#sys_PopupShowImagesProductId_'+product_id).modal('show');
+    }
 };//class
 
 CHECKALL_ITEM = {

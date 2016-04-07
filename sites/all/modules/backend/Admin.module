@@ -76,6 +76,13 @@ function Admin_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
+    $items["admincp/product"] = array(
+		"title" => t('Quan ly San pham'),
+		"description" => "product",
+		'page callback' => 'router_page',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
 	
   return $items;
 }
@@ -172,6 +179,9 @@ function Admin_theme() {
         //tin tuc
         'indexNews' 		=> array('template' => 'View/tpl/news/indexNews'),
         'addNews' 			=> array('template' => 'View/tpl/news/addNews'),
+        //S?n ph?m
+        'indexProduct' 		=> array('template' => 'View/tpl/product/indexProduct'),
+        'addProduct' 			=> array('template' => 'View/tpl/product/addProduct'),
  		//here
     );
 }
@@ -210,6 +220,9 @@ function Admin_init(){
 
         'Model/News.php',
 		'Controller/NewsController.php',
+
+        'Model/Product.php',
+		'Controller/ProductController.php',
 	);
 	Loader::load('Admin', $files);
 }
