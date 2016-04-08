@@ -8,23 +8,40 @@
 						<div class="pay">
 							<div class="col-lg-6">
 								<div class="content-post-cart">
-									<div class="title-pay-cart">Tóm tắt đơn hàng</div>
-									<ul class="list-pay">
-							            <li>
-							                <a class="img" href="">
-							                    <img height="60" width="60" alt="Áo Sơ Mi Nam Công Sở Fonto Menswear : SR045" src="<?php echo $base_url.'/'.path_to_theme() ?>/View/img/s1.jpg">
-							                </a>
-							                <span class="title">Áo Sơ Mi Nam Công Sở Fonto Menswear : SR048</span>
-							                <span class="price">350.000đ x 1</span>
-							            </li>
-							            <li>
-							                <a class="img" href="">
-							                    <img height="60" width="60" alt="Áo Sơ Mi Nam Công Sở Fonto Menswear : SR045" src="<?php echo $base_url.'/'.path_to_theme() ?>/View/img/s2.jpg">
-							                </a>
-							                <span class="title">Áo Sơ Mi Nam Công Sở Fonto Menswear : SR045</span>
-							                <span class="price">350.000đ x 1</span>
-							            </li>
-							    	</ul>
+									<div class="title-pay-cart">Chi tiết đơn hàng</div>
+									<table class="list-pay">
+							            
+							            <tr>
+							                <td width="10%">
+								                <a class="img" href="">
+								                    <img height="60" width="60" alt="Áo Sơ Mi Nam Công Sở Fonto Menswear : SR045" src="<?php echo $base_url.'/'.path_to_theme() ?>/View/img/s1.jpg">
+								                </a>
+							            	</td>
+							                <td>
+							                	<span class="title">Áo Sơ Mi Nam Công Sở Fonto Menswear : SR048</span>
+							                </td>
+							                <td width="20%">
+							                	<span class="price">350.000đ x 1</span>
+							                </td>
+							            </tr>
+							             <tr>
+							               	<td width="10%">
+								                <a class="img" href="">
+								                    <img height="60" width="60" alt="Áo Sơ Mi Nam Công Sở Fonto Menswear : SR045" src="<?php echo $base_url.'/'.path_to_theme() ?>/View/img/s2.jpg">
+								                </a>
+							            	</td>
+							                <td>
+							                	<span class="title">Áo Sơ Mi Nam Công Sở Fonto Menswear : SR048</span>
+							                </td>
+							                <td width="20%">
+							                	<span class="price">350.000đ x 1</span>
+							                </td>
+							            </tr>
+							            <tr class="last">
+							                <td colspan="2"><div class="total-price-cart">Tổng</div></td>
+							                <td width="20%"><span class="price">700.000đ</span></td>
+							            </tr>
+							    	</table>
 							    </div>
 							</div>
 

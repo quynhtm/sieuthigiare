@@ -898,39 +898,36 @@ form#txtFormPaymentCart {
     color: #ff0000;
 }
 
-ul.list-pay {
+table.list-pay {
     color: #414141;
     list-style: outside none none;
-    padding: 0px 10px 5px;
-    margin-top: 20px;
+    margin: 20px 5px 5px 5px;
+    width: 98%;
 }
-ul.list-pay li {
+table tbody{
+    border-top: none;
+}
+table.list-pay tr{
     border-bottom: 1px solid #f2f2f2;
-    margin: 10px 0;
-    overflow: hidden;
-    padding-bottom: 10px;
-    position: relative;
-    vertical-align: top;
-    width: 100%;
-}
-ul.list-pay a.img {
-    float: left;
-    margin-right: 13px;
-    top: 34px;
-}
-ul.list-pay a.img img{
-    width: 100%;
-}
-
-ul.list-pay span.title {
-    font-size: 13px;
-    line-height: 16px;
-}
-ul.list-pay span.price {
-    bottom: 2px;
-    color: #000;
     font-size: 14px;
+}
+table.list-pay tr.last{
+    border-bottom: none;
+    font-size: 20px;
     font-weight: bold;
-    position: absolute;
-    right: 0;
+    font-style: italic;
+}
+table.list-pay td {
+    color: #333;
+    padding: 5px;
+    vertical-align: top;
+    position: relative;
+}
+table.list-pay a.img img{
+    width: 100%;
+    border: 1px solid #f2f2f2;
+}
+table.list-pay span.price {
+    font-weight: bold;
+    text-align: left;
 }
