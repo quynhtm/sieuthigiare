@@ -111,6 +111,23 @@ function Shop_menu() {
 		'type' => MENU_CALLBACK,
 	);
 
+	$items["gio-hang.html"] = array(
+		"title" => t('Giỏ hàng'),
+		"description" => "Giỏ hàng",
+		'page callback' => 'menuLoad',
+		'page arguments' => array('ShopCartController/shopCart'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+	$items["gui-don-hang.html"] = array(
+		"title" => t('Gửi đơn hàng'),
+		"description" => "Gửi đơn hàng",
+		'page callback' => 'menuLoad',
+		'page arguments' => array('ShopCartController/shopSendCart'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
   return $items;
 }
 
@@ -128,6 +145,7 @@ function Shop_theme() {
 	    'shopEditPassword' => array(
 	      'template' => 'View/tpl/shopEditPassword'
 	    ),
+	    
 	    'shopManagerProduct' => array(
 	      'template' => 'View/tpl/shopManagerProduct'
 	    ),
@@ -140,7 +158,13 @@ function Shop_theme() {
 	    'shopDetailProduct' => array(
 	      'template' => 'View/tpl/shopDetailProduct'
 	    ),
-	    
+
+	    'shopCart' => array(
+	      'template' => 'View/tpl/shopCart'
+	    ),
+	    'shopSendCart' => array(
+	      'template' => 'View/tpl/shopSendCart'
+	    ),  
 	);
 }
 
@@ -156,7 +180,9 @@ function Shop_init() {
 			
 			'Model/ShopShowProductModel.php',
 			'Controller/ShopShowProductController.php',
-
+			
+			'Controller/ShopCartController.php',
+			
 			'View/css/shop.css',
 			'View/js/shop.js',
 		);

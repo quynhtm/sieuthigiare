@@ -51,7 +51,7 @@
 						<span class="time-work">(Thời gian làm việc: 8:00 - 17:30 các ngày trong tuần)</span>
 					</div>
 		    	</div>
-				<a href="<?php echo $base_url ?>/shop-cart" title="Giỏ hàng">
+				<a href="<?php echo $base_url ?>/gio-hang.html" title="Giỏ hàng">
 				<div class="box-shop-cart">
 					<span class="icon-shop"></span>
 					<span class="num-in-cart">Giỏ hàng</span>

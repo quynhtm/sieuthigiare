@@ -1225,39 +1225,6 @@ form.frmOrder {
     width: 100%;
     font-size: 15px;
 }
-.list-shop-cart-item .first th{
-    background: #f2f2f2;
-    border: 1px solid #ddd;
-    padding: 5px;
-}
-.list-shop-cart-item tr td{
-    border: 1px solid #ddd;
-    padding: 5px;
-}
-.list-shop-cart-item tr.even td{
-    background: #f2f2f2;
-}
-
-.list-shop-cart-item  tr.odd td{
-    background: #fff;
-}
-.list-shop-cart-item  tr td .num-item-in-one-product{
-    border: 1px solid #ddd;
-    padding: 5px;
-    width: 70px;
-}
-.not-product-in-cat {
-    color: #ff0000;
-    font-style: italic;
-}
-form#txtFormPaymentCart {
-    margin: 0 auto;
-    margin-top: 10px;
-    width: 50%;
-}
-.form-group label span{
-    color: #ff0000;
-}
 #typeProduct li a.act{
     color: #222!important;
 }
@@ -1607,9 +1574,6 @@ form#txtFormPaymentCart {
 }
 .box-shop-cart:hover {
     border: 2px solid #ddd;
-}
-.grid-shop-cart * {
-    font-size: 15px;
 }
 .thread-details-content-view table tbody {
     border-top: medium none;
