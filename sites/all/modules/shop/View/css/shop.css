@@ -894,10 +894,13 @@ form#txtFormPaymentCart {
     margin-top: 20px;
     padding: 0 10px 5px;
 }
-.form-group label span{
+form#txtFormPaymentCart .form-group label span{
     color: #ff0000;
 }
-
+form#txtFormPaymentCart .form-group label {
+    color: #333;
+    font-size: 14px;
+}
 table.list-pay {
     color: #414141;
     list-style: outside none none;
