@@ -49,6 +49,7 @@ class Session{
 	}
 
 	public static function destroySessionUserShop(){
-	  	session_destroy();
+	  	global $user_shop;
+	  	unset($_SESSION['user_shop']);
 	}
 }
