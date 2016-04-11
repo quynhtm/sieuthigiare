@@ -373,7 +373,7 @@ a.btn-yahoo:hover{
 }
 .body-list-item .item {
     padding-top: 8px;
-    height: 428px;
+    height: 405px;
     display: inline-block;
 }
 .body-list-item  .post-thumb {
@@ -464,10 +464,11 @@ a.btn-yahoo:hover{
     height: 12px;
 }
 .item-banner{
-    background: url("../img/bg-cart.jpg") no-repeat 0 0;
+    color: #555;
     display: none;
-    height: 44px;
+    height: 35px;
     margin-top: 8px;
+    overflow: hidden;
 }
 .body-list-item .item:hover .item-banner{
     display: block;

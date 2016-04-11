@@ -5,7 +5,8 @@ jQuery(document).ready(function($){
 	check_valid_form.change_info();
 	check_valid_form.post_product();
 
-	TAB_SELECT.detail_tab();
+	tab_select.detail_tab();
+	hover_img.change_img();
 });
 check_valid_form = {
 	check_login:function(){
@@ -302,7 +303,7 @@ check_valid_form = {
 	}
 }
 
-TAB_SELECT= {
+tab_select= {
 	detail_tab:function(){
 		jQuery(".left-bottom-content-view .tab li").click(function(){
 			jQuery(".left-bottom-content-view .tab li").removeClass("act");
@@ -310,6 +311,17 @@ TAB_SELECT= {
 			var datatab = jQuery(this).attr('data-tab');
 			jQuery('.left-bottom-content-view .show-tab').removeClass('act');
 			jQuery('.left-bottom-content-view .show-tab-'+datatab).addClass('act');
+		});
+	}
+}
+
+hover_img = {
+	change_img:function(){
+		jQuery(".body-list-item .item").hover(function(){
+			var img = jQuery(this).find('.post-thumb img').attr('src');
+			var img_hover = jQuery(this).find('.post-thumb img').attr('data-other-src');
+			jQuery(this).find('.post-thumb img').attr('src', img_hover);
+			jQuery(this).find('.post-thumb img').attr('data-other-src', img);
 		});
 	}
 }

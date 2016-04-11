@@ -16,25 +16,34 @@ class ShopShowProductController{
 
 	public function shopshowProduct(){
 		
-		
 		$limit = SITE_RECORD_PER_PAGE;
 		
 		$dataSearch['product_status'] = trim(FunctionLib::getParam('product_status','1'));
 		$dataSearch['category_id'] = FunctionLib::getParam('category_id','');
 
-		$arrFields = array('product_id', 'category_name','product_name', 'product_price_sell', 'product_price_market', 'product_image', 'product_image_hover', 'product_type_price');
+		$arrFields = array('product_id', 'category_name','product_name', 'product_price_sell', 'product_price_market', 'product_image', 'product_image_hover', 'product_type_price', 'product_selloff', 'user_shop_id');
 		$result = ShopShowProductModel::getSearchListItems($dataSearch, $limit, $arrFields);
-		
-		// if(isset($result['data']) && !empty($result['data'])){
-		// 	foreach($result['data'] as $k => &$value){
-		// 		if( isset($value->product_image) && trim($value->product_image) != ''){
-		// 			$value->url_image = FunctionLib::getThumbImage($value->product_image,$value->product_id,FOLDER_PRODUCT,300,300);
-				
-		// 	}
-		// }
+		$phone = '';
+
+		if(isset($result['data']) && !empty($result['data'])){
+			foreach($result['data'] as $k => &$value){
+				if( isset($value->product_image) && trim($value->product_image) != ''){
+					$value->url_image = $value->url_image_hover = FunctionLib::getThumbImage($value->product_image,$value->product_id,FOLDER_PRODUCT,300,300);
+					if($value->product_image_hover != ''){
+						$value->url_image_hover = FunctionLib::getThumbImage($value->product_image_hover,$value->product_id,FOLDER_PRODUCT,300,300);
+					}
+				}
+			}
+			
+			if($result['data'][0]->user_shop_id > 0){
+				$user_shop = DataCommon::getShopById($result['data'][0]->user_shop_id);
+				$phone = $user_shop[$result['data'][0]->user_shop_id]->shop_phone;
+			}
+		}
 		
 		return theme('shopShowProduct', array(
-											'result'=>$result['data']
+											'result'=>$result['data'],
+											'phone'=>$phone,
 											));
 	}
 	public function shopDetailProduct(){

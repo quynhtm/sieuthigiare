@@ -29,14 +29,14 @@
 							<div class="col-lg-3 col-xs-3 ">
 								<div class="item">
 									<div class="post-thumb">
-										<a href="" title=""><img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/1.jpg" alt="Cốc tự nguấy Self Stirring MUG 2015 (Đen)"></a>
+										<a href="" title=""><img src="<?php echo $v->url_image ?>" alt="<?php echo $v->product_name?>" alt="<?php echo $v->product_name?>" data-other-src="<?php echo $v->url_image_hover?>"></a>
 									</div>
 									<div class="item-content">
 										<div class="title-info">
 											<h4 class="post-title"><a title="<?php echo $v->product_name?>" href=""><?php echo $v->product_name?></a></h4>
 											<div class="item-price">
 	                                    		<?php if($v->product_type_price == 2){?>
-	                                    			<span class="amount-call">Liên hệ: <i class="num-call">0913.922.986</i></span>
+	                                    			<span class="amount-call">Liên hệ: <i class="num-call"><?php echo $phone ?></i></span>
 	                                    		<?php }else{?>
 		                                    		<?php if($v->product_price_sell > 0 && $v->product_price_market > 0){?>
 		                                    		<span class="amount-1"><?php echo $v->product_price_sell?>đ</span>
@@ -55,7 +55,7 @@
 				                                <div class="rating" style="width:0%" id="rate-1"></div>
 				                            </div>
 				                        </div>
-				                        <div class="item-banner"></div>
+				                        <div class="item-banner"><?php echo $v->product_selloff ?></div>
 									</div>
 								</div>
 							</div>
