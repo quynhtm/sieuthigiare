@@ -26,14 +26,18 @@ class ContactController{
 		global $base_url;
 		$limit = SITE_RECORD_PER_PAGE;
 		//search
-		$dataSearch['province_name'] = FunctionLib::getParam('province_name','');
-		$dataSearch['province_status'] = FunctionLib::getParam('province_status', -1);
+		$dataSearch['contact_title'] = FunctionLib::getParam('contact_title','');
+		$dataSearch['contact_user_name_send'] = FunctionLib::getParam('contact_user_name_send','');
+		$dataSearch['contact_email_send'] = FunctionLib::getParam('contact_email_send','');
+		$dataSearch['contact_phone_send'] = FunctionLib::getParam('contact_phone_send','');
+		$dataSearch['contact_reason'] = FunctionLib::getParam('contact_reason', -1);
+		$dataSearch['contact_status'] = FunctionLib::getParam('contact_status', -1);
 
 		$getFields = array();
 		$result = Contact::getSearchListItems($dataSearch,$limit,$getFields);
 
 		//build option
-		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['province_status']);
+		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['contact_status']);
 
 		return $view = theme('indexContact',array(
 									'title'=>'Danh sách liên hệ',
