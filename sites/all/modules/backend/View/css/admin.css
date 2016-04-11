@@ -917,6 +917,8 @@ form#formListItem {
 .padding10{padding: 10px}
 .padding20{padding: 20px}
 
+.paddingTop10{padding-top: 10px}
+.paddingTop20{padding-top: 20px}
 .paddingTop30{padding-top: 30px}
 #sys_drag_sort {
     display: inline-block;

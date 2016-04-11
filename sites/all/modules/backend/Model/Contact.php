@@ -25,15 +25,38 @@ class Contact{
             $arrCond = array();
 			if(!empty($dataSearch)){
 				foreach($dataSearch as $field =>$value){
-					if($field === 'contact_type' && $value != -1){
+					if($field === 'contact_reason' && $value != -1){
 						$sql->condition('i.'.$field, $value, '=');
 						array_push($arrCond, $field.' = '.$value);
 					}
+
 					if($field === 'contact_status' && $value != -1){
 						$sql->condition('i.'.$field, $value, '=');
 						array_push($arrCond, $field.' = '.$value);
 					}
+
 					if($field === 'contact_title' && $value != ''){
+						$db_or = db_or();
+						$db_or->condition('i.'.$field, '%'.$value.'%', 'LIKE');
+						$sql->condition($db_or);
+						array_push($arrCond, "(".$field." LIKE '%". $value ."%')");
+					}
+
+					if($field === 'contact_user_name_send' && $value != ''){
+						$db_or = db_or();
+						$db_or->condition('i.'.$field, '%'.$value.'%', 'LIKE');
+						$sql->condition($db_or);
+						array_push($arrCond, "(".$field." LIKE '%". $value ."%')");
+					}
+
+					if($field === 'contact_email_send' && $value != ''){
+						$db_or = db_or();
+						$db_or->condition('i.'.$field, '%'.$value.'%', 'LIKE');
+						$sql->condition($db_or);
+						array_push($arrCond, "(".$field." LIKE '%". $value ."%')");
+					}
+
+					if($field === 'contact_phone_send' && $value != ''){
 						$db_or = db_or();
 						$db_or->condition('i.'.$field, '%'.$value.'%', 'LIKE');
 						$sql->condition($db_or);

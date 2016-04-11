@@ -46,6 +46,12 @@ define('FOLDER_NEWS', 'news');
 define('STASTUS_HIDE', 0);
 define('STASTUS_SHOW', 1);
 
+define('CONTACT_NEW', 1);
+define('CONTACT_OK', 2);
+define('CONTACT_SUCCESS', 3);
+define('CONTACT_REASON_CUSTOMER', 1);
+define('CONTACT_REASON_SHOP', 2);
+
 define('BLOCK_FALSE', 0);
 define('BLOCK_TRUE', 1);
 
