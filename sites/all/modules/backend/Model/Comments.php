@@ -24,15 +24,29 @@ class Comments{
             $arrCond = array();
 			if(!empty($dataSearch)){
 				foreach($dataSearch as $field =>$value){
-					if($field === 'contact_type' && $value != -1){
+					if($field === 'comment_product_id' && $value != -1){
 						$sql->condition('i.'.$field, $value, '=');
 						array_push($arrCond, $field.' = '.$value);
 					}
-					if($field === 'contact_status' && $value != -1){
+					if($field === 'comment_shop_id' && $value != -1){
 						$sql->condition('i.'.$field, $value, '=');
 						array_push($arrCond, $field.' = '.$value);
 					}
-					if($field === 'contact_title' && $value != ''){
+					if($field === 'comment_status' && $value != -1){
+						$sql->condition('i.'.$field, $value, '=');
+						array_push($arrCond, $field.' = '.$value);
+					}
+					if($field === 'comment_is_reply' && $value != -1){
+						$sql->condition('i.'.$field, $value, '=');
+						array_push($arrCond, $field.' = '.$value);
+					}
+					if($field === 'comment_product_name' && $value != ''){
+						$db_or = db_or();
+						$db_or->condition('i.'.$field, '%'.$value.'%', 'LIKE');
+						$sql->condition($db_or);
+						array_push($arrCond, "(".$field." LIKE '%". $value ."%')");
+					}
+					if($field === 'comment_shop_name' && $value != ''){
 						$db_or = db_or();
 						$db_or->condition('i.'.$field, '%'.$value.'%', 'LIKE');
 						$sql->condition($db_or);

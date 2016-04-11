@@ -3,15 +3,14 @@
 * QuynhTM
 */
 class CommentsController{
-	private $arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
+	private $arrStatus = array(-1 => 'Tất cả', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
+	private $arrReply = array(-1 => 'Tất cả', COMMENT_OK_REPLY => 'Đã trả lời', COMMENT_NOT_REPLY => 'Chưa trả lời');
 	public function __construct(){
-		
 			$files = array(
 				'bootstrap/lib/ckeditor/ckeditor.js',
 				'bootstrap/lib/ckeditor/config.js',
 		    );
 		    Loader::loadJSExt('Core', $files);
-
 	        $files = array(
 	            'bootstrap/css/bootstrap.css',
 	            'css/font-awesome.css',
@@ -20,10 +19,8 @@ class CommentsController{
 	            'bootstrap/js/bootstrap.min.js',
 	            'bootstrap/lib/upload/jquery.uploadfile.js',
 	            'js/common_admin.js',
-
 	        );
 	        Loader::load('Core', $files);
-
 	        $files = array(
 	        	'View/css/admin.css',
 	            'View/js/admin.js',
@@ -43,12 +40,14 @@ class CommentsController{
 
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['province_status']);
+		$optionReply = FunctionLib::getOption($this->arrReply, $dataSearch['province_status']);
 
 		return $view = theme('indexComments',array(
 									'title'=>'Danh sách liên hệ',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,
+									'optionReply' => $optionReply,
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));
