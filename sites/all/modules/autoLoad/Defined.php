@@ -26,13 +26,16 @@ define('AJAX_DOMAIN', '/sieuthigiare.vn/');
  * Dinh nghia cac Table cho website
  */
 define('TABLE_SUPPORT_ONLINE', 'web_support_online');
-define('TABLE_CONFIG_INFO', 'web_config_info');
-define('TABLE_PRODUCT', 'web_product');
-define('TABLE_USER_SHOP', 'web_user_shop');
-define('TABLE_SUPPLIER', 'web_supplier');
-define('TABLE_PROVINCE', 'web_province');
-define('TABLE_CATEGORY', 'web_category');
-define('TABLE_NEWS', 'web_news');
+define('TABLE_CONFIG_INFO',    'web_config_info');
+define('TABLE_PRODUCT',        'web_product');
+define('TABLE_USER_SHOP',      'web_user_shop');
+define('TABLE_SUPPLIER',       'web_supplier');
+define('TABLE_PROVINCE',       'web_province');
+define('TABLE_CATEGORY',       'web_category');
+define('TABLE_NEWS',           'web_news');
+define('TABLE_CONTACT',        'web_contact');
+define('TABLE_COMMENT',        'web_comment');
+define('TABLE_ORDER',          'web_order');
 
 //dinh nghia thu muc chua anh
 define('FOLDER_DEFAULT', 'img_other');
