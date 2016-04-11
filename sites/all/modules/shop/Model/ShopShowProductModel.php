@@ -11,8 +11,11 @@ class ShopShowProductModel{
     static $foreign_key_user_shop = 'user_shop_id';
     
 	public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
-        global $user_shop;
-
+        $param = arg();
+        $shop_id = 0;
+        if(isset($param[1]) && $param[1] >0){
+            $shop_id = intval($param[1]);
+        }
         if(empty($arrFields))
             $arrFields = self::$arrFields;
         
@@ -21,7 +24,7 @@ class ShopShowProductModel{
             foreach($arrFields as $field){
                 $sql->addField('i', $field, $field);
             }
-            $sql->condition('i.'.self::$foreign_key_user_shop, $user_shop->shop_id, '=');
+            $sql->condition('i.'.self::$foreign_key_user_shop, $shop_id, '=');
             /*Begin search*/
             if(!empty($dataSearch)){
                 foreach($dataSearch as $field =>$value){
