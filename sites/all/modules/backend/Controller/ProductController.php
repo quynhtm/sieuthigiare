@@ -52,11 +52,6 @@ class ProductController{
 			}
 		}
 
-		//test cache
-		$product_id = 28;
-		$product = DataCommon::getProductById($product_id);
-		FunctionLib::Debug($product);
-
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrProductStatus, $dataSearch['product_status']);
 

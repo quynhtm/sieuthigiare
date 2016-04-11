@@ -14,16 +14,16 @@ class Cache {
 
     const CACHE_USER_SHOP_ID = 'cache_shop_id_';
 
-	public static function do_put( $key, $value, $time = 0 ){
+	public function do_put( $key, $value, $time = 0 ){
         //if $time = 0: mac dinh la 5nam (^_^)
         $cache = phpFastCache();
         return $cache->set($key,$value,$time);
     }
-    public static function do_get( $key ){
+    public function do_get( $key ){
         $cache = phpFastCache();
         return $cache->get($key);
     }
-    public static function do_remove( $key ){
+    public function do_remove( $key ){
         $cache = phpFastCache();
         return $cache->delete($key);
     }
