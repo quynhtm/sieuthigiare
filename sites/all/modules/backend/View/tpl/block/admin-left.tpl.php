@@ -29,7 +29,7 @@
             <ul class="sub">
                 <li <?php if($param[1]=='product'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/product"><i class="icon-minus"></i> Sản phẩm</a></li>
                 <li <?php if($param[1]=='category'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/category"><i class="icon-minus"></i> Danh mục sản phẩm</a></li>
-                <li <?php if($param[1]=='comment'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/comment"><i class="icon-minus"></i> QL Bình luận</a></li>
+                <li <?php if($param[1]=='comments'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/comments"><i class="icon-minus"></i> QL Bình luận</a></li>
             </ul>
         </li>
 

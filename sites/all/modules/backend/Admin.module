@@ -90,14 +90,14 @@ function Admin_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
-    $items["admincp/comment"] = array(
-		"title" => t('Quan ly Binh luan'),
-		"description" => "comment",
-		'page callback' => 'router_page',
-		'access callback' => TRUE,
-		'type' => MENU_CALLBACK,
-	);
-	
+
+     $items["admincp/comments"] = array(
+        "title" => t('Quan ly Binh luan'),
+        "description" => "comments",
+        'page callback' => 'router_page',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
   return $items;
 }
 
@@ -198,11 +198,11 @@ function Admin_theme() {
         'addProduct' 			=> array('template' => 'View/tpl/product/addProduct'),
         //lien he
         'indexContact' 		=> array('template' => 'View/tpl/contact/indexContact'),
-        'addContact' 			=> array('template' => 'View/tpl/contact/addContact'),
+        'addContact' 		=> array('template' => 'View/tpl/contact/addContact'),
 
         //lien he
-        'indexComment' 		=> array('template' => 'View/tpl/comment/indexComment'),
-        'addComment' 			=> array('template' => 'View/tpl/comment/addComment'),
+        'indexComments' 		=> array('template' => 'View/tpl/comments/indexComments'),
+        'addComments' 		=> array('template' => 'View/tpl/comments/addComments'),
  		//here
     );
 }
@@ -248,8 +248,8 @@ function Admin_init(){
         'Model/Contact.php',
 		'Controller/ContactController.php',
 
-        //'Model/Comment.php',
-		//'Controller/CommentController.php',
+        'Model/Comments.php',
+		'Controller/CommentsController.php',
 	);
 	Loader::load('Admin', $files);
 }

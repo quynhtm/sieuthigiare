@@ -2,7 +2,7 @@
 /*
 * QuynhTM
 */
-class Comment{
+class Comments{
 	static $table_action = TABLE_COMMENT;
 	static $primary_key = 'comment_id';
 	static $arrFields = array('comment_id','comment_parent_id', 'comment_product_id', 'comment_product_name','comment_shop_id','comment_shop_name',
