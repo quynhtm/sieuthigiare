@@ -423,6 +423,17 @@ a.btn-yahoo:hover{
     position: relative;
      text-decoration: line-through;
 }
+.amount-call {
+    color: #666 !important;
+    position: relative;
+}
+.num-call{
+    color: #c63829;
+    font-size: 18px;
+    font-weight: 400 !important;
+    font-style: normal;
+    margin-left: 5px;
+}
 .sale-off {
     background: #d60c0c none repeat scroll 0 0;
     border-radius: 2px;

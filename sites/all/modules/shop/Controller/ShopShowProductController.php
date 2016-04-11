@@ -22,7 +22,7 @@ class ShopShowProductController{
 		$dataSearch['product_status'] = trim(FunctionLib::getParam('product_status','1'));
 		$dataSearch['category_id'] = FunctionLib::getParam('category_id','');
 
-		$arrFields = array('product_id', 'category_name','product_name', 'product_price_sell', 'product_price_market', 'product_image', 'product_image_hover');
+		$arrFields = array('product_id', 'category_name','product_name', 'product_price_sell', 'product_price_market', 'product_image', 'product_image_hover', 'product_type_price');
 		$result = ShopShowProductModel::getSearchListItems($dataSearch, $limit, $arrFields);
 		
 		// if(isset($result['data']) && !empty($result['data'])){

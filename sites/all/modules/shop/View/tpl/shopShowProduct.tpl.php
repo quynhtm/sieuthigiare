@@ -35,9 +35,19 @@
 										<div class="title-info">
 											<h4 class="post-title"><a title="<?php echo $v->product_name?>" href=""><?php echo $v->product_name?></a></h4>
 											<div class="item-price">
-	                                    		<span class="amount-1"><?php echo $v->product_price_sell?></span>
-												<span class="amount-2"><?php echo $v->product_price_market?></span>
-                                    			<span class="sale-off">-38%</span>
+	                                    		<?php if($v->product_type_price == 2){?>
+	                                    			<span class="amount-call">Liên hệ: <i class="num-call">0913.922.986</i></span>
+	                                    		<?php }else{?>
+		                                    		<?php if($v->product_price_sell > 0 && $v->product_price_market > 0){?>
+		                                    		<span class="amount-1"><?php echo $v->product_price_sell?>đ</span>
+													<span class="amount-2"><?php echo $v->product_price_market?>đ</span>
+													<?php if((float)$v->product_price_market > (float)$v->product_price_sell) {?>
+												    <span class="sale-off">
+												    	-<?php echo number_format(100 - ((float)$v->product_price_sell/(float)$v->product_price_market)*100, 1) ?>%
+												    </span>
+												    <?php } ?>
+											    <?php } ?>
+	                                    		<?php } ?>
                                     		</div>
 										</div>
 										<div class="item-rating">
