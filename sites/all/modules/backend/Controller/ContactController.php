@@ -3,9 +3,10 @@
 * QuynhTM
 */
 class ContactController{
+	//1: liên hệ mới, 2: đã xác nhận,3: đã xử lý
+	private $arrStatus = array(-1 => 'Tất cả', CONTACT_NEW => 'Liên hệ mới', CONTACT_OK => 'Đã xác nhận', CONTACT_SUCCESS => 'Đã xử lý');
+	private $arrReason = array(-1 => 'Tất cả', CONTACT_REASON_CUSTOMER => 'Khách hàng gửi', CONTACT_REASON_SHOP => 'Shop gửi');
 
-	private $arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
-	
 	public function __construct(){
 			
         $files = array(
@@ -38,12 +39,14 @@ class ContactController{
 
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['contact_status']);
+		$optionReason = FunctionLib::getOption($this->arrReason, $dataSearch['contact_reason']);
 
 		return $view = theme('indexContact',array(
 									'title'=>'Danh sách liên hệ',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,
+									'optionReason' => $optionReason,
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));

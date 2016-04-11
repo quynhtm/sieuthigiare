@@ -2,17 +2,38 @@
 	<div class="wrapp-search-box">
 		<div class="search-box-title">Thông tin tìm kiếm</div>
 		<form action="" method="GET" id="frmSearch" class="frmSearch" name="frmSearch">
-			<div class="col-lg-3">
-				<label class="control-label">Tên tỉnh thành</label>
-				<div><input type="text" class="form-control input-sm" placeholder ="Tên tỉnh thành" id="province_name" class="keyword" name="province_name" value="<?php echo $dataSearch['province_name'] ?>"/></div>
+			<div class="paddingTop20">
+				<div class="col-lg-3">
+					<label class="control-label">Tiêu đề liên hệ</label>
+					<div><input type="text" class="form-control input-sm" placeholder ="Tiêu đề liên hệ" id="contact_title" name="contact_title" value="<?php echo isset($dataSearch['contact_title']) ?$dataSearch['contact_title']:''; ?>"/></div>
+				</div>
+				<div class="col-lg-3">
+					<label class="control-label">Người gửi liên hệ</label>
+					<div><input type="text" class="form-control input-sm" placeholder ="Người gửi" id="contact_user_name_send" name="contact_user_name_send" value="<?php echo isset($dataSearch['contact_user_name_send']) ?$dataSearch['contact_user_name_send']:''; ?>"/></div>
+				</div>
+				<div class="col-lg-3">
+					<label class="control-label">Email gửi liên hệ</label>
+					<div><input type="text" class="form-control input-sm" placeholder ="Email người gửi" id="contact_email_send" name="contact_email_send" value="<?php echo isset($dataSearch['contact_email_send']) ?$dataSearch['contact_email_send']:''; ?>"/></div>
+				</div>
+				<div class="col-lg-3">
+					<label class="control-label">Phone gửi liên hệ</label>
+					<div><input type="text" class="form-control input-sm" placeholder ="Phone người gửi" id="contact_phone_send" name="contact_phone_send" value="<?php echo isset($dataSearch['contact_phone_send']) ?$dataSearch['contact_phone_send']:''; ?>"/></div>
+				</div>
 			</div>
-			<div class="col-lg-3">
-				<label class="control-label">Trạng thái</label>
-				<div><select class="form-control input-sm" name="province_status"><?php echo $optionStatus;?></select></div>
-			</div>
-			<div class="col-lg-3">
-				<label class="control-label">&nbsp;</label>
-				<div><button class="btn btn-primary" name="submit" value="1">Tìm kiếm</button></div>
+			<div class="clear"></div>
+			<div class="paddingTop10">
+				<div class="col-lg-3">
+					<label class="control-label">Loại gửi</label>
+					<div><select class="form-control input-sm" name="contact_reason"><?php echo $optionReason;?></select></div>
+				</div>
+				<div class="col-lg-3">
+					<label class="control-label">Trạng thái</label>
+					<div><select class="form-control input-sm" name="contact_status"><?php echo $optionStatus;?></select></div>
+				</div>
+				<div class="col-lg-3">
+					<label class="control-label">&nbsp;</label>
+					<div><button class="btn btn-primary" name="submit" value="1">Tìm kiếm</button></div>
+				</div>
 			</div>
 		</form>
 	</div>
