@@ -50,7 +50,8 @@ class DataCommon{
 	 */
 	public static function getShopById($id_shop = 0){
 		if($id_shop <= 0) return array();
-		$user_shop = Cache::do_get(Cache::CACHE_USER_SHOP_ID.$id_shop);
+		$Cache = new Cache();
+		$user_shop = $Cache->do_get(Cache::CACHE_USER_SHOP_ID.$id_shop);
 		if($user_shop == null){
 			$query = db_select(self::$table_user_shop, 's')
 				->condition('s.shop_id', $id_shop, '=')
@@ -60,7 +61,7 @@ class DataCommon{
 				foreach($data as $k=> $cate){
 					$user_shop[$cate->shop_id] = $cate;
 				}
-				Cache::do_put(Cache::CACHE_USER_SHOP_ID.$id_shop, $user_shop, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+				$Cache->do_put(Cache::CACHE_USER_SHOP_ID.$id_shop, $user_shop, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
 			}
 		}
 		return $user_shop;
@@ -72,7 +73,8 @@ class DataCommon{
 	 */
 	public static function getProductById($product_id = 0){
 		if($product_id <= 0) return array();
-		$product = Cache::do_get(Cache::CACHE_PRODUCT_ID.$product_id);
+		$Cache = new Cache();
+		$product = $Cache->do_get(Cache::CACHE_PRODUCT_ID.$product_id);
 		if( $product == null){
 			$query = db_select(self::$table_product, 'p')
 				->condition('p.product_id', $product_id, '=')
@@ -82,7 +84,7 @@ class DataCommon{
 				foreach($data as $k=> $pro){
 					$product[$pro->product_id] = $pro;
 				}
-				Cache::do_put(Cache::CACHE_PRODUCT_ID.$product_id, $product, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+				$Cache->do_put(Cache::CACHE_PRODUCT_ID.$product_id, $product, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
 			}
 		}
 		return $product;
