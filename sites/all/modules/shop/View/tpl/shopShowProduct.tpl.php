@@ -39,8 +39,8 @@
 	                                    			<span class="amount-call">Liên hệ: <i class="num-call"><?php echo $phone ?></i></span>
 	                                    		<?php }else{?>
 		                                    		<?php if($v->product_price_sell > 0 && $v->product_price_market > 0){?>
-		                                    		<span class="amount-1"><?php echo $v->product_price_sell?>đ</span>
-													<span class="amount-2"><?php echo $v->product_price_market?>đ</span>
+		                                    		<span class="amount-1"><?php echo number_format($v->product_price_sell)?>đ</span>
+													<span class="amount-2"><?php echo number_format($v->product_price_market) ?>đ</span>
 													<?php if((float)$v->product_price_market > (float)$v->product_price_sell) {?>
 												    <span class="sale-off">
 												    	-<?php echo number_format(100 - ((float)$v->product_price_sell/(float)$v->product_price_market)*100, 1) ?>%
@@ -60,6 +60,11 @@
 								</div>
 							</div>
 							<?php } ?>
+						</div>
+						<div class="show-box-paging">
+							<div class="showListPage">
+								<?php print render($pager); ?>
+							</div>
 						</div>
 					</div>
 				</div>

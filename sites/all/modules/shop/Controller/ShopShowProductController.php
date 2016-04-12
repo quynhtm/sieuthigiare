@@ -16,7 +16,7 @@ class ShopShowProductController{
 
 	public function shopshowProduct(){
 		
-		$limit = SITE_RECORD_PER_PAGE;
+		$limit = SITE_RECORD_PER_PAGE_SHOP_NORMAL;
 		
 		$dataSearch['product_status'] = trim(FunctionLib::getParam('product_status','1'));
 		$dataSearch['category_id'] = FunctionLib::getParam('category_id','');
@@ -44,6 +44,7 @@ class ShopShowProductController{
 		return theme('shopShowProduct', array(
 											'result'=>$result['data'],
 											'phone'=>$phone,
+											'pager' =>$result['pager'],
 											));
 	}
 	public function shopDetailProduct(){
