@@ -175,7 +175,7 @@
 						            <div class="form-actions">
 						                <input type="hidden" id="id_hiden" name="id" value="<?php if(isset($arrItem->product_id)) { echo $arrItem->product_id; } ?>"/>
 						                <input type="hidden" value="txt-form-post" name="txt-form-post">
-										<button type="submit" name="submit" id="buttonFormShopSubmit" class="btn btn-primary" value="1" onc>Lưu</button>
+										<button type="submit" name="submit" id="buttonFormShopSubmit" class="btn btn-primary" value="1" >Lưu</button>
 						                <button type="reset" class="btn btn-danger">Bỏ qua</button>
 						            </div>
 						        </div>
