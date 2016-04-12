@@ -24,6 +24,7 @@ class ShopShowProductController{
 		$arrFields = array('product_id', 'category_name','product_name', 'product_price_sell', 'product_price_market', 'product_image', 'product_image_hover', 'product_type_price', 'product_selloff', 'user_shop_id');
 		$result = ShopShowProductModel::getSearchListItems($dataSearch, $limit, $arrFields);
 		$phone = '';
+		$arrCategoryChildren = array();
 
 		if(isset($result['data']) && !empty($result['data'])){
 			foreach($result['data'] as $k => &$value){
@@ -38,10 +39,15 @@ class ShopShowProductController{
 			if($result['data'][0]->user_shop_id > 0){
 				$user_shop = DataCommon::getShopById($result['data'][0]->user_shop_id);
 				$phone = $user_shop[$result['data'][0]->user_shop_id]->shop_phone;
+
+				//get list cagegory left shop
+				$shop_category = $user_shop[$result['data'][0]->user_shop_id]->shop_category;
+				$arrCategoryChildren = DataCommon::getListCategoryChildren($shop_category);
 			}
 		}
 		
 		return theme('shopShowProduct', array(
+											'arrCategoryChildren'=>$arrCategoryChildren,
 											'result'=>$result['data'],
 											'phone'=>$phone,
 											'pager' =>$result['pager'],

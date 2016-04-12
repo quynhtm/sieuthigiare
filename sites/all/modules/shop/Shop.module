@@ -94,14 +94,6 @@ function Shop_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
-	$items["gian-hang/%/%"] = array(
-		"title" => t('Gian hàng'),
-		"description" => "Gian hàng",
-		'page callback' => 'menuLoad',
-		'page arguments' => array('ShopShowProductController/shopshowProduct'),
-		'access callback' => TRUE,
-		'type' => MENU_CALLBACK,
-	);
 	$items["chi-tiet-san-pham.html"] = array(
 		"title" => t('Chi tiết sản phẩm'),
 		"description" => "Chi tiết sản phẩm",

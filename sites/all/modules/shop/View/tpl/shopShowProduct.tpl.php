@@ -11,13 +11,9 @@
 					<div class="left-category-shop">
 						<div class="title-category-parent">ĐIỆN MÁY & CÔNG NGHỆ</div>
 						<ul>
-							<li><a href="">Điện thoại - Máy tính bảng</a></li>
-							<li><a href="">Máy tính - Linh phụ kiện</a></li>
-							<li><a href="">Thiết bị nhà bếp</a></li>
-							<li><a href="">Thiết bị an ninh</a></li>
-							<li><a href="">Điện tử - Kỹ thuật số</a></li>
-							<li><a href="">Điện thoại - Máy tính bảng</a></li>
-							<li><a href="">Điện máy - Điện lạnh - Điện gia dụng</a></li>
+							<?php foreach($arrCategoryChildren as $k =>$v){?>
+							<li><a href="<?php echo $base_url.'/gian-hang/4/c'.$k.'/shop-teen.html' ?>" title="<?php echo $v?>"><?php echo $v?></a></li>
+							<?php } ?>
 						</ul>
 					</div>
 					<div class="right-show-product-shop body-list-item ">
