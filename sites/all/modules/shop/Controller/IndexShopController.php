@@ -10,6 +10,7 @@ class indexShopController{
 	public $category_id = 0;
 	public $user_shop = array();
 	public function __construct(){
+		global $base_url;
 		//lay param khi vao trang shop
 		$param = arg();
 		//shop_id
@@ -26,13 +27,13 @@ class indexShopController{
 			$this->user_shop = DataCommon::getShopById($this->shop_id);
 			if(!empty($this->user_shop)){
 				if(isset($this->user_shop->shop_status) && $this->user_shop->shop_status != STASTUS_SHOW){
-					//redirect sang trang 404
+					drupal_goto($base_url.'/page-404');
 				}
 			}else{
-				//redirect sang trang 404
+				drupal_goto($base_url.'/page-404');
 			}
 		}else{
-			//redirect sang trang 404
+			drupal_goto($base_url.'/page-404');
 		}
 
 		$files = array(
