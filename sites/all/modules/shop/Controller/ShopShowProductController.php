@@ -6,9 +6,9 @@
 * @Version	 : 1.0
 */
 class ShopShowProductController{
-	static $shop_id = 0;
-	static $category_id = 0;
-	static $user_shop = array();
+	public $shop_id = 0;
+	public $category_id = 0;
+	public $user_shop = array();
 	public function __construct(){
 		//lay param khi vao trang shop
 		$param = arg();
@@ -25,7 +25,7 @@ class ShopShowProductController{
 		if($this->shop_id > 0){
 			$this->user_shop = DataCommon::getShopById($this->shop_id);
 			if(!empty($this->user_shop)){
-				if(isset($this->user_shop['shop_status']) && $this->user_shop['shop_status'] != STASTUS_SHOW){
+				if(isset($this->user_shop->shop_status) && $this->user_shop->shop_status != STASTUS_SHOW){
 					//redirect sang trang 404
 				}
 			}else{
@@ -42,13 +42,10 @@ class ShopShowProductController{
 	}
 
 	public function shopshowProduct(){
-		$limit = SITE_RECORD_PER_PAGE_SHOP_NORMAL;
-		
-		$dataSearch['product_status'] = trim(FunctionLib::getParam('product_status','1'));
-		$dataSearch['category_id'] = FunctionLib::getParam('category_id','');
-
+		$limit = (isset($this->user_shop->is_shop) && $this->user_shop->is_shop = SHOP_VIP) ? SITE_RECORD_PER_PAGE_SHOP_VIP: SITE_RECORD_PER_PAGE_SHOP_NORMAL;
 		$arrFields = array('product_id', 'category_name','product_name', 'product_price_sell', 'product_price_market', 'product_image', 'product_image_hover', 'product_type_price', 'product_selloff', 'user_shop_id');
-		$result = ShopShowProductModel::getProductShop($dataSearch, $limit, $arrFields);
+		$result = ShopShowProductModel::getProductShop($this->shop_id,$this->category_id, $limit, $arrFields);
+
 		$phone = '';
 		$arrCategoryChildren = array();
 
@@ -62,12 +59,10 @@ class ShopShowProductController{
 				}
 			}
 			
-			if($result['data'][0]->user_shop_id > 0){
-				$user_shop = DataCommon::getShopById($result['data'][0]->user_shop_id);
-				$phone = $user_shop[$result['data'][0]->user_shop_id]->shop_phone;
-
+			if(!empty($this->user_shop)){
+				$phone = $this->user_shop->shop_phone;
 				//get list cagegory left shop
-				$shop_category = $user_shop[$result['data'][0]->user_shop_id]->shop_category;
+				$shop_category = $this->user_shop->shop_category;
 				$arrCategoryChildren = DataCommon::getListCategoryChildren($shop_category);
 			}
 		}
@@ -76,6 +71,7 @@ class ShopShowProductController{
 											'arrCategoryChildren'=>$arrCategoryChildren,
 											'result'=>$result['data'],
 											'phone'=>$phone,
+											'user_shop'=>$this->user_shop,
 											'pager' =>$result['pager'],
 											));
 	}
