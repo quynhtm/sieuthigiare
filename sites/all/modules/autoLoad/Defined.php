@@ -23,7 +23,10 @@ define("SITE_RECORD_PER_PAGE_SHOP_VIP", '20');
 
 define("PATH_UPLOAD", DRUPAL_ROOT.'/uploads');
 define('base_url_lang', $base_url .'/'. ((!isset($language->language) || $language->language == 'und' || $language->language == 'vi') ? 'vi/' : $language->language.'/'));
+
 define('AJAX_DOMAIN', '/sieuthigiare.vn/');
+define('IS_WEB', 0);// 0:local, 1:web
+
 /**
  * QuynhTM add
  * Dinh nghia cac Table cho website

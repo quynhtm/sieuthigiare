@@ -77,6 +77,15 @@ function page_404(){
 	return $view;
 }
 function CoreAjax(){
+    global $base_url;
+    
+    if(IS_WEB){
+        Utility::headerReferer();
+        if(!preg_match(AJAX_DOMAIN, $base_url, $Matches)){
+            Utility::pageAccessDenied();
+        }
+    }
+
     $action = FunctionLib::getParam('act', '');
     if($action != ''){
         $AjaxUpload = new AjaxUpload();
@@ -87,6 +96,15 @@ function CoreAjax(){
 }
 
 function CoreAjaxAction(){
+    global $base_url;
+
+    if(IS_WEB){
+        Utility::headerReferer();
+        if(!preg_match(AJAX_DOMAIN, $base_url, $Matches)){
+            Utility::pageAccessDenied();
+        }
+    }
+
     $action = FunctionLib::getParam('act', '');
     if($action != ''){
         $AjaxAction = new AjaxAction();
