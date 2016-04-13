@@ -11,7 +11,7 @@ function Shop_menu() {
 		"title" => t('Đăng ký shop'),
 		"description" => "Đăng ký shop",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('ShopRegController/ajaxCheckShopRegExist'),
+		'page arguments' => array('RegShopController/ajaxCheckShopRegExist'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -19,7 +19,7 @@ function Shop_menu() {
 		"title" => t('Đăng ký shop'),
 		"description" => "Đăng ký shop",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('ShopRegController/shopRegister'),
+		'page arguments' => array('RegShopController/regShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -27,7 +27,7 @@ function Shop_menu() {
 		"title" => t('Đăng nhập shop'),
 		"description" => "Đăng nhâp shop",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('ShopRegController/shopLogin'),
+		'page arguments' => array('RegShopController/loginShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -35,7 +35,7 @@ function Shop_menu() {
 		"title" => t('Thoát shop'),
 		"description" => "Thoat shop",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('ShopRegController/shopLogout'),
+		'page arguments' => array('RegShopController/logoutShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -43,7 +43,7 @@ function Shop_menu() {
 		"title" => t('Sửa thông tin gian hàng'),
 		"description" => "Sửa thông tin gian hàng",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('ShopRegController/shopEditInfo'),
+		'page arguments' => array('RegShopController/editInfoShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -51,7 +51,7 @@ function Shop_menu() {
 		"title" => t('Đổi mật khẩu'),
 		"description" => "Đổi mật khẩu",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('ShopRegController/shopEditPassword'),
+		'page arguments' => array('RegShopController/editPasswordShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -60,7 +60,7 @@ function Shop_menu() {
 		"title" => t('Quản lý sản phẩm'),
 		"description" => "Quản lý sản phẩm",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('AdminShopController/adminShop'),
+		'page arguments' => array('AdminShopController/productShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -68,7 +68,7 @@ function Shop_menu() {
 		"title" => t('Đăng sản phẩm'),
 		"description" => "Đăng sản phẩm",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('AdminShopController/adminFormShop'),
+		'page arguments' => array('AdminShopController/productFormShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -76,7 +76,7 @@ function Shop_menu() {
 		"title" => t('Sửa sản phẩm'),
 		"description" => "Sửa sản phẩm",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('AdminShopController/adminFormShop'),
+		'page arguments' => array('AdminShopController/productFormShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -84,7 +84,7 @@ function Shop_menu() {
 		"title" => t('xóa sản phẩm'),
 		"description" => "Xóa sản phẩm",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('AdminShopController/adminDeleteShop'),
+		'page arguments' => array('AdminShopController/productDeleteShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -110,7 +110,7 @@ function Shop_menu() {
 		"title" => t('Giỏ hàng'),
 		"description" => "Giỏ hàng",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('ShopCartController/shopCart'),
+		'page arguments' => array('CartShopController/cartShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -118,7 +118,7 @@ function Shop_menu() {
 		"title" => t('Gửi đơn hàng'),
 		"description" => "Gửi đơn hàng",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('ShopCartController/shopSendCart'),
+		'page arguments' => array('CartShopController/cartSendShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -129,17 +129,17 @@ function Shop_menu() {
 function Shop_theme() {
 	return array(
 		//register shop
-	    'shopRegister' => array(
-	      'template' => 'View/tpl/shopRegister'
+	    'regShop' => array(
+	      'template' => 'View/tpl/regShop'
 	    ),
-	    'shopLogin' => array(
-	      'template' => 'View/tpl/shopLogin'
+	    'loginShop' => array(
+	      'template' => 'View/tpl/loginShop'
 	    ),
-	    'shopEditInfo' => array(
-	      'template' => 'View/tpl/shopEditInfo'
+	    'editInfoShop' => array(
+	      'template' => 'View/tpl/editInfoShop'
 	    ),
-	    'shopEditPassword' => array(
-	      'template' => 'View/tpl/shopEditPassword'
+	    'editPasswordShop' => array(
+	      'template' => 'View/tpl/editPasswordShop'
 	    ),
 	    //admin shop
 	    'adminShop' => array(
@@ -156,11 +156,11 @@ function Shop_theme() {
 	      'template' => 'View/tpl/detailShop'
 	    ),
 
-	    'shopCart' => array(
-	      'template' => 'View/tpl/shopCart'
+	    'cartShop' => array(
+	      'template' => 'View/tpl/cartShop'
 	    ),
-	    'shopSendCart' => array(
-	      'template' => 'View/tpl/shopSendCart'
+	    'cartSendShop' => array(
+	      'template' => 'View/tpl/cartSendShop'
 	    ),  
 	);
 }
@@ -169,16 +169,17 @@ function Shop_init() {
 	$uri = request_uri();
 	if(preg_match("/(\/admin)/", $uri)==0){
 		$files = array(
-			'Model/ShopRegModel.php',
-			'Controller/ShopRegController.php',
+			'Model/RegShop.php',
+			'Controller/RegShopController.php',
 			
-			'Model/AdminShopModel.php',
-			'Controller/AdminShopController.php',
+			'Model/ProductShop.php',
+			'Controller/ProductShopController.php',
 			
-			'Model/IndexShopModel.php',
+			'Model/IndexShop.php',
 			'Controller/IndexShopController.php',
 			
-			'Controller/ShopCartController.php',
+			'Model/CartShop.php',
+			'Controller/CartShopController.php',
 			
 			'View/css/shop.css',
 			'View/js/shop.js',
