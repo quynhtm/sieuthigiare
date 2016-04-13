@@ -41,7 +41,7 @@ class ShopRegController{
 			}
 
 			//check user and hash pass
-			$check_user_exists = ShopUser::checkNameMailPhone($dataInput ['user_shop']['value'], $dataInput ['shop_email']['value'], $dataInput ['shop_phone']['value']);
+			$check_user_exists = ShopReg::checkNameMailPhone($dataInput ['user_shop']['value'], $dataInput ['shop_email']['value'], $dataInput ['shop_phone']['value']);
 			if($check_user_exists != ''){
 				drupal_set_message($check_user_exists, 'error');
 				drupal_goto($base_url.'/dang-ky.html');
@@ -61,9 +61,9 @@ class ShopRegController{
 							'shop_status'=>0,
 							'shop_created'=>$dataInput ['shop_created']['value'],
 						);
-						$query = ShopUser::insert($data_post);
+						$query = ShopReg::insert($data_post);
 						if($query){
-							$getItemUserShop = ShopUser::getUserbyCond($dataInput ['user_shop']['value']);
+							$getItemUserShop = ShopReg::getUserbyCond($dataInput ['user_shop']['value']);
 							if(!empty($getItemUserShop)){
 								$user_shop = $getItemUserShop[0];
 								Session::createSessionUserShop($user_shop);
@@ -82,7 +82,7 @@ class ShopRegController{
 				
 			}
 		}
-		$listProvices = ShopUser::getAllProvices(200);
+		$listProvices = ShopReg::getAllProvices(200);
 		$data = array('listProvices' => $listProvices);
 
 		$view = theme('shopRegister', $data);
@@ -108,16 +108,16 @@ class ShopRegController{
 				drupal_set_message($errors, 'error');
 				drupal_goto($base_url.'/dang-nhap.html');
 			}else{
-				$arrOneItem = ShopUser::getUserExists($dataInput ['user_shop_login']['value']);
+				$arrOneItem = ShopReg::getUserExists($dataInput ['user_shop_login']['value']);
 				if(!empty($arrOneItem)){
-					ShopUser::checkLoginUserShop($arrOneItem[0], $dataInput ['password_shop_login']['value']);
+					ShopReg::checkLoginUserShop($arrOneItem[0], $dataInput ['password_shop_login']['value']);
 				}else{
 					drupal_set_message('Tên đăng nhập hoặc mật khẩu không đúng!', 'error');
 					drupal_goto($base_url.'/dang-nhap.html');
 				}
 			}
 		}
-		$listProvices = ShopUser::getAllProvices(200);
+		$listProvices = ShopReg::getAllProvices(200);
 		$data = array('listProvices' => $listProvices);
 
 		$view = theme('shopLogin', $data);
@@ -155,7 +155,7 @@ class ShopRegController{
 				$errors .= 'Email không đúng định dạng!<br/>';
 			}
 			//check phone, mail
-			$check_valid_mail_phone = ShopUser::checkMailPhoneOfUser($user_shop->shop_id, $dataInput ['shop_email']['value'], $dataInput ['shop_phone']['value']);
+			$check_valid_mail_phone = ShopReg::checkMailPhoneOfUser($user_shop->shop_id, $dataInput ['shop_email']['value'], $dataInput ['shop_phone']['value']);
 			if($check_valid_mail_phone != ''){
 				$errors .= $check_valid_mail_phone;
 			}
@@ -174,11 +174,11 @@ class ShopRegController{
 				'shop_transfer'=>$dataInput ['shop_transfer']['value'],
 			);
 
-			$query = ShopUser::updateId($data_post, $user_shop->shop_id);
+			$query = ShopReg::updateId($data_post, $user_shop->shop_id);
 			drupal_set_message('Cập nhật thông tin gian hàng thành công!');
 			drupal_goto($base_url.'/quan-ly-gian-hang.html');
 		}
-		$listProvince = ShopUser::getAllProvices($limit=200);
+		$listProvince = ShopReg::getAllProvices($limit=200);
 		$arrCategoryParent = DataCommon::getListCategoryParent();
 		$dataCategory['shop_category'] = $user_shop->shop_category;
 		$optionCategoryParent = FunctionLib::getOption(array(-1=>'Chọn danh mục cha') + $arrCategoryParent, $dataCategory['shop_category']);
@@ -205,7 +205,7 @@ class ShopRegController{
 				drupal_goto($base_url.'/doi-mat-khau.html');
 			}
 
-			$arrUser = ShopUser::getUserExists($dataInput['user_shop_login']['value']);
+			$arrUser = ShopReg::getUserExists($dataInput['user_shop_login']['value']);
 			if(!empty($arrUser) && $arrUser[0]->shop_id == $user_shop->shop_id){
 				if($dataInput['user_shop_password']['value'] == $dataInput['user_shop_rep_password']['value']){
 					$check_valid_pass = ValidForm::checkRegexPass($dataInput['user_shop_password']['value'], 6);
@@ -215,7 +215,7 @@ class ShopRegController{
 						$data_post = array(
 							'user_password'=>$hash_pass,
 						);
-						$query = ShopUser::updateId($data_post, $user_shop->shop_id);
+						$query = ShopReg::updateId($data_post, $user_shop->shop_id);
 						if($query){
 							drupal_set_message('Đổi mật khẩu thành công!');
 							drupal_goto($base_url.'/quan-ly-gian-hang.html');
@@ -237,7 +237,7 @@ class ShopRegController{
 	}
 
 	public function shopLogout(){
-		ShopUser::logoutUserShop();
+		ShopReg::logoutUserShop();
 	}
 
 	public function ajaxCheckShopRegExist(){
@@ -250,7 +250,7 @@ class ShopRegController{
 		$user_shop = FunctionLib::getParam('user_shop','');
     	$shop_phone = FunctionLib::getParam('shop_phone','');
     	$shop_email = FunctionLib::getParam('shop_email','');
-    	$err = ShopUser::ajaxCheckNameMailPhone($user_shop, $shop_phone, $shop_email);
+    	$err = ShopReg::ajaxCheckNameMailPhone($user_shop, $shop_phone, $shop_email);
     	if(!empty($err)){
     		echo json_encode($err);die;
     	}else{

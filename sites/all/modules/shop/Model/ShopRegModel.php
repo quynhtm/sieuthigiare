@@ -5,7 +5,7 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0
 */
-class ShopUser{
+class ShopReg{
 	static $table_action = TABLE_USER_SHOP;
 	static $table_action_provice = TABLE_PROVINCE;
 	static $primary_key_user_shop = 'shop_id';

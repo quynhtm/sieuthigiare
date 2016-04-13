@@ -5,7 +5,7 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0
 */
-class ShopManagerProduct{
+class AdminShop{
 	static $table_action = TABLE_PRODUCT;
     static $primary_key = 'product_id';
     

@@ -5,7 +5,7 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0
 */
-class ShopShowProductController{
+class indexShopController{
 	public $shop_id = 0;
 	public $category_id = 0;
 	public $user_shop = array();
@@ -41,10 +41,10 @@ class ShopShowProductController{
 	    Loader::load('Core', $files);
 	}
 
-	public function shopshowProduct(){
+	public function indexShop(){
 		$limit = (isset($this->user_shop->is_shop) && $this->user_shop->is_shop = SHOP_VIP) ? SITE_RECORD_PER_PAGE_SHOP_VIP: SITE_RECORD_PER_PAGE_SHOP_NORMAL;
 		$arrFields = array('product_id', 'category_name','product_name', 'product_price_sell', 'product_price_market', 'product_image', 'product_image_hover', 'product_type_price', 'product_selloff', 'user_shop_id');
-		$result = ShopShowProductModel::getProductShop($this->shop_id,$this->category_id, $limit, $arrFields);
+		$result = indexShop::getProductShop($this->shop_id,$this->category_id, $limit, $arrFields);
 
 		$phone = '';
 		$arrCategoryChildren = array();
@@ -67,15 +67,15 @@ class ShopShowProductController{
 			}
 		}
 		
-		return theme('shopShowProduct', array(
-											'arrCategoryChildren'=>$arrCategoryChildren,
-											'result'=>$result['data'],
-											'phone'=>$phone,
-											'user_shop'=>$this->user_shop,
-											'pager' =>$result['pager'],
-											));
+		return theme('indexShop', array(
+										'arrCategoryChildren'=>$arrCategoryChildren,
+										'result'=>$result['data'],
+										'phone'=>$phone,
+										'user_shop'=>$this->user_shop,
+										'pager' =>$result['pager'],
+										));
 	}
-	public function shopDetailProduct(){
+	public function detailShop(){
 		$files = array(
 	            'bootstrap/lib/jcarousel/jquery.jcarousel.min.js',
 	            'bootstrap/lib/jcarousel/jcarousel.responsive.js',
@@ -83,6 +83,6 @@ class ShopShowProductController{
 	        );
 	    Loader::load('Core', $files);
 
-		return theme('shopDetailProduct');
+		return theme('detailShop');
 	}
 }

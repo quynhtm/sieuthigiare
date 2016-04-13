@@ -6,6 +6,7 @@
 * @Version	 : 1.0
 */
 function Shop_menu() {
+	//register shop
 	$items["ajax-check-user-reg-exist"] = array(
 		"title" => t('Đăng ký shop'),
 		"description" => "Đăng ký shop",
@@ -54,11 +55,12 @@ function Shop_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
+	//admin shop
 	$items["quan-ly-gian-hang.html"] = array(
 		"title" => t('Quản lý sản phẩm'),
 		"description" => "Quản lý sản phẩm",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('ShopManagerProductController/shopManagerProduct'),
+		'page arguments' => array('AdminShopController/adminShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -66,7 +68,7 @@ function Shop_menu() {
 		"title" => t('Đăng sản phẩm'),
 		"description" => "Đăng sản phẩm",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('ShopManagerProductController/shopFormProduct'),
+		'page arguments' => array('AdminShopController/adminFormShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -74,7 +76,7 @@ function Shop_menu() {
 		"title" => t('Sửa sản phẩm'),
 		"description" => "Sửa sản phẩm",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('ShopManagerProductController/shopFormProduct'),
+		'page arguments' => array('AdminShopController/adminFormShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -82,15 +84,16 @@ function Shop_menu() {
 		"title" => t('xóa sản phẩm'),
 		"description" => "Xóa sản phẩm",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('ShopManagerProductController/shopDeleteProduct'),
+		'page arguments' => array('AdminShopController/adminDeleteShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
+	//index shop
 	$items["gian-hang/%/%"] = array(
 		"title" => t('Gian hàng'),
 		"description" => "Gian hàng",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('ShopShowProductController/shopshowProduct'),
+		'page arguments' => array('IndexShopController/indexShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -98,11 +101,11 @@ function Shop_menu() {
 		"title" => t('Chi tiết sản phẩm'),
 		"description" => "Chi tiết sản phẩm",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('ShopShowProductController/shopDetailProduct'),
+		'page arguments' => array('IndexShopController/detailShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
-
+	//gio hang
 	$items["gio-hang.html"] = array(
 		"title" => t('Giỏ hàng'),
 		"description" => "Giỏ hàng",
@@ -125,6 +128,7 @@ function Shop_menu() {
 
 function Shop_theme() {
 	return array(
+		//register shop
 	    'shopRegister' => array(
 	      'template' => 'View/tpl/shopRegister'
 	    ),
@@ -137,18 +141,19 @@ function Shop_theme() {
 	    'shopEditPassword' => array(
 	      'template' => 'View/tpl/shopEditPassword'
 	    ),
-	    
-	    'shopManagerProduct' => array(
-	      'template' => 'View/tpl/shopManagerProduct'
+	    //admin shop
+	    'adminShop' => array(
+	      'template' => 'View/tpl/adminShop'
 	    ),
-	    'shopFormProduct' => array(
-	      'template' => 'View/tpl/shopFormProduct'
+	    'adminFormShop' => array(
+	      'template' => 'View/tpl/adminFormShop'
 	    ),
-	    'shopShowProduct' => array(
-	      'template' => 'View/tpl/shopShowProduct'
+	    //index shop
+	    'indexShop' => array(
+	      'template' => 'View/tpl/indexShop'
 	    ),
-	    'shopDetailProduct' => array(
-	      'template' => 'View/tpl/shopDetailProduct'
+	    'detailShop' => array(
+	      'template' => 'View/tpl/detailShop'
 	    ),
 
 	    'shopCart' => array(
@@ -167,11 +172,11 @@ function Shop_init() {
 			'Model/ShopRegModel.php',
 			'Controller/ShopRegController.php',
 			
-			'Model/ShopManagerProductModel.php',
-			'Controller/ShopManagerProductController.php',
+			'Model/AdminShopModel.php',
+			'Controller/AdminShopController.php',
 			
-			'Model/ShopShowProductModel.php',
-			'Controller/ShopShowProductController.php',
+			'Model/IndexShopModel.php',
+			'Controller/IndexShopController.php',
 			
 			'Controller/ShopCartController.php',
 			

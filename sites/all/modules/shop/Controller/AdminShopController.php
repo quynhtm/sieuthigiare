@@ -5,15 +5,12 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0
 */
-class ShopManagerProductController{
+class AdminShopController{
 	private $arrStatus = array(-1 => '--Chọn trạng thái--', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
 	private $arrTypePrice = array(-1 => '--Chọn kiểu giá--', TYPE_PRICE_NUMBER => 'Hiển thị giá bán', TYPE_PRICE_CONTACT => 'Liên hệ với shop');
-	private $arrTypeProduct = array(-1 => '--Chọn loại sản phẩm--',
-		PRODUCT_NOMAL => 'Sản phẩm bình thường',
-		PRODUCT_HOT => 'Sản phẩm nổi bật',
-		PRODUCT_SELLOFF => 'Sản phẩm giảm giá');
+	private $arrTypeProduct = array(-1 => '--Chọn loại sản phẩm--', PRODUCT_NOMAL => 'Sản phẩm bình thường', PRODUCT_HOT => 'Sản phẩm nổi bật', PRODUCT_SELLOFF => 'Sản phẩm giảm giá');
 
-	public function shopManagerProduct(){
+	public function adminShop(){
 		global $base_url, $user_shop;
 
 		if($user_shop->shop_id == 0){
@@ -37,7 +34,7 @@ class ShopManagerProductController{
 		$dataSearch['date_end'] = FunctionLib::getParam('date_end', '');
 		
 		$arrFields = array('product_id', 'category_name', 'product_code','product_name', 'product_price_sell', 'product_price_market', 'product_content', 'product_image', 'product_image_hover', 'time_created', 'product_status');
-		$result = ShopManagerProduct::getSearchListItems($dataSearch, $limit, $arrFields);
+		$result = AdminShop::getSearchListItems($dataSearch, $limit, $arrFields);
 		//FunctionLib::Debug($result);
 		if(isset($result['data']) && !empty($result['data'])){
 			foreach($result['data'] as $k => &$value){
@@ -53,7 +50,7 @@ class ShopManagerProductController{
 
 		$arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
 		$optionStatus = FunctionLib::getOption(array(-1=>'Chọn trạng thái') + $arrStatus, $dataSearch['product_status']);
-		return theme('shopManagerProduct',array(
+		return theme('adminShop',array(
 									'title'=>'Cấu hình chung',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
@@ -63,7 +60,7 @@ class ShopManagerProductController{
 									'optionCategoryChildren'=>$optionCategoryChildren));
 	}
 
-	public function shopFormProduct(){
+	public function adminFormShop(){
 		global $base_url, $user_shop;
 		if($user_shop->shop_id == 0){
 			drupal_set_message('Bạn không có quyền truy cập. Vui lòng đăng nhập tài khoản!', 'error');
@@ -99,7 +96,7 @@ class ShopManagerProductController{
 			$id = intval($param[1]);
 			$fields = '';
 			$cond = 'product_id='.$id.' AND user_shop_id='.$user_shop->shop_id;
-			$arrItem = ShopManagerProduct::getItembyCond($fields, $cond);
+			$arrItem = AdminShop::getItembyCond($fields, $cond);
 			
 			if(empty($arrItem)){
 				drupal_set_message('Bạn không có quyền truy cập. Đây không phải là tin đăng của bạn!', 'error');
@@ -191,7 +188,7 @@ class ShopManagerProductController{
 				}
 			}else{
 				if($data['category_id']['value'] > 0 ){
-					$data['category_name']['value'] = ShopManagerProduct::getNameCategory($data['category_id']['value']);
+					$data['category_name']['value'] = AdminShop::getNameCategory($data['category_id']['value']);
 				}
 				
 				if(!empty($arrItem)){
@@ -200,7 +197,7 @@ class ShopManagerProductController{
 						drupal_goto($base_url.'/quan-ly-gian-hang.html');
 					}
 				}
-				ShopManagerProduct::save($data, $id);
+				AdminShop::save($data, $id);
 				drupal_goto($base_url.'/quan-ly-gian-hang.html');
 			}
 		}
@@ -210,7 +207,7 @@ class ShopManagerProductController{
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->product_status)? $arrItem->product_status : -1);
 		$optionTypeProduct = FunctionLib::getOption($this->arrTypeProduct, isset($arrItem->product_is_hot)? $arrItem->product_is_hot : -1);
 		$optionTypePrice = FunctionLib::getOption($this->arrTypePrice, isset($arrItem->product_type_price)? $arrItem->product_type_price : -1);
-		return theme('shopFormProduct',
+		return theme('adminFormShop',
 			array('optionCategoryChildren'=>$optionCategoryChildren,
 				'optionStatus'=>$optionStatus,
 				'optionTypeProduct'=>$optionTypeProduct,
@@ -220,7 +217,7 @@ class ShopManagerProductController{
 				'arrImageOther'=>$arrImageOther,));
 	}
 
-	public function shopDeleteProduct(){
+	public function adminDeleteShop(){
 		global $base_url, $user_shop;
 
 		if($user_shop->shop_id == 0){
@@ -231,7 +228,7 @@ class ShopManagerProductController{
 		if(!empty($listId)){
 			foreach($listId as $id){
 				if($id > 0){
-					ShopManagerProduct::deleteOne($id);
+					AdminShop::deleteOne($id);
 				}
 			}
 			drupal_set_message('Xóa bài viết thành công.');
