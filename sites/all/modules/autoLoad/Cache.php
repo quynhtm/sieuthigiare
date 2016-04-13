@@ -4,7 +4,7 @@
  */
 require_once(DRUPAL_ROOT ."/phpfastcache-final/phpfastcache.php");
 class Cache {
-    const CACHE_ON = 1 ;// 0: không dùng qua cache, 1: dùng qua cache
+    const CACHE_ON = 0 ;// 0: không dùng qua cache, 1: dùng qua cache
     const CACHE_TIME_TO_LIVE_15 = 900; //Time cache 15 phut
     const CACHE_TIME_TO_LIVE_ONE_DAY = 86400; //Time cache 1 ngay
     const CACHE_TIME_TO_LIVE_ONE_WEEK = 604800; //Time cache 1 tuan
