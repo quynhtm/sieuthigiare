@@ -4,16 +4,20 @@
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="link-breadcrumb">
 				<a href="">Trang chủ</a><i class="icon-double-angle-right"></i>
-				<a href="">Điện máy & công nghệ</a>
+				<a href=""><?php echo isset($user_shop->shop_name)? $user_shop->shop_name : 'Trang chủ của shop';?></a>
 			</div>
 			<div class="main-view-post box-register">
 				<div class="wrap-main-view">
 					<div class="left-category-shop">
-						<div class="title-category-parent">ĐIỆN MÁY & CÔNG NGHỆ</div>
+						<div class="title-category-parent">DANH MỤC SẢN PHẨM</div>
+						<?php if(isset($arrCategoryChildren) && !empty($arrCategoryChildren)){
+							$shop_id = isset($user_shop->shop_id)? $user_shop->shop_id : 0;
+							$shop_id = isset($user_shop->shop_name)? $user_shop->shop_id : 0;
+						?>
 						<ul>
 							<?php foreach($arrCategoryChildren as $k =>$v){?>
-							<li><a href="<?php echo $base_url.'/gian-hang/4/c'.$k.'/shop-teen.html' ?>" title="<?php echo $v?>"><?php echo $v?></a></li>
-							<?php } ?>
+							<li><a href="<?php echo $base_url.'/gian-hang/'.$shop_id.'/c'.$k.'/shop-teen.html' ?>" title="<?php echo $v?>"><?php echo $v?></a></li>
+							<?php } } ?>
 						</ul>
 					</div>
 					<div class="right-show-product-shop body-list-item ">
