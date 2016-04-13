@@ -251,6 +251,10 @@ class ShopRegController{
     	$shop_phone = FunctionLib::getParam('shop_phone','');
     	$shop_email = FunctionLib::getParam('shop_email','');
     	$err = ShopUser::ajaxCheckNameMailPhone($user_shop, $shop_phone, $shop_email);
-    	echo json_encode($err);die;
+    	if(!empty($err)){
+    		echo json_encode($err);die;
+    	}else{
+    		echo '';die;
+    	}
 	}
 }
