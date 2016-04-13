@@ -12,25 +12,7 @@ class ShopManagerProductController{
 		PRODUCT_NOMAL => 'Sản phẩm bình thường',
 		PRODUCT_HOT => 'Sản phẩm nổi bật',
 		PRODUCT_SELLOFF => 'Sản phẩm giảm giá');
-	public function __construct(){
-		$files = array(
-			'bootstrap/lib/ckeditor/ckeditor.js',
-			'bootstrap/lib/ckeditor/config.js',
-			'bootstrap/lib/dragsort/jquery.dragsort.js',
-			'js/autoNumeric.js',
-		);
-		Loader::loadJSExt('Core', $files);
-		$files = array(
-			'bootstrap/lib/upload/cssUpload.css',
-			'bootstrap/js/bootstrap.min.js',
-			'bootstrap/lib/upload/jquery.uploadfile.js',
-			'js/common_admin.js',
 
-			'bootstrap/lib/datetimepicker/datetimepicker.css',
-			'bootstrap/lib/datetimepicker/jquery.datetimepicker.js',
-		);
-		Loader::load('Core', $files);
-	}
 	public function shopManagerProduct(){
 		global $base_url, $user_shop;
 
@@ -38,6 +20,12 @@ class ShopManagerProductController{
 			drupal_set_message('Bạn không có quyền truy cập. Vui lòng đăng nhập tài khoản!', 'error');
 			drupal_goto($base_url);
 		}
+
+		$files = array(
+			'bootstrap/lib/datetimepicker/datetimepicker.css',
+			'bootstrap/lib/datetimepicker/jquery.datetimepicker.js',
+		);
+		Loader::load('Core', $files);
 
 		$limit = SITE_RECORD_PER_PAGE;
 		//search
@@ -81,6 +69,27 @@ class ShopManagerProductController{
 			drupal_set_message('Bạn không có quyền truy cập. Vui lòng đăng nhập tài khoản!', 'error');
 			drupal_goto($base_url);
 		}
+
+
+		$files = array(
+			'bootstrap/lib/ckeditor/ckeditor.js',
+			'bootstrap/lib/ckeditor/config.js',
+			'bootstrap/lib/dragsort/jquery.dragsort.js',
+			'js/autoNumeric.js',
+		);
+		Loader::loadJSExt('Core', $files);
+		$files = array(
+			'bootstrap/lib/upload/cssUpload.css',
+			'bootstrap/js/bootstrap.min.js',
+			'bootstrap/lib/upload/jquery.uploadfile.js',
+			'js/common_admin.js',
+
+			'bootstrap/lib/datetimepicker/datetimepicker.css',
+			'bootstrap/lib/datetimepicker/jquery.datetimepicker.js',
+		);
+		Loader::load('Core', $files);
+
+
 		$param = arg();
 		$arrItem = array();
 		$id = 0;
