@@ -104,6 +104,15 @@ check_valid_form = {
 				agree.addClass('error').focus();
 				return false;
 			}
+			// check_valid_form.ajax_check_shop_reg_exist(name.val(), phone.val(), email.val());
+			// var error = jQuery('span.show-error').length;
+			// alert(error);
+			// return false;
+			// if(error){
+			// 	return false;
+			// }else{
+			// 	jQuery("form.formSendRegister").submit();
+			// }
 		});
 	},
 	change_pass:function(){
@@ -271,6 +280,7 @@ check_valid_form = {
 		});
 	},
 	ajax_check_shop_reg_exist:function(user_shop, shop_phone, shop_email){
+		jQuery('span.show-error').remove();
 		var url = BASEPARAMS.base_url+'/ajax-check-user-reg-exist';
 		jQuery.ajax({
 			type: "POST",
@@ -297,6 +307,7 @@ check_valid_form = {
 					}else{
 						jQuery('.formSendRegister input[name="shop_email"]').removeClass('error').nextAll('span.show-error').remove();
 					}
+					return false;
 				}
 			}
 		});
