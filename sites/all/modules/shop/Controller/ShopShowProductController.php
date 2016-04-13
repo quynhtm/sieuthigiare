@@ -6,8 +6,35 @@
 * @Version	 : 1.0
 */
 class ShopShowProductController{
-	
+	static $shop_id = 0;
+	static $category_id = 0;
+	static $user_shop = array();
 	public function __construct(){
+		//lay param khi vao trang shop
+		$param = arg();
+		//shop_id
+		if(isset($param[1]) && $param[1] >0){
+			$this->shop_id = intval($param[1]);
+		}
+		//category_id
+		if(isset($param[2]) && $param[2] >0){
+			$this->category_id= intval($param[2]);
+		}
+
+		//kiem tra xem shop do co ton tai hay ko
+		if($this->shop_id > 0){
+			$this->user_shop = DataCommon::getShopById($this->shop_id);
+			if(!empty($this->user_shop)){
+				if(isset($this->user_shop['shop_status']) && $this->user_shop['shop_status'] != STASTUS_SHOW){
+					//redirect sang trang 404
+				}
+			}else{
+				//redirect sang trang 404
+			}
+		}else{
+			//redirect sang trang 404
+		}
+
 		$files = array(
 	            'css/font-awesome.css',
 	        );
@@ -15,14 +42,13 @@ class ShopShowProductController{
 	}
 
 	public function shopshowProduct(){
-		
 		$limit = SITE_RECORD_PER_PAGE_SHOP_NORMAL;
 		
 		$dataSearch['product_status'] = trim(FunctionLib::getParam('product_status','1'));
 		$dataSearch['category_id'] = FunctionLib::getParam('category_id','');
 
 		$arrFields = array('product_id', 'category_name','product_name', 'product_price_sell', 'product_price_market', 'product_image', 'product_image_hover', 'product_type_price', 'product_selloff', 'user_shop_id');
-		$result = ShopShowProductModel::getSearchListItems($dataSearch, $limit, $arrFields);
+		$result = ShopShowProductModel::getProductShop($dataSearch, $limit, $arrFields);
 		$phone = '';
 		$arrCategoryChildren = array();
 

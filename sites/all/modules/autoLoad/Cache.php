@@ -14,6 +14,8 @@ class Cache {
 
     const CACHE_USER_SHOP_ID = 'cache_shop_id_';
 
+    const CACHE_ON = 0 ;// 0: không dùng qua cache, 1: dùng qua cache
+
 	public function do_put( $key, $value, $time = 0 ){
         //if $time = 0: mac dinh la 5nam (^_^)
         $cache = phpFastCache();

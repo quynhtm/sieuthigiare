@@ -50,18 +50,23 @@ class DataCommon{
 	 */
 	public static function getShopById($id_shop = 0){
 		if($id_shop <= 0) return array();
-		$Cache = new Cache();
-		$user_shop = $Cache->do_get(Cache::CACHE_USER_SHOP_ID.$id_shop);
-		if($user_shop == null){
+		$user_shop = array();
+		if(Cache::CACHE_ON){
+			$cache = new Cache();
+			$user_shop = $cache->do_get(Cache::CACHE_USER_SHOP_ID.$id_shop);
+		}
+		if($user_shop == null || empty($user_shop)){
 			$query = db_select(self::$table_user_shop, 's')
 				->condition('s.shop_id', $id_shop, '=')
 				->fields('s');
 			$data = $query->execute();
 			if(!empty($data)){
 				foreach($data as $k=> $cate){
-					$user_shop[$cate->shop_id] = $cate;
+					$user_shop = $cate;
 				}
-				$Cache->do_put(Cache::CACHE_USER_SHOP_ID.$id_shop, $user_shop, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+				if(Cache::CACHE_ON) {
+					$cache->do_put(Cache::CACHE_USER_SHOP_ID . $id_shop, $user_shop, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+				}
 			}
 		}
 		return $user_shop;

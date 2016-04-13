@@ -10,36 +10,22 @@ class ShopShowProductModel{
     static $primary_key = 'product_id';
     static $foreign_key_user_shop = 'user_shop_id';
     
-	public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
-        $param = arg();
-        $shop_id = 0;
-        if(isset($param[1]) && $param[1] >0){
-            $shop_id = intval($param[1]);
-        }
+	public static function getProductShop($shop_id = 0,$category_id = 0, $limit = 30, $arrFields = array()){
         if(empty($arrFields))
             $arrFields = self::$arrFields;
         
         if(!empty($arrFields)){
-             $sql = db_select(self::$table_action, 'i')->extend('PagerDefault');
+            $sql = db_select(self::$table_action, 'i')->extend('PagerDefault');
             foreach($arrFields as $field){
                 $sql->addField('i', $field, $field);
             }
+            $sql->condition('i.product_status', STASTUS_SHOW, '=');
+            $sql->condition('i.is_block', PRODUCT_NOT_BLOCK, '=');
             $sql->condition('i.'.self::$foreign_key_user_shop, $shop_id, '=');
-            /*Begin search*/
-            if(!empty($dataSearch)){
-                foreach($dataSearch as $field =>$value){
-                    
-                    if($field === 'category_id' && $value != ''){
-                        $sql->condition('i.'.$field, $value, '=');
-                    }
 
-                    if($field === 'status' && $value != -1){
-                        $sql->condition('i.'.$field, $value, '=');
-                    }
-                    
-                }
+            if(isset($category_id) && $category_id > 0){
+                $sql->condition('i.category_id', $category_id, '=');
             }
-            
             /*End search*/
             $result = $sql->limit($limit)->orderBy('i.'.self::$primary_key, 'DESC')->execute();
             $arrItem = (array)$result->fetchAll();

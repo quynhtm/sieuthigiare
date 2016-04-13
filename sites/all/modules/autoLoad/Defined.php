@@ -70,6 +70,8 @@ define('TYPE_PRICE_CONTACT', 2);
 define('PRODUCT_NOMAL', 1);
 define('PRODUCT_HOT', 2);
 define('PRODUCT_SELLOFF', 3);
+define('PRODUCT_BLOCK', 0);
+define('PRODUCT_NOT_BLOCK', 1);
 
 //loai shop
 define('SHOP_FREE', 1);
