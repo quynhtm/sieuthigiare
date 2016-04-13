@@ -60,7 +60,7 @@ function Shop_menu() {
 		"title" => t('Quản lý sản phẩm'),
 		"description" => "Quản lý sản phẩm",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('AdminShopController/productShop'),
+		'page arguments' => array('ProductShopController/productShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -68,7 +68,7 @@ function Shop_menu() {
 		"title" => t('Đăng sản phẩm'),
 		"description" => "Đăng sản phẩm",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('AdminShopController/productFormShop'),
+		'page arguments' => array('ProductShopController/productFormShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -76,7 +76,7 @@ function Shop_menu() {
 		"title" => t('Sửa sản phẩm'),
 		"description" => "Sửa sản phẩm",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('AdminShopController/productFormShop'),
+		'page arguments' => array('ProductShopController/productFormShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -84,7 +84,7 @@ function Shop_menu() {
 		"title" => t('xóa sản phẩm'),
 		"description" => "Xóa sản phẩm",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('AdminShopController/productDeleteShop'),
+		'page arguments' => array('ProductShopController/productDeleteShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
