@@ -294,7 +294,7 @@ class ProductShopController{
 		//lay param khi vao trang shop
 		$param = arg();
 		//shop_id
-		if(isset($param[1]) && $param[1] >0){
+		if(isset($param[1]) && $param[1] != ''){
 			$this->shop_id = intval($param[1]);
 		}
 		//category_id

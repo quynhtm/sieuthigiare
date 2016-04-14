@@ -3,7 +3,7 @@
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="link-breadcrumb">
-				<a href="">Trang chủ</a><i class="icon-double-angle-right"></i>
+				<a href="<?php echo $base_url; ?>">Trang chủ</a><i class="icon-double-angle-right"></i>
 				<a href=""><?php echo isset($user_shop->shop_name)? $user_shop->shop_name : 'Trang chủ của shop';?></a>
 			</div>
 			<div class="main-view-post box-register">
@@ -16,7 +16,7 @@
 						?>
 						<ul>
 							<?php foreach($arrCategoryChildren as $k =>$v){?>
-							<li><a href="<?php echo $base_url.'/gian-hang/'.$shop_id.'/c'.$k.'/shop-teen.html' ?>" title="<?php echo $v?>"><?php echo $v?></a></li>
+							<li><a href="<?php echo $base_url.'/gian-hang/'.$shop_id.'/c'.$k.'/'.Stdio::pregReplaceStringAlias($v).'.html' ?>" title="<?php echo $v?>"><?php echo $v?></a></li>
 							<?php } } ?>
 						</ul>
 					</div>
@@ -29,11 +29,15 @@
 							<div class="col-lg-3 col-xs-3 ">
 								<div class="item">
 									<div class="post-thumb">
-										<a href="" title=""><img src="<?php echo $v->url_image ?>" alt="<?php echo $v->product_name?>" alt="<?php echo $v->product_name?>" data-other-src="<?php echo $v->url_image_hover?>"></a>
+										<a href="<?php echo $base_url.'/san-pham/p'.$v->product_id.'/'.Stdio::pregReplaceStringAlias($v->product_name).'.html' ?>" title="<?php echo $v->product_name?>">
+											<img src="<?php echo $v->url_image ?>" alt="<?php echo $v->product_name?>" data-other-src="<?php echo $v->url_image_hover?>">
+										</a>
 									</div>
 									<div class="item-content">
 										<div class="title-info">
-											<h4 class="post-title"><a title="<?php echo $v->product_name?>" href=""><?php echo $v->product_name?></a></h4>
+											<h4 class="post-title">
+												<a title="<?php echo $v->product_name?>" href="<?php echo $base_url.'/san-pham/p'.$v->product_id.'/'.Stdio::pregReplaceStringAlias($v->product_name).'.html' ?>"><?php echo $v->product_name?></a>
+											</h4>
 											<div class="item-price">
 	                                    		<?php if($v->product_type_price == 2){?>
 	                                    			<span class="amount-call">Liên hệ: <i class="num-call"><?php echo $phone ?></i></span>

@@ -97,7 +97,7 @@ function Shop_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
-	$items["chi-tiet-san-pham.html"] = array(
+	$items["san-pham/%/%"] = array(
 		"title" => t('Chi tiết sản phẩm'),
 		"description" => "Chi tiết sản phẩm",
 		'page callback' => 'menuLoad',

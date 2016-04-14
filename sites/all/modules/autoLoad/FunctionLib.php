@@ -325,15 +325,26 @@ class FunctionLib{
 			if($end_cut_str < 0 && strlen($str) > abs($end_cut_str)){
 				$str = substr($str, 0, $end_cut_str);
 			}
-			return $str;
+			return intval($str);
+		}
+		return '';
+	}
+
+	/*
+	* DuyNx cut string
+	* $start_cut_str: so ky tu dau cat bo
+	* $end_add_str: so ky tu cuoi cat bo
+	*/
+	public static function cutStr($str='', $start_cut_str=0, $end_cut_str=0){
+		if($str != ''){
+			if($start_cut_str > 0){
+				$str = substr($str, $start_cut_str);
+			}
+			if($end_cut_str < 0 && strlen($str) > abs($end_cut_str)){
+				$str = substr($str, 0, $end_cut_str);
+			}
+			return intval($str);
 		}
 		return '';
 	}
 }
-
-//$a = FunctionLib::base64EncodeStr(BASE64_SHOPID, '', '4');
-//echo $a;die;
-
-//$str = 'c2hvcGlkXzRhYng=';
-//$a = FunctionLib::base64DecodeStr($str, 7, -3);
-//echo $a;die;
