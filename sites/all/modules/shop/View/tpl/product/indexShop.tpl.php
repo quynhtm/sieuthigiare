@@ -15,7 +15,7 @@
 						?>
 						<ul>
 							<?php foreach($arrCategoryChildren as $k =>$v){?>
-							<li><a href="<?php echo FunctionLib::buildLinkCategory($shop_id, '', $k, $v) ?>" title="<?php echo $v?>"><?php echo $v?></a></li>
+							<li><a class="<?php if($category_id == $k){ ?>act<?php } ?>" href="<?php echo FunctionLib::buildLinkCategory($shop_id, '', $k, $v) ?>" title="<?php echo $v?>"><?php echo $v?></a></li>
 							<?php } } ?>
 						</ul>
 					</div>

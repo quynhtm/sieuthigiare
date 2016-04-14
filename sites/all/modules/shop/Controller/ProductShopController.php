@@ -259,22 +259,23 @@ class ProductShopController{
 						$value->url_image_hover = FunctionLib::getThumbImage($value->product_image_hover,$value->product_id,FOLDER_PRODUCT,300,300);
 					}
 				}
-			}
-			
-			if(!empty($this->user_shop)){
-				$phone = $this->user_shop->shop_phone;
-				//get list cagegory left shop
-				$shop_category = $this->user_shop->shop_category;
-				$arrCategoryChildren = DataCommon::getListCategoryChildren($shop_category);
-			}
+			}	
 		}
 		
+		if(!empty($this->user_shop)){
+			$phone = $this->user_shop->shop_phone;
+			//get list cagegory left shop
+			$shop_category = $this->user_shop->shop_category;
+			$arrCategoryChildren = DataCommon::getListCategoryChildren($shop_category);
+		}
+
 		return theme('indexShop', array(
 										'arrCategoryChildren'=>$arrCategoryChildren,
 										'result'=>$result['data'],
 										'phone'=>$phone,
 										'user_shop'=>$this->user_shop,
 										'pager' =>$result['pager'],
+										'category_id' =>$this->category_id,
 										));
 	}
 
@@ -298,8 +299,8 @@ class ProductShopController{
 			$this->shop_id = intval($param[1]);
 		}
 		//category_id
-		if(isset($param[2]) && $param[2] >0){
-			$this->category_id= intval($param[2]);
+		if(isset($param[2]) && $param[2] != ''){
+			$this->category_id= FunctionLib::cutStr($param[2], 1, 0);
 		}
 
 		//kiem tra xem shop do co ton tai hay ko

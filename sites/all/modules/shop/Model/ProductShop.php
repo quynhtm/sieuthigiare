@@ -181,7 +181,7 @@ class ProductShop{
         }
     }
     //index
-    public static function getIndexShop($shop_id = 0,$category_id = 0, $limit = 30, $arrFields = array()){
+    public static function getIndexShop($shop_id = 0, $category_id = 0, $limit = 30, $arrFields = array()){
         if($shop_id > 0){
             if(!empty($arrFields)){
                 $sql = db_select(self::$table_action, 'i')->extend('PagerDefault');

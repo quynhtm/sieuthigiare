@@ -347,7 +347,8 @@ a.btn-yahoo:hover{
 .left-category-shop ul li a{
     color: #333;
 }
-.left-category-shop ul li a:hover{
+.left-category-shop ul li a:hover,
+.left-category-shop ul li a.act{
     color: #0388cd;
 }
 .right-show-product-shop.body-list-item {
