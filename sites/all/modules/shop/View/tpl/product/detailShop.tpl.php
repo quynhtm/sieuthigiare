@@ -9,6 +9,7 @@
 			<div class="main-view-post box-detail-product">
 				<div class="wrap-main-view">
 					<?php 
+					$product_id=0;
 					$product_name='';
 					$product_sort_desc='';
 					$product_content = '';
@@ -17,7 +18,9 @@
 					$price_sell = 0;
 					$product_type_price=0;
 					$product_image ='';
+					$product_image_other ='';
 					foreach($result as $v){
+						$product_id = $v->product_id;
 						$product_name = $v->product_name;
 						$product_sort_desc = $v->product_sort_desc;
 						$product_content = $v->product_content;
@@ -31,19 +34,32 @@
 
 						$product_image = $v->product_image;
 						if($v->product_image != ''){
-							$product_image = FunctionLib::getThumbImage($v->product_image,$v->product_id,FOLDER_PRODUCT,300,300);
+							$product_image = FunctionLib::getThumbImage($v->product_image, $product_id, FOLDER_PRODUCT,800,800);
+						}
+						if($v->product_image_other != ''){
+							$product_image_other = unserialize($v->product_image_other);
 						}
 					?>
 					<div class="top-content-view">
 						<div class="left-slider-img">
+							<?php 
+							if(!empty($product_image_other)){
+							?>
 							<ul class="list-thumb-img">
-								<li><a href=""><img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/s1.jpg" alt=""></a></li>
-								<li><a href=""><img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/s2.jpg" alt=""></a></li>
-								<li><a href=""><img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/s3.jpg" alt=""></a></li>
+								<?php 
+								foreach($product_image_other as $img){
+								?>
+								<li>
+									<a href="javascript:void(0)" data-zoom="<?php echo FunctionLib::getThumbImage($img, $product_id, FOLDER_PRODUCT, 800, 800) ?>">
+										<img src="<?php echo FunctionLib::getThumbImage($img, $product_id, FOLDER_PRODUCT, 100, 100) ?>" alt="<?php echo $product_name ?>"/>
+									</a>
+								</li>
+								<?php } ?>
 							</ul>
+							<?php } ?>
 							<div class="max-thumb-img">
 								<?php if($product_image != ''){?>
-								<img src="<?php echo $product_image; ?>" alit="<?php echo $product_name ?>"/>
+								<img src="<?php echo $product_image; ?>" alt="<?php echo $product_name ?>"/>
 								<?php } ?>
 							</div>
 						</div>

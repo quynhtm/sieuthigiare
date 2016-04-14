@@ -490,9 +490,9 @@ a.btn-yahoo:hover{
     width: 480px;
 }
 .list-thumb-img {
-    height: 540px;
-    overflow: hidden;
     float: left;
+    max-height: 500px;
+    overflow: hidden;
     width: 60px;
 }
 .list-thumb-img li {
@@ -507,10 +507,14 @@ a.btn-yahoo:hover{
     min-height: 50px;
     overflow: hidden;
     width: 50px;
+    padding: 5px 0px;
 }
 .list-thumb-img a img {
     transition-duration: 0.2s;
     width: 100%;
+}
+.list-thumb-img a.act {
+    border: 1px solid #ff0000;
 }
 .left-slider-img .max-thumb-img {
     float: left;

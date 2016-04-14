@@ -7,6 +7,7 @@ jQuery(document).ready(function($){
 
 	tab_select.detail_tab();
 	hover_img.change_img();
+	hover_img.change_img_detail();
 });
 check_valid_form = {
 	check_login:function(){
@@ -325,6 +326,14 @@ hover_img = {
 			var img_hover = jQuery(this).find('.post-thumb img').attr('data-other-src');
 			jQuery(this).find('.post-thumb img').attr('src', img_hover);
 			jQuery(this).find('.post-thumb img').attr('data-other-src', img);
+		});
+	},
+	change_img_detail:function(){
+		jQuery(".list-thumb-img a").click(function(){
+			jQuery('.list-thumb-img a').removeClass('act');
+			jQuery(this).addClass('act');
+			var img_change = jQuery(this).attr('data-zoom');
+			jQuery('.left-slider-img .max-thumb-img img').attr('src', img_change);
 		});
 	}
 }
