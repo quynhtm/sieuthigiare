@@ -308,7 +308,6 @@ class FunctionLib{
 			}
 			return base64_encode($str);
 		}
-
 		return '';
 	}
 	/*
@@ -328,6 +327,14 @@ class FunctionLib{
 			return $str;
 		}
 		return '';
+	}
+
+	public static function buildLinkDetail($product_id = 0, $product_name = ''){
+		$url = '';
+		if($product_id > 0 && $product_name > 0){
+			$url = 'domain/san-pham/p'.$product_id.'/'.self::safe_title($product_name).'.html';
+		}
+		return $url;
 	}
 }
 
