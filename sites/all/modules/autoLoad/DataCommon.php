@@ -12,6 +12,8 @@ class DataCommon{
 	public static $table_product = TABLE_PRODUCT;
 	public static $primary_key_province = 'province_id';
 
+	const CACHE_ON = 0;
+
 	public static function getListCategoryParent(){
 		$query = db_select(self::$table_category, 'c')
 			->condition('c.category_parent_id', 0, '=')

@@ -27,9 +27,6 @@ define('base_url_lang', $base_url .'/'. ((!isset($language->language) || $langua
 define('AJAX_DOMAIN', '/sieuthigiare.vn/');
 define('IS_WEB', 0);// 0:local, 1:web
 
-define('BASE64_SHOPID', 'shopid_');
-define('BASE64_CATID', 'catid_');
-
 /**
  * QuynhTM add
  * Dinh nghia cac Table cho website
@@ -81,7 +78,7 @@ define('SHOP_FREE', 1);
 define('SHOP_NOMAL', 2);
 define('SHOP_VIP', 3);
 
-define('IMAGE_ERROR', 113); // dung sau quet cac item up ?nh nhung ko cap nhat DB
+define('IMAGE_ERROR', 113); // dung sau quet cac item up anh nhung ko cap nhat DB
 define('IMAGE_DEFAULT', $base_url.'/sites/all/modules/autoLoad/img/default.png');
 
 
