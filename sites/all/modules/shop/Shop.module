@@ -2,24 +2,16 @@
 /*
 * @Created by: HSS
 * @Author	 : nguyenduypt86@gmail.com
-* @Date 	 : 06/2014
+* @Date 	 : 04/2016
 * @Version	 : 1.0
 */
 function Shop_menu() {
 	//register shop
-	$items["ajax-check-user-reg-exist"] = array(
-		"title" => t('Đăng ký shop'),
-		"description" => "Đăng ký shop",
-		'page callback' => 'menuLoad',
-		'page arguments' => array('RegShopController/ajaxCheckShopRegExist'),
-		'access callback' => TRUE,
-		'type' => MENU_CALLBACK,
-	);
 	$items["dang-ky.html"] = array(
 		"title" => t('Đăng ký shop'),
 		"description" => "Đăng ký shop",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('RegShopController/regShop'),
+		'page arguments' => array('RegShopController/registerShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -51,11 +43,19 @@ function Shop_menu() {
 		"title" => t('Đổi mật khẩu'),
 		"description" => "Đổi mật khẩu",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('RegShopController/editPasswordShop'),
+		'page arguments' => array('RegShopController/editPassShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
-	//admin shop
+	$items["ajax-check-user-reg-exist"] = array(
+		"title" => t('Đăng ký shop'),
+		"description" => "Đăng ký shop",
+		'page callback' => 'menuLoad',
+		'page arguments' => array('RegShopController/ajaxCheckShopExist'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+	//product shop
 	$items["quan-ly-gian-hang.html"] = array(
 		"title" => t('Quản lý sản phẩm'),
 		"description" => "Quản lý sản phẩm",
@@ -93,7 +93,7 @@ function Shop_menu() {
 		"title" => t('Gian hàng'),
 		"description" => "Gian hàng",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('IndexShopController/indexShop'),
+		'page arguments' => array('ProductShopController/indexShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -101,11 +101,11 @@ function Shop_menu() {
 		"title" => t('Chi tiết sản phẩm'),
 		"description" => "Chi tiết sản phẩm",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('IndexShopController/detailShop'),
+		'page arguments' => array('ProductShopController/detailShop'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
-	//gio hang
+	//cart shop
 	$items["gio-hang.html"] = array(
 		"title" => t('Giỏ hàng'),
 		"description" => "Giỏ hàng",
@@ -129,38 +129,38 @@ function Shop_menu() {
 function Shop_theme() {
 	return array(
 		//register shop
-	    'regShop' => array(
-	      'template' => 'View/tpl/regShop'
+	    'registerShop' => array(
+	      'template' => 'View/tpl/reg/registerShop'
 	    ),
 	    'loginShop' => array(
-	      'template' => 'View/tpl/loginShop'
+	      'template' => 'View/tpl/reg/loginShop'
 	    ),
 	    'editInfoShop' => array(
-	      'template' => 'View/tpl/editInfoShop'
+	      'template' => 'View/tpl/reg/editInfoShop'
 	    ),
-	    'editPasswordShop' => array(
-	      'template' => 'View/tpl/editPasswordShop'
+	    'editPassShop' => array(
+	      'template' => 'View/tpl/reg/editPassShop'
 	    ),
-	    //admin shop
-	    'adminShop' => array(
-	      'template' => 'View/tpl/adminShop'
+	    //product shop
+	    'productShop' => array(
+	      'template' => 'View/tpl/product/productShop'
 	    ),
-	    'adminFormShop' => array(
-	      'template' => 'View/tpl/adminFormShop'
+	    'productFormShop' => array(
+	      'template' => 'View/tpl/product/productFormShop'
 	    ),
 	    //index shop
 	    'indexShop' => array(
-	      'template' => 'View/tpl/indexShop'
+	      'template' => 'View/tpl/product/indexShop'
 	    ),
 	    'detailShop' => array(
-	      'template' => 'View/tpl/detailShop'
+	      'template' => 'View/tpl/product/detailShop'
 	    ),
-
+	    //cart shop
 	    'cartShop' => array(
-	      'template' => 'View/tpl/cartShop'
+	      'template' => 'View/tpl/cart/cartShop'
 	    ),
 	    'cartSendShop' => array(
-	      'template' => 'View/tpl/cartSendShop'
+	      'template' => 'View/tpl/cart/cartSendShop'
 	    ),  
 	);
 }
@@ -174,9 +174,6 @@ function Shop_init() {
 			
 			'Model/ProductShop.php',
 			'Controller/ProductShopController.php',
-			
-			'Model/IndexShop.php',
-			'Controller/IndexShopController.php',
 			
 			'Model/CartShop.php',
 			'Controller/CartShopController.php',

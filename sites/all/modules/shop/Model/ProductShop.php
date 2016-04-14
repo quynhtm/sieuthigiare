@@ -8,15 +8,10 @@
 class ProductShop{
 	static $table_action = TABLE_PRODUCT;
     static $primary_key = 'product_id';
-    
-	static $table_action_provice = TABLE_PROVINCE;
-	static $primary_key_province = 'province_id';
-
-    static $primary_key_user_shop = 'user_shop_id';
-
+    static $foreign_key_user_shop = 'user_shop_id';
     static $table_action_category = TABLE_CATEGORY;
     static $primary_key_cagegory = 'category_id';
-
+    //admin
 	public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
         global $base_url, $user_shop;
 
@@ -28,7 +23,7 @@ class ProductShop{
             foreach($arrFields as $field){
                 $sql->addField('i', $field, $field);
             }
-            $sql->condition('i.'.self::$primary_key_user_shop, $user_shop->shop_id, '=');
+            $sql->condition('i.'.self::$foreign_key_user_shop, $user_shop->shop_id, '=');
             /*Begin search*/
             $cond = '';
             $arrCond = array();
@@ -38,7 +33,7 @@ class ProductShop{
             if(!empty($dataSearch)){
                 foreach($dataSearch as $field =>$value){
                     
-                    if($field === 'category_id' && $value != ''){
+                    if($field === 'category_id' && $value != -1){
                         $sql->condition('i.'.$field, $value, '=');
                         array_push($arrCond, $field.' = '.$value);
                     }
@@ -80,7 +75,7 @@ class ProductShop{
                     }
                 }
 
-                array_push($arrCond, self::$primary_key_user_shop.' = '.$user_shop->shop_id);
+                array_push($arrCond, self::$foreign_key_user_shop.' = '.$user_shop->shop_id);
                 if(!empty($arrCond)){
                     $cond = implode(' AND ', $arrCond);
                 }
@@ -122,13 +117,6 @@ class ProductShop{
         return false;
     }
 
-    public static function deleteId($id){
-        if($id > 0){
-            return DB::deleteId(self::$table_action, self::$primary_key, $id);
-        }
-        return false;
-    }
-
     public static function getNameCategory($catid=0){
         if($catid > 0){
             $arrItem =  DB::getItemById(self::$table_action_category, self::$primary_key_cagegory, array('category_name'), $catid);
@@ -164,7 +152,7 @@ class ProductShop{
         return false;
     }
 
-    public static function deleteOne($id=0){
+    public static function deleteId($id=0){
         global $user_shop;
 
         if($id > 0){
@@ -188,8 +176,35 @@ class ProductShop{
                         }
                     }
                 }
-                self::deleteId($id);
+                DB::deleteId(self::$table_action, self::$primary_key, $id); 
             }
         }
+    }
+    //index
+    public static function getIndexShop($shop_id = 0,$category_id = 0, $limit = 30, $arrFields = array()){
+        if($shop_id > 0){
+            if(!empty($arrFields)){
+                $sql = db_select(self::$table_action, 'i')->extend('PagerDefault');
+                foreach($arrFields as $field){
+                    $sql->addField('i', $field, $field);
+                }
+                $sql->condition('i.product_status', STASTUS_SHOW, '=');
+                $sql->condition('i.is_block', PRODUCT_NOT_BLOCK, '=');
+                $sql->condition('i.'.self::$foreign_key_user_shop, $shop_id, '=');
+
+                if(isset($category_id) && $category_id > 0){
+                    $sql->condition('i.category_id', $category_id, '=');
+                }
+
+                $result = $sql->limit($limit)->orderBy('i.'.self::$primary_key, 'DESC')->execute();
+                $arrItem = (array)$result->fetchAll();
+
+                $pager = array('#theme' => 'pager','#quantity' => 3);
+                $data['data'] = $arrItem;
+                $data['pager'] = $pager;
+                return $data;
+            }
+        }
+        return array('data' => array(),'total' => 0,'pager' => array(),);
     }
 }

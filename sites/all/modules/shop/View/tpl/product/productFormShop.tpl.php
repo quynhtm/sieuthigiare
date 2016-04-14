@@ -135,7 +135,7 @@
 						                                        onclick="Common_admin.checkedImageHover('<?php echo $v ?>','<?php echo $k ?>');">
 						                                        <label for="chẹcked_image_hover<?php echo $k ?>" style='font-weight:normal'>Ảnh Hover</label>
 						                                        <br/>
-						                                        <a href="javascript:void(0);" id="sys_delete_img_other_<?php echo $k ?>"onclick="Common_admin.removeImage('<?php echo $k ?>','<?php if(isset($arrItem->product_id)){ echo $arrItem->product_id; } ?>','<?php echo $v ?>','1');">Xóa ảnh</a>
+						                                        <a href="javascript:void(0);" id="sys_delete_img_other_<?php echo $k ?>"onclick="Common_admin.removeImage('<?php echo $k ?>','<?php if(isset($arrItem->product_id)){ echo $arrItem->product_id; } ?>','<?php echo $v ?>','2');">Xóa ảnh</a>
 						                                        <span style="display: none"><b><?php echo $k ?></b></span>
 						                                    </div>
 						                                    <?php

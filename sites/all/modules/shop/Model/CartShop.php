@@ -5,6 +5,6 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0
 */
-class ShopCart{
+class CartShop{
 	
 }

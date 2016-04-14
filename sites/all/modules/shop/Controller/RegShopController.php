@@ -5,8 +5,9 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0
 */
+
 class RegShopController{
-	public function regShop(){
+	public function registerShop(){
 		global $base_url, $user_shop;
 		
 		if($user_shop->shop_id != 0){
@@ -40,10 +41,11 @@ class RegShopController{
 				drupal_goto($base_url.'/dang-ky.html');
 			}
 
-			//check user and hash pass
-			$check_user_exists = RegShop::checkNameMailPhone($dataInput ['user_shop']['value'], $dataInput ['shop_email']['value'], $dataInput ['shop_phone']['value']);
-			if($check_user_exists != ''){
-				drupal_set_message($check_user_exists, 'error');
+			//check shop and hash pass
+			$check_shop_exists = RegShop::checkNamePhoneMail($dataInput['user_shop']['value'], $dataInput['shop_phone']['value'], $dataInput['shop_email']['value']);
+			if(!empty($check_shop_exists)){
+				$arrError = implode('<br/>', $check_shop_exists);
+				drupal_set_message($arrError, 'error');
 				drupal_goto($base_url.'/dang-ky.html');
 			}else{
 				if($dataInput['user_password']['value'] == $dataInput['rep_user_password']['value']){
@@ -63,7 +65,7 @@ class RegShopController{
 						);
 						$query = RegShop::insert($data_post);
 						if($query){
-							$getItemUserShop = RegShop::getUserbyCond($dataInput ['user_shop']['value']);
+							$getItemUserShop = RegShop::getShopByCond($dataInput ['user_shop']['value']);
 							if(!empty($getItemUserShop)){
 								$user_shop = $getItemUserShop[0];
 								Session::createSessionUserShop($user_shop);
@@ -78,14 +80,14 @@ class RegShopController{
 				}else{
 					drupal_set_message('Mật khẩu không khớp và phải lớn hơn 6 ký tự!', 'error');
 					drupal_goto($base_url.'/dang-ky.html');
-				}	
-				
+				}
 			}
 		}
-		$listProvices = RegShop::getAllProvices(200);
+		
+		$listProvices = DataCommon::getAllProvices();
 		$data = array('listProvices' => $listProvices);
 
-		$view = theme('regShop', $data);
+		$view = theme('registerShop', $data);
 		return $view;
 	}
 
@@ -108,16 +110,16 @@ class RegShopController{
 				drupal_set_message($errors, 'error');
 				drupal_goto($base_url.'/dang-nhap.html');
 			}else{
-				$arrOneItem = RegShop::getUserExists($dataInput ['user_shop_login']['value']);
+				$arrOneItem = RegShop::getShopByCond($dataInput ['user_shop_login']['value']);
 				if(!empty($arrOneItem)){
-					RegShop::checkLoginUserShop($arrOneItem[0], $dataInput ['password_shop_login']['value']);
+					RegShop::checkLoginShop($arrOneItem[0], $dataInput ['password_shop_login']['value']);
 				}else{
 					drupal_set_message('Tên đăng nhập hoặc mật khẩu không đúng!', 'error');
 					drupal_goto($base_url.'/dang-nhap.html');
 				}
 			}
 		}
-		$listProvices = RegShop::getAllProvices(200);
+		$listProvices = DataCommon::getAllProvices();
 		$data = array('listProvices' => $listProvices);
 
 		$view = theme('loginShop', $data);
@@ -155,7 +157,7 @@ class RegShopController{
 				$errors .= 'Email không đúng định dạng!<br/>';
 			}
 			//check phone, mail
-			$check_valid_mail_phone = RegShop::checkMailPhoneOfUser($user_shop->shop_id, $dataInput ['shop_email']['value'], $dataInput ['shop_phone']['value']);
+			$check_valid_mail_phone = RegShop::checkMailPhoneOfShop($user_shop->shop_id, $dataInput ['shop_email']['value'], $dataInput ['shop_phone']['value']);
 			if($check_valid_mail_phone != ''){
 				$errors .= $check_valid_mail_phone;
 			}
@@ -178,7 +180,7 @@ class RegShopController{
 			drupal_set_message('Cập nhật thông tin gian hàng thành công!');
 			drupal_goto($base_url.'/quan-ly-gian-hang.html');
 		}
-		$listProvince = RegShop::getAllProvices($limit=200);
+		$listProvince = DataCommon::getAllProvices();
 		$arrCategoryParent = DataCommon::getListCategoryParent();
 		$dataCategory['shop_category'] = $user_shop->shop_category;
 		$optionCategoryParent = FunctionLib::getOption(array(-1=>'Chọn danh mục cha') + $arrCategoryParent, $dataCategory['shop_category']);
@@ -186,7 +188,7 @@ class RegShopController{
 		return $view = theme('editInfoShop', array('listProvince'=>$listProvince, 'optionCategoryParent'=>$optionCategoryParent));
 	}
 
-	public function editPasswordShop(){
+	public function editPassShop(){
 		global $base_url, $user_shop;
 
 		if($user_shop->shop_id == 0){
@@ -205,7 +207,7 @@ class RegShopController{
 				drupal_goto($base_url.'/doi-mat-khau.html');
 			}
 
-			$arrUser = RegShop::getUserExists($dataInput['user_shop_login']['value']);
+			$arrUser = RegShop::getShopByCond($dataInput['user_shop_login']['value']);
 			if(!empty($arrUser) && $arrUser[0]->shop_id == $user_shop->shop_id){
 				if($dataInput['user_shop_password']['value'] == $dataInput['user_shop_rep_password']['value']){
 					$check_valid_pass = ValidForm::checkRegexPass($dataInput['user_shop_password']['value'], 6);
@@ -233,14 +235,14 @@ class RegShopController{
 				drupal_goto($base_url.'/doi-mat-khau.html');
 			}
 		}
-		return $view = theme('editPasswordShop');
+		return $view = theme('editPassShop');
 	}
 
 	public function logoutShop(){
-		RegShop::logoutUserShop();
+		RegShop::logoutShop();
 	}
 
-	public function ajaxCheckRegShopExist(){
+	public function ajaxCheckShopExist(){
 		global $base_url, $user_shop;
 		
 		if($user_shop->shop_id != 0){
@@ -250,7 +252,7 @@ class RegShopController{
 		$user_shop = FunctionLib::getParam('user_shop','');
     	$shop_phone = FunctionLib::getParam('shop_phone','');
     	$shop_email = FunctionLib::getParam('shop_email','');
-    	$err = RegShop::ajaxCheckNameMailPhone($user_shop, $shop_phone, $shop_email);
+    	$err = RegShop::checkNamePhoneMail($user_shop, $shop_phone, $shop_email);
     	if(!empty($err)){
     		echo json_encode($err);die;
     	}else{

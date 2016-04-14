@@ -6,6 +6,11 @@
 * @Version	 : 1.0
 */
 class ProductShopController{
+	
+	public $shop_id = 0;
+	public $category_id = 0;
+	public $user_shop = array();
+
 	private $arrStatus = array(-1 => '--Chọn trạng thái--', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
 	private $arrTypePrice = array(-1 => '--Chọn kiểu giá--', TYPE_PRICE_NUMBER => 'Hiển thị giá bán', TYPE_PRICE_CONTACT => 'Liên hệ với shop');
 	private $arrTypeProduct = array(-1 => '--Chọn loại sản phẩm--', PRODUCT_NOMAL => 'Sản phẩm bình thường', PRODUCT_HOT => 'Sản phẩm nổi bật', PRODUCT_SELLOFF => 'Sản phẩm giảm giá');
@@ -28,7 +33,7 @@ class ProductShopController{
 		//search
 		$dataSearch['product_id'] = FunctionLib::getParam('product_id',0);
 		$dataSearch['product_name'] = trim(FunctionLib::getParam('product_name',''));
-		$dataSearch['category_id'] = FunctionLib::getParam('category_id','');
+		$dataSearch['category_id'] = FunctionLib::getParam('category_id', -1);
 		$dataSearch['product_status'] = FunctionLib::getParam('product_status', -1);
 		$dataSearch['date_start'] = FunctionLib::getParam('date_start', '');
 		$dataSearch['date_end'] = FunctionLib::getParam('date_end', '');
@@ -66,7 +71,6 @@ class ProductShopController{
 			drupal_set_message('Bạn không có quyền truy cập. Vui lòng đăng nhập tài khoản!', 'error');
 			drupal_goto($base_url);
 		}
-
 
 		$files = array(
 			'bootstrap/lib/ckeditor/ckeditor.js',
@@ -131,7 +135,6 @@ class ProductShopController{
 					'product_price_sell'=>array('value'=>FunctionLib::getIntParam('product_price_sell_hide','')),
 					'product_price_market'=>array('value'=>FunctionLib::getIntParam('product_price_market_hide','')),
 					'product_price_input'=>array('value'=>FunctionLib::getIntParam('product_price_input_hide','')),
-
 
 					'product_selloff'=>array('value'=>FunctionLib::getParam('product_selloff','')),
 					'product_image'=>array('value'=>FunctionLib::getParam('image_primary','')),
@@ -207,7 +210,7 @@ class ProductShopController{
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->product_status)? $arrItem->product_status : -1);
 		$optionTypeProduct = FunctionLib::getOption($this->arrTypeProduct, isset($arrItem->product_is_hot)? $arrItem->product_is_hot : -1);
 		$optionTypePrice = FunctionLib::getOption($this->arrTypePrice, isset($arrItem->product_type_price)? $arrItem->product_type_price : -1);
-		return theme('productForm',
+		return theme('productFormShop',
 			array('optionCategoryChildren'=>$optionCategoryChildren,
 				'optionStatus'=>$optionStatus,
 				'optionTypeProduct'=>$optionTypeProduct,
@@ -228,12 +231,94 @@ class ProductShopController{
 		if(!empty($listId)){
 			foreach($listId as $id){
 				if($id > 0){
-					ProductShop::deleteOne($id);
+					ProductShop::deleteId($id);
 				}
 			}
 			drupal_set_message('Xóa bài viết thành công.');
 		}
 		drupal_set_message('Xóa sản phẩm thành công!');
 		drupal_goto($base_url.'/quan-ly-gian-hang.html');
+	}
+
+	public function indexShop(){
+		
+		$this->cacheShop();
+
+		$limit = (isset($this->user_shop->is_shop) && $this->user_shop->is_shop = SHOP_VIP) ? SITE_RECORD_PER_PAGE_SHOP_VIP: SITE_RECORD_PER_PAGE_SHOP_NORMAL;
+		$arrFields = array('product_id', 'category_name','product_name', 'product_price_sell', 'product_price_market', 'product_image', 'product_image_hover', 'product_type_price', 'product_selloff', 'user_shop_id');
+		$result = ProductShop::getIndexShop($this->shop_id,$this->category_id, $limit, $arrFields);
+
+		$phone = '';
+		$arrCategoryChildren = array();
+
+		if(isset($result['data']) && !empty($result['data'])){
+			foreach($result['data'] as $k => &$value){
+				if( isset($value->product_image) && trim($value->product_image) != ''){
+					$value->url_image = $value->url_image_hover = FunctionLib::getThumbImage($value->product_image,$value->product_id,FOLDER_PRODUCT,300,300);
+					if($value->product_image_hover != ''){
+						$value->url_image_hover = FunctionLib::getThumbImage($value->product_image_hover,$value->product_id,FOLDER_PRODUCT,300,300);
+					}
+				}
+			}
+			
+			if(!empty($this->user_shop)){
+				$phone = $this->user_shop->shop_phone;
+				//get list cagegory left shop
+				$shop_category = $this->user_shop->shop_category;
+				$arrCategoryChildren = DataCommon::getListCategoryChildren($shop_category);
+			}
+		}
+		
+		return theme('indexShop', array(
+										'arrCategoryChildren'=>$arrCategoryChildren,
+										'result'=>$result['data'],
+										'phone'=>$phone,
+										'user_shop'=>$this->user_shop,
+										'pager' =>$result['pager'],
+										));
+	}
+
+	public function detailShop(){
+		$files = array(
+	            'bootstrap/lib/jcarousel/jquery.jcarousel.min.js',
+	            'bootstrap/lib/jcarousel/jcarousel.responsive.js',
+	            'bootstrap/lib/jcarousel/jcarousel.responsive.css',
+	        );
+	    Loader::load('Core', $files);
+
+		return theme('detailShop');
+	}
+
+	public function cacheShop(){
+		global $base_url;
+		//lay param khi vao trang shop
+		$param = arg();
+		//shop_id
+		if(isset($param[1]) && $param[1] >0){
+			$this->shop_id = intval($param[1]);
+		}
+		//category_id
+		if(isset($param[2]) && $param[2] >0){
+			$this->category_id= intval($param[2]);
+		}
+
+		//kiem tra xem shop do co ton tai hay ko
+		if($this->shop_id > 0){
+			$this->user_shop = DataCommon::getShopById($this->shop_id);
+			if(!empty($this->user_shop)){
+				if(isset($this->user_shop->shop_status) && $this->user_shop->shop_status != STASTUS_SHOW){
+					drupal_goto($base_url.'/page-404');
+				}
+			}else{
+				drupal_goto($base_url.'/page-404');
+			}
+		}else{
+			drupal_goto($base_url.'/page-404');
+		}
+
+		$files = array(
+	            	'css/font-awesome.css',
+	        	);
+	    Loader::load('Core', $files);
 	}
 }

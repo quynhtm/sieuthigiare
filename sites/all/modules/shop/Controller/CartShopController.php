@@ -2,10 +2,10 @@
 /*
 * @Created by: HSS
 * @Author	 : nguyenduypt86@gmail.com
-* @Date 	 : 06/2014
+* @Date 	 : 04/2016
 * @Version	 : 1.0
 */
-class ShopCartController{
+class CartShopController{
 	
 	public function cartShop(){
 		

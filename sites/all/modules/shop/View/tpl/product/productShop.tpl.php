@@ -11,7 +11,7 @@
 					<form action="" method="GET" id="frmSearch" class="frmSearch" name="frmSearch">
 						<div class="col-lg-3">
 							<div class="form-group">
-								<label class="control-label">Mã sản phẩm</label>
+								<label class="control-label">ID sản phẩm</label>
 								<div><input type="text" class="form-control input-sm" placeholder ="Mã sản phẩm" name="product_id" value="<?php echo $dataSearch['product_id'] ?>"/></div>
 							</div>
 							<div class="form-group">

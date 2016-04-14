@@ -10,6 +10,7 @@ class DataCommon{
 	public static $table_province = TABLE_PROVINCE;
 	public static $table_user_shop = TABLE_USER_SHOP;
 	public static $table_product = TABLE_PRODUCT;
+	public static $primary_key_province = 'province_id';
 
 	public static function getListCategoryParent(){
 		$query = db_select(self::$table_category, 'c')
@@ -93,5 +94,9 @@ class DataCommon{
 			}
 		}
 		return $product;
+	}
+
+	public static function getAllProvices(){
+		return DB::getItembyCond(self::$table_province, 'province_id, province_name', '', self::$primary_key_province.' ASC', 'province_status=1', '');
 	}
 }

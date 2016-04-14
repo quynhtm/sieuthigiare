@@ -104,7 +104,8 @@ check_valid_form = {
 				agree.addClass('error').focus();
 				return false;
 			}
-			// check_valid_form.ajax_check_shop_reg_exist(name.val(), phone.val(), email.val());
+			//check_valid_form.ajax_check_shop_reg_exist(name.val(), phone.val(), email.val());
+			//return false;
 		});
 	},
 	change_pass:function(){
