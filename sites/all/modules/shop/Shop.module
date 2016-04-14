@@ -123,6 +123,24 @@ function Shop_menu() {
 		'type' => MENU_CALLBACK,
 	);
 
+	//contact shop
+	$items["lien-he-quan-tri.html"] = array(
+		"title" => t('Quản lý liên hệ'),
+		"description" => "Quản lý liên hệ",
+		'page callback' => 'menuLoad',
+		'page arguments' => array('ContactShopController/contactShop'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+	$items["gui-lien-he.html"] = array(
+		"title" => t('Gửi liên hệ'),
+		"description" => "Gửi liên hệ",
+		'page callback' => 'menuLoad',
+		'page arguments' => array('ContactShopController/contactFormShop'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
   return $items;
 }
 
@@ -161,7 +179,15 @@ function Shop_theme() {
 	    ),
 	    'cartSendShop' => array(
 	      'template' => 'View/tpl/cart/cartSendShop'
-	    ),  
+	    ),
+
+		//contact shop
+		'contactShop' => array(
+			'template' => 'View/tpl/contact/contactShop'
+		),
+		'contactFormShop' => array(
+			'template' => 'View/tpl/contact/contactFormShop'
+		),
 	);
 }
 
@@ -174,6 +200,9 @@ function Shop_init() {
 			
 			'Model/ProductShop.php',
 			'Controller/ProductShopController.php',
+
+			'Model/ContactShop.php',
+			'Controller/ContactShopController.php',
 			
 			'Model/CartShop.php',
 			'Controller/CartShopController.php',

@@ -10,6 +10,7 @@
 				<li><a href="<?php echo FunctionLib::buildLinkCategory($user_shop->shop_id, $user_shop->shop_name, 0, '') ?>">Trang chủ shop</a></li>
 				<li><a href="<?php echo $base_url.'/quan-ly-gian-hang.html'?>">Quản lý sản phẩm</a></li>
 				<li><a href="<?php echo $base_url.'/quan-ly-quang-cao.html'?>">Quản lý quảng cáo</a></li>
+				<li><a href="<?php echo $base_url.'/lien-he-quan-tri.html'?>">Liên hệ quản trị</a></li>
 			</ul>
 		</div>
 	</div>

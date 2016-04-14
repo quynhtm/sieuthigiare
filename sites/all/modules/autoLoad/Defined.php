@@ -60,6 +60,8 @@ define('CONTACT_OK', 2);
 define('CONTACT_SUCCESS', 3);
 define('CONTACT_REASON_CUSTOMER', 1);
 define('CONTACT_REASON_SHOP', 2);
+define('CONTACT_TYPE_SEND', 1);//ki?u g?i
+define('CONTACT_TYPE_RECEIVE', 2);//receive ki?u nh?n
 
 define('BLOCK_FALSE', 0);
 define('BLOCK_TRUE', 1);
