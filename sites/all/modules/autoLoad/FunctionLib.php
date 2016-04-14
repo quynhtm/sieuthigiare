@@ -346,11 +346,12 @@ class FunctionLib{
 		}
 		return '';
 	}
-	
+
 	public static function buildLinkDetail($product_id = 0, $product_name = ''){
+		global $base_url;
 		$url = '';
-		if($product_id > 0 && $product_name > 0){
-			$url = 'domain/san-pham/p'.$product_id.'/'.self::safe_title($product_name).'.html';
+		if($product_id > 0 && $product_name !=''){
+			$url = $base_url.'/san-pham/p'.$product_id.'/'.self::safe_title($product_name).'.html';
 		}
 		return $url;
 	}
