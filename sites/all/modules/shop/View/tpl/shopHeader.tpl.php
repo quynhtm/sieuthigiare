@@ -7,7 +7,7 @@
 		<div class="navigator">
 			<ul>
 				<li><a href="<?php echo $base_url ?>">Trang chủ</a></li>
-				<li><a href="<?php echo $base_url.'/gian-hang/'.$user_shop->shop_id.'/'.Stdio::pregReplaceStringAlias($user_shop->shop_name).'.html' ?>">Trang chủ shop</a></li>
+				<li><a href="<?php echo FunctionLib::buildLinkCategory($user_shop->shop_id, $user_shop->shop_name, 0, '') ?>">Trang chủ shop</a></li>
 				<li><a href="<?php echo $base_url.'/quan-ly-gian-hang.html'?>">Quản lý sản phẩm</a></li>
 				<li><a href="<?php echo $base_url.'/quan-ly-quang-cao.html'?>">Quản lý quảng cáo</a></li>
 			</ul>

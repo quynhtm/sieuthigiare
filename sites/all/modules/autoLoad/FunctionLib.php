@@ -429,13 +429,14 @@ class FunctionLib{
 		return '';
 	}
 
-	public static function buildLinkCategory($shop_id = 0, $shop_name = 'shop', $category_id = 0, $category_name = 'danh m?c'){
+	public static function buildLinkCategory($shop_id = 0, $shop_name = 'shop', $category_id = 0, $category_name = 'danh muc'){
 		global $base_url;
+		
 		$url = '';
 		if($shop_id > 0 && $category_id > 0 && $category_name !=''){
 			$url = $base_url.'/gian-hang/'.$shop_id.'/c'.$category_id.'/'.self::safe_title($category_name).'.html';
 		}
-		elseif($shop_id > 0 && $category_id = 0){
+		elseif($shop_id > 0 && $shop_name !=''){
 			$url = $base_url.'/gian-hang/'.$shop_id.'/'.self::safe_title($shop_name).'.html';
 		}
 		return $url;
