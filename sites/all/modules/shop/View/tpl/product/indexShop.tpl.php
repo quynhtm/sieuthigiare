@@ -29,14 +29,14 @@
 							<div class="col-lg-3 col-xs-3 ">
 								<div class="item">
 									<div class="post-thumb">
-										<a href="<?php echo $base_url.'/san-pham/p'.$v->product_id.'/'.Stdio::pregReplaceStringAlias($v->product_name).'.html' ?>" title="<?php echo $v->product_name?>">
+										<a href="<?php echo FunctionLib:: buildLinkDetail($v->product_id, $v->product_name); ?>" title="<?php echo $v->product_name?>">
 											<img src="<?php echo $v->url_image ?>" alt="<?php echo $v->product_name?>" data-other-src="<?php echo $v->url_image_hover?>">
 										</a>
 									</div>
 									<div class="item-content">
 										<div class="title-info">
 											<h4 class="post-title">
-												<a title="<?php echo $v->product_name?>" href="<?php echo $base_url.'/san-pham/p'.$v->product_id.'/'.Stdio::pregReplaceStringAlias($v->product_name).'.html' ?>"><?php echo $v->product_name?></a>
+												<a title="<?php echo $v->product_name?>" href="<?php echo FunctionLib:: buildLinkDetail($v->product_id, $v->product_name); ?>"><?php echo $v->product_name?></a>
 											</h4>
 											<div class="item-price">
 	                                    		<?php if($v->product_type_price == 2){?>
