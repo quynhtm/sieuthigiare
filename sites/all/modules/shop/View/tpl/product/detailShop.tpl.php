@@ -8,7 +8,33 @@
 			</div>
 			<div class="main-view-post box-detail-product">
 				<div class="wrap-main-view">
-					<div class="tob-content-view">
+					<?php 
+					$product_name='';
+					$product_sort_desc='';
+					$product_content = '';
+					$product_selloff = '';
+					$price_market = 0;
+					$price_sell = 0;
+					$product_type_price=0;
+					$product_image ='';
+					foreach($result as $v){
+						$product_name = $v->product_name;
+						$product_sort_desc = $v->product_sort_desc;
+						$product_content = $v->product_content;
+						$product_selloff = $v->product_selloff;
+						$price_market = number_format($v->product_price_market);
+						$price_sell = number_format($v->product_price_sell);
+						
+						if($v->product_type_price == 1 || $v->product_type_price == -1){
+							$product_type_price=1;
+						}
+
+						$product_image = $v->product_image;
+						if($v->product_image != ''){
+							$product_image = FunctionLib::getThumbImage($v->product_image,$v->product_id,FOLDER_PRODUCT,300,300);
+						}
+					?>
+					<div class="top-content-view">
 						<div class="left-slider-img">
 							<ul class="list-thumb-img">
 								<li><a href=""><img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/s1.jpg" alt=""></a></li>
@@ -16,39 +42,53 @@
 								<li><a href=""><img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/s3.jpg" alt=""></a></li>
 							</ul>
 							<div class="max-thumb-img">
-								<img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/s1.jpg" alt="">
+								<?php if($product_image != ''){?>
+								<img src="<?php echo $product_image; ?>" alit="<?php echo $product_name ?>"/>
+								<?php } ?>
 							</div>
 						</div>
 						<div class="center-des-product">
-							<h1>Áo Sơ Mi Nam Công Sở Fonto Menswear : SR048</h1>
-							<div class="row-price">
-								<div class="lbl-row">Giá thị trường:</div>
-								<div class="price-origin">2.849.000<span class="td-border">đ</span></div>
-							</div>
-							<div class="row-price">
-								<div class="lbl-row lbl-price-sale">Giá bán:</div>
-								<div class="price-sale">2.419.000<span class="td-border">đ</span></div>
-							</div>
+							<h1><?php echo $product_name ?></h1>
+							
+							<?php if($product_type_price == 1){ ?>
+							
+								<?php if($price_market){?>
+								<div class="row-price">
+									<div class="lbl-row">Giá thị trường:</div>
+									<div class="price-origin"><?php echo $price_market ?><span class="td-border">đ</span></div>
+								</div>
+								<?php } ?>
+
+								<?php if($price_sell){?>
+								<div class="row-price">
+									<div class="lbl-row lbl-price-sale">Giá bán:</div>
+									<div class="price-sale"><?php echo $price_sell ?><span class="td-border">đ</span></div>
+								</div>
+								<?php } ?>
+
+								<?php if($price_sell==0 && $price_market==0){?>
+								<div class="row-price">
+									<div class="lbl-row lbl-price-sale">Giá bán:</div>
+									<div class="price-sale">Liên hệ</div>
+								</div>
+								<?php } ?>
+							
+							<?php }else{ ?>
+								<div class="row-price">
+									<div class="lbl-row lbl-price-sale">Giá bán:</div>
+									<div class="price-sale">Liên hệ</div>
+								</div>
+							<?php } ?>
+
 							<div class="features-point">
 								<div class="lbl-point">Mô tả sản phẩm</div>
-								<div class="des-point">
-									Áo sơ mi nam thương hiệu FONTO Menswear sử dụng chất liệu Cotton-Bamboo, form dáng Hàn Quốc<br>
-									-Với chất liệu thoáng mát, thấm mồ hôi và mềm mại tự nhiên, đem đến sự thoải mái khi mang mặc.<br>
-									- Kiểu dáng trang nhã toát lên sự lịch lãm,sang trọng.<br>
-									- Chuẩn mực mới cho thời trang công sở.<br>
-									- Chất liệu 80% bamboo, 20% poly<br>
-									- Cổ lật<br>
-									- May hàng nút cài dọc thân áo trước<br>
-									- Thiết kế may túi bên ngực trái và thêu logo thương hiệu trên miệng túi<br>
-									- Dáng Regular<br>
-									- Không co giãn<br>
-								</div>
+								<div class="des-point"><?php echo $product_sort_desc ?></div>
+								<?php if($product_selloff !=''){?>
 								<div class="box-promotion">
 									<div class="lbl-point">Thông tin khuyến mãi</div>
-									<div class="-box-content-promotion">
-										Tặng thắt lưng da khi có thẻ thành viên đến ngày 8/4
-									</div>
+									<div class="box-content-promotion"><?php echo $product_selloff ?></div>
 								</div>
+								<?php } ?>
 							</div>
 						</div>
 						<div class="right-des-product">
@@ -73,6 +113,7 @@
 							</div>
 						</div>
 					</div>
+					<?php } ?>
 					<div class="center-content-view">
 						<div class="title-center-content-view">Sản phẩm bán bởi "<a href="" title>Siêu thị giá rẻ</a>" </div>
 						<div class="content-center-content-view">
@@ -166,7 +207,7 @@
 								<li data-tab="3">Nhận xét</li>
 							</ul>
 							<div class="content-bottom-content-view">
-								<div class="act show-tab show-tab-1">Testing1...</div>
+								<div class="act show-tab show-tab-1"><?php echo $product_content ?></div>
 								<div class="show-tab show-tab-2">Testing2...</div>
 								<div class="show-tab show-tab-3">Testing3...</div>
 							</div>

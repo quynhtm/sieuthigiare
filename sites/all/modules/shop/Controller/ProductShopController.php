@@ -280,6 +280,8 @@ class ProductShopController{
 	}
 
 	public function detailShop(){
+		$param = arg();
+
 		$files = array(
 	            'bootstrap/lib/jcarousel/jquery.jcarousel.min.js',
 	            'bootstrap/lib/jcarousel/jcarousel.responsive.js',
@@ -287,7 +289,22 @@ class ProductShopController{
 	        );
 	    Loader::load('Core', $files);
 
-		return theme('detailShop');
+	    $product_id = 0;
+	    
+	    if(isset($param[1]) && $param[1] != ''){
+			$product_id = FunctionLib::cutStr($param[1], 1, 0);
+		}
+		
+	    $arrFields = array('product_id', 'category_name','product_name', 'product_price_sell', 'product_price_market', 'product_image', 
+	    					'product_image_hover', 'product_image_other', 'product_sort_desc', 'product_content',
+	    					'product_type_price', 'product_selloff', 'user_shop_id'
+	    					);
+	    $result = ProductShop::getDetailShop($product_id, 1, $arrFields);
+	   
+		return theme('detailShop', array(
+										'result'=>$result,
+									)
+								);
 	}
 
 	public function cacheShop(){

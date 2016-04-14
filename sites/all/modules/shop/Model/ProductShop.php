@@ -207,4 +207,29 @@ class ProductShop{
         }
         return array('data' => array(),'total' => 0,'pager' => array(),);
     }
+
+     public static function getDetailShop($product_id = 0, $limit = 1, $arrFields = array()){
+
+        if($product_id > 0){
+         
+            if(!empty($arrFields)){
+                $sql = db_select(self::$table_action, 'i');
+                foreach($arrFields as $field){
+                    $sql->addField('i', $field, $field);
+                }
+                $sql->condition('i.product_status', STASTUS_SHOW, '=');
+                $sql->condition('i.is_block', PRODUCT_NOT_BLOCK, '=');
+
+                if(isset($product_id) && $product_id > 0){
+                    $sql->condition('i.product_id', $product_id, '=');
+                }
+
+                $result = $sql->range(0, 1)->orderBy('i.'.self::$primary_key, 'DESC')->execute();
+                $arrItem = (array)$result->fetchAll();
+
+                return $arrItem;
+            }
+        }
+        return array('arrItem' => array());
+    }
 }
