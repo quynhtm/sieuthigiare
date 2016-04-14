@@ -487,7 +487,7 @@ a.btn-yahoo:hover{
 .left-slider-img {
     display: inline-block;
     float: left;
-    width: 480px;
+    width: 425px;
 }
 .list-thumb-img {
     float: left;
@@ -518,8 +518,10 @@ a.btn-yahoo:hover{
 }
 .left-slider-img .max-thumb-img {
     float: left;
+    height: 400px;
+    overflow: hidden;
     position: relative;
-    width: 400px;
+    width: 350px;
 }
 .left-slider-img .max-thumb-img img{
     width: 100%;
@@ -527,7 +529,7 @@ a.btn-yahoo:hover{
 .center-des-product {
     display: inline-block;
     float: left;
-    width: 500px;
+    width: 520px;
 }
 .center-des-product h1 {
     color: #444;
@@ -593,7 +595,7 @@ a.btn-yahoo:hover{
 .right-des-product {
     display: inline-block;
     float: right;
-    width: 230px;
+    width: 280px;
 }
 .content-right-product {
     border: 1px solid #e4e4e4;

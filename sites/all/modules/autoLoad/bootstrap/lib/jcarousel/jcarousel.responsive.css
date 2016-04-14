@@ -28,8 +28,9 @@
 }
 
 .jcarousel img {
+    height: auto!important;
+    max-height: 100%!important;
     max-width: 100%;
-    height: auto !important;
 }
 
 /** Carousel Controls **/

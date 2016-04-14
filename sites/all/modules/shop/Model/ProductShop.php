@@ -208,7 +208,7 @@ class ProductShop{
         return array('data' => array(),'total' => 0,'pager' => array(),);
     }
 
-     public static function getDetailShop($product_id = 0, $limit = 1, $arrFields = array()){
+    public static function getDetailShop($product_id = 0, $limit = 1, $arrFields = array()){
 
         if($product_id > 0){
          
@@ -231,5 +231,38 @@ class ProductShop{
             }
         }
         return array('arrItem' => array());
+    }
+
+    public static function getProductSameCatShop($product_id=0, $category_id = 0, $limit = 30, $arrFields = array(), $catOther = false){
+        
+        if(!empty($arrFields)){
+            $sql = db_select(self::$table_action, 'i');
+            foreach($arrFields as $field){
+                $sql->addField('i', $field, $field);
+            }
+            $sql->condition('i.product_status', STASTUS_SHOW, '=');
+            $sql->condition('i.is_block', PRODUCT_NOT_BLOCK, '=');
+            
+
+            if(isset($category_id) && $category_id > 0){
+                
+                if($catOther == false){
+                    $sql->condition('i.category_id', $category_id, '=');
+                }else{
+                    $sql->condition('i.category_id', $category_id, '<>');
+                }
+            }
+
+            if(isset($product_id) && $product_id > 0){
+                $sql->condition('i.product_id', $product_id, '<>');
+            }
+
+            $result = $sql->range(0, $limit)->orderBy('i.'.self::$primary_key, 'DESC')->execute();
+            $arrItem = (array)$result->fetchAll();
+
+            return $arrItem;
+        }
+        
+        return array();
     }
 }

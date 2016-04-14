@@ -5,9 +5,9 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0
 */
-class Seo{
+class SeoMeta{
 
-	public function SEO($title='', $img='', $meta_title='', $meta_keyword='', $meta_description=''){
+	public static function SEO($title='', $img='', $meta_title='', $meta_keyword='', $meta_description=''){
 		global $base_url;
 
 		$url = $base_url.request_uri();

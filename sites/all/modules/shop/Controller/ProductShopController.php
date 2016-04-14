@@ -289,20 +289,36 @@ class ProductShopController{
 	        );
 	    Loader::load('Core', $files);
 
+	    $files = array(
+	            'View/js/shop.js',
+	        );
+	    Loader::load('Shop', $files);
+	   
 	    $product_id = 0;
-	    
+	    $category_id = 0;
 	    if(isset($param[1]) && $param[1] != ''){
 			$product_id = FunctionLib::cutStr($param[1], 1, 0);
 		}
 		
-	    $arrFields = array('product_id', 'category_name','product_name', 'product_price_sell', 'product_price_market', 'product_image', 
+	    $arrFields = array('product_id', 'category_name', 'category_id','product_name', 'product_price_sell', 'product_price_market', 'product_image', 
 	    					'product_image_hover', 'product_image_other', 'product_sort_desc', 'product_content',
 	    					'product_type_price', 'product_selloff', 'user_shop_id'
 	    					);
 	    $result = ProductShop::getDetailShop($product_id, 1, $arrFields);
-	   
+	    if(!empty($result)){
+	   	 	$this->user_shop = DataCommon::getShopById($result[0]->user_shop_id);
+	   	 	$category_id = $result[0]->category_id;
+	    }
+	    //san pham ban co the quan tam
+	    $arrSame = ProductShop::getProductSameCatShop($product_id, $category_id, 15, $arrFields, false);
+	   	if(count($arrSame) < 15){
+	   		$arrSame1 = ProductShop::getProductSameCatShop($product_id, $category_id, 15 - count($arrSame), $arrFields, true);
+	   		$arrSame = array_merge($arrSame, $arrSame1);
+	   	}
 		return theme('detailShop', array(
 										'result'=>$result,
+										'user_shop'=>$this->user_shop,
+										'arrSame'=>$arrSame,
 									)
 								);
 	}
