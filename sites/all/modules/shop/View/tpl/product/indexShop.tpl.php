@@ -12,11 +12,10 @@
 						<div class="title-category-parent">DANH MỤC SẢN PHẨM</div>
 						<?php if(isset($arrCategoryChildren) && !empty($arrCategoryChildren)){
 							$shop_id = isset($user_shop->shop_id)? $user_shop->shop_id : 0;
-							$shop_id = isset($user_shop->shop_name)? $user_shop->shop_id : 0;
 						?>
 						<ul>
 							<?php foreach($arrCategoryChildren as $k =>$v){?>
-							<li><a href="<?php echo $base_url.'/gian-hang/'.$shop_id.'/c'.$k.'/'.Stdio::pregReplaceStringAlias($v).'.html' ?>" title="<?php echo $v?>"><?php echo $v?></a></li>
+							<li><a href="<?php echo FunctionLib::buildLinkCategory($shop_id, $k, $v) ?>" title="<?php echo $v?>"><?php echo $v?></a></li>
 							<?php } } ?>
 						</ul>
 					</div>
