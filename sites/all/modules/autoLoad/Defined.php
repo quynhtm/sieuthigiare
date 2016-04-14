@@ -27,6 +27,9 @@ define('base_url_lang', $base_url .'/'. ((!isset($language->language) || $langua
 define('AJAX_DOMAIN', '/sieuthigiare.vn/');
 define('IS_WEB', 0);// 0:local, 1:web
 
+define('BASE64_SHOPID', 'shopid_');
+define('BASE64_CATID', 'catid_');
+
 /**
  * QuynhTM add
  * Dinh nghia cac Table cho website
