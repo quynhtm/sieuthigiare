@@ -50,8 +50,8 @@ class DataCommon{
 	 * @return array
 	 */
 	public static function getShopById($id_shop = 0){
-		if($id_shop <= 0) return array();
 		$user_shop = array();
+		if($id_shop <= 0) return $user_shop;
 		if(Cache::CACHE_ON){
 			$cache = new Cache();
 			$user_shop = $cache->do_get(Cache::CACHE_USER_SHOP_ID.$id_shop);
@@ -78,19 +78,24 @@ class DataCommon{
 	 * @return array
 	 */
 	public static function getProductById($product_id = 0){
-		if($product_id <= 0) return array();
-		$Cache = new Cache();
-		$product = $Cache->do_get(Cache::CACHE_PRODUCT_ID.$product_id);
-		if( $product == null){
+		$product = array();
+		if($product_id <= 0) return $product;
+		if(Cache::CACHE_ON) {
+			$cache = new Cache();
+			$product = $cache->do_get(Cache::CACHE_PRODUCT_ID . $product_id);
+		}
+		if( $product == null || empty($product)){
 			$query = db_select(self::$table_product, 'p')
 				->condition('p.product_id', $product_id, '=')
 				->fields('p');
 			$data = $query->execute();
 			if(!empty($data)){
 				foreach($data as $k=> $pro){
-					$product[$pro->product_id] = $pro;
+					$product[] = $pro;
 				}
-				$Cache->do_put(Cache::CACHE_PRODUCT_ID.$product_id, $product, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+				if(Cache::CACHE_ON) {
+					$cache->do_put(Cache::CACHE_PRODUCT_ID.$product_id, $product, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+				}
 			}
 		}
 		return $product;
