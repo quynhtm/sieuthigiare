@@ -6,6 +6,7 @@ jQuery(document).ready(function($){
 	check_valid_form.post_product();
 
 	tab_select.detail_tab();
+	tab_select.click_show_form_comment();
 	hover_img.change_img();
 	hover_img.change_img_detail();
 });
@@ -316,7 +317,20 @@ tab_select= {
 			jQuery('.left-bottom-content-view .show-tab').removeClass('act');
 			jQuery('.left-bottom-content-view .show-tab-'+datatab).addClass('act');
 		});
-	}
+	},
+
+	click_show_form_comment:function(){
+		jQuery('#clickFormCommentSubmit').click(function(){
+			if(jQuery('.form-comment-post .wrapp-form-comment-post').hasClass('act')){
+				jQuery('.form-comment-post .wrapp-form-comment-post').removeClass('act');
+				jQuery('.form-comment-post .wrapp-form-comment-post').fadeOut();
+			}else{
+				jQuery('.form-comment-post .wrapp-form-comment-post').addClass('act');
+				jQuery('.form-comment-post .wrapp-form-comment-post').fadeIn();
+			}
+		});
+	},
+
 }
 
 hover_img = {

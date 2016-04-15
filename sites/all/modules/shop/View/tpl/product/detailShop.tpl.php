@@ -135,7 +135,7 @@
 										<?php } ?>
 		                            </select>
 								</div>
-								<div class="buynow">Mua ngay</div>
+								<div id="buttonFormBuySubmit" class="buynow btn">Mua ngay</div>
 							</div>
 							<div class="content-right-product">
 								<div class="order-number-phone">
@@ -197,7 +197,72 @@
 							<div class="content-bottom-content-view">
 								<div class="act show-tab show-tab-1"><?php echo $product_content ?></div>
 								<div class="show-tab show-tab-2"><?php echo $user_shop->shop_transfer ?></div>
-								<div class="show-tab show-tab-3">Testing3...</div>
+								<div class="show-tab show-tab-3">
+									<div class="form-comment-post">
+										<div class="col-sm-8">
+											<div class="row">
+												<div class="control-group">
+													<span id="clickFormCommentSubmit" class="btn btn-primary">Nhận xét sản phẩm</span>
+												</div>
+												<div class="wrapp-form-comment-post">
+													<div class="control-group">
+														<label class="control-label">Họ tên</label>
+														<div class="controls">
+															<input type="text" class="form-control input-sm" placeholder="Họ tên" name="">
+														</div>
+													</div>
+													<div class="control-group">
+														<label class="control-label">Tiêu đề</label>
+														<div class="controls">
+															<input type="text" class="form-control input-sm" placeholder="Tiêu đề" name="">
+														</div>
+													</div>
+													<div class="control-group">
+														<label class="control-label">Bình luận</label>
+														<div class="controls">
+															<textarea name="product_content" id="product_content" class="form-control input-sm" cols="30" rows="5"></textarea>
+														</div>
+													</div>
+													<button type="submit" name="submit" id="buttonFormCommentSubmit" class="btn btn-primary" value="1">Gửi nhận xét</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="item-comment">
+										<div class="c-title">
+											<span class="c-name">Duy Nguyen</span>
+											<span class="c-time">- 8 giờ trước</span>
+										</div>
+										<div class="c-comment">
+											Mình mới mua sp này ,rất tiện lợi ,dùng rất ok
+										</div>
+										<div class="rep-comment">Trả lời</div>
+										<div class="list-comment">
+											<div class="item-rep">
+												<div class="c-title">
+													<span class="c-name">Duy Nguyen</span>
+													<span class="c-time">- 8 giờ trước</span>
+												</div>
+												<div class="c-comment">
+													Chào bạn Phạm Văn Khoa, Bộ phận CSKH của chúng tôi sẽ liên hệ để hỗ trợ bạn đặt đơn hàng. 
+													Bạn vui lòng giữ liên lạc nhé. Cảm ơn bạn đã quan tâm đến các sản phẩm do chúng tôi cung cấp!
+												</div>
+												<div class="rep-comment">Trả lời</div>
+											</div>
+											<div class="item-rep">
+												<div class="c-title">
+													<span class="c-name">Duy Nguyen</span>
+													<span class="c-time">- 8 giờ trước</span>
+												</div>
+												<div class="c-comment">
+													Chào bạn Phạm Văn Khoa, Bộ phận CSKH của chúng tôi sẽ liên hệ để hỗ trợ bạn đặt đơn hàng. 
+													Bạn vui lòng giữ liên lạc nhé. Cảm ơn bạn đã quan tâm đến các sản phẩm do chúng tôi cung cấp!
+												</div>
+												<div class="rep-comment">Trả lời</div>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="right-bottom-content-view">
