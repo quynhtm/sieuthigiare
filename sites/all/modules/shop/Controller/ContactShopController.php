@@ -43,7 +43,7 @@ class ContactShopController{
 
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 			$data = array(
-					'contact_title'=>array('value'=>FunctionLib::getIntParam('contact_title',''), 'require'=>1, 'messages'=>'Bạn chưa nhập tiêu đề liên hệ'),
+					'contact_title'=>array('value'=>FunctionLib::getParam('contact_title',''), 'require'=>1, 'messages'=>'Bạn chưa nhập tiêu đề liên hệ'),
 					'contact_content'=>array('value'=>FunctionLib::getParam('contact_content',''), 'require'=>1, 'messages'=>'Bạn chưa nhập nội dung liên hệ!'),
 
 					'contact_user_id_send'=>array('value'=>$user_shop->shop_id, 'require'=>0),
@@ -57,6 +57,7 @@ class ContactShopController{
 
 				);
 			$errors = ValidForm::validInputData($data);
+
 			if($errors != ''){
 				drupal_set_message($errors, 'error');
 				drupal_goto($base_url.'/gui-lien-he.html');

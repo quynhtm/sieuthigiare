@@ -125,8 +125,7 @@ function page_default(){
             $meta_description = 'Home';
             $img = '';
     }
-    $Seo = new Seo();
-    $Seo->SEO($meta_title, $img, $meta_title, $meta_keywords, $meta_description);
+    SeoMeta::SEO($meta_title, $img, $meta_title, $meta_keywords, $meta_description);
 
 	return '';
 }
