@@ -9,12 +9,7 @@
 	<div class="content">
 		<div class="wrapp-shop">
 			<div class="box-shop-search">
-				<div class="title-box-shop-search"><?php echo $title ?>
-						<span style="float: right; margin-right:50px ">
-							<button type="submit" name="submit" id="buttonFormShopSubmit" class="btn btn-primary" value="1" onc>Lưu</button>
-   							<button type="reset" class="btn btn-danger">Bỏ qua</button>
-						</span>
-				</div>
+				<div class="title-box-shop-search"><?php echo $title ?></div>
 				<div class="content-box-shop-search">
 					<div class="wrapp-box-info">
 
@@ -42,12 +37,10 @@
 								<div class="col-sm-10">
 						            <div class="form-actions">
 						                <input type="hidden" value="txt-form-post" name="txt-form-post">
-										<button type="submit" name="submit" id="buttonFormShopSubmit" class="btn btn-primary" value="1" >Lưu</button>
-						                <button type="reset" class="btn btn-danger">Bỏ qua</button>
+										<button type="submit" name="submit" id="buttonFormShopSubmit" class="btn btn-primary" value="1" >Gửi yêu cầu</button>
 						            </div>
 						        </div>
 					        </div>
-
 					</div>
 				</div>
 			</div>

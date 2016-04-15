@@ -45,6 +45,7 @@
 								if(!empty($result)){
 									foreach($result as $k=>$v) {?>
 									<tr>
+										<td><?php echo $k+1 ?></td>
 										<td><?php echo $v->contact_title ?></td>
 										<td><?php echo $v->contact_content ?></td>
 										<td><?php echo isset($arrStatus[$v->contact_status])?$arrStatus[$v->contact_status]:'Đang gửi' ?></td>
