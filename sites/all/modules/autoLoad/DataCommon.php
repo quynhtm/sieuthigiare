@@ -91,7 +91,7 @@ class DataCommon{
 			$data = $query->execute();
 			if(!empty($data)){
 				foreach($data as $k=> $pro){
-					$product[] = $pro;
+					$product = $pro;
 				}
 				if(Cache::CACHE_ON) {
 					$cache->do_put(Cache::CACHE_PRODUCT_ID.$product_id, $product, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);

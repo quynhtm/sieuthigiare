@@ -95,9 +95,6 @@ function Site_init() {
 			'View/js/site.js',
 			'View/css/site.css',
 			'View/css/media.css',
-
-			'View/js/nivoslider/jquery.nivo.slider.js',
-			'View/js/nivoslider/jquery.nivo.slider.css',
 		);
 		Loader::load('Site', $files);
 	}

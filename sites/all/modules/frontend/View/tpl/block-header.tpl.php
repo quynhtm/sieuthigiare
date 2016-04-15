@@ -64,14 +64,7 @@
 	    <div class="container">
 		    <div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav menu-header">
-					<li class="home-focus act"><a href="" title="Trang chủ">Trang chủ</a></li>
-					<li><a href="" title="Thời trang nam">Thời trang nam</a></li>
-					<li><a href="" title="Thời trang nữ">Thời trang nữ</a></li>
-					<li><a href="" title="Thời trang trẻ em">Thời trang trẻ em</a></li>
-					<li><a href="" title="Đồ gia dụng">Đồ gia dụng</a></li>
-					<li><a href="" title="Blog">Blog</a></li>
-					<li><a href="" title="Tuyển đại lý">Tuyển đại lý</a></li>
-					<li><a href="" title="Liên hệ">Liên hệ</a></li>
+					
 				</ul>
 			</div>
 		</div>

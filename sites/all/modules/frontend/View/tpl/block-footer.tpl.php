@@ -10,4 +10,3 @@
       Email: hotro@sanphamredep.com</p>
   </div>
 </div>
-<div id="back-top-wrapper" style="display: block;"><span id="back-top"><span></span></span></div>
