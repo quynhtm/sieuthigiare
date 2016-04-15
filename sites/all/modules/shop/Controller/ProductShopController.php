@@ -280,6 +280,8 @@ class ProductShopController{
 	}
 
 	public function detailShop(){
+		global $base_url;
+
 		$param = arg();
 
 		$files = array(
@@ -300,25 +302,40 @@ class ProductShopController{
 			$product_id = FunctionLib::cutStr($param[1], 1, 0);
 		}
 		
-	    $arrFields = array('product_id', 'category_name', 'category_id','product_name', 'product_price_sell', 'product_price_market', 'product_image', 
-	    					'product_image_hover', 'product_image_other', 'product_sort_desc', 'product_content',
-	    					'product_type_price', 'product_selloff', 'user_shop_id'
-	    					);
-	    $result = ProductShop::getDetailShop($product_id, 1, $arrFields);
+		$result = DataCommon::getProductById($product_id);
+		
 	    if(!empty($result)){
+	   	 	
+	   	 	if(isset($result[0]->product_status) && !$result[0]->product_status == STASTUS_SHOW){
+	   	 		drupal_goto($base_url.'/page-404');
+	   	 	}
+
+	   	 	if(isset($result[0]->is_block) && !$result[0]->is_block == PRODUCT_NOT_BLOCK){
+	   	 		drupal_goto($base_url.'/page-404');
+	   	 	}
+
 	   	 	$this->user_shop = DataCommon::getShopById($result[0]->user_shop_id);
 	   	 	$category_id = $result[0]->category_id;
 	    }
 	    //san pham ban co the quan tam
+	     $arrFields = array('product_id', 'product_name', 'product_price_sell', 
+	     					'product_price_market', 'product_image', 
+	    					'product_image_hover','product_type_price', 'product_selloff'
+	    					);
+
 	    $arrSame = ProductShop::getProductSameCatShop($product_id, $category_id, 15, $arrFields, false);
 	   	if(count($arrSame) < 15){
 	   		$arrSame1 = ProductShop::getProductSameCatShop($product_id, $category_id, 15 - count($arrSame), $arrFields, true);
 	   		$arrSame = array_merge($arrSame, $arrSame1);
 	   	}
+	   	//san pham noi bat
+	   	$arrHot= ProductShop:: getProductHot($product_id, 5, $arrFields);
+
 		return theme('detailShop', array(
 										'result'=>$result,
 										'user_shop'=>$this->user_shop,
 										'arrSame'=>$arrSame,
+										'arrHot'=>$arrHot,
 									)
 								);
 	}

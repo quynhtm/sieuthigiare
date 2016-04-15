@@ -207,32 +207,7 @@ class ProductShop{
         }
         return array('data' => array(),'total' => 0,'pager' => array(),);
     }
-
-    public static function getDetailShop($product_id = 0, $limit = 1, $arrFields = array()){
-
-        if($product_id > 0){
-         
-            if(!empty($arrFields)){
-                $sql = db_select(self::$table_action, 'i');
-                foreach($arrFields as $field){
-                    $sql->addField('i', $field, $field);
-                }
-                $sql->condition('i.product_status', STASTUS_SHOW, '=');
-                $sql->condition('i.is_block', PRODUCT_NOT_BLOCK, '=');
-
-                if(isset($product_id) && $product_id > 0){
-                    $sql->condition('i.product_id', $product_id, '=');
-                }
-
-                $result = $sql->range(0, 1)->orderBy('i.'.self::$primary_key, 'DESC')->execute();
-                $arrItem = (array)$result->fetchAll();
-
-                return $arrItem;
-            }
-        }
-        return array('arrItem' => array());
-    }
-
+    //san pham ban co the quan tam
     public static function getProductSameCatShop($product_id=0, $category_id = 0, $limit = 30, $arrFields = array(), $catOther = false){
         
         if(!empty($arrFields)){
@@ -243,7 +218,6 @@ class ProductShop{
             $sql->condition('i.product_status', STASTUS_SHOW, '=');
             $sql->condition('i.is_block', PRODUCT_NOT_BLOCK, '=');
             
-
             if(isset($category_id) && $category_id > 0){
                 
                 if($catOther == false){
@@ -256,6 +230,32 @@ class ProductShop{
             if(isset($product_id) && $product_id > 0){
                 $sql->condition('i.product_id', $product_id, '<>');
             }
+
+            $result = $sql->range(0, $limit)->orderBy('i.'.self::$primary_key, 'DESC')->execute();
+            $arrItem = (array)$result->fetchAll();
+
+            return $arrItem;
+        }
+        
+        return array();
+    }
+    //san pham noi bat
+     public static function getProductHot($product_id=0, $limit = 10, $arrFields = array()){
+        
+        if(!empty($arrFields)){
+            $sql = db_select(self::$table_action, 'i');
+            foreach($arrFields as $field){
+                $sql->addField('i', $field, $field);
+            }
+            $sql->condition('i.product_status', STASTUS_SHOW, '=');
+            $sql->condition('i.is_block', PRODUCT_NOT_BLOCK, '=');
+             $sql->condition('i.product_is_hot', 2, '=');
+
+            if(isset($product_id) && $product_id > 0){
+                $sql->condition('i.product_id', $product_id, '<>');
+            }
+
+
 
             $result = $sql->range(0, $limit)->orderBy('i.'.self::$primary_key, 'DESC')->execute();
             $arrItem = (array)$result->fetchAll();

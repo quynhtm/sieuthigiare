@@ -168,8 +168,8 @@
 												<?php }else{ ?>
 												<p class="price-sale">
 													<?php if($same->product_price_sell > 0 && $same->product_price_market > 0){?>
-													<?php echo number_format($v->product_price_sell)?><span>đ</span>
-													<i>(<?php echo number_format($v->product_price_market)?>)</i>
+													<?php echo number_format($same->product_price_sell)?><span>đ</span>
+													<i>(<?php echo number_format($same->product_price_market)?>)</i>
 													<?php }else{ ?>
 														Liên hệ
 													<?php } ?>
@@ -204,30 +204,32 @@
 							<div class="title-hot"><span>Sản phẩm nổi bật</span></div>
 							<div class="content-right-bottom-content-view">
 								<ul>
-									<li>
-										<a class="i-thumb" href="" title="">
-											<img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/p1.jpg" alt="">
+									<?php 
+										foreach($arrHot as $h){
+									?>
+									<li class="item">
+										<a class="i-thumb post-thumb" title="<?php echo $h->product_name?>" href="<?php echo FunctionLib:: buildLinkDetail($h->product_id, $h->product_name); ?>">
+											<img src="<?php echo FunctionLib::getThumbImage($h->product_image, $h->product_id, FOLDER_PRODUCT, 200, 200) ?>" alt="<?php echo $h->product_name?>" 
+											data-other-src="<?php echo FunctionLib::getThumbImage($h->product_image_hover, $h->product_id, FOLDER_PRODUCT, 200, 200) ?>">
 										</a>
-										<a class="item-name" href="" title="">Điện thoại iPhone 6S Plus Rose Gold 16GB</a>
+										
+										<a class="item-name" title="<?php echo $h->product_name?>" href="<?php echo FunctionLib:: buildLinkDetail($h->product_id, $h->product_name); ?>"><?php echo $h->product_name?></a>
 										<div class="item-price">
+											<?php if($h->product_type_price == 2){?>
+											<p class="price-sale">Liên hệ</p>
+											<?php }else{ ?>
 											<p class="price-sale">
-												20.790.000 <span>đ</span>
-												<i>(21.790.000đ)</i>
+												<?php if($h->product_price_sell > 0 && $h->product_price_market > 0){?>
+												<?php echo number_format($h->product_price_sell)?><span>đ</span>
+												<i>(<?php echo number_format($h->product_price_market)?>)</i>
+												<?php }else{ ?>
+													Liên hệ
+												<?php } ?>
 											</p>
+											<?php } ?>
 										</div>
 									</li>
-									<li>
-										<a class="i-thumb" href="" title="">
-											<img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/p1.jpg" alt="">
-										</a>
-										<a class="item-name" href="" title="">Điện thoại iPhone 6S Plus Rose Gold 16GB</a>
-										<div class="item-price">
-											<p class="price-sale">
-												20.790.000 <span>đ</span>
-												<i>(21.790.000đ)</i>
-											</p>
-										</div>
-									</li>
+									<?php } ?>
 								</ul>
 							</div>
 						</div>
