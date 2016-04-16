@@ -50,6 +50,16 @@
 </div>
 
 <script>
-	CKEDITOR.replace('contact_content',{height:400});
+	CKEDITOR.replace(
+		'contact_content',
+		{
+			toolbar: [
+				{ name: 'document',    items : [ 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' ] },
+				{ name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
+				{ name: 'colors',      items : [ 'TextColor','BGColor' ] },
+			],
+		},
+		{height:400}
+	);
 </script>
 

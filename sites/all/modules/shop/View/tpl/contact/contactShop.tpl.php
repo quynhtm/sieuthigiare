@@ -5,25 +5,20 @@
 	</div>
 	<div class="content">
 		<div class="wrapp-shop">
-			<div class="box-shop-search">
-				<div class="title-box-shop-search">Thông tin tìm kiếm</div>
-				<div class="content-box-shop-search">
-					<form action="" method="GET" id="frmSearch" class="frmSearch" name="frmSearch">
-						<div class="col-lg-3">
-							<div class="form-group">
-								<label class="control-label">&nbsp;</label>
-								<div>
-									<a href="<?php echo $base_url?>/gui-lien-he.html" class="btn btn-warning">Gửi liên hệ</a>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
+			<div class="col-lg-12">
+
 			</div>
 			<div class="list-shop-show">
 				<div class="title-table-shop-shop">Danh sách liên hệ đã gửi cho quản trị site</div>
 				<div class="show-box-paging">
-					<div class="total-rows"><b><?php echo t('Tổng số: ')?> <?php echo $totalItem ?></b></div>
+					<div class="col-lg-12">
+						<b><?php echo t('Tổng số: ')?> <?php echo $totalItem ?></b>
+						<form action="" method="GET" id="frmSearch" class="frmSearch" name="frmSearch">
+							<div style="text-align: right">
+								<a href="<?php echo $base_url?>/gui-lien-he.html" class="btn btn-warning">Gửi liên hệ</a>
+							</div>
+						</form>
+					</div>
 					<div class="showListPage">
 						<?php print render($pager); ?>
 					</div>
@@ -34,10 +29,11 @@
 							<thead>
 							<tr>
 								<th width="5%">STT</th>
-								<th width="">Tiêu đề liên hệ</th>
-								<th width="">Nội dung liên hệ</th>
-								<th width="">Trạng thái</th>
-								<th width="">Ngày gửi</th>
+								<th width="15%">Tiêu đề liên hệ</th>
+								<th width="30%">Nội dung liên hệ</th>
+								<th width="30%">Quản trị hồi đáp</th>
+								<th width="10%">Trạng thái</th>
+								<th width="10%">Ngày gửi</th>
 							</tr>
 							</thead>
 							<tbody>
@@ -48,6 +44,7 @@
 										<td><?php echo $k+1 ?></td>
 										<td><?php echo $v->contact_title ?></td>
 										<td><?php echo $v->contact_content ?></td>
+										<td><?php echo $v->contact_content_reply ?></td>
 										<td><?php echo isset($arrStatus[$v->contact_status])?$arrStatus[$v->contact_status]:'Đang gửi' ?></td>
 										<td><?php echo date('d-m-Y',$v->contact_time_creater)?></td>
 									</tr>

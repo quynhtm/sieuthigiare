@@ -8,7 +8,11 @@ class ContactController{
 	private $arrReason = array(-1 => 'Tất cả', CONTACT_REASON_CUSTOMER => 'Khách hàng gửi', CONTACT_REASON_SHOP => 'Shop gửi');
 
 	public function __construct(){
-			
+		$files = array(
+			'bootstrap/lib/ckeditor/ckeditor.js',
+			'bootstrap/lib/ckeditor/config.js',
+		);
+		Loader::loadJSExt('Core', $files);
         $files = array(
             'bootstrap/css/bootstrap.css',
             'css/font-awesome.css',
@@ -47,6 +51,8 @@ class ContactController{
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,
 									'optionReason' => $optionReason,
+									'arrStatus' => $this->arrStatus,
+									'arrReason' => $this->arrReason,
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));
@@ -56,55 +62,40 @@ class ContactController{
 	function formContactAction(){
 		global $base_url;
 		$param = arg();
-		$arrItem = array();
+		$contact = array();
 		$item_id = 0;
 		if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
 			$item_id = (int)$param[3];
-			$arrItem = Contact::getItemById(array(), $item_id);
-			//FunctionLib::Debug($arrItem);
+			$contact = Contact::getItemById(array(), $item_id);
 		}
 
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
-			$dataInput = array(
-				'province_name'=>array('value'=>FunctionLib::getParam('province_name',''), 'require'=>1, 'messages'=>'Tên tỉnh thành không được trống!'),
-				'province_position'=>array('value'=>FunctionLib::getParam('province_position',100)),
-				'province_status'=>array('value'=>FunctionLib::getParam('province_status','')),
-			);
-
-			$errors = ValidForm::validInputData($dataInput);
-			if($errors != ''){
-				drupal_set_message($errors, 'error');
-				if($item_id > 0){
-					drupal_goto($base_url.'/admincp/contact/edit/'.$item_id);
-				}else{
-					drupal_goto($base_url.'/admincp/contact/add');
-				}
+			$contact_status = FunctionLib::getParam('contact_status',CONTACT_NEW);
+			$contact_content_reply = FunctionLib::getParam('contact_content_reply','');
+			if(trim($contact_content_reply) != ''){
+				$dataInput = array(
+					'contact_content_reply'=>array('value'=>$contact_content_reply),
+					'contact_status'=>array('value'=>CONTACT_SUCCESS),
+					'contact_time_update'=>array('value'=>time()),
+				);
 			}else{
-				Province::save($dataInput, $item_id);
-				drupal_goto($base_url.'/admincp/contact');
+				$dataInput = array(
+					'contact_status'=>array('value'=>$contact_status),
+					'contact_time_update'=>array('value'=>time()),
+				);
 			}
+
+			Contact::save($dataInput, $item_id);
+			drupal_goto($base_url.'/admincp/contact');
 		}
-		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->province_status) ? $arrItem->province_status: -1);
+
+		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($contact->contact_status)? $contact->contact_status : CONTACT_NEW);
 		return $view = theme('addContact',
-			array('arrItem'=>$arrItem,
+			array('contact'=>$contact,
 				'item_id'=>$item_id,
-				'title'=>'Liên hệ',
-				'optionStatus'=>$optionStatus));
+				'optionStatus'=>$optionStatus,
+				'arrReason' => $this->arrReason,
+				'title'=>'Liên hệ'));
 	}
 
-	function deleteContactAction(){
-		global $base_url;
-		if(isset($_POST) && $_POST['txtFormName']=='txtFormName'){
-			$listId = isset($_POST['checkItem'])? $_POST['checkItem'] : array();
-			if(!empty($listId)){
-				foreach($listId as $item_id){
-					if($item_id > 0){
-						Contact::deleteId($item_id);
-					}
-				}
-				drupal_set_message('Xóa bài viết thành công.');
-			}
-		}
-		drupal_goto($base_url.'/admincp/contact');
-	}
 }

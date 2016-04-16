@@ -5,9 +5,9 @@
 class Contact{
 	static $table_action = TABLE_CONTACT;
 	static $primary_key = 'contact_id';
-	static $arrFields = array('contact_id','contact_title', 'contact_content','contact_phone_send', 'contact_email_send',
+	static $arrFields = array('contact_id','contact_title', 'contact_content', 'contact_content_reply','contact_phone_send', 'contact_email_send',
 		'contact_type','contact_reason', 'contact_status','contact_user_id_send', 'contact_user_name_send',
-		'contact_time_creater', 'contact_time_update');
+		'contact_time_creater', 'contact_time_update', 'contact_user_id_update', 'contact_user_name_update');
 
 	public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
 		//n?u get field rong thi lay all
@@ -104,14 +104,7 @@ class Contact{
 			drupal_set_message('Upadate success.');
 			return true;
 		}
-		//insert
-		else{
-			$query = self::insert($data_post);
-			if($query){
-				drupal_set_message('Insert success.');
-				return true;
-			}
-		}
+
 		return false;
 	}
 
