@@ -254,6 +254,65 @@ span#logo{
 .item-right-slider:last-child{
     margin-bottom: 0px;
 }
+/*product*/
+.title-list-item{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    padding: 5px 0px;
+    overflow: hidden;
+}
+.title-list-item span{
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
+    background: #fff;
+    display: inline-block;
+    padding-right: 10px;
+}
+.w-home > ul {
+    margin-right: -100px;
+}
+.w-home .item {
+    display: inline-block;
+    float: left;
+    margin-right: 30px;
+    padding: 10px;
+    width: 230px;
+    margin-bottom: 0px;
+    height: 385px;
+    overflow: hidden;
+}
+.w-home .item:hover{
+    box-shadow: 0 0 2px rgba(87, 87, 87, 0.6);
+}
+.w-home .item .post-thumb {
+    display: block;
+    height: 225px;
+    line-height: 225px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+}
+.w-home .item .post-thumb img {
+    width: 100%;
+}
+.w-home .item .post-title{
+    font-size: 12px;
+    height: 36px;
+    line-height: 1;
+    margin: 0 0 8px;
+    overflow: hidden;
+}
+.w-home .item .post-title a {
+    color: #666;
+    font-size: 13px;
+    line-height: 18px;
+}
+.w-home .item:hover .item-banner{
+    display: block;
+}
 /*footer*/
 #footer {
     border-top: 2px solid #cc0000;
