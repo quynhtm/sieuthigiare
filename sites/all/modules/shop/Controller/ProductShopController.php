@@ -306,16 +306,18 @@ class ProductShopController{
 		
 	    if(!empty($result)){
 	   	 	
-	   	 	if(isset($result[0]->product_status) && !$result[0]->product_status == STASTUS_SHOW){
+	   	 	if(isset($result->product_status) && $result->product_status != STASTUS_SHOW){
 	   	 		drupal_goto($base_url.'/page-404');
 	   	 	}
 
-	   	 	if(isset($result[0]->is_block) && !$result[0]->is_block == PRODUCT_NOT_BLOCK){
+	   	 	if(isset($result->is_block) && $result->is_block != PRODUCT_NOT_BLOCK){
 	   	 		drupal_goto($base_url.'/page-404');
 	   	 	}
 
-	   	 	$this->user_shop = DataCommon::getShopById($result[0]->user_shop_id);
-	   	 	$category_id = $result[0]->category_id;
+	   	 	$this->user_shop = DataCommon::getShopById($result->user_shop_id);
+	   	 	$category_id = $result->category_id;
+	    }else{
+	    	drupal_goto($base_url.'/page-404');
 	    }
 	    //san pham ban co the quan tam
 	     $arrFields = array('product_id', 'product_name', 'product_price_sell', 

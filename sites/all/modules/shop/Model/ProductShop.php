@@ -209,32 +209,31 @@ class ProductShop{
     }
     //san pham ban co the quan tam
     public static function getProductSameCatShop($product_id=0, $category_id = 0, $limit = 30, $arrFields = array(), $catOther = false){
-        
-        if(!empty($arrFields)){
+        global $base_url;
+
+        if(!empty($arrFields) && $product_id > 0 && $category_id > 0){
+       
             $sql = db_select(self::$table_action, 'i');
             foreach($arrFields as $field){
                 $sql->addField('i', $field, $field);
             }
             $sql->condition('i.product_status', STASTUS_SHOW, '=');
             $sql->condition('i.is_block', PRODUCT_NOT_BLOCK, '=');
+                 
+            if($catOther == false){
+                $sql->condition('i.category_id', $category_id, '=');
+            }else{
+                $sql->condition('i.category_id', $category_id, '<>');
+            }
             
-            if(isset($category_id) && $category_id > 0){
-                
-                if($catOther == false){
-                    $sql->condition('i.category_id', $category_id, '=');
-                }else{
-                    $sql->condition('i.category_id', $category_id, '<>');
-                }
-            }
-
-            if(isset($product_id) && $product_id > 0){
-                $sql->condition('i.product_id', $product_id, '<>');
-            }
-
+            $sql->condition('i.product_id', $product_id, '<>');
+            
             $result = $sql->range(0, $limit)->orderBy('i.'.self::$primary_key, 'DESC')->execute();
             $arrItem = (array)$result->fetchAll();
 
             return $arrItem;
+        }else{
+            drupal_goto($base_url.'/page-404');
         }
         
         return array();
@@ -242,25 +241,22 @@ class ProductShop{
     //san pham noi bat
      public static function getProductHot($product_id=0, $limit = 10, $arrFields = array()){
         
-        if(!empty($arrFields)){
+        if(!empty($arrFields) && $product_id > 0){
             $sql = db_select(self::$table_action, 'i');
             foreach($arrFields as $field){
                 $sql->addField('i', $field, $field);
             }
             $sql->condition('i.product_status', STASTUS_SHOW, '=');
             $sql->condition('i.is_block', PRODUCT_NOT_BLOCK, '=');
-             $sql->condition('i.product_is_hot', 2, '=');
-
-            if(isset($product_id) && $product_id > 0){
-                $sql->condition('i.product_id', $product_id, '<>');
-            }
-
-
-
+            $sql->condition('i.product_is_hot', 2, '=');
+            $sql->condition('i.product_id', $product_id, '<>');
+            
             $result = $sql->range(0, $limit)->orderBy('i.'.self::$primary_key, 'DESC')->execute();
             $arrItem = (array)$result->fetchAll();
 
             return $arrItem;
+        }else{
+            drupal_goto($base_url.'/page-404');
         }
         
         return array();

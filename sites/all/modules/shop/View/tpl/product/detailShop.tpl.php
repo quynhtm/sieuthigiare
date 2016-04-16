@@ -13,29 +13,30 @@
 	$product_image_other ='';
 	$category_id=0;
 	$category_name = '';
-	foreach($result as $v){
-		$product_id = $v->product_id;
-		$product_name = $v->product_name;
-		$product_sort_desc = $v->product_sort_desc;
-		$product_content = $v->product_content;
-		$product_selloff = $v->product_selloff;
-		$price_market = number_format($v->product_price_market);
-		$price_sell = number_format($v->product_price_sell);
+	
+	if(!empty($result)){
+		$product_id = $result->product_id;
+		$product_name = $result->product_name;
+		$product_sort_desc = $result->product_sort_desc;
+		$product_content = $result->product_content;
+		$product_selloff = $result->product_selloff;
+		$price_market = number_format($result->product_price_market);
+		$price_sell = number_format($result->product_price_sell);
 		
-		$category_id = $v->category_id;
-		$category_name = $v->category_name;
+		$category_id = $result->category_id;
+		$category_name = $result->category_name;
 
 
-		if($v->product_type_price == 1 || $v->product_type_price == -1){
+		if($result->product_type_price == 1 || $result->product_type_price == -1){
 			$product_type_price=1;
 		}
 
-		$product_image = $v->product_image;
-		if($v->product_image != ''){
-			$product_image = FunctionLib::getThumbImage($v->product_image, $product_id, FOLDER_PRODUCT,400,500);
+		$product_image = $result->product_image;
+		if($result->product_image != ''){
+			$product_image = FunctionLib::getThumbImage($result->product_image, $product_id, FOLDER_PRODUCT,400,500);
 		}
-		if($v->product_image_other != ''){
-			$product_image_other = unserialize($v->product_image_other);
+		if($result->product_image_other != ''){
+			$product_image_other = unserialize($result->product_image_other);
 		}
 
 		SeoMeta::SEO($product_name, $product_image, $product_name, $product_name, $product_sort_desc);
