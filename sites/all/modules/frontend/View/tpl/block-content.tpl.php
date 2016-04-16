@@ -4,12 +4,9 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<div class="link-breadcrumb">
-				<a href="http://project.vn/BanHang/sieuthigiare.vn">Trang chủ</a><i class="icon-double-angle-right"></i>
-				<a href="">Shop Công Nghệ</a>
-			</div>
+			
 			<div class="content-list-item">
-														<div class="col-lg-3 col-xs-3 ">
+								<div class="col-lg-3 col-xs-3 ">
 								<div class="item">
 									<div class="post-thumb">
 										<a title="Điện thoại di động LG G3 16GB D855" href="http://project.vn/BanHang/sieuthigiare.vn/san-pham/p31/Dien-thoai-di-dong-LG-G3-16GB-D855.html">

@@ -12,7 +12,6 @@
 	$category_id = $result->category_id;
 	$category_name = $result->category_name;
 
-
 	$product_type_price = -1;
 
 	if($result->product_type_price == 1 || $result->product_type_price == -1){
@@ -34,7 +33,8 @@
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="link-breadcrumb">
-				<a href="">Trang chủ</a><i class="icon-double-angle-right"></i>
+				<a href="<?php echo $base_url ?>">Trang chủ</a>
+				<i class="icon-double-angle-right"></i>
 				<a href="<?php echo FunctionLib::buildLinkCategory($user_shop->shop_id, $user_shop->shop_name, 0, '') ?>"><?php echo $user_shop->shop_name ?></a>
 				<i class="icon-double-angle-right"></i>
 				<a href="<?php echo FunctionLib::buildLinkCategory($user_shop->shop_id, $user_shop->shop_name, $category_id, $category_name) ?>"><?php echo $category_name ?></a>

@@ -209,6 +209,9 @@ function Shop_init() {
 			
 			'View/css/shop.css',
 			'View/js/shop.js',
+			
+			'View/js/nivoslider/jquery.nivo.slider.js',
+			'View/js/nivoslider/jquery.nivo.slider.css',
 		);
 		Loader::load('Shop', $files);
 	}

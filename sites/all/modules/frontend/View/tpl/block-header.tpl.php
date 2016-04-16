@@ -16,16 +16,10 @@
 		</div>
 	</div>
 </div>
-<nav class="navbar navbar-inverse">
+<div class="center-header">
  	<div class="container">
 	    <div class="top-header">	
 	    	<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Menu icon</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
 	      		<?php if(drupal_is_front_page()){?>
 	      		<h1 id="logo"><a href="<?php echo $base_url ?>"><img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/logo.png" alt="Sản phẩm rẻ đẹp - San pham re dep" /></a></h1>
 	      		<?php }else{ ?>
@@ -60,14 +54,5 @@
 		    </div>
 		</div>
 	</div>
-	 <div class="bottom-header">
-	    <div class="container">
-		    <div id="navbar" class="collapse navbar-collapse">
-				<ul class="nav navbar-nav menu-header">
-					
-				</ul>
-			</div>
-		</div>
-	</div>
-</nav>
+</div>
 	

@@ -71,7 +71,9 @@ a.btn-yahoo:hover{
 .box-register .form-control {
     display: inline-block;
     float: left;
-    width: 195px;
+    width: 225px;
+    box-shadow:none;
+    border-radius: 2px;
 }
 .title-login-me {
     font-size: 18px !important;

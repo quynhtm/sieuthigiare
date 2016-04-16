@@ -22,25 +22,12 @@ a{
     clear: both;
     width: 100%;
 }
-.bottom-header {
-    background: #cc0000 none repeat scroll 0 0;
-    clear: both;
-    display: inline-block;
-    margin-top: 5px;
-    width: 100%;
-}
-.bottom-header #navbar{
-    margin: 0!important;
-    padding: 0!important;
-    
-}
-.bottom-header #navbar ul.menu-header{
-    left: 0!important;
-}
-.navbar-inverse{
+.center-header{
     background: #fff;
     border: none;
     border-radius: 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #d8d8d8;
 }
 #logo {
     border-radius: 5px;
@@ -90,166 +77,6 @@ span#logo{
 }
 .btn-search:hover{
     background: #c00000;
-}
-.navbar-nav.menu-header{
-    left: 9px;
-    margin-top: 20px;
-    position: relative;
-     z-index: 2;
-}
-.menu-header.navbar-nav > li {
-    margin: 0 2px;
-    position: relative;
-}
-.menu-header.navbar-nav > li > a{
-    color: #fff;
-    display: block;
-    font-size: 16px;
-    height: 40px;
-    line-height: 40px;
-    padding: 0 10px;
-    position: relative;
-}
-.menu-header.navbar-nav li.act a,
-.menu-header.navbar-nav li a:hover,
-.menu-header.navbar-nav li a:focus,
-.menu-header.navbar-nav li a:active{
-    color: #fff !important;
-    background: none!important;
-}
-.menu-header.navbar-nav li a:hover{
-    text-decoration: underline!important;
-}
-.menu-header.navbar-nav li {
-    position: relative;
-}
-/*.menu-header.navbar-nav li.home-focus a:hover{
-    text-decoration: none!important;
-}*/
-#slider-box {
-    display: inline-block;
-    width: 100%;
-    clear: both;
-}
-.wrapp-box {
-    margin: 0 auto;
-    position: relative;
-    width: 1170px;
-}
-.slider-box-left {
-    border-bottom: 0 none !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    display: inline-block;
-    max-height: 322px;
-    overflow: hidden;
-    position: relative;
-    transition: all 0.2s ease-in-out 0s;
-    width: 100%;
-}
-.slider-box-left img{
-    width: 100%;
-}
-.slider-box-right{
-    cursor: pointer;
-    width: 97%;
-    float: right;
-    position: relative;
-    transition: all 0.2s ease-in-out 0s;
-    display: inline-block;
-    max-height: 322px;
-    overflow: hidden;
-}
-.slider-box-right img {
-    max-height: 315px;
-    width: 100%;
-}
-.content-footer-bottom {
-    background: none repeat scroll 0 0 #373737;
-    margin-top: 50px;
-}
-.wrapp-content-footer-bottom div.address h4 {
-    color: #9b9b9b !important;
-    font-family: "Arial";
-    font-size: 18px;
-    margin-bottom: 15px;
-    text-transform: uppercase;
-}
-.wrapp-content-footer-bottom div.address p {
-    color: #9b9b9b !important;
-    font-family: "Arial";
-    font-size: 15px;
-}
-.content-post-line ul {
-    display: inline-block;
-    width: 100%;
-}
-.content-post-line .item-product {
-    position: relative;
-}
-.item-product .product-img img {
-    background-color: #f7f7f7;
-    position: relative;
-    z-index: 1;
-}
-.item-product .product-img {
-    max-height: 305px;
-    overflow: hidden;
-}
-.right-post-product .product-img{
-    max-height: none!important;
-}
-.item-product .product-img img {
-    width: 100%;
-    min-height: 305px;
-}
-.content-post-line .item-product .product-name {
-    height: 50px;
-    overflow: hidden;
-    padding: 10px 0 0;
-    text-align: left;
-    display: inline-block;
-    width: 100%;
-    clear: both;
-}
-.price-sale-close{
-    float: left;
-    color: #999!important;
-    font-size: 14px!important;
-    text-decoration: line-through;
-    margin-top: 5px;
-}
-.price-sale{
-    float: right;
-}
-.item-product .product-name a {
-    color: #333;
-    transition: all 0.3s ease-in-out 0s;
-    font-size: 13px;
-    font-weight: bold;
-    text-decoration: none !important;
-}
-.item-product .product-name a:hover{
-    color: #c10001;
-}
-.item-product .product-price{
-    text-align: right;
-    font-size: 18px;
-    font-weight: 400;
-    color: #c00;
-    font-family: Impact, Arial;
-}
-.box-top-header {
-    display: inline-block;
-    float: right;
-    width: 78%;
-    margin-top: 10px;
-}
-.catalog-menu {
-    clear: both;
-    display: inline-block;
-    margin-top: 20px;
-    width: 100%;
 }
 .box-login {
     display: inline-block;
@@ -335,6 +162,7 @@ span#logo{
     font-size: 18px;
     font-weight: bold;
     padding-left: 25px;
+    font-family: Arial,Helvetica,sans-serif;
 }
 .phone-call-num .time-work{
     color: #666;
@@ -342,7 +170,91 @@ span#logo{
     font-style: italic;
     font-weight: normal;
 }
-
+/*content*/
+.box-menu {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ddd;
+    min-height: 428px;
+    width: 230px;
+    border-top: none;
+    position: relative;
+    display: inline-block;
+    float: left;
+}
+.title-cat-menu {
+    background: #f2f2f2 none repeat scroll 0 0;
+    border-bottom: 1px solid #e3e3e3;
+    font-weight: bold;
+    padding: 8px 5px 8px 12px;
+    text-transform: uppercase;
+}
+.content-box-menu{
+    clear: both;
+    display: inline-block;
+    width: 100%;
+}
+.content-box-menu > ul{
+    margin-bottom: 0;
+}
+.content-box-menu > ul > li{
+    background: #fff;
+    border-bottom: 1px solid #f1f1f1;
+    color: #333;
+    display: block;
+    height: 38px;
+    line-height: 38px;
+    padding-left: 13px;
+    text-decoration: none;
+}
+.content-box-menu ul > li > a{
+    text-transform: none;
+}
+.content-box-menu ul > li:last-child{
+    border-bottom: none;
+}
+.content-box-menu .list-subcat{
+    border: 1px solid #ddd;
+    display: none;
+    left: 100%;
+    width: 702px;
+    padding-left: 30px;
+    padding-right: 15px;
+    position: absolute;
+    top: -1px;
+    z-index: 22;
+    min-height: 429px;
+}
+.content-box-menu ul > li:hover .list-subcat{
+    display: inline-block;
+}
+.content-box-menu .list-subcat li {
+    height: 32px;
+    line-height: 32px;
+    white-space: nowrap;
+}
+.content-box-menu .list-subcat li a:hover{
+    font-weight: bold;
+}
+.slider-box-mid {
+    display: inline-block;
+    float: left;
+    height: 428px;
+    width: 730px;
+    margin-left: 5px;
+}
+.ads-right-mid{
+    display: inline-block;
+    float: right;
+    height: 455px;
+    width: 300px;
+}
+.item-right-slider {
+    margin-bottom: 10px;
+}
+.item-right-slider:last-child{
+    margin-bottom: 0px;
+}
+/*footer*/
 #footer {
     border-top: 2px solid #cc0000;
     margin-top: 50px !important;

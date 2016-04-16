@@ -3,7 +3,8 @@
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="link-breadcrumb">
-				<a href="<?php echo $base_url; ?>">Trang chủ</a><i class="icon-double-angle-right"></i>
+				<a href="<?php echo $base_url; ?>">Trang chủ</a>
+				<i class="icon-double-angle-right"></i>
 				<a href=""><?php echo isset($user_shop->shop_name)? $user_shop->shop_name : 'Trang chủ của shop';?></a>
 			</div>
 			<div class="main-view-post box-register">
