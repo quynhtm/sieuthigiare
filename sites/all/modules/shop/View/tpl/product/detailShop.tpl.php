@@ -1,47 +1,33 @@
 <?php 
 	global $base_url;
-
-	$product_id=0;
-	$product_name='';
-	$product_sort_desc='';
-	$product_content = '';
-	$product_selloff = '';
-	$price_market = 0;
-	$price_sell = 0;
-	$product_type_price=0;
-	$product_image ='';
-	$product_image_other ='';
-	$category_id=0;
-	$category_name = '';
 	
-	if(!empty($result)){
-		$product_id = $result->product_id;
-		$product_name = $result->product_name;
-		$product_sort_desc = $result->product_sort_desc;
-		$product_content = $result->product_content;
-		$product_selloff = $result->product_selloff;
-		$price_market = number_format($result->product_price_market);
-		$price_sell = number_format($result->product_price_sell);
-		
-		$category_id = $result->category_id;
-		$category_name = $result->category_name;
+	$product_id = $result->product_id;
+	$product_name = $result->product_name;
+	$product_sort_desc = $result->product_sort_desc;
+	$product_content = $result->product_content;
+	$product_selloff = $result->product_selloff;
+	$price_market = number_format($result->product_price_market);
+	$price_sell = number_format($result->product_price_sell);
+	
+	$category_id = $result->category_id;
+	$category_name = $result->category_name;
 
 
-		if($result->product_type_price == 1 || $result->product_type_price == -1){
-			$product_type_price=1;
-		}
+	$product_type_price = -1;
 
-		$product_image = $result->product_image;
-		if($result->product_image != ''){
-			$product_image = FunctionLib::getThumbImage($result->product_image, $product_id, FOLDER_PRODUCT,400,500);
-		}
-		if($result->product_image_other != ''){
-			$product_image_other = unserialize($result->product_image_other);
-		}
-
-		SeoMeta::SEO($product_name, $product_image, $product_name, $product_name, $product_sort_desc);
+	if($result->product_type_price == 1 || $result->product_type_price == -1){
+		$product_type_price=1;
 	}
 
+	$product_image = $result->product_image;
+	if($result->product_image != ''){
+		$product_image = FunctionLib::getThumbImage($result->product_image, $product_id, FOLDER_PRODUCT,400,500);
+	}
+	if($result->product_image_other != ''){
+		$product_image_other = unserialize($result->product_image_other);
+	}
+
+	SeoMeta::SEO($product_name, $product_image, $product_name, $product_name, $product_sort_desc);
 
 ?>
 <div class="container">
