@@ -263,7 +263,7 @@
     clear:both;
 }
 .wrapp-content-global{
-    border: 1px solid #CCCCCC;
+    /*border: 1px solid #CCCCCC;*/
     background: none repeat scroll 0 0 #FAFAFA;
     min-height:730px;
     display: inline-block;

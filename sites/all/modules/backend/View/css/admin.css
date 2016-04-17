@@ -921,6 +921,14 @@ form#formListItem {
 .paddingTop10{padding-top: 10px}
 .paddingTop20{padding-top: 20px}
 .paddingTop30{padding-top: 30px}
+
+.boder_admin{border: 1px solid}
+
+.align_center{text-align: center}
+.align_left{text-align: left}
+.align_right{text-align: right}
+.align_justify{text-align: justify}
+
 #sys_drag_sort {
     display: inline-block;
     float: left;
