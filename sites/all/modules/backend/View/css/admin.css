@@ -929,6 +929,8 @@ form#formListItem {
 .align_right{text-align: right}
 .align_justify{text-align: justify}
 
+.a_control:hover{color: red}
+
 #sys_drag_sort {
     display: inline-block;
     float: left;
