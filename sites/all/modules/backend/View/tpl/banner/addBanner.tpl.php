@@ -21,11 +21,12 @@
                      <div><input type="text" class="form-control input-sm" name="banner_order" value="<?php if(isset($arrItem->banner_order)){ echo $arrItem->banner_order; } ?>"></div>
                  </div>
                  <div class="col-lg-12 paddingTop10">
-                     <a href="javascript:;"class="btn btn-primary" onclick="Common_admin.uploadMultipleImages(1);">Upload ảnh quảng cáo</a>
+                     <a href="javascript:;"class="btn btn-primary" onclick="Common_admin.uploadBannerAdvanced();">Upload ảnh quảng cáo</a>
                      <div id="sys_show_image_banner">
 
                      </div>
                      <input name="banner_image" type="hidden" id="banner_image" value="<?php if(isset($arrItem->banner_image)){ echo $arrItem->banner_image; } ?>">
+                     <input name="banner_image_old" type="hidden" id="banner_image_old" value="<?php if(isset($arrItem->banner_image)){ echo $arrItem->banner_image; } ?>">
                  </div>
 
                  <div class="col-lg-12 paddingTop10">

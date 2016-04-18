@@ -90,10 +90,13 @@ class BannerController{
 		}
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 			$item_id = FunctionLib::getParam('id', 0);
+			$banner_image = trim(FunctionLib::getParam('banner_image', ''));
+			$banner_image_old = trim(FunctionLib::getParam('banner_image_old', ''));
+			$banner_is_run_time = FunctionLib::getParam('banner_is_run_time',BANNER_NOT_RUN_TIME);
 			$dataInput = array(
 				'banner_name'=>array('value'=>FunctionLib::getParam('banner_name',''), 'require'=>1, 'messages'=>'Tên banner không được bỏ trống!'),
 				'banner_link'=>array('value'=>FunctionLib::getParam('banner_link',''), 'require'=>1, 'messages'=>'Link banner không được bỏ trống!'),
-				'banner_image'=>array('value'=>FunctionLib::getParam('banner_image',''), 'require'=>1, 'messages'=>'Chưa nhập ảnh cho banner quảng cáo!'),
+				'banner_image'=>array('value'=>$banner_image, 'require'=>1, 'messages'=>'Chưa nhập ảnh cho banner quảng cáo!'),
 
 				'banner_order'=>array('value'=>FunctionLib::getParam('banner_order',1)),
 				'banner_is_target'=>array('value'=>FunctionLib::getParam('banner_is_target',BANNER_NOT_TARGET_BLANK)),
@@ -101,12 +104,9 @@ class BannerController{
 				'banner_page'=>array('value'=>FunctionLib::getParam('banner_page',0)),
 				'banner_category_id'=>array('value'=>FunctionLib::getParam('banner_category_id',0)),
 				'banner_status'=>array('value'=>FunctionLib::getParam('banner_status',STASTUS_HIDE)),
-				'banner_is_run_time'=>array('value'=>FunctionLib::getParam('banner_is_run_time',BANNER_NOT_RUN_TIME)),
-				'banner_start_time'=>array('value'=>FunctionLib::getParam('banner_start_time',0)),
-				'banner_end_time'=>array('value'=>FunctionLib::getParam('banner_end_time',0)),
+				'banner_is_run_time'=>array('value'=>$banner_is_run_time),
 				'banner_shop_id'=>array('value'=>FunctionLib::getParam('banner_shop_id',0)),
 				'banner_is_shop'=>array('value'=>FunctionLib::getParam('banner_is_shop',BANNER_NOT_SHOP)),
-				'banner_create_time'=>array('value'=>FunctionLib::getParam('banner_create_time',0)),
 				'banner_update_time'=>array('value'=>FunctionLib::getParam('banner_update_time',0)),
 			);
 			$errors = ValidForm::validInputData($dataInput);
@@ -118,12 +118,22 @@ class BannerController{
 					drupal_goto($base_url.'/admincp/banner/add');
 				}
 			}else{
-				//FunctionLib::Debug($dataInput);
-				if($item_id > 0) {
-					$dataInput['banner_update_time']['value'] = time();
-				}else{
-					$dataInput['banner_create_time']['value'] = time();
+				//add thời gian cho banner
+				$banner_start_time = trim(FunctionLib::getParam('banner_start_time',''));
+				$banner_end_time = trim(FunctionLib::getParam('banner_end_time',''));
+				$banner_start_time = ($banner_start_time != '') ? strtotime($banner_start_time . ' 00:00:00'): 0;
+				$banner_end_time = ($banner_end_time != '')? strtotime($banner_end_time . ' 23:59:59'): 0;
+
+				$dataInput['banner_start_time']['value'] = ($banner_is_run_time == BANNER_IS_RUN_TIME)? $banner_start_time: 0;
+				$dataInput['banner_end_time']['value'] = ($banner_is_run_time == BANNER_IS_RUN_TIME)? $banner_end_time: 0;
+				$dataInput['banner_update_time']['value'] = time();
+
+				//so sánh ảnh cũ và mơi, nếu khách nhau thì xóa ảnh cũ đi
+				if($banner_image_old !== '' && $banner_image !== ''){
+					//để mai làm, ngủ đã :D
 				}
+
+				//FunctionLib::Debug($dataInput);
 				Banner::save($dataInput, $item_id);
 				drupal_goto($base_url.'/admincp/banner');
 			}
