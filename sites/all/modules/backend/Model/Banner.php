@@ -5,8 +5,8 @@
 class Banner{
 	static $table_action = TABLE_BANNER;
 	static $primary_key = 'banner_id';
-	static $arrFields = array('banner_id', 'banner_name', 'banner_image',
-		'banner_link', 'banner_order', 'banner_is_target','banner_type',
+	static $arrFields = array('banner_id', 'banner_name', 'banner_image','banner_image_temp',
+		'banner_link', 'banner_order', 'banner_is_target','banner_type','banner_category_id',
 		'banner_page', 'banner_status','banner_is_run_time', 'banner_start_time','banner_end_time', 'banner_is_shop',
 		'banner_shop_id', 'banner_create_time', 'banner_update_time');
 

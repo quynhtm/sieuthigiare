@@ -52,6 +52,9 @@ class AjaxUpload{
             case 2 ://img product
                 $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_PRODUCT, FOLDER_PRODUCT, 'product_image_other', self::$primary_key_product);
                 break;
+            case 3 ://img banner qu?ng cáo
+                $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_BANNER, FOLDER_BANNER, 'banner_image_temp', self::$primary_key_product);
+                break;
             default:
                 break;
         }
@@ -70,9 +73,14 @@ class AjaxUpload{
                 if($field_img_other == 'news_image_other'){
                     $new_row['news_create'] = time();
                     $new_row['news_status'] = IMAGE_ERROR;
-                }elseif($field_img_other == 'product_image_other'){
+                }
+                elseif($field_img_other == 'product_image_other'){
                     $new_row['time_created'] = time();
                     $new_row['product_status'] = IMAGE_ERROR;
+                }
+                elseif($field_img_other == 'banner_image_temp'){
+                    $new_row['banner_create_time'] = time();
+                    $new_row['banner_status'] = IMAGE_ERROR;
                 }
                 $item_id = DB::insertOneItem($table_action, $new_row);
             }elseif($id_hiden > 0){

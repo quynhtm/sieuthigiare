@@ -233,6 +233,52 @@ var Common_admin = {
         jQuery("#sys_mulitplefileuploader").uploadFile(settings);
     },
 
+    /**
+     * Upload banner quảng cáo
+     */
+    uploadBannerAdvanced: function() {
+        jQuery('#sys_PopupUploadImgOtherPro').modal('show');
+        jQuery('.ajax-upload-dragdrop').remove();
+        var urlAjaxUpload = BASEPARAMS.base_url+'/ajax?act=upload_image&code=upload_image';
+        var id_hiden = document.getElementById('id_hiden').value;
+
+        var settings = {
+            url: urlAjaxUpload,
+            method: "POST",
+            allowedTypes:"jpg,png,jpeg",
+            fileName: "multipleFile",
+            formData: {id: id_hiden,type: 3},
+            multiple: (id_hiden==0)? false: true,
+            onSubmit:function(){
+                jQuery( "#sys_show_button_upload").hide();
+                jQuery("#status").html("<font color='green'>Đang upload...</font>");
+            },
+            onSuccess:function(files,xhr,data){
+                dataResult = JSON.parse(xhr);
+                if(dataResult.intIsOK === 1){
+                    //gan lai id item cho id hiden: dung cho them moi, sua item
+                    jQuery('#id_hiden').val(dataResult.id_item);
+                    jQuery( "#sys_show_button_upload").show();
+
+                    //show ảnh
+                    var html = "<img height='300' width='400' src='" + dataResult.info.src + "'/>";
+                    jQuery('#banner_image').val(dataResult.info.name_img);
+                    jQuery('#sys_show_image_banner').html(html);
+
+                    //thanh cong
+                    jQuery("#status").html("<font color='green'>Upload is success</font>");
+                    setTimeout( "jQuery('.ajax-file-upload-statusbar').hide();",2000 );
+                    setTimeout( "jQuery('#status').hide();",2000 );
+                    setTimeout( "jQuery('#sys_PopupUploadImgOtherPro').modal('hide');",2500 );
+                }
+            },
+            onError: function(files,status,errMsg){
+                jQuery("#status").html("<font color='red'>Upload is Failed</font>");
+            }
+        }
+        jQuery("#sys_mulitplefileuploader").uploadFile(settings);
+    },
+
     checkedImage: function(nameImage,key){
         if (confirm('Bạn có muốn chọn ảnh này làm ảnh đại diện?')) {
             jQuery('#image_primary').val(nameImage);

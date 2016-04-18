@@ -79,6 +79,18 @@ define('PRODUCT_NOT_BLOCK', 1);
 
 define('BANNER_NOT_RUN_TIME', 0);
 define('BANNER_IS_RUN_TIME', 1);
+define('BANNER_NOT_TARGET_BLANK', 0);
+define('BANNER_TARGET_BLANK', 1);
+define('BANNER_NOT_SHOP', 0);
+define('BANNER_IS_SHOP', 1);
+define('BANNER_TYPE_HOME_BIG', 1);
+define('BANNER_TYPE_HOME_SMALL', 2);
+define('BANNER_TYPE_HOME_LEFT', 3);
+define('BANNER_TYPE_HOME_RIGHT', 4);
+define('BANNER_PAGE_HOME', 1);
+define('BANNER_PAGE_LIST', 2);
+define('BANNER_PAGE_DETAIL', 3);
+define('BANNER_PAGE_CATEGORY', 4);
 
 //loai shop
 define('SHOP_FREE', 1);
