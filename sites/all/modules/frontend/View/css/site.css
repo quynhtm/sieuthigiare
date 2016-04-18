@@ -270,6 +270,7 @@ span#logo{
     font-weight: bold;
     text-transform: uppercase;
     width: 100%;
+    margin-bottom: 15px;
 }
 .w-home > ul {
     margin-right: -100px;
