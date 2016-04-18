@@ -77,7 +77,7 @@ global $base_url;
 				</a>
 			</div>
 			<div class="col-lg-2 align_center">
-				<a class="a_control" title="Banner Quảng cáo" href="<?php echo $base_url ?>/admincp/banner_advanced">
+				<a class="a_control" title="Banner Quảng cáo" href="<?php echo $base_url ?>/admincp/banner">
 					<div class="boder_admin padding10">
 					<i class="icon-globe icon-4x"></i> <br/>Banner Quảng cáo
 					</div>

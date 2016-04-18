@@ -42,10 +42,12 @@ define('TABLE_NEWS',           'web_news');
 define('TABLE_CONTACT',        'web_contact');
 define('TABLE_COMMENT',        'web_comment');
 define('TABLE_ORDER',          'web_order');
+define('TABLE_BANNER',         'web_banner');
 
 //dinh nghia thu muc chua anh
 define('FOLDER_DEFAULT', 'img_other');
 define('FOLDER_PRODUCT', 'product');
+define('FOLDER_BANNER', 'banner');
 define('FOLDER_NEWS', 'news');
 
 //common
@@ -74,6 +76,9 @@ define('PRODUCT_HOT', 2);
 define('PRODUCT_SELLOFF', 3);
 define('PRODUCT_BLOCK', 0);
 define('PRODUCT_NOT_BLOCK', 1);
+
+define('BANNER_NOT_RUN_TIME', 0);
+define('BANNER_IS_RUN_TIME', 1);
 
 //loai shop
 define('SHOP_FREE', 1);

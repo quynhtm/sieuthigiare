@@ -91,9 +91,17 @@ function Admin_menu() {
 		'type' => MENU_CALLBACK,
 	);
 
-     $items["admincp/comments"] = array(
+    $items["admincp/comments"] = array(
         "title" => t('Quan ly Binh luan'),
         "description" => "comments",
+        'page callback' => 'router_page',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+
+    $items["admincp/banner"] = array(
+        "title" => t('Banner Quang cao'),
+        "description" => "banner",
         'page callback' => 'router_page',
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
@@ -203,6 +211,10 @@ function Admin_theme() {
         //lien he
         'indexComments' 		=> array('template' => 'View/tpl/comments/indexComments'),
         'addComments' 		=> array('template' => 'View/tpl/comments/addComments'),
+
+        //lien he
+        'indexBanner' 		=> array('template' => 'View/tpl/banner/indexBanner'),
+        'addBanner' 		=> array('template' => 'View/tpl/banner/addBanner'),
  		//here
     );
 }
@@ -250,6 +262,9 @@ function Admin_init(){
 
         'Model/Comments.php',
 		'Controller/CommentsController.php',
+
+        'Model/Banner.php',
+		'Controller/BannerController.php',
 	);
 	Loader::load('Admin', $files);
 }
