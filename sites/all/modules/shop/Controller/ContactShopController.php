@@ -15,7 +15,7 @@ class ContactShopController{
 		}
 
 		$limit = SITE_RECORD_PER_PAGE;
-		$arrFields = array('contact_id','contact_title', 'contact_content','contact_status','contact_time_creater');
+		$arrFields = array('contact_id','contact_title', 'contact_content', 'contact_content_reply','contact_status','contact_time_creater');
 		$result = ContactShop::getSearchListItems($limit, $arrFields);
 
 		//FunctionLib::Debug($result);

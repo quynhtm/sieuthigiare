@@ -2,12 +2,13 @@
 /*
 * QuynhTM
 */
-class Contact{
-	static $table_action = TABLE_CONTACT;
-	static $primary_key = 'contact_id';
-	static $arrFields = array('contact_id','contact_title', 'contact_content', 'contact_content_reply','contact_phone_send', 'contact_email_send',
-		'contact_type','contact_reason', 'contact_status','contact_user_id_send', 'contact_user_name_send',
-		'contact_time_creater', 'contact_time_update', 'contact_user_id_update', 'contact_user_name_update');
+class Banner{
+	static $table_action = TABLE_BANNER;
+	static $primary_key = 'banner_id';
+	static $arrFields = array('banner_id', 'banner_name', 'banner_image','banner_image_temp',
+		'banner_link', 'banner_order', 'banner_is_target','banner_type','banner_category_id',
+		'banner_page', 'banner_status','banner_is_run_time', 'banner_start_time','banner_end_time', 'banner_is_shop',
+		'banner_shop_id', 'banner_create_time', 'banner_update_time');
 
 	public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
 		//n?u get field rong thi lay all
@@ -23,46 +24,55 @@ class Contact{
             /*Begin search*/
             $cond = '';
             $arrCond = array();
+			$created_start = $created_end = '';
+			$update_start = $update_end = '';
 			if(!empty($dataSearch)){
 				foreach($dataSearch as $field =>$value){
-					if($field === 'contact_reason' && $value != -1){
+					if($field === 'banner_id' && $value != -1){
 						$sql->condition('i.'.$field, $value, '=');
 						array_push($arrCond, $field.' = '.$value);
 					}
 
-					if($field === 'contact_status' && $value != -1){
-						$sql->condition('i.'.$field, $value, '=');
-						array_push($arrCond, $field.' = '.$value);
-					}
-
-					if($field === 'contact_title' && $value != ''){
+					if($field === 'banner_name' && $value != ''){
 						$db_or = db_or();
 						$db_or->condition('i.'.$field, '%'.$value.'%', 'LIKE');
 						$sql->condition($db_or);
 						array_push($arrCond, "(".$field." LIKE '%". $value ."%')");
 					}
 
-					if($field === 'contact_user_name_send' && $value != ''){
-						$db_or = db_or();
-						$db_or->condition('i.'.$field, '%'.$value.'%', 'LIKE');
-						$sql->condition($db_or);
-						array_push($arrCond, "(".$field." LIKE '%". $value ."%')");
+					//tim t?o
+					if($field == 'created_start' && $value != ''){
+						$created_start = CDate::convertDate($value.' 00:00:00');
+					}
+					if($field == 'created_end' && $value != ''){
+						$created_end = CDate::convertDate($value.' 23:59:59');
 					}
 
-					if($field === 'contact_email_send' && $value != ''){
-						$db_or = db_or();
-						$db_or->condition('i.'.$field, '%'.$value.'%', 'LIKE');
-						$sql->condition($db_or);
-						array_push($arrCond, "(".$field." LIKE '%". $value ."%')");
+					//time update
+					if($field == 'update_start' && $value != ''){
+						$update_start = CDate::convertDate($value.' 00:00:00');
 					}
-
-					if($field === 'contact_phone_send' && $value != ''){
-						$db_or = db_or();
-						$db_or->condition('i.'.$field, '%'.$value.'%', 'LIKE');
-						$sql->condition($db_or);
-						array_push($arrCond, "(".$field." LIKE '%". $value ."%')");
+					if($field == 'update_end' && $value != ''){
+						$update_end = CDate::convertDate($value.' 23:59:59');
 					}
 				}
+
+				if($created_start != '' && $created_end != ''){
+					if($created_end >= $created_start){
+						$sql->condition('i.banner_create_time', array($created_start, $created_end), 'BETWEEN');
+						array_push($arrCond, ' (banner_create_time BETWEEN '.$created_start.' AND '.$created_end.')');
+
+					}
+				}
+
+				if($update_start != '' && $update_end != ''){
+					if($update_end >= $update_start){
+						$sql->condition('i.banner_update_time', array($update_start, $update_end), 'BETWEEN');
+						array_push($arrCond, ' (time_update banner_update_time '.$update_start.' AND '.$update_end.')');
+
+					}
+				}
+
 				if(!empty($arrCond)){
 					$cond = implode(' AND ', $arrCond);
 				}
@@ -104,7 +114,14 @@ class Contact{
 			drupal_set_message('Upadate success.');
 			return true;
 		}
-
+		//insert
+		else{
+			$query = self::insert($data_post);
+			if($query){
+				drupal_set_message('Insert success.');
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -114,6 +131,7 @@ class Contact{
 		}
 		return false;
 	}
+
 	public static function updateId($dataUpdate, $id = 0){
 		if($id > 0 && !empty($dataUpdate)){
 			return DB::updateId(self::$table_action, self::$primary_key, $dataUpdate, $id);
@@ -126,5 +144,23 @@ class Contact{
 			return DB::deleteId(self::$table_action, self::$primary_key, $id);
 		}
 		return false;
+	}
+	public static function deleteOne($id=0){
+		if($id > 0){
+			$arrItem = DB::getItemById(self::$table_action, self::$primary_key, array('banner_image'), $id);
+			if(!empty($arrItem)){
+				if(trim($arrItem[0]->banner_image) != ''){
+					$path = PATH_UPLOAD.'/'.FOLDER_BANNER.'/'.$id;
+					if(is_file($path.'/'.$arrItem[0]->banner_image)){
+						@unlink($path.'/'.$arrItem[0]->banner_image);
+					}
+					FunctionLib::delteImageCacheItem(FOLDER_BANNER, $id);
+					if(is_dir($path)) {
+						@rmdir($path);
+					}
+				}
+				self::deleteId($id);
+			}
+		}
 	}
 }

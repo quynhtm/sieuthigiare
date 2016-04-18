@@ -43,10 +43,6 @@
 	<div class="page-title-box">
 		<div class="wrapper">
 			<h5 class="padding10"><?php echo (isset($title)) ? $title: t('Quản lý bài viết');?></h5>
-			<span class="menu_tools">
-				<a href="<?php echo $base_url; ?>/admincp/contact/add" title="Thêm mới" class="icon-plus icon-admin green"></a>
-                <a href="javascript:void(0)" title="Xóa item" id="deleteMoreItem" class="icon-trash icon-admin red"></a>
-           </span>
 		</div>
 	</div>
 	<div class="page-content-box">
@@ -64,11 +60,11 @@
 					<thead>
 					<tr>
 						<th width="2%">STT</th>
-						<th width="1%"><input type="checkbox" id="checkAll"/></th>
-						<th width="15%">Tiêu đề liên hệ</th>
-						<th width="15%">Người gửi</th>
-						<th width="30%">Nội dung</th>
+						<th width="5%">ID</th>
+						<th width="50%">Nội dung liên hệ</th>
+						<th width="20%">Người gửi</th>
 						<th width="8%">Ngày gửi</th>
+						<th width="8%">Kiểu gửi</th>
 						<th width="8%">Status</th>
 						<th width="10%">Action</th>
 					</tr>
@@ -77,8 +73,17 @@
 					<?php foreach ($result as $key => $item) {?>
 					<tr>
 						<td><?php echo $key+1 ?></td>
-						<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item->contact_id ?>" /></td>
-						<td><?php echo $item->contact_title; ?></td>
+						<td><?php echo $item->contact_id ?></td>
+						<td>
+							<?php
+								echo '<b>Tiêu đề: </b>'.$item->contact_title;
+								echo '<br/><b>Nội dung: </b>'.$item->contact_content;
+								if($item->contact_content_reply != ''){
+									echo '<b>Trả lời: </b>'.date('d-m-Y h:i:s',$item->contact_time_update).$item->contact_content_reply;
+									//echo '<b>User: </b>'.$item->contact_user_name_update;
+								}
+							?>
+						</td>
 						<td>
 							<?php
 							echo ($item->contact_user_id_send > 0)?'<b>Shop: </b>['.$item->contact_user_id_send.'] '.$item->contact_user_name_send: $item->contact_user_name_send;
@@ -86,18 +91,21 @@
 							echo ($item->contact_email_send != '' )? '<br/>'.$item->contact_email_send: '';
 							?>
 						</td>
-						<td><?php echo $item->contact_content; ?></td>
-						<td><?php echo date('d-m-Y h:i:s',$item->contact_time_creater); ?></td>
 						<td>
-							<?php echo ($item->contact_reason == 1)? 'Liên hệ ở ngoài site': 'Shop liên hệ với quản trị'; ?>
+							<?php
+								echo date('d-m-Y h:i:s',$item->contact_time_creater);
+								echo '<br/>'.date('d-m-Y h:i:s',$item->contact_time_update);
+							?>
 						</td>
 						<td>
-							<?php echo ($item->contact_status == 1)? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
+							<?php echo isset($arrReason[$item->contact_reason])? $arrReason[$item->contact_reason] : 'Shop liên hệ'; ?>
+						</td>
+						<td>
+							<?php echo isset($arrStatus[$item->contact_status])? $arrStatus[$item->contact_status] : 'Liên hệ mới'; ?>
 						</td>
 						<td>
 							<?php $linkEdit = $base_url.'/admincp/contact/edit/'.$item->contact_id; ?>
 							<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit icon-admin green "></i></a>
-							<a id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-trash icon-admin red"></i></a>
 						</td>
 					</tr>
 					<?php }?>
