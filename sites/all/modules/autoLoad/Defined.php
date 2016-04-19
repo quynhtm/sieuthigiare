@@ -87,6 +87,7 @@ define('BANNER_TYPE_HOME_BIG', 1);
 define('BANNER_TYPE_HOME_SMALL', 2);
 define('BANNER_TYPE_HOME_LEFT', 3);
 define('BANNER_TYPE_HOME_RIGHT', 4);
+define('BANNER_TYPE_HOME_LIST', 5);
 define('BANNER_PAGE_HOME', 1);
 define('BANNER_PAGE_LIST', 2);
 define('BANNER_PAGE_DETAIL', 3);

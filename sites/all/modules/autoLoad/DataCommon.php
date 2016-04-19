@@ -10,39 +10,58 @@ class DataCommon{
 	public static $table_province = TABLE_PROVINCE;
 	public static $table_user_shop = TABLE_USER_SHOP;
 	public static $table_product = TABLE_PRODUCT;
+	public static $table_banner = TABLE_BANNER;
 	public static $primary_key_province = 'province_id';
 
 	public static function getListCategoryParent(){
-		$query = db_select(self::$table_category, 'c')
-			->condition('c.category_parent_id', 0, '=')
-			->condition('c.category_status', 1, '=')
-			->fields('c', array('category_id','category_name'));
-		$data = $query->execute();
-		$result = array();
-		if(!empty($data)){
-			foreach($data as $k=> $cate){
-				$result[$cate->category_id] = $cate->category_name;
-			}
+		$categoryParent = array();
+		if(Cache::CACHE_ON){
+			$cache = new Cache();
+			$categoryParent = $cache->do_get(Cache::CACHE_LIST_CATEGORY_PARENT);
 		}
-		return $result;
-	}
-
-	public static function getListCategoryChildren($catid=0){
-		if($catid > 0){
+		if($categoryParent == null || empty($categoryParent)) {
 			$query = db_select(self::$table_category, 'c')
-					->condition('c.category_parent_id', $catid, '=')
-					->condition('c.category_status', 1, '=')
-					->fields('c', array('category_id','category_name'));
+				->condition('c.category_parent_id', 0, '=')
+				->condition('c.category_status', STASTUS_SHOW, '=')
+				->fields('c', array('category_id', 'category_name'));
 			$data = $query->execute();
-			$result = array();
-			if(!empty($data)){
-				foreach($data as $k=> $cate){
-					$result[$cate->category_id] = $cate->category_name;
+			if (!empty($data)) {
+				foreach ($data as $k => $cate) {
+					$categoryParent[$cate->category_id] = $cate->category_name;
+				}
+				if (Cache::CACHE_ON) {
+					$cache->do_put(Cache::CACHE_LIST_CATEGORY_PARENT, $categoryParent, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
 				}
 			}
-			return $result;
 		}
-		return array();
+		return $categoryParent;
+	}
+
+	public static function getListCategoryChildren($category_parent_id = 0){
+		$categoryChildren = array();
+		if($category_parent_id > 0){
+			if(Cache::CACHE_ON){
+				$cache = new Cache();
+				$categoryChildren = $cache->do_get(Cache::CACHE_CATEGORY_CHILDREN_PARENT_ID.$category_parent_id);
+			}
+			if($categoryChildren == null || empty($categoryChildren)) {
+				$query = db_select(self::$table_category, 'c')
+					->condition('c.category_parent_id', $category_parent_id, '=')
+					->condition('c.category_status', STASTUS_SHOW, '=')
+					->fields('c', array('category_id', 'category_name'));
+				$data = $query->execute();
+				if (!empty($data)) {
+					foreach ($data as $k => $cate) {
+						$categoryChildren[$cate->category_id] = $cate->category_name;
+					}
+					if (Cache::CACHE_ON) {
+						$cache->do_put(Cache::CACHE_CATEGORY_CHILDREN_PARENT_ID.$category_parent_id, $categoryChildren, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+					}
+				}
+				return $categoryChildren;
+			}
+		}
+		return $categoryChildren;
 	}
 
 	public static function getNameCategory($catid=0){
@@ -72,8 +91,8 @@ class DataCommon{
 				->fields('s');
 			$data = $query->execute();
 			if(!empty($data)){
-				foreach($data as $k=> $cate){
-					$user_shop = $cate;
+				foreach($data as $k=> $shop){
+					$user_shop = $shop;
 				}
 				if(Cache::CACHE_ON) {
 					$cache->do_put(Cache::CACHE_USER_SHOP_ID . $id_shop, $user_shop, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
@@ -112,6 +131,61 @@ class DataCommon{
 	}
 
 	public static function getAllProvices(){
-		return DB::getItembyCond(self::$table_province, 'province_id, province_name', '', self::$primary_key_province.' ASC', 'province_status=1', '');
+		$categoryChildren = array();
+		if(Cache::CACHE_ON){
+			$cache = new Cache();
+			$categoryChildren = $cache->do_get(Cache::CACHE_PROVINCE);
+		}
+		if($categoryChildren == null || empty($categoryChildren)) {
+			$query = db_select(self::$table_province, 'p')
+				->condition('p.province_status', STASTUS_SHOW, '=')
+				->fields('p', array('province_id', 'province_name'));
+			$data = $query->execute();
+			if (!empty($data)) {
+				foreach ($data as $k => $province) {
+					$categoryChildren[$province->province_id] = $province->province_name;
+				}
+				if (Cache::CACHE_ON) {
+					$cache->do_put(Cache::CACHE_PROVINCE, $categoryChildren, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+				}
+			}
+		}
+		return $categoryChildren;
+	}
+
+	/**
+	 * @param int $banner_type: 1:banner home to, 2: banner home nh?,3: banner trái, 4 banner ph?i,5: banner trong list s?n ph?m
+	 * @param int $banner_page: 1: trang ch?, 2: trang list,3: trang detail, 4: trang list danh m?c
+	 * @param int $banner_category_id
+	 * @param int $banner_shop_id
+	 * @return array
+	 */
+	public static function getBannerAdvanced($banner_type = 0, $banner_page = 0, $banner_category_id = 0, $banner_shop_id = 0){
+		$bannerAdvanced = array();
+		if(Cache::CACHE_ON){
+			$cache = new Cache();
+			$bannerAdvanced = $cache->do_get(Cache::CACHE_PROVINCE.'_'.$banner_type.'_'.$banner_page.'_'.$banner_category_id.'_'.$banner_shop_id);
+		}
+		if($bannerAdvanced == null || empty($bannerAdvanced)) {
+			$arrField = array('banner_id', 'banner_name', 'banner_image','banner_link', 'banner_order', 'banner_is_target','banner_type','banner_category_id',
+				'banner_page', 'banner_status','banner_is_run_time', 'banner_start_time','banner_end_time', 'banner_is_shop','banner_shop_id');
+			$query = db_select(self::$table_banner, 'c')
+				->condition('c.banner_status', STASTUS_SHOW, '=')
+				->condition('c.banner_type', $banner_type, '=')
+				->condition('c.banner_page', $banner_page, '=')
+				->condition('c.banner_category_id', $banner_category_id, '=')
+				->condition('c.banner_shop_id', $banner_shop_id, '=')
+				->fields('c', $arrField);
+			$data = $query->execute();
+			if (!empty($data)) {
+				foreach ($data as $k => $banner) {
+					$bannerAdvanced[] = $banner;
+				}
+				if (Cache::CACHE_ON) {
+					$cache->do_put(Cache::CACHE_PROVINCE.'_'.$banner_type.'_'.$banner_page.'_'.$banner_category_id.'_'.$banner_shop_id, $bannerAdvanced, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+				}
+			}
+		}
+		return $bannerAdvanced;
 	}
 }

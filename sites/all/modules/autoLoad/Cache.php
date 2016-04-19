@@ -11,11 +11,21 @@ class Cache {
     const CACHE_TIME_TO_LIVE_30 = 1800; //Time cache 30 phut
     const CACHE_TIME_TO_LIVE_60 = 3600; //Time cache 60 phut
 
+    //cache Province
+    const CACHE_PROVINCE = 'cache_province';
+
+    //cache banner
+    const CACHE_BANNER_ADVANCED = 'cache_banner_advanced_';
+
     //cacheProduct
     const CACHE_PRODUCT_ID = 'cache_product_id_';
 
     //cache Shop
     const CACHE_USER_SHOP_ID = 'cache_shop_id_';
+
+    //cache Category
+    const CACHE_LIST_CATEGORY_PARENT = 'cache_list_category_parent';
+    const CACHE_CATEGORY_CHILDREN_PARENT_ID = 'cache_category_children_parent_id_';
 
 	public function do_put( $key, $value, $time = 0 ){
         //if $time = 0: mac dinh la 5nam (^_^)
