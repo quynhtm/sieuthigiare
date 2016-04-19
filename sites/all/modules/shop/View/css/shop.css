@@ -306,16 +306,15 @@ a.btn-yahoo:hover{
 }
 .link-breadcrumb {
     background: #f2f2f2;
-    border-radius: 2px;
-    margin: 0 10px;
-    padding: 8px;
-    text-transform: uppercase;
-    margin-bottom: 5px;
+    border: 1px solid #ddd;
+    border-top: none;
+    margin: 0 0 5px;
+    padding: 5px 8px;
+    text-transform: none;
 }
 .link-breadcrumb a {
     display: inline-block;
     font-size: 12px;
-    font-weight: bold;
 }
 .link-breadcrumb a:hover{
     text-decoration: underline;
@@ -335,6 +334,7 @@ a.btn-yahoo:hover{
 }
 .title-category-parent {
     font-size: 15px;
+    font-weight: bold;
     margin-bottom: 10px;
 }
 .left-category-shop ul{
@@ -351,6 +351,13 @@ a.btn-yahoo:hover{
 }
 .left-category-shop ul li a:hover,
 .left-category-shop ul li a.act{
+    color: #0388cd;
+}
+.wrap-main-view.shop .box-menu{
+    min-height: auto;
+}
+.wrap-main-view.shop ul li a:hover,
+.wrap-main-view.shop ul li a.act{
     color: #0388cd;
 }
 .right-show-product-shop.body-list-item {
@@ -786,7 +793,11 @@ a.btn-yahoo:hover{
 .content-bottom-content-view .act.show-tab{
     display: block;
 }
-
+.content-bottom-content-view .show-tab img {
+    max-width: 100% !important;
+    width: auto!important;
+    height: auto!important;
+}
 .right-bottom-content-view{
     width: 300px;
     display: inline-block;

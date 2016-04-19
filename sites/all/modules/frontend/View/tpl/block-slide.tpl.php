@@ -1,8 +1,7 @@
 <?php global $base_url; ?>
 <div class="box-header-midd-wrapp">
 	<div class="container">
-		<div class="box-menu">
-			<div class="title-cat-menu">Danh mục sản phẩm</div>
+		<div class="box-menu-list">
 			<div class="content-box-menu">
 				<ul>
 					<li>

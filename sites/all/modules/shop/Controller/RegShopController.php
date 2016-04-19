@@ -165,6 +165,7 @@ class RegShopController{
 				drupal_set_message($errors, 'error');
 				drupal_goto($base_url.'/sua-thong-tin-gian-hang.html');
 			}
+
 			$data_post = array(
 				'shop_category'=>$dataInput ['shop_category']['value'],
 				'shop_name'=>$dataInput ['shop_name']['value'],
@@ -175,6 +176,10 @@ class RegShopController{
 				'shop_province'=>$dataInput ['shop_province']['value'],
 				'shop_transfer'=>$dataInput ['shop_transfer']['value'],
 			);
+
+			if($dataInput ['shop_category']['value'] > 0){
+				$data_post['shop_category_name'] = DataCommon::getNameCategory($dataInput ['shop_category']['value']);
+			}
 
 			$query = RegShop::updateId($data_post, $user_shop->shop_id);
 			drupal_set_message('Cập nhật thông tin gian hàng thành công!');

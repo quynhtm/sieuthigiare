@@ -1,24 +1,33 @@
 <?php global $base_url;?>
 <div class="container">
 	<div class="row">
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<div class="col-lg-12">
 			<div class="link-breadcrumb">
 				<a href="<?php echo $base_url; ?>">Trang chủ</a>
 				<i class="icon-double-angle-right"></i>
 				<a href=""><?php echo isset($user_shop->shop_name)? $user_shop->shop_name : 'Trang chủ của shop';?></a>
 			</div>
 			<div class="main-view-post box-register">
-				<div class="wrap-main-view">
+				<div class="wrap-main-view shop">
 					<div class="left-category-shop">
-						<div class="title-category-parent">DANH MỤC SẢN PHẨM</div>
+						<div class="title-category-parent">
+							<?php 
+								if(isset($user_shop->shop_category_name) && $user_shop->shop_category_name != ''){
+									echo $user_shop->shop_category_name;
+								}else{
+									echo 'Danh mục sản phẩm';
+								} 
+							?>
+						</div>
 						<?php if(isset($arrCategoryChildren) && !empty($arrCategoryChildren)){
 							$shop_id = isset($user_shop->shop_id)? $user_shop->shop_id : 0;
 						?>
 						<ul>
 							<?php foreach($arrCategoryChildren as $k =>$v){?>
 							<li><a class="<?php if($category_id == $k){ ?>act<?php } ?>" href="<?php echo FunctionLib::buildLinkCategory($shop_id, '', $k, $v) ?>" title="<?php echo $v?>"><?php echo $v?></a></li>
-							<?php } } ?>
+							<?php } ?>
 						</ul>
+						<?php } ?>
 					</div>
 					<div class="right-show-product-shop body-list-item ">
 						<div class="banner-shop-content">

@@ -45,6 +45,16 @@ class DataCommon{
 		return array();
 	}
 
+	public static function getNameCategory($catid=0){
+		if($catid > 0){
+			$result = DB::getItembyCond(self::$table_category, 'category_name', '', 'category_id ASC', 'category_status=1 AND category_id='.$catid, 1);
+			if(!empty($result)){
+				return $result[0]->category_name;
+			}
+		}
+		return '';
+	}
+
 	/**
 	 * @param int $id_shop
 	 * @return array

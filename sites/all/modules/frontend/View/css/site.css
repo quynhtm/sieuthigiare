@@ -24,10 +24,15 @@ a{
 }
 .center-header{
     background: #fff;
-    border: none;
-    border-radius: 0;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #d8d8d8;
+    border-bottom: 1px solid #ddd;
+}
+.bottom-header {
+    background: #cc0000;
+    clear: both;
+    display: inline-block;
+    height: 35px;
+    margin-top: 10px;
+    width: 100%;
 }
 #logo {
     border-radius: 5px;
@@ -47,14 +52,13 @@ span#logo{
 .box-top-header-right {
     display: inline-block;
     float: right;
-    margin-top: 8px;
+    margin-top: 10px;
     width: 72%;
 }
 .box-search {
     display: inline-block;
     float: left;
-    margin-top: 1px;
-    width: 100%;
+    width: 95%;
     border: 2px solid #cc0000;
 }
 .keyword {
@@ -102,88 +106,65 @@ span#logo{
 .box-login .link-normal:hover{
      color: #ff7300;
 }
-.box-shop-cart {
-    border: 2px solid #cc0000;
-    display: inline-block;
-    float: right;
-    padding: 5px 15px 5px 5px;
-    max-width: 22%;
-}
-.box-shop-cart .icon-shop{
-    background: rgba(0, 0, 0, 0) url("../img/bg.png") no-repeat scroll -160px -118px;
-    display: inline-block;
-    height: 28px;
-    width: 40px;
-    vertical-align: top;
-}
-.num-in-cart {
-    display: inline-block;
-    font-family: tahoma !important;
-    font-size: 15px;
-    font-weight: bold;
-    max-width: 95px;
-    overflow: hidden;
-    position: relative;
-    top: 3px;
-    vertical-align: top;
-    white-space: nowrap;
-}
 .search-top-center{
     display: inline-block;
     float: left;
     margin-top: 1px;
     width: 70%;
 }
-.guide-link{
-    font-weight: bold;
-    font-style: italic;
-    font-size: 12px;
-    color: #555;
+.box-header-link{
     clear: both;
-    margin-top: 5px;
-    display: inline-block;
     width: 100%;
 }
-.guide-link > a {
-    font-weight: normal;
-}
-.phone-call-num{
-    font-weight: bold;
-    font-size: 12px;
-    color: #555;
-    clear: both;
-    margin-top: 5px;
+.box-menu-title {
     display: inline-block;
-    width: 100%;
-}
-.phone-call-num .icon-phone-head{
-    background: rgba(0, 0, 0, 0) url("../img/bg.png") no-repeat scroll -178px -157px;
-    color: #cc0000;
-    font-size: 18px;
-    font-weight: bold;
-    padding-left: 25px;
-    font-family: Arial,Helvetica,sans-serif;
-}
-.phone-call-num .time-work{
-    color: #666;
-    font-size: 11px;
-    font-style: italic;
-    font-weight: normal;
+    float: left;
+    position: relative;
+    width: 230px;
 }
 /*content*/
-.box-menu {
-    background: #fff none repeat scroll 0 0;
+.box-menu-list{
+    background: #fff;
     border: 1px solid #ddd;
-    min-height: 428px;
-    width: 230px;
     border-top: none;
+    width: 230px;
     position: relative;
     display: inline-block;
     float: left;
+    height: 427px;
+}
+.icon-cat-title {
+    display: inline-block !important;
+    float: left;
+    margin-right: 10px;
+    margin-top: 3px !important;
+    width: 18px !important;
+}
+.ic-line {
+    background: #fff;
+    clear: both;
+    display: block;
+    height: 3px;
+    margin-bottom: 2px;
+    width: 100%;
+}
+.title-cat-menu .right-down{
+    display: inline-block;
+    float: right;
+    font-size: 25px;
+    height: 20px;
+    position: relative;
+    right: 5px;
+    top: -6px;
+}
+.front .title-cat-menu .right-down{
+    display: none;
 }
 .title-cat-menu {
-    background: #f2f2f2 none repeat scroll 0 0;
-    border-bottom: 1px solid #e3e3e3;
+    background: #cc0000;
+    border: 1px solid #cc0000;
+    color: #fff;
+    cursor: pointer;
     font-weight: bold;
     padding: 8px 5px 8px 12px;
     text-transform: uppercase;
@@ -206,8 +187,10 @@ span#logo{
     padding-left: 13px;
     text-decoration: none;
 }
-.content-box-menu ul > li > a{
+.content-box-menu ul > li > a {
+    display: inline-block;
     text-transform: none;
+    width: 100%;
 }
 .content-box-menu ul > li:last-child{
     border-bottom: none;
@@ -216,13 +199,13 @@ span#logo{
     border: 1px solid #ddd;
     display: none;
     left: 100%;
-    width: 702px;
+    width: 735px;
     padding-left: 30px;
     padding-right: 15px;
     position: absolute;
     top: -1px;
     z-index: 22;
-    min-height: 429px;
+    min-height: 428px;
 }
 .content-box-menu ul > li:hover .list-subcat{
     display: inline-block;
@@ -253,6 +236,10 @@ span#logo{
 }
 .item-right-slider:last-child{
     margin-bottom: 0px;
+}
+.item-right-slider img {
+    height: 209px;
+    width: 100%;
 }
 /*product*/
 .w-list-block{

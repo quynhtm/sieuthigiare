@@ -276,6 +276,7 @@ class ProductShopController{
 										'user_shop'=>$this->user_shop,
 										'pager' =>$result['pager'],
 										'category_id' =>$this->category_id,
+										'category_parent' =>$this->category_id,
 										));
 	}
 
