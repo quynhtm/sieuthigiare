@@ -248,7 +248,7 @@ var Common_admin = {
             allowedTypes:"jpg,png,jpeg",
             fileName: "multipleFile",
             formData: {id: id_hiden,type: 3},
-            multiple: (id_hiden==0)? false: true,
+            multiple: false,
             onSubmit:function(){
                 jQuery( "#sys_show_button_upload").hide();
                 jQuery("#status").html("<font color='green'>Đang upload...</font>");

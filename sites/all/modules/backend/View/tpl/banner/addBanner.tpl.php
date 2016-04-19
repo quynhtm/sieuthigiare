@@ -23,7 +23,9 @@
                  <div class="col-lg-12 paddingTop10">
                      <a href="javascript:;"class="btn btn-primary" onclick="Common_admin.uploadBannerAdvanced();">Upload ảnh quảng cáo</a>
                      <div id="sys_show_image_banner">
-
+                         <?php if(isset($arrItem->banner_image) && $arrItem->banner_image !=''){?>
+                             <img height='300' width='400' src='<?php echo FunctionLib::getThumbImage($arrItem->banner_image,$arrItem->banner_id,FOLDER_BANNER,400,300)?>'/>
+                         <?php }?>
                      </div>
                      <input name="banner_image" type="hidden" id="banner_image" value="<?php if(isset($arrItem->banner_image)){ echo $arrItem->banner_image; } ?>">
                      <input name="banner_image_old" type="hidden" id="banner_image_old" value="<?php if(isset($arrItem->banner_image)){ echo $arrItem->banner_image; } ?>">
@@ -64,11 +66,11 @@
                  </div>
                  <div class="col-lg-12 paddingTop10">
                      <label class="control-label">Ngày bắt đầu</label>
-                     <div><input type="text" class="form-control input-sm date" placeholder ="Ngày bắt đầu" name="banner_start_time" value="<?php if(isset($arrItem->banner_start_time)){ echo $arrItem->banner_start_time; } ?>"/></div>
+                     <div><input type="text" class="form-control input-sm date" placeholder ="Ngày bắt đầu" name="banner_start_time" value="<?php if(isset($arrItem->banner_start_time) && $arrItem->banner_start_time > 0){ echo date('d-m-Y',$arrItem->banner_start_time); } ?>"/></div>
                  </div>
                  <div class="col-lg-12 paddingTop10">
                      <label class="control-label">Ngày kết thúc</label>
-                     <div><input type="text" class="form-control input-sm date" placeholder ="Ngày kết thúc" name="banner_end_time" value="<?php if(isset($arrItem->banner_end_time)){ echo $arrItem->banner_end_time; } ?>"/></div>
+                     <div><input type="text" class="form-control input-sm date" placeholder ="Ngày kết thúc" name="banner_end_time" value="<?php if(isset($arrItem->banner_end_time) && $arrItem->banner_end_time > 0){ echo date('d-m-Y',$arrItem->banner_end_time); } ?>"/></div>
                  </div>
                  <div class="col-lg-12 paddingTop10">
                      <label class="control-label">Danh mục quảng cáo</label>
@@ -119,7 +121,7 @@
     jQuery(document).ready(function($){
         jQuery('.date').datetimepicker({
             timepicker:false,
-            format:'d/m/Y',
+            format:'d-m-Y',
             lang:'vi'
         });
     });

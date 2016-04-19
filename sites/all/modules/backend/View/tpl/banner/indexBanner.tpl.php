@@ -77,7 +77,7 @@
 
 							<td>
 								<?php
-								echo '<b>P: </b>['.$item->banner_id.'] '.$item->banner_name.'<br/>';
+								echo '<b>B: </b>['.$item->banner_id.'] '.$item->banner_name.'<br/>';
 								echo '<span class="font_9">Ngày tạo:'. date('d-m-Y h:i:s',$item->banner_create_time).'</span>';
 								?>
 							</td>
@@ -89,7 +89,7 @@
 							</td>
 							<td>
 								<?php
-								if($item->banner_is_run_time == BANNER_NOT_RUN_TIME){
+								if($item->banner_is_run_time == BANNER_IS_RUN_TIME){
 									echo 'Start: '.date('d-m-Y h:i:s',$item->banner_start_time);
 									echo '<br/>End: '.date('d-m-Y h:i:s',$item->banner_end_time);
 								}else{

@@ -62,7 +62,7 @@ class BannerController{
 									'optionStatus' => $optionStatus,
 									'arrProductStatus' => $this->arrStatus,
 									'arrIsShop' => $this->arrIsShop,
-									'arrIsBlock' => $this->arrIsBlock,
+									'arrIsBlock' => array(),
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));
@@ -129,8 +129,13 @@ class BannerController{
 				$dataInput['banner_update_time']['value'] = time();
 
 				//so sánh ảnh cũ và mơi, nếu khách nhau thì xóa ảnh cũ đi
-				if($banner_image_old !== '' && $banner_image !== ''){
-					//để mai làm, ngủ đã :D
+				if($banner_image_old !== '' && $banner_image !== '' && strcmp ( $banner_image_old , $banner_image ) != 0 && $item_id > 0){
+					//xoa anh cũ
+					$path = PATH_UPLOAD.'/'.FOLDER_BANNER.'/'.$item_id;
+					if(is_file($path.'/'.$banner_image_old)){
+						@unlink($path.'/'.$banner_image_old);
+					}
+					FunctionLib::delteImageCacheItem(FOLDER_BANNER, $item_id);
 				}
 
 				//FunctionLib::Debug($dataInput);
