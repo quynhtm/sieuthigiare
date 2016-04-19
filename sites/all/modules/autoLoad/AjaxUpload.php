@@ -8,6 +8,7 @@
 class AjaxUpload{
 	static $primary_key_news = 'news_id';
     static $primary_key_product = 'product_id';
+    static $primary_key_banner = 'banner_id';
 
 	function playme(){
 		$code = FunctionLib::getParam('code', '');
@@ -44,7 +45,6 @@ class AjaxUpload{
         $aryData = array();
         $aryData['intIsOK'] = -1;
         $aryData['msg'] = "Data not exists!";
-        
         switch( $type ){
             case 1://img news
                 $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_NEWS, FOLDER_NEWS, 'news_image_other', self::$primary_key_news);
@@ -53,7 +53,7 @@ class AjaxUpload{
                 $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_PRODUCT, FOLDER_PRODUCT, 'product_image_other', self::$primary_key_product);
                 break;
             case 3 ://img banner qu?ng cáo
-                $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_BANNER, FOLDER_BANNER, 'banner_image_temp', self::$primary_key_product);
+                $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_BANNER, FOLDER_BANNER, 'banner_image_temp', self::$primary_key_banner);
                 break;
             default:
                 break;
@@ -88,14 +88,11 @@ class AjaxUpload{
             }
 
             $aryError = $tmpImg = array();
-            $old_file = '';
-            
-            $file_name = Upload::uploadFile('multipleFile', 
+            $file_name = Upload::uploadFile('multipleFile',
 	                           $_file_ext = 'jpg,jpeg,png,gif', 
 	                           $_max_file_size = 10*1024*1024, 
 	                           $_folder = $folder.'/'.$item_id,
-	                           $type_json=0
-                           );
+	                           $type_json=0);
             
             if ($file_name != '' && empty($aryError)) {
                 $tmpImg['name_img'] = $file_name;
