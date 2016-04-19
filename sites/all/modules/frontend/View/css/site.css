@@ -181,9 +181,10 @@ span#logo{
     width: 25px;
     cursor: pointer;
 }
-.support-online{
+.support-online {
     display: inline-block;
     float: right;
+    margin-top: 5px;
 }
 .support-online > span {
     color: #444;
