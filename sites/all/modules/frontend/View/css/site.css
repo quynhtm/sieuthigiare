@@ -16,7 +16,7 @@ a{
     border-bottom: 1px solid #d8d8d8;
     border-top: 1px solid #d8d8d8;
     position: relative;
-    padding: 5px 0px;
+    padding: 8px 0;
 }
 .top-header {
     clear: both;
@@ -37,7 +37,7 @@ a{
 #logo {
     border-radius: 5px;
     float: left;
-    margin-top: 5px;
+    margin-top: 8px;
     overflow: hidden;
     margin-right: 15px;
 }
@@ -52,7 +52,7 @@ span#logo{
 .box-top-header-right {
     display: inline-block;
     float: right;
-    margin-top: 10px;
+    margin-top: 15px;
     width: 72%;
 }
 .box-search {
@@ -91,7 +91,7 @@ span#logo{
     display: inline-block;
     font-size: 12px;
     font-weight: bold;
-    padding-left: 10px;
+    padding-left: 30px;
 }
 .btnLog:hover,
 .btnLog:focus,
@@ -122,6 +122,75 @@ span#logo{
     position: relative;
     width: 230px;
 }
+.desc-price-day {
+    display: inline-block;
+    float: left;
+    margin-top: 5px;
+    margin-left: 3px;
+    font-size: 14px;
+    font-style: italic;
+}
+.desc-price-day .icon-star-empty{
+    color: #fe6d00;
+    font-size: 18px;
+}
+.support-contact .icon-book{
+    font-size: 30px;
+    color:#ddd;
+    margin-right:10px;
+    position: relative;
+    top:2px; 
+}
+.support-contact {
+    border-right: 1px solid #f2f2f2;
+    float: left;
+    font-size: 14px;
+    height: 40px;
+    margin: 8px 0;
+    padding-left: 48px;
+    padding-right: 20px;
+    width: 165px;
+    cursor: pointer;
+    color: #333;
+}
+.support-contact:hover{
+    color: #005981;
+}
+.shopping-cart {
+    background: rgba(0, 0, 0, 0) url("../img/cart.png") no-repeat scroll 0 0;
+    display: inline-block;
+    float: right;
+    height: 46px;
+    width: 50px;
+    position: relative;
+}
+.shopping-cart .num-item{
+    color: #fff;
+    font-size: 11px;
+    font-weight: 400;
+    height: 16px;
+    line-height: 16px;
+    overflow: hidden;
+    padding: 0 3px;
+    position: absolute;
+    right: 2px;
+    text-align: center;
+    text-overflow: ellipsis;
+    top: 3px;
+    white-space: nowrap;
+    width: 25px;
+    cursor: pointer;
+}
+.support-online {
+    display: inline-block;
+    float: right;
+    margin-top: 5px;
+}
+.support-online > span {
+    color: #444;
+    font-size: 17px;
+    font-weight: bold;
+}
 /*content*/
 .box-menu-list{
     background: #fff;
@@ -137,11 +206,11 @@ span#logo{
     display: inline-block !important;
     float: left;
     margin-right: 10px;
-    margin-top: 3px !important;
+    margin-top: 2px !important;
     width: 18px !important;
 }
 .ic-line {
-    background: #fff;
+    background: #222;
     clear: both;
     display: block;
     height: 3px;
@@ -161,9 +230,7 @@ span#logo{
     display: none;
 }
 .title-cat-menu {
-    background: #cc0000;
-    border: 1px solid #cc0000;
-    color: #fff;
+    color: #222;
     cursor: pointer;
     font-weight: bold;
     padding: 8px 5px 8px 12px;

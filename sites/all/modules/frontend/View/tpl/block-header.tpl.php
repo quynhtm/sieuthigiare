@@ -33,6 +33,13 @@
 						</form>
 					</div>
 		    	</div>
+		    	<div class="box-right-focus">
+		    		<div class="support-contact">
+						<i class="icon-book"></i>Liên hệ</div>
+		    		<div class="shopping-cart">
+		    			<span class="num-item">1</span>
+		    		</div>
+		    	</div>
 		    </div>
 		</div>
 		<div class="box-header-link">
@@ -43,9 +50,15 @@
 					    <span class="ic-line"></span>
 					    <span class="ic-line"></span>
 					</div>
-				    Danh mục
+				    Danh mục sản phẩm
 				    <i class="right-down icon-angle-down"></i>
 				</div>
+			</div>
+			<div class="desc-price-day">
+				<i class="icon-star-empty"></i> <a href="#" title="Giảm giá mỗi ngày">Giảm giá mỗi ngày</a>
+			</div>
+			<div class="support-online">
+				CSKH: <span>0938.423.368 - 0913.922.986</span>
 			</div>
 		</div>
 	</div>

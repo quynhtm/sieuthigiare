@@ -6,6 +6,7 @@ class CategoryController{
 
 	private $arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
 	private $arrCategoryParent = array();
+	private $arrShowContent = array(0 => 'Ẩn', 1 => 'Hiển thị');
 
 	public function __construct(){
 		$this->arrCategoryParent = DataCommon::getListCategoryParent();
@@ -30,12 +31,14 @@ class CategoryController{
 		$dataSearch['category_name'] = FunctionLib::getParam('category_name','');
 		$dataSearch['category_status'] = FunctionLib::getParam('category_status', -1);
 		$dataSearch['category_parent_id'] = FunctionLib::getParam('category_parent_id', -1);
+		$dataSearch['category_content_front'] = FunctionLib::getParam('category_content_front', 0);
 
 		$result = Category::getSearchListItems($dataSearch,$limit,array());
 
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['category_status']);
 		$optionCategoryParent = FunctionLib::getOption(array(-1=>'Chọn danh mục cha')+$this->arrCategoryParent, $dataSearch['category_parent_id']);
+		$optionShowContent = FunctionLib::getOption($this->arrShowContent, $dataSearch['category_content_front']);
 
 		return $view = theme('indexCategory',array(
 									'title'=>'Danh mục sản phẩm',
@@ -43,6 +46,7 @@ class CategoryController{
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,
 									'optionCategoryParent' => $optionCategoryParent,
+									'optionShowContent' => $optionShowContent,
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));
@@ -64,9 +68,12 @@ class CategoryController{
 			$dataInput = array(
 				'category_name'=>array('value'=>FunctionLib::getParam('category_name',''), 'require'=>1, 'messages'=>'Tên danh mục không được trống!'),
 				'category_parent_id'=>array('value'=>FunctionLib::getParam('category_parent_id',''), 'require'=>1, 'messages'=>'Chưa chọn danh mục cha!'),
+				'category_content_front'=>array('value'=>FunctionLib::getIntParam('category_content_front',0)),
 				'category_status'=>array('value'=>FunctionLib::getParam('category_status',0)),
 				'category_order'=>array('value'=>FunctionLib::getParam('category_order',0)),
 			);
+
+
 
 			$errors = ValidForm::validInputData($dataInput);
 			if($errors != ''){
@@ -83,12 +90,16 @@ class CategoryController{
 		}
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->category_status) ? $arrItem->category_status: -1);
 		$optionCategoryParent = FunctionLib::getOption(array(0=>'Chọn danh mục cha')+$this->arrCategoryParent, isset($arrItem->category_parent_id) ? $arrItem->category_parent_id: -1);
+		$optionShowContent = FunctionLib::getOption($this->arrShowContent, isset($arrItem->category_content_front) ? $arrItem->category_content_front: 0);
+		
 		return $view = theme('addCategory',
 			array('arrItem'=>$arrItem,
 				'item_id'=>$item_id,
 				'title'=>'danh mục sản phẩm',
 				'optionCategoryParent'=>$optionCategoryParent,
-				'optionStatus'=>$optionStatus));
+				'optionStatus'=>$optionStatus,
+				'optionShowContent'=>$optionShowContent,
+				));
 	}
 
 	function deleteCategoryAction(){
