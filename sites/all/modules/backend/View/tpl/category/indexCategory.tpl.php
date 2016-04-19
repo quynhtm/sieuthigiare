@@ -13,6 +13,11 @@
 			</div>
 
 			<div class="col-lg-3">
+				<label class="control-label">Hiện ở trang chủ</label>
+				<div><select class="form-control input-sm" name="category_content_front"><?php echo $optionShowContent;?></select></div>
+			</div>
+
+			<div class="col-lg-3">
 				<label class="control-label">Trạng thái</label>
 				<div><select class="form-control input-sm" name="category_status"><?php echo $optionStatus;?></select></div>
 			</div>

@@ -5,7 +5,7 @@
 class Category{
 	static $table_action = TABLE_CATEGORY;
 	static $primary_key = 'category_id';
-	static $arrFields = array('category_id', 'category_name', 'category_parent_id', 'category_status', 'category_order');
+	static $arrFields = array('category_id', 'category_name', 'category_parent_id', 'category_status', 'category_order', 'category_content_front');
 
 	public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
 		//n?u get field rong thi lay all
@@ -28,6 +28,10 @@ class Category{
 						array_push($arrCond, $field.' = '.$value);
 					}
 					if($field === 'category_status' && $value != -1){
+						$sql->condition('i.'.$field, $value, '=');
+						array_push($arrCond, $field.' = '.$value);
+					}
+					if($field === 'category_content_front' && $value != 0){
 						$sql->condition('i.'.$field, $value, '=');
 						array_push($arrCond, $field.' = '.$value);
 					}
