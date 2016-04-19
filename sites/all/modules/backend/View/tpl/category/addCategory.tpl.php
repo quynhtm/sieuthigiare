@@ -24,7 +24,7 @@
              </div>
 
              <div class="control-group">
-                 <label class="control-label">Hiện ở trang chủ<span>*</span></label>
+                 <label class="control-label">Hiện ở trang chủ</label>
                  <div class="controls">
                      <select class="form-control input-sm" name="category_content_front">
                          <?php echo $optionShowContent;?>
