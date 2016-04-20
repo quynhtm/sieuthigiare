@@ -90,8 +90,9 @@ function Site_init() {
 	$uri = request_uri();
 	if(preg_match("/(\/admin)/", $uri)==0){
 		$files = array(
-			'Model/SiteBlocksModel.php',
-			'Controller/SiteBlockController.php',
+			'Model/Site.php',
+			'Controller/SiteController.php',
+
 			'View/js/site.js',
 			'View/css/site.css',
 			'View/css/media.css',
@@ -132,7 +133,11 @@ function block_header(){
 	return $view;
 }
 function block_slide(){
-	$view= theme('block-slide');
+	
+	$bannerLager = SiteController::getListBannerLagerSite();
+	$bannerSmall = SiteController::getListBannerSmallSite();
+
+	$view= theme('block-slide', array('bannerLager'=>$bannerLager, 'bannerSmall'=>$bannerSmall));
 	return $view;
 }
 function block_content(){

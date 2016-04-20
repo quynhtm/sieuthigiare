@@ -159,21 +159,21 @@
 		</div>
 		<div class="slider-box-mid">
 			<div class="nivoSlider" id="slider">
-				<a title="Sản phẩm trực tuyến 2015" href="http://sanphamredep.com" target="_blank" class="nivo-imageLink" style="display: block;">
-					<img alt="Sản phẩm trực tuyến 2015" src="http://sanphamredep.com/uploads/images/ads/11-2015/08-35-08-07-11-2015-1.jpg" style="width: 730px; visibility: hidden;">
+				<?php foreach($bannerLager as $v){ ?>
+				<a title="<?php echo $v->banner_name ?>" href="<?php echo $v->banner_link ?>" target="_blank" class="nivo-imageLink" style="display: block;">
+					<img src="<?php echo FunctionLib::getThumbImage($v->banner_image, $v->banner_id, FOLDER_BANNER, 0, 0) ?>" alt="<?php echo $v->banner_name ?>"/>
 				</a>
-									<a title="Sản phẩm trực tuyến 2015" href="http://sanphamredep.com" target="_blank" class="nivo-imageLink" style="display: none;">
-					<img alt="Sản phẩm trực tuyến 2015" src="http://sanphamredep.com/uploads/images/ads/11-2015/08-35-35-07-11-2015-2.jpg" style="width: 730px; visibility: hidden;">
-				</a>
+				<?php } ?>
 			</div>
 		</div>
 		<div class="ads-right-mid">
+			<?php foreach($bannerSmall as $v){ ?>
 			<div class="item-right-slider">
-				<a href="" title><img title="KHUYẾN MẠI CANON" alt="KHUYẾN MẠI CANON" src="https://static10.zamba.vn/original/i:plaza/product/product/-0-amdunnuocsieutoc_304x205-87928/hn-home.jpg"></a>
+				<a href="<?php echo $v->banner_link ?>" title ="<?php echo $v->banner_name ?>">
+					<img src="<?php echo FunctionLib::getThumbImage($v->banner_image, $v->banner_id, FOLDER_BANNER, 300, 210) ?>" alt="<?php echo $v->banner_name ?>"/>
+				</a>
 			</div>
-			<div class="item-right-slider">
-				<a href="" title><img title="KHUYẾN MẠI CANON" alt="KHUYẾN MẠI CANON" src="https://static10.zamba.vn/original/i:plaza/product/product/-0-balo hau due mat troi-71254/home-hn.jpg"></a>
-			</div>
+			<?php } ?>
 		</div>
 	</div>
 </div>
