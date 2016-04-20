@@ -191,7 +191,7 @@ class ProductShopController{
 				}
 			}else{
 				if($data['category_id']['value'] > 0 ){
-					$data['category_name']['value'] = ProductShop::getNameCategory($data['category_id']['value']);
+					$data['category_name']['value'] = DataCommon::getNameCategory($data['category_id']['value']);
 				}
 				
 				if(!empty($arrItem)){

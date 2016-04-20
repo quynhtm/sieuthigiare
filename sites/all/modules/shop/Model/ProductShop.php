@@ -117,16 +117,6 @@ class ProductShop{
         return false;
     }
 
-    public static function getNameCategory($catid=0){
-        if($catid > 0){
-            $arrItem =  DB::getItemById(self::$table_action_category, self::$primary_key_cagegory, array('category_name'), $catid);
-            if(!empty($arrItem)){
-                return $arrItem[0]->category_name;
-            }
-        }
-        return '';
-    }
-
 	public static function save($data=array(), $id = 0){
         $data_post = array();
         if(!empty($data)){
