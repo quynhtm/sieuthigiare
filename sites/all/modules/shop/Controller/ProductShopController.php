@@ -268,6 +268,8 @@ class ProductShopController{
 			$shop_category = $this->user_shop->shop_category;
 			$arrCategoryChildren = DataCommon::getListCategoryChildren($shop_category);
 		}
+		
+		$bannerList = DataCommon::getBannerAdvanced(BANNER_TYPE_HOME_BIG, BANNER_PAGE_HOME, $shop_category, 0);
 
 		return theme('indexShop', array(
 										'arrCategoryChildren'=>$arrCategoryChildren,
@@ -277,6 +279,7 @@ class ProductShopController{
 										'pager' =>$result['pager'],
 										'category_id' =>$this->category_id,
 										'category_parent' =>$this->category_id,
+										'bannerList' =>$bannerList,
 										));
 	}
 
