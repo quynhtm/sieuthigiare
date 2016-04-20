@@ -178,9 +178,12 @@ class RegShopController{
 			);
 
 			if($dataInput ['shop_category']['value'] > 0){
-				$data_post['shop_category_name'] = DataCommon::getNameCategory($dataInput ['shop_category']['value']);
+				$arrCat = DataCommon::getCategoryById($dataInput ['shop_category']['value']);
+				if(!empty($arrCat)){
+					$data_post['shop_category_name'] = $arrCat->category_name;
+				}
 			}
-
+			
 			$query = RegShop::updateId($data_post, $user_shop->shop_id);
 			drupal_set_message('Cập nhật thông tin gian hàng thành công!');
 			drupal_goto($base_url.'/quan-ly-gian-hang.html');

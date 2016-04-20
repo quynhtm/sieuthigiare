@@ -191,9 +191,11 @@ class ProductShopController{
 				}
 			}else{
 				if($data['category_id']['value'] > 0 ){
-					$data['category_name']['value'] = DataCommon::getNameCategory($data['category_id']['value']);
+					$arrCat = DataCommon::getCategoryById($data['category_id']['value']);
+					if(!empty($arrCat)){
+						$data['category_name']['value'] = $arrCat->category_name;
+					}
 				}
-				
 				if(!empty($arrItem)){
 					if($arrItem->product_id != $id){
 						drupal_set_message('Bạn không có quyền sửa tin đăng này!', 'error');
