@@ -40,6 +40,7 @@ define('TABLE_PROVINCE',       'web_province');
 define('TABLE_CATEGORY',       'web_category');
 define('TABLE_NEWS',           'web_news');
 define('TABLE_CONTACT',        'web_contact');
+define('TABLE_BUILD_SQL',        'web_build_sql');
 define('TABLE_COMMENT',        'web_comment');
 define('TABLE_ORDER',          'web_order');
 define('TABLE_BANNER',         'web_banner');

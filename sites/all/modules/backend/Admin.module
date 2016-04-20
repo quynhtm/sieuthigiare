@@ -90,6 +90,13 @@ function Admin_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
+    $items["admincp/buildsql"] = array(
+		"title" => t('Quan ly thuc thi SQL'),
+		"description" => "build_sql",
+		'page callback' => 'router_page',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
 
     $items["admincp/comments"] = array(
         "title" => t('Quan ly Binh luan'),
@@ -215,6 +222,10 @@ function Admin_theme() {
         //lien he
         'indexBanner' 		=> array('template' => 'View/tpl/banner/indexBanner'),
         'addBanner' 		=> array('template' => 'View/tpl/banner/addBanner'),
+
+        //build SQL
+        'indexBuildSql' 		=> array('template' => 'View/tpl/buildSql/indexBuildSql'),
+        'addBuildSql' 		=> array('template' => 'View/tpl/buildSql/addBuildSql'),
  		//here
     );
 }
@@ -265,6 +276,9 @@ function Admin_init(){
 
         'Model/Banner.php',
 		'Controller/BannerController.php',
+
+        'Model/BuildSql.php',
+		'Controller/BuildSqlController.php',
 	);
 	Loader::load('Admin', $files);
 }
