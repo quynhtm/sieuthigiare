@@ -31,7 +31,14 @@
 					</div>
 					<div class="right-show-product-shop body-list-item ">
 						<div class="banner-shop-content">
-							<a href="" title=""><img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/banner.jpg" alt=""></a>
+							<?php if(!empty($bannerList)){ ?>
+								<?php foreach($bannerList as $v){ ?>
+								<a title="<?php echo $v->banner_name ?>" href="<?php echo $v->banner_link ?>" target="_blank">
+									<img src="<?php echo FunctionLib::getThumbImage($v->banner_image, $v->banner_id, FOLDER_BANNER, 0, 0) ?>" alt="<?php echo $v->banner_name ?>"/>
+								</a>
+								<?php } ?>
+							<?php } ?>
+							
 						</div>
 						<div class="content-list-item">
 							<?php foreach($result as $v){?>
