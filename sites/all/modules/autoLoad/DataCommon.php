@@ -130,6 +130,34 @@ class DataCommon{
 		return $product;
 	}
 
+	/**
+	 * @param int $category_id
+	 * @return array
+	 */
+	public static function getCategoryById($category_id = 0){
+		$category = array();
+		if($category_id <= 0) return $category;
+		if(Cache::CACHE_ON) {
+			$cache = new Cache();
+			$category = $cache->do_get(Cache::CACHE_CATEGORY_ID . $category_id);
+		}
+		if( $category == null || empty($category)){
+			$query = db_select(self::$table_category, 'c')
+				->condition('c.category_id', $category_id, '=')
+				->fields('c');
+			$data = $query->execute();
+			if(!empty($data)){
+				foreach($data as $k=> $cate){
+					$category = $cate;
+				}
+				if(Cache::CACHE_ON) {
+					$cache->do_put(Cache::CACHE_CATEGORY_ID.$category_id, $category, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+				}
+			}
+		}
+		return $category;
+	}
+
 	public static function getAllProvices(){
 		$categoryChildren = array();
 		if(Cache::CACHE_ON){

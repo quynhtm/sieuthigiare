@@ -26,6 +26,7 @@ class Cache {
     //cache Category
     const CACHE_LIST_CATEGORY_PARENT = 'cache_list_category_parent';
     const CACHE_CATEGORY_CHILDREN_PARENT_ID = 'cache_category_children_parent_id_';
+    const CACHE_CATEGORY_ID = 'cache_categ?y_id_';
 
 	public function do_put( $key, $value, $time = 0 ){
         //if $time = 0: mac dinh la 5nam (^_^)
