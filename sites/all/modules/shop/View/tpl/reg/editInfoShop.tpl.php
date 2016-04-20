@@ -42,8 +42,8 @@
 										<label class="control-label">Tỉnh/thành<span>(*)</span></label>
 										<div>
 											<select class="form-control input-sm" name="shop_province">
-												<?php foreach($listProvince as $province){?>
-												<option value="<?php echo $province->province_id ?>" <?php if($province->province_id == $user_shop->shop_province){ ?>selected="selected"<?php } ?>><?php echo $province->province_name ?></option>
+												<?php foreach ($listProvinces as $k => $v) { ?>
+												<option value="<?php echo $k ?>" <?php if($k == $user_shop->shop_province){ ?>selected="selected"<?php } ?>><?php echo $v ?></option>
 												<?php } ?>
 											</select>
 										</div>

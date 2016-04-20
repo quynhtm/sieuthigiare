@@ -56,8 +56,8 @@
 										<div class="form-group">
 											<label class="control-label">Tỉnh/thành<span>(*)</span></label>
 											<select id="shop_province" name="shop_province" class="form-control">
-												<?php foreach ($listProvices as $v) { ?>
-												<option value="<?php echo $v->province_id ?>"><?php echo $v->province_name ?></option>
+												<?php foreach ($listProvices as $k => $v) { ?>
+												<option value="<?php echo $k ?>"><?php echo $v ?></option>
 												<?php } ?>
 											</select>
 										</div>

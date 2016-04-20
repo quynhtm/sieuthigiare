@@ -185,12 +185,12 @@ class RegShopController{
 			drupal_set_message('Cập nhật thông tin gian hàng thành công!');
 			drupal_goto($base_url.'/quan-ly-gian-hang.html');
 		}
-		$listProvince = DataCommon::getAllProvices();
+		$listProvinces = DataCommon::getAllProvices();
 		$arrCategoryParent = DataCommon::getListCategoryParent();
 		$dataCategory['shop_category'] = $user_shop->shop_category;
 		$optionCategoryParent = FunctionLib::getOption(array(-1=>'Chọn danh mục cha') + $arrCategoryParent, $dataCategory['shop_category']);
 
-		return $view = theme('editInfoShop', array('listProvince'=>$listProvince, 'optionCategoryParent'=>$optionCategoryParent));
+		return $view = theme('editInfoShop', array('listProvinces'=>$listProvinces, 'optionCategoryParent'=>$optionCategoryParent));
 	}
 
 	public function editPassShop(){
