@@ -17,4 +17,8 @@ class SiteController{
 		return $result;
 	}
 
+	public static function getListProductHome(){
+		$listCat ='';
+	}
+
 }
