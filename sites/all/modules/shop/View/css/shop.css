@@ -493,6 +493,11 @@ a.btn-yahoo:hover{
     width: 100%;
 }
 /*detail*/
+.box-detail-product .top-content-view {
+    display: inline-block;
+    margin-top: 5px;
+    width: 100%;
+}
 .left-slider-img {
     display: inline-block;
     float: left;
