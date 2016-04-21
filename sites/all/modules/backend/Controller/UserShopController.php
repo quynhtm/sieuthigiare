@@ -112,7 +112,7 @@ class UserShopController{
 		return $view = theme('addUserShop',array('user_shop'=>$user_shop,
 			'optionStatus'=>$optionStatus,
 			'optionIsShop'=>$optionIsShop,
-			'optionNumberLimitProduct'=>$optionNumberLimitProduct,
+			'optionNumberLimitProduct'=>$optionNumberLimitProduct
 			));
 		
 	}
