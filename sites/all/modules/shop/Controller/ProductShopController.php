@@ -45,6 +45,7 @@ class ProductShopController{
 			foreach($result['data'] as $k => &$value){
 				if( isset($value->product_image) && trim($value->product_image) != ''){
 					$value->url_image = FunctionLib::getThumbImage($value->product_image,$value->product_id,FOLDER_PRODUCT,80,80);
+					$value->image_big = FunctionLib::getThumbImage($value->product_image,$value->product_id,FOLDER_PRODUCT,300,400);
 				}
 			}
 		}
@@ -211,7 +212,7 @@ class ProductShopController{
 		$optionCategoryChildren = FunctionLib::getOption(array(-1=>'Chọn danh mục sản phẩm') + $arrCategoryChildren, isset($arrItem->category_id)? $arrItem->category_id : -1);
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->product_status)? $arrItem->product_status : -1);
 		$optionTypeProduct = FunctionLib::getOption($this->arrTypeProduct, isset($arrItem->product_is_hot)? $arrItem->product_is_hot : -1);
-		$optionTypePrice = FunctionLib::getOption($this->arrTypePrice, isset($arrItem->product_type_price)? $arrItem->product_type_price : -1);
+		$optionTypePrice = FunctionLib::getOption($this->arrTypePrice, isset($arrItem->product_type_price)? $arrItem->product_type_price : TYPE_PRICE_NUMBER);
 		return theme('productFormShop',
 			array('optionCategoryChildren'=>$optionCategoryChildren,
 				'optionStatus'=>$optionStatus,

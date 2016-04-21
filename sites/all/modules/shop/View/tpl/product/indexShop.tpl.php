@@ -5,7 +5,7 @@
 			<div class="link-breadcrumb">
 				<a href="<?php echo $base_url; ?>">Trang chủ</a>
 				<i class="icon-double-angle-right"></i>
-				<a href=""><?php echo isset($user_shop->shop_name)? $user_shop->shop_name : 'Trang chủ của shop';?></a>
+				<a href="<?php echo FunctionLib::buildLinkCategory($user_shop->shop_id,$user_shop->shop_name);?>"><?php echo isset($user_shop->shop_name)? $user_shop->shop_name : 'Trang chủ của shop';?></a>
 			</div>
 			<div class="main-view-post box-register">
 				<div class="wrap-main-view shop">

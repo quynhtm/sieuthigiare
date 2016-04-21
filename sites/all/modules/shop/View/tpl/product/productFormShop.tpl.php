@@ -12,7 +12,7 @@
 				<div class="title-box-shop-search"><?php echo $title ?>
 						<span style="float: right; margin-right:50px ">
 							<button type="submit" name="submit" id="buttonFormShopSubmit" class="btn btn-primary" value="1" onc>Lưu</button>
-   							<button type="reset" class="btn btn-danger">Bỏ qua</button>
+   							<a href="javascript:void(0);" onclick="window.history.back();" title="Bỏ qua" class="btn btn-warning" style="background-color:#bbb;border-color:#bbb;">Bỏ qua</a>
 						</span>
 				</div>
 				<div class="content-box-shop-search">
@@ -176,7 +176,7 @@
 						                <input type="hidden" id="id_hiden" name="id" value="<?php if(isset($arrItem->product_id)) { echo $arrItem->product_id; } ?>"/>
 						                <input type="hidden" value="txt-form-post" name="txt-form-post">
 										<button type="submit" name="submit" id="buttonFormShopSubmit" class="btn btn-primary" value="1" >Lưu</button>
-						                <button type="reset" class="btn btn-danger">Bỏ qua</button>
+										<a href="javascript:void(0);" onclick="window.history.back();" title="Bỏ qua" class="btn btn-warning" style="background-color:#bbb;border-color:#bbb;">Bỏ qua</a>
 						            </div>
 						        </div>
 					        </div>
@@ -198,17 +198,19 @@
                 <h4 class="modal-title" id="myModalLabel">Upload ảnh</h4>
             </div>
             <div class="modal-body">
-                <form name="uploadImage" method="post" action="#" enctype="multipart/form-data">
-                    <div class="form_group">
-                        <div id="sys_mulitplefileuploader" class="btn btn-primary">Upload ảnh</div>
-                        <div id="status"></div>
+				<form name="uploadImage" method="post" action="#" enctype="multipart/form-data">
+					<div class="form_group">
+						<div id="sys_show_button_upload">
+							<div id="sys_mulitplefileuploader" class="btn btn-primary">Upload ảnh</div>
+						</div>
+						<div id="status"></div>
 
-                        <div class="clearfix"></div>
-                        <div class="clearfix" style='margin: 5px 10px; width:100%;'>
-                            <div id="div_image"></div>
-                        </div>
-                    </div>
-                </form>
+						<div class="clearfix"></div>
+						<div class="clearfix" style='margin: 5px 10px; width:100%;'>
+							<div id="div_image"></div>
+						</div>
+					</div>
+				</form>
             </div>
         </div>
     </div>

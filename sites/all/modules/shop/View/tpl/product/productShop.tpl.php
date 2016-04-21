@@ -12,7 +12,7 @@
 						<div class="col-lg-3">
 							<div class="form-group">
 								<label class="control-label">ID sản phẩm</label>
-								<div><input type="text" class="form-control input-sm" placeholder ="Mã sản phẩm" name="product_id" value="<?php echo $dataSearch['product_id'] ?>"/></div>
+								<div><input type="text" class="form-control input-sm" placeholder ="Mã sản phẩm" name="product_id" value="<?php if(isset($dataSearch['product_id']) && $dataSearch['product_id'] > 0){echo $dataSearch['product_id'];} ?>"/></div>
 							</div>
 							<div class="form-group">
 								<label class="control-label">Tên Sản phẩm</label>
@@ -94,7 +94,7 @@
 												<img src="<?php echo $v->url_image; ?>" class='imge_hover' id='<?php echo $v->product_id ?>'/>
 											</div>
 											<div id='div_hover_<?php echo $v->product_id ?>'style="position: absolute; bottom: 30px; left: 40px; border: 2px solid #ccc; padding: 5px; background: #F4F9FF; z-index: 1000; display: none">
-												<img src="<?php echo $v->url_image; ?>" height="200" width="200"/>
+												<img src="<?php echo $v->image_big; ?>"/>
 											</div>
 										</div>
 										<?php } else{?>
@@ -161,6 +161,16 @@
 </div>
 <script>
 	jQuery(document).ready(function($){
+		//hover view anh
+		jQuery(".imge_hover").mouseover(function() {
+			var id = jQuery(this).attr('id');
+			jQuery("#div_hover_" + id).show();
+		});
+		jQuery(".imge_hover").mouseout(function() {
+			var id = jQuery(this).attr('id');
+			jQuery("#div_hover_" + id).hide();
+		});
+
 		jQuery('a.deleteItem').click(function(){
 			var total = jQuery( ".showListItem tbody input:checked" ).length;
 			if(total==0){
