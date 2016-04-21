@@ -59,8 +59,9 @@ class RegShopController{
 							'shop_phone'=>$dataInput ['shop_phone']['value'],
 							'shop_email'=>$dataInput ['shop_email']['value'],
 							'shop_province'=>$dataInput ['shop_province']['value'],
-							'is_shop'=>0,
-							'shop_status'=>0,
+							'is_shop'=>SHOP_FREE,
+							'shop_status'=>STASTUS_HIDE,
+							'number_limit_product'=>SHOP_NUMBER_PRODUCT_FREE,
 							'shop_created'=>$dataInput ['shop_created']['value'],
 						);
 						$query = RegShop::insert($data_post);

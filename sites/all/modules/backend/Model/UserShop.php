@@ -24,7 +24,7 @@ class UserShop{
 			$arrCond = array();
 			if(!empty($dataSearch)){
 				foreach($dataSearch as $field =>$value){
-					if($field === 'shop_status' && $value != -1){
+					if($field === 'shop_status' && $value != -2){
 						$sql->condition('i.'.$field, $value, '=');
 						array_push($arrCond, $field.' = '.$value);
 					}
@@ -33,6 +33,12 @@ class UserShop{
 						array_push($arrCond, $field.' = '.$value);
 					}
 					if($field === 'shop_name' && $value != ''){
+						$db_or = db_or();
+						$db_or->condition('i.'.$field, '%'.$value.'%', 'LIKE');
+						$sql->condition($db_or);
+						array_push($arrCond, "(".$field." LIKE '%". $value ."%')");
+					}
+					if($field === 'user_shop' && $value != ''){
 						$db_or = db_or();
 						$db_or->condition('i.'.$field, '%'.$value.'%', 'LIKE');
 						$sql->condition($db_or);

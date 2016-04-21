@@ -14,58 +14,60 @@
             <div class="control-group">
                 <label class="control-label">Tên shop<span>*</span></label>
                 <div class="controls">
-                    <input type="text" name="shop_name" value="<?php if(isset($arrOneItem->shop_name)){ echo $arrOneItem->shop_name; } ?>">
+                    <input type="text" name="shop_name" value="<?php if(isset($user_shop->shop_name)){ echo $user_shop->shop_name; } ?>">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Tên đăng nhập<span>*</span></label>
                 <div class="controls">
-                    <input type="text" name="user_shop" value="<?php if(isset($arrOneItem->user_shop)){ echo $arrOneItem->user_shop; } ?>">
+                    <input type="text" name="user_shop" readonly value="<?php if(isset($user_shop->user_shop)){ echo $user_shop->user_shop; } ?>">
+                </div>
+            </div>
+             <div class="control-group">
+                <label class="control-label">Đổi mật khẩu - nếu có</label>
+                <div class="controls">
+                    <input type="password" name="user_password_edit" value="">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Số điện thoại</label>
                 <div class="controls">
-                    <input type="text" name="shop_phone" value="<?php if(isset($arrOneItem->shop_phone)){ echo $arrOneItem->shop_phone; } ?>">
+                    <input type="text" name="shop_phone" value="<?php if(isset($user_shop->shop_phone)){ echo $user_shop->shop_phone; } ?>">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Email</label>
                 <div class="controls">
-                    <input type="text" name="shop_email" value="<?php if(isset($arrOneItem->shop_email)){ echo $arrOneItem->shop_email; } ?>">
+                    <input type="text" name="shop_email" value="<?php if(isset($user_shop->shop_email)){ echo $user_shop->shop_email; } ?>">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Địa chỉ</label>
                 <div class="controls">
-                    <input type="text" name="shop_address" value="<?php if(isset($arrOneItem->shop_address)){ echo $arrOneItem->shop_address; } ?>">
+                    <input type="text" name="shop_address" value="<?php if(isset($user_shop->shop_address)){ echo $user_shop->shop_address; } ?>">
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label">Giới hạn số sản phẩm</label>
-                <div class="controls">
-                    <input type="text" name="number_limit_product" value="<?php if(isset($arrOneItem->number_limit_product)){ echo $arrOneItem->number_limit_product; } ?>">
-                </div>
+                <div class="controls"><select class="form-control input-sm" name="number_limit_product"><?php echo $optionNumberLimitProduct;?></select></div>
             </div>
             <div class="control-group">
                 <label class="control-label">Loại gian hàng</label>
-                <div class="controls">
-                    <select name="is_shop">
-                        <option value="0" <?php if(isset($arrOneItem->is_shop) && $arrOneItem->is_shop == 0){ ?>selected="selected"<?php } ?>>Thường</option>
-                        <option value="1" <?php if(isset($arrOneItem->is_shop) && $arrOneItem->is_shop == 1){ ?>selected="selected"<?php } ?>>Vip</option>
-                    </select>
-                </div>
+                <div class="controls"><select class="form-control input-sm" name="is_shop"><?php echo $optionIsShop;?></select></div>
             </div>
             <div class="control-group">
                 <label class="control-label">Trạng thái</label>
-                <div class="controls">
-                    <select name="shop_status">
-                        <option value="0" <?php if(isset($arrOneItem->shop_status) && $arrOneItem->shop_status == 0){ ?>selected="selected"<?php } ?>>Ẩn</option>
-                        <option value="1" <?php if(isset($arrOneItem->shop_status) && $arrOneItem->shop_status == 1){ ?>selected="selected"<?php } ?>>Hiện</option>
-                    </select>
-                </div>
+                <div class="controls"><select class="form-control input-sm" name="shop_status"><?php echo $optionStatus;?></select></div>
             </div>
-        
+            <div class="control-group">
+                <label class="control-label">Chính sách giao nhận</label>
+                <div class="controls"><textarea id="shop_transfer" name="shop_transfer" class="form-control input-sm" cols="30" rows="10"><?php if(isset($user_shop->shop_transfer)) { echo $user_shop->shop_transfer; } ?></textarea></div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Giới thiệu của shop</label>
+                <div class="controls"><textarea id="shop_about" name="shop_about" class="form-control input-sm" cols="30" rows="10"><?php if(isset($user_shop->shop_about)) { echo $user_shop->shop_about; } ?></textarea></div>
+            </div>
+
             <div class="form-actions">
                 <input type="hidden" value="txt-form-post" name="txt-form-post">
 				<button type="submit" name="txtSubmit" id="buttonSubmit" class="btn btn-primary">Lưu</button>
@@ -74,3 +76,28 @@
 		 </form>
 	</div>
 </div>
+
+<script type="text/javascript">
+    CKEDITOR.replace(
+        'shop_about',
+        {
+            toolbar: [
+                { name: 'document',    items : [ 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' ] },
+                { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
+                { name: 'colors',      items : [ 'TextColor','BGColor' ] },
+            ],
+        },
+        {height:400}
+    );
+    CKEDITOR.replace(
+        'shop_transfer',
+        {
+            toolbar: [
+                { name: 'document',    items : [ 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' ] },
+                { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
+                { name: 'colors',      items : [ 'TextColor','BGColor' ] },
+            ],
+        },
+        {height:400}
+    );
+</script>

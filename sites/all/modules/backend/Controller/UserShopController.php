@@ -5,38 +5,47 @@
 */
 class UserShopController{
 
-	private $arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
-	
-	public function __construct(){
-			
-        $files = array(
-            'bootstrap/css/bootstrap.css',
-            'css/font-awesome.css',
-            'css/core.css',
-        );
-        Loader::load('Core', $files);
+	private $arrStatus = array(-2 => 'Tất cả', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn', STASTUS_BLOCK => 'Khóa');
+	private $arrIsShop = array(-2 => 'Tất cả', SHOP_FREE => 'Shop Free', SHOP_NOMAL => 'Shop thường', SHOP_VIP => 'Shop Vip');
+	private $arrNumberLimitProduct = array(-2 => 'Tất cả',
+		SHOP_NUMBER_PRODUCT_FREE => 'Lượt đăng Shop Free ('.SHOP_NUMBER_PRODUCT_FREE.')',
+		SHOP_NUMBER_PRODUCT_NOMAL => 'Lượt đăng Shop thường ('.SHOP_NUMBER_PRODUCT_NOMAL.')',
+		SHOP_NUMBER_PRODUCT_VIP => 'Lượt đăng Shop Vip ('.SHOP_NUMBER_PRODUCT_VIP.')');
 
-        $files = array(
-        	'View/css/admin.css',
-            'View/js/admin.js',
-        );
-        Loader::load('Admin', $files);
+	public function __construct(){
+		$files = array(
+			'bootstrap/lib/ckeditor/ckeditor.js',
+			'bootstrap/lib/ckeditor/config.js',
+		);
+		Loader::loadJSExt('Core', $files);
+		$files = array(
+			'bootstrap/css/bootstrap.css',
+			'css/font-awesome.css',
+			'css/core.css',
+		);
+		Loader::load('Core', $files);
+
+		$files = array(
+			'View/css/admin.css',
+			'View/js/admin.js',
+		);
+		Loader::load('Admin', $files);
 	}
 
 	function indexUserShop(){
 		global $base_url;
 		$limit = SITE_RECORD_PER_PAGE;
 		//search
-		$dataSearch['province_name'] = FunctionLib::getParam('province_name','');
-		$dataSearch['province_status'] = FunctionLib::getParam('province_status', -1);
+		$dataSearch['user_shop'] = FunctionLib::getParam('user_shop','');
+		$dataSearch['shop_status'] = FunctionLib::getParam('shop_status', -2);
 
 		$result = UserShop::getSearchListItems($dataSearch,$limit,array());
 
 		//build option
-		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['province_status']);
+		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['shop_status']);
 
 		return $view = theme('indexUserShop',array(
-			'title'=>'Danh sách tỉnh/thành',
+			'title'=>'Danh sách User Shop',
 			'result' => $result['data'],
 			'dataSearch' => $dataSearch,
 			'optionStatus' => $optionStatus,
@@ -47,22 +56,18 @@ class UserShopController{
 	}
 
 	function formUserShopAction(){
-		global $base_url, $user;
-
-		$Stdio = new Stdio();
-
+		global $base_url;
 		$param = arg();
 		$id = 0;
-		$arrOneItem = array();
-
+		$user_shop = array();
 		if(isset($param[2]) && isset($param[3]) && $param[2]=='edit' && $param[3]>0){
-			$arrFields = array('shop_id', 'shop_name', 'user_shop', 'shop_phone', 'shop_email', 'shop_address', 'shop_status','number_limit_product', 'is_shop');
-			$arrOneItem = UserShop::getItemById($arrFields, $param[3]);
+			$arrFields = UserShop::$arrFields;
+			$user_shop = UserShop::getItemById($arrFields, $param[3]);
 			$id = $param[3];
 		}
 
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
-
+			$user_password = FunctionLib::getParam('user_password','');
 			$data = array(
 						'shop_name'=>array('value'=>FunctionLib::getParam('shop_name',''), 'require'=>1, 'messages'=>'Tiêu đề không được trống!'),
 						'user_shop'=>array('value'=>FunctionLib::getParam('user_shop',''), 'require'=>0, 'messages'=>''),
@@ -70,8 +75,8 @@ class UserShopController{
 						'shop_email'=>array('value'=>FunctionLib::getParam('shop_email',''), 'require'=>0, 'messages'=>''),
 						'shop_address'=>array('value'=>FunctionLib::getParam('shop_address',''), 'require'=>0, 'messages'=>''),
 						'shop_status'=>array('value'=>FunctionLib::getParam('shop_status',''), 'require'=>0, 'messages'=>''),
-						'number_limit_product'=>array('value'=>FunctionLib::getIntParam('number_limit_product',12), 'require'=>1, 'messages'=>'Nhập giới hạn sản phẩm ở gian hàng!'),
-						'is_shop'=>array('value'=>FunctionLib::getIntParam('is_shop',0), 'require'=>0, 'messages'=>''),
+						'number_limit_product'=>array('value'=>FunctionLib::getIntParam('number_limit_product',SHOP_NUMBER_PRODUCT_FREE), 'require'=>1, 'messages'=>'Nhập giới hạn sản phẩm ở gian hàng!'),
+						'is_shop'=>array('value'=>FunctionLib::getIntParam('is_shop',SHOP_FREE), 'require'=>0, 'messages'=>''),
 					);
 
 			$errors = ValidForm::validInputData($data);
@@ -90,12 +95,25 @@ class UserShopController{
 					drupal_goto($base_url.'/admincp/usershop/add');
 				}
 			}else{
+				//doi mat khau neu co
+				if(trim($user_password) !==''){
+					require_once DRUPAL_ROOT . '/' . variable_get('password_inc', 'includes/password.inc');
+					$data['user_shop_password']['value'] = user_hash_password($user_password);
+				}
+				//FunctionLib::Debug($data);
 				UserShop::save($data, $id);
 				drupal_goto($base_url.'/admincp/usershop');
 			}
 			
 		}
-		return $view = theme('addUserShop',array('arrOneItem'=>$arrOneItem));
+		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($user_shop->shop_status)? $user_shop->shop_status : -2);
+		$optionIsShop = FunctionLib::getOption($this->arrIsShop, isset($user_shop->is_shop)? $user_shop->is_shop : SHOP_FREE);
+		$optionNumberLimitProduct = FunctionLib::getOption($this->arrNumberLimitProduct, isset($user_shop->number_limit_product)? $user_shop->number_limit_product : SHOP_NUMBER_PRODUCT_FREE);
+		return $view = theme('addUserShop',array('user_shop'=>$user_shop,
+			'optionStatus'=>$optionStatus,
+			'optionIsShop'=>$optionIsShop,
+			'optionNumberLimitProduct'=>$optionNumberLimitProduct,
+			));
 		
 	}
 

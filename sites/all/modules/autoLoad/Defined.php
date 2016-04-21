@@ -54,6 +54,7 @@ define('FOLDER_NEWS', 'news');
 //common
 define('STASTUS_HIDE', 0);
 define('STASTUS_SHOW', 1);
+define('STASTUS_BLOCK', -1);//khóa
 
 define('COMMENT_OK_REPLY', 0);//comment_is_reply
 define('COMMENT_NOT_REPLY', 1);
@@ -98,6 +99,11 @@ define('BANNER_PAGE_CATEGORY', 4);
 define('SHOP_FREE', 1);
 define('SHOP_NOMAL', 2);
 define('SHOP_VIP', 3);
+define('SHOP_number_limit_product', 3);
+define('SHOP_NUMBER_PRODUCT_FREE', 20);//so luong san pham shop dc dang
+define('SHOP_NUMBER_PRODUCT_NOMAL', 100);
+define('SHOP_NUMBER_PRODUCT_VIP',1000);
+
 
 define('IMAGE_ERROR', 113); // dung sau quet cac item up anh nhung ko cap nhat DB
 define('IMAGE_DEFAULT', $base_url.'/sites/all/modules/autoLoad/img/default.png');
