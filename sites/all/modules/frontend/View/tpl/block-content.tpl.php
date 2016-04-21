@@ -2,72 +2,55 @@
 	global $base_url;
 ?>
 <div class="container">
+	<?php
+		foreach ($result as $key => $val) {
+	?>
 	<div class="w-list-block">
-		<div class="title-list-item">Laptop - Máy tính bảng</div>
+		<div class="title-list-item"><?php echo $key ?></div>
 		<div class="content-list-item w-home">
 			<ul>
-				<?php for($i=0; $i<10; $i++){ ?>
+				<?php foreach($val as $item){ ?>
 				<li class="item">
 					<div class="post-thumb">
-						<a title="" href="">
-							<img data-other-src="http://project.vn/BanHang/sieuthigiare.vn/image.php?type_dir=product&amp;id=31&amp;width=300&amp;height=300&amp;image=http://project.vn/BanHang/sieuthigiare.vn/uploads/product/31/01-38-28-12-04-2016-lgg3androidsmartphone.jpg" alt="Điện thoại di động LG G3 16GB D855" 
-							src="http://project.vn/BanHang/sieuthigiare.vn/image.php?type_dir=product&amp;id=31&amp;width=300&amp;height=300&amp;image=http://project.vn/BanHang/sieuthigiare.vn/uploads/product/30/01-36-42-12-04-2016-best-smartphone.jpg">
+						<a href="<?php echo FunctionLib::buildLinkDetail($item->product_id, $item->product_name); ?>" title="<?php echo $item->product_name?>">
+							<img src="<?php echo FunctionLib::getThumbImage($item->product_image,$item->product_id,FOLDER_PRODUCT,300,300) ?>" 
+							data-other-src="<?php echo FunctionLib::getThumbImage($item->product_image_hover,$item->product_id,FOLDER_PRODUCT,300,300) ?>" 
+							alt="<?php echo $item->product_name ?>"/>
 						</a>
 					</div>
 					<div class="item-content">
 						<div class="title-info">
 							<h4 class="post-title">
-								<a href="" title="Điện thoại di động LG G3 16GB D855">Điện thoại di động LG G3 16GB D855</a>
+								<a href="" title="<?php echo $item->product_name?>"><?php echo $item->product_name?></a>
 							</h4>
 							<div class="item-price">
-		                	<span class="amount-call">Liên hệ: <i class="num-call">0913922986</i></span>
-		                </div>
+                        		<?php if($item->product_type_price == 2){?>
+                        			<span class="amount-call">Liên hệ: <i class="num-call">12345</i></span>
+                        		<?php }else{?>
+                            		<?php if($item->product_price_sell > 0 && $item->product_price_market > 0){?>
+                            		<span class="amount-1"><?php echo number_format($item->product_price_sell)?>đ</span>
+									<span class="amount-2"><?php echo number_format($item->product_price_market) ?>đ</span>
+									<?php if((float)$item->product_price_market > (float)$item->product_price_sell) {?>
+								    <span class="sale-off">
+								    	-<?php echo number_format(100 - ((float)$item->product_price_sell/(float)$item->product_price_market)*100, 1) ?>%
+								    </span>
+								    <?php } ?>
+							    <?php } ?>
+                        		<?php } ?>
+                    		</div>
 						</div>
 						<div class="item-rating">
 		                    <div class="rating-box">
 		                        <div id="rate-1" style="width:0%" class="rating"></div>
 		                    </div>
 		                </div>
-		                <div class="item-banner">Tặng kèm bao da bảo vệ máy</div>
+		                <div class="item-banner"><?php echo $item->product_selloff ?></div>
 					</div>
 				</li>
 				<?php } ?>
 			</ul>
 		</div>	
 	</div>
-
-	<div class="w-list-block">
-		<div class="title-list-item">Laptop - Máy tính bảng</div>
-		<div class="content-list-item w-home">
-			<ul>
-				<?php for($i=0; $i<10; $i++){ ?>
-				<li class="item">
-					<div class="post-thumb">
-						<a title="" href="">
-							<img data-other-src="http://project.vn/BanHang/sieuthigiare.vn/image.php?type_dir=product&amp;id=31&amp;width=300&amp;height=300&amp;image=http://project.vn/BanHang/sieuthigiare.vn/uploads/product/31/01-38-28-12-04-2016-lgg3androidsmartphone.jpg" alt="Điện thoại di động LG G3 16GB D855" 
-							src="http://project.vn/BanHang/sieuthigiare.vn/image.php?type_dir=product&amp;id=31&amp;width=300&amp;height=300&amp;image=http://project.vn/BanHang/sieuthigiare.vn/uploads/product/30/01-36-42-12-04-2016-best-smartphone.jpg">
-						</a>
-					</div>
-					<div class="item-content">
-						<div class="title-info">
-							<h4 class="post-title">
-								<a href="" title="Điện thoại di động LG G3 16GB D855">Điện thoại di động LG G3 16GB D855</a>
-							</h4>
-							<div class="item-price">
-		                	<span class="amount-call">Liên hệ: <i class="num-call">0913922986</i></span>
-		                </div>
-						</div>
-						<div class="item-rating">
-		                    <div class="rating-box">
-		                        <div id="rate-1" style="width:0%" class="rating"></div>
-		                    </div>
-		                </div>
-		                <div class="item-banner">Tặng kèm bao da bảo vệ máy</div>
-					</div>
-				</li>
-				<?php } ?>
-			</ul>
-		</div>	
-	</div>
+	<?php } ?>
 </div>
 

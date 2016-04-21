@@ -8,7 +8,7 @@
 class Site{
 	static $table_action_category = TABLE_CATEGORY;
 	static $table_action_product = TABLE_PRODUCT;
-	function makeListCatid($limit=0){
+	public static function makeListCatid($limit=0){
 		global $base_url;
 
 		$arrCatId = array();
@@ -31,13 +31,14 @@ class Site{
 	}
 
 
-	public static function getListProductContentHome($limit=0){
-		if($limit > 0){
-			$listCat = Site::makeListCatid($limit);
+	public static function getListProductContentHome($cat_limit=0, $product_limit=0){
+		if($cat_limit > 0 && $product_limit > 0){
+			$listCat = Site::makeListCatid($cat_limit);
 			if(!empty($listCat)){
 				foreach($listCat as $k => $v){
 					
 					$sql = db_select(self::$table_action_product, 'i');
+					$sql->addField('i', 'product_id', 'product_id');
 					$sql->addField('i', 'product_name', 'product_name');
 					$sql->addField('i', 'product_price_sell', 'product_price_sell');
 					$sql->addField('i', 'product_price_market', 'product_price_market');
@@ -49,16 +50,13 @@ class Site{
 					$sql->condition('i.is_block', PRODUCT_NOT_BLOCK,'=');
 					$sql->condition('i.category_id', $v, 'IN');
 					$sql->orderBy('i.product_id', 'DESC');
-					$sql->range(10);
+					$sql->range(0, $product_limit);
 					
 					$result[$k] = $sql->execute()->fetchAll();
 				}
-				bug($result);
 				return $result;
 			}
 		}
 		return array();
 	}
 }
-
-Site::getListProductContentHome($limit=20);

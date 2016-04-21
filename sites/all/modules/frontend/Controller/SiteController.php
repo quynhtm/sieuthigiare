@@ -18,7 +18,8 @@ class SiteController{
 	}
 
 	public static function getListProductHome(){
-		$listCat ='';
+		$result = Site::getListProductContentHome(2, 20);
+		return $result;
 	}
 
 }
