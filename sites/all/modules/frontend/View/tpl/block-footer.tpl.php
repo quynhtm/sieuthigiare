@@ -6,7 +6,7 @@
   <div class="address">
       <p><strong>Hà Nội:</strong><br>
       Số 10 ngách 224/6 đường Hoàng Mai -Hoàng Văn Thụ - Hoàng Mai - Hà Nội<br>
-      ĐT: 0946.721.638 - 0913.922.986<br>
-      Email: hotro@sanphamredep.com</p>
+      ĐT: <?php echo PHONE_CARE ?><br>
+      Email: systemrv1@gmai.com</p>
   </div>
 </div>

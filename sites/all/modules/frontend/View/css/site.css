@@ -394,3 +394,9 @@ span#logo{
 #footer .address * {
     font-size: 14px;
 }
+.link-shop {
+    color: #c63829;
+    font-size: 13px;
+    font-style: normal;
+    margin-left: 5px;
+}

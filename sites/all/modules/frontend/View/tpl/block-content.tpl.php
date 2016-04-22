@@ -2,14 +2,12 @@
 	global $base_url;
 ?>
 <div class="container">
-	<?php
-		foreach ($result as $key => $val) {
-	?>
+	
 	<div class="w-list-block">
-		<div class="title-list-item"><?php echo $key ?></div>
+		<div class="title-list-item">Sản phẩm mới</div>
 		<div class="content-list-item w-home">
 			<ul>
-				<?php foreach($val as $item){ ?>
+				<?php foreach($result as $item){ ?>
 				<li class="item">
 					<div class="post-thumb">
 						<a href="<?php echo FunctionLib::buildLinkDetail($item->product_id, $item->product_name); ?>" title="<?php echo $item->product_name?>">
@@ -25,7 +23,7 @@
 							</h4>
 							<div class="item-price">
                         		<?php if($item->product_type_price == 2){?>
-                        			<span class="amount-call">Liên hệ: <i class="num-call">12345</i></span>
+                        			<span class="amount-call">Liên hệ: <i class="link-shop"><?php echo $item->user_shop_name ?></i></span>
                         		<?php }else{?>
                             		<?php if($item->product_price_sell > 0 && $item->product_price_market > 0){?>
                             		<span class="amount-1"><?php echo number_format($item->product_price_sell)?>đ</span>
@@ -51,6 +49,6 @@
 			</ul>
 		</div>	
 	</div>
-	<?php } ?>
+	
 </div>
 

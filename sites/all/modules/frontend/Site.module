@@ -141,7 +141,7 @@ function block_slide(){
 	return $view;
 }
 function block_content(){
-	$result = SiteController::getListProductHome();
+	$result = SiteController::getListProductContent(30);
 	$view= theme('block-content', array('result'=>$result));
 	return $view;
 }
