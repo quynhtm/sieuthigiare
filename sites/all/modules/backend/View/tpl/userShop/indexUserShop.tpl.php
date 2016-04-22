@@ -4,7 +4,7 @@
 		<form action="" method="GET" id="frmSearch" class="frmSearch" name="frmSearch">
 			<div class="col-lg-3">
 				<label class="control-label">Tên tỉnh thành</label>
-				<div><input type="text" class="form-control input-sm" placeholder ="Tên tỉnh thành" id="province_name" class="keyword" name="province_name" value="<?php echo $dataSearch['province_name'] ?>"/></div>
+				<div><input type="text" class="form-control input-sm" placeholder ="Tên tỉnh thành" id="user_shop" class="keyword" name="user_shop" value="<?php echo $dataSearch['user_shop'] ?>"/></div>
 			</div>
 			<div class="col-lg-3">
 				<label class="control-label">Trạng thái</label>
@@ -68,12 +68,12 @@
 							</td>
 							<td><?php echo $item->shop_name; ?></td>
 							<td><?php echo $item->shop_address; ?></td>
-							<td><?php echo ($item->is_shop == 1)? '<i class="green">Vip</i>': '<i class="red">Thường</i>'; ?></td>
+							<td><?php echo isset($arrIsShop[$item->is_shop])? $arrIsShop[$item->is_shop]: 'Chưa chọn loại Shop' ?></td>
 							<td>
-								<?php echo ($item->shop_status == 1)? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
+								<?php echo ($item->shop_status == STASTUS_SHOW)? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
 							</td>
 							<td>
-								<?php echo ($item->is_login == 1)? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
+								<?php echo ($item->is_login == SHOP_ONLINE)? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
 							</td>
 							<td><?php echo date('d-m-Y h:i:s',$item->shop_created); ?></td>
 							<td>

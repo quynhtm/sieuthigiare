@@ -38,21 +38,20 @@ class UserShopController{
 		//search
 		$dataSearch['user_shop'] = FunctionLib::getParam('user_shop','');
 		$dataSearch['shop_status'] = FunctionLib::getParam('shop_status', -2);
-
 		$result = UserShop::getSearchListItems($dataSearch,$limit,array());
 
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['shop_status']);
-
 		return $view = theme('indexUserShop',array(
 			'title'=>'Danh sách User Shop',
 			'result' => $result['data'],
 			'dataSearch' => $dataSearch,
 			'optionStatus' => $optionStatus,
+			'arrIsShop' => $this->arrIsShop,
+			'arrStatus' => $this->arrStatus,
 			'base_url' => $base_url,
 			'totalItem' =>$result['total'],
 			'pager' =>$result['pager']));
-
 	}
 
 	function formUserShopAction(){
@@ -78,7 +77,6 @@ class UserShopController{
 						'number_limit_product'=>array('value'=>FunctionLib::getIntParam('number_limit_product',SHOP_NUMBER_PRODUCT_FREE), 'require'=>1, 'messages'=>'Nhập giới hạn sản phẩm ở gian hàng!'),
 						'is_shop'=>array('value'=>FunctionLib::getIntParam('is_shop',SHOP_FREE), 'require'=>0, 'messages'=>''),
 					);
-
 			$errors = ValidForm::validInputData($data);
 			if($data['shop_email']['value'] != ''){
 				$check_email = ValidForm::checkRegexEmail($data['shop_email']['value']);
@@ -86,7 +84,6 @@ class UserShopController{
 					$errors .= 'Email sai cấu trúc!<br/>';
 				}
 			}
-
 			if($errors != ''){
 				drupal_set_message($errors, 'error');
 				if($id > 0){
@@ -104,7 +101,6 @@ class UserShopController{
 				UserShop::save($data, $id);
 				drupal_goto($base_url.'/admincp/usershop');
 			}
-			
 		}
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($user_shop->shop_status)? $user_shop->shop_status : -2);
 		$optionIsShop = FunctionLib::getOption($this->arrIsShop, isset($user_shop->is_shop)? $user_shop->is_shop : SHOP_FREE);

@@ -99,6 +99,8 @@ define('BANNER_PAGE_CATEGORY', 4);
 define('SHOP_FREE', 1);
 define('SHOP_NOMAL', 2);
 define('SHOP_VIP', 3);
+define('SHOP_ONLINE', 1);
+define('SHOP_OFFLINE', 0);
 define('SHOP_number_limit_product', 3);
 define('SHOP_NUMBER_PRODUCT_FREE', 20);//so luong san pham shop dc dang
 define('SHOP_NUMBER_PRODUCT_NOMAL', 100);
