@@ -8,9 +8,9 @@ class UserShopController{
 	private $arrStatus = array(-2 => 'Tất cả', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn', STASTUS_BLOCK => 'Khóa');
 	private $arrIsShop = array(-2 => 'Tất cả', SHOP_FREE => 'Shop Free', SHOP_NOMAL => 'Shop thường', SHOP_VIP => 'Shop Vip');
 	private $arrNumberLimitProduct = array(-2 => 'Tất cả',
-		SHOP_NUMBER_PRODUCT_FREE => 'Lượt đăng Shop Free ('.SHOP_NUMBER_PRODUCT_FREE.')',
-		SHOP_NUMBER_PRODUCT_NOMAL => 'Lượt đăng Shop thường ('.SHOP_NUMBER_PRODUCT_NOMAL.')',
-		SHOP_NUMBER_PRODUCT_VIP => 'Lượt đăng Shop Vip ('.SHOP_NUMBER_PRODUCT_VIP.')');
+		SHOP_NUMBER_PRODUCT_FREE => 'Lượt đăng Shop Free (20)',
+		SHOP_NUMBER_PRODUCT_NOMAL => 'Lượt đăng Shop thường (100)',
+		SHOP_NUMBER_PRODUCT_VIP => 'Lượt đăng Shop Vip (1000)');
 
 	public function __construct(){
 		$files = array(
@@ -112,9 +112,7 @@ class UserShopController{
 		return $view = theme('addUserShop',array('user_shop'=>$user_shop,
 			'optionStatus'=>$optionStatus,
 			'optionIsShop'=>$optionIsShop,
-			'optionNumberLimitProduct'=>$optionNumberLimitProduct
-			));
-		
+			'optionNumberLimitProduct'=>$optionNumberLimitProduct));
 	}
 
 	function deleteUserShopAction(){
