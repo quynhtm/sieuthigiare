@@ -26,7 +26,7 @@ define('base_url_lang', $base_url .'/'. ((!isset($language->language) || $langua
 
 define('AJAX_DOMAIN', '/sieuthigiare.vn/');
 define('IS_WEB', 0);// 0:local, 1:web
-
+define('PHONE_CARE', '0985.10.10.26 - 0913.922.986');
 /**
  * QuynhTM add
  * Dinh nghia cac Table cho website

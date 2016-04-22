@@ -58,7 +58,7 @@
 				<i class="icon-star-empty"></i> <a href="#" title="Giảm giá mỗi ngày">Giảm giá mỗi ngày</a>
 			</div>
 			<div class="support-online">
-				CSKH: <span>094.11.99.656 - 0913.922.986</span>
+				CSKH: <span><?php echo PHONE_CARE ?></span>
 			</div>
 		</div>
 	</div>
