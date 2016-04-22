@@ -23,7 +23,7 @@
 							</h4>
 							<div class="item-price">
                         		<?php if($item->product_type_price == 2){?>
-                        			<span class="amount-call">Liên hệ: <i class="num-call">12345</i></span>
+                        			<span class="amount-call">Liên hệ: <i class="link-shop"><?php echo $item->user_shop_name ?></i></span>
                         		<?php }else{?>
                             		<?php if($item->product_price_sell > 0 && $item->product_price_market > 0){?>
                             		<span class="amount-1"><?php echo number_format($item->product_price_sell)?>đ</span>
