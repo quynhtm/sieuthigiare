@@ -17,8 +17,8 @@ class SiteController{
 		return $result;
 	}
 
-	public static function getListProductHome(){
-		$result = Site::getListProductContentHome(2, 20);
+	public static function getListProductContent($limit=0){
+		$result = Site::getListProductContent($limit);
 		return $result;
 	}
 

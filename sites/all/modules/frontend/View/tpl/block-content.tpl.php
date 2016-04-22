@@ -2,14 +2,12 @@
 	global $base_url;
 ?>
 <div class="container">
-	<?php
-		foreach ($result as $key => $val) {
-	?>
+	
 	<div class="w-list-block">
-		<div class="title-list-item"><?php echo $key ?></div>
+		<div class="title-list-item">Sản phẩm mới</div>
 		<div class="content-list-item w-home">
 			<ul>
-				<?php foreach($val as $item){ ?>
+				<?php foreach($result as $item){ ?>
 				<li class="item">
 					<div class="post-thumb">
 						<a href="<?php echo FunctionLib::buildLinkDetail($item->product_id, $item->product_name); ?>" title="<?php echo $item->product_name?>">
@@ -51,6 +49,6 @@
 			</ul>
 		</div>	
 	</div>
-	<?php } ?>
+	
 </div>
 
