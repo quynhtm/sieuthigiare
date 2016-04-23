@@ -357,7 +357,7 @@ span#logo{
 }
 .w-home .item .post-title{
     font-size: 12px;
-    height: 36px;
+    max-height: 36px;
     line-height: 1;
     margin: 0 0 8px;
     overflow: hidden;

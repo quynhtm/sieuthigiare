@@ -403,7 +403,7 @@ a.btn-yahoo:hover{
 }
 .body-list-item .post-title {
     font-size: 12px;
-    height: 36px;
+    max-height: 36px;
     line-height: 1;
     margin: 0 0 8px;
     overflow: hidden;
@@ -1038,4 +1038,7 @@ table.list-pay span.price {
 }
 .box-register .formSendLogin{
     width: 305px;
+}
+.mgt5{
+    margin-top: 10px;
 }
