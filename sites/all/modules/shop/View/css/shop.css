@@ -32,12 +32,10 @@ a.btn-yahoo {
 a.btn-yahoo:hover{
   background-position: -253px -96px;
 }
-.login-other {
-    #background: rgba(0, 0, 0, 0) url("../img/line-or.png") no-repeat scroll right 30px;
-    #width: 94%;
-    border-right: 1px solid #ddd;
+.form-login{
     height: 235px;
-    width: 102%;
+    margin: 0 auto;
+    width: 400px;
 }
 .title-login-other {
     font-size: 18px !important;
@@ -48,14 +46,14 @@ a.btn-yahoo:hover{
 .box-register label {
     display: inline-block;
     font-weight: normal;
-    width: 135px;
+    width: 100%;
     float: left;
     margin-top: 5px;
 }
 .box-register .form-left-reg {
     display: inline-block;
     margin-right: 10px;
-    width: 45%;
+    width: 48%;
     float: left;
 }
 .box-register .form-right-reg{
@@ -71,7 +69,7 @@ a.btn-yahoo:hover{
 .box-register .form-control {
     display: inline-block;
     float: left;
-    width: 225px;
+    width: 100%;
     box-shadow:none;
     border-radius: 2px;
 }
@@ -86,7 +84,7 @@ a.btn-yahoo:hover{
 	width: 100%;
 }
 .box-register .agree {
-    margin-left: 135px;
+    margin-left: 2px;
 }
 .box-register  .agree input {
     float: left;
@@ -99,10 +97,10 @@ a.btn-yahoo:hover{
     font-style: italic;
 }
 .box-register .list-action{
-    margin-left: 135px;
+    margin-left: 2px;
 }
 .title-head span {
-    font-size: 14px;
+    font-size: 22px;
 }
 /*manager shop*/
 .main-manager-shop .header{
@@ -307,8 +305,7 @@ a.btn-yahoo:hover{
 .link-breadcrumb {
     background: #f2f2f2;
     border: 1px solid #ddd;
-    border-top: none;
-    margin: 0 0 5px;
+    margin: 5px 0 5px;
     padding: 5px 8px;
     text-transform: none;
 }
@@ -383,7 +380,7 @@ a.btn-yahoo:hover{
 }
 .body-list-item .item {
     padding-top: 8px;
-    height: 405px;
+    height: 360px;
     display: inline-block;
 }
 .body-list-item  .post-thumb {
@@ -1033,4 +1030,26 @@ table.list-pay span.price {
 }
 .form-comment-post .wrapp-form-comment-post{
     display: none;
+}
+.link-tab {
+    color: #555;
+    font-size: 18px;
+}
+.form-send-register h1.title-head,
+.form-login h1.title-head {
+    display: inline-block;
+    margin-bottom: 45px;
+    width: 100%;
+    font-size: 30px;
+}
+.form-send-register {
+    margin: 0 auto;
+    width: 620px;
+}
+.main-view-post{
+    display: inline-block;
+    width: 100%;
+}
+.box-register .formSendLogin{
+    width: 305px;
 }

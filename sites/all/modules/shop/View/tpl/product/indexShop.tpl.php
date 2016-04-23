@@ -70,12 +70,9 @@
 	                                    		<?php } ?>
                                     		</div>
 										</div>
-										<div class="item-rating">
-				                            <div class="rating-box">
-				                                <div class="rating" style="width:0%" id="rate-1"></div>
-				                            </div>
-				                        </div>
-				                        <div class="item-banner"><?php echo $v->product_selloff ?></div>
+										<?php if($v->product_selloff != ''){?>
+						                <div class="item-banner"><?php echo $v->product_selloff ?></div>
+						                <?php } ?>
 									</div>
 								</div>
 							</div>
