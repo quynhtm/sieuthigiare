@@ -442,33 +442,18 @@ a.btn-yahoo:hover{
     margin-left: 5px;
 }
 .sale-off {
-    background: #d60c0c none repeat scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../img/discount.png") no-repeat scroll center top;
     border-radius: 2px;
     color: #fff;
-    font-family: Roboto-Medium,sans-serif;
     font-weight: 400 !important;
-    margin-left: 8px;
-    padding-left: 8px;
-    padding-right: 8px;
-}
-.item-rating {
-    margin-top: 8px;
-    overflow: hidden;
-}
-.rating-box {
-    background: transparent url("../img/bg-rating.png") repeat-x scroll 0 0;
-    display: block;
-    font-size: 0;
-    height: 12px;
-    margin-right: 5px;
-    margin-top: 0;
-    text-indent: -999em;
-    width: 50px;
-}
-.rating-box .rating {
-    background: transparent url("../img/bg-rating.png") repeat-x scroll 0 100%;
-    display: block;
-    height: 12px;
+    height: 67px;
+    line-height: 67px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    width: 65px;
+    font-weight: bold;
 }
 .item-banner{
     color: #555;
