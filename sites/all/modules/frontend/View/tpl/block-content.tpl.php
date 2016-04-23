@@ -37,9 +37,15 @@
                         		<?php } ?>
                     		</div>
 						</div>
+
 						<?php if($item->product_selloff != ''){?>
 		                <div class="item-banner"><?php echo $item->product_selloff ?></div>
 		                <?php } ?>
+						
+						<?php if($item->product_type_price == 1){?>
+		                <div class="mgt5 amount-call">gian hàng: <i class="link-shop"><?php echo $item->user_shop_name ?></i></div>
+						<?php } ?>
+
 					</div>
 				</li>
 				<?php } ?>

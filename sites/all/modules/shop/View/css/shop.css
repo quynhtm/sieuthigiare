@@ -382,7 +382,7 @@ a.btn-yahoo:hover{
 }
 .body-list-item .item {
     padding-top: 8px;
-    height: 360px;
+    height: 380px;
     display: inline-block;
 }
 .body-list-item  .post-thumb {
@@ -403,7 +403,7 @@ a.btn-yahoo:hover{
 }
 .body-list-item .post-title {
     font-size: 12px;
-    height: 36px;
+    max-height: 36px;
     line-height: 1;
     margin: 0 0 8px;
     overflow: hidden;
@@ -447,7 +447,6 @@ a.btn-yahoo:hover{
     background: rgba(0, 0, 0, 0) url("../img/discount.png") no-repeat scroll center top;
     border-radius: 2px;
     color: #fff;
-    font-weight: 400 !important;
     height: 67px;
     line-height: 67px;
     position: absolute;
@@ -1039,4 +1038,7 @@ table.list-pay span.price {
 }
 .box-register .formSendLogin{
     width: 305px;
+}
+.mgt5{
+    margin-top: 10px;
 }
