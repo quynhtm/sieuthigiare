@@ -21,6 +21,7 @@ a{
 .top-header {
     clear: both;
     width: 100%;
+    margin-top: 20px;
 }
 .center-header{
     background: #fff;
@@ -142,7 +143,7 @@ span#logo{
     top:2px; 
 }
 .support-contact {
-    border-right: 1px solid #f2f2f2;
+    #border-right: 1px solid #f2f2f2;
     float: left;
     font-size: 14px;
     height: 40px;
@@ -332,7 +333,7 @@ span#logo{
 .w-home .item {
     display: inline-block;
     float: left;
-    height: 385px;
+    height: 360px;
     margin-bottom: 0;
     margin-right: 23px;
     overflow: hidden;

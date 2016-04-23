@@ -37,12 +37,9 @@
                         		<?php } ?>
                     		</div>
 						</div>
-						<div class="item-rating">
-		                    <div class="rating-box">
-		                        <div id="rate-1" style="width:0%" class="rating"></div>
-		                    </div>
-		                </div>
+						<?php if($item->product_selloff != ''){?>
 		                <div class="item-banner"><?php echo $item->product_selloff ?></div>
+		                <?php } ?>
 					</div>
 				</li>
 				<?php } ?>

@@ -5,7 +5,7 @@
 <div class="link-top-head">
 	<div class="container">
 		<div class="box-login">
-			<a href="' ?>" class="link-normal">Hướng dẫn mua hàng</a>
+			<!-- <a href="" class="link-normal">Hướng dẫn mua hàng</a> -->
 			<?php if($user_shop->shop_id == 0){?>
 			<a href="<?php echo $base_url.'/dang-nhap.html' ?>" class="btnLog" rel="nofollow" >Đăng nhập</a>
 			<a href="<?php echo $base_url.'/dang-ky.html' ?>" class="btnLog" rel="nofollow" >Đăng ký</a>
@@ -35,10 +35,11 @@
 		    	</div>
 		    	<div class="box-right-focus">
 		    		<div class="support-contact">
-						<i class="icon-book"></i>Liên hệ</div>
-		    		<div class="shopping-cart">
+						<i class="icon-book"></i>Liên hệ
+					</div>
+		    		<!-- <div class="shopping-cart">
 		    			<span class="num-item">1</span>
-		    		</div>
+		    		</div> -->
 		    	</div>
 		    </div>
 		</div>

@@ -3,7 +3,7 @@
 	
 	$product_id = $result->product_id;
 	$product_name = $result->product_name;
-	$product_sort_desc = $result->product_sort_desc;
+	$product_sort_desc = Utility::substring($result->product_sort_desc, 800, '...');
 	$product_content = $result->product_content;
 	$product_selloff = $result->product_selloff;
 	$price_market = number_format($result->product_price_market);
@@ -25,7 +25,7 @@
 	if($result->product_image_other != ''){
 		$product_image_other = unserialize($result->product_image_other);
 	}
-
+	
 	SeoMeta::SEO($product_name, $product_image, $product_name, $product_name, $product_sort_desc);
 
 ?>
@@ -103,7 +103,9 @@
 
 							<div class="features-point">
 								<div class="lbl-point">Mô tả sản phẩm</div>
-								<div class="des-point"><?php echo $product_sort_desc ?></div>
+								<div class="des-point">
+									<?php echo $product_sort_desc ?>
+								</div>
 								<?php if($product_selloff !=''){?>
 								<div class="box-promotion">
 									<div class="lbl-point">Thông tin khuyến mãi</div>
@@ -113,6 +115,20 @@
 							</div>
 						</div>
 						<div class="right-des-product">
+							<div class="content-right-product">
+								<div id="fb-root"></div>
+									<script>(function(d, s, id) {
+									  var js, fjs = d.getElementsByTagName(s)[0];
+									  if (d.getElementById(id)) return;
+									  js = d.createElement(s); js.id = id;
+									  js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6";
+									  fjs.parentNode.insertBefore(js, fjs);
+									}(document, 'script', 'facebook-jssdk'));</script>
+								<div class="fb-like" data-href="<?php echo FunctionLib::buildLinkDetail($product_id, $product_name); ?>" 
+									data-layout="button_count" data-action="like" 
+									data-show-faces="false" data-share="true">
+								</div>
+							</div>
 							<div class="content-right-product">
 								<div class="order-number">
 									<label for="buy-number">Số lượng</label>

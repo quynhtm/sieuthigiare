@@ -259,81 +259,81 @@ class FunctionLib{
 
 	public  static function numberToWord($s, $lang = 'vi') {
 		$ds = 0;
-		$so = $hang = array();
+        $so = $hang = array();
 
-		$viN = array("khÃ´ng", "m?t", "hai", "ba", "b?n", "n?m", "sÃ¡u", "b?y", "tÃ¡m", "chÃ­n");
-		$viRow = array("", "nghÃ¬n", "tri?u", "t?");
+        $viN = array("không", "một", "hai", "ba", "bốn", "năm", "sáu", "bảy", "tám", "chín");
+        $viRow = array("", "nghìn", "triệu", "tỷ");
 
-		$enN = array("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine");
-		$enRow = array("", "thousand", "million", "billion");
+        $enN = array("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine");
+        $enRow = array("", "thousand", "million", "billion");
 
-		if ($lang == 'vi') {
-			$so = $viN;
-			$hang = $viRow;
-		} else {
-			$so = $enN;
-			$hang = $enRow;
-		}
+        if ($lang == 'vi') {
+            $so = $viN;
+            $hang = $viRow;
+        } else {
+            $so = $enN;
+            $hang = $enRow;
+        }
 
-		$s = str_replace(",", "", $s);
-		$ds = (int) $s;
-		if ($ds == 0) {
-			return "khÃ´ng ";
-		}
+        $s = str_replace(",", "", $s);
+        $ds = (int) $s;
+        if ($ds == 0) {
+            return "không ";
+        }
 
-		$i = $j = $donvi = $chuc = $tram = 0;
-		$i = strlen($s);
+        $i = $j = $donvi = $chuc = $tram = 0;
+        $i = strlen($s);
 
-		$Str = "";
-		if ($i == 0)
-			$Str = "";
-		else {
-			$j = 0;
-			while ($i > 0) {
-				$donvi = substr($s, $i - 1, 1);
-				$i = $i - 1;
-				if ($i > 0) {
-					$chuc = substr($s, $i - 1, 1);
-				} else {
-					$chuc = -1;
-				}
-				$i = $i - 1;
-				if ($i > 0) {
-					$tram = substr($s, $i - 1, 1);
-				} else {
-					$tram = -1;
-				}
-				$i = $i - 1;
-				if ($donvi > 0 || $chuc > 0 || $tram > 0 || $j == 3)
-					$Str = $hang[$j] . " " . $Str;
-				$j = $j + 1;
-				if ($j > 3)
-					$j = 1;
-				if ($donvi == 1 && $chuc > 1)
-					$Str = "m?t" . " " . $Str;
-				else {
-					if ($donvi == 5 && $chuc > 0)
-						$Str = "l?m" . " " . $Str;
-					else if ($donvi > 0)
-						$Str = $so[$donvi] . " " . $Str;
-				}
-				if ($chuc < 0)
-					break;
-				else
-					if ($chuc == 0 && $donvi > 0)
-						$Str = "l?" . " " . $Str;
-				if ($chuc == 1)
-					$Str = "m??i" . " " . $Str;
-				if ($chuc > 1)
-					$Str = $so[$chuc] . " " . "m??i" . " " . $Str;
-				if ($tram < 0)
-					break;
-				else
-					if ($tram > 0 || $chuc > 0 || $donvi > 0)
-						$Str = $so[$tram] . " " . "tr?m" . " " . $Str;
-			}
-		}
-		return strtoupper(substr($Str, 0, 1)) . substr($Str, 1, strlen($Str) - 1) . ($lang == 'vi' ? "??ng" : 'vnd');
+        $Str = "";
+        if ($i == 0)
+            $Str = "";
+        else {
+            $j = 0;
+            while ($i > 0) {
+                $donvi = substr($s, $i - 1, 1);
+                $i = $i - 1;
+                if ($i > 0) {
+                    $chuc = substr($s, $i - 1, 1);
+                } else {
+                    $chuc = -1;
+                }
+                $i = $i - 1;
+                if ($i > 0) {
+                    $tram = substr($s, $i - 1, 1);
+                } else {
+                    $tram = -1;
+                }
+                $i = $i - 1;
+                if ($donvi > 0 || $chuc > 0 || $tram > 0 || $j == 3)
+                    $Str = $hang[$j] . " " . $Str;
+                $j = $j + 1;
+                if ($j > 3)
+                    $j = 1;
+                if ($donvi == 1 && $chuc > 1)
+                    $Str = "mốt" . " " . $Str;
+                else {
+                    if ($donvi == 5 && $chuc > 0)
+                        $Str = "lăm" . " " . $Str;
+                    else if ($donvi > 0)
+                        $Str = $so[$donvi] . " " . $Str;
+                }
+                if ($chuc < 0)
+                    break;
+                else
+                if ($chuc == 0 && $donvi > 0)
+                    $Str = "lẻ" . " " . $Str;
+                if ($chuc == 1)
+                    $Str = "mười" . " " . $Str;
+                if ($chuc > 1)
+                    $Str = $so[$chuc] . " " . "mươi" . " " . $Str;
+                if ($tram < 0)
+                    break;
+                else
+                if ($tram > 0 || $chuc > 0 || $donvi > 0)
+                    $Str = $so[$tram] . " " . "trăm" . " " . $Str;
+            }
+        }
+        return strtoupper(substr($Str, 0, 1)) . substr($Str, 1, strlen($Str) - 1) . ($lang == 'vi' ? "đồng" : 'vnd');
 	}
 
 	static function getThumbImage($fname = '', $id = 0, $folder = FOLDER_DEFAULT,$thum_w = 0,$thum_h = 0,$cropratio = '') {
