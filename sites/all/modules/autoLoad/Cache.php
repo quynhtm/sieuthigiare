@@ -4,12 +4,14 @@
  */
 require_once(DRUPAL_ROOT ."/phpfastcache-final/phpfastcache.php");
 class Cache {
-    const CACHE_ON = 0 ;// 0: không dùng qua cache, 1: dùng qua cache
+    const CACHE_ON = 1 ;// 0: không dùng qua cache, 1: dùng qua cache
     const CACHE_TIME_TO_LIVE_15 = 900; //Time cache 15 phut
-    const CACHE_TIME_TO_LIVE_ONE_DAY = 86400; //Time cache 1 ngay
-    const CACHE_TIME_TO_LIVE_ONE_WEEK = 604800; //Time cache 1 tuan
     const CACHE_TIME_TO_LIVE_30 = 1800; //Time cache 30 phut
     const CACHE_TIME_TO_LIVE_60 = 3600; //Time cache 60 phut
+    const CACHE_TIME_TO_LIVE_ONE_DAY = 86400; //Time cache 1 ngay
+    const CACHE_TIME_TO_LIVE_ONE_WEEK = 604800; //Time cache 1 tuan
+
+    const VERSION_CACHE = 'ver_2_';//dung de thay doi cache tat ca,khong phai remove tung cache
 
     //cache Province
     const CACHE_PROVINCE = 'cache_province';

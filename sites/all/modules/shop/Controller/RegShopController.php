@@ -60,7 +60,7 @@ class RegShopController{
 							'shop_email'=>$dataInput ['shop_email']['value'],
 							'shop_province'=>$dataInput ['shop_province']['value'],
 							'is_shop'=>SHOP_FREE,
-							'shop_status'=>STASTUS_HIDE,
+							'shop_status'=>STASTUS_SHOW,
 							'number_limit_product'=>SHOP_NUMBER_PRODUCT_FREE,
 							'shop_created'=>$dataInput ['shop_created']['value'],
 						);
@@ -185,7 +185,12 @@ class RegShopController{
 				}
 			}
 			
-			$query = RegShop::updateId($data_post, $user_shop->shop_id);
+			RegShop::updateId($data_post, $user_shop->shop_id);
+			if(Cache::CACHE_ON){
+				$key_cache = Cache::VERSION_CACHE.Cache::CACHE_USER_SHOP_ID.$user_shop->shop_id;
+				$cache = new Cache();
+				$cache->do_remove($key_cache);
+			}
 			drupal_set_message('Cập nhật thông tin gian hàng thành công!');
 			drupal_goto($base_url.'/quan-ly-gian-hang.html');
 		}

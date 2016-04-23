@@ -14,10 +14,11 @@ class DataCommon{
 	public static $primary_key_province = 'province_id';
 
 	public static function getListCategoryParent(){
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_PARENT;
 		$categoryParent = array();
 		if(Cache::CACHE_ON){
 			$cache = new Cache();
-			$categoryParent = $cache->do_get(Cache::CACHE_LIST_CATEGORY_PARENT);
+			$categoryParent = $cache->do_get($key_cache);
 		}
 		if($categoryParent == null || empty($categoryParent)) {
 			$query = db_select(self::$table_category, 'c')
@@ -30,7 +31,7 @@ class DataCommon{
 					$categoryParent[$cate->category_id] = $cate->category_name;
 				}
 				if (Cache::CACHE_ON) {
-					$cache->do_put(Cache::CACHE_LIST_CATEGORY_PARENT, $categoryParent, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+					$cache->do_put($key_cache, $categoryParent, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
 				}
 			}
 		}
@@ -38,11 +39,12 @@ class DataCommon{
 	}
 
 	public static function getListCategoryChildren($category_parent_id = 0){
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_CATEGORY_CHILDREN_PARENT_ID;
 		$categoryChildren = array();
 		if($category_parent_id > 0){
 			if(Cache::CACHE_ON){
 				$cache = new Cache();
-				$categoryChildren = $cache->do_get(Cache::CACHE_CATEGORY_CHILDREN_PARENT_ID.$category_parent_id);
+				$categoryChildren = $cache->do_get($key_cache.$category_parent_id);
 			}
 			if($categoryChildren == null || empty($categoryChildren)) {
 				$query = db_select(self::$table_category, 'c')
@@ -55,7 +57,7 @@ class DataCommon{
 						$categoryChildren[$cate->category_id] = $cate->category_name;
 					}
 					if (Cache::CACHE_ON) {
-						$cache->do_put(Cache::CACHE_CATEGORY_CHILDREN_PARENT_ID.$category_parent_id, $categoryChildren, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+						$cache->do_put($key_cache.$category_parent_id, $categoryChildren, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
 					}
 				}
 				return $categoryChildren;
@@ -70,10 +72,11 @@ class DataCommon{
 	 */
 	public static function getShopById($id_shop = 0){
 		$user_shop = array();
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_USER_SHOP_ID;
 		if($id_shop <= 0) return $user_shop;
 		if(Cache::CACHE_ON){
 			$cache = new Cache();
-			$user_shop = $cache->do_get(Cache::CACHE_USER_SHOP_ID.$id_shop);
+			$user_shop = $cache->do_get($key_cache.$id_shop);
 		}
 		if($user_shop == null || empty($user_shop)){
 			$query = db_select(self::$table_user_shop, 's')
@@ -85,7 +88,7 @@ class DataCommon{
 					$user_shop = $shop;
 				}
 				if(Cache::CACHE_ON) {
-					$cache->do_put(Cache::CACHE_USER_SHOP_ID . $id_shop, $user_shop, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+					$cache->do_put($key_cache. $id_shop, $user_shop, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
 				}
 			}
 		}
@@ -98,10 +101,11 @@ class DataCommon{
 	 */
 	public static function getProductById($product_id = 0){
 		$product = array();
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_PRODUCT_ID;
 		if($product_id <= 0) return $product;
 		if(Cache::CACHE_ON) {
 			$cache = new Cache();
-			$product = $cache->do_get(Cache::CACHE_PRODUCT_ID . $product_id);
+			$product = $cache->do_get($key_cache. $product_id);
 		}
 		if( $product == null || empty($product)){
 			$query = db_select(self::$table_product, 'p')
@@ -113,7 +117,7 @@ class DataCommon{
 					$product = $pro;
 				}
 				if(Cache::CACHE_ON) {
-					$cache->do_put(Cache::CACHE_PRODUCT_ID.$product_id, $product, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+					$cache->do_put($key_cache.$product_id, $product, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
 				}
 			}
 		}
@@ -126,10 +130,11 @@ class DataCommon{
 	 */
 	public static function getCategoryById($category_id = 0){
 		$category = array();
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_CATEGORY_ID;
 		if($category_id <= 0) return $category;
 		if(Cache::CACHE_ON) {
 			$cache = new Cache();
-			$category = $cache->do_get(Cache::CACHE_CATEGORY_ID . $category_id);
+			$category = $cache->do_get($key_cache. $category_id);
 		}
 		if( $category == null || empty($category)){
 			$query = db_select(self::$table_category, 'c')
@@ -141,7 +146,7 @@ class DataCommon{
 					$category = $cate;
 				}
 				if(Cache::CACHE_ON) {
-					$cache->do_put(Cache::CACHE_CATEGORY_ID.$category_id, $category, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+					$cache->do_put($key_cache.$category_id, $category, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
 				}
 			}
 		}
@@ -149,10 +154,11 @@ class DataCommon{
 	}
 
 	public static function getAllProvices(){
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_PROVINCE;
 		$categoryChildren = array();
 		if(Cache::CACHE_ON){
 			$cache = new Cache();
-			$categoryChildren = $cache->do_get(Cache::CACHE_PROVINCE);
+			$categoryChildren = $cache->do_get($key_cache);
 		}
 		if($categoryChildren == null || empty($categoryChildren)) {
 			$query = db_select(self::$table_province, 'p')
@@ -164,7 +170,7 @@ class DataCommon{
 					$categoryChildren[$province->province_id] = $province->province_name;
 				}
 				if (Cache::CACHE_ON) {
-					$cache->do_put(Cache::CACHE_PROVINCE, $categoryChildren, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+					$cache->do_put($key_cache, $categoryChildren, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
 				}
 			}
 		}
@@ -182,7 +188,7 @@ class DataCommon{
 		$bannerAdvanced = array();
 		if(Cache::CACHE_ON){
 			$cache = new Cache();
-			$bannerAdvanced = $cache->do_get(Cache::CACHE_PROVINCE.'_'.$banner_type.'_'.$banner_page.'_'.$banner_category_id.'_'.$banner_shop_id);
+			$bannerAdvanced = $cache->do_get(Cache::VERSION_CACHE.Cache::CACHE_BANNER_ADVANCED.'_'.$banner_type.'_'.$banner_page.'_'.$banner_category_id.'_'.$banner_shop_id);
 		}
 		if($bannerAdvanced == null || empty($bannerAdvanced)) {
 			$arrField = array('banner_id', 'banner_name', 'banner_image','banner_link', 'banner_order', 'banner_is_target','banner_type','banner_category_id',
@@ -200,7 +206,7 @@ class DataCommon{
 					$bannerAdvanced[] = $banner;
 				}
 				if (Cache::CACHE_ON) {
-					$cache->do_put(Cache::CACHE_PROVINCE.'_'.$banner_type.'_'.$banner_page.'_'.$banner_category_id.'_'.$banner_shop_id, $bannerAdvanced, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+					$cache->do_put(Cache::VERSION_CACHE.Cache::CACHE_BANNER_ADVANCED.'_'.$banner_type.'_'.$banner_page.'_'.$banner_category_id.'_'.$banner_shop_id, $bannerAdvanced, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
 				}
 			}
 		}

@@ -141,6 +141,11 @@ class BannerController{
 
 				//FunctionLib::Debug($dataInput);
 				Banner::save($dataInput, $item_id);
+				if(Cache::CACHE_ON){
+					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_BANNER_ADVANCED.'_'.$dataInput['banner_type']['value'].'_'.$dataInput['banner_page']['value'].'_'.$dataInput['banner_category_id']['value'].'_'.$dataInput['banner_shop_id']['value'];
+					$cache = new Cache();
+					$cache->do_remove($key_cache);
+				}
 				drupal_goto($base_url.'/admincp/banner');
 			}
 		}

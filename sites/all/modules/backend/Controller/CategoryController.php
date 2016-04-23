@@ -85,6 +85,13 @@ class CategoryController{
 				}
 			}else{
 				Category::save($dataInput, $item_id);
+				if(Cache::CACHE_ON){
+					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_CATEGORY_ID.$item_id;
+					$cache = new Cache();
+					$cache->do_remove($key_cache);
+					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_PARENT);
+					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_CATEGORY_CHILDREN_PARENT_ID.$item_id);
+				}
 				drupal_goto($base_url.'/admincp/category');
 			}
 		}

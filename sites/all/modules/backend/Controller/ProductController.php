@@ -137,6 +137,11 @@ class ProductController{
 			}else{
 				//FunctionLib::Debug($dataInput);
 				Product::save($dataInput, $item_id);
+				if(Cache::CACHE_ON){
+					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_PRODUCT_ID.$item_id;
+					$cache = new Cache();
+					$cache->do_remove($key_cache);
+				}
 				drupal_goto($base_url.'/admincp/product');
 			}
 		}

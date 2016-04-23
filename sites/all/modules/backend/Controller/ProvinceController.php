@@ -4,7 +4,7 @@
 */
 class ProvinceController{
 
-	private $arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
+	private $arrStatus = array(-1 => 'Tất cả', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE=> 'Ẩn');
 	
 	public function __construct(){
 			
@@ -43,7 +43,6 @@ class ProvinceController{
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));
-
 	}
 
 	function formProvinceAction(){
@@ -74,6 +73,11 @@ class ProvinceController{
 				}
 			}else{
 				Province::save($dataInput, $item_id);
+				if(Cache::CACHE_ON){
+					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_PROVINCE;
+					$cache = new Cache();
+					$cache->do_remove($key_cache);
+				}
 				drupal_goto($base_url.'/admincp/province');
 			}
 		}
@@ -94,6 +98,11 @@ class ProvinceController{
 					if($item_id > 0){
 						Province::deleteId($item_id);
 					}
+				}
+				if(Cache::CACHE_ON){
+					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_PROVINCE;
+					$cache = new Cache();
+					$cache->do_remove($key_cache);
 				}
 				drupal_set_message('Xóa bài viết thành công.');
 			}

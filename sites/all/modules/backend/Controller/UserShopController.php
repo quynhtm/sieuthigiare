@@ -99,6 +99,11 @@ class UserShopController{
 				}
 				//FunctionLib::Debug($data);
 				UserShop::save($data, $id);
+				if(Cache::CACHE_ON){
+					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_USER_SHOP_ID.$id;
+					$cache = new Cache();
+					$cache->do_remove($key_cache);
+				}
 				drupal_goto($base_url.'/admincp/usershop');
 			}
 		}

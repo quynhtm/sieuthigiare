@@ -90,8 +90,6 @@ class ProductShopController{
 			'bootstrap/lib/datetimepicker/jquery.datetimepicker.js',
 		);
 		Loader::load('Core', $files);
-
-
 		$param = arg();
 		$arrItem = array();
 		$id = 0;
@@ -122,7 +120,6 @@ class ProductShopController{
 					}
 				}
 			}
-
 		}
 		
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
@@ -204,6 +201,11 @@ class ProductShopController{
 					}
 				}
 				ProductShop::save($data, $id);
+				if(Cache::CACHE_ON){
+					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_PRODUCT_ID.$id;
+					$cache = new Cache();
+					$cache->do_remove($key_cache);
+				}
 				drupal_goto($base_url.'/quan-ly-gian-hang.html');
 			}
 		}
