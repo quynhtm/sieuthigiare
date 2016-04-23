@@ -10,6 +10,11 @@
 				<?php foreach($result as $item){ ?>
 				<li class="item">
 					<div class="post-thumb">
+						<?php if((float)$item->product_price_market > (float)$item->product_price_sell) {?>
+					    <span class="sale-off">
+					    	-<?php echo number_format(100 - ((float)$item->product_price_sell/(float)$item->product_price_market)*100, 1) ?>%
+					    </span>
+					    <?php } ?>
 						<a href="<?php echo FunctionLib::buildLinkDetail($item->product_id, $item->product_name); ?>" title="<?php echo $item->product_name?>">
 							<img src="<?php echo FunctionLib::getThumbImage($item->product_image,$item->product_id,FOLDER_PRODUCT,300,300) ?>" 
 							data-other-src="<?php echo FunctionLib::getThumbImage($item->product_image_hover,$item->product_id,FOLDER_PRODUCT,300,300) ?>" 
@@ -28,11 +33,6 @@
                             		<?php if($item->product_price_sell > 0 && $item->product_price_market > 0){?>
                             		<span class="amount-1"><?php echo number_format($item->product_price_sell)?>đ</span>
 									<span class="amount-2"><?php echo number_format($item->product_price_market) ?>đ</span>
-									<?php if((float)$item->product_price_market > (float)$item->product_price_sell) {?>
-								    <span class="sale-off">
-								    	-<?php echo number_format(100 - ((float)$item->product_price_sell/(float)$item->product_price_market)*100, 1) ?>%
-								    </span>
-								    <?php } ?>
 							    <?php } ?>
                         		<?php } ?>
                     		</div>
