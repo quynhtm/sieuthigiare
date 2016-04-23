@@ -172,13 +172,12 @@ class ProductShopController{
 				}
 				//neu ko co anh hove, lay anh hove la cai anh dau tien
 				if($data['product_image_hover']['value'] == ''){
-					$data['product_image_hover']['value'] = $arrInputImgOther[0];
+					$data['product_image_hover']['value'] = (isset($arrInputImgOther[1]))?$arrInputImgOther[1]:$arrInputImgOther[0];
 				}
 				$data['product_image_other']['value'] = serialize($arrInputImgOther);
 			}
 
 			$errors = ValidForm::validInputData($data);
-			
 			if($errors != ''){
 				if(!empty($arrItem)){
 					drupal_set_message($errors, 'error');
