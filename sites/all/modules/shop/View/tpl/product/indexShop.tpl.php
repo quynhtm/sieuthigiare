@@ -28,16 +28,15 @@
 				<?php } ?>
 			</div>
 			<div class="right-show-product-shop body-list-item ">
+				<?php if(!empty($bannerList)){ ?>
 				<div class="banner-shop-content">
-					<?php if(!empty($bannerList)){ ?>
-						<?php foreach($bannerList as $v){ ?>
-						<a title="<?php echo $v->banner_name ?>" href="<?php echo $v->banner_link ?>" target="_blank">
-							<img src="<?php echo FunctionLib::getThumbImage($v->banner_image, $v->banner_id, FOLDER_BANNER, 0, 0) ?>" alt="<?php echo $v->banner_name ?>"/>
-						</a>
-						<?php } ?>
+					<?php foreach($bannerList as $v){ ?>
+					<a title="<?php echo $v->banner_name ?>" href="<?php echo $v->banner_link ?>" target="_blank">
+						<img src="<?php echo FunctionLib::getThumbImage($v->banner_image, $v->banner_id, FOLDER_BANNER, 0, 0) ?>" alt="<?php echo $v->banner_name ?>"/>
+					</a>
 					<?php } ?>
-					
 				</div>
+				<?php } ?>
 				<div class="content-list-item">
 					<?php foreach($result as $v){?>
 					<div class="col-lg-3 col-xs-3 ">
@@ -71,6 +70,9 @@
 								<?php if($v->product_selloff != ''){?>
 				                <div class="item-banner"><?php echo $v->product_selloff ?></div>
 				                <?php } ?>
+				                <?php if($item->product_type_price == 1){?>
+				                <div class="amount-call">gian hàng: <i class="link-shop"><?php echo $item->user_shop_name ?></i></div>
+								<?php } ?>
 							</div>
 						</div>
 					</div>
