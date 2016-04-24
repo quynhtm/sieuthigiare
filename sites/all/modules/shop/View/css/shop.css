@@ -321,13 +321,16 @@ a.btn-yahoo:hover{
     padding: 0 10px;
 }
 .left-category-shop {
-    background: #f3f3f3;
-    border: 1px solid #eee;
-    border-radius: 2px;
     display: inline-block;
     float: left;
-    padding: 12px 15px 15px;
     width: 240px;
+}
+.wrapp-category-menu{
+    border-radius: 2px;
+    background: #f3f3f3;
+    border: 1px solid #eee;
+    padding: 12px 15px 15px;
+    margin-bottom: 10px;
 }
 .title-category-parent {
     font-size: 15px;
