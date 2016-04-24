@@ -3,14 +3,40 @@
 		<div class="search-box-title">Thông tin tìm kiếm</div>
 		<form action="" method="GET" id="frmSearch" class="frmSearch" name="frmSearch">
 			<div class="col-lg-3">
-				<label class="control-label">Tên tỉnh thành</label>
-				<div><input type="text" class="form-control input-sm" placeholder ="Tên tỉnh thành" id="user_shop" class="keyword" name="user_shop" value="<?php echo $dataSearch['user_shop'] ?>"/></div>
+				<label class="control-label">User đăng nhập</label>
+				<div><input type="text" class="form-control input-sm" placeholder ="Tên đăng nhập" id="user_shop" class="keyword" name="user_shop" value="<?php echo $dataSearch['user_shop'] ?>"/></div>
 			</div>
 			<div class="col-lg-3">
+				<label class="control-label">Tên hiển thị của shop</label>
+				<div><input type="text" class="form-control input-sm" placeholder ="Tên hiển thị của shop" id="shop_name" class="keyword" name="shop_name" value="<?php echo $dataSearch['shop_name'] ?>"/></div>
+			</div>
+			<div class="col-lg-3">
+				<label class="control-label">Số điện thoại</label>
+				<div><input type="text" class="form-control input-sm" placeholder ="số điện thoại" id="shop_phone" class="keyword" name="shop_phone" value="<?php echo $dataSearch['shop_phone'] ?>"/></div>
+			</div>
+			<div class="col-lg-3">
+				<label class="control-label">Email</label>
+				<div><input type="text" class="form-control input-sm" placeholder ="Email" id="shop_email" class="keyword" name="shop_email" value="<?php echo $dataSearch['shop_email'] ?>"/></div>
+			</div>
+
+			<div class="col-lg-3 paddingTop10">
+				<label class="control-label">Danh mục shop dùng</label>
+				<div><select class="form-control input-sm" name="shop_category"><?php echo $optionCategroy;?></select></div>
+			</div>
+			<div class="col-lg-3 paddingTop10">
+				<label class="control-label">Lượt up của shop</label>
+				<div><select class="form-control input-sm" name="number_limit_product"><?php echo $optionNumberLimitProduct;?></select></div>
+			</div>
+			<div class="col-lg-2 paddingTop10">
 				<label class="control-label">Trạng thái</label>
-				<div><select class="form-control input-sm" name="province_status"><?php echo $optionStatus;?></select></div>
+				<div><select class="form-control input-sm" name="shop_status"><?php echo $optionStatus;?></select></div>
 			</div>
-			<div class="col-lg-3">
+			<div class="col-lg-2 paddingTop10">
+				<label class="control-label">Loại shop</label>
+				<div><select class="form-control input-sm" name="is_shop"><?php echo $optionIsShop;?></select></div>
+			</div>
+
+			<div class="col-lg-2 paddingTop10">
 				<label class="control-label">&nbsp;</label>
 				<div><button class="btn btn-primary" name="submit" value="1">Tìm kiếm</button></div>
 			</div>
@@ -24,7 +50,10 @@
 			<h5 class="padding10"><?php echo (isset($title)) ? $title: t('Quản lý bài viết');?></h5>
 			<span class="menu_tools">
 				<a href="<?php echo $base_url; ?>/admincp/usershop/add" title="Thêm mới" class="icon-plus icon-admin green"></a>
-                <a href="javascript:void(0)" title="Xóa item" id="deleteMoreItem" class="icon-trash icon-admin red"></a>
+                <a href="javascript:void(0)" title="Xóa Xóa" id="deleteMoreItem" class="icon-trash icon-admin red"></a>
+                <a href="javascript:void(0)" title="Khóa Shop" id="blockUserMoreItem" class="icon-unlock-alt icon-admin red"></a>
+                <a href="javascript:void(0)" title="Mở Shop" id="showUserMoreItem" class="icon-ok icon-admin green"></a>
+                <a href="javascript:void(0)" title="Ẩn Shop" id="hideUserMoreItem" class="icon-remove icon-admin red"></a>
            </span>
 		</div>
 	</div>
@@ -45,35 +74,48 @@
 						<th width="1%">STT</th>
 						<th width="1%"><input type="checkbox" id="checkAll"/></th>
 						<th width="20%">Thông tin shop</th>
-						<th width="20%">Tên shop</th>
-						<th width="20%">Địa chỉ</th>
+						<th width="25%">Tên shop</th>
+						<th width="25%">Địa chỉ</th>
 						<th width="20%">Loại gian hàng</th>
-						<th width="10%">Trạng thái</th>
-						<th width="9%">Online</th>
+						<th width="5%">Status</th>
+						<th width="5%">Online</th>
 						<th width="10%">Ngày tạo</th>
 						<th width="9%">Action</th>
 					</tr>
 					</thead>
 					<tbody>
 					<?php foreach ($result as $key => $item) {?>
-						<tr>
+						<tr style="padding: 10px 0px;">
 							<td><?php echo $key+1 ?></td>
 							<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item->shop_id ?>" /></td>
 							<td>
 								<?php
-									echo '['.$item->shop_id.'] <a href="'.FunctionLib::buildLinkCategory($item->shop_id, $item->shop_name, 0, '').'" target="_blank" title="Trang chủ shop '.$item->shop_name.'">'.$item->user_shop.'</a>';
+									echo '['.$item->shop_id.'] <a href="'.FunctionLib::buildLinkCategory($item->shop_id, $item->shop_name, 0, '').'" target="_blank" title="Trang chủ shop '.$item->shop_name.'"><b>'.$item->user_shop.'</b></a>';
 									echo '<br/>'.$item->shop_phone;
 									echo '<br/>'.$item->shop_email;
 								?>
 							</td>
-							<td><?php echo $item->shop_name; ?></td>
-							<td><?php echo $item->shop_address; ?></td>
-							<td><?php echo isset($arrIsShop[$item->is_shop])? $arrIsShop[$item->is_shop]: 'Chưa chọn loại Shop' ?></td>
 							<td>
-								<?php echo ($item->shop_status == STASTUS_SHOW)? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
+								<?php
+									echo '<a href="'.FunctionLib::buildLinkCategory($item->shop_id, $item->shop_name, 0, '').'" target="_blank" title="Trang chủ shop '.$item->shop_name.'"><b>'.$item->shop_name.'</b></a>';
+									echo '<br/>'.$item->shop_category_name;
+								?>
 							</td>
-							<td>
-								<?php echo ($item->is_login == SHOP_ONLINE)? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
+							<td><?php echo $item->shop_address; ?></td>
+							<td><?php echo isset($arrIsShop[$item->is_shop])? $arrIsShop[$item->is_shop].' ('.$item->number_limit_product.')': 'Chưa chọn loại Shop' ?></td>
+							<td class="align_center">
+								<?php
+									if($item->shop_status == STASTUS_SHOW){
+										echo '<i class="icon-ok icon-admin green"></i>';
+									}elseif($item->shop_status == STASTUS_HIDE){
+										echo '<i class="icon-remove icon-admin red"></i>';
+									}else{
+										echo '<i class="icon-unlock-alt icon-admin red"></i>';
+									}
+								?>
+							</td>
+							<td class="align_center">
+								<?php echo ($item->is_login == SHOP_ONLINE)? '<i class="icon-smile icon-admin green"></i>': '<i class="icon-meh icon-admin red"></i>'; ?>
 							</td>
 							<td><?php echo date('d-m-Y h:i:s',$item->shop_created); ?></td>
 							<td>
@@ -102,5 +144,8 @@
 <script>
 	jQuery(document).ready(function(){
 		DELETE_ITEM.init('admincp/usershop');
+		BLOCK_USER_SHOP.init('admincp/usershop');
+		SHOW_USER_SHOP.init('admincp/usershop');
+		HIDE_USER_SHOP.init('admincp/usershop');
 	});
 </script>

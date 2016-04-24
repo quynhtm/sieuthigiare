@@ -126,7 +126,9 @@ class ProductShop{
         }
         //update
         if($id > 0){
-            unset($data_post['time_created']);
+            if(isset($data_post['time_created'])){
+                unset($data_post['time_created']);
+            }
             self::updateId($data_post, $id);
             drupal_set_message('Cập nhật thành công.');
             return true;

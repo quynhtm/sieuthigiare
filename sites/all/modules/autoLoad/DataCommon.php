@@ -13,6 +13,34 @@ class DataCommon{
 	public static $table_banner = TABLE_BANNER;
 	public static $primary_key_province = 'province_id';
 
+	/**
+	 * DÙng ?? khóa, m?, ?n toàn b? s?n ph?m c?a shop
+	 * @param int $shop_id
+	 * @param int $is_block
+	 */
+	public static function updateInforProductByShopId($shop_id = 0, $is_block = PRODUCT_NOT_BLOCK){
+		if($shop_id > 0){
+			$query = db_select(self::$table_product, 'p')
+				->condition('p.user_shop_id', $shop_id, '=')
+				->fields('p', array('product_id'));
+			$data = $query->execute();
+			$inforShop = self::getShopById($shop_id);
+			if (!empty($data)) {
+				$cache = new Cache();
+				foreach ($data as $k => $pro) {
+					$dataUpdate['is_block']['value'] = $is_block;
+					if(!empty($inforShop)){
+						$dataUpdate['user_shop_name']['value'] = $inforShop->shop_name;
+						$dataUpdate['is_shop']['value'] = $inforShop->is_shop;
+						$dataUpdate['shop_province']['value'] = $inforShop->shop_province;
+					}
+					Product::save($dataUpdate, $pro->product_id);
+					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_PRODUCT_ID.$pro->product_id;
+					$cache->do_remove($key_cache);
+				}
+			}
+		}
+	}
 	public static function getListCategoryParent(){
 		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_PARENT;
 		$categoryParent = array();

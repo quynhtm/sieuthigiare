@@ -6,8 +6,8 @@
 class UserShopController{
 
 	private $arrStatus = array(-2 => 'Tất cả', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn', STASTUS_BLOCK => 'Khóa');
-	private $arrIsShop = array(-2 => 'Tất cả', SHOP_FREE => 'Shop Free', SHOP_NOMAL => 'Shop thường', SHOP_VIP => 'Shop Vip');
-	private $arrNumberLimitProduct = array(-2 => 'Tất cả',
+	private $arrIsShop = array(-1 => 'Tất cả', SHOP_FREE => 'Shop Free', SHOP_NOMAL => 'Shop thường', SHOP_VIP => 'Shop Vip');
+	private $arrNumberLimitProduct = array(-1 => 'Tất cả',
 		SHOP_NUMBER_PRODUCT_FREE => 'Lượt đăng Shop Free (20)',
 		SHOP_NUMBER_PRODUCT_NOMAL => 'Lượt đăng Shop thường (100)',
 		SHOP_NUMBER_PRODUCT_VIP => 'Lượt đăng Shop Vip (1000)');
@@ -37,16 +37,30 @@ class UserShopController{
 		$limit = SITE_RECORD_PER_PAGE;
 		//search
 		$dataSearch['user_shop'] = FunctionLib::getParam('user_shop','');
+		$dataSearch['user_shop'] = FunctionLib::getParam('user_shop','');
+		$dataSearch['shop_name'] = FunctionLib::getParam('shop_name','');
+		$dataSearch['shop_phone'] = FunctionLib::getParam('shop_phone','');
+		$dataSearch['shop_email'] = FunctionLib::getParam('shop_email','');
 		$dataSearch['shop_status'] = FunctionLib::getParam('shop_status', -2);
+		$dataSearch['shop_category'] = FunctionLib::getParam('shop_category', -1);
+		$dataSearch['is_shop'] = FunctionLib::getParam('is_shop', -1);
+		$dataSearch['number_limit_product'] = FunctionLib::getParam('number_limit_product', -1);
 		$result = UserShop::getSearchListItems($dataSearch,$limit,array());
 
 		//build option
+		$arrCategoryParent = DataCommon::getListCategoryParent();
+		$optionCategroy = FunctionLib::getOption(array(-1=>'Chọn danh mục cha') + $arrCategoryParent, $dataSearch['shop_category']);
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['shop_status']);
+		$optionIsShop = FunctionLib::getOption($this->arrIsShop, $dataSearch['is_shop']);
+		$optionNumberLimitProduct = FunctionLib::getOption($this->arrNumberLimitProduct, $dataSearch['number_limit_product']);
 		return $view = theme('indexUserShop',array(
 			'title'=>'Danh sách User Shop',
 			'result' => $result['data'],
 			'dataSearch' => $dataSearch,
 			'optionStatus' => $optionStatus,
+			'optionCategroy' => $optionCategroy,
+			'optionIsShop' => $optionIsShop,
+			'optionNumberLimitProduct' => $optionNumberLimitProduct,
 			'arrIsShop' => $this->arrIsShop,
 			'arrStatus' => $this->arrStatus,
 			'base_url' => $base_url,
@@ -126,6 +140,70 @@ class UserShopController{
 				}
 			}
 			drupal_set_message('Xóa Item thành công.');
+		}
+		drupal_goto($base_url.'/admincp/usershop');
+	}
+
+	function blockUserShopAction(){
+		global $base_url;
+		if(isset($_POST) && $_POST['txtFormName']=='txtFormName'){
+			$listId = isset($_POST['checkItem'])? $_POST['checkItem'] : 0;
+			$cache = new Cache();
+			foreach($listId as $shop_id){
+				if($shop_id > 0){
+
+					//cap nhat khoa shop
+					$data['shop_status']['value'] = STASTUS_BLOCK;
+					UserShop::save($data, $shop_id);
+					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_USER_SHOP_ID.$shop_id;
+					$cache->do_remove($key_cache);
+
+					//lấy các sản phẩm của nó và khóa lại
+					DataCommon::updateInforProductByShopId($shop_id,PRODUCT_BLOCK);
+				}
+			}
+		}
+		drupal_goto($base_url.'/admincp/usershop');
+	}
+	function showUserShopAction(){
+		global $base_url;
+		if(isset($_POST) && $_POST['txtFormName']=='txtFormName'){
+			$listId = isset($_POST['checkItem'])? $_POST['checkItem'] : 0;
+			$cache = new Cache();
+			foreach($listId as $shop_id){
+				if($shop_id > 0){
+
+					//cap nhat khoa shop
+					$data['shop_status']['value'] = STASTUS_SHOW;
+					UserShop::save($data, $shop_id);
+					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_USER_SHOP_ID.$shop_id;
+					$cache->do_remove($key_cache);
+
+					//lấy các sản phẩm của nó và khóa lại
+					DataCommon::updateInforProductByShopId($shop_id,PRODUCT_NOT_BLOCK);
+				}
+			}
+		}
+		drupal_goto($base_url.'/admincp/usershop');
+	}
+	function hideUserShopAction(){
+		global $base_url;
+		if(isset($_POST) && $_POST['txtFormName']=='txtFormName'){
+			$listId = isset($_POST['checkItem'])? $_POST['checkItem'] : 0;
+			$cache = new Cache();
+			foreach($listId as $shop_id){
+				if($shop_id > 0){
+
+					//cap nhat khoa shop
+					$data['shop_status']['value'] = STASTUS_HIDE;
+					UserShop::save($data, $shop_id);
+					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_USER_SHOP_ID.$shop_id;
+					$cache->do_remove($key_cache);
+
+					//lấy các sản phẩm của nó và khóa lại
+					DataCommon::updateInforProductByShopId($shop_id,PRODUCT_BLOCK);
+				}
+			}
 		}
 		drupal_goto($base_url.'/admincp/usershop');
 	}

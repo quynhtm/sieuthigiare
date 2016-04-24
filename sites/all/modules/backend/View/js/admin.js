@@ -40,6 +40,64 @@ DELETE_CACHE_IMAGE_PRODUCT={
 		});
 	}
 }
+/**
+ * danh cho USER_SHOP
+ * @type {{init: Function}}
+ */
+BLOCK_USER_SHOP={
+	init:function(path_menu){
+		jQuery('a#blockUserMoreItem').click(function(){
+			var total = jQuery( "input:checked" ).length;
+			if(total==0){
+				alert('Vui lòng chọn ít nhất 1 bản ghi để Khóa!');
+				return false;
+			}else{
+				if (confirm('Bạn muốn Khóa [OK]:Đồng ý [Cancel]:Bỏ qua?)')){
+					jQuery('form#formListItem').attr("action", BASEPARAMS.base_url+"/"+path_menu+"/block");
+					jQuery('form#formListItem').submit();
+					return true;
+				}
+				return false;
+			}
+		});
+	}
+}
+SHOW_USER_SHOP={
+	init:function(path_menu){
+		jQuery('a#showUserMoreItem').click(function(){
+			var total = jQuery( "input:checked" ).length;
+			if(total==0){
+				alert('Vui lòng chọn ít nhất 1 bản ghi để Mở!');
+				return false;
+			}else{
+				if (confirm('Bạn muốn Mở [OK]:Đồng ý [Cancel]:Bỏ qua?)')){
+					jQuery('form#formListItem').attr("action", BASEPARAMS.base_url+"/"+path_menu+"/show");
+					jQuery('form#formListItem').submit();
+					return true;
+				}
+				return false;
+			}
+		});
+	}
+}
+HIDE_USER_SHOP={
+	init:function(path_menu){
+		jQuery('a#hideUserMoreItem').click(function(){
+			var total = jQuery( "input:checked" ).length;
+			if(total==0){
+				alert('Vui lòng chọn ít nhất 1 bản ghi để Ẩn!');
+				return false;
+			}else{
+				if (confirm('Bạn muốn ẨN [OK]:Đồng ý [Cancel]:Bỏ qua?)')){
+					jQuery('form#formListItem').attr("action", BASEPARAMS.base_url+"/"+path_menu+"/hide");
+					jQuery('form#formListItem').submit();
+					return true;
+				}
+				return false;
+			}
+		});
+	}
+}
 
 HISTORY_BACK = {
 	init:function(){
