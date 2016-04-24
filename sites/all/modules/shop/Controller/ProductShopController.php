@@ -136,15 +136,16 @@ class ProductShopController{
 		
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 			$id = FunctionLib::getParam('id', 0);
+			$product_type_price = FunctionLib::getIntParam('product_type_price',TYPE_PRICE_NUMBER);
 			$data = array(
 					'category_id'=>array('value'=>FunctionLib::getIntParam('category_id',''), 'require'=>1, 'messages'=>'Chưa chọn danh mục sản phẩm'),
 					'product_name'=>array('value'=>FunctionLib::getParam('product_name',''), 'require'=>1, 'messages'=>'Tên sản phẩm không được trống!'),
 					'product_content'=>array('value'=>FunctionLib::getParam('product_content',''), 'require'=>1, 'messages'=>'Chi tiết sản phẩm không được trống!'),
 					'product_sort_desc'=>array('value'=>FunctionLib::getParam('product_sort_desc',''), 'require'=>1, 'messages'=>'Chi tiết sản phẩm không được trống!'),
 
-					'product_price_sell'=>array('value'=>FunctionLib::getIntParam('product_price_sell_hide','')),
-					'product_price_market'=>array('value'=>FunctionLib::getIntParam('product_price_market_hide','')),
-					'product_price_input'=>array('value'=>FunctionLib::getIntParam('product_price_input_hide','')),
+					'product_price_sell'=>array('value'=>FunctionLib::getIntParam('product_price_sell_hide',0)),
+					'product_price_market'=>array('value'=>FunctionLib::getIntParam('product_price_market_hide',0)),
+					'product_price_input'=>array('value'=>FunctionLib::getIntParam('product_price_input_hide',0)),
 
 					'product_selloff'=>array('value'=>FunctionLib::getParam('product_selloff','')),
 					'product_image'=>array('value'=>FunctionLib::getParam('image_primary','')),
@@ -158,7 +159,7 @@ class ProductShopController{
 
 					'product_status'=>array('value'=>FunctionLib::getIntParam('product_status',STASTUS_HIDE), 'require'=>0),
 					'product_is_hot'=>array('value'=>FunctionLib::getIntParam('product_is_hot',PRODUCT_NOMAL), 'require'=>0),
-					'product_type_price'=>array('value'=>FunctionLib::getIntParam('product_type_price',TYPE_PRICE_NUMBER)),
+					'product_type_price'=>array('value'=>$product_type_price),
 				);
 			
 			if(!empty($arrItem)){
@@ -213,6 +214,12 @@ class ProductShopController{
 					if($arrItem->product_id != $id){
 						drupal_set_message('Bạn không có quyền sửa tin đăng này!', 'error');
 						drupal_goto($base_url.'/quan-ly-gian-hang.html');
+					}
+				}
+				//check nếu ko nhập giá bán thì cho về hiển thị kiểu liên hệ
+				if($product_type_price == TYPE_PRICE_NUMBER){
+					if((int)$data['product_price_sell']['value'] == 0){
+						$data['product_type_price']['value'] = TYPE_PRICE_CONTACT;
 					}
 				}
 				ProductShop::save($data, $id);
