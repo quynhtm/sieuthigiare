@@ -265,7 +265,7 @@ class ProductShopController{
 		$this->cacheShop();
 
 		$limit = (isset($this->user_shop->is_shop) && $this->user_shop->is_shop = SHOP_VIP) ? SITE_RECORD_PER_PAGE_SHOP_VIP: SITE_RECORD_PER_PAGE_SHOP_NORMAL;
-		$arrFields = array('product_id', 'category_name','product_name', 'product_price_sell', 'product_price_market', 'product_image', 'product_image_hover', 'product_type_price', 'product_selloff', 'user_shop_id');
+		$arrFields = array('product_id', 'category_name','product_name', 'product_price_sell', 'product_price_market', 'product_image', 'product_image_hover', 'product_type_price', 'product_selloff', 'user_shop_id', 'user_shop_name');
 		$result = ProductShop::getIndexShop($this->shop_id,$this->category_id, $limit, $arrFields);
 
 		$phone = '';

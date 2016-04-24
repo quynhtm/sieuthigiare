@@ -46,6 +46,9 @@ class Site{
 					$sql->addField('i', 'product_selloff', 'product_selloff');
 					$sql->addField('i', 'product_image', 'product_image');
 					$sql->addField('i', 'product_image_hover', 'product_image_hover');
+					$sql->addField('i', 'user_shop_id', 'user_shop_id');
+					$sql->addField('i', 'user_shop_name', 'user_shop_name');
+
 					$sql->condition('i.product_status', STASTUS_SHOW,'=');
 					$sql->condition('i.is_block', PRODUCT_NOT_BLOCK,'=');
 					$sql->condition('i.category_id', $v, 'IN');
@@ -71,7 +74,9 @@ class Site{
 			$sql->addField('i', 'product_selloff', 'product_selloff');
 			$sql->addField('i', 'product_image', 'product_image');
 			$sql->addField('i', 'product_image_hover', 'product_image_hover');
+			$sql->addField('i', 'user_shop_id', 'user_shop_id');
 			$sql->addField('i', 'user_shop_name', 'user_shop_name');
+
 			$sql->condition('i.product_status', STASTUS_SHOW,'=');
 			$sql->condition('i.is_block', PRODUCT_NOT_BLOCK,'=');
 			$sql->orderBy('i.product_id', 'DESC');
