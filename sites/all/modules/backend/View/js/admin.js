@@ -22,6 +22,24 @@ DELETE_ITEM={
 		});
 	}
 }
+DELETE_CACHE_IMAGE_PRODUCT={
+	init:function(path_menu){
+		jQuery('a#deleteCacheImageProductMoreItem').click(function(){
+			var total = jQuery( "input:checked" ).length;
+			if(total==0){
+				alert('Vui lòng chọn ít nhất 1 bản ghi để xóa!');
+				return false;
+			}else{
+				if (confirm('Bạn muốn xóa [OK]:Đồng ý [Cancel]:Bỏ qua?)')){
+					jQuery('form#formListItem').attr("action", BASEPARAMS.base_url+"/"+path_menu+"/deleteCacheImage");
+					jQuery('form#formListItem').submit();
+					return true;
+				}
+				return false;
+			}
+		});
+	}
+}
 
 HISTORY_BACK = {
 	init:function(){

@@ -27,6 +27,7 @@
 			<span class="menu_tools">
 				<a href="<?php echo $base_url; ?>/admincp/product/add" title="Thêm mới" class="icon-plus icon-admin green"></a>
                 <a href="javascript:void(0)" title="Xóa item" id="deleteMoreItem" class="icon-trash icon-admin red"></a>
+                <a href="javascript:void(0)" title="Xóa Cache Image Product" id="deleteCacheImageProductMoreItem" class="icon-picture icon-admin red"></a>
            </span>
 		</div>
 	</div>
@@ -177,6 +178,7 @@
 			jQuery("#div_hover_" + id).hide();
 		});
 		DELETE_ITEM.init('admincp/product');
+		DELETE_CACHE_IMAGE_PRODUCT.init('admincp/product');
 	});
 </script>
 

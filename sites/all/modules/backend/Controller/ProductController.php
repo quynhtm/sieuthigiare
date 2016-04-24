@@ -66,7 +66,6 @@ class ProductController{
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));
-
 	}
 
 	function formProductAction(){
@@ -162,6 +161,22 @@ class ProductController{
 				foreach($listId as $id){
 					if($id > 0){
 						Product::deleteOne($id);
+					}
+				}
+				drupal_set_message('Xóa bài viết thành công.');
+			}
+		}
+		drupal_goto($base_url.'/admincp/product');
+	}
+
+	function deleteCacheImageProductAction(){
+		global $base_url;
+		if(isset($_POST) && $_POST['txtFormName']=='txtFormName'){
+			$listId = FunctionLib::getParam('checkItem',array());
+			if(!empty($listId)){
+				foreach($listId as $id){
+					if($id > 0){
+						FunctionLib::delteImageCacheItem(FOLDER_PRODUCT, $id);
 					}
 				}
 				drupal_set_message('Xóa bài viết thành công.');
