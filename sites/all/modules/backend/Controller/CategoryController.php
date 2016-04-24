@@ -115,8 +115,15 @@ class CategoryController{
 			$listId = isset($_POST['checkItem'])? $_POST['checkItem'] : array();
 			if(!empty($listId)){
 				foreach($listId as $item_id){
+					$cache = new Cache();
 					if($item_id > 0){
 						Category::deleteId($item_id);
+						if(Cache::CACHE_ON){
+							$key_cache = Cache::VERSION_CACHE.Cache::CACHE_CATEGORY_ID.$item_id;
+							$cache->do_remove($key_cache);
+							$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_PARENT);
+							$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_CATEGORY_CHILDREN_PARENT_ID.$item_id);
+						}
 					}
 				}
 				drupal_set_message('Xóa bài viết thành công.');

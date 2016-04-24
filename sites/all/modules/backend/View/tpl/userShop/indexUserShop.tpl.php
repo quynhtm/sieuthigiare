@@ -61,7 +61,7 @@
 							<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item->shop_id ?>" /></td>
 							<td>
 								<?php
-									echo $item->user_shop;
+									echo '['.$item->shop_id.'] <a href="'.FunctionLib::buildLinkDetail($item->shop_id,$item->shop_name).'" target="_blank" title="Trang chủ shop '.$item->shop_name.'">'.$item->user_shop.'</a>';
 									echo '<br/>'.$item->shop_phone;
 									echo '<br/>'.$item->shop_email;
 								?>
