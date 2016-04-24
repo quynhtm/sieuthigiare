@@ -129,7 +129,7 @@
 									data-show-faces="false" data-share="true">
 								</div>
 							</div>
-							<div class="content-right-product">
+							<!-- <div class="content-right-product">
 								<div class="order-number">
 									<label for="buy-number">Số lượng</label>
 									<select class="sl-number" id="buy-number" name="">
@@ -139,7 +139,7 @@
 		                            </select>
 								</div>
 								<div id="buttonFormBuySubmit" class="buynow btn">Mua ngay</div>
-							</div>
+							</div> -->
 							<div class="content-right-product">
 								<div class="order-number-phone">
 									<p>Quý khách muốn đặt qua điện thoại</p>

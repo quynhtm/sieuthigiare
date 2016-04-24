@@ -55,9 +55,9 @@
 				    <i class="right-down icon-angle-down"></i>
 				</div>
 			</div>
-			<div class="desc-price-day">
+			<!-- <div class="desc-price-day">
 				<i class="icon-star-empty"></i> <a href="#" title="Giảm giá mỗi ngày">Giảm giá mỗi ngày</a>
-			</div>
+			</div -->
 			<div class="support-online">
 				CSKH: <span><?php echo PHONE_CARE ?></span>
 			</div>
