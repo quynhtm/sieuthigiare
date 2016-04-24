@@ -90,11 +90,14 @@ a.btn-yahoo:hover{
     float: left;
     margin-right: 5px;
 }
-.box-register .agree span {
+.box-register .agree label {
     display: inline-block;
     float: left;
     font-size: 13px;
     font-style: italic;
+    font-weight: normal;
+    margin-top: 1px;
+    width: auto;
 }
 .box-register .list-action{
     margin-left: 2px;
@@ -1043,4 +1046,17 @@ table.list-pay span.price {
 }
 .mgt5{
     margin-top: 10px;
+}
+.main-view-post.box-register .formSendRegister{
+    position: relative;
+}
+.main-view-post.box-register .formSendRegister .loading {
+    background: #fff url("../img/loading.gif") no-repeat scroll center center;
+    height: 100%;
+    left: 0;
+    opacity: 0.1;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999999
 }
