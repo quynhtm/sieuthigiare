@@ -7,32 +7,30 @@
 			<div class="form-left-reg">
 				<div class="form-group">
 					<label class="control-label">Tên đăng nhập<span>(*)</span></label>
-					<input type="text" id="user_shop" class="form-control" name="user_shop">
+					<input type="text" id="user_shop" class="form-control" name="user_shop" value="<?php echo isset($user_shop)?$user_shop :''?>">
 				</div>
 				<div class="form-group">
 					<label class="control-label">Mật khẩu<span>(*)</span></label>
-					<input type="password" id="user_password" class="form-control" name="user_password">
+					<input type="password" id="user_password" class="form-control" name="user_password" value="<?php echo isset($user_password)?$user_password :''?>">
 				</div>
 				<div class="form-group">
 					<label class="control-label">Nhập lại mật khẩu<span>(*)</span></label>
-					<input type="password" id="rep_user_password" class="form-control" name="rep_user_password">
+					<input type="password" id="rep_user_password" class="form-control" name="rep_user_password" value="<?php echo isset($rep_user_password)?$rep_user_password :''?>">
 				</div>
 			</div>
 			<div class="form-right-reg">
 				<div class="form-group">
 					<label class="control-label">Số điện thoại<span>(*)</span></label>
-					<input type="text" id="shop_phone" name="shop_phone" class="form-control">
+					<input type="text" id="shop_phone" name="shop_phone" class="form-control" value="<?php echo isset($shop_phone)?$shop_phone :''?>">
 				</div>
 				<div class="form-group">
 					<label class="control-label">Email<span>(*)</span></label>
-					<input type="text" id="shop_email" name="shop_email" class="form-control">
+					<input type="text" id="shop_email" name="shop_email" class="form-control" value="<?php echo isset($shop_email)?$shop_email :''?>">
 				</div>
 				<div class="form-group">
 					<label class="control-label">Tỉnh/thành<span>(*)</span></label>
 					<select id="shop_province" name="shop_province" class="form-control">
-						<?php foreach ($listProvices as $k => $v) { ?>
-						<option value="<?php echo $k ?>"><?php echo $v ?></option>
-						<?php } ?>
+						<?php echo $optionProvices; ?>
 					</select>
 				</div>
 			</div>

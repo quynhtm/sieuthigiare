@@ -17,16 +17,21 @@ class RegShopController{
 		if($user_shop->shop_id != 0){
 			drupal_goto($base_url);
 		}
-		
+		$listProvices = DataCommon::getAllProvices();
 		if(isset($_POST['txtFormNameRegister'])){
-			
+			$user_shop = FunctionLib::getParam('user_shop','');
+			$user_password = FunctionLib::getParam('user_password','');
+			$rep_user_password = FunctionLib::getParam('rep_user_password','');
+			$shop_phone = FunctionLib::getParam('shop_phone','');
+			$shop_email = FunctionLib::getParam('shop_email','');
+			$shop_province = FunctionLib::getParam('shop_province','');
 			$dataInput = array(
-							'user_shop'=>array('value'=>FunctionLib::getParam('user_shop',''), 'require'=>1, 'messages'=>'Tên đăng nhập không được trống!'),
-							'user_password'=>array('value'=>FunctionLib::getParam('user_password',''), 'require'=>1, 'messages'=>'Mật khẩu không được trống!'),
-							'rep_user_password'=>array('value'=>FunctionLib::getParam('rep_user_password',''), 'require'=>1, 'messages'=>'Nhập lại mật khẩu không được trống!'),
-							'shop_phone'=>array('value'=>FunctionLib::getParam('shop_phone',''), 'require'=>1, 'messages'=>'Số điện thoại không được trống!'),
-							'shop_email'=>array('value'=>FunctionLib::getParam('shop_email',''), 'require'=>1, 'messages'=>'Email không được trống!'),
-							'shop_province'=>array('value'=>FunctionLib::getParam('shop_province',''), 'require'=>1, 'messages'=>'Chọn 1 tỉnh thành!'),
+							'user_shop'=>array('value'=>trim($user_shop), 'require'=>1, 'messages'=>'Tên đăng nhập không được trống!'),
+							'user_password'=>array('value'=>trim($user_password), 'require'=>1, 'messages'=>'Mật khẩu không được trống!'),
+							'rep_user_password'=>array('value'=>trim($rep_user_password), 'require'=>1, 'messages'=>'Nhập lại mật khẩu không được trống!'),
+							'shop_phone'=>array('value'=>trim($shop_phone), 'require'=>1, 'messages'=>'Số điện thoại không được trống!'),
+							'shop_email'=>array('value'=>trim($shop_email), 'require'=>1, 'messages'=>'Email không được trống!'),
+							'shop_province'=>array('value'=>trim($shop_province), 'require'=>1, 'messages'=>'Chọn 1 tỉnh thành!'),
 							'agree'=>array('value'=>FunctionLib::getParam('agree',''), 'require'=>1, 'messages'=>'Bạn chưa đồng ý với điều khoản của chúng tôi!'),
 							'shop_created'=>array('value'=>time(), 'require'=>0, 'messages'=>''),
 						);
@@ -42,7 +47,15 @@ class RegShopController{
 			}
 			if($errors != ''){
 				drupal_set_message($errors, 'error');
-				drupal_goto($base_url.'/dang-ky.html');
+				$optionProvices = FunctionLib::getOption($listProvices, $shop_province);
+				return $view = theme('registerShop',
+					array('optionProvices' => $optionProvices,
+						'user_shop' => $user_shop,
+						'user_password' => $user_password,
+						'rep_user_password' => $rep_user_password,
+						'shop_phone' => $shop_phone,
+						'shop_email' => $shop_email
+					));
 			}
 
 			//check shop and hash pass
@@ -91,11 +104,9 @@ class RegShopController{
 				}
 			}
 		}
-		
-		$listProvices = DataCommon::getAllProvices();
-		$data = array('listProvices' => $listProvices);
 
-		$view = theme('registerShop', $data);
+		$optionProvices = FunctionLib::getOption($listProvices, 22);
+		$view = theme('registerShop', array('optionProvices' => $optionProvices));
 		return $view;
 	}
 
