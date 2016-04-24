@@ -13,6 +13,15 @@ function Site_menu() {
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
+
+    $items["danh-muc-san-pham.html"] = array(
+		"title" => t('Danh mục sản phẩm'),
+		"description" => "Danh mục sản phẩm",
+		'page callback' => 'menuLoad',
+		'page arguments' => array('SiteController/getListProductInCategory'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
   return $items;
 }
 
@@ -61,6 +70,10 @@ function Site_theme() {
 	    ),
 		'block-footer' => array(
 	      'template' => 'View/tpl/block-footer'
+	    ),
+		
+	    'list-product-in-category' => array(
+	      'template' => 'View/tpl/list-product-in-category'
 	    ),
 	);
 }
