@@ -194,13 +194,14 @@
 						<div class="left-bottom-content-view">
 							<ul class="tab">
 								<li class="act" data-tab="1">Chi tiết sản phẩm</li>
-								<li data-tab="2">Chính sách giao nhận</li>
-								<li data-tab="3">Nhận xét</li>
+								<li data-tab="2">Bình luận</li>
+								<li data-tab="3">Chính sách giao nhận</li>
+								<li data-tab="4">Giới thiệu Shop</li>
 							</ul>
 							<div class="content-bottom-content-view">
 								<div class="act show-tab show-tab-1"><?php echo $product_content ?></div>
-								<div class="show-tab show-tab-2"><?php echo $user_shop->shop_transfer ?></div>
-								<div class="show-tab show-tab-3">
+								<div class="show-tab show-tab-2">
+									<!--
 									<div class="form-comment-post">
 										<div class="col-sm-8">
 											<div class="row">
@@ -265,7 +266,25 @@
 											</div>
 										</div>
 									</div>
+									-->
+									<div class="social-comment">
+									<div class="content-comment-facebook">
+										<div class="socialFacebook">
+											<div id="fb-root"></div>
+											<script>(function(d, s, id) {
+											  var js, fjs = d.getElementsByTagName(s)[0];
+											  if (d.getElementById(id)) return;
+											  js = d.createElement(s); js.id = id;
+											  js.src = "//connect.facebook.net/vi_VN/all.js#xfbml=1&appId=342626259177944";
+											  fjs.parentNode.insertBefore(js, fjs);
+											}(document, 'script', 'facebook-jssdk'));</script>
+											<div class="fb-comments" data-href="<?php echo FunctionLib:: buildLinkDetail($product_id, $product_name); ?>" data-width="800px" data-num-posts="10"></div>
+										</div>
+									</div>
 								</div>
+								</div>
+								<div class="show-tab show-tab-3"><?php echo $user_shop->shop_transfer ?></div>
+								<div class="show-tab show-tab-4"><?php echo $user_shop->shop_about ?></div>
 							</div>
 						</div>
 						<div class="right-bottom-content-view">
