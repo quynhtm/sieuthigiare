@@ -28,6 +28,18 @@ class ProductShopController{
 			'bootstrap/lib/datetimepicker/jquery.datetimepicker.js',
 		);
 		Loader::load('Core', $files);
+		$files = array(
+			'bootstrap/css/bootstrap.css',
+			'css/font-awesome.css',
+			'css/core.css',
+			'bootstrap/js/bootstrap.min.js',
+		);
+		Loader::load('Core', $files);
+		$files = array(
+			'View/css/admin.css',
+			'View/js/admin.js',
+		);
+		Loader::load('Admin', $files);
 
 		$limit = SITE_RECORD_PER_PAGE;
 		//search
@@ -38,7 +50,7 @@ class ProductShopController{
 		$dataSearch['date_start'] = FunctionLib::getParam('date_start', '');
 		$dataSearch['date_end'] = FunctionLib::getParam('date_end', '');
 		
-		$arrFields = array('product_id', 'category_name', 'product_code','product_name', 'product_price_sell', 'product_price_market', 'product_content', 'product_image', 'product_image_hover', 'time_created', 'product_status');
+		$arrFields = array('product_id', 'category_name', 'product_code','product_name', 'product_price_sell', 'product_price_market', 'product_price_input', 'product_content', 'product_image', 'product_image_hover', 'time_created', 'product_status');
 		$result = ProductShop::getSearchListItems($dataSearch, $limit, $arrFields);
 		//FunctionLib::Debug($result);
 		if(isset($result['data']) && !empty($result['data'])){
@@ -173,6 +185,10 @@ class ProductShopController{
 				//neu ko co anh hove, lay anh hove la cai anh dau tien
 				if($data['product_image_hover']['value'] == ''){
 					$data['product_image_hover']['value'] = (isset($arrInputImgOther[1]))?$arrInputImgOther[1]:$arrInputImgOther[0];
+				}elseif($data['product_image_hover']['value'] != ''){
+					if($data['product_image']['value'] != '' && strcmp($data['product_image']['value'],$data['product_image_hover']['value']) == 0){
+						$data['product_image_hover']['value'] = (isset($arrInputImgOther[1]))?$arrInputImgOther[1]:$arrInputImgOther[0];
+					}
 				}
 				$data['product_image_other']['value'] = serialize($arrInputImgOther);
 			}

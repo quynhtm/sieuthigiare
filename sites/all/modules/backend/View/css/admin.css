@@ -924,10 +924,10 @@ form#formListItem {
 
 .boder_admin{border: 1px solid}
 
-.align_center{text-align: center}
-.align_left{text-align: left}
-.align_right{text-align: right}
-.align_justify{text-align: justify}
+.align_center{text-align: center!important;}
+.align_left{text-align: left!important;}
+.align_right{text-align: right!important;}
+.align_justify{text-align: justify!important;}
 
 .a_control:hover{color: red}
 

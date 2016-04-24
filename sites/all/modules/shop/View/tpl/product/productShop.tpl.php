@@ -39,7 +39,7 @@
 						</div>
 						<div class="col-lg-3">
 							<div class="form-group">
-								<label class="control-label">Từ ngày</label>
+								<label class="control-label">Tạo từ ngày</label>
 								<div><input type="text" class="form-control input-sm date" placeholder ="Ngày bắt đầu" name="date_start" value="<?php echo $dataSearch['date_start'] ?>"/></div>
 							</div>
 							<div class="form-group">
@@ -72,24 +72,22 @@
 						<table class="table taicon-adminble-bordered table-hover table-striped" width="100%" cellpadding="5" cellspacing="1" border="1">
 							<thead>
 							<tr>
-								<th width="5%">Ảnh</th>
-								<th width="2%">Chọn<br/><input type="checkbox" id="checkAll" onclick="CHECKALL_ITEM.init();"/></th>
-								<th width="">[Mã] Tên sản phẩm</th>
-								<th width="">Danh mục</th>
-								<th width="">Giá bán</th>
-								<th width="">Giá thị trường</th>
-								<th width="">Mô tả</th>
-								<th width="">Ngày tạo</th>
-								<th width="">Trạng thái</th>
-								<th width="">Thao tác</th>
+								<th width="5%" class="td_list">Ảnh</th>
+								<th width="23%" class="td_list">[Mã] Tên sản phẩm</th>
+								<th width="12%" class="td_list">Danh mục</th>
+								<th width="30%" class="td_list">Mô tả ngắn</th>
+								<th width="15%" class="td_list">Giá bán</th>
+								<th width="6%" class="td_list">Trạng thái</th>
+								<th width="2%" class="td_list">Chọn</th>
+								<th width="15%" class="td_list">Thao tác</th>
 							</tr>
 							</thead>
 							<tbody>
 								<?php foreach($result as $k=>$v) {?>
-								<tr style="padding: 3px">
-									<td>
+								<tr>
+									<td style="">
 										<?php if( isset($v->url_image)) {?>
-										<div style="position: relative;">
+										<div style="position: relative; margin: 15px 0px">
 											<div style="position: relative; z-index: 10">
 												<img src="<?php echo $v->url_image; ?>" class='imge_hover' id='<?php echo $v->product_id ?>'/>
 											</div>
@@ -102,32 +100,37 @@
 										<?php }?>
 
 									</td>
-									<td><input type="checkbox" class="checkItem" name="id[]" value="<?php echo $v->product_id?>"/></td>
-									<td><?php echo $v->product_name ?></td>
+									<td>
+										<?php
+											echo '['.$v->product_id.'] <a href="'.FunctionLib::buildLinkDetail($v->product_id,$v->product_name).'" target="_blank" title="Chi tiết sản phẩm">'.$v->product_name.'</a>';
+											echo '<br/>Ngày tạo: '.date('d/m/Y h:i', $v->time_created);
+										?>
+									</td>
 									<td><?php echo $v->category_name ?></td>
+									<td><?php echo Utility::substring($v->product_content, $length = 200, $replacer='...')?></td>
 									<td>
 										<?php 
-											$price_market = number_format($v->product_price_sell);
+											$price_market = FunctionLib::numberFormat($v->product_price_sell);
 											if($price_market == 0){
 												echo "Liên hệ với shop";
 											}else{
-												echo $price_market;
+												echo 'Giá bán: <b class="price_sell">'.$price_market.'đ</b>';
 											}
-										?>
-									</td>
-									<td>
-										<?php 
 											$price_sell = number_format($v->product_price_market);
 											if($price_sell == 0){
-												echo "Liên hệ";
+												echo "<br/>Liên hệ";
 											}else{
-												echo $price_sell;
+												echo '<br/>Thị trường: <b>'.$price_sell.'đ</b>';
+											}
+
+											$product_price_input = number_format($v->product_price_input);
+											if($product_price_input > 0){
+												echo '<br/>Giá nhập: <b>'.$product_price_input.'đ</b>';
 											}
 										?>
 									</td>
-									<td><?php echo Utility::substring($v->product_content, $length = 100, $replacer='...')?></td>
-									<td><?php echo date('d/m/Y h:i', $v->time_created)?></td>
-									<td>
+
+									<td class="align_center">
 										<?php
 											$status = '';
 											if($v->product_status == 1){
@@ -138,10 +141,12 @@
 											echo $status;
 										?>
 									</td>
+
+									<td class="align_center"><input type="checkbox" class="checkItem" name="id[]" value="<?php echo $v->product_id?>"/></td>
 									<td>
-									<?php $linkEdit = $base_url.'/sua-san-pham/'.$v->product_id.'/'.Stdio::pregReplaceStringAlias($v->product_name).'.html' ?>
-									<a href="<?php echo $linkEdit; ?>" title="sửa"><i class="icon-edit green font-size-20"></i></a>
-									<a href="javascript:void(0)" class="deleteItem" title="Xóa"><i class="icon-trash font-size-20 red"></i></a>
+										<?php $linkEdit = $base_url.'/sua-san-pham/'.$v->product_id.'/'.Stdio::pregReplaceStringAlias($v->product_name).'.html' ?>
+										<a href="<?php echo $linkEdit; ?>" title="sửa"><i class="icon-edit green font-size-20"></i></a>
+										<a href="javascript:void(0)" class="deleteItem" title="Xóa"><i class="icon-trash font-size-20 red"></i></a>
 									</td>
 								</tr>
 								<?php } ?>
