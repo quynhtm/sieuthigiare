@@ -340,6 +340,14 @@ class ProductShopController{
 
 	   	 	$this->user_shop = DataCommon::getShopById($result->user_shop_id);
 	   	 	$category_id = $result->category_id;
+	   	 	//check shop bi khoa
+	   	 	if(!empty($this->user_shop)){
+	   	 		$shop_status = $this->user_shop->shop_status;
+	   	 		if($shop_status != STASTUS_SHOW){
+					drupal_goto($base_url.'/page-404');
+				}
+	   	 	}
+
 	    }else{
 	    	drupal_goto($base_url.'/page-404');
 	    }

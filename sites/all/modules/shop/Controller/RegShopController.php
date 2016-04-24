@@ -113,7 +113,14 @@ class RegShopController{
 			}else{
 				$arrOneItem = RegShop::getShopByCond($dataInput ['user_shop_login']['value']);
 				if(!empty($arrOneItem)){
-					RegShop::checkLoginShop($arrOneItem[0], $dataInput ['password_shop_login']['value']);
+					$shop_status = $arrOneItem[0]->shop_status;
+					if($shop_status == STASTUS_SHOW){
+						RegShop::checkLoginShop($arrOneItem[0], $dataInput ['password_shop_login']['value']);
+					}else{
+						drupal_set_message('Gian hàng của bạn đang bị khóa hoặc chưa kiểm duyệt. Liên hệ với ban quản trị!', 'error');
+						drupal_goto($base_url.'/dang-nhap.html');
+					}
+					
 				}else{
 					drupal_set_message('Tên đăng nhập hoặc mật khẩu không đúng!', 'error');
 					drupal_goto($base_url.'/dang-nhap.html');
