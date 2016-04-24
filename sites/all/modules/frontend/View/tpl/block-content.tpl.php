@@ -28,7 +28,11 @@
 							</h4>
 							<div class="item-price">
                         		<?php if($item->product_type_price == 2){?>
-                        			<span class="amount-call">Liên hệ: <i class="link-shop"><?php echo $item->user_shop_name ?></i></span>
+                        			<span class="amount-call">Liên hệ: 
+                        				<a class="link-shop" href="<?php echo FunctionLib::buildLinkCategory($item->user_shop_id, $item->user_shop_name, 0, '') ?>">
+					                		<?php echo $item->user_shop_name ?>
+					                	</a>
+                        			</span>
                         		<?php }else{?>
                             		<?php if($item->product_price_sell > 0 && $item->product_price_market > 0){?>
                             		<span class="amount-1"><?php echo number_format($item->product_price_sell)?>đ</span>
@@ -43,7 +47,11 @@
 		                <?php } ?>
 						
 						<?php if($item->product_type_price == 1){?>
-		                <div class="mgt5 amount-call">gian hàng: <i class="link-shop"><?php echo $item->user_shop_name ?></i></div>
+		                <div class="mgt5 amount-call">
+		                	<a class="link-shop" href="<?php echo FunctionLib::buildLinkCategory($item->user_shop_id, $item->user_shop_name, 0, '') ?>">
+		                		<?php echo $item->user_shop_name ?>
+		                	</a>
+		            	</div>
 						<?php } ?>
 
 					</div>

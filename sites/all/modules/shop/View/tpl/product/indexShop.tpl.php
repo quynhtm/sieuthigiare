@@ -1,4 +1,9 @@
-<?php global $base_url;?>
+<?php 
+	global $base_url;
+	if(isset($user_shop->shop_name) && $user_shop->shop_name != ''){
+		SeoMeta::SEO($user_shop->shop_name, '', $user_shop->shop_name, $user_shop->shop_name, $user_shop->shop_name);
+	}
+?>
 <div class="container">
 	<div class="link-breadcrumb">
 		<a href="<?php echo $base_url; ?>">Trang chủ</a>
@@ -70,8 +75,10 @@
 								<?php if($v->product_selloff != ''){?>
 				                <div class="item-banner"><?php echo $v->product_selloff ?></div>
 				                <?php } ?>
-				                <?php if($item->product_type_price == 1){?>
-				                <div class="mgt5 amount-call">gian hàng: <i class="link-shop"><?php echo $item->user_shop_name ?></i></div>
+				                <?php if($v->product_type_price == 1){?>
+				                <div class="mgt5 amount-call">
+									<i class="link-shop"><?php echo $v->user_shop_name ?></i>
+				                </div>
 								<?php } ?>
 							</div>
 						</div>
