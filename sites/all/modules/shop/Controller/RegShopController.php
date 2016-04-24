@@ -289,8 +289,25 @@ class RegShopController{
 		}
 		
 		$user_shop = FunctionLib::getParam('user_shop','');
+    	$user_pass = FunctionLib::getParam('user_pass','');
     	$shop_phone = FunctionLib::getParam('shop_phone','');
     	$shop_email = FunctionLib::getParam('shop_email','');
+    	
+    	$check_valid_name = ValidForm::checkRegexName($user_shop);
+		if(!$check_valid_name){
+			$err['check_name'] = 'Tên đăng nhập không được có dấu!<br/>';
+		}
+		$check_valid_mail = ValidForm::checkRegexEmail($shop_email);
+		if(!$check_valid_mail){
+			$err['check_mail'] = 'Email không đúng định dạng!<br/>';
+		}
+		$check_valid_pass = ValidForm::checkRegexPass($user_pass, 6);
+		if(!$check_valid_pass){
+			$err['check_pass'] = 'Mật khẩu không được có dấu!<br/>';
+		}
+		if(!empty($err)){
+    		echo json_encode($err);die;
+    	}
     	$err = RegShop::checkNamePhoneMail($user_shop, $shop_phone, $shop_email);
     	if(!empty($err)){
     		echo json_encode($err);die;

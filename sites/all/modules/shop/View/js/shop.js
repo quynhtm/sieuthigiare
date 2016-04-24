@@ -33,81 +33,9 @@ check_valid_form = {
 		});
 	},
 	check_reg_shop:function(){
-
 		jQuery("#submitRegister").click(function(){
-			var name = jQuery('.formSendRegister input[name="user_shop"]'),
-				pass = jQuery('.formSendRegister input[name="user_password"]'),
-				re_pass = jQuery('.formSendRegister input[name="rep_user_password"]'),
-				phone = jQuery('.formSendRegister input[name="shop_phone"]'),
-				email = jQuery('.formSendRegister input[name="shop_email"]'),
-				province = jQuery('.formSendRegister select[name="shop_province"]'),
-				agree = jQuery('.formSendRegister input[name="agree"]');
-
-			if(name.val() == ''){
-				jAlert('Tên đăng nhập không được trống!', 'Cảnh báo');
-				name.addClass('error').focus();
-				return false;
-			}else{
-				name.removeClass('error');
-			}
-
-			if(pass.val() == ''){
-				jAlert('Mật khẩu không được trống!', 'Cảnh báo');
-				pass.addClass('error').focus();
-				return false;
-			}else{
-				if(pass.val() != re_pass.val()){
-					pass.addClass('error');
-					re_pass.addClass('error').focus();
-					jAlert('Mật khẩu không khớp!', 'Cảnh báo');
-					return false;
-				}else{
-					pass.removeClass('error');
-					re_pass.removeClass('error');
-				}
-			}
-
-			if(phone.val() == ''){
-				jAlert('Điện thoại không được trống!', 'Cảnh báo');
-				phone.addClass('error').focus();
-				return false;
-			}else{
-				phone.removeClass('error');
-			}
-
-			if(email.val() == ''){
-				jAlert('Email không được trống!', 'Cảnh báo');
-				email.addClass('error').focus();
-				return false;
-			}else{
-				var regex = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
-				var check_mail = regex.test(email.val());
-				if(!check_mail){
-					valid = false;
-					jAlert('Email không đúng định dạng!', 'Cảnh báo');
-					email.addClass('error').focus();
-				}else{
-					email.removeClass('error');
-				}
-			}
-
-			if(province.val() <= 0){
-				jAlert('Tỉnh/thành không được trống!', 'Cảnh báo');
-				province.addClass('error').focus();
-				return false;
-			}else{
-				province.removeClass('error');
-			}
-
-			if(agree.is(':checked')){
-				agree.removeClass('error');
-			}else{
-				jAlert('Bạn chưa đồng ý với chính sách của chúng tôi!', 'Cảnh báo');
-				agree.addClass('error').focus();
-				return false;
-			}
-			//check_valid_form.ajax_check_shop_reg_exist(name.val(), phone.val(), email.val());
-			//return false;
+			check_valid_form.ajax_check_shop_reg_exist();
+			return false;
 		});
 	},
 	change_pass:function(){
@@ -274,21 +202,106 @@ check_valid_form = {
 			}
 		});
 	},
-	ajax_check_shop_reg_exist:function(user_shop, shop_phone, shop_email){
+	ajax_check_shop_reg_exist:function(){
 		jQuery('span.show-error').remove();
 		var url = BASEPARAMS.base_url+'/ajax-check-user-reg-exist';
+		
+		var name = jQuery('.formSendRegister input[name="user_shop"]'),
+			pass = jQuery('.formSendRegister input[name="user_password"]'),
+			re_pass = jQuery('.formSendRegister input[name="rep_user_password"]'),
+			phone = jQuery('.formSendRegister input[name="shop_phone"]'),
+			email = jQuery('.formSendRegister input[name="shop_email"]'),
+			province = jQuery('.formSendRegister select[name="shop_province"]'),
+			agree = jQuery('.formSendRegister input[name="agree"]'),
+
+			user_shop 	= name.val(),
+			user_pass 	= pass.val(),
+			shop_phone 	= phone.val(),
+			shop_email 	= email.val();
+
+		//begin check null
+		if(name.val() == ''){
+			jAlert('Tên đăng nhập không được trống!', 'Cảnh báo');
+			name.addClass('error').focus();
+			return false;
+		}else{
+			name.removeClass('error');
+		}
+
+		if(pass.val() == ''){
+			jAlert('Mật khẩu không được trống!', 'Cảnh báo');
+			pass.addClass('error').focus();
+			return false;
+		}else{
+			if(pass.val() != re_pass.val()){
+				pass.addClass('error');
+				re_pass.addClass('error').focus();
+				jAlert('Mật khẩu không khớp!', 'Cảnh báo');
+				return false;
+			}else{
+				pass.removeClass('error');
+				re_pass.removeClass('error');
+			}
+		}
+
+		if(phone.val() == ''){
+			jAlert('Điện thoại không được trống!', 'Cảnh báo');
+			phone.addClass('error').focus();
+			return false;
+		}else{
+			phone.removeClass('error');
+		}
+
+		if(email.val() == ''){
+			jAlert('Email không được trống!', 'Cảnh báo');
+			email.addClass('error').focus();
+			return false;
+		}else{
+			var regex = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+			var check_mail = regex.test(email.val());
+			if(!check_mail){
+				valid = false;
+				jAlert('Email không đúng định dạng!', 'Cảnh báo');
+				email.addClass('error').focus();
+			}else{
+				email.removeClass('error');
+			}
+		}
+
+		if(province.val() <= 0){
+			jAlert('Tỉnh/thành không được trống!', 'Cảnh báo');
+			province.addClass('error').focus();
+			return false;
+		}else{
+			province.removeClass('error');
+		}
+
+		if(agree.is(':checked')){
+			agree.removeClass('error');
+		}else{
+			jAlert('Bạn chưa đồng ý với chính sách của chúng tôi!', 'Cảnh báo');
+			agree.addClass('error').focus();
+			return false;
+		}
+		//end check null
+		
 		jQuery.ajax({
 			type: "POST",
 			url: url,
-			data: "user_shop="+encodeURI(user_shop) + "&shop_phone="+encodeURI(shop_phone)+ "&shop_email="+encodeURI(shop_email),
+			data: "user_shop="+encodeURI(user_shop) + "&user_pass="+encodeURI(user_pass) + "&shop_phone="+encodeURI(shop_phone)+ "&shop_email="+encodeURI(shop_email),
 			success: function(data){
+				
 				if(data != ''){
 					var obj = jQuery.parseJSON(data);
 					if(typeof obj.check_name != 'undefined') {
   						jQuery('.formSendRegister input[name="user_shop"]').addClass('error').after('<span class="show-error">'+obj.check_name+'</span>');
-
 					}else{
 						jQuery('.formSendRegister input[name="user_shop"]').removeClass('error').nextAll('span.show-error').remove();
+					}
+					if(typeof obj.check_pass != 'undefined') {
+  						jQuery('.formSendRegister input[name="user_password"]').addClass('error').after('<span class="show-error">'+obj.check_pass+'</span>');
+					}else{
+						jQuery('.formSendRegister input[name="user_password"]').removeClass('error').nextAll('span.show-error').remove();
 					}
 					if(typeof obj.check_phone != 'undefined') {
   						jQuery('.formSendRegister input[name="shop_phone"]').addClass('error').after('<span class="show-error">'+obj.check_phone+'</span>');
@@ -302,7 +315,13 @@ check_valid_form = {
 					}else{
 						jQuery('.formSendRegister input[name="shop_email"]').removeClass('error').nextAll('span.show-error').remove();
 					}
+					var num_error = jQuery('.show-error').size();
+					if(num_error > 0){
+						return false;
+					}
 				}
+				jQuery('form.formSendRegister').submit();
+				return false;
 			}
 		});
 	}
