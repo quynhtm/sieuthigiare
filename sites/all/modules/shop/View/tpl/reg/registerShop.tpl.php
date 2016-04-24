@@ -36,8 +36,8 @@
 			</div>
 			<div class="form-group">
 				<div class="agree">
-					<input type="checkbox" value="true" name="agree">
-					<span class="checkbox-note">Tôi đã xem và đồng ý với chính sách bảo mật của shopcuatui.com.vn</span>
+					<input type="checkbox" value="true" name="agree" id="agree">
+					<label for="agree" class="checkbox-note">Tôi đã xem và đồng ý với chính sách bảo mật của shopcuatui.com.vn</label>
 				</div>
 			</div>
 			<div class="form-group-action">

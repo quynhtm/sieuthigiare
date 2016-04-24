@@ -284,13 +284,13 @@ check_valid_form = {
 			return false;
 		}
 		//end check null
-		
+		jQuery('.formSendRegister').append('<div class="loading"></div>');
 		jQuery.ajax({
 			type: "POST",
 			url: url,
 			data: "user_shop="+encodeURI(user_shop) + "&user_pass="+encodeURI(user_pass) + "&shop_phone="+encodeURI(shop_phone)+ "&shop_email="+encodeURI(shop_email),
 			success: function(data){
-				
+				jQuery('.formSendRegister').find('.loading').remove();
 				if(data != ''){
 					var obj = jQuery.parseJSON(data);
 					if(typeof obj.check_name != 'undefined') {
