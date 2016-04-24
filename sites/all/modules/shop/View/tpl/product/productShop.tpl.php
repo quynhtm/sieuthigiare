@@ -110,20 +110,22 @@
 									<td><?php echo Utility::substring($v->product_content, $length = 200, $replacer='...')?></td>
 									<td>
 										<?php 
-											$price_market = FunctionLib::numberFormat($v->product_price_sell);
-											if($price_market == 0){
-												echo "Liên hệ với shop";
-											}else{
-												echo 'Giá bán: <b class="price_sell">'.$price_market.'đ</b>';
-											}
-											$price_sell = number_format($v->product_price_market);
+											
+											$price_sell = FunctionLib::numberFormat($v->product_price_sell);
 											if($price_sell == 0){
 												echo "<br/>Liên hệ";
 											}else{
-												echo '<br/>Thị trường: <b>'.$price_sell.'đ</b>';
+												echo '<br/>Giá bán: <b class="price_sell">'.$price_sell.'đ</b>';
 											}
 
-											$product_price_input = number_format($v->product_price_input);
+											$price_market = FunctionLib::numberFormat($v->product_price_market);
+											if($price_market == 0){
+												echo "<br/>Liên hệ";
+											}else{
+												echo '<br/>Giá thị trường: <b>'.$price_market.'đ</b>';
+											}
+											
+											$product_price_input = FunctionLib::numberFormat($v->product_price_input);
 											if($product_price_input > 0){
 												echo '<br/>Giá nhập: <b>'.$product_price_input.'đ</b>';
 											}
