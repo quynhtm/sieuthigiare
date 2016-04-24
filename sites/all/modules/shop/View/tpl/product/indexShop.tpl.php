@@ -13,24 +13,41 @@
 	<div class="main-view-post">
 		<div class="wrap-main-view shop">
 			<div class="left-category-shop">
-				<div class="title-category-parent">
-					<?php 
-						if(isset($user_shop->shop_category_name) && $user_shop->shop_category_name != ''){
-							echo $user_shop->shop_category_name;
-						}else{
-							echo 'Danh mục sản phẩm';
-						} 
+				<div class="wrapp-category-menu">
+					<div class="title-category-parent">
+						<?php 
+							if(isset($user_shop->shop_category_name) && $user_shop->shop_category_name != ''){
+								echo $user_shop->shop_category_name;
+							}else{
+								echo 'Danh mục sản phẩm';
+							} 
+						?>
+					</div>
+					<?php if(isset($arrCategoryChildren) && !empty($arrCategoryChildren)){
+						$shop_id = isset($user_shop->shop_id)? $user_shop->shop_id : 0;
 					?>
-				</div>
-				<?php if(isset($arrCategoryChildren) && !empty($arrCategoryChildren)){
-					$shop_id = isset($user_shop->shop_id)? $user_shop->shop_id : 0;
-				?>
-				<ul>
-					<?php foreach($arrCategoryChildren as $k =>$v){?>
-					<li><a class="<?php if($category_id == $k){ ?>act<?php } ?>" href="<?php echo FunctionLib::buildLinkCategory($shop_id, '', $k, $v) ?>" title="<?php echo $v?>"><?php echo $v?></a></li>
+					<ul>
+						<?php foreach($arrCategoryChildren as $k =>$v){?>
+						<li><a class="<?php if($category_id == $k){ ?>act<?php } ?>" href="<?php echo FunctionLib::buildLinkCategory($shop_id, '', $k, $v) ?>" title="<?php echo $v?>"><?php echo $v?></a></li>
+						<?php } ?>
+					</ul>
 					<?php } ?>
-				</ul>
-				<?php } ?>
+				</div>
+				<div class="content-right-product">
+					<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+						  var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) return;
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6";
+						  fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));</script>
+					<div class="fb-like" data-href="<?php echo FunctionLib::buildLinkCategory($user_shop->shop_id, $user_shop->shop_name, 0, '') ?>" 
+						data-layout="button_count" data-action="like" 
+						data-show-faces="false" data-share="true">
+					</div>
+				</div>
+
 			</div>
 			<div class="right-show-product-shop body-list-item ">
 				<?php if(!empty($bannerList)){ ?>
@@ -48,7 +65,9 @@
 						<div class="item">
 							<div class="post-thumb">
 								<a href="<?php echo FunctionLib:: buildLinkDetail($v->product_id, $v->product_name); ?>" title="<?php echo $v->product_name?>">
+									<?php if(isset($v->url_image) && $v->url_image != ''){?>
 									<img src="<?php echo $v->url_image ?>" alt="<?php echo $v->product_name?>" data-other-src="<?php echo $v->url_image_hover?>">
+									<?php } ?>
 								</a>
 							</div>
 							<div class="item-content">
