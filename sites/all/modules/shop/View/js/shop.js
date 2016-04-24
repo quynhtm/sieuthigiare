@@ -198,7 +198,7 @@ check_valid_form = {
 		});
 	},
 	post_product:function(){
-		jQuery("#buttonFormShopSubmit").click(function(){
+		jQuery(".buttonFormShopSubmit").click(function(){
 			var category = jQuery('#category_id'),
 				product_type_price = jQuery('#product_type_price'),
 				product_price_sell = jQuery('#product_price_sell'),
