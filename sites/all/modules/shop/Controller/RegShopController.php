@@ -7,6 +7,10 @@
 */
 
 class RegShopController{
+
+	static $table_action = TABLE_USER_SHOP;
+	static $primary_key_user_shop = 'shop_id';
+	
 	public function registerShop(){
 		global $base_url, $user_shop;
 		
@@ -70,6 +74,9 @@ class RegShopController{
 							if(!empty($getItemUserShop)){
 								$user_shop = $getItemUserShop[0];
 								Session::createSessionUserShop($user_shop);
+
+								$data_login = array('time_access'=>time(), 'is_login'=>1);
+		    					DB::updateId(self::$table_action, self::$primary_key_user_shop, $data_login, $user_shop->shop_id);
 							}
 							drupal_set_message('Đăng ký gian hàng thành công!');
 							drupal_goto($base_url.'/sua-thong-tin-gian-hang.html');
