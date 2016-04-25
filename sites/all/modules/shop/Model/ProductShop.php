@@ -230,27 +230,4 @@ class ProductShop{
         
         return array();
     }
-    //san pham noi bat
-     public static function getProductHot($product_id=0, $limit = 10, $arrFields = array()){
-        
-        if(!empty($arrFields) && $product_id > 0){
-            $sql = db_select(self::$table_action, 'i');
-            foreach($arrFields as $field){
-                $sql->addField('i', $field, $field);
-            }
-            $sql->condition('i.product_status', STASTUS_SHOW, '=');
-            $sql->condition('i.is_block', PRODUCT_NOT_BLOCK, '=');
-            $sql->condition('i.product_is_hot', 2, '=');
-            $sql->condition('i.product_id', $product_id, '<>');
-            
-            $result = $sql->range(0, $limit)->orderBy('i.'.self::$primary_key, 'DESC')->execute();
-            $arrItem = (array)$result->fetchAll();
-
-            return $arrItem;
-        }else{
-            drupal_goto($base_url.'/page-404');
-        }
-        
-        return array();
-    }
 }

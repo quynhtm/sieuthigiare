@@ -65,6 +65,8 @@
 								<a href="javascript:void(0)" title="">
 									<img src="<?php echo $product_image; ?>" alt="<?php echo $product_name ?>"/>
 								</a>
+								<?php }else{ ?>
+									<img src="<?php echo IMAGE_DEFAULT ?>"/>
 								<?php } ?>
 							</div>
 						</div>
@@ -159,27 +161,35 @@
 							<div class="jcarousel-wrapper">
 								<div class="jcarousel">
 									<ul>
-										<?php foreach($arrSame as $same){?>
+										<?php foreach($arrSame as $k=>$same){?>
+										<?php if($k < 10){?>
 										<li class="item">
 											<a class="img-thumb post-thumb" title="<?php echo $same->product_name?>" href="<?php echo FunctionLib:: buildLinkDetail($same->product_id, $same->product_name); ?>">
+												<?php if($same->product_image != ''){?>
 												<img src="<?php echo FunctionLib::getThumbImage($same->product_image, $same->product_id, FOLDER_PRODUCT, 200, 200) ?>" alt="<?php echo $same->product_name?>" data-other-src="<?php echo FunctionLib::getThumbImage($same->product_image_hover, $same->product_id, FOLDER_PRODUCT, 200, 200) ?>">
+												<?php }else{ ?>
+												<img src="<?php echo IMAGE_DEFAULT ?>"/>
+												<?php } ?>
 											</a>
 											<a class="item-name" title="<?php echo $same->product_name?>" href="<?php echo FunctionLib:: buildLinkDetail($same->product_id, $same->product_name); ?>"><?php echo $same->product_name?></a>
 											<div class="item-price">
 												<?php if($same->product_type_price == 2){?>
-												<p class="price-sale">Liên hệ</p>
+													<p class="price-sale">Liên hệ</p>
 												<?php }else{ ?>
-												<p class="price-sale">
-													<?php if($same->product_price_sell > 0 && $same->product_price_market > 0){?>
-													<?php echo number_format($same->product_price_sell)?><span>đ</span>
-													<i>(<?php echo number_format($same->product_price_market)?>)</i>
-													<?php }else{ ?>
-														Liên hệ
-													<?php } ?>
-												</p>
+													<p class="price-sale">
+														<?php if($same->product_price_sell > 0){?>
+															<?php echo number_format($same->product_price_sell)?><span>đ</span>
+															<?php if($same->product_price_market > 0){?>
+															<i>(<?php echo number_format($same->product_price_market)?>)</i>
+															<?php } ?>
+														<?php }else{ ?>
+															Liên hệ
+														<?php } ?>
+													</p>
 												<?php } ?>
 											</div>
 										</li>
+										<?php } ?>
 										<?php } ?>
 									</ul>
 								</div>
@@ -292,30 +302,40 @@
 							<div class="content-right-bottom-content-view">
 								<ul>
 									<?php 
-										foreach($arrHot as $h){
+										foreach($arrSame as $k=>$h){
+										if($k>=10){
 									?>
 									<li class="item">
 										<a class="i-thumb post-thumb" title="<?php echo $h->product_name?>" href="<?php echo FunctionLib:: buildLinkDetail($h->product_id, $h->product_name); ?>">
+											<?php if($h->product_image != ''){?>
 											<img src="<?php echo FunctionLib::getThumbImage($h->product_image, $h->product_id, FOLDER_PRODUCT, 200, 200) ?>" alt="<?php echo $h->product_name?>" 
 											data-other-src="<?php echo FunctionLib::getThumbImage($h->product_image_hover, $h->product_id, FOLDER_PRODUCT, 200, 200) ?>">
+											<?php }else{ ?>
+											<img src="<?php echo IMAGE_DEFAULT ?>"/>
+											<?php } ?>
 										</a>
 										
 										<a class="item-name" title="<?php echo $h->product_name?>" href="<?php echo FunctionLib:: buildLinkDetail($h->product_id, $h->product_name); ?>"><?php echo $h->product_name?></a>
 										<div class="item-price">
 											<?php if($h->product_type_price == 2){?>
-											<p class="price-sale">Liên hệ</p>
+												<p class="price-sale">Liên hệ</p>
 											<?php }else{ ?>
-											<p class="price-sale">
-												<?php if($h->product_price_sell > 0 && $h->product_price_market > 0){?>
-												<?php echo number_format($h->product_price_sell)?><span>đ</span>
-												<i>(<?php echo number_format($h->product_price_market)?>)</i>
-												<?php }else{ ?>
-													Liên hệ
-												<?php } ?>
-											</p>
+												<p class="price-sale">
+													<?php if($h->product_price_sell > 0){?>
+														
+														<?php echo number_format($h->product_price_sell)?><span>đ</span>
+														<?php if($h->product_price_market > 0){?>
+														<i>(<?php echo number_format($h->product_price_market)?>)</i>
+														<?php } ?>
+
+													<?php }else{ ?>
+														Liên hệ
+													<?php } ?>
+												</p>
 											<?php } ?>
 										</div>
 									</li>
+									<?php } ?>
 									<?php } ?>
 								</ul>
 							</div>

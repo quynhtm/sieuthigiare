@@ -16,9 +16,13 @@
 					    </span>
 					    <?php } ?>
 						<a href="<?php echo FunctionLib::buildLinkDetail($item->product_id, $item->product_name); ?>" title="<?php echo $item->product_name?>">
+							<?php if($item->product_image != ''){?>
 							<img src="<?php echo FunctionLib::getThumbImage($item->product_image,$item->product_id,FOLDER_PRODUCT,300,300) ?>" 
 							data-other-src="<?php echo FunctionLib::getThumbImage($item->product_image_hover,$item->product_id,FOLDER_PRODUCT,300,300) ?>" 
 							alt="<?php echo $item->product_name ?>"/>
+							<?php }else{ ?>
+							<img src="<?php echo IMAGE_DEFAULT ?>"/>
+							<?php } ?>
 						</a>
 					</div>
 					<div class="item-content">
@@ -34,10 +38,18 @@
 					                	</a>
                         			</span>
                         		<?php }else{?>
-                            		<?php if($item->product_price_sell > 0 && $item->product_price_market > 0){?>
-                            		<span class="amount-1"><?php echo number_format($item->product_price_sell)?>đ</span>
-									<span class="amount-2"><?php echo number_format($item->product_price_market) ?>đ</span>
-							    <?php } ?>
+                            		<?php if($item->product_price_sell > 0){?>
+                            			<span class="amount-1"><?php echo number_format($item->product_price_sell)?>đ</span>
+										<?php if($item->product_price_market > 0){ ?>
+										<span class="amount-2"><?php echo number_format($item->product_price_market) ?>đ</span>
+										<?php } ?>
+							    	<?php }else{ ?>
+								    	<span class="amount-call">Liên hệ: 
+	                        				<a class="link-shop" href="<?php echo FunctionLib::buildLinkCategory($item->user_shop_id, $item->user_shop_name, 0, '') ?>">
+						                		<?php echo $item->user_shop_name ?>
+						                	</a>
+	                        			</span>
+							    	<?php } ?>
                         		<?php } ?>
                     		</div>
 						</div>

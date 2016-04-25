@@ -369,14 +369,11 @@ class ProductShopController{
 	   		$arrSame1 = ProductShop::getProductSameCatShop($product_id, $category_id, 15 - count($arrSame), $arrFields, true);
 	   		$arrSame = array_merge($arrSame, $arrSame1);
 	   	}
-	   	//san pham noi bat
-	   	$arrHot= ProductShop:: getProductHot($product_id, 5, $arrFields);
 
 		return theme('detailShop', array(
 										'result'=>$result,
 										'user_shop'=>$this->user_shop,
 										'arrSame'=>$arrSame,
-										'arrHot'=>$arrHot,
 									)
 								);
 	}

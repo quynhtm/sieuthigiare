@@ -388,7 +388,7 @@ a.btn-yahoo:hover{
 }
 .body-list-item .item {
     padding-top: 8px;
-    height: 380px;
+    height: 345px;
     display: inline-block;
 }
 .body-list-item  .post-thumb {
@@ -405,7 +405,7 @@ a.btn-yahoo:hover{
 }
 .body-list-item .title-info {
     margin-bottom: 8px;
-    min-height: 65px;
+    max-height: 65px;
 }
 .body-list-item .post-title {
     font-size: 12px;
@@ -503,7 +503,6 @@ a.btn-yahoo:hover{
     width: 100%;
 }
 .list-thumb-img li a {
-    border: 1px solid #d1d1d1;
     display: block;
     max-height: 80px;
     min-height: 50px;
@@ -514,8 +513,9 @@ a.btn-yahoo:hover{
 .list-thumb-img a img {
     transition-duration: 0.2s;
     width: 100%;
+     border: 1px solid #d1d1d1;
 }
-.list-thumb-img a.act {
+.list-thumb-img a.act img{
     border: 1px solid #ff0000;
 }
 .left-slider-img .max-thumb-img {
