@@ -38,9 +38,10 @@ a{
 #logo {
     border-radius: 5px;
     float: left;
+    margin-right: 15px;
     margin-top: 8px;
     overflow: hidden;
-    margin-right: 15px;
+    width: 230px;
 }
 span#logo{
     margin-bottom: 10px;
@@ -54,7 +55,7 @@ span#logo{
     display: inline-block;
     float: right;
     margin-top: 15px;
-    width: 72%;
+    width: 78%;
 }
 .box-search {
     display: inline-block;
@@ -143,27 +144,141 @@ span#logo{
     top:2px; 
 }
 .support-contact {
-    #border-right: 1px solid #f2f2f2;
-    float: left;
-    font-size: 14px;
-    height: 40px;
-    margin: 8px 0;
-    padding-left: 48px;
-    padding-right: 20px;
-    width: 165px;
-    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 2px;
     color: #333;
+    cursor: pointer;
+    display: inline-block;
+    float: left;
+    font-size: 13px;
+    margin: 1px 0;
+    padding: 2px 8px 5px;
+    position: relative
 }
 .support-contact:hover{
     color: #005981;
+    background: #fff;
+    border: 1px solid #ddd;
 }
-.shopping-cart {
-    background: rgba(0, 0, 0, 0) url("../img/cart.png") no-repeat scroll 0 0;
-    display: inline-block;
-    float: right;
-    height: 46px;
-    width: 50px;
+.support-contact .icon-phone::before {
+    background: #fe6d00 none repeat scroll 0 0;
+    border-radius: 100%;
+    color: #fff;
+    font-size: 15px;
+    height: 24px;
+    line-height: 24px;
     position: relative;
+    text-align: center;
+    top: 2px;
+    width: 23px;
+    margin-right: 5px;
+}
+.support-contact i.idrop {
+    border-color: #999 transparent transparent;
+    border-style: solid;
+    border-width: 4px 4px 0;
+    display: inline-block;
+    position: relative;
+    right: 0;
+    top: -2px;
+    margin-left: 2px;
+}
+.support-contact .box-hover-support-contact{
+     background: #fff none repeat scroll 0 0;
+    border: 1px solid #d6d6d6;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+    color: #444;
+    cursor: default;
+    display: none;
+    left: -158px;
+    padding: 10px 0;
+    position: absolute;
+    top: 40px;
+    width: 455px;
+    z-index: 110;
+}
+.support-contact:hover .box-hover-support-contact{
+    display: block;
+}
+.box-hover-support-contact .top-arrow-box{
+    height: 9px;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: -10px;
+    width: 100%;
+}
+.box-hover-support-contact .top-arrow-box > i{
+    background: rgba(0, 0, 0, 0) url("../img/icon.png") no-repeat scroll 0px 0px;
+    display: inline-block;
+    height: 9px;
+    position: relative;
+    top: -1px;
+    width: 14px;
+    left: -15px;
+}
+.box-hover-support-contact .custommer{
+    border-bottom: 1px solid #ddd;
+    color: #666;
+    display: block;
+    font-size: 12px;
+    line-height: 18px;
+    margin: 0;
+    padding: 5px 20px;
+}
+.box-hover-support-contact .custommer b{
+    color: #444;
+    text-transform: uppercase;
+}
+.support-user-shop{
+    color: #666;
+    display: block;
+    font-size: 12px;
+    line-height: 18px;
+    margin: 0;
+    padding: 5px 20px;
+}
+.support-user-shop b{
+    color: #444;
+    text-transform: uppercase;
+}
+.support-user-shop ul{
+    border: 0 none;
+    padding: 0 5px 0 10px;
+    margin-bottom: 0;
+}
+.support-user-shop ul li {
+    line-height: 25px;
+    font-size: 12px;
+}
+.support-user-shop ul li i {
+    border-color: transparent transparent transparent #c2c2c2;
+    border-style: solid;
+    border-width: 3px 0 3px 3px;
+    display: block;
+    float: left;
+    margin: 10px 7px 9px 0;
+}
+.chat-sky {
+    background: rgba(0, 0, 0, 0) url("../img/icon.png") no-repeat scroll 0 -8px;
+    display: inline-block;
+    height: 15px;
+    margin: 3px 15px 0 5px;
+    position: relative;
+    top: 2px;
+    width: 45px;
+}
+
+.shopping-cart {
+    background: rgba(0, 0, 0, 0) url("../img/icon.png") no-repeat scroll -145px 0;
+    display: inline-block;
+    float: left;
+    height: 46px;
+    margin-left: 105px;
+    margin-top: -10px;
+    position: relative;
+    width: 50px;
 }
 .shopping-cart .num-item{
     color: #fff;
@@ -181,16 +296,6 @@ span#logo{
     white-space: nowrap;
     width: 25px;
     cursor: pointer;
-}
-.support-online {
-    display: inline-block;
-    float: right;
-    margin-top: 5px;
-}
-.support-online > span {
-    color: #444;
-    font-size: 17px;
-    font-weight: bold;
 }
 /*content*/
 .box-menu-list{

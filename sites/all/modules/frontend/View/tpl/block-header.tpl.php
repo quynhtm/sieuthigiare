@@ -35,7 +35,33 @@
 		    	</div>
 		    	<div class="box-right-focus">
 		    		<div class="support-contact">
-						<i class="icon-book"></i>Liên hệ
+						<i class="icon-phone"></i> Hỗ trợ
+						<i class="idrop"></i>
+
+						<div class="box-hover-support-contact">
+							<div class="top-arrow-box"><i></i></div>
+							<div class="custommer">
+								<b>Dành cho khách hàng:</b> Để mua sản phẩm bạn vui lòng liên hệ theo số điện thoại trong tin đăng của các shop.
+							</div>
+							<div class="support-user-shop">
+								<b>Dành cho chủ shop:</b>
+								<ul>
+									<li>
+										<i></i>
+										CSKH: <b><?php echo PHONE_CARE ?></b>
+									</li>
+									<li>
+										<i></i>
+										Đăng ký quảng cáo: <b>094.11.99.656</b>
+									</li>
+									<li>
+										<i></i>
+										Hỗ trợ trực tuyến:
+										<a title="Hỗ trợ trực tuyến qua Skype!" href="skype:nguyenduypt86?chat" class="chat-sky" rel="nofollow"></a>
+									</li>
+								</ul>
+							</div>
+						</div>
 					</div>
 		    		<!-- <div class="shopping-cart">
 		    			<span class="num-item">1</span>
@@ -58,9 +84,6 @@
 			<!-- <div class="desc-price-day">
 				<i class="icon-star-empty"></i> <a href="#" title="Giảm giá mỗi ngày">Giảm giá mỗi ngày</a>
 			</div -->
-			<div class="support-online">
-				CSKH: <span><?php echo PHONE_CARE ?></span>
-			</div>
 		</div>
 	</div>
 </div>
