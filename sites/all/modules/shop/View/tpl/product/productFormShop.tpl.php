@@ -24,7 +24,7 @@
 									<div class="control-group">
 										<label class="control-label">Tên Sản phẩm<span>(*)</span></label>
 										<div class="controls">
-											<input type="text" class="form-control input-sm" placeholder="Tên Sản phẩm" name="product_name" value="<?php if(isset($arrItem->product_name)) { echo $arrItem->product_name; } ?>">
+											<input type="text" class="form-control input-sm" placeholder="Tên Sản phẩm" name="product_name" maxlength="255" value="<?php if(isset($arrItem->product_name)) { echo $arrItem->product_name; } ?>">
 										</div>
 									</div>
 									<div class="control-group">
@@ -47,7 +47,7 @@
 									<div class="control-group">
 										<label class="control-label">Thứ tự hiển thị</label>
 										<div class="controls">
-											<input type="text" class="form-control input-sm" placeholder="Thứ tự hiển thị" name="product_order" value="<?php if(isset($arrItem->product_order)) { echo $arrItem->product_order; } ?>">
+											<input type="text" class="form-control input-sm" placeholder="Thứ tự hiển thị" name="product_order" maxlength="10" value="<?php if(isset($arrItem->product_order)) { echo $arrItem->product_order; } ?>">
 										</div>
 									</div>
 
@@ -95,7 +95,7 @@
 									<div class="control-group">
 						                <label class="control-label">Thông tin khuyến mại</label>
 						                <div class="controls">
-						                    <input type="text" class="form-control input-sm" placeholder="Thông tin khuyến mại" name="product_selloff" value="<?php if(isset($arrItem->product_selloff)) { echo $arrItem->product_selloff; } ?>">
+						                    <input type="text" class="form-control input-sm" placeholder="Thông tin khuyến mại" name="product_selloff" maxlength="255" value="<?php if(isset($arrItem->product_selloff)) { echo $arrItem->product_selloff; } ?>">
 						                </div>
 						            </div>
 						        </div>

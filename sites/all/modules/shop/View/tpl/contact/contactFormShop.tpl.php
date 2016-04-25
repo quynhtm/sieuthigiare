@@ -19,7 +19,7 @@
 									<div class="control-group">
 										<label class="control-label">Tiêu đề tin<span>(*)</span></label>
 										<div class="controls">
-											<input type="text" class="form-control input-sm" placeholder="Tiêu đề tin" name="contact_title" value="">
+											<input type="text" class="form-control input-sm" placeholder="Tiêu đề tin" name="contact_title" maxlength="255" value="">
 										</div>
 									</div>
 						        </div>

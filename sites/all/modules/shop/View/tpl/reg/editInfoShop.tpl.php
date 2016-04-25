@@ -16,19 +16,19 @@
 								<div class="col-lg-3">
 									<div class="form-group">
 										<label class="control-label">Tên gian hàng<span>(*)</span></label>
-										<div><input type="text" class="form-control input-sm" placeholder ="Tên gian hàng" name="shop_name"  value="<?php echo $user_shop->shop_name?>"/></div>
+										<div><input type="text" class="form-control input-sm" placeholder ="Tên gian hàng" name="shop_name"  maxlength="255" value="<?php echo $user_shop->shop_name?>"/></div>
 									</div>
 									<div class="form-group">
 										<label class="control-label">Số điện thoại<span>(*)</span></label>
-										<div><input type="text" class="form-control input-sm" placeholder ="Số điện thoại" name="shop_phone"  value="<?php echo $user_shop->shop_phone?>"/></div>
+										<div><input type="text" class="form-control input-sm" placeholder ="Số điện thoại" name="shop_phone"  maxlength="255" value="<?php echo $user_shop->shop_phone?>"/></div>
 									</div>
 									<div class="form-group">
 										<label class="control-label">Địa chỉ</label>
-										<div><input type="text" class="form-control input-sm" placeholder ="Địa chỉ" name="shop_address"  value="<?php echo $user_shop->shop_address?>"/></div>
+										<div><input type="text" class="form-control input-sm" placeholder ="Địa chỉ" name="shop_address"  maxlength="255" value="<?php echo $user_shop->shop_address?>"/></div>
 									</div>
 									<div class="form-group">
 										<label class="control-label">Email<span>(*)</span></label>
-										<div><input type="text" class="form-control input-sm" placeholder ="Email" name="shop_email"  value="<?php echo $user_shop->shop_email?>"/></div>
+										<div><input type="text" class="form-control input-sm" placeholder ="Email" name="shop_email"  maxlength="255" value="<?php echo $user_shop->shop_email?>"/></div>
 									</div>
 									<div class="form-group">
 										<label class="control-label">Danh mục<span>(*)</span></label>

@@ -94,6 +94,47 @@ class DataCommon{
 		return $categoryChildren;
 	}
 
+	static function getListCategory($catid='', $level=0, &$arrHtml){
+		global $language;
+		$listcat = explode(',', $catid);
+		$arrListCat = array();
+
+		if(!empty($arrListCat)){
+			$where = '(';
+			foreach($listcat as $cat){
+				if($cat != end($listcat)){
+					$where .= 'category_parent_id = '.$cat.' OR ';
+				}else{
+					$where .= 'category_parent_id = '.$cat;
+				}
+			}
+			$where .= ')';
+			//parent > 0;
+			$arrListCat = DB::getItembyCond(self::$table_category, "category_id, category_name, category_parent_id", '', "category_id ASC", "category_status=".STASTUS_SHOW." AND ".$where, '');
+		}else{
+			//parent = 0;
+			$arrListCat = DB::getItembyCond(self::$table_category, "category_id, category_name, category_parent_id", '', "category_id ASC", "category_status=".STASTUS_SHOW." AND category_parent_id=$catid", '');
+		}
+		if (!empty($arrListCat)){
+			foreach ($arrListCat as $k => $v){
+				$value = $v->category_id;
+				$nameCat = $v->category_name;
+				$parent = $v->category_parent_id;
+				$item = array();
+				if($level == 0){
+					//$arrHtml[$value] = $nameCat;
+				}else{
+					$arrHtml[$parent][$value] = $nameCat;
+				}
+				
+				self::getListCategory($v->category_id, $level+1, $arrHtml);
+			}
+			return '';
+		}else{
+			return '';
+		}
+	}
+
 	/**
 	 * @param int $id_shop
 	 * @return array
@@ -241,3 +282,6 @@ class DataCommon{
 		return $bannerAdvanced;
 	}
 }
+// $arrCategory = array();
+// 	DataCommon::getListCategory(0, 0, $arrCategory);
+// 	bug($arrCategory);
