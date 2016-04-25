@@ -20,8 +20,9 @@ a{
 }
 .top-header {
     clear: both;
+    display: inline-block;
+    margin-top: 8px;
     width: 100%;
-    margin-top: 20px;
 }
 .center-header{
     background: #fff;
