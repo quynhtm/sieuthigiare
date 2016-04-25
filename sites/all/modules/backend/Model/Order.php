@@ -2,7 +2,7 @@
 /*
 * QuynhTM
 */
-class Category{
+class Order{
 	static $table_action = TABLE_ORDER;
 	static $primary_key = 'order_id';
 	static $arrFields = array('order_id',

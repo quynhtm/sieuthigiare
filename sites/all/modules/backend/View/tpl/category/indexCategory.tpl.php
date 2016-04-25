@@ -1,4 +1,4 @@
-<div class="search-box">
+<div class="search-box" style="display: none">
 	<div class="wrapp-search-box">
 		<div class="search-box-title">Thông tin tìm kiếm</div>
 		<form action="" method="GET" id="frmSearch" class="frmSearch" name="frmSearch">
@@ -56,27 +56,27 @@
 					<tr>
 						<th width="2%"class="td_list">STT</th>
 						<th width="1%" class="td_list"><input type="checkbox" id="checkAll"/></th>
-						<th width="60%" class="td_list">Tên danh mục</th>
-						<th width="8%" class="td_list">ParentId</th>
+						<th width="40%" class="td_list">Tên danh mục</th>
+						<th width="25%" class="td_list">Danh mục cha</th>
 						<th width="8%" class="td_list">Vị trí</th>
 						<th width="5%" class="td_list">Status</th>
-						<th width="15%" class="td_list">Action</th>
+						<th width="10%" class="td_list">Action</th>
 					</tr>
 					</thead>
 					<tbody>
 					<?php foreach ($result as $key => $item) {?>
 					<tr>
 						<td><?php echo $key+1 ?></td>
-						<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item->category_id ?>" /></td>
-						<td><?php echo $item->category_name; ?></td>
-						<td><?php echo $item->category_parent_id; ?></td>
-						<td><?php echo $item->category_order; ?></td>
+						<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item['category_id'] ?>" /></td>
+						<td><?php echo $item['padding_left'].$item['category_name']; ?></td>
+						<td><?php echo '['.$item['category_parent_id'].'] '.$item['category_parent_name']; ?></td>
+						<td><?php echo $item['category_order']; ?></td>
 						<td>
-							<?php echo ($item->category_status == 1)? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
+							<?php echo ($item['category_status']== STASTUS_SHOW )? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
 						</td>
 						<td>
-							<?php $linkEdit = $base_url.'/admincp/category/edit/'.$item->category_id; ?>
-							<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit icon-admin green "></i></a>
+							<?php $linkEdit = $base_url.'/admincp/category/edit/'.$item['category_id']; ?>
+							<a href="<?php echo $linkEdit; ?>" title="Update Item" target="_blank"><i class="icon-edit icon-admin green "></i></a>
 							<a id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-trash icon-admin red"></i></a>
 						</td>
 					</tr>

@@ -26,14 +26,20 @@ class CategoryController{
 	}
 	function indexCategory(){
 		global $base_url;
-		$limit = SITE_RECORD_PER_PAGE;
+		$limit = 1000;
+		$treeCategroy = array();
 		//search
 		$dataSearch['category_name'] = FunctionLib::getParam('category_name','');
 		$dataSearch['category_status'] = FunctionLib::getParam('category_status', -1);
 		$dataSearch['category_parent_id'] = FunctionLib::getParam('category_parent_id', -1);
 		$dataSearch['category_content_front'] = FunctionLib::getParam('category_content_front', 0);
 
-		$result = Category::getSearchListItems($dataSearch,$limit,array());
+		$result = Category::getSearchListItems(array(),$limit,array());
+		$dataCate = $result['data'];
+		if(!empty($dataCate)){
+			$treeCategroy = self::getTreeCategory($dataCate);
+		}
+		//FunctionLib::Debug($treeCategroy);
 
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['category_status']);
@@ -42,7 +48,7 @@ class CategoryController{
 
 		return $view = theme('indexCategory',array(
 									'title'=>'Danh mục sản phẩm',
-									'result' => $result['data'],
+									'result' => $treeCategroy,
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,
 									'optionCategoryParent' => $optionCategoryParent,
@@ -51,6 +57,59 @@ class CategoryController{
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));
 
+	}
+
+	/**
+	 * build cây danh mục
+	 * @param $data
+	 * @return array
+	 */
+	public function getTreeCategory($data){
+		$max = 0;
+		$aryCategoryProduct = $arrCategory = array();
+		if(!empty($data)){
+			foreach ($data as $k=>$value){
+				$max = ($max < $value->category_parent_id)? $value->category_parent_id : $max;
+				$arrCategory[$value->category_id] = array(
+					'category_id'=>$value->category_id,
+					'category_parent_id'=>$value->category_parent_id,
+					'category_content_front'=>$value->category_content_front,
+					'category_order'=>$value->category_order,
+					'category_status'=>$value->category_status,
+					'category_name'=>$value->category_name);
+			}
+		}
+
+		if($max > 0){
+			$aryCategoryProduct = self::showCategory($max, $arrCategory);
+		}
+		return $aryCategoryProduct;
+	}
+	public function showCategory($max, $aryDataInput) {
+		$aryData = array();
+		if(is_array($aryDataInput) && count($aryDataInput) > 0) {
+			foreach ($aryDataInput as $k => $val) {
+				if((int)$val['category_parent_id'] == 0) {
+					$val['padding_left'] = '';
+					$val['category_parent_name'] = '';
+					$aryData[] = $val;
+					self::showSubCategory($val['category_id'],$val['category_name'], $max, $aryDataInput, $aryData);
+				}
+			}
+		}
+		return $aryData;
+	}
+	public static function showSubCategory($cat_id,$cat_name, $max, $aryDataInput, &$aryData) {
+		if($cat_id <= $max) {
+			foreach ($aryDataInput as $chk => $chval) {
+				if($chval['category_parent_id'] == $cat_id) {
+					$chval['padding_left'] = '---------- ';
+					$chval['category_parent_name'] = $cat_name;
+					$aryData[] = $chval;
+					self::showSubCategory($chval['category_id'],$chval['category_name'], $max, $aryDataInput, $aryData);
+				}
+			}
+		}
 	}
 
 	function formCategoryAction(){
