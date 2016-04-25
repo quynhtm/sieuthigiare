@@ -58,6 +58,8 @@
 										<i></i>
 										Hỗ trợ trực tuyến:
 										<a title="Hỗ trợ trực tuyến qua Skype!" href="skype:nguyenduypt86?chat" class="chat-sky" rel="nofollow"></a>
+										<a title="Hỗ trợ trực tuyến qua Skype!" href="skype:mercury_0206?chat" class="chat-sky" rel="nofollow"></a>
+										
 									</li>
 								</ul>
 							</div>

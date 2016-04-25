@@ -150,9 +150,9 @@ span#logo{
     cursor: pointer;
     display: inline-block;
     float: left;
-    font-size: 13px;
+    font-size: 18px;
     margin: 1px 0;
-    padding: 2px 8px 5px;
+    padding: 2px 8px 3px;
     position: relative
 }
 .support-contact:hover{
@@ -169,7 +169,7 @@ span#logo{
     line-height: 24px;
     position: relative;
     text-align: center;
-    top: 2px;
+    top: 0px;
     width: 23px;
     margin-right: 5px;
 }
@@ -214,7 +214,7 @@ span#logo{
     display: inline-block;
     height: 9px;
     position: relative;
-    top: -1px;
+    top: -7px;
     width: 14px;
     left: -15px;
 }
