@@ -87,7 +87,7 @@ class UserShopController{
 						'shop_phone'=>array('value'=>FunctionLib::getParam('shop_phone',''), 'require'=>0, 'messages'=>''),
 						'shop_email'=>array('value'=>FunctionLib::getParam('shop_email',''), 'require'=>0, 'messages'=>''),
 						'shop_address'=>array('value'=>FunctionLib::getParam('shop_address',''), 'require'=>0, 'messages'=>''),
-						'shop_status'=>array('value'=>FunctionLib::getParam('shop_status',''), 'require'=>0, 'messages'=>''),
+						//'shop_status'=>array('value'=>FunctionLib::getParam('shop_status',''), 'require'=>0, 'messages'=>''),
 						'number_limit_product'=>array('value'=>FunctionLib::getIntParam('number_limit_product',SHOP_NUMBER_PRODUCT_FREE), 'require'=>1, 'messages'=>'Nhập giới hạn sản phẩm ở gian hàng!'),
 						'is_shop'=>array('value'=>FunctionLib::getIntParam('is_shop',SHOP_FREE), 'require'=>0, 'messages'=>''),
 					);

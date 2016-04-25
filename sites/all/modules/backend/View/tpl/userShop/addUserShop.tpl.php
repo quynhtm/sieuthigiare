@@ -57,7 +57,7 @@
             </div>
             <div class="control-group">
                 <label class="control-label">Trạng thái</label>
-                <div class="controls"><select class="form-control input-sm" name="shop_status" disabled><?php echo $optionStatus;?></select></div>
+                <div class="controls"><select class="form-control input-sm" name="shop_status"><?php echo $optionStatus;?></select></div>
             </div>
             <div class="control-group">
                 <label class="control-label">Chính sách giao nhận</label>
