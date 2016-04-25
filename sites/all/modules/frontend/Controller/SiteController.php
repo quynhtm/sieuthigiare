@@ -24,6 +24,6 @@ class SiteController{
 
 	public static function getListProductInCategory(){
 		
-		return theme('list-product-in-category');
+		return theme('pageCategoryProduct');
 	}
 }

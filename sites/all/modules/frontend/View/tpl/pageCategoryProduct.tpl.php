@@ -8,15 +8,18 @@
 	<div class="main-view-post">
 		<div class="wrap-main-view shop">
 			<div class="left-category-shop">
-				<div class="title-category-parent">Làm đẹp &amp; Sức khỏe</div>
-					<ul>
-						<li><a title="Trang điểm" href="" class="">Trang điểm</a></li>
-						<li><a title="Chăm sóc cơ thể" href="" class="">Chăm sóc cơ thể</a></li>
-						<li><a title="Chăm sóc tóc" href="" class="">Chăm sóc tóc</a></li>
-						<li><a title="Chăm sóc da mặt" href="" class="">Chăm sóc da mặt</a></li>
-						<li><a title="Thiết bị y tế &amp; Làm đẹp" href="" class="">Thiết bị y tế &amp; Làm đẹp</a></li>
-					</ul>
+				<div class="wrapp-category-menu">
+					<div class="title-category-parent">Làm đẹp &amp; Sức khỏe</div>
+						<ul>
+							<li><a title="Trang điểm" href="" class="">Trang điểm</a></li>
+							<li><a title="Chăm sóc cơ thể" href="" class="">Chăm sóc cơ thể</a></li>
+							<li><a title="Chăm sóc tóc" href="" class="">Chăm sóc tóc</a></li>
+							<li><a title="Chăm sóc da mặt" href="" class="">Chăm sóc da mặt</a></li>
+							<li><a title="Thiết bị y tế &amp; Làm đẹp" href="" class="">Thiết bị y tế &amp; Làm đẹp</a></li>
+						</ul>
+					</div>
 				</div>
+			</div>
 			<div class="right-show-product-shop body-list-item">
 				<div class="content-list-item">
 					<div class="col-lg-3 col-xs-3 ">

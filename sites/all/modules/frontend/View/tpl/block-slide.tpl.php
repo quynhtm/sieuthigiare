@@ -5,22 +5,19 @@
 			<div class="content-box-menu">
 				<?php if(!empty($arrCategory)){?>
 				<ul>
-					<?php foreach($arrCategory as $cat){?>
+					<?php foreach($arrCategory as $key=>$cat){?>
 					<?php if(isset($cat['name']) && $cat['name'] != ''){ ?>
 					<li>
-						<a class="" href=""><?php echo $cat['name'] ?></a>
-						<div class="list-subcat" style="background: #fff url(<?php echo $base_url.'/'.path_to_theme() ?>/View/img/1.png) no-repeat bottom right">
+						<a href="<?php echo FunctionLib::buildLinkCategory(0, 0, $key, $cat['name']) ?>"><?php echo $cat['name'] ?></a>
+						<?php if(isset($cat['sub']) && !empty($cat['name'])) {?>
+						<div class="list-subcat" style="background: #fff">
 							<ul>
-								<li><a href="">Máy ảnh - Máy quay</a></li>
-								<li><a href="">Điện thoại</a></li>
-								<li><a href="">Máy tính bảng</a></li>
-								<li><a href="">Máy tính, laptop</a></li>
-								<li><a href="">Thiết bị văn phòng</a></li>
-								<li><a href="">Màn hình</a></li>
-								<li><a href="">Tivi - Âm thanh - Thiết bị Số</a></li>
-								<li><a href="">Phụ kiện công nghệ</a></li>
+								<?php foreach($cat['sub'] as $k=>$sub){ ?>
+								<li><a href="<?php echo FunctionLib::buildLinkCategory(0, 0, $k, $sub) ?>"><?php echo $sub ?></a></li>
+								<?php } ?>
 							</ul>
 						</div>
+						<?php } ?>
 					</li>
 					<?php } ?>
 					<?php } ?>

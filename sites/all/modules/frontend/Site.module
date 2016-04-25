@@ -14,7 +14,7 @@ function Site_menu() {
         'type' => MENU_CALLBACK,
     );
 
-    $items["danh-muc-san-pham.html"] = array(
+    $items["danh-muc/%/%"] = array(
 		"title" => t('Danh mục sản phẩm'),
 		"description" => "Danh mục sản phẩm",
 		'page callback' => 'menuLoad',
@@ -72,8 +72,8 @@ function Site_theme() {
 	      'template' => 'View/tpl/block-footer'
 	    ),
 		
-	    'list-product-in-category' => array(
-	      'template' => 'View/tpl/list-product-in-category'
+	    'pageCategoryProduct' => array(
+	      'template' => 'View/tpl/pageCategoryProduct'
 	    ),
 	);
 }
@@ -148,7 +148,7 @@ function block_header(){
 function block_slide(){
 	
 	$arrCategory = array();
-	DataCommon::getListCategory(0, $arrCategory, 10);
+	DataCommon::getListCategory(0, $arrCategory, 11);
 	
 	$bannerLager = SiteController::getListBannerLagerSite();
 	$bannerSmall = SiteController::getListBannerSmallSite();

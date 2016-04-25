@@ -435,6 +435,8 @@ class FunctionLib{
 		}
 		elseif($shop_id > 0 && $shop_name !=''){
 			$url = $base_url.'/gian-hang/'.$shop_id.'/'.self::safe_title($shop_name).'.html';
+		}elseif($category_id > 0 && $category_name !=''){
+			$url = $base_url.'/danh-muc/c'.$category_id.'/'.self::safe_title($category_name).'.html';
 		}
 		return $url;
 	}
