@@ -3,9 +3,12 @@
 	<div class="container">
 		<div class="box-menu-list">
 			<div class="content-box-menu">
+				<?php if(!empty($arrCategory)){?>
 				<ul>
+					<?php foreach($arrCategory as $cat){?>
+					<?php if(isset($cat['name']) && $cat['name'] != ''){ ?>
 					<li>
-						<a class="" href="">Điện tử - Âm thanh</a>
+						<a class="" href=""><?php echo $cat['name'] ?></a>
 						<div class="list-subcat" style="background: #fff url(<?php echo $base_url.'/'.path_to_theme() ?>/View/img/1.png) no-repeat bottom right">
 							<ul>
 								<li><a href="">Máy ảnh - Máy quay</a></li>
@@ -19,142 +22,10 @@
 							</ul>
 						</div>
 					</li>
-					<li>
-						<a class="" href="">Thời trang nam</a>
-						<div class="list-subcat" style="background:  #fff  url(<?php echo $base_url.'/'.path_to_theme() ?>/View/img/1.png) no-repeat bottom right">
-							<ul>
-								<li><a href="">Máy ảnh - Máy quay</a></li>
-								<li><a href="">Điện thoại</a></li>
-								<li><a href="">Máy tính bảng</a></li>
-								<li><a href="">Máy tính, laptop</a></li>
-								<li><a href="">Thiết bị văn phòng</a></li>
-								<li><a href="">Màn hình</a></li>
-								<li><a href="">Tivi - Âm thanh - Thiết bị Số</a></li>
-								<li><a href="">Phụ kiện công nghệ</a></li>
-							</ul>
-						</div>
-					</li>
-					<li>
-						<a class="" href="">Điện tử - Âm thanh</a>
-						<div class="list-subcat" style="background:  #fff  url(<?php echo $base_url.'/'.path_to_theme() ?>/View/img/1.png) no-repeat bottom right">
-							<ul>
-								<li><a href="">Máy ảnh - Máy quay</a></li>
-								<li><a href="">Điện thoại</a></li>
-								<li><a href="">Máy tính bảng</a></li>
-								<li><a href="">Máy tính, laptop</a></li>
-								<li><a href="">Thiết bị văn phòng</a></li>
-								<li><a href="">Màn hình</a></li>
-								<li><a href="">Tivi - Âm thanh - Thiết bị Số</a></li>
-								<li><a href="">Phụ kiện công nghệ</a></li>
-							</ul>
-						</div>
-					</li>
-					<li>
-						<a class="" href="">Thời trang nam</a>
-						<div class="list-subcat" style="background:  #fff url(<?php echo $base_url.'/'.path_to_theme() ?>/View/img/1.png) no-repeat bottom right">
-							<ul>
-								<li><a href="">Máy ảnh - Máy quay</a></li>
-								<li><a href="">Điện thoại</a></li>
-								<li><a href="">Máy tính bảng</a></li>
-								<li><a href="">Máy tính, laptop</a></li>
-								<li><a href="">Thiết bị văn phòng</a></li>
-								<li><a href="">Màn hình</a></li>
-								<li><a href="">Tivi - Âm thanh - Thiết bị Số</a></li>
-								<li><a href="">Phụ kiện công nghệ</a></li>
-							</ul>
-						</div>
-					</li>
-					<li>
-						<a class="" href="">Điện tử - Âm thanh</a>
-						<div class="list-subcat" style="background: #fff url(<?php echo $base_url.'/'.path_to_theme() ?>/View/img/1.png) no-repeat bottom right">
-							<ul>
-								<li><a href="">Máy ảnh - Máy quay</a></li>
-								<li><a href="">Điện thoại</a></li>
-								<li><a href="">Máy tính bảng</a></li>
-								<li><a href="">Máy tính, laptop</a></li>
-								<li><a href="">Thiết bị văn phòng</a></li>
-								<li><a href="">Màn hình</a></li>
-								<li><a href="">Tivi - Âm thanh - Thiết bị Số</a></li>
-								<li><a href="">Phụ kiện công nghệ</a></li>
-							</ul>
-						</div>
-					</li>
-					<li>
-						<a class="" href="">Thời trang nam</a>
-						<div class="list-subcat" style="background: #fff url(<?php echo $base_url.'/'.path_to_theme() ?>/View/img/1.png) no-repeat bottom right">
-							<ul>
-								<li><a href="">Máy ảnh - Máy quay</a></li>
-								<li><a href="">Điện thoại</a></li>
-								<li><a href="">Máy tính bảng</a></li>
-								<li><a href="">Máy tính, laptop</a></li>
-								<li><a href="">Thiết bị văn phòng</a></li>
-								<li><a href="">Màn hình</a></li>
-								<li><a href="">Tivi - Âm thanh - Thiết bị Số</a></li>
-								<li><a href="">Phụ kiện công nghệ</a></li>
-							</ul>
-						</div>
-					</li>
-					<li>
-						<a class="" href="">Điện tử - Âm thanh</a>
-						<div class="list-subcat" style="background: #fff url(<?php echo $base_url.'/'.path_to_theme() ?>/View/img/1.png) no-repeat bottom right">
-							<ul>
-								<li><a href="">Máy ảnh - Máy quay</a></li>
-								<li><a href="">Điện thoại</a></li>
-								<li><a href="">Máy tính bảng</a></li>
-								<li><a href="">Máy tính, laptop</a></li>
-								<li><a href="">Thiết bị văn phòng</a></li>
-								<li><a href="">Màn hình</a></li>
-								<li><a href="">Tivi - Âm thanh - Thiết bị Số</a></li>
-								<li><a href="">Phụ kiện công nghệ</a></li>
-							</ul>
-						</div>
-					</li>
-					<li>
-						<a class="" href="">Thời trang nam</a>
-						<div class="list-subcat" style="background: #fff url(<?php echo $base_url.'/'.path_to_theme() ?>/View/img/1.png) no-repeat bottom right">
-							<ul>
-								<li><a href="">Máy ảnh - Máy quay</a></li>
-								<li><a href="">Điện thoại</a></li>
-								<li><a href="">Máy tính bảng</a></li>
-								<li><a href="">Máy tính, laptop</a></li>
-								<li><a href="">Thiết bị văn phòng</a></li>
-								<li><a href="">Màn hình</a></li>
-								<li><a href="">Tivi - Âm thanh - Thiết bị Số</a></li>
-								<li><a href="">Phụ kiện công nghệ</a></li>
-							</ul>
-						</div>
-					</li>
-					<li>
-						<a class="" href="">Điện tử - Âm thanh</a>
-						<div class="list-subcat" style="background: #fff url(<?php echo $base_url.'/'.path_to_theme() ?>/View/img/1.png) no-repeat bottom right">
-							<ul>
-								<li><a href="">Máy ảnh - Máy quay</a></li>
-								<li><a href="">Điện thoại</a></li>
-								<li><a href="">Máy tính bảng</a></li>
-								<li><a href="">Máy tính, laptop</a></li>
-								<li><a href="">Thiết bị văn phòng</a></li>
-								<li><a href="">Màn hình</a></li>
-								<li><a href="">Tivi - Âm thanh - Thiết bị Số</a></li>
-								<li><a href="">Phụ kiện công nghệ</a></li>
-							</ul>
-						</div>
-					</li>
-					<li>
-						<a class="" href="">Thời trang nam</a>
-						<div class="list-subcat" style="background: #fff url(<?php echo $base_url.'/'.path_to_theme() ?>/View/img/1.png) no-repeat bottom right">
-							<ul>
-								<li><a href="">Máy ảnh - Máy quay</a></li>
-								<li><a href="">Điện thoại</a></li>
-								<li><a href="">Máy tính bảng</a></li>
-								<li><a href="">Máy tính, laptop</a></li>
-								<li><a href="">Thiết bị văn phòng</a></li>
-								<li><a href="">Màn hình</a></li>
-								<li><a href="">Tivi - Âm thanh - Thiết bị Số</a></li>
-								<li><a href="">Phụ kiện công nghệ</a></li>
-							</ul>
-						</div>
-					</li>
+					<?php } ?>
+					<?php } ?>
 				</ul>
+				<?php } ?>
 			</div>
 		</div>
 		<div class="slider-box-mid">

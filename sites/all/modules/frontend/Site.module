@@ -147,10 +147,13 @@ function block_header(){
 }
 function block_slide(){
 	
+	$arrCategory = array();
+	DataCommon::getListCategory(0, $arrCategory, 10);
+	
 	$bannerLager = SiteController::getListBannerLagerSite();
 	$bannerSmall = SiteController::getListBannerSmallSite();
 
-	$view= theme('block-slide', array('bannerLager'=>$bannerLager, 'bannerSmall'=>$bannerSmall));
+	$view= theme('block-slide', array('bannerLager'=>$bannerLager, 'bannerSmall'=>$bannerSmall, 'arrCategory'=>$arrCategory));
 	return $view;
 }
 function block_content(){
