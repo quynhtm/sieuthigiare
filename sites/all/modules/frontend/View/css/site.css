@@ -507,3 +507,10 @@ span#logo{
     font-style: normal;
     margin-left: 5px;
 }
+.not-product {
+    color: #ff0000;
+    font-size: 30px;
+    font-style: italic;
+    padding: 50px;
+    text-align: center;
+}

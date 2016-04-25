@@ -28,6 +28,7 @@ define('AJAX_DOMAIN', '/shopcuatui.com.vn/');
 define('IS_WEB', 0);// 0:local, 1:web
 define('PHONE_CARE', '0985.10.10.26 - 0913.922.986');
 define('WEB_SITE', 'Shopcuatui.com.vn');
+define('NOT_PRODUCT', 'Chưa có sản phẩm nào...');
 /**
  * QuynhTM add
  * Dinh nghia cac Table cho website
@@ -55,7 +56,7 @@ define('FOLDER_NEWS', 'news');
 //common
 define('STASTUS_HIDE', 0);
 define('STASTUS_SHOW', 1);
-define('STASTUS_BLOCK', -1);//kh�a
+define('STASTUS_BLOCK', -1);//khóa
 
 define('COMMENT_OK_REPLY', 0);//comment_is_reply
 define('COMMENT_NOT_REPLY', 1);

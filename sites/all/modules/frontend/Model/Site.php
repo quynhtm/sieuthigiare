@@ -8,6 +8,8 @@
 class Site{
 	static $table_action_category = TABLE_CATEGORY;
 	static $table_action_product = TABLE_PRODUCT;
+	static $primary_key_product = 'product_id';
+
 	public static function makeListCatid($limit=0){
 		global $base_url;
 
@@ -29,7 +31,6 @@ class Site{
 		}
 		return $arrCatId;
 	}
-
 
 	public static function getListProductContentHome($cat_limit=0, $product_limit=0){
 		if($cat_limit > 0 && $product_limit > 0){
@@ -87,5 +88,39 @@ class Site{
 			return $result;
 		}
 		return array();
+	}
+
+	public static function getProductInCategory($category_id=0, $arrFields, $limit=0){
+		if($category_id > 0){
+            if(!empty($arrFields)){
+                $arrCatid[0] = $category_id;
+                $listCat = DataCommon::getListCategoryChildren($category_id);
+                if(!empty($listCat)){
+                	foreach($listCat as $key=>$val){
+                		array_push($arrCatid, $key);
+                	}
+                }
+               
+                $sql = db_select(self::$table_action_product, 'i')->extend('PagerDefault');
+                foreach($arrFields as $field){
+                    $sql->addField('i', $field, $field);
+                }
+                $sql->condition('i.product_status', STASTUS_SHOW, '=');
+                $sql->condition('i.is_block', PRODUCT_NOT_BLOCK, '=');
+                
+                if(!empty($arrCatid)){
+                    $sql->condition('i.category_id', $arrCatid, 'IN');
+                }
+
+                $result = $sql->limit($limit)->orderBy('i.'.self::$primary_key_product, 'DESC')->execute();
+                $arrItem = (array)$result->fetchAll();
+
+                $pager = array('#theme' => 'pager','#quantity' => 3);
+                $data['data'] = $arrItem;
+                $data['pager'] = $pager;
+                return $data;
+            }
+        }
+        return array('data' => array(),'total' => 0,'pager' => array(),);
 	}
 }
