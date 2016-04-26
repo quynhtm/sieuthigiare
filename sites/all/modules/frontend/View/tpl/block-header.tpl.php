@@ -72,7 +72,7 @@
 		    </div>
 		</div>
 		<div class="box-header-link">
-			<div class="box-menu-title">
+			<div class="box-menu-title <?php if(!drupal_is_front_page()){ echo 'box-menu-hover'; }?>">
 				<div class="title-cat-menu">
 					<div class="icon-cat-title">
 						<span class="ic-line"></span>
@@ -82,6 +82,28 @@
 				    Danh mục sản phẩm
 				    <i class="right-down icon-angle-down"></i>
 				</div>
+				<?php if(!empty($arrCategory)){?>
+				<div class="content-box-menu header-menu-other">
+					<ul>
+						<?php foreach($arrCategory as $key=>$cat){?>
+						<?php if(isset($cat['name']) && $cat['name'] != ''){ ?>
+						<li>
+							<a href="<?php echo FunctionLib::buildLinkCategory(0, 0, $key, $cat['name']) ?>"><?php echo $cat['name'] ?></a>
+							<?php if(isset($cat['sub']) && !empty($cat['name'])) {?>
+							<div class="list-subcat" style="background: #fff">
+								<ul>
+									<?php foreach($cat['sub'] as $k=>$sub){ ?>
+									<li><a href="<?php echo FunctionLib::buildLinkCategory(0, 0, $k, $sub) ?>"><?php echo $sub ?></a></li>
+									<?php } ?>
+								</ul>
+							</div>
+							<?php } ?>
+						</li>
+						<?php } ?>
+						<?php } ?>
+					</ul>
+				</div>
+				<?php } ?>
 			</div>
 			<!-- <div class="desc-price-day">
 				<i class="icon-star-empty"></i> <a href="#" title="Giảm giá mỗi ngày">Giảm giá mỗi ngày</a>

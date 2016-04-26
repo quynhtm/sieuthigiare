@@ -2,6 +2,7 @@
 body{
     overflow-x: hidden;
     background: #fff;
+    position: relative;
 }
 a{
     color: #333;
@@ -124,6 +125,7 @@ span#logo{
     float: left;
     position: relative;
     width: 230px;
+    z-index: 2;
 }
 .desc-price-day {
     display: inline-block;
@@ -331,7 +333,7 @@ span#logo{
     height: 20px;
     position: relative;
     right: 5px;
-    top: -6px;
+    top: -8px;
 }
 .front .title-cat-menu .right-down{
     display: none;
@@ -343,10 +345,27 @@ span#logo{
     padding: 8px 5px 8px 12px;
     text-transform: uppercase;
 }
+.box-menu-hover.act .title-cat-menu{
+    color: #cc0000;
+}
+.box-menu-hover.act .title-cat-menu .ic-line{
+    background: #cc0000;
+}
 .content-box-menu{
+    background: #fff none repeat scroll 0 0;
     clear: both;
     display: inline-block;
+    min-height: 420px;
     width: 100%;
+}
+.content-box-menu.header-menu-other{
+    border: 1px solid #ddd;
+    display: none;
+    position: absolute;
+    z-index: 999;
+}
+.box-menu-title:hover .content-box-menu.header-menu-other{
+    display: block;
 }
 .content-box-menu > ul{
     margin-bottom: 0;
@@ -380,6 +399,13 @@ span#logo{
     top: -1px;
     z-index: 22;
     min-height: 428px;
+    max-height: 428px;
+    overflow: hidden;
+}
+.content-box-menu.header-menu-other .list-subcat{
+    min-height: 420px;
+    max-height: 420px;
+    overflow: hidden;
 }
 .content-box-menu ul > li:hover .list-subcat{
     display: inline-block;
@@ -513,4 +539,15 @@ span#logo{
     font-style: italic;
     padding: 50px;
     text-align: center;
+}
+.bg-opacity{
+    background: #000;
+    display: block;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    opacity: 0.1;
 }

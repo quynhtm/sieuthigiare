@@ -142,7 +142,12 @@ function page_default(){
 }
 
 function block_header(){
-	$view= theme('block-header');
+	
+	$arrCategory = array();
+	if(!drupal_is_front_page()){
+		DataCommon::getListCategory(0, $arrCategory, 11);
+	}
+	$view= theme('block-header', array('arrCategory'=>$arrCategory));
 	return $view;
 }
 function block_slide(){

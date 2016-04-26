@@ -1040,6 +1040,7 @@ table.list-pay span.price {
 .main-view-post{
     display: inline-block;
     width: 100%;
+    min-height: 300px;
 }
 .box-register .formSendLogin{
     width: 305px;
