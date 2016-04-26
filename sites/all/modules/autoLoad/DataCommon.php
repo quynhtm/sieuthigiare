@@ -59,7 +59,7 @@ class DataCommon{
 					$categoryParent[$cate->category_id] = $cate->category_name;
 				}
 				if (Cache::CACHE_ON) {
-					$cache->do_put($key_cache, $categoryParent, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+					$cache->do_put($key_cache, $categoryParent, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
 				}
 			}
 		}
@@ -85,7 +85,7 @@ class DataCommon{
 						$categoryChildren[$cate->category_id] = $cate->category_name;
 					}
 					if (Cache::CACHE_ON) {
-						$cache->do_put($key_cache.$category_parent_id, $categoryChildren, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+						$cache->do_put($key_cache.$category_parent_id, $categoryChildren, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
 					}
 				}
 				return $categoryChildren;
@@ -132,6 +132,80 @@ class DataCommon{
 			}
 		}
 		return array();
+	}
+
+	/**
+	 * Build Tree categroy menu danh m?c
+	 * @return array
+	 */
+	public static function buildCacheTreeCategory(){
+		$treeCategory = array();
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_TREE_MENU_CATEGORY_HEADER;
+		if(Cache::CACHE_ON){
+			$cache = new Cache();
+			$treeCategory = $cache->do_get($key_cache);
+		}
+		if($treeCategory == null || empty($treeCategory)){
+			$query = db_select(self::$table_category, 'c')
+				->condition('c.category_status', STASTUS_SHOW, '=')
+				->orderBy('c. category_order', 'ASC')
+				->fields('c');
+			$data = $query->execute();
+			if(!empty($data)){
+				$dataCate = array();
+				foreach($data as $k=> $cate){
+					$dataCate[] = $cate;
+				}
+				//build tree cat with parent_id
+				$treeCategory = self::getTreeCategory($dataCate);
+				if(Cache::CACHE_ON) {
+					$cache->do_put($key_cache, $treeCategory, Cache::CACHE_TIME_TO_LIVE_ONE_YEAR);
+				}
+			}
+		}
+		return $treeCategory;
+	}
+	public function getTreeCategory($data){
+		$arrCategory = array();
+		if(!empty($data)){
+			foreach ($data as $k=>$value){
+				if($value->category_parent_id > 0){
+					$arrCategory[$value->category_parent_id]['arrSubCategory'][] = array(
+						'category_id'=>$value->category_id,
+						'category_order'=>$value->category_order,//hien th? th? t? s?p x?p
+						'category_name'=>$value->category_name);
+				}else{
+					//thong tin parent
+					$arrCategory[$value->category_id]['category_parent_name'] = $value->category_name;
+					$arrCategory[$value->category_id]['category_id'] = $value->category_id;
+					$arrCategory[$value->category_id]['category_status'] = $value->category_status;
+					$arrCategory[$value->category_id]['category_image_background'] = $value->category_image_background;
+					$arrCategory[$value->category_id]['category_order'] = $value->category_order;//hien th? th? t? s?p x?p
+				}
+			}
+			if(!empty($arrCategory)){
+				foreach($arrCategory as $key => $val){
+					if(!isset($val['category_id'])){
+						unset($arrCategory[$key]);
+					}
+				}
+			}
+			self::sortArrayASC($arrCategory,"category_order");
+		}
+		return $arrCategory;
+	}
+	public function sortArrayASC (&$array, $key) {
+		$sorter=array();
+		$ret=array();
+		reset($array);
+		foreach ($array as $ii => $va) {
+			$sorter[$ii]=$va[$key];
+		}
+		asort($sorter);
+		foreach ($sorter as $ii => $va) {
+			$ret[$ii]=$array[$ii];
+		}
+		$array=$ret;
 	}
 
 	/**
@@ -214,7 +288,7 @@ class DataCommon{
 					$category = $cate;
 				}
 				if(Cache::CACHE_ON) {
-					$cache->do_put($key_cache.$category_id, $category, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+					$cache->do_put($key_cache.$category_id, $category, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
 				}
 			}
 		}
@@ -238,7 +312,7 @@ class DataCommon{
 					$categoryChildren[$province->province_id] = $province->province_name;
 				}
 				if (Cache::CACHE_ON) {
-					$cache->do_put($key_cache, $categoryChildren, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+					$cache->do_put($key_cache, $categoryChildren, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
 				}
 			}
 		}
@@ -274,7 +348,7 @@ class DataCommon{
 					$bannerAdvanced[] = $banner;
 				}
 				if (Cache::CACHE_ON) {
-					$cache->do_put(Cache::VERSION_CACHE.Cache::CACHE_BANNER_ADVANCED.'_'.$banner_type.'_'.$banner_page.'_'.$banner_category_id.'_'.$banner_shop_id, $bannerAdvanced, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+					$cache->do_put(Cache::VERSION_CACHE.Cache::CACHE_BANNER_ADVANCED.'_'.$banner_type.'_'.$banner_page.'_'.$banner_category_id.'_'.$banner_shop_id, $bannerAdvanced, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
 				}
 			}
 		}
