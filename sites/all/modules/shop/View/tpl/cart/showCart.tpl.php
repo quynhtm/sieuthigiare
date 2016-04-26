@@ -36,7 +36,7 @@
 										}else{
 											if($v->product_price_sell > 0){
 												$price = number_format($v->product_price_sell);
-												echo $price.'<sup>đ</sup>';
+												echo $price.'đ';
 											}else{
 												echo $price;
 											}

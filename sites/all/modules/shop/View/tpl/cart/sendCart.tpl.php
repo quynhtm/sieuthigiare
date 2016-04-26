@@ -8,37 +8,40 @@
 						<div class="content-post-cart">
 							<div class="title-pay-cart">Chi tiết đơn hàng</div>
 							<table class="list-pay">
-					            
+					            <?php foreach($result as $item){?>
 					            <tr>
 					                <td width="10%">
-						                <a class="img" href="">
-						                    <img height="60" width="60" alt="Áo Sơ Mi Nam Công Sở Fonto Menswear : SR045" src="<?php echo $base_url.'/'.path_to_theme() ?>/View/img/s1.jpg">
+						                <a class="img" href="<?php echo FunctionLib::buildLinkDetail($item->product_id, $item->product_name); ?>" title="<?php echo $item->product_name?>">
+						                    <?php if($item->product_image != ''){?>
+											<img width="60" src="<?php echo FunctionLib::getThumbImage($item->product_image,$item->product_id,FOLDER_PRODUCT,300,300) ?>" 
+												 alt="<?php echo $item->product_name ?>"/>
+											<?php }else{ ?>
+											<img width="60" src="<?php echo IMAGE_DEFAULT ?>"/>
+											<?php } ?>
 						                </a>
 					            	</td>
 					                <td>
-					                	<span class="title">Áo Sơ Mi Nam Công Sở Fonto Menswear : SR048</span>
+					                	<span class="title"><?php echo $item->product_name ?></span>
 					                </td>
 					                <td width="20%">
-					                	<span class="price">350.000đ x 1</span>
+					                	<span class="price">
+											<?php 
+												$price = 'Liên hệ';
+												if($item->product_type_price == 2){
+													echo $price.' x '.$item->num;;
+												}else{
+													if($item->product_price_sell > 0){
+														$price = number_format($item->product_price_sell);
+														echo $price.'đ x '.$item->num;
+													}else{
+														echo $price.' x '.$item->num;;
+													}
+												}
+											?>
+					                	</span>
 					                </td>
 					            </tr>
-					             <tr>
-					               	<td width="10%">
-						                <a class="img" href="">
-						                    <img height="60" width="60" alt="Áo Sơ Mi Nam Công Sở Fonto Menswear : SR045" src="<?php echo $base_url.'/'.path_to_theme() ?>/View/img/s2.jpg">
-						                </a>
-					            	</td>
-					                <td>
-					                	<span class="title">Áo Sơ Mi Nam Công Sở Fonto Menswear : SR048</span>
-					                </td>
-					                <td width="20%">
-					                	<span class="price">350.000đ x 1</span>
-					                </td>
-					            </tr>
-					            <tr class="last">
-					                <td colspan="2"><div class="total-price-cart">Tổng</div></td>
-					                <td width="20%"><span class="price">700.000đ</span></td>
-					            </tr>
+					            <?php } ?>
 					    	</table>
 					    </div>
 					</div>
@@ -64,7 +67,7 @@
 									<input type="text" id="txtAddress" name="txtAddress" class="form-control" value="">
 								</div>
 								<div class="form-group">
-									<label>Ghi chú<span>(*)</span></label>
+									<label>Ghi chú</label>
 									<textarea  id="txtMessage" class="form-control" rows="5" name="txtMessage"></textarea>
 									<span class="des">VD: thời gian nhận hàng...</span>
 								</div>

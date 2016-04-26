@@ -3,6 +3,7 @@ jQuery(document).ready(function($){
 	SHOP_CART.update();
 	SHOP_CART.delOne();
 	SHOP_CART.delAll();
+	SHOP_CART.sendCart();
 });
 SHOP_CART = {
 	add:function(){
@@ -83,4 +84,35 @@ SHOP_CART = {
 			return true;
 		});	
 	},
+	sendCart:function(){
+		jQuery("#submitPaymentOrder").click(function(){
+
+			var name = jQuery('#txtFormPaymentCart input[name="txtName"]'),
+				phone = jQuery('#txtFormPaymentCart input[name="txtMobile"]'),
+				address = jQuery('#txtFormPaymentCart input[name="txtAddress"]');
+				
+				if(name.val() == ''){
+					jAlert('Họ và tên không được trống!', 'Cảnh báo');
+					name.addClass('error').focus();
+					return false;
+				}else{
+					name.removeClass('error');
+				}
+				if(phone.val() == ''){
+					jAlert('Số điện thoại không được trống!', 'Cảnh báo');
+					phone.addClass('error').focus();
+					return false;
+				}else{
+					phone.removeClass('error');
+				}
+
+				if(address.val() == ''){
+					jAlert('Địa chỉ không được trống!', 'Cảnh báo');
+					address.addClass('error').focus();
+					return false;
+				}else{
+					address.removeClass('error');
+				}
+		});
+	}
 }
