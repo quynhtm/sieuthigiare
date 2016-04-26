@@ -1084,3 +1084,6 @@ table.list-pay span.price {
     width: 100%;
     z-index: 999999
 }
+.list-btn-control {
+    margin-top: 5px;
+}
