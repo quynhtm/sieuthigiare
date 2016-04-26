@@ -106,6 +106,14 @@ function Shop_menu() {
 		'type' => MENU_CALLBACK,
 	);
 	//cart shop
+	$items["them-vao-gio-hang.html"] = array(
+		"title" => t('Giỏ hàng'),
+		"description" => "Giỏ hàng",
+		'page callback' => 'menuLoad',
+		'page arguments' => array('CartShopController/addCart'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
 	$items["gio-hang.html"] = array(
 		"title" => t('Giỏ hàng'),
 		"description" => "Giỏ hàng",
@@ -209,6 +217,7 @@ function Shop_init() {
 			
 			'View/css/shop.css',
 			'View/js/shop.js',
+			'View/js/cart.js',
 			
 			'View/js/nivoslider/jquery.nivo.slider.js',
 			'View/js/nivoslider/jquery.nivo.slider.css',

@@ -65,9 +65,9 @@
 							</div>
 						</div>
 					</div>
-		    		<!-- <div class="shopping-cart">
+		    		<div class="shopping-cart">
 		    			<span class="num-item">1</span>
-		    		</div> -->
+		    		</div>
 		    	</div>
 		    </div>
 		</div>
