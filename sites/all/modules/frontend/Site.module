@@ -147,7 +147,10 @@ function block_header(){
 	if(!drupal_is_front_page()){
 		DataCommon::getListCategory(0, $arrCategory, 11);
 	}
-	$view= theme('block-header', array('arrCategory'=>$arrCategory));
+	
+	$numCart = SiteController::countCartItem();
+
+	$view= theme('block-header', array('arrCategory'=>$arrCategory, 'numCart'=>$numCart));
 	return $view;
 }
 function block_slide(){

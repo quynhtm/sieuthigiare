@@ -8,6 +8,7 @@
 					<div class="view-content-post">
 						<form method="post" action="" name="txtFormShopCart" id="txtFormShopCart">
 						<div class="grid-shop-cart">
+							<?php if(!empty($result)){?>
 							<table width="100%" class="list-shop-cart-item">
 								<tbody>
 									<tr class="first">
@@ -18,22 +19,37 @@
 										<th>Thành tiền</th>
 										<th>Thao tác</th>
 									</tr>
-									<tr class="odd">
+									<?php foreach($result as $v){?>
+									<tr>
 										<td>1</td>
-										<td><a target="_blank" href="">Bộ đồ thể thao nam, áo ngắn tay, quần lửng, phong cách khỏe khoắn</a></td>
-										<td><input type="text" name="listCart[192][M]" value="1" class="num-item-in-one-product"></td>
-										<td>246,000<sup>đ</sup></td>
+										<td><a target="_blank" href=""><?php echo $v->product_name ?></a></td>
+										<td><input type="text" name="listCart[<?php echo $v->product_id ?>]" value="<?php echo $v->num ?>" class="num-item-in-one-product"></td>
+										<td>
+											<?php 
+												if($v->product_type_price == 2){
+													echo "Liên hệ";
+												}else{
+													if($v->product_price_sell > 0){
+														echo number_format($v->product_price_sell).'<sup>đ</sup>';
+													}else{
+														echo "Liên hệ";
+													}
+												}
+											?>
+										</td>
 										<td>246,000<sup>đ</sup></td>
 										<td>
 											<a data-size="M" data="192" class="delOneItemCart" href="javascript:void(0)">Xóa</a>
 										</td>
-									</tr>	
-										<tr>
+									</tr>
+									<?php } ?>
+									<tr>
 										<td colspan="5"><b>Tổng số tiền thanh toán:</b></td>
 										<td colspan="2"><b>246,000</b><sup>đ</sup></td>
 									</tr>	
 								</tbody>
 							</table>
+							<?php } ?>
 						</div>
 						</form>
 						<div class="list-btn-control">

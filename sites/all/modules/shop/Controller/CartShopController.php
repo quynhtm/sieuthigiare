@@ -38,8 +38,31 @@ class CartShopController{
 	}
 
 	public function cartShop(){
+		global $base_url;
 		
-		return theme('cartShop');
+		$listCart 	= isset($_SESSION['cart']) ? $_SESSION['cart'] :  array();
+		$updateCart = FunctionLib::getParam('listCart', array());
+		$result = array();
+
+		if(!empty($updateCart)){
+			bug($updateCart);
+			$listCart = $_SESSION['cart'];
+			drupal_goto($base_url.'/gio-hang.html');
+		}
+
+		if(!empty($listCart)){
+			$arrId  = array_keys($listCart);
+			$arrFields = array('product_id', 'product_name', 'product_price_sell', 'product_type_price');
+			$result = CartShop::getListCat($arrId, $arrFields);
+			
+			foreach($result as $key=>$item){
+				if(in_array($item->product_id, $arrId)){
+					$result[$key]->num = $listCart[$item->product_id];
+				}	
+			}
+		}
+
+		return theme('cartShop', array('result'=>$result));
 	}
 	public function cartSendShop(){
 		

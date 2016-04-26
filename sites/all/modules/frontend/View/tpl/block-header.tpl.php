@@ -65,9 +65,13 @@
 							</div>
 						</div>
 					</div>
-		    		<div class="shopping-cart">
-		    			<span class="num-item">1</span>
-		    		</div>
+					<?php if($numCart > 0){?>
+					<a href="<?php echo $base_url ?>/gio-hang.html" title="Giỏ hàng">
+			    		<div class="shopping-cart">
+			    			<span class="num-item"><?php echo $numCart ?></span>
+			    		</div>
+			    	</a>
+		    		<?php } ?>
 		    	</div>
 		    </div>
 		</div>

@@ -73,4 +73,16 @@ class SiteController{
 											'arrCategoryChildren'=>$arrCategoryChildren
 											));
 	}
+
+	public static function countCartItem(){
+		$numItem = 0;
+		if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])){
+		  foreach ($_SESSION['cart'] as $v){
+		    if($v > 0){
+		    	$numItem += $v;
+		    }
+		  }
+		}
+		return $numItem;
+	}
 }

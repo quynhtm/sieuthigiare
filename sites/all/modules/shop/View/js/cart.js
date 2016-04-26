@@ -15,8 +15,7 @@ SHOP_CART = {
 					data: "pid="+encodeURI(pid),
 					data: "pid="+encodeURI(pid) + "&pnum="+encodeURI(pnum),
 					success: function(data){
-						return false;
-						if(data=='notAddCart'){
+						if(data == 'no'){
 							jAlert('Không tồn tại sản phẩm!', 'Cảnh báo');
 							return false;
 						}else{
