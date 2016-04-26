@@ -166,7 +166,8 @@
 										<li class="item">
 											<a class="img-thumb post-thumb" title="<?php echo $same->product_name?>" href="<?php echo FunctionLib:: buildLinkDetail($same->product_id, $same->product_name); ?>">
 												<?php if($same->product_image != ''){?>
-												<img src="<?php echo FunctionLib::getThumbImage($same->product_image, $same->product_id, FOLDER_PRODUCT, 200, 200) ?>" alt="<?php echo $same->product_name?>" data-other-src="<?php echo FunctionLib::getThumbImage($same->product_image_hover, $same->product_id, FOLDER_PRODUCT, 200, 200) ?>">
+												<img src="<?php echo FunctionLib::getThumbImage($same->product_image, $same->product_id, FOLDER_PRODUCT, 300, 300) ?>" alt="<?php echo $same->product_name?>" 
+													data-other-src="<?php echo FunctionLib::getThumbImage($same->product_image_hover, $same->product_id, FOLDER_PRODUCT, 300, 300) ?>">
 												<?php }else{ ?>
 												<img src="<?php echo IMAGE_DEFAULT ?>"/>
 												<?php } ?>
@@ -308,8 +309,8 @@
 									<li class="item">
 										<a class="i-thumb post-thumb" title="<?php echo $h->product_name?>" href="<?php echo FunctionLib:: buildLinkDetail($h->product_id, $h->product_name); ?>">
 											<?php if($h->product_image != ''){?>
-											<img src="<?php echo FunctionLib::getThumbImage($h->product_image, $h->product_id, FOLDER_PRODUCT, 200, 200) ?>" alt="<?php echo $h->product_name?>" 
-											data-other-src="<?php echo FunctionLib::getThumbImage($h->product_image_hover, $h->product_id, FOLDER_PRODUCT, 200, 200) ?>">
+											<img src="<?php echo FunctionLib::getThumbImage($h->product_image, $h->product_id, FOLDER_PRODUCT, 300, 300) ?>" alt="<?php echo $h->product_name?>" 
+											data-other-src="<?php echo FunctionLib::getThumbImage($h->product_image_hover, $h->product_id, FOLDER_PRODUCT, 300, 300) ?>">
 											<?php }else{ ?>
 											<img src="<?php echo IMAGE_DEFAULT ?>"/>
 											<?php } ?>

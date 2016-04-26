@@ -179,7 +179,7 @@ class ProductController{
 						FunctionLib::delteImageCacheItem(FOLDER_PRODUCT, $id);
 					}
 				}
-				drupal_set_message('Xóa bài viết thành công.');
+				drupal_set_message('Xóa cache ảnh thành công.');
 			}
 		}
 		drupal_goto($base_url.'/admincp/product');

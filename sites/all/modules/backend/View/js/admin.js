@@ -27,7 +27,7 @@ DELETE_CACHE_IMAGE_PRODUCT={
 		jQuery('a#deleteCacheImageProductMoreItem').click(function(){
 			var total = jQuery( "input:checked" ).length;
 			if(total==0){
-				alert('Vui lòng chọn ít nhất 1 bản ghi để xóa!');
+				alert('Vui lòng chọn ít nhất 1 bản ghi để xóa cache ảnh!');
 				return false;
 			}else{
 				if (confirm('Bạn muốn xóa [OK]:Đồng ý [Cancel]:Bỏ qua?)')){

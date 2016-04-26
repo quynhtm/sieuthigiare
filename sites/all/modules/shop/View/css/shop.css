@@ -529,10 +529,11 @@ a.btn-yahoo:hover{
 }
 .left-slider-img .max-thumb-img {
     float: left;
-    height: 400px;
+    max-height: 400px;
     overflow: hidden;
     position: relative;
     width: 350px;
+    height: auto;
 }
 .left-slider-img .max-thumb-img img{
     width: 100%;
@@ -685,7 +686,7 @@ a.btn-yahoo:hover{
     font-size: 15px;
     font-weight: 700;
     line-height: 35px;
-    padding: 15px 0 20px 12px;
+    padding: 8px;
     text-transform: uppercase;
 }
 .content-center-content-view{
@@ -757,10 +758,11 @@ a.btn-yahoo:hover{
     margin-top: 20px;
     width: 100%;
 }
-.left-bottom-content-view{
-    width: 900px;
+.left-bottom-content-view {
     display: inline-block;
     float: left;
+    text-align: justify;
+    width: 995px;
 }
 .bottom-content-view .tab{
     border-bottom: 1px solid #ddd;
@@ -841,11 +843,11 @@ a.btn-yahoo:hover{
 }
 .content-right-bottom-content-view ul li .i-thumb {
     display: block;
-    margin: 0 0 7px;
+    height: auto;
+    margin: 0 0 8px;
+    overflow: hidden;
     text-align: center;
     width: 100%;
-    height: 205px;
-    overflow: hidden;
 }
 
 .content-right-bottom-content-view ul li a.item-name {
