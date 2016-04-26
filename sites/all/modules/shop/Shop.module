@@ -118,7 +118,23 @@ function Shop_menu() {
 		"title" => t('Giỏ hàng'),
 		"description" => "Giỏ hàng",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('CartShopController/cartShop'),
+		'page arguments' => array('CartShopController/showCart'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+	$items["xoa-mot-phan-tu-trong-gio-hang.html"] = array(
+		"title" => t('Giỏ hàng'),
+		"description" => "Giỏ hàng",
+		'page callback' => 'menuLoad',
+		'page arguments' => array('CartShopController/delOne'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+	$items["xoa-het-gio-hang.html"] = array(
+		"title" => t('Giỏ hàng'),
+		"description" => "Giỏ hàng",
+		'page callback' => 'menuLoad',
+		'page arguments' => array('CartShopController/delAllCart'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -126,7 +142,7 @@ function Shop_menu() {
 		"title" => t('Gửi đơn hàng'),
 		"description" => "Gửi đơn hàng",
 		'page callback' => 'menuLoad',
-		'page arguments' => array('CartShopController/cartSendShop'),
+		'page arguments' => array('CartShopController/sendCart'),
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
@@ -182,11 +198,11 @@ function Shop_theme() {
 	      'template' => 'View/tpl/product/detailShop'
 	    ),
 	    //cart shop
-	    'cartShop' => array(
-	      'template' => 'View/tpl/cart/cartShop'
+	    'showCart' => array(
+	      'template' => 'View/tpl/cart/showCart'
 	    ),
-	    'cartSendShop' => array(
-	      'template' => 'View/tpl/cart/cartSendShop'
+	    'sendCart' => array(
+	      'template' => 'View/tpl/cart/sendCart'
 	    ),
 
 		//contact shop

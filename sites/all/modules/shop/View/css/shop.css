@@ -1087,3 +1087,6 @@ table.list-pay span.price {
 .list-btn-control {
     margin-top: 5px;
 }
+.list-btn-control .text-center{
+    text-align: center;
+}

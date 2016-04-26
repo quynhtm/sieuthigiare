@@ -36,8 +36,7 @@ class CartShopController{
 		}
 		echo $mes; exit();
 	}
-
-	public function cartShop(){
+	public function showCart(){
 		global $base_url;
 		
 		$listCart 	= isset($_SESSION['cart']) ? $_SESSION['cart'] :  array();
@@ -45,7 +44,16 @@ class CartShopController{
 		$result = array();
 
 		if(!empty($updateCart)){
-			bug($updateCart);
+			foreach($updateCart as $k => $v){
+				if($v == 0){
+					unset($_SESSION['cart'][$k]);
+					if(empty($_SESSION['cart'])){
+						unset($_SESSION['cart'][$k]);
+					}
+				}else{
+					$_SESSION['cart'][$k] = $v;
+				}
+			}
 			$listCart = $_SESSION['cart'];
 			drupal_goto($base_url.'/gio-hang.html');
 		}
@@ -62,10 +70,24 @@ class CartShopController{
 			}
 		}
 
-		return theme('cartShop', array('result'=>$result));
+		return theme('showCart', array('result'=>$result));
 	}
-	public function cartSendShop(){
+	function delOne(){
+		$id = FunctionLib::getParam('id', 0);
+		if($id > 0){
+			unset($_SESSION['cart'][$id]);
+			echo 'oK';exit();
+		}
+	}
+	public function delAllCart(){
+		$delAll = FunctionLib::getParam('delAll', array());
+		if($delAll == 'delAll'){
+			unset($_SESSION['cart']);
+			echo 'ok';exit();
+		}
+	}
+	public function sendCart(){
 		
-		return theme('cartSendShop');
+		return theme('sendCart');
 	}
 }
