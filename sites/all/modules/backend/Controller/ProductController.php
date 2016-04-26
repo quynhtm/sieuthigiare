@@ -9,7 +9,8 @@ class ProductController{
 
 	private $arrTypePrice = array(-1 => '--Chọn kiểu giá--', TYPE_PRICE_NUMBER => 'Hiển thị giá bán', TYPE_PRICE_CONTACT => 'Liên hệ với shop');
 	private $arrTypeProduct = array(-1 => '--Chọn loại sản phẩm--', PRODUCT_NOMAL => 'Sản phẩm bình thường', PRODUCT_HOT => 'Sản phẩm nổi bật', PRODUCT_SELLOFF => 'Sản phẩm giảm giá');
-
+	private $arrCategory = array();
+	private $arrUserShop = array();
 	public function __construct(){
 		$files = array(
 			'bootstrap/lib/ckeditor/ckeditor.js',
@@ -34,6 +35,9 @@ class ProductController{
 			'View/js/admin.js',
 		);
 		Loader::load('Admin', $files);
+
+		$this->arrCategory = DataCommon::getOptionTreeCategory();
+		$this->arrUserShop = DataCommon::getListUserShop();
 	}
 
 	function indexProduct(){
@@ -112,6 +116,8 @@ class ProductController{
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 			$item_id = FunctionLib::getParam('id', 0);
 			$product_type_price = FunctionLib::getIntParam('product_type_price',TYPE_PRICE_NUMBER);
+			$user_shop_id = FunctionLib::getParam('user_shop_id',0);
+			$user_shop = ($user_shop_id > 0)? DataCommon::getShopById($user_shop_id): array();
 			$data = array(
 				'category_id'=>array('value'=>FunctionLib::getIntParam('category_id',''), 'require'=>1, 'messages'=>'Chưa chọn danh mục sản phẩm'),
 				'product_name'=>array('value'=>FunctionLib::getParam('product_name',''), 'require'=>1, 'messages'=>'Tên sản phẩm không được trống!'),
@@ -125,12 +131,12 @@ class ProductController{
 				'product_selloff'=>array('value'=>FunctionLib::getParam('product_selloff','')),
 				'product_image'=>array('value'=>FunctionLib::getParam('image_primary','')),
 				'product_image_hover'=>array('value'=>FunctionLib::getParam('image_primary_hover','')),
-				'product_order'=>array('value'=>FunctionLib::getIntParam('product_order','')),
+				'product_order'=>array('value'=>FunctionLib::getIntParam('product_order',100)),
 
-				/*'user_shop_id'=>array('value'=>$user_shop->shop_id, 'require'=>0),
-				'user_shop_name'=>array('value'=>$user_shop->shop_name, 'require'=>0),
-				'shop_province'=>array('value'=>$user_shop->shop_province, 'require'=>0),
-				'is_shop'=>array('value'=>$user_shop->is_shop, 'require'=>0),*/
+				'user_shop_id'=>array('value'=>$user_shop_id, 'require'=>0),
+				'user_shop_name'=>array('value'=>isset($user_shop->shop_name)?$user_shop->shop_name:'', 'require'=>0),
+				'shop_province'=>array('value'=>isset($user_shop->shop_province)?$user_shop->shop_province: 22, 'require'=>0),
+				'is_shop'=>array('value'=>isset($user_shop->is_shop)?$user_shop->is_shop: SHOP_NOMAL, 'require'=>0),
 
 				'product_status'=>array('value'=>FunctionLib::getIntParam('product_status',STASTUS_HIDE), 'require'=>0),
 				'product_is_hot'=>array('value'=>FunctionLib::getIntParam('product_is_hot',PRODUCT_NOMAL), 'require'=>0),
@@ -199,16 +205,18 @@ class ProductController{
 				drupal_goto($base_url.'/admincp/product');
 			}
 		}
-		$arrCategoryChildren = DataCommon::getListCategoryChildren(43);//fix tạm
-		$optionCategoryChildren = FunctionLib::getOption(array(-1=>'Chọn danh mục sản phẩm') + $arrCategoryChildren, isset($arrItem->category_id)? $arrItem->category_id : -1);
+
+		$optionCategory = FunctionLib::getOptionTreeCategory($this->arrCategory,isset($arrItem->category_id)? $arrItem->category_id : 0, array());
 		$optionStatus = FunctionLib::getOption($this->arrProductStatus, isset($arrItem->product_status)? $arrItem->product_status : -1);
 		$optionTypeProduct = FunctionLib::getOption($this->arrTypeProduct, isset($arrItem->product_is_hot)? $arrItem->product_is_hot : -1);
 		$optionTypePrice = FunctionLib::getOption($this->arrTypePrice, isset($arrItem->product_type_price)? $arrItem->product_type_price : TYPE_PRICE_NUMBER);
+		$optionUserShop = FunctionLib::getOption($this->arrUserShop, isset($arrItem->user_shop_id)? $arrItem->user_shop_id : 0);
 		return theme('addProduct',
-			array('optionCategoryChildren'=>$optionCategoryChildren,
+			array('optionCategory'=>$optionCategory,
 				'optionStatus'=>$optionStatus,
 				'optionTypeProduct'=>$optionTypeProduct,
 				'optionTypePrice'=>$optionTypePrice,
+				'optionUserShop'=>$optionUserShop,
 				'arrItem'=>$arrItem,
 				'title'=>'Sửa sản phẩm',
 				'arrImageOther'=>$arrImageOther,));

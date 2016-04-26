@@ -408,6 +408,29 @@ class FunctionLib{
 		return '';
 	}
 
+	static function getOptionTreeCategory($options_array, $selected, $disabled = array()) {
+		$input = '<option value="0">-- Chọn danh mục  --</option>';
+		if ($options_array)
+			foreach ($options_array as $k => $val) {
+				$key = $val['category_id'];
+				$input .= '<option value="' . $key . '"';
+				if (!in_array($selected, $disabled)) {
+					if ($key === '' && $selected === '') {
+						$input .= ' selected';
+					} else
+						if ($selected !== '' && $key == $selected) {
+							$input .= ' selected';
+						}
+				}
+				if (!empty($disabled)) {
+					if (in_array($key, $disabled)) {
+						$input .= ' disabled';
+					}
+				}
+				$input .= '>' . $val['padding_left'] . $val['category_name'] . '</option>';
+			}
+		return $input;
+	}
 	/*
 	* DuyNx cut string
 	* $start_cut_str: so ky tu dau cat bo

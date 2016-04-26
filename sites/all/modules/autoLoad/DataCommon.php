@@ -238,6 +238,34 @@ class DataCommon{
 	}
 
 	/**
+	 * get danh sach shop dang ho?t ??ng
+	 * @return array
+	 */
+	public static function getListUserShop(){
+		$user_shop = array();
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_LIST_USER_SHOP;
+		if(Cache::CACHE_ON){
+			$cache = new Cache();
+			$user_shop = $cache->do_get($key_cache);
+		}
+		if($user_shop == null || empty($user_shop)){
+			$query = db_select(self::$table_user_shop, 's')
+				->condition('s.shop_status', STASTUS_SHOW, '=')
+				->fields('s', array('shop_id', 'shop_name'));
+			$data = $query->execute();
+			if (!empty($data)) {
+				foreach ($data as $k => $shop) {
+					$user_shop[$shop->shop_id] = $shop->shop_name;
+				}
+				if (Cache::CACHE_ON) {
+					$cache->do_put($key_cache, $user_shop, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+				}
+			}
+		}
+		return $user_shop;
+	}
+
+	/**
 	 * @param int $product_id
 	 * @return array
 	 */
@@ -353,5 +381,78 @@ class DataCommon{
 			}
 		}
 		return $bannerAdvanced;
+	}
+
+	/**
+	 * build cây danh m?c
+	 * Tao Option chon danh m?c hien th? theo cay
+	 * @param $data
+	 * @return array
+	 */
+	public static function getOptionTreeCategory(){
+		$optionTreeCategory = array();
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_OPTION_TREE_CATEGORY;
+		if(Cache::CACHE_ON){
+			$cache = new Cache();
+			$optionTreeCategory = $cache->do_get($key_cache);
+		}
+		if($optionTreeCategory == null || empty($optionTreeCategory)) {
+			$query = db_select(self::$table_category, 'c')
+				->condition('c.category_status', STASTUS_SHOW, '=')
+				->orderBy('c. category_order', 'ASC')
+				->fields('c');
+			$data = $query->execute();
+			$dataCate = array();
+			if (!empty($data)) {
+				foreach ($data as $k => $banner) {
+					$dataCate[] = $banner;
+				}
+			}
+
+			$max = 0;
+			$arrCategory = array();
+			if (!empty($dataCate)) {
+				foreach ($dataCate as $k => $value) {
+					$max = ($max < $value->category_parent_id) ? $value->category_parent_id : $max;
+					$arrCategory[$value->category_id] = array(
+						'category_id' => $value->category_id,
+						'category_parent_id' => $value->category_parent_id,
+						'category_name' => $value->category_name);
+				}
+			}
+			if ($max > 0) {
+				$optionTreeCategory = self::showCategory($max, $arrCategory);
+			}
+
+			if (Cache::CACHE_ON) {
+				$cache->do_put($key_cache, $optionTreeCategory, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+			}
+		}
+		return $optionTreeCategory;
+	}
+	public static function showCategory($max, $aryDataInput) {
+		$aryData = array();
+		if(is_array($aryDataInput) && count($aryDataInput) > 0) {
+			foreach ($aryDataInput as $k => $val) {
+				if((int)$val['category_parent_id'] == 0) {
+					$val['padding_left'] = '';
+					$val['category_parent_name'] = '';
+					$aryData[] = $val;
+					self::showSubCategory($val['category_id'],$max, $aryDataInput, $aryData);
+				}
+			}
+		}
+		return $aryData;
+	}
+	public static function showSubCategory($cat_id, $max, $aryDataInput, &$aryData) {
+		if($cat_id <= $max) {
+			foreach ($aryDataInput as $chk => $chval) {
+				if($chval['category_parent_id'] == $cat_id) {
+					$chval['padding_left'] = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+					$aryData[] = $chval;
+					self::showSubCategory($chval['category_id'], $max, $aryDataInput, $aryData);
+				}
+			}
+		}
 	}
 }

@@ -117,6 +117,7 @@ class UserShopController{
 					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_USER_SHOP_ID.$id;
 					$cache = new Cache();
 					$cache->do_remove($key_cache);
+					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_LIST_USER_SHOP);
 				}
 				drupal_goto($base_url.'/admincp/usershop');
 			}
@@ -157,6 +158,7 @@ class UserShopController{
 					UserShop::save($data, $shop_id);
 					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_USER_SHOP_ID.$shop_id;
 					$cache->do_remove($key_cache);
+					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_LIST_USER_SHOP);
 
 					//lấy các sản phẩm của nó và khóa lại
 					DataCommon::updateInforProductByShopId($shop_id,PRODUCT_BLOCK);
@@ -178,6 +180,7 @@ class UserShopController{
 					UserShop::save($data, $shop_id);
 					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_USER_SHOP_ID.$shop_id;
 					$cache->do_remove($key_cache);
+					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_LIST_USER_SHOP);
 
 					//lấy các sản phẩm của nó và khóa lại
 					DataCommon::updateInforProductByShopId($shop_id,PRODUCT_NOT_BLOCK);
@@ -199,6 +202,7 @@ class UserShopController{
 					UserShop::save($data, $shop_id);
 					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_USER_SHOP_ID.$shop_id;
 					$cache->do_remove($key_cache);
+					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_LIST_USER_SHOP);
 
 					//lấy các sản phẩm của nó và khóa lại
 					DataCommon::updateInforProductByShopId($shop_id,PRODUCT_BLOCK);

@@ -6,20 +6,29 @@
 		</div>
 	</div>
 	<div class="page-content-box paddingTop30">
-		 <form class="form-horizontal" name="txtForm" action="" method="post" enctype="multipart/form-data">
+        <div class="show-bottom-info">
+		     <form class="form-horizontal" name="txtForm" action="" method="post" enctype="multipart/form-data">
              <!--Block 1-->
              <div class="col-lg-3">
                  <div class="col-lg-12">
-                     <label class="control-label">Tên Sản phẩm<span>(*)</span></label>
+                     <label class="control-label">Tên Sản phẩm<span class="price_sell">(*)</span></label>
                      <div>
                          <input type="text" class="form-control input-sm" placeholder="Tên Sản phẩm" name="product_name" maxlength="255" value="<?php if(isset($arrItem->product_name)) { echo $arrItem->product_name; } ?>">
                      </div>
                  </div>
                  <div class="col-lg-12 paddingTop10">
-                     <label class="control-label">Danh mục<span>(*)</span></label>
+                     <label class="control-label">User Shop<span class="price_sell">(*)</span></label>
+                     <div>
+                         <select class="form-control input-sm" name="user_shop_id" id="user_shop_id">
+                             <?php echo $optionUserShop ?>
+                         </select>
+                     </div>
+                 </div>
+                 <div class="col-lg-12 paddingTop10">
+                     <label class="control-label">Danh mục<span class="price_sell">(*)</span></label>
                      <div>
                          <select class="form-control input-sm" name="category_id" id="category_id">
-                             <?php echo $optionCategoryChildren ?>
+                             <?php echo $optionCategory ?>
                          </select>
                      </div>
                  </div>
@@ -59,7 +68,7 @@
                      </div>
                  </div>
                  <div class="col-lg-12 paddingTop10">
-                     <label class="control-label">Giá bán<span>(*)</span></label>
+                     <label class="control-label">Giá bán<span class="price_sell">(*)</span></label>
                      <div>
                          <input type="text" placeholder="Giá bán" id="product_price_sell" name="product_price_sell" class="formatMoney text-right form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="<?php if(isset($arrItem->product_price_sell)) { echo $arrItem->product_price_sell; } ?>">
                          <input type="hidden" id="product_price_sell_hide" name="product_price_sell_hide" value="0">
@@ -96,7 +105,7 @@
                      </div>
                  </div>
                  <!--hien thi anh-->
-                 <ul id="sys_drag_sort" class="ul_drag_sort">
+                 <ul id="sys_drag_sort" class="ul_drag_sort paddingTop10" style="margin-left: 10px!important;">
                      <?php if(isset($arrItem->product_image_other)){
                          $key_primary = -1;
                          $image_primary = $arrItem->product_image;
@@ -142,12 +151,12 @@
 
              <div class="col-lg-12">
                  <div class="col-lg-12 paddingTop10">
-                     <label class="control-label">Mô tả ngắn<span>(*)</span></label>
+                     <label class="control-label">Mô tả ngắn<span class="price_sell">(*)</span></label>
                      <div><textarea id="product_sort_desc" name="product_sort_desc" class="form-control input-sm" cols="30" rows="10"><?php if(isset($arrItem->product_sort_desc)) { echo $arrItem->product_sort_desc; } ?></textarea></div>
                  </div>
 
                  <div class="col-lg-12 paddingTop10">
-                     <label class="control-label">Mô tả ngắn<span>(*)</span></label>
+                     <label class="control-label">Mô tả ngắn<span class="price_sell">(*)</span></label>
                      <div><button type="button" onclick="Common_admin.insertImageContent(2)" class="btn btn-primary">Chèn ảnh vào nội dung</button></div>
                      <div>
                          <textarea name="product_content" id="product_content" class="form-control input-sm" cols="30" rows="10"><?php if(isset($arrItem->product_content)) { echo $arrItem->product_content; } ?></textarea>
@@ -162,6 +171,7 @@
                  </div>
              </div>
 		 </form>
+	    </div>
 	</div>
 </div>
 
