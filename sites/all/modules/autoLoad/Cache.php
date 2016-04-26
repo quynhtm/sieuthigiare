@@ -10,6 +10,8 @@ class Cache {
     const CACHE_TIME_TO_LIVE_60 = 3600; //Time cache 60 phut
     const CACHE_TIME_TO_LIVE_ONE_DAY = 86400; //Time cache 1 ngay
     const CACHE_TIME_TO_LIVE_ONE_WEEK = 604800; //Time cache 1 tuan
+    const CACHE_TIME_TO_LIVE_ONE_MONTH = 4*604800; //Time cache 1 tháng
+    const CACHE_TIME_TO_LIVE_ONE_YEAR =  4*12*604800; //Time cache 1 n?m
 
     const VERSION_CACHE = 'ver_2_';//dung de thay doi cache tat ca,khong phai remove tung cache
 
@@ -29,6 +31,7 @@ class Cache {
     const CACHE_LIST_CATEGORY_PARENT = 'cache_list_category_parent';
     const CACHE_CATEGORY_CHILDREN_PARENT_ID = 'cache_category_children_parent_id_';
     const CACHE_CATEGORY_ID = 'cache_category_id_';
+    const CACHE_TREE_MENU_CATEGORY_HEADER = 'cache_tree_menu_category_header';
 
 	public function do_put( $key, $value, $time = 0 ){
         //if $time = 0: mac dinh la 5nam (^_^)

@@ -5,7 +5,7 @@
 class Category{
 	static $table_action = TABLE_CATEGORY;
 	static $primary_key = 'category_id';
-	static $arrFields = array('category_id', 'category_name', 'category_parent_id', 'category_status', 'category_order', 'category_content_front');
+	static $arrFields = array('category_id', 'category_name', 'category_parent_id', 'category_status', 'category_order', 'category_image_background', 'category_content_front');
 
 	public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
 		//n?u get field rong thi lay all
