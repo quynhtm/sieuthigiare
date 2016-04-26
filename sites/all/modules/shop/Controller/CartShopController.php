@@ -22,9 +22,12 @@ class CartShopController{
 		if(!empty($arrItem)){
 			if($arrItem[0]->product_status == STASTUS_SHOW){
 				if(isset($_SESSION['cart'][$pid])){
-					$num = $_SESSION['cart'][$pid] + $pnum;	
+					$num = $_SESSION['cart'][$pid] + $pnum;
 				}else{
 					$num = $pnum;
+				}
+				if($num > 10){
+					$num = 10;
 				}
 				$_SESSION['cart'][$pid] = $num;
 				$mes = 'ok';

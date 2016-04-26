@@ -1053,7 +1053,7 @@ table.list-pay span.price {
     display: inline-block;
     margin-bottom: 45px;
     width: 100%;
-    font-size: 30px;
+    font-size: 25px;
 }
 .form-send-register {
     margin: 0 auto;
@@ -1088,4 +1088,7 @@ table.list-pay span.price {
 }
 .list-btn-control .text-center{
     text-align: center;
+}
+.title-head{
+    font-size: 25px;
 }

@@ -4,7 +4,7 @@
 		<div class="wrap-main-view">
 			<div class="view-content-post">
 				<?php if(!empty($result)){?>
-				<h1 class="title-head text-left"><a title="Tất cả các sản phẩm trong giỏ hàng" href="<?php echo $base_url.'/gio-hang.html'?>">Tất cả các sản phẩm trong giỏ hàng</a></h1>
+				<h3 class="title-head text-left"><a rel="nofollow" title="Giỏ hàng của bạn" href="<?php echo $base_url.'/gio-hang.html'?>">Giỏ hàng của bạn</a></h3>
 				<form method="post" action="" name="txtFormShopCart" id="txtFormShopCart">
 				<div class="grid-shop-cart">
 					<table width="100%" class="list-shop-cart-item">
