@@ -6,7 +6,10 @@ class ProductController{
 	private $arrProductStatus = array(-1 => 'Tất cả', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
 	private $arrIsBlock = array(-1 => 'Tất cả', BLOCK_TRUE => 'Không khóa', BLOCK_FALSE => 'Đang khóa');
 	private $arrIsShop = array(-1 => 'Tất cả', SHOP_FREE => 'Shop Free', SHOP_NOMAL => 'Shop thường', SHOP_VIP => 'Shop VIP');
-	private $arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
+
+	private $arrTypePrice = array(-1 => '--Chọn kiểu giá--', TYPE_PRICE_NUMBER => 'Hiển thị giá bán', TYPE_PRICE_CONTACT => 'Liên hệ với shop');
+	private $arrTypeProduct = array(-1 => '--Chọn loại sản phẩm--', PRODUCT_NOMAL => 'Sản phẩm bình thường', PRODUCT_HOT => 'Sản phẩm nổi bật', PRODUCT_SELLOFF => 'Sản phẩm giảm giá');
+
 	public function __construct(){
 		$files = array(
 			'bootstrap/lib/ckeditor/ckeditor.js',
@@ -39,23 +42,18 @@ class ProductController{
 		//search
 		$dataSearch['product_status'] = FunctionLib::getParam('product_status', -1);
 		$dataSearch['product_id'] = FunctionLib::getParam('product_id', -1);
-		$arrField = array('product_id', 'product_name',
-			'product_price_sell', 'product_price_market', 'product_price_input','product_type_price',
-			'product_selloff', 'product_is_hot','product_image', 'product_image_hover','product_image_other',
-			'category_id', 'category_name',	'product_status', 'is_block','user_shop_id', 'user_shop_name','is_shop', 'shop_province','time_created', 'time_update');
-		$result = Product::getSearchListItems($dataSearch,$limit,$arrField);
+		$result = Product::getSearchListItems($dataSearch,$limit,array());
 		if(isset($result['data']) && !empty($result['data'])){
 			foreach($result['data'] as $k => &$value){
 				if( isset($value->product_image) && trim($value->product_image) != ''){
 					$value->url_image = FunctionLib::getThumbImage($value->product_image,$value->product_id,FOLDER_PRODUCT,80,80);
-					$value->url_image_hover = FunctionLib::getThumbImage($value->product_image,$value->product_id,FOLDER_PRODUCT,450,200);
+					$value->url_image_hover = FunctionLib::getThumbImage($value->product_image,$value->product_id,FOLDER_PRODUCT,300,300);
 				}
 			}
 		}
 
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrProductStatus, $dataSearch['product_status']);
-
 		return $view = theme('indexProduct',array(
 									'title'=>'San pham',
 									'result' => $result['data'],
@@ -70,6 +68,23 @@ class ProductController{
 	}
 
 	function formProductAction(){
+		$files = array(
+			'bootstrap/lib/ckeditor/ckeditor.js',
+			'bootstrap/lib/ckeditor/config.js',
+			'bootstrap/lib/dragsort/jquery.dragsort.js',
+			'js/autoNumeric.js',
+		);
+		Loader::loadJSExt('Core', $files);
+		$files = array(
+			'bootstrap/lib/upload/cssUpload.css',
+			'bootstrap/js/bootstrap.min.js',
+			'bootstrap/lib/upload/jquery.uploadfile.js',
+			'js/common_admin.js',
+
+			'bootstrap/lib/datetimepicker/datetimepicker.css',
+			'bootstrap/lib/datetimepicker/jquery.datetimepicker.js',
+		);
+		Loader::load('Core', $files);
 		global $base_url;
 	
 		$param = arg();
@@ -81,8 +96,8 @@ class ProductController{
 
 			//lấy mảng ảnh khách của item để chèn vào nội dung
 			if(!empty($arrItem)){
-				if(isset($arrItem->news_image_other) && trim($arrItem->news_image_other) != ''){
-					$arrOther = unserialize($arrItem->news_image_other);
+				if(isset($arrItem->product_image_other) && trim($arrItem->product_image_other) != ''){
+					$arrOther = unserialize($arrItem->product_image_other);
 					foreach($arrOther as $k =>$val_other){
 						$arrImageOther[] = array(
 							'image_small'=> FunctionLib::getThumbImage($val_other,$arrItem->product_id,FOLDER_PRODUCT,80,80),
@@ -96,18 +111,38 @@ class ProductController{
 
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 			$item_id = FunctionLib::getParam('id', 0);
-			$dataInput = array(
-				'news_title'=>array('value'=>FunctionLib::getParam('news_title',''), 'require'=>1, 'messages'=>'Tiêu đề tin bài không được trống!'),
-				'news_desc_sort'=>array('value'=>FunctionLib::getParam('news_desc_sort','')),
-				'news_image'=>array('value'=>FunctionLib::getParam('image_primary','')),
-				'news_content'=>array('value'=>FunctionLib::getParam('news_content','')),
-				'news_status'=>array('value'=>FunctionLib::getParam('news_status',0)),
-				'news_category'=>array('value'=>FunctionLib::getParam('news_category',0)),
-				'news_create'=>array('value'=>FunctionLib::getParam('news_create',0)),
-				'news_type'=>array('value'=>FunctionLib::getParam('news_type',0)),
+			$product_type_price = FunctionLib::getIntParam('product_type_price',TYPE_PRICE_NUMBER);
+			$data = array(
+				'category_id'=>array('value'=>FunctionLib::getIntParam('category_id',''), 'require'=>1, 'messages'=>'Chưa chọn danh mục sản phẩm'),
+				'product_name'=>array('value'=>FunctionLib::getParam('product_name',''), 'require'=>1, 'messages'=>'Tên sản phẩm không được trống!'),
+				'product_content'=>array('value'=>FunctionLib::getParam('product_content',''), 'require'=>1, 'messages'=>'Chi tiết sản phẩm không được trống!'),
+				'product_sort_desc'=>array('value'=>FunctionLib::getParam('product_sort_desc',''), 'require'=>1, 'messages'=>'Chi tiết sản phẩm không được trống!'),
+
+				'product_price_sell'=>array('value'=>FunctionLib::getIntParam('product_price_sell_hide',0)),
+				'product_price_market'=>array('value'=>FunctionLib::getIntParam('product_price_market_hide',0)),
+				'product_price_input'=>array('value'=>FunctionLib::getIntParam('product_price_input_hide',0)),
+
+				'product_selloff'=>array('value'=>FunctionLib::getParam('product_selloff','')),
+				'product_image'=>array('value'=>FunctionLib::getParam('image_primary','')),
+				'product_image_hover'=>array('value'=>FunctionLib::getParam('image_primary_hover','')),
+				'product_order'=>array('value'=>FunctionLib::getIntParam('product_order','')),
+
+				/*'user_shop_id'=>array('value'=>$user_shop->shop_id, 'require'=>0),
+				'user_shop_name'=>array('value'=>$user_shop->shop_name, 'require'=>0),
+				'shop_province'=>array('value'=>$user_shop->shop_province, 'require'=>0),
+				'is_shop'=>array('value'=>$user_shop->is_shop, 'require'=>0),*/
+
+				'product_status'=>array('value'=>FunctionLib::getIntParam('product_status',STASTUS_HIDE), 'require'=>0),
+				'product_is_hot'=>array('value'=>FunctionLib::getIntParam('product_is_hot',PRODUCT_NOMAL), 'require'=>0),
+				'product_type_price'=>array('value'=>$product_type_price),
 			);
 
-			//lấy lại vị trí sắp xếp của ảnh khác
+			if(!empty($arrItem)){
+				$data['time_update']['value'] = time();
+			}else{
+				$data['time_created']['value'] = time();
+			}
+			//lay lai vi tri sap xep cua anh khac
 			$arrInputImgOther = array();
 			$getImgOther = FunctionLib::getParam('img_other',array());
 
@@ -119,14 +154,21 @@ class ProductController{
 				}
 			}
 			if (!empty($arrInputImgOther) && count($arrInputImgOther) > 0) {
-				//nếu không chọn ảnh chính, lấy ảnh chính là cái đầu tiên
-				if($dataInput['news_image']['value'] == ''){
-					$dataInput['news_image']['value'] = $arrInputImgOther[0];
+				//neu ko co anh chinh, lay anh chinh la cai anh dau tien
+				if($data['product_image']['value'] == ''){
+					$data['product_image']['value'] = $arrInputImgOther[0];
 				}
-				$dataInput['news_image_other']['value'] = serialize($arrInputImgOther);
+				//neu ko co anh hove, lay anh hove la cai anh dau tien
+				if($data['product_image_hover']['value'] == ''){
+					$data['product_image_hover']['value'] = (isset($arrInputImgOther[1]))?$arrInputImgOther[1]:$arrInputImgOther[0];
+				}elseif($data['product_image_hover']['value'] != ''){
+					if($data['product_image']['value'] != '' && strcmp($data['product_image']['value'],$data['product_image_hover']['value']) == 0){
+						$data['product_image_hover']['value'] = (isset($arrInputImgOther[1]))?$arrInputImgOther[1]:$arrInputImgOther[0];
+					}
+				}
+				$data['product_image_other']['value'] = serialize($arrInputImgOther);
 			}
-
-			$errors = ValidForm::validInputData($dataInput);
+			$errors = ValidForm::validInputData($data);
 			if($errors != ''){
 				drupal_set_message($errors, 'error');
 				if($item_id > 0){
@@ -136,7 +178,19 @@ class ProductController{
 				}
 			}else{
 				//FunctionLib::Debug($dataInput);
-				Product::save($dataInput, $item_id);
+				if($data['category_id']['value'] > 0 ){
+					$arrCat = DataCommon::getCategoryById($data['category_id']['value']);
+					if(!empty($arrCat)){
+						$data['category_name']['value'] = $arrCat->category_name;
+					}
+				}
+				//check nếu ko nhập giá bán thì cho về hiển thị kiểu liên hệ
+				if($product_type_price == TYPE_PRICE_NUMBER){
+					if((int)$data['product_price_sell']['value'] == 0){
+						$data['product_type_price']['value'] = TYPE_PRICE_CONTACT;
+					}
+				}
+				Product::save($data, $item_id);
 				if(Cache::CACHE_ON){
 					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_PRODUCT_ID.$item_id;
 					$cache = new Cache();
@@ -145,13 +199,19 @@ class ProductController{
 				drupal_goto($base_url.'/admincp/product');
 			}
 		}
-		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->news_status) ? $arrItem->news_status: 0);
-		return $view = theme('addProduct',
-			array('arrItem'=>$arrItem,
-				'item_id'=>$item_id,
-				'arrImageOther'=>$arrImageOther,
-				'title'=>'tin tức',
-				'optionStatus'=>$optionStatus));
+		$arrCategoryChildren = DataCommon::getListCategoryChildren(43);//fix tạm
+		$optionCategoryChildren = FunctionLib::getOption(array(-1=>'Chọn danh mục sản phẩm') + $arrCategoryChildren, isset($arrItem->category_id)? $arrItem->category_id : -1);
+		$optionStatus = FunctionLib::getOption($this->arrProductStatus, isset($arrItem->product_status)? $arrItem->product_status : -1);
+		$optionTypeProduct = FunctionLib::getOption($this->arrTypeProduct, isset($arrItem->product_is_hot)? $arrItem->product_is_hot : -1);
+		$optionTypePrice = FunctionLib::getOption($this->arrTypePrice, isset($arrItem->product_type_price)? $arrItem->product_type_price : TYPE_PRICE_NUMBER);
+		return theme('addProduct',
+			array('optionCategoryChildren'=>$optionCategoryChildren,
+				'optionStatus'=>$optionStatus,
+				'optionTypeProduct'=>$optionTypeProduct,
+				'optionTypePrice'=>$optionTypePrice,
+				'arrItem'=>$arrItem,
+				'title'=>'Sửa sản phẩm',
+				'arrImageOther'=>$arrImageOther,));
 	}
 
 	function deleteProductAction(){

@@ -7,86 +7,160 @@
 	</div>
 	<div class="page-content-box paddingTop30">
 		 <form class="form-horizontal" name="txtForm" action="" method="post" enctype="multipart/form-data">
-		 	
-            <div class="control-group">
-                <label class="control-label">Title tin tức<span>*</span></label>
-                <div class="controls">
-                    <input type="text" class="form-control input-sm" name="news_title" value="<?php if(isset($arrItem->news_title)){ echo $arrItem->news_title; } ?>">
-                </div>
-            </div>
-
-             <div class="control-group">
-                 <label for="textName" class="control-label marginTop_15">Ảnh đại diện</label>
-                 <div class="col-lg-8">
-                     <a href="javascript:;"class="btn btn-primary" onclick="Common_admin.uploadMultipleImages(1);">Upload ảnh </a>
-                     <input name="image_primary" type="hidden" id="image_primary" value="<?php if(isset($arrItem->news_image)){ echo $arrItem->news_image; } ?>">
+             <!--Block 1-->
+             <div class="col-lg-3">
+                 <div class="col-lg-12">
+                     <label class="control-label">Tên Sản phẩm<span>(*)</span></label>
+                     <div>
+                         <input type="text" class="form-control input-sm" placeholder="Tên Sản phẩm" name="product_name" maxlength="255" value="<?php if(isset($arrItem->product_name)) { echo $arrItem->product_name; } ?>">
+                     </div>
                  </div>
-            </div>
-            <!--hien thi anh-->
-            <ul id="sys_drag_sort" class="ul_drag_sort">
-            <?php if(isset($arrItem->news_image_other)){
-                $key_primary = -1;
-                $image_primary = $arrItem->news_image;
-                ?>
-                    <?php
-                        if(trim($arrItem->news_image_other) != ''){
-                            $list_news_image_other = unserialize($arrItem->news_image_other);
-                            foreach($list_news_image_other as $k=>$v){ ?>
-                                <li id="sys_div_img_other_<?php echo $k ?>">
-                                    <div class="div_img_upload">
-                                        <img src="<?php echo $base_url.'/uploads/news/'.$arrItem->news_id.'/'.$v?>" height="80" width="80">
-                                        <input type="hidden" id="sys_img_other_<?php echo $k ?>" name="img_other[]" value="<?php echo $v ?>" class="sys_img_other">
-                                        <div class='clear'></div>
-                                        <input type="radio" id="chẹcked_image_<?php echo $k ?>" name="chẹcked_image" value="<?php echo $k ?>"
-                                               <?php if (isset($image_primary) && ($image_primary == $v)){ ?> checked="checked" <?php }?>
-                                        onclick="Common_admin.checkedImage('<?php echo $v ?>','<?php echo $k ?>');">
-                                        <label for="chẹcked_image_<?php echo $k ?>" style='font-weight:normal'>Ảnh đại diện</label>
-                                        <br/><a href="javascript:void(0);" id="sys_delete_img_other_<?php echo $k ?>"onclick="Common_admin.removeImage('<?php echo $k ?>','<?php if(isset($arrItem->news_id)){ echo $arrItem->news_id; } ?>','<?php echo $v ?>','1');">Xóa ảnh</a>
-                                        <span style="display: none"><b><?php echo $k ?></b></span>
-                                    </div>
-                                    <?php
-                                        if(isset($image_primary) && $image_primary == $v){
-                                            $key_primary = $k;
-                                        }
-                                    ?>
-                                </li>
-                            <?php }?>
-                            <input type="hidden" id="sys_key_image_primary" name="sys_key_image_primary" value="<?php echo $key_primary ?>">
-                        <?php } ?>
+                 <div class="col-lg-12 paddingTop10">
+                     <label class="control-label">Danh mục<span>(*)</span></label>
+                     <div>
+                         <select class="form-control input-sm" name="category_id" id="category_id">
+                             <?php echo $optionCategoryChildren ?>
+                         </select>
+                     </div>
+                 </div>
 
-            <?php } ?>
-                    </ul>
-             <input name="list1SortOrder" id ='list1SortOrder' type="hidden" />
-            <!--ket thuc hien thi anh-->
+                 <div class="col-lg-12 paddingTop10">
+                     <label class="control-label">Loại sản phẩm</label>
+                     <div>
+                         <select class="form-control input-sm" name="product_is_hot">
+                             <?php echo $optionTypeProduct ?>
+                         </select>
+                     </div>
+                 </div>
+                 <div class="col-lg-12 paddingTop10">
+                     <label class="control-label">Thứ tự hiển thị</label>
+                     <div>
+                         <input type="text" class="form-control input-sm" placeholder="Thứ tự hiển thị" name="product_order" maxlength="10" value="<?php if(isset($arrItem->product_order)) { echo $arrItem->product_order; } ?>">
+                     </div>
+                 </div>
 
-            <div class="control-group">
-                <label class="control-label">Mô tả ngắn</label>
-                <div class="controls">
-                    <textarea name="news_desc_sort"><?php if(isset($arrItem->news_desc_sort)){ echo $arrItem->news_desc_sort; } ?></textarea>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label">Nội dung</label>
-                <div class="controls"><button type="button" onclick="Common_admin.insertImageContent(1)" class="btn btn-primary">Chèn ảnh vào nội dung</button></div>
-                <div class="controls">
-                    <textarea name="news_content"><?php if(isset($arrItem->news_content)){ echo $arrItem->news_content; } ?></textarea>
-                </div>
-            </div>
-        
-            <div class="control-group">
-                <label class="control-label">Trạng thái</label>
-                <div class="controls">
-                    <select class="form-control input-sm" name="news_status">
-                        <?php echo $optionStatus;?>
-                    </select>
-                </div>
-            </div>
-            <div class="form-actions">
-                <input type="hidden" id="id_hiden" name="id" value="<?php if(isset($arrItem->news_id)){ echo $arrItem->news_id; } ?>"/>
-                <input type="hidden" value="txt-form-post" name="txt-form-post">
-				<button type="submit" name="txtSubmit" id="buttonSubmit" class="btn btn-primary">Lưu lại</button>
-                <button type="reset" class="btn">Bỏ qua</button>
-            </div>
+                 <div class="col-lg-12 paddingTop10">
+                     <label class="control-label">Trạng thái ẩn/hiện</label>
+                     <div>
+                         <select class="form-control input-sm" name="product_status">
+                             <?php echo $optionStatus ?>
+                         </select>
+                     </div>
+                 </div>
+             </div>
+             <!--Block 2-->
+             <div class="col-lg-3">
+                 <div class="col-lg-12">
+                     <label class="control-label">Kiểu hiển thị giá</label>
+                     <div>
+                         <select class="form-control input-sm" name="product_type_price" id="product_type_price">
+                             <?php echo $optionTypePrice ?>
+                         </select>
+                     </div>
+                 </div>
+                 <div class="col-lg-12 paddingTop10">
+                     <label class="control-label">Giá bán<span>(*)</span></label>
+                     <div>
+                         <input type="text" placeholder="Giá bán" id="product_price_sell" name="product_price_sell" class="formatMoney text-right form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="<?php if(isset($arrItem->product_price_sell)) { echo $arrItem->product_price_sell; } ?>">
+                         <input type="hidden" id="product_price_sell_hide" name="product_price_sell_hide" value="0">
+                     </div>
+                 </div>
+                 <div class="col-lg-12 paddingTop10">
+                     <label class="control-label">Giá thị trường</label>
+                     <div>
+                         <input type="text" placeholder="Giá thị trường" name="product_price_market" id="product_price_market" class="formatMoney text-right form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="<?php if(isset($arrItem->product_price_market)) { echo $arrItem->product_price_market; } ?>">
+                         <input type="hidden" id="product_price_market_hide" name="product_price_market_hide" value="0">
+                     </div>
+                 </div>
+                 <div class="col-lg-12 paddingTop10">
+                     <label class="control-label">Giá nhập</label>
+                     <div>
+                         <input type="text" placeholder="Giá nhập" name="product_price_input" id="product_price_input" class="formatMoney text-right form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="<?php if(isset($arrItem->product_price_sell)) { echo $arrItem->product_price_sell; } ?>">
+                         <input type="hidden" id="product_price_input_hide" name="product_price_input_hide" value="0">
+                     </div>
+                 </div>
+                 <div class="col-lg-12 paddingTop10">
+                     <label class="control-label">Thông tin khuyến mại</label>
+                     <div>
+                         <input type="text" class="form-control input-sm" placeholder="Thông tin khuyến mại" name="product_selloff" maxlength="255" value="<?php if(isset($arrItem->product_selloff)) { echo $arrItem->product_selloff; } ?>">
+                     </div>
+                 </div>
+             </div>
+
+             <div class="col-lg-6">
+                 <div class="col-lg-12 paddingTop10">
+                     <div class="col-lg-12">
+                         <a href="javascript:;"class="btn btn-primary" onclick="Common_admin.uploadMultipleImages(2);">Upload ảnh</a>
+                         <input name="image_primary" type="hidden" id="image_primary" value="<?php if(isset($arrItem->product_image)) { echo $arrItem->product_image; } ?>">
+                         <input name="image_primary_hover" type="hidden" id="image_primary_hover" value="<?php if(isset($arrItem->product_image_hover)) { echo $arrItem->product_image_hover; } ?>">
+                     </div>
+                 </div>
+                 <!--hien thi anh-->
+                 <ul id="sys_drag_sort" class="ul_drag_sort">
+                     <?php if(isset($arrItem->product_image_other)){
+                         $key_primary = -1;
+                         $image_primary = $arrItem->product_image;
+                         $image_primary_hover = $arrItem->product_image_hover;
+                         ?>
+                         <?php
+                         if(trim($arrItem->product_image_other) != ''){
+                             $list_product_image_other = unserialize($arrItem->product_image_other);
+                             foreach($list_product_image_other as $k=>$v){ ?>
+                                 <li id="sys_div_img_other_<?php echo $k ?>">
+                                     <div class="div_img_upload">
+                                         <img src="<?php echo $base_url.'/uploads/product/'.$arrItem->product_id.'/'.$v?>" height="80" width="80">
+                                         <input type="hidden" id="sys_img_other_<?php echo $k ?>" name="img_other[]" value="<?php echo $v ?>" class="sys_img_other">
+                                         <div class='clear'></div>
+                                         <input type="radio" id="chẹcked_image_<?php echo $k ?>" name="chẹcked_image" value="<?php echo $k ?>"
+                                             <?php if (isset($image_primary) && ($image_primary == $v)){ ?> checked="checked" <?php }?>
+                                                onclick="Common_admin.checkedImage('<?php echo $v ?>','<?php echo $k ?>');">
+                                         <label for="chẹcked_image_<?php echo $k ?>" style='font-weight:normal'>Ảnh đại diện</label>
+                                         <br/>
+                                         <input type="radio" id="chẹcked_image_hover<?php echo $k ?>" name="chẹcked_image_hover" value="<?php echo $k ?>"
+                                             <?php if (isset($image_primary_hover) && ($image_primary_hover == $v)){ ?> checked="checked" <?php }?>
+                                                onclick="Common_admin.checkedImageHover('<?php echo $v ?>','<?php echo $k ?>');">
+                                         <label for="chẹcked_image_hover<?php echo $k ?>" style='font-weight:normal'>Ảnh Hover</label>
+                                         <br/>
+                                         <a href="javascript:void(0);" id="sys_delete_img_other_<?php echo $k ?>"onclick="Common_admin.removeImage('<?php echo $k ?>','<?php if(isset($arrItem->product_id)){ echo $arrItem->product_id; } ?>','<?php echo $v ?>','2');">Xóa ảnh</a>
+                                         <span style="display: none"><b><?php echo $k ?></b></span>
+                                     </div>
+                                     <?php
+                                     if(isset($image_primary) && $image_primary == $v){
+                                         $key_primary = $k;
+                                     }
+                                     ?>
+                                 </li>
+                             <?php }?>
+                             <input type="hidden" id="sys_key_image_primary" name="sys_key_image_primary" value="<?php echo $key_primary ?>">
+                         <?php } ?>
+
+                     <?php } ?>
+                 </ul>
+                 <input name="list1SortOrder" id ='list1SortOrder' type="hidden" />
+                 <!--ket thuc hien thi anh-->
+             </div>
+
+             <div class="col-lg-12">
+                 <div class="col-lg-12 paddingTop10">
+                     <label class="control-label">Mô tả ngắn<span>(*)</span></label>
+                     <div><textarea id="product_sort_desc" name="product_sort_desc" class="form-control input-sm" cols="30" rows="10"><?php if(isset($arrItem->product_sort_desc)) { echo $arrItem->product_sort_desc; } ?></textarea></div>
+                 </div>
+
+                 <div class="col-lg-12 paddingTop10">
+                     <label class="control-label">Mô tả ngắn<span>(*)</span></label>
+                     <div><button type="button" onclick="Common_admin.insertImageContent(2)" class="btn btn-primary">Chèn ảnh vào nội dung</button></div>
+                     <div>
+                         <textarea name="product_content" id="product_content" class="form-control input-sm" cols="30" rows="10"><?php if(isset($arrItem->product_content)) { echo $arrItem->product_content; } ?></textarea>
+                     </div>
+                 </div>
+
+                 <div class="col-lg-12 paddingTop10">
+                     <input type="hidden" id="id_hiden" name="id" value="<?php if(isset($arrItem->product_id)) { echo $arrItem->product_id; } ?>"/>
+                     <input type="hidden" value="txt-form-post" name="txt-form-post">
+                     <button type="submit" name="submit" class="buttonFormShopSubmit btn btn-primary" value="1" >Lưu</button>
+                     <a href="javascript:void(0);" onclick="window.history.back();" title="Bỏ qua" class="btn btn-warning" style="background-color:#bbb;border-color:#bbb;">Bỏ qua</a>
+                 </div>
+             </div>
 		 </form>
 	</div>
 </div>
@@ -152,19 +226,29 @@
 </div>
 <!-- chen anh vào noi dung-->
 
-<script>
-    CKEDITOR.replace('news_desc_sort');
-    CKEDITOR.replace('news_content', {height:800});
-</script>
-
 <script type="text/javascript">
-    //kéo thả ảnh
-   jQuery("#sys_drag_sort").dragsort({ dragSelector: "div", dragBetween: true, dragEnd: saveOrder });
+    //dịnh dạng giá
+    jQuery('.formatMoney').autoNumeric('init');
+    CKEDITOR.replace('product_content',{height:650});
+    CKEDITOR.replace(
+        'product_sort_desc',
+        {
+            toolbar: [
+                { name: 'document',    items : [ 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' ] },
+                { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
+                { name: 'colors',      items : [ 'TextColor','BGColor' ] },
+            ],
+        },
+        {height:400}
+    );
+
+    //keo tha anh
+    jQuery("#sys_drag_sort").dragsort({ dragSelector: "div", dragBetween: true, dragEnd: saveOrder });
     function saveOrder() {
         var data = jQuery("#sys_drag_sort li div span").map(function() { return jQuery(this).children().html(); }).get();
         jQuery("input[name=list1SortOrder]").val(data.join(","));
     };
     function insertImgContent(src){
-        CKEDITOR.instances.news_content.insertHtml('<img src="'+src+'"/>');
+        CKEDITOR.instances.product_content.insertHtml('<img src="'+src+'"/>');
     }
 </script>
