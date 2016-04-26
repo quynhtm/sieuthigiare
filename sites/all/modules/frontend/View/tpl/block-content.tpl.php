@@ -28,7 +28,7 @@
 					<div class="item-content">
 						<div class="title-info">
 							<h4 class="post-title">
-								<a href="" title="<?php echo $item->product_name?>"><?php echo $item->product_name?></a>
+								<a href="<?php echo FunctionLib::buildLinkDetail($item->product_id, $item->product_name); ?>" title="<?php echo $item->product_name?>"><?php echo $item->product_name?></a>
 							</h4>
 							<div class="item-price">
                         		<?php if($item->product_type_price == 2){?>

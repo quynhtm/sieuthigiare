@@ -22,9 +22,12 @@ class CartShopController{
 		if(!empty($arrItem)){
 			if($arrItem[0]->product_status == STASTUS_SHOW){
 				if(isset($_SESSION['cart'][$pid])){
-					$num = $_SESSION['cart'][$pid] + $pnum;	
+					$num = $_SESSION['cart'][$pid] + $pnum;
 				}else{
 					$num = $pnum;
+				}
+				if($num > 10){
+					$num = 10;
 				}
 				$_SESSION['cart'][$pid] = $num;
 				$mes = 'ok';
@@ -61,7 +64,7 @@ class CartShopController{
 		if(!empty($listCart)){
 			$arrId  = array_keys($listCart);
 			$arrFields = array('product_id', 'product_name', 'product_price_sell', 'product_type_price');
-			$result = CartShop::getListCat($arrId, $arrFields);
+			$result = CartShop::getListItem($arrId, $arrFields);
 			
 			foreach($result as $key=>$item){
 				if(in_array($item->product_id, $arrId)){
@@ -87,7 +90,77 @@ class CartShopController{
 		}
 	}
 	public function sendCart(){
-		
-		return theme('sendCart');
+		global $base_url;
+
+		$result= array();
+		if(isset($_SESSION['cart'])){
+			if(!empty($_SESSION['cart'])){
+				$listCart = $_SESSION['cart'];
+				$arrId  = array_keys($listCart);
+				$arrFields = array('product_id', 'product_name', 'product_price_sell', 'product_type_price', 
+									'product_image', 'product_image_hover', 'category_id', 'category_name',
+									'user_shop_id', 'user_shop_name','shop_province'
+									);
+				$result = CartShop::getListItem($arrId, $arrFields);
+				if(!empty($result)){
+					foreach($result as $key=>$item){
+						if(in_array($item->product_id, $arrId)){
+							$result[$key]->num = $listCart[$item->product_id];
+						}	
+					}
+				}else{
+					drupal_goto($base_url);
+				}
+			}else{
+				drupal_goto($base_url);
+			}
+		}else{
+			drupal_goto($base_url);
+		}
+
+		if(isset($_POST) && !empty($_POST)){
+			$name = FunctionLib::getParam('txtName', '');
+			$phone = FunctionLib::getParam('txtMobile', '');
+			$email = FunctionLib::getParam('txtEmail', '');
+			$address = FunctionLib::getParam('txtAddress', '');
+			$message = FunctionLib::getParam('txtMessage', '');
+
+			if($name != '' && $phone != '' && $address != ''){
+				$data = array(
+						'order_customer_name'=>$name,
+						'order_customer_phone'=>$phone,
+						'order_customer_email'=>$email,
+						'order_customer_address'=>$address,
+						'order_customer_note'=>$message,
+						'order_time'=>time(),
+						'order_status'=>0
+						);
+				foreach($result as $v){
+					$data['order_product_id'] = $v->product_id;
+					$data['order_product_name'] = $v->product_name;
+					$data['order_product_price_sell'] = $v->product_price_sell;
+					$data['order_product_image'] = $v->product_image;
+					$data['order_product_type_price'] = $v->product_type_price;
+					$data['order_quality_buy'] = $v->num;
+
+					$data['order_category_id'] = $v->category_id;
+					$data['order_category_name'] = $v->category_name;
+
+					$data['order_user_shop_id'] = $v->user_shop_id;
+					$data['order_user_shop_name'] = $v->user_shop_name;
+					$data['order_product_province'] = $v->shop_province;
+
+					CartShop::insert($data);
+				}
+				unset($_SESSION['cart']);
+				drupal_goto($base_url.'/cam-on-da-mua-hang.html');
+			}
+
+		}
+
+		return theme('sendCart', array('result'=>$result));
+	}
+	public function thanksOrder(){
+		return theme('thanksOrder');
 	}
 }

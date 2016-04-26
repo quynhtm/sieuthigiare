@@ -4,7 +4,7 @@
 		<div class="wrap-main-view">
 			<div class="view-content-post">
 				<?php if(!empty($result)){?>
-				<h1 class="title-head text-left"><a title="Tất cả các sản phẩm trong giỏ hàng" href="<?php echo $base_url.'/gio-hang.html'?>">Tất cả các sản phẩm trong giỏ hàng</a></h1>
+				<h3 class="title-head text-left"><a rel="nofollow" title="Giỏ hàng của bạn" href="<?php echo $base_url.'/gio-hang.html'?>">Giỏ hàng của bạn</a></h3>
 				<form method="post" action="" name="txtFormShopCart" id="txtFormShopCart">
 				<div class="grid-shop-cart">
 					<table width="100%" class="list-shop-cart-item">
@@ -36,7 +36,7 @@
 										}else{
 											if($v->product_price_sell > 0){
 												$price = number_format($v->product_price_sell);
-												echo $price.'<sup>đ</sup>';
+												echo $price.'đ';
 											}else{
 												echo $price;
 											}
@@ -66,7 +66,7 @@
 					<div class="not-product"><?php echo NOT_PRODUCT_CART ?></div>
 				<?php } ?>
 				<div class="list-btn-control <?php if(empty($result)){?>text-center<?php } ?>">
-					<a id="backBuy" class="btn btn-primary" href="<?php echo $base_url.'/trang-chu' ?>">Tiếp tục mua hàng</a>
+					<a id="backBuy" class="btn btn-primary" href="<?php echo $base_url.'/trang-chu.html' ?>">Tiếp tục mua hàng</a>
 					<?php if(!empty($result)){?>
 					<a id="updateCart" class="btn btn-primary" href="javascript:void(0)">Cập nhật đơn hàng</a>
 					<a id="delAllCart" class="btn btn-primary" data="delAll" href="javascript:void(0)">Xóa toàn bộ đơn hàng</a>

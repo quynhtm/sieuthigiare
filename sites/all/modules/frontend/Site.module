@@ -7,7 +7,7 @@
 */
 function Site_menu() {
     
-	$items['trang-chu'] = array(
+	$items['trang-chu.html'] = array(
         'title' => t('Trang chủ'),
         'page callback' => 'page_default',
         'access callback' => TRUE,

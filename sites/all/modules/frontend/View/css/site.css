@@ -95,7 +95,7 @@ span#logo{
     display: inline-block;
     font-size: 12px;
     font-weight: bold;
-    padding-left: 30px;
+    padding-left: 20px;
 }
 .btnLog:hover,
 .btnLog:focus,
@@ -279,26 +279,26 @@ span#logo{
     float: left;
     height: 46px;
     margin-left: 105px;
-    margin-top: -10px;
+    margin-top: -2px;
     position: relative;
     width: 50px;
 }
-.shopping-cart .num-item{
-    color: #fff;
+.shopping-cart .num-item {
+    color: #cc0000;
+    cursor: pointer;
     font-size: 11px;
     font-weight: 400;
     height: 16px;
+    left: 15px;
     line-height: 16px;
     overflow: hidden;
     padding: 0 3px;
     position: absolute;
-    right: 2px;
     text-align: center;
     text-overflow: ellipsis;
-    top: 3px;
+    top: -5px;
     white-space: nowrap;
     width: 25px;
-    cursor: pointer;
 }
 /*content*/
 .box-menu-list{

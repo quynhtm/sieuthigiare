@@ -146,7 +146,14 @@ function Shop_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
-
+	$items["cam-on-da-mua-hang.html"] = array(
+		"title" => t('Cảm ơn đã mua hàng'),
+		"description" => "Cảm ơn đã mua hàng",
+		'page callback' => 'menuLoad',
+		'page arguments' => array('CartShopController/thanksOrder'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
 	//contact shop
 	$items["lien-he-quan-tri.html"] = array(
 		"title" => t('Quản lý liên hệ'),
@@ -203,6 +210,9 @@ function Shop_theme() {
 	    ),
 	    'sendCart' => array(
 	      'template' => 'View/tpl/cart/sendCart'
+	    ),
+	    'thanksOrder' => array(
+	      'template' => 'View/tpl/cart/thanksOrder'
 	    ),
 
 		//contact shop
