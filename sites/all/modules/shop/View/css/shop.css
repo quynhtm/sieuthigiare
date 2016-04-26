@@ -906,10 +906,9 @@ a.btn-yahoo:hover{
 .list-shop-cart-item  tr.odd td{
     background: #fff;
 }
-.list-shop-cart-item  tr td .num-item-in-one-product{
-    border: 1px solid #ddd;
+.list-shop-cart-item tr td .num-item-in-one-product {
     padding: 5px;
-    width: 70px;
+    width: 50px;
 }
 .not-product-in-cat {
     color: #ff0000;
@@ -1074,11 +1073,11 @@ table.list-pay span.price {
 .main-view-post.box-register .formSendRegister{
     position: relative;
 }
-.main-view-post.box-register .formSendRegister .loading {
+.loading {
     background: #fff url("../img/loading.gif") no-repeat scroll center center;
     height: 100%;
     left: 0;
-    opacity: 0.1;
+    opacity: 0.4;
     position: fixed;
     top: 0;
     width: 100%;
