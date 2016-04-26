@@ -6,6 +6,7 @@ class ProductController{
 	private $arrProductStatus = array(-1 => 'Tất cả', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
 	private $arrIsBlock = array(-1 => 'Tất cả', BLOCK_TRUE => 'Không khóa', BLOCK_FALSE => 'Đang khóa');
 	private $arrIsShop = array(-1 => 'Tất cả', SHOP_FREE => 'Shop Free', SHOP_NOMAL => 'Shop thường', SHOP_VIP => 'Shop VIP');
+	private $arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
 	public function __construct(){
 		$files = array(
 			'bootstrap/lib/ckeditor/ckeditor.js',
