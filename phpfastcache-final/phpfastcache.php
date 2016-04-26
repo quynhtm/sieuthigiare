@@ -18,7 +18,7 @@ phpFastCache::$config = array(
 	"htaccess"      => true,
 
     // path to cache folder, leave it blank for auto detect
-	"path"      =>  "",
+	"path"      =>  DRUPAL_ROOT."/file_cache",
     "securityKey"   =>  "auto", // auto will use domain name, set it to 1 string if you use alias domain name
 
     // MEMCACHE
