@@ -27,9 +27,13 @@
 						?>
 					</div>
 					<ul>
-						<?php foreach($arrCategoryChildren as $k =>$v){?>
-						<li><a <?php if($arrCatCurrent->category_id == $k){ ?>class="act"<?php } ?> href="<?php echo FunctionLib::buildLinkCategory(0, 0, $k, $v) ?>" title="<?php echo $v?>"><?php echo $v?></a></li>
-						<?php } ?>
+						<?php 
+						if(!empty($arrCategoryChildren)){
+							foreach($arrCategoryChildren as $k =>$v){?>
+							<li><a <?php if($arrCatCurrent->category_id == $k){ ?>class="act"<?php } ?> href="<?php echo FunctionLib::buildLinkCategory(0, 0, $k, $v) ?>" title="<?php echo $v?>"><?php echo $v?></a></li>
+						<?php } 
+						}
+						?>
 					</ul>
 				</div>
 				<div class="content-right-product">
@@ -50,9 +54,9 @@
 			<div class="right-show-product-shop body-list-item">
 				<?php if(!empty($result)) {?>
 				<div class="content-list-item">
-					<?php foreach($result as $v){?>
-					<div class="col-lg-3 col-xs-3 ">
-						<div class="item">
+					<ul>
+						<?php foreach($result as $v){?>
+						<li class="item">
 							<div class="post-thumb">
 								<a href="<?php echo FunctionLib:: buildLinkDetail($v->product_id, $v->product_name); ?>" title="<?php echo $v->product_name?>">
 									<?php if(isset($v->url_image) && $v->url_image != ''){?>
@@ -105,9 +109,9 @@
 								<?php } ?>
 
 							</div>
-						</div>
-					</div>
-					<?php } ?>
+						</li>
+						<?php } ?>
+					</ul>
 				</div>
 				<div class="show-box-paging">
 					<div class="showListPage">

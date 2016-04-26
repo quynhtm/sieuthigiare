@@ -60,9 +60,9 @@
 				</div>
 				<?php } ?>
 				<div class="content-list-item">
-					<?php foreach($result as $v){?>
-					<div class="col-lg-3 col-xs-3 ">
-						<div class="item">
+					<ul>
+						<?php foreach($result as $v){?>
+						<li class="item">
 							<div class="post-thumb">
 								<a href="<?php echo FunctionLib:: buildLinkDetail($v->product_id, $v->product_name); ?>" title="<?php echo $v->product_name?>">
 									<?php if(isset($v->url_image) && $v->url_image != ''){?>
@@ -103,9 +103,9 @@
 				                <div class="item-banner"><?php echo $v->product_selloff ?></div>
 				                <?php } ?>
 							</div>
-						</div>
-					</div>
-					<?php } ?>
+						</li>
+						<?php } ?>
+					</ul>
 				</div>
 				<div class="show-box-paging">
 					<div class="showListPage">

@@ -383,13 +383,22 @@ a.btn-yahoo:hover{
     padding-right: 8px;
     margin-bottom: 30px;
 }
-.body-list-item .content-list-item >div:hover {
-    box-shadow: 0 0 2px rgba(87, 87, 87, 0.6);
+.body-list-item ul {
+    margin-right: -100px;
 }
 .body-list-item .item {
-    padding-top: 8px;
-    height: 410px;
     display: inline-block;
+    float: left;
+    height: 370px;
+    margin-bottom: 0;
+    margin-right: 23px;
+    overflow: hidden;
+    padding: 10px;
+    width: 235px;
+    position: relative;
+}
+.body-list-item .item:hover{
+    box-shadow: 0 0 2px rgba(87, 87, 87, 0.6); 
 }
 .body-list-item  .post-thumb {
     display: block;
@@ -684,13 +693,22 @@ a.btn-yahoo:hover{
     width: 100%;
     margin-top: 20px;
 }
- .content-center-content-view li{
-    float: left;
+.content-center-content-view ul{
+    margin: 2px 1px!important;
+ }
+.content-center-content-view li{
     line-height: 24px;
     margin: 0 0 20px;
     overflow: hidden;
-    padding: 0 15px;
+    padding: 5px 15px;
     max-width: 235px;
+    height: 255px;
+    overflow: hidden;
+    border: none!important;
+    width: 228px !important;
+ }
+ .jcarousel li.item:hover{
+     box-shadow: 0 0 2px rgba(87, 87, 87, 0.6);
  }
   .content-center-content-view li .img-thumb {
     display: block;
@@ -792,7 +810,7 @@ a.btn-yahoo:hover{
     height: auto!important;
 }
 .right-bottom-content-view{
-    width: 300px;
+    width: 235px;
     display: inline-block;
     float: right;
 }

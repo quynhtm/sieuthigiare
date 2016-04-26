@@ -53,7 +53,6 @@
                         		<?php } ?>
                     		</div>
 						</div>
-
 						<?php if($item->product_selloff != ''){?>
 		                <div class="item-banner"><?php echo $item->product_selloff ?></div>
 		                <?php } ?>
