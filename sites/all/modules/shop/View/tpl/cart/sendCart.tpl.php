@@ -52,23 +52,23 @@
 							<form method="post" action="" name="txtFormPaymentCart" id="txtFormPaymentCart" class="txtFormPaymentCart">
 								<div class="form-group">
 									<label>Họ và tên<span>(*)</span></label>
-									<input type="text" id="txtName" class="form-control" name="txtName" value="">
+									<input type="text" id="txtName" class="form-control" name="txtName" maxlength="255">
 								</div>
 								<div class="form-group">
 									<label class="control-label">Số điện thoại<span>(*)</span></label>
-									<input type="text" id="txtMobile" name="txtMobile" class="form-control" value="">
+									<input type="text" id="txtMobile" name="txtMobile" class="form-control" maxlength="255">
 								</div>
 								<div class="form-group">
 									<label class="control-label">Email</label>
-									<input type="text" id="txtEmail" name="txtEmail" class="form-control" value="">
+									<input type="text" id="txtEmail" name="txtEmail" class="form-control" maxlength="255">
 								</div>
 								<div class="form-group">
 									<label class="control-label">Địa chỉ<span>(*)</span></label>
-									<input type="text" id="txtAddress" name="txtAddress" class="form-control" value="">
+									<input type="text" id="txtAddress" name="txtAddress" class="form-control" maxlength="255">
 								</div>
 								<div class="form-group">
 									<label>Ghi chú</label>
-									<textarea  id="txtMessage" class="form-control" rows="5" name="txtMessage"></textarea>
+									<textarea  id="txtMessage" class="form-control" rows="5" name="txtMessage" maxlength="1000"></textarea>
 									<span class="des">VD: thời gian nhận hàng...</span>
 								</div>
 								 <input type="hidden" name="txtFormName" id="txtFormName" value="txtFormName"/>
