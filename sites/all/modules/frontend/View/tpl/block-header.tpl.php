@@ -66,11 +66,11 @@
 						</div>
 					</div>
 					<?php if($numCart > 0){?>
-					<a href="<?php echo $base_url ?>/gio-hang.html" title="Giỏ hàng">
+					<!-- <a href="<?php echo $base_url ?>/gio-hang.html" title="Giỏ hàng">
 			    		<div class="shopping-cart">
 			    			<span class="num-item"><?php echo $numCart ?></span>
 			    		</div>
-			    	</a>
+			    	</a> -->
 		    		<?php } ?>
 		    	</div>
 		    </div>
