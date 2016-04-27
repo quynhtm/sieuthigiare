@@ -1132,3 +1132,5 @@ table.list-pay span.price {
 .forgotpass:hover{
     text-decoration: underline;
 }
+
+.align_center{text-align: center!important;}
