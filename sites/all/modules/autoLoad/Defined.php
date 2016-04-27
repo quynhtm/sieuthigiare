@@ -30,7 +30,7 @@ define('PHONE_CARE', '0985.10.10.26 - 0913.922.986');
 define('WEB_SITE', 'Shopcuatui.com.vn');
 define('NOT_PRODUCT', 'Chưa có sản phẩm nào...');
 define('NOT_PRODUCT_CART', 'Chưa có sản phẩm nào trong giỏ hàng...');
-define('SESSION_SHOP_TIME_OUT', 3600);
+define('SESSION_SHOP_TIME_OUT', 5);
 /**
  * QuynhTM add
  * Dinh nghia cac Table cho website
