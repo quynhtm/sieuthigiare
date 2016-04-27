@@ -88,7 +88,7 @@ class RegShopController{
 								$user_shop = $getItemUserShop[0];
 								Session::createSessionUserShop($user_shop);
 
-								$data_login = array('time_access'=>time(), 'is_login'=>1);
+								$data_login = array('shop_time_login'=>time(), 'is_login'=>1);
 		    					DB::updateId(self::$table_action, self::$primary_key_user_shop, $data_login, $user_shop->shop_id);
 							}
 							drupal_set_message('Đăng ký gian hàng thành công!');
@@ -281,6 +281,18 @@ class RegShopController{
 		RegShop::logoutShop();
 	}
 
+	public function forgotPass(){
+		global $base_url;
+		
+		if(!empty($_POST)){
+			$email_shop = FunctionLib::getParam('email_shop','');
+			if($email_shop == ''){
+				drupal_set_message('Email khôi phục mật khẩu không được trống. Hệ thống sẽ gửi mail tới địa chỉ này!');
+				drupal_goto($base_url.'/quen-mat-khau.html');
+			}
+		}
+		return theme('forgotPass');
+	}
 	public function ajaxCheckShopExist(){
 		global $base_url, $user_shop;
 		

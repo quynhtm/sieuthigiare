@@ -23,6 +23,14 @@ function Shop_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
+	$items["quen-mat-khau.html"] = array(
+		"title" => t('Quên mật khẩu'),
+		"description" => "Quên mật khẩu",
+		'page callback' => 'menuLoad',
+		'page arguments' => array('RegShopController/forgotPass'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
 	$items["thoat.html"] = array(
 		"title" => t('Thoát shop'),
 		"description" => "Thoat shop",
@@ -199,6 +207,9 @@ function Shop_theme() {
 	    ),
 	    'editPassShop' => array(
 	      'template' => 'View/tpl/reg/editPassShop'
+	    ),
+	    'forgotPass' => array(
+	      'template' => 'View/tpl/reg/forgotPass'
 	    ),
 	    //product shop
 	    'productShop' => array(

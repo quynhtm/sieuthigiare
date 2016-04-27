@@ -133,7 +133,7 @@ class CartShopController{
 						'order_customer_address'=>$address,
 						'order_customer_note'=>$message,
 						'order_time'=>time(),
-						'order_status'=>0
+						'order_status'=>ORDER_STATUS_NEW
 						);
 				foreach($result as $v){
 					$data['order_product_id'] = $v->product_id;
