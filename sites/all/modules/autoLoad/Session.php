@@ -7,7 +7,7 @@
 */
 
 class Session{
-	static $session_time_out = 3600;
+	static $session_time_out = SESSION_SHOP_TIME_OUT;
 	static $table_user_shop = TABLE_USER_SHOP;
 	static $primary_key_user_shop = 'shop_id';
 
@@ -21,6 +21,12 @@ class Session{
 		}else{
 			$user_shop = $_SESSION['user_shop'];
 			if(isset($user_shop->expires) && self::$session_time_out <= time() - $user_shop->expires){
+				//update db and logout
+				$data_update = array(
+								'shop_time_logout'=>time(),
+								'is_login'=>0,
+								);
+				DB::updateId(self::$table_user_shop, self::$primary_key_user_shop, $data_update, $user_shop->shop_id);
 				$user_shop = new stdClass();
 				$user_shop->shop_id = 0;
 				$user_shop->is_login = 0;
