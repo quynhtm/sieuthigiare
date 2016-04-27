@@ -1055,6 +1055,13 @@ table.list-pay span.price {
     width: 100%;
     font-size: 25px;
 }
+.form-request-password h1.title-head{
+    margin-bottom: 0;
+}
+.restore-pass-text01{
+    margin: 20px 0px;
+    font-size: 12px;
+}
 .form-send-register {
     margin: 0 auto;
     width: 620px;

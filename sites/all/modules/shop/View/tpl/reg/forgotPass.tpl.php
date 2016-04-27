@@ -1,10 +1,14 @@
 <?php global $base_url;?>
 
 <div class="main-view-post box-register">
-	<div class="form-login">
+	<div class="form-login form-request-password">
 		<h1 class="title-head">Quên mật khẩu<span></h1>
-		
 		<form class="formForgotPass" method="post" action="<?php echo $base_url?>/quen-mat-khau.html" class="form-inline">
+			
+			<div class="restore-pass-text01">
+				Nhập đầy đủ thông tin để nhận lại mật khẩu mới. Bạn sẽ được hệ thống gửi một thư với các chỉ dẫn để phục hồi mật khẩu.
+			</div>
+
 			<div class="form-group">
 				<label class="control-label">Tên đăng nhập shop<span>(*)</span></label>
 				<input type="text" id="user_shop" class="form-control" name="user_shop" value="<?php if(isset($user_shop)){ echo $user_shop; } ?>">
