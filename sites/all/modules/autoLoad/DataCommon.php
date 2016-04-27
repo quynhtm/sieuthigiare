@@ -93,47 +93,7 @@ class DataCommon{
 		}
 		return $categoryChildren;
 	}
-
-	static function getListCategory($catid='', &$arrHtml, $limit=10){
-		global $language;
-		if($limit > 0){
-			$listcat = explode(',', $catid);
-			$arrListCat = array();
-
-			if(!empty($arrListCat)){
-				$where = '(';
-				foreach($listcat as $cat){
-					if($cat != end($listcat)){
-						$where .= 'category_parent_id = '.$cat.' OR ';
-					}else{
-						$where .= 'category_parent_id = '.$cat;
-					}
-				}
-				$where .= ')';
-				//parent > 0;
-				$arrListCat = DB::getItembyCond(self::$table_category, "category_id, category_name, category_parent_id", '', "category_id ASC", "category_status=".STASTUS_SHOW." AND ".$where, '');
-			}else{
-				//parent = 0;
-				$arrListCat = DB::getItembyCond(self::$table_category, "category_id, category_name, category_parent_id", '', "category_id ASC", "category_status=".STASTUS_SHOW." AND category_parent_id=$catid", $limit);
-			}
-			if(!empty($arrListCat)){
-				foreach ($arrListCat as $k => $v){
-					$key = $v->category_id;
-					$val = $v->category_name;
-					$parent = $v->category_parent_id;
-					if($parent == 0){
-						$arrHtml[$key]['name'] = $val;
-						$arrHtml[$key]['background'] = '';
-					}else{
-						$arrHtml[$parent]['sub'][$key] = $val;
-					}
-					self::getListCategory($key, $arrHtml);
-				}
-			}
-		}
-		return array();
-	}
-
+	
 	/**
 	 * Build Tree categroy menu danh m?c
 	 * @return array

@@ -410,6 +410,12 @@ span#logo{
 .content-box-menu ul > li:hover .list-subcat{
     display: inline-block;
 }
+.list-subcat ul {
+    display: inline-block;
+    float: left;
+    margin-right: 10px;
+    width: 38%;
+}
 .content-box-menu .list-subcat li {
     height: 32px;
     line-height: 32px;

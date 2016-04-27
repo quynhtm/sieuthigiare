@@ -142,24 +142,19 @@ function page_default(){
 }
 
 function block_header(){
-	
 	$arrCategory = array();
 	if(!drupal_is_front_page()){
-		DataCommon::getListCategory(0, $arrCategory, 11);
+		$arrCategory = DataCommon::buildCacheTreeCategory();
 	}
-	
 	$numCart = SiteController::countCartItem();
-
 	$view= theme('block-header', array('arrCategory'=>$arrCategory, 'numCart'=>$numCart));
 	return $view;
 }
 function block_slide(){
-	
-	$arrCategory = array();
-	DataCommon::getListCategory(0, $arrCategory, 11);
-
-	//lấy theo cache danh muc
-	//$arrCategory = DataCommon::buildCacheTreeCategory();
+	//lay theo cache danh muc
+	$arrCategory = DataCommon::buildCacheTreeCategory();
+	//$cache = new Cache();
+	//$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_TREE_MENU_CATEGORY_HEADER);die;
 
 	$bannerLager = SiteController::getListBannerLagerSite();
 	$bannerSmall = SiteController::getListBannerSmallSite();

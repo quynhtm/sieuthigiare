@@ -89,17 +89,27 @@
 				<?php if(!empty($arrCategory)){?>
 				<div class="content-box-menu header-menu-other">
 					<ul>
-						<?php foreach($arrCategory as $key=>$cat){?>
-						<?php if(isset($cat['name']) && $cat['name'] != ''){ ?>
+						<?php foreach($arrCategory as $cat){?>
+						<?php if(isset($cat['category_parent_name']) && $cat['category_parent_name'] != ''){ ?>
 						<li>
-							<a href="<?php echo FunctionLib::buildLinkCategory(0, 0, $key, $cat['name']) ?>"><?php echo $cat['name'] ?></a>
-							<?php if(isset($cat['sub']) && !empty($cat['name'])) {?>
-							<div class="list-subcat" style="background: #fff">
+							<a href="<?php echo FunctionLib::buildLinkCategory(0, 0, $cat['category_id'], $cat['category_parent_name']) ?>"><?php echo $cat['category_parent_name'] ?></a>
+							<?php if(isset($cat['arrSubCategory']) && !empty($cat['arrSubCategory'])) {?>
+							<?php 	
+								$url = '';
+								if($cat['category_image_background'] != ''){
+								$url = 'url('.FunctionLib::getThumbImage($cat['category_image_background'],$cat['category_id'],FOLDER_CATEGORY,735,428).') no-repeat bottom right';
+							} ?>
+							<div class="list-subcat" style="background: #fff <?php echo $url ?>">
+								<?php
+									$list_ul = array_chunk($cat['arrSubCategory'], 10);
+								?>
+								<?php foreach($list_ul as $ul){?>
 								<ul>
-									<?php foreach($cat['sub'] as $k=>$sub){ ?>
-									<li><a href="<?php echo FunctionLib::buildLinkCategory(0, 0, $k, $sub) ?>"><?php echo $sub ?></a></li>
+									<?php foreach($ul as $sub){ ?>
+									<li><a href="<?php echo FunctionLib::buildLinkCategory(0, 0, $sub['category_id'], $sub['category_name']) ?>"><?php echo $sub['category_name'] ?></a></li>
 									<?php } ?>
 								</ul>
+								<?php } ?>
 							</div>
 							<?php } ?>
 						</li>

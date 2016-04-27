@@ -54,6 +54,7 @@ define('FOLDER_DEFAULT', 'img_other');
 define('FOLDER_PRODUCT', 'product');
 define('FOLDER_BANNER', 'banner');
 define('FOLDER_NEWS', 'news');
+define('FOLDER_CATEGORY', 'category');
 
 //common
 define('STASTUS_HIDE', 0);
