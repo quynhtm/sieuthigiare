@@ -320,8 +320,13 @@ class RegShopController{
 					RegShop::updateId($data_post, $shop_id);
 
 					$linkpath = $base_url.'/dang-nhap.html';
-					$contentEmail = '';
-					$contentEmail.='<br/>Bạn <a href="'.$linkpath.'">Nhấn liên kết</a> và nhập mật khẩu: '.$pass.'<br/>';
+					$contentEmail = '<b>Thay đổi mật khẩu tại ShopCuaTui.COM.VN</b><br/>';
+					$contentEmail .= 'Chào: '.$userExist[0]->user_shop.'<br/>';
+					$contentEmail .= 'Dưới đây là thông tin đăng nhập<br/><br/>';
+					$contentEmail .= '<b>Tên đăng nhập:</b> '.$userExist[0]->user_shop.'<br/>';
+					$contentEmail .= '<b>Mật khẩu:</b> '.$pass.'<br/><br/>';
+					$contentEmail .= '<a href="'.$linkpath.'">Bấm vào để đăng nhập</a><br/><br/>';
+					$contentEmail .= 'Ghi chú: Bạn hay đăng nhập và thay đổi mật khẩu cho bảo mật lần đăng nhập sau';
 					
     				$subject = 'Khôi phục mật khẩu:';
 					auto_send_mail('Shop', $contentEmail, $email_shop, $subject);
