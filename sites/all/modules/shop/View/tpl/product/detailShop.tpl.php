@@ -131,7 +131,7 @@
 									data-show-faces="false" data-share="true">
 								</div>
 							</div>
-							<!-- <div class="content-right-product">
+							<div class="content-right-product">
 								<div class="order-number">
 									<label for="buy-number">Số lượng</label>
 									<select class="sl-num" id="buy-num" name="buy-num">
@@ -141,7 +141,7 @@
 		                            </select>
 								</div>
 								<div id="buttonFormBuySubmit" data-pid="<?php echo $product_id ?>" class="buynow btn">Mua ngay</div>
-							</div> -->
+							</div>
 							<div class="content-right-product">
 								<div class="order-number-phone">
 									<p>Quý khách muốn đặt qua điện thoại</p>
