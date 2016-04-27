@@ -172,6 +172,16 @@ function Shop_menu() {
 		'type' => MENU_CALLBACK,
 	);
 
+	//danh sach don hang
+	$items["danh-sach-dơn-hang.html"] = array(
+		"title" => t('Quản lý đơn hàng'),
+		"description" => "Quản lý đơn hàng",
+		'page callback' => 'menuLoad',
+		'page arguments' => array('OrdersShopController/ordersShop'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
   return $items;
 }
 
@@ -222,6 +232,11 @@ function Shop_theme() {
 		'contactFormShop' => array(
 			'template' => 'View/tpl/contact/contactFormShop'
 		),
+
+		//danh sach don hang
+		'ordersShop' => array(
+			'template' => 'View/tpl/orders/ordersShop'
+		),
 	);
 }
 
@@ -237,6 +252,9 @@ function Shop_init() {
 
 			'Model/ContactShop.php',
 			'Controller/ContactShopController.php',
+
+			'Model/OrdersShop.php',
+			'Controller/OrdersShopController.php',
 			
 			'Model/CartShop.php',
 			'Controller/CartShopController.php',
