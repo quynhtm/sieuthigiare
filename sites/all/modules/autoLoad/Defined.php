@@ -25,7 +25,7 @@ define("PATH_UPLOAD", DRUPAL_ROOT.'/uploads');
 define('base_url_lang', $base_url .'/'. ((!isset($language->language) || $language->language == 'und' || $language->language == 'vi') ? 'vi/' : $language->language.'/'));
 
 define('AJAX_DOMAIN', '/shopcuatui.com.vn/');
-define('IS_WEB', 0);// 0:local, 1:web
+define('IS_DEV', 0);// 0:local, 1:web
 define('PHONE_CARE', '0985.10.10.26 - 0913.922.986');
 define('WEB_SITE', 'Shopcuatui.com.vn');
 define('NOT_PRODUCT', 'Chưa có sản phẩm nào...');
