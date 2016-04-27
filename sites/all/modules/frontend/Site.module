@@ -163,7 +163,7 @@ function block_slide(){
 	return $view;
 }
 function block_content(){
-	$result = SiteController::getListProductContent(30);
+	$result = SiteController::getListProductContent(40);
 	$view= theme('block-content', array('result'=>$result));
 	return $view;
 }

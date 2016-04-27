@@ -7,9 +7,6 @@
 				<div class="content-thanks-order">
 					Shop sẽ liên hệ với bạn để xác thực thông tin. Cảm ơn bạn đã mua hàng! 
 				</div>
-				<div class="note-thanks-order">
-					<a href="<?php echo $base_url.'/lien-he.html#feedback' ?>">Góp ý để nâng cao dịch vụ của chúng tôi</a>
-				</div>
 			</div>
 		</div>
 	</div>
