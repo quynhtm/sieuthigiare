@@ -3,6 +3,7 @@ jQuery(document).ready(function($){
 	check_valid_form.check_reg_shop();
 	check_valid_form.change_pass();
 	check_valid_form.change_info();
+	check_valid_form.forgot_pass();
 	check_valid_form.post_product();
 
 	tab_select.detail_tab();
@@ -122,6 +123,18 @@ check_valid_form = {
 				return false;
 			}else{
 				province.removeClass('error');
+			}
+		});
+	},
+	forgot_pass:function(){
+		jQuery("#submitForgotPass").click(function(){
+			var mail = jQuery('.formForgotPass input[name="email_shop"]');
+			if(mail.val() == ''){
+				jAlert('Email không được trống!', 'Cảnh báo');
+				mail.addClass('error').focus();
+				return false;
+			}else{
+				mail.removeClass('error');
 			}
 		});
 	},

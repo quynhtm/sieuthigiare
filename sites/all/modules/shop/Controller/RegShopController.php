@@ -281,6 +281,18 @@ class RegShopController{
 		RegShop::logoutShop();
 	}
 
+	public function forgotPass(){
+		global $base_url;
+		
+		if(!empty($_POST)){
+			$email_shop = FunctionLib::getParam('email_shop','');
+			if($email_shop == ''){
+				drupal_set_message('Email khôi phục mật khẩu không được trống. Hệ thống sẽ gửi mail tới địa chỉ này!');
+				drupal_goto($base_url.'/quen-mat-khau.html');
+			}
+		}
+		return theme('forgotPass');
+	}
 	public function ajaxCheckShopExist(){
 		global $base_url, $user_shop;
 		

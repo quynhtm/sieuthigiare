@@ -279,26 +279,27 @@ span#logo{
     float: left;
     height: 46px;
     margin-left: 105px;
-    margin-top: -2px;
+    margin-top: -10px;
     position: relative;
     width: 50px;
 }
 .shopping-cart .num-item {
-    color: #cc0000;
+    border-radius: 100%;
+    color: #fff;
     cursor: pointer;
     font-size: 11px;
     font-weight: 400;
     height: 16px;
-    left: 15px;
+    left: 12px;
     line-height: 16px;
     overflow: hidden;
     padding: 0 3px;
     position: absolute;
     text-align: center;
     text-overflow: ellipsis;
-    top: -5px;
+    top: 0;
     white-space: nowrap;
-    width: 25px;
+    width: 14px;
 }
 /*content*/
 .box-menu-list{

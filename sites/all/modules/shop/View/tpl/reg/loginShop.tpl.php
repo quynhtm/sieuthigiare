@@ -17,6 +17,7 @@
 			</div>
 			<input type="hidden" name="txtFormNameLogin" id="txtFormNameLogin" value="txtFormNameLogin"/>
 			<button type="submit" id="submitLogin" class="btn btn-primary">Đăng nhập</button>
+			<a class="forgotpass" href="<?php echo $base_url ?>/quen-mat-khau.html" rel="nofollow">Bạn quên mật khẩu?</a>
 		</form>
 	</div>
 </div>
