@@ -100,6 +100,14 @@ define('BANNER_PAGE_LIST', 2);
 define('BANNER_PAGE_DETAIL', 3);
 define('BANNER_PAGE_CATEGORY', 4);
 
+//Trang thái Don hang
+//0:đơn hàng bị xóa1: đơn hàng mới, 2: đơn hàng đã xác nhận, 3:đơn hàng hoàn thành,4: đơn hàng bị hủy
+define('ORDER_STATUS_DELETE', 0);
+define('ORDER_STATUS_NEW', 1);
+define('ORDER_STATUS_CHECKED', 2);
+define('ORDER_STATUS_SUCCESS', 3);
+define('ORDER_STATUS_CANCEL', 4);
+
 //loai shop
 define('SHOP_FREE', 1);
 define('SHOP_NOMAL', 2);
