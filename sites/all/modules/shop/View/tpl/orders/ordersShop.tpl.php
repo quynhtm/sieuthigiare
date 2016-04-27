@@ -9,13 +9,13 @@
 
 			</div>
 			<div class="list-shop-show">
-				<div class="title-table-shop-shop">Danh sách liên hệ đã gửi cho quản trị site</div>
+				<div class="title-table-shop-shop">Danh sách Đơn hàng của shop</div>
 				<div class="show-box-paging">
 					<div class="col-lg-12">
 						<b><?php echo t('Tổng số: ')?> <?php echo $totalItem ?></b>
 						<form action="" method="GET" id="frmSearch" class="frmSearch" name="frmSearch">
 							<div style="text-align: right">
-								<a href="<?php echo $base_url?>/gui-lien-he.html" class="btn btn-warning">Gửi liên hệ</a>
+								
 							</div>
 						</form>
 					</div>
@@ -29,9 +29,9 @@
 							<thead>
 							<tr>
 								<th width="5%">STT</th>
-								<th width="15%">Thông tin sản phẩm</th>
-								<th width="30%">Thông tin khách hàng</th>
-								<th width="30%">Ghi chú của khách</th>
+								<th width="25%">Thông tin sản phẩm</th>
+								<th width="25%">Thông tin khách hàng</th>
+								<th width="25%">Ghi chú của khách</th>
 								<th width="10%">Tình trạng ĐH</th>
 								<th width="10%">Ngày đặt</th>
 							</tr>
@@ -63,9 +63,9 @@
 												echo 'Địa chỉ: '.$item->order_customer_address.'<br/>';
 											?>
 										</td>
-										<td><?php echo $v->order_customer_note ?></td>
-										<td><?php echo isset($arrStatus[$v->order_status])?$arrStatus[$v->order_status]:'Đơn hàng mới' ?></td>
-										<td><?php echo date('d-m-Y',$v->order_time)?></td>
+										<td><?php echo $item->order_customer_note ?></td>
+										<td><?php echo isset($arrStatus[$item->order_status])?$arrStatus[$item->order_status]:'Đơn hàng mới' ?></td>
+										<td><?php echo date('d-m-Y',$item->order_time)?></td>
 									</tr>
 								<?php } } ?>
 							</tbody>
