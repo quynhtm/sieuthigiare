@@ -74,12 +74,12 @@
 						<th width="1%">STT</th>
 						<th width="1%"><input type="checkbox" id="checkAll"/></th>
 						<th width="20%">Thông tin shop</th>
-						<th width="25%">Tên shop</th>
+						<th width="20%">Tên shop</th>
 						<th width="25%">Địa chỉ</th>
-						<th width="20%">Loại gian hàng</th>
+						<th width="15%">Loại gian hàng</th>
 						<th width="5%">Status</th>
-						<th width="5%">Online</th>
-						<th width="10%">Ngày tạo</th>
+						<th width="8%">Online</th>
+						<th width="8%">Ngày tạo</th>
 						<th width="9%">Action</th>
 					</tr>
 					</thead>
