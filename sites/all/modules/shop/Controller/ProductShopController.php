@@ -23,6 +23,12 @@ class ProductShopController{
 			drupal_goto($base_url);
 		}
 
+		//check full infomation
+		if($user_shop->shop_name == '' || $user_shop->shop_phone == '' || $user_shop->shop_email == '' || $user_shop->shop_category <=0 || $user_shop->shop_province <= 0){
+			drupal_set_message('Bạn vui lòng nhập đầy đủ thông tin. Các trường có dấu (*) là bắt buộc!');
+			drupal_goto($base_url.'/sua-thong-tin-gian-hang.html');
+		}
+
 		$files = array(
 			'bootstrap/lib/datetimepicker/datetimepicker.css',
 			'bootstrap/lib/datetimepicker/jquery.datetimepicker.js',
@@ -83,6 +89,11 @@ class ProductShopController{
 		if($user_shop->shop_id == 0){
 			drupal_set_message('Bạn không có quyền truy cập. Vui lòng đăng nhập tài khoản!', 'error');
 			drupal_goto($base_url);
+		}
+		//check full infomation
+		if($user_shop->shop_name == '' || $user_shop->shop_phone == '' || $user_shop->shop_email == '' || $user_shop->shop_category <=0 || $user_shop->shop_province <= 0){
+			drupal_set_message('Bạn vui lòng nhập đầy đủ thông tin. Các trường có dấu (*) là bắt buộc!');
+			drupal_goto($base_url.'/sua-thong-tin-gian-hang.html');
 		}
 
 		$files = array(
