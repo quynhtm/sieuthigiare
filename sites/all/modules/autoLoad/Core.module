@@ -79,7 +79,7 @@ function page_404(){
 function CoreAjax(){
     global $base_url;
     
-    if(IS_WEB){
+    if(IS_DEV){
         Utility::headerReferer();
         if(!preg_match(AJAX_DOMAIN, $base_url, $Matches)){
             Utility::pageAccessDenied();
@@ -98,7 +98,7 @@ function CoreAjax(){
 function CoreAjaxAction(){
     global $base_url;
 
-    if(IS_WEB){
+    if(IS_DEV){
         Utility::headerReferer();
         if(!preg_match(AJAX_DOMAIN, $base_url, $Matches)){
             Utility::pageAccessDenied();

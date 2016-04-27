@@ -128,7 +128,16 @@ check_valid_form = {
 	},
 	forgot_pass:function(){
 		jQuery("#submitForgotPass").click(function(){
-			var mail = jQuery('.formForgotPass input[name="email_shop"]');
+			var name = jQuery('.formForgotPass input[name="user_shop"]'),
+				mail = jQuery('.formForgotPass input[name="email_shop"]');
+			if(name.val() == ''){
+				jAlert('Tên đăng nhập không được trống!', 'Cảnh báo');
+				name.addClass('error').focus();
+				return false;
+			}else{
+				name.removeClass('error');
+			}
+
 			if(mail.val() == ''){
 				jAlert('Email không được trống!', 'Cảnh báo');
 				mail.addClass('error').focus();

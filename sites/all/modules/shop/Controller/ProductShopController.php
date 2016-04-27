@@ -19,7 +19,6 @@ class ProductShopController{
 		global $base_url, $user_shop;
 
 		if($user_shop->shop_id == 0){
-			//drupal_set_message('Bạn không có quyền truy cập. Vui lòng đăng nhập tài khoản!', 'error');
 			drupal_goto($base_url.'/dang-nhap.html');
 		}
 
@@ -87,7 +86,6 @@ class ProductShopController{
 	public function productFormShop(){
 		global $base_url, $user_shop;
 		if($user_shop->shop_id == 0){
-			//drupal_set_message('Bạn không có quyền truy cập. Vui lòng đăng nhập tài khoản!', 'error');
 			drupal_goto($base_url.'/dang-nhap.html');
 		}
 		//check full infomation
@@ -262,7 +260,6 @@ class ProductShopController{
 		global $base_url, $user_shop;
 
 		if($user_shop->shop_id == 0){
-			//drupal_set_message('Bạn không có quyền truy cập. Vui lòng đăng nhập tài khoản!', 'error');
 			drupal_goto($base_url.'/dang-nhap.html');
 		}
 		$listId =  FunctionLib::getParam('id',array());
