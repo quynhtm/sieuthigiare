@@ -31,6 +31,13 @@ class RegShop{
 		}
 		return false;
 	}
+
+	public static function getShopByCondMail($mail=''){
+		if($mail != ''){
+			return DB:: getItembyCond(self::$table_action, '', '', self::$primary_key_user_shop.' ASC', "shop_email='".$mail."'", 1);
+		}
+		return false;
+	}
 	
 	public static function checkNamePhoneMail($name='', $phone='', $mail=''){
 		$errors = array();

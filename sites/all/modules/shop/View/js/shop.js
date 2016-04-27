@@ -134,7 +134,15 @@ check_valid_form = {
 				mail.addClass('error').focus();
 				return false;
 			}else{
-				mail.removeClass('error');
+				var regex = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+				var check_mail = regex.test(mail.val());
+				if(!check_mail){
+					jAlert('Email không đúng định dạng!', 'Cảnh báo');
+					mail.addClass('error').focus();
+					return false;
+				}else{
+					mail.removeClass('error');
+				}
 			}
 		});
 	},

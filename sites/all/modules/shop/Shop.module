@@ -280,3 +280,51 @@ function Shop_init() {
 		Loader::load('Shop', $files);
 	}
 }
+
+//config send mail
+function Shop_mail($key, &$message, $params) {
+	global $user;
+
+	$options = array(
+	'langcode' => $message['language']->language,
+	);
+	if($key != null){
+	    $message['subject'] = $params;
+	    $message['body'][] = '<div style=" border: 1px solid #D4D4D4;margin: 0 auto;min-height: 100%;width: 99%; display:inline-block">';
+	    $message['body'][] = _emailHeader();
+	    $message['body'][] = '<div style="margin:0 10px">'.$key.'</div>';
+	   $message['body'][] = _emailFooter();
+	    $message['body'][] = '</div>';
+	$message['headers']['Content-Type'] = "text/html; charset=utf-8";
+	$message['headers']['Mime-Version'] = "1.0";
+	}
+}
+
+function _emailHeader(){
+	global $base_url;
+    $output = '';
+    $output .= '<div style="background: none repeat scroll 0 0 #EFEFEF;float: left;height: 48px;margin: 0 auto;width: 100%; margin-bottom: 20px; display: inline-block;">';
+    $output .= '<div style="float: left;margin: 0 auto;width: 25%;">';
+        $output .= '<div style="padding-top: 4px;padding-left: 15px;">';
+            $output .= '<a href="'.$base_url.'"><img style="margin-top:5px; height:30px" id="logo" src="'.$base_url.'/sites/all/modules/frontend/View/img/logo.png" /></a>';
+        $output .= '</div>';
+    $output .= '</div>';
+    $output .= '</div>';
+    return $output;
+}
+
+function _emailFooter(){
+    $output = '';
+    $output .= '<div style="background: none repeat scroll 0 0 #EFEFEF;border-top: 1px solid #DBDBDB;bottom: 0;float: left;height: 37px;width: 100%; margin-top: 20px;">';
+        $output .= '<div style="margin: 0 auto;width: 100%;">';
+            $output.='<span style="padding-right: 15px;float: right; padding-top: 10px;">&copy; '.t("ShopCuaTui.COM.VN, 2015").'-'.date('Y').'.</span>';
+        $output .= '</div>';
+    $output .= '</div>';
+    return $output;
+}
+
+function auto_send_mail($module='', $contentMail='', $to='', $subject) {
+    $module = $module;
+    $language = language_default();
+    $result = drupal_mail($module, $contentMail, $to, $language, $subject);
+}
