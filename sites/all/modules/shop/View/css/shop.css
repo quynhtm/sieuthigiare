@@ -1111,3 +1111,7 @@ table.list-pay span.price {
     margin-top: 20px;
     text-align: center;
 }
+.txtFormPaymentCart .des {
+    font-size: 12px;
+    font-style: italic;
+}
