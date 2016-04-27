@@ -286,7 +286,43 @@ class RegShopController{
 		
 		if(!empty($_POST)){
 			$email_shop = FunctionLib::getParam('email_shop','');
-			if($email_shop == ''){
+			$form_name = FunctionLib::getParam('txtFormForgotPass','');
+			
+			if($email_shop != '' && $form_name == 'txtFormForgotPass'){
+				
+				$check_valid_mail = ValidForm::checkRegexEmail($email_shop);
+				
+				if(!$check_valid_mail){
+					$errors = 'Email không đúng định dạng!<br/>';
+					if($errors != ''){
+						drupal_set_message($errors, 'error');
+						return theme('forgotPass', array('shop_email' => $email_shop));
+					}
+				}
+
+				$userExist = RegShop::getShopByCondMail($email_shop);
+				if(!empty($userExist)){
+					$shop_id = $userExist[0]->shop_id;
+					$pass = self::randomString(5);
+
+					require_once DRUPAL_ROOT . '/' . variable_get('password_inc', 'includes/password.inc');
+					$hash_pass = user_hash_password($pass);
+					
+					$data_post = array('user_password'=>$hash_pass);
+					RegShop::updateId($data_post, $shop_id);
+
+					$linkpath = $base_url.'/dang-nhap.html';
+					$contentEmail = '';
+					$contentEmail.='<br/>Bạn <a href="'.$linkpath.'">Nhấn liên kết</a> và nhập mật khẩu: '.$pass.'<br/>';
+					
+    				$subject = 'Khôi phục mật khẩu:';
+					auto_send_mail('Shop', $contentEmail, $email_shop, $subject);
+					drupal_set_message('Hệ thống đã gửi một thư tới địa chỉ email này!');
+				}else{
+					drupal_set_message('Không tồn tại email này!');
+					return theme('forgotPass', array('shop_email' => $email_shop));
+				}
+			}else{
 				drupal_set_message('Email khôi phục mật khẩu không được trống. Hệ thống sẽ gửi mail tới địa chỉ này!');
 				drupal_goto($base_url.'/quen-mat-khau.html');
 			}
@@ -326,5 +362,14 @@ class RegShopController{
     	}else{
     		echo '';die;
     	}
+	}
+	public static function randomString($length=5){
+		$str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$strLength = strlen($str);
+	    $random_string = '';
+	    for($i=0; $i<=$length; $i++) {
+	        $random_string .= $str[rand(0, $strLength - 1)];
+	    }
+	    return $random_string;
 	}
 }
