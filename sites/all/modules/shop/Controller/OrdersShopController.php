@@ -22,14 +22,26 @@ class OrdersShopController{
 		}
 
 		$limit = SITE_RECORD_PER_PAGE;
+		$dataSearch['order_product_id'] = FunctionLib::getParam('order_product_id',0);
+		$dataSearch['order_product_name'] = trim(FunctionLib::getParam('order_product_name',''));
+		$dataSearch['order_customer_name'] = trim(FunctionLib::getParam('order_customer_name',''));
+		$dataSearch['order_customer_phone'] = trim(FunctionLib::getParam('order_customer_phone',''));
+		$dataSearch['order_customer_email'] = trim(FunctionLib::getParam('order_customer_email',''));
+		$dataSearch['order_status'] = FunctionLib::getParam('order_status', -1);
+		$dataSearch['date_start'] = FunctionLib::getParam('date_start', '');
+		$dataSearch['date_end'] = FunctionLib::getParam('date_end', '');
+
 		$arrFields = array('order_id',
 			'order_product_id', 'order_product_name', 'order_product_price_sell', 'order_product_image', 'order_category_id', 'order_category_name','order_product_type_price','order_product_province',
 			'order_customer_name', 'order_customer_phone', 'order_customer_email', 'order_customer_address','order_customer_note','order_quality_buy',
 			'order_user_shop_id', 'order_user_shop_name', 'order_status', 'order_time');
-		$result = OrdersShop::getSearchListItems($limit, $arrFields);
+		$result = OrdersShop::getSearchListItems($dataSearch,$limit, $arrFields);
+		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['order_status']);
 		return theme('ordersShop',array(
 									'title'=>'Liên hệ với quản trị site',
 									'arrStatus' => $this->arrStatus,
+									'optionStatus' => $optionStatus,
+									'dataSearch' => $dataSearch,
 									'result' => $result['data'],
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));

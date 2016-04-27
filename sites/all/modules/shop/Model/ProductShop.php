@@ -15,9 +15,6 @@ class ProductShop{
 	public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
         global $base_url, $user_shop;
 
-        if(empty($arrFields))
-            $arrFields = self::$arrFields;
-        
         if(!empty($arrFields)){
              $sql = db_select(self::$table_action, 'i')->extend('PagerDefault');
             foreach($arrFields as $field){
