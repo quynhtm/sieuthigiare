@@ -30,7 +30,6 @@ class Session{
 				$user_shop = new stdClass();
 				$user_shop->shop_id = 0;
 				$user_shop->is_login = 0;
-				unset($_SESSION['user_shop']);
 			}else{
 				$get_user_shop = DB::getItembyCond(self::$table_user_shop, '*', '', self::$primary_key_user_shop.' ASC', self::$primary_key_user_shop.'='.$user_shop->shop_id, 1);
 				if(!empty($get_user_shop)){
