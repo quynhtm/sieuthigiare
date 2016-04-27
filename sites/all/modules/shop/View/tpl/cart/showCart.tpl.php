@@ -68,7 +68,6 @@
 				<div class="list-btn-control <?php if(empty($result)){?>text-center<?php } ?>">
 					<a id="backBuy" class="btn btn-primary" href="<?php echo $base_url.'/trang-chu.html' ?>">Tiếp tục mua hàng</a>
 					<?php if(!empty($result)){?>
-					<a id="updateCart" class="btn btn-primary" href="javascript:void(0)">Cập nhật đơn hàng</a>
 					<a id="delAllCart" class="btn btn-primary" data="delAll" href="javascript:void(0)">Xóa toàn bộ đơn hàng</a>
 					<a id="sendCart" class="btn btn-primary" href="<?php echo $base_url?>/gui-don-hang.html">Gửi đơn hàng</a>
 					<?php } ?>
