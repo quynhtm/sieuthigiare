@@ -88,7 +88,7 @@ class RegShopController{
 								$user_shop = $getItemUserShop[0];
 								Session::createSessionUserShop($user_shop);
 
-								$data_login = array('time_access'=>time(), 'is_login'=>1);
+								$data_login = array('shop_time_login'=>time(), 'is_login'=>1);
 		    					DB::updateId(self::$table_action, self::$primary_key_user_shop, $data_login, $user_shop->shop_id);
 							}
 							drupal_set_message('Đăng ký gian hàng thành công!');
