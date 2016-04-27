@@ -32,7 +32,7 @@ SHOP_CART = {
 		});
 	},
 	update:function(){
-		jQuery('#updateCart').click(function(){
+		jQuery('#txtFormShopCart select').change(function(){
 			var updateCart = BASEPARAMS.base_url + '/gio-hang.html';
 			jConfirm('Bạn có muốn cập nhật đơn hàng không [OK]:Đồng ý [Cancel]:Bỏ qua ?', 'Xác nhận', function(r) {
 				if(r){
