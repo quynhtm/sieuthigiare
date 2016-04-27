@@ -6,7 +6,7 @@ class UserShop{
 	static $table_action = TABLE_USER_SHOP;
 	static $primary_key = 'shop_id';
 	static $arrFields = array('shop_id', 'shop_name', 'user_shop', 'user_password', 'shop_phone','shop_category','shop_category_name','shop_transfer',
-		'shop_address','shop_email','shop_province','shop_about','number_limit_product','is_shop','is_login','time_access','shop_status','shop_created');
+		'shop_address','shop_email','shop_province','shop_about','number_limit_product','is_shop','is_login','shop_time_login','shop_time_logout','shop_status','shop_created');
 
 	public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
 		//n?u get field rong thi lay all
