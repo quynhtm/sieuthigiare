@@ -94,7 +94,7 @@ class RegShop{
 		    }
 		    if($hash && $hash == $stored_hash){
 		    	Session::createSessionUserShop($user_shop);
-		    	$data_login = array('time_access'=>time(), 'is_login'=>1);
+		    	$data_login = array('shop_time_login'=>time(), 'is_login'=>1);
 		    	DB::updateId(self::$table_action, self::$primary_key_user_shop, $data_login, $user_shop->shop_id);
 		    	drupal_goto($base_url.'/quan-ly-gian-hang.html');
 		    }else{
@@ -110,7 +110,7 @@ class RegShop{
 	public static function logoutShop(){
 		global $base_url, $user_shop;
 		Session::destroySessionUserShop();
-		$data_login = array('time_access'=>time(), 'is_login'=>0);
+		$data_login = array('shop_time_logout'=>time(), 'is_login'=>0);
 		DB::updateId(self::$table_action, self::$primary_key_user_shop, $data_login, $user_shop->shop_id);
 		drupal_goto($base_url);
 	}
