@@ -5,7 +5,12 @@
 			<div class="content-box-menu">
 				<?php if(!empty($arrCategory)){?>
 				<ul>
-					<?php foreach($arrCategory as $cat){?>
+					<?php 
+					$i=0;
+					foreach($arrCategory as $cat){
+					$i++;
+					if($i<=11){
+					?>
 					<?php if(isset($cat['category_parent_name']) && $cat['category_parent_name'] != ''){ ?>
 					<li>
 						<a href="<?php echo FunctionLib::buildLinkCategory(0, 0, $cat['category_id'], $cat['category_parent_name']) ?>"><?php echo $cat['category_parent_name'] ?></a>
@@ -29,6 +34,7 @@
 						</div>
 						<?php } ?>
 					</li>
+					<?php } ?>
 					<?php } ?>
 					<?php } ?>
 				</ul>
