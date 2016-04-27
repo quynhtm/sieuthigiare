@@ -115,7 +115,9 @@
 								?>
 							</td>
 							<td class="align_center">
-								<?php echo ($item->is_login == SHOP_ONLINE)? '<i class="icon-smile icon-admin green"></i>': '<i class="icon-meh icon-admin red"></i>'; ?>
+								<?php
+									echo ($item->is_login == SHOP_ONLINE)? '<i class="icon-smile icon-admin green"></i> <br/>'.date('d-m-Y h:i:s',$item->shop_time_login): '<i class="icon-meh icon-admin red"></i><br/>'.date('d-m-Y h:i:s',$item->shop_time_logout);
+								?>
 							</td>
 							<td><?php echo date('d-m-Y h:i:s',$item->shop_created); ?></td>
 							<td>
