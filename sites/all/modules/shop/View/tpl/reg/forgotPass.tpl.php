@@ -6,7 +6,11 @@
 		
 		<form class="formForgotPass" method="post" action="<?php echo $base_url?>/quen-mat-khau.html" class="form-inline">
 			<div class="form-group">
-				<label class="control-label">Email cần khôi phục mật khẩu<span>(*)</span></label>
+				<label class="control-label">Tên đăng nhập shop<span>(*)</span></label>
+				<input type="text" id="user_shop" class="form-control" name="user_shop" value="<?php if(isset($user_shop)){ echo $user_shop; } ?>">
+			</div>
+			<div class="form-group">
+				<label class="control-label">Email đăng ký shop<span>(*)</span></label>
 				<input type="text" id="email_shop" class="form-control" name="email_shop" value="<?php if(isset($shop_email)){ echo $shop_email; } ?>">
 			</div>
 			<input type="hidden" name="txtFormForgotPass" id="txtFormForgotPass" value="txtFormForgotPass"/>

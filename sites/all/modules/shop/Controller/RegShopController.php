@@ -285,22 +285,30 @@ class RegShopController{
 		global $base_url;
 		
 		if(!empty($_POST)){
+			$user_shop = FunctionLib::getParam('user_shop','');
 			$email_shop = FunctionLib::getParam('email_shop','');
 			$form_name = FunctionLib::getParam('txtFormForgotPass','');
 			
-			if($email_shop != '' && $form_name == 'txtFormForgotPass'){
+			if($user_shop != '' && $email_shop != '' && $form_name == 'txtFormForgotPass'){
+				$errors = '';
 				
-				$check_valid_mail = ValidForm::checkRegexEmail($email_shop);
-				
-				if(!$check_valid_mail){
-					$errors = 'Email không đúng định dạng!<br/>';
-					if($errors != ''){
-						drupal_set_message($errors, 'error');
-						return theme('forgotPass', array('shop_email' => $email_shop));
-					}
+				$check_valid_name = ValidForm::checkRegexName($user_shop);
+				if(!$check_valid_name){
+					$errors .= 'Tên đăng nhập không được có dấu!<br/>';
 				}
 
-				$userExist = RegShop::getShopByCondMail($email_shop);
+				$check_valid_mail = ValidForm::checkRegexEmail($email_shop);
+				if(!$check_valid_mail){
+					$errors .= 'Email không đúng định dạng!<br/>';
+				}
+
+				if($errors != ''){
+					drupal_set_message($errors, 'error');
+					return theme('forgotPass', array('user_shop' => $user_shop, 'shop_email' => $email_shop));
+				}
+
+				$userExist = RegShop::getShopByCondMail($user_shop, $email_shop);
+				
 				if(!empty($userExist)){
 					$shop_id = $userExist[0]->shop_id;
 					$pass = self::randomString(5);
@@ -319,7 +327,7 @@ class RegShopController{
 					auto_send_mail('Shop', $contentEmail, $email_shop, $subject);
 					drupal_set_message('Hệ thống đã gửi một thư tới địa chỉ email này!');
 				}else{
-					drupal_set_message('Không tồn tại email này!');
+					drupal_set_message('Không đúng tên đăng nhập hoặc email đăng ký shop!', 'error');
 					return theme('forgotPass', array('shop_email' => $email_shop));
 				}
 			}else{
