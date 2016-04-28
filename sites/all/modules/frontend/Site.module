@@ -55,6 +55,14 @@ function Site_block_info() {
 		'visibility' => 1,
 	);
 
+	$blocks['block-item-404'] = array(
+		'info' => t('Block item 404'),
+		'status'	=> TRUE,
+		'region'	=> 'content',
+		'weight'	=> 0,
+		'visibility' => 1,
+	);
+
    return $blocks;
 }
 function Site_theme() {
@@ -71,7 +79,9 @@ function Site_theme() {
 		'block-footer' => array(
 	      'template' => 'View/tpl/block-footer'
 	    ),
-		
+	    'block-item-404' => array(
+	      'template' => 'View/tpl/block-item-404'
+	    ),
 	    'pageCategoryProduct' => array(
 	      'template' => 'View/tpl/pageCategoryProduct'
 	    ),
@@ -96,6 +106,10 @@ function Site_block_view($delta='') {
 		  $block['subject'] = t('Block footer');
 		  $block['content'] = block_footer();
 		  break;
+		case 'block-item-404':
+		  $block['subject'] = t('Block item 404');
+		  $block['content'] = block_item_404();
+		  break;
 	}
 	return $block;
 }
@@ -108,7 +122,6 @@ function Site_init() {
 
 			'View/js/site.js',
 			'View/css/site.css',
-			'View/css/media.css',
 		);
 		Loader::load('Site', $files);
 	}
@@ -163,11 +176,16 @@ function block_slide(){
 	return $view;
 }
 function block_content(){
-	$result = SiteController::getListProductContent(40);
+	$result = SiteController::getListProductContent(40, false);
 	$view= theme('block-content', array('result'=>$result));
 	return $view;
 }
 function block_footer(){
 	$view= theme('block-footer');
+	return $view;
+}
+function block_item_404(){
+	$result = SiteController::getListProductContent(20, true);
+	$view= theme('block-item-404', array('result'=>$result));
 	return $view;
 }

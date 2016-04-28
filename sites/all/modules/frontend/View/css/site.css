@@ -343,7 +343,7 @@ span#logo{
     color: #222;
     cursor: pointer;
     font-weight: bold;
-    padding: 8px 5px 8px 12px;
+    padding: 8px 5px 10px 12px;
     text-transform: uppercase;
 }
 .box-menu-hover.act .title-cat-menu{
@@ -557,4 +557,56 @@ span#logo{
     width: 100%;
     z-index: 1;
     opacity: 0.1;
+}
+.right-ultity {
+    display: inline-block;
+    float: right;
+    height: 35px;
+    position: relative;
+    top: -8px;
+    width: 660px;
+    overflow: hidden;
+    color:#9a9a9a;
+}
+.shop-create {
+    display: inline-block;
+    float: left;
+    width: 220px;
+}
+.shop-create i {
+    background: rgba(0, 0, 0, 0) url("../img/icon.png") no-repeat scroll 0 -95px;
+    display: inline-block;
+    height: 29px;
+    width: 29px;
+    float: left;
+}
+.shop-transfer {
+    display: inline-block;
+    float: left;
+    width: 220px;
+}
+.shop-transfer i {
+    background: rgba(0, 0, 0, 0) url("../img/icon.png") no-repeat scroll -34px -95px;
+    display: inline-block;
+    float: left;
+    height: 32px;
+    width: 58px;
+}
+.shop-diversity{
+    display: inline-block;
+    float: left;
+    width: 220px;
+}
+.shop-diversity i {
+    background: rgba(0, 0, 0, 0) url("../img/icon.png") no-repeat scroll -93px -95px;
+    display: inline-block;
+    float: left;
+    height: 29px;
+    width: 48px;
+}
+.right-ultity i {
+    margin-right: 5px;
+}
+.right-ultity span{
+    font-style: italic;
 }
