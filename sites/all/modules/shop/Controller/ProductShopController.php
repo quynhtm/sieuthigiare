@@ -369,7 +369,8 @@ class ProductShopController{
 	    //san pham ban co the quan tam
 	     $arrFields = array('product_id', 'product_name', 'product_price_sell', 
 	     					'product_price_market', 'product_image', 
-	    					'product_image_hover','product_type_price', 'product_selloff'
+	    					'product_image_hover','product_type_price', 'product_selloff',
+	    					'user_shop_id','user_shop_name'
 	    					);
 
 	    $arrSame = ProductShop::getProductSameCatShop($product_id, $category_id, 15, $arrFields, false);
