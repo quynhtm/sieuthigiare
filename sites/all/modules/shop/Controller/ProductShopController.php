@@ -297,10 +297,8 @@ class ProductShopController{
 		$limit = (isset($this->user_shop->is_shop) && $this->user_shop->is_shop = SHOP_VIP) ? SITE_RECORD_PER_PAGE_SHOP_VIP: SITE_RECORD_PER_PAGE_SHOP_NORMAL;
 		$arrFields = array('product_id', 'category_name','product_name', 'product_price_sell', 'product_price_market', 'product_image', 'product_image_hover', 'product_type_price', 'product_selloff', 'user_shop_id', 'user_shop_name');
 		$result = ProductShop::getIndexShop($this->shop_id,$this->category_id, $limit, $arrFields);
-
 		$phone = '';
-		$arrCategoryChildren = array();
-
+		$treeCategoryShop = array();
 		if(isset($result['data']) && !empty($result['data'])){
 			foreach($result['data'] as $k => &$value){
 				if( isset($value->product_image) && trim($value->product_image) != ''){
@@ -321,9 +319,9 @@ class ProductShopController{
 		}
 		
 		$bannerList = DataCommon::getBannerAdvanced(BANNER_TYPE_HOME_BIG, BANNER_PAGE_HOME,!empty($arrCateParenId)? array_rand($arrCateParenId,1): 0, 0);
-
 		return theme('indexShop', array(
-										'arrCategoryChildren'=>$treeCategoryShop,
+										'treeCategoryShop'=>$treeCategoryShop,
+										'arrCateParenId'=>$arrCateParenId,
 										'result'=>$result['data'],
 										'phone'=>$phone,
 										'user_shop'=>$this->user_shop,

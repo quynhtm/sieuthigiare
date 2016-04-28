@@ -15,20 +15,18 @@
 			<div class="left-category-shop">
 				<div class="wrapp-category-menu">
 					<div class="title-category-parent">
-						<?php 
-							if(isset($user_shop->shop_category_name) && $user_shop->shop_category_name != ''){
-								echo $user_shop->shop_category_name;
-							}else{
-								echo 'Danh mục sản phẩm';
-							} 
-						?>
+						Danh mục sản phẩm
 					</div>
-					<?php if(isset($arrCategoryChildren) && !empty($arrCategoryChildren)){
+					<?php if(isset($treeCategoryShop) && !empty($treeCategoryShop)){
 						$shop_id = isset($user_shop->shop_id)? $user_shop->shop_id : 0;
 					?>
 					<ul>
-						<?php foreach($arrCategoryChildren as $k =>$v){?>
-						<li><a class="<?php if($category_id == $k){ ?>act<?php } ?>" href="<?php echo FunctionLib::buildLinkCategory($shop_id, '', $k, $v) ?>" title="<?php echo $v?>"><?php echo $v?></a></li>
+						<?php foreach($treeCategoryShop as $k =>$v){?>
+							<?php if(in_array($k,$arrCateParenId)){?>
+								<li><b><?php echo $v?></b></li><!--- ten danh mục cha không có link-->
+							<?php }else{?>
+								<li><a class="<?php if($category_id == $k){ ?>act<?php } ?>" href="<?php echo FunctionLib::buildLinkCategory($shop_id, '', $k, $v) ?>" title="<?php echo $v?>"><?php echo $v?></a></li>
+							<?php } ?>
 						<?php } ?>
 					</ul>
 					<?php } ?>

@@ -165,7 +165,8 @@ class RegShopController{
 	    Loader::loadJSExt('Core', $files);
 
 		if(!empty($_POST['frmChangeInfo'])){
-			$arrCateParent = FunctionLib::getParam('shop_category',array());
+			$selectCateParent = FunctionLib::getParam('shop_category',array());
+			$arrCateParent = (count($selectCateParent) > 2)? array_rand($selectCateParent,2): $selectCateParent;//lay 2 danh muc cha
 			$shop_category = !empty($arrCateParent)? implode(',',$arrCateParent): '';
 			$dataInput = array(
 						'shop_category'=>array('value'=>$shop_category, 'require'=>1, 'messages'=>'Chọn danh mục sản phẩm!'),
@@ -176,7 +177,6 @@ class RegShopController{
 						'shop_about'=>array('value'=>FunctionLib::getParam('shop_about',''), 'require'=>0, 'messages'=>''),
 						'shop_province'=>array('value'=>FunctionLib::getIntParam('shop_province',''), 'require'=>0, 'messages'=>'Chọn tỉnh thành!'),
 						'shop_transfer'=>array('value'=>FunctionLib::getParam('shop_transfer',''), 'require'=>0, 'messages'=>''),
-
 					);
 
 			$errors = ValidForm::validInputData($dataInput);
@@ -193,7 +193,6 @@ class RegShopController{
 				drupal_set_message($errors, 'error');
 				drupal_goto($base_url.'/sua-thong-tin-gian-hang.html');
 			}
-
 			$data_post = array(
 				'shop_category'=>$dataInput ['shop_category']['value'],
 				'shop_name'=>$dataInput ['shop_name']['value'],
@@ -205,18 +204,14 @@ class RegShopController{
 				'shop_transfer'=>$dataInput ['shop_transfer']['value'],
 			);
 
-			/*if($dataInput ['shop_category']['value'] > 0){
-				$arrCat = DataCommon::getCategoryById($dataInput ['shop_category']['value']);
-				if(!empty($arrCat)){
-					$data_post['shop_category_name'] = $arrCat->category_name;
-				}
-			}*/
 			$data_post['shop_category_name'] = '';
 			RegShop::updateId($data_post, $user_shop->shop_id);
 			if(Cache::CACHE_ON){
 				$key_cache = Cache::VERSION_CACHE.Cache::CACHE_USER_SHOP_ID.$user_shop->shop_id;
+				$key_cache2 = Cache::VERSION_CACHE.Cache::CACHE_TREE_MENU_CATEGORY_USER_SHOP_ID.$user_shop->shop_id;
 				$cache = new Cache();
 				$cache->do_remove($key_cache);
+				$cache->do_remove($key_cache2);
 			}
 			drupal_set_message('Cập nhật thông tin gian hàng thành công!');
 			drupal_goto($base_url.'/quan-ly-gian-hang.html');

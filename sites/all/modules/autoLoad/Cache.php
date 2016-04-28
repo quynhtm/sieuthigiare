@@ -13,7 +13,7 @@ class Cache {
     const CACHE_TIME_TO_LIVE_ONE_MONTH = 2419200; //Time cache 1 thang
     const CACHE_TIME_TO_LIVE_ONE_YEAR =  29030400; //Time cache 1 nam
 
-    const VERSION_CACHE = 'ver_3_';//dung de thay doi cache tat ca,khong phai remove tung cache
+    const VERSION_CACHE = 'ver_4_';//dung de thay doi cache tat ca,khong phai remove tung cache
 
     //cache Province
     const CACHE_PROVINCE = 'cache_province';
