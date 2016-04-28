@@ -516,3 +516,9 @@
     text-transform: uppercase;
     text-align: center;
 }
+.full-page {
+    background: #fafafa;
+}
+#block-site-block-item-404{
+    padding-top:10px; 
+}

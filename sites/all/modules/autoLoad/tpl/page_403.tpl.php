@@ -1,4 +1,4 @@
-<div class="container">
+<div class="full-page">
 	<div class="main-view-post">
 		<div class="wrap-main-view">
 			<div class="view-content-static">
