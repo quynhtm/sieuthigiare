@@ -336,9 +336,11 @@ a.btn-yahoo:hover{
     margin-bottom: 10px;
 }
 .title-category-parent {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: bold;
     margin-bottom: 10px;
+    text-transform: uppercase;
+    padding-bottom: 5px;
 }
 
 .left-category-shop ul li{
