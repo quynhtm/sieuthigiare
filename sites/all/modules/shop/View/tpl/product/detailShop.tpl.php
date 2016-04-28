@@ -189,6 +189,11 @@
 													</p>
 												<?php } ?>
 											</div>
+							                <div class="mgt5 amount-call">
+							                	<a class="link-shop" href="<?php echo FunctionLib::buildLinkCategory($same->user_shop_id, $same->user_shop_name, 0, '') ?>">
+							                		<?php echo $same->user_shop_name ?>
+							                	</a>
+							            	</div>
 										</li>
 										<?php } ?>
 										<?php } ?>
@@ -335,6 +340,11 @@
 												</p>
 											<?php } ?>
 										</div>
+										<div class="mgt5 amount-call">
+						                	<a class="link-shop" href="<?php echo FunctionLib::buildLinkCategory($same->user_shop_id, $same->user_shop_name, 0, '') ?>">
+						                		<?php echo $same->user_shop_name ?>
+						                	</a>
+						            	</div>
 									</li>
 									<?php } ?>
 									<?php } ?>
