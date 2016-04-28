@@ -17,8 +17,8 @@ class SiteController{
 		return $result;
 	}
 
-	public static function getListProductContent($limit=0){
-		$result = Site::getListProductContent($limit);
+	public static function getListProductContent($limit=0, $random=false){
+		$result = Site::getListProductContent($limit, $random);
 		return $result;
 	}
 

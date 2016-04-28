@@ -176,7 +176,7 @@ function block_slide(){
 	return $view;
 }
 function block_content(){
-	$result = SiteController::getListProductContent(40);
+	$result = SiteController::getListProductContent(40, false);
 	$view= theme('block-content', array('result'=>$result));
 	return $view;
 }
@@ -185,8 +185,7 @@ function block_footer(){
 	return $view;
 }
 function block_item_404(){
-	
-	$result = SiteController::getListProductContent(20);
+	$result = SiteController::getListProductContent(20, true);
 	$view= theme('block-item-404', array('result'=>$result));
 	return $view;
 }
