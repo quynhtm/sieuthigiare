@@ -47,11 +47,32 @@
                     <input type="text" name="shop_address" value="<?php if(isset($user_shop->shop_address)){ echo $user_shop->shop_address; } ?>">
                 </div>
             </div>
+             <div class="control-group">
+                 <label class="control-label">Danh mục sản phẩm<span>(*)</span></label>
+                 <div class="controls">
+                     <select class="form-control input-sm" name="shop_category[]" multiple="multiple" style="height: 250px;">
+                         <option value="-1">--Chọn danh mục đăng bán sản phẩm -- </option>
+                         <?php
+                         if(count($arrCategoryParent) >0){
+                             foreach ($arrCategoryParent as $key => $text) {
+                                 $input = '<option value="' . $key . '"';
+                                 if (in_array($key, $arrShopCate)) {
+                                     $input .= ' selected';
+                                 }
+                                 $input .= '>' . $text . '</option>';
+                                 echo $input;
+                             }
+                         }
+                         ?>
+                     </select>
+                 </div>
+             </div>
             <div class="control-group">
                 <label class="control-label">Giới hạn số sản phẩm</label>
                 <div class="controls"><select class="form-control input-sm" name="number_limit_product"><?php echo $optionNumberLimitProduct;?></select></div>
             </div>
-            <div class="control-group">
+
+             <div class="control-group">
                 <label class="control-label">Loại gian hàng</label>
                 <div class="controls"><select class="form-control input-sm" name="is_shop"><?php echo $optionIsShop;?></select></div>
             </div>

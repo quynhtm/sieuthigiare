@@ -81,13 +81,16 @@ class UserShopController{
 
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 			$user_password = FunctionLib::getParam('user_password','');
+			$selectCateParent = FunctionLib::getParam('shop_category',array());
+			$arrCateParent = (count($selectCateParent) > 2)? array_rand($selectCateParent,2): $selectCateParent;//lay 2 danh muc cha
+			$shop_category = !empty($arrCateParent)? implode(',',$arrCateParent): '';
 			$data = array(
 						'shop_name'=>array('value'=>FunctionLib::getParam('shop_name',''), 'require'=>1, 'messages'=>'Tiêu đề không được trống!'),
 						'user_shop'=>array('value'=>FunctionLib::getParam('user_shop',''), 'require'=>0, 'messages'=>''),
 						'shop_phone'=>array('value'=>FunctionLib::getParam('shop_phone',''), 'require'=>0, 'messages'=>''),
 						'shop_email'=>array('value'=>FunctionLib::getParam('shop_email',''), 'require'=>0, 'messages'=>''),
 						'shop_address'=>array('value'=>FunctionLib::getParam('shop_address',''), 'require'=>0, 'messages'=>''),
-						//'shop_status'=>array('value'=>FunctionLib::getParam('shop_status',''), 'require'=>0, 'messages'=>''),
+						'shop_category'=>array('value'=>$shop_category, 'require'=>0, 'messages'=>''),
 						'number_limit_product'=>array('value'=>FunctionLib::getIntParam('number_limit_product',SHOP_NUMBER_PRODUCT_FREE), 'require'=>1, 'messages'=>'Nhập giới hạn sản phẩm ở gian hàng!'),
 						'is_shop'=>array('value'=>FunctionLib::getIntParam('is_shop',SHOP_FREE), 'require'=>0, 'messages'=>''),
 					);
@@ -118,6 +121,7 @@ class UserShopController{
 					$cache = new Cache();
 					$cache->do_remove($key_cache);
 					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_LIST_USER_SHOP);
+					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_TREE_MENU_CATEGORY_USER_SHOP_ID.$id);
 				}
 				drupal_goto($base_url.'/admincp/usershop');
 			}
@@ -125,9 +129,15 @@ class UserShopController{
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($user_shop->shop_status)? $user_shop->shop_status : -2);
 		$optionIsShop = FunctionLib::getOption($this->arrIsShop, isset($user_shop->is_shop)? $user_shop->is_shop : SHOP_FREE);
 		$optionNumberLimitProduct = FunctionLib::getOption($this->arrNumberLimitProduct, isset($user_shop->number_limit_product)? $user_shop->number_limit_product : SHOP_NUMBER_PRODUCT_FREE);
+
+		$arrCategoryParent = DataCommon::getListCategoryParent();
+		$arrShopCate = ($user_shop->shop_category != '')? explode(',',$user_shop->shop_category): array();
+
 		return $view = theme('addUserShop',array('user_shop'=>$user_shop,
 			'optionStatus'=>$optionStatus,
 			'optionIsShop'=>$optionIsShop,
+			'arrShopCate'=>$arrShopCate,
+			'arrCategoryParent'=>$arrCategoryParent,
 			'optionNumberLimitProduct'=>$optionNumberLimitProduct));
 	}
 
