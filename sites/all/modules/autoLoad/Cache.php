@@ -13,7 +13,7 @@ class Cache {
     const CACHE_TIME_TO_LIVE_ONE_MONTH = 2419200; //Time cache 1 thang
     const CACHE_TIME_TO_LIVE_ONE_YEAR =  29030400; //Time cache 1 nam
 
-    const VERSION_CACHE = 'ver_2_';//dung de thay doi cache tat ca,khong phai remove tung cache
+    const VERSION_CACHE = 'ver_3_';//dung de thay doi cache tat ca,khong phai remove tung cache
 
     //cache Province
     const CACHE_PROVINCE = 'cache_province';
@@ -27,6 +27,7 @@ class Cache {
     //cache Shop
     const CACHE_USER_SHOP_ID = 'cache_shop_id_';
     const CACHE_LIST_USER_SHOP = 'cache_list_user_shop';
+    const CACHE_TREE_MENU_CATEGORY_USER_SHOP_ID = 'cache_tree_menu_category_user_shop_id_';
 
     //cache Category
     const CACHE_LIST_CATEGORY_PARENT = 'cache_list_category_parent';

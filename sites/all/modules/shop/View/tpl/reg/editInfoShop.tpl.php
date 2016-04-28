@@ -31,10 +31,20 @@
 										<div><input type="text" class="form-control input-sm" placeholder ="Email" name="shop_email"  maxlength="255" value="<?php echo $user_shop->shop_email?>"/></div>
 									</div>
 									<div class="form-group">
-										<label class="control-label">Danh mục<span>(*)</span></label>
+										<label class="control-label">Danh mục- Chọn 1 hay 2 danh mục có sản phẩm<span>(*)</span></label>
 										<div>
-											<select class="form-control input-sm" name="shop_category">
-												<?php echo $optionCategoryParent ?>
+											<select class="form-control input-sm" name="shop_category[]" multiple="multiple">
+												<option value="-1">--Chọn danh mục đăng bán sản phẩm -- </option>
+												<?php
+													foreach ($arrCategoryParent as $key => $text) {
+														$input = '<option value="' . $key . '"';
+														if (in_array($key, $arrShopCate)) {
+															$input .= ' selected';
+														}
+														$input .= '>' . $text . '</option>';
+														echo $input;
+													}
+												?>
 											</select>
 										</div>
 									</div>

@@ -165,8 +165,10 @@ class RegShopController{
 	    Loader::loadJSExt('Core', $files);
 
 		if(!empty($_POST['frmChangeInfo'])){
+			$arrCateParent = FunctionLib::getParam('shop_category',array());
+			$shop_category = !empty($arrCateParent)? implode(',',$arrCateParent): '';
 			$dataInput = array(
-						'shop_category'=>array('value'=>FunctionLib::getIntParam('shop_category',''), 'require'=>1, 'messages'=>'Chọn danh mục sản phẩm!'),
+						'shop_category'=>array('value'=>$shop_category, 'require'=>1, 'messages'=>'Chọn danh mục sản phẩm!'),
 						'shop_name'=>array('value'=>FunctionLib::getParam('shop_name',''), 'require'=>1, 'messages'=>'Tên gian hàng không được trống!'),
 						'shop_phone'=>array('value'=>FunctionLib::getParam('shop_phone',''), 'require'=>1, 'messages'=>'Số điện thoại không được trống!'),
 						'shop_address'=>array('value'=>FunctionLib::getParam('shop_address',''), 'require'=>0, 'messages'=>''),
@@ -203,13 +205,13 @@ class RegShopController{
 				'shop_transfer'=>$dataInput ['shop_transfer']['value'],
 			);
 
-			if($dataInput ['shop_category']['value'] > 0){
+			/*if($dataInput ['shop_category']['value'] > 0){
 				$arrCat = DataCommon::getCategoryById($dataInput ['shop_category']['value']);
 				if(!empty($arrCat)){
 					$data_post['shop_category_name'] = $arrCat->category_name;
 				}
-			}
-			
+			}*/
+			$data_post['shop_category_name'] = '';
 			RegShop::updateId($data_post, $user_shop->shop_id);
 			if(Cache::CACHE_ON){
 				$key_cache = Cache::VERSION_CACHE.Cache::CACHE_USER_SHOP_ID.$user_shop->shop_id;
@@ -221,10 +223,11 @@ class RegShopController{
 		}
 		$listProvinces = DataCommon::getAllProvices();
 		$arrCategoryParent = DataCommon::getListCategoryParent();
-		$dataCategory['shop_category'] = $user_shop->shop_category;
-		$optionCategoryParent = FunctionLib::getOption(array(-1=>'Chọn danh mục cha') + $arrCategoryParent, $dataCategory['shop_category']);
+		$arrShopCate = ($user_shop->shop_category != '')? explode(',',$user_shop->shop_category): array();
 
-		return $view = theme('editInfoShop', array('listProvinces'=>$listProvinces, 'optionCategoryParent'=>$optionCategoryParent));
+		return theme('editInfoShop', array('listProvinces'=>$listProvinces,
+			'arrShopCate'=>$arrShopCate,
+			'arrCategoryParent'=>$arrCategoryParent));
 	}
 
 	public function editPassShop(){

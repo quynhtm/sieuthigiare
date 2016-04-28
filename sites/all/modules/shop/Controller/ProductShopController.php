@@ -23,7 +23,7 @@ class ProductShopController{
 		}
 
 		//check full infomation
-		if($user_shop->shop_name == '' || $user_shop->shop_phone == '' || $user_shop->shop_email == '' || $user_shop->shop_category <=0 || $user_shop->shop_province <= 0){
+		if($user_shop->shop_name == '' || $user_shop->shop_phone == '' || $user_shop->shop_email == '' || $user_shop->shop_category =='' || $user_shop->shop_province <= 0){
 			drupal_set_message('Bạn vui lòng nhập đầy đủ thông tin. Các trường có dấu (*) là bắt buộc!');
 			drupal_goto($base_url.'/sua-thong-tin-gian-hang.html');
 		}
@@ -67,10 +67,10 @@ class ProductShopController{
 			}
 		}
 		//FunctionLib::Debug($result);
+		$arrCategoryChildren = DataCommon::buildCacheTreeCategoryWithShop($user_shop->shop_id);
+		$treeCategoryShop = self::showTreeCategoryShop($arrCategoryChildren);
 
-		$arrCategoryChildren = DataCommon::getListCategoryChildren($user_shop->shop_category);
-		$optionCategoryChildren = FunctionLib::getOption(array(-1=>'Chọn danh mục sản phẩm') + $arrCategoryChildren, $dataSearch['category_id']);
-
+		$optionCategoryChildren = FunctionLib::getOption(array(-1=>'Chọn danh mục sản phẩm') + $treeCategoryShop, $dataSearch['category_id']);
 		$arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
 		$optionStatus = FunctionLib::getOption(array(-1=>'Chọn trạng thái') + $arrStatus, $dataSearch['product_status']);
 		return theme('productShop',array(
@@ -83,6 +83,18 @@ class ProductShopController{
 									'optionCategoryChildren'=>$optionCategoryChildren));
 	}
 
+	public function showTreeCategoryShop($arrCategoryChildren = array(),$name_space = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'){
+		$treeCategoryShop = array();
+		if(!empty($arrCategoryChildren)){
+			foreach($arrCategoryChildren as $key => $val){
+				$treeCategoryShop[$val['category_id']] = $val['category_parent_name'];
+				foreach($val['arrSubCategory'] as $kk =>$child){
+					$treeCategoryShop[$child['category_id']]= $name_space.$child['category_name'];
+				}
+			}
+		}
+		return $treeCategoryShop;
+	}
 	public function productFormShop(){
 		global $base_url, $user_shop;
 		if($user_shop->shop_id == 0){
@@ -241,8 +253,11 @@ class ProductShopController{
 			}
 		}
 
-		$arrCategoryChildren = DataCommon::getListCategoryChildren($user_shop->shop_category);
-		$optionCategoryChildren = FunctionLib::getOption(array(-1=>'Chọn danh mục sản phẩm') + $arrCategoryChildren, isset($arrItem->category_id)? $arrItem->category_id : -1);
+		$arrCategoryChildren = DataCommon::buildCacheTreeCategoryWithShop($user_shop->shop_id);
+		$treeCategoryShop = self::showTreeCategoryShop($arrCategoryChildren);
+		$arrCateParenId = ($user_shop->shop_category != '')? explode(',',$user_shop->shop_category): array();
+		$optionCategoryChildren = FunctionLib::getOption(array(-1=>'Chọn danh mục sản phẩm') + $treeCategoryShop, isset($arrItem->category_id)? $arrItem->category_id : -1,$arrCateParenId);
+
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->product_status)? $arrItem->product_status : -1);
 		$optionTypeProduct = FunctionLib::getOption($this->arrTypeProduct, isset($arrItem->product_is_hot)? $arrItem->product_is_hot : -1);
 		$optionTypePrice = FunctionLib::getOption($this->arrTypePrice, isset($arrItem->product_type_price)? $arrItem->product_type_price : TYPE_PRICE_NUMBER);
@@ -296,18 +311,19 @@ class ProductShopController{
 				}
 			}	
 		}
-		
+		$arrCateParenId = array();
 		if(!empty($this->user_shop)){
 			$phone = $this->user_shop->shop_phone;
 			//get list cagegory left shop
-			$shop_category = $this->user_shop->shop_category;
-			$arrCategoryChildren = DataCommon::getListCategoryChildren($shop_category);
+			$arrCateParenId = ($this->user_shop->shop_category != '')? explode(',',$this->user_shop->shop_category): array();
+			$arrCategoryChildren = DataCommon::buildCacheTreeCategoryWithShop($this->user_shop->shop_id);
+			$treeCategoryShop = self::showTreeCategoryShop($arrCategoryChildren,'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
 		}
 		
-		$bannerList = DataCommon::getBannerAdvanced(BANNER_TYPE_HOME_BIG, BANNER_PAGE_HOME, $shop_category, 0);
+		$bannerList = DataCommon::getBannerAdvanced(BANNER_TYPE_HOME_BIG, BANNER_PAGE_HOME,!empty($arrCateParenId)? array_rand($arrCateParenId,1): 0, 0);
 
 		return theme('indexShop', array(
-										'arrCategoryChildren'=>$arrCategoryChildren,
+										'arrCategoryChildren'=>$treeCategoryShop,
 										'result'=>$result['data'],
 										'phone'=>$phone,
 										'user_shop'=>$this->user_shop,

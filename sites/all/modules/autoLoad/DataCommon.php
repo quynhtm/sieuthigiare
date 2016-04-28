@@ -93,7 +93,48 @@ class DataCommon{
 		}
 		return $categoryChildren;
 	}
-	
+
+	public static function buildCacheTreeCategoryWithShop($shop_id = 0){
+		if($shop_id == 0) return array();
+		$user_shop = self::getShopById($shop_id);
+		$arrParenId = array();
+		if(!empty($user_shop)){
+			$arrParenId = ($user_shop->shop_category != '')? explode(',',$user_shop->shop_category): array();
+		}
+		if(empty($arrParenId)) return array();
+		$treeCategory = array();
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_TREE_MENU_CATEGORY_USER_SHOP_ID.$shop_id;
+		if(Cache::CACHE_ON){
+			$cache = new Cache();
+			$treeCategory = $cache->do_get($key_cache);
+		}
+		if($treeCategory == null || empty($treeCategory)){
+			$query = db_select(self::$table_category, 'c')
+				->condition('c.category_status', STASTUS_SHOW, '=')
+				->orderBy('c. category_order', 'ASC');
+			$db_or = db_or();
+			$db_or->condition('c.category_id', $arrParenId,'IN');
+			$db_or->condition('c.category_parent_id', $arrParenId,'IN');
+			$query->condition($db_or);
+			$query->fields('c');
+
+			$data = $query->execute();
+			if(!empty($data)){
+				$dataCate = array();
+				foreach($data as $k=> $cate){
+					$dataCate[] = $cate;
+				}
+				//build tree cat with parent_id
+				$treeCategory = self::getTreeCategory($dataCate);
+
+				if(Cache::CACHE_ON) {
+					$cache->do_put($key_cache, $treeCategory, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+				}
+			}
+		}
+		return $treeCategory;
+	}
+
 	/**
 	 * Build Tree categroy menu danh m?c
 	 * @return array
@@ -125,7 +166,7 @@ class DataCommon{
 		}
 		return $treeCategory;
 	}
-	public function getTreeCategory($data){
+	public static function getTreeCategory($data){
 		$arrCategory = array();
 		if(!empty($data)){
 			foreach ($data as $k=>$value){
@@ -154,7 +195,7 @@ class DataCommon{
 		}
 		return $arrCategory;
 	}
-	public function sortArrayASC (&$array, $key) {
+	public static function sortArrayASC (&$array, $key) {
 		$sorter=array();
 		$ret=array();
 		reset($array);
