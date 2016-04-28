@@ -66,7 +66,7 @@ function user_pass() {
     );
   }
   $form['actions'] = array('#type' => 'actions');
-  $form['actions']['submit'] = array('#type' => 'submit', '#value' => t('E-mail new password'));
+  $form['actions']['submit'] = array('#type' => 'submit', '#value' => t('Nhận mật khẩu mới'));
 
   return $form;
 }

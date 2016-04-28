@@ -2105,10 +2105,10 @@ function user_login($form, &$form_state) {
     drupal_goto('user/' . $user->uid);
   }
 
-  $str1= '<div class="title-login-user"><span>Đăng nhập</span></div>'; 
+  $str= '<div class="title-login-user"><span>Đăng nhập</span></div>'; 
   $form['html'] = array(
    '#type' => 'markup',
-   '#markup' => $str1,
+   '#markup' => $str,
   );
 
   // Display login form:
@@ -2129,21 +2129,10 @@ function user_login($form, &$form_state) {
   $form['actions'] = array('#type' => 'actions');
   $form['actions']['submit'] = array('#type' => 'submit', '#value' => t('Đăng nhập'));
 
-  $html1='<div class="remember-login">
-      <input type="checkbox" class="save-login" name="save_login" id="save-login" />
-      <label for="save-login" class="txt-save-login">'.t("Ghi nhớ tài khoản").'</label>
-     </div>';
-   $form['remember'] = array(
-     '#type' => 'markup',
-     '#markup' => $html1,
-  );
-  $html2='<div class="link-info">
-      <div class="registration"><a href="'.$base_url.'/dang-ky">'.t('Đăng ký').'</a></div>
-      <div class="forgot-password"><a href="'.$base_url.'/user/password">'.t('Bạn quên mật khẩu?').'</a></div>
-     </div>';
+  $html='<div class="link-info"><a href="'.$base_url.'/user/password">'.t('Bạn quên mật khẩu?').'</a></div>';
   $form['forgot'] = array(
     '#type' => 'markup',
-    '#markup' => $html2,
+    '#markup' => $html,
   );
 
   
