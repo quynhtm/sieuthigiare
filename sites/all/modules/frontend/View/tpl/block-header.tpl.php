@@ -128,6 +128,23 @@
 			<div class="desc-price-day">
 				<i class="icon-star-empty"></i> <a href="#" title="Giảm giá mỗi ngày">Giảm giá mỗi ngày</a>
 			</div>
+			<div class="right-ultity">
+				<div class="shop-create">
+					<i></i>
+					<b>Tạo shop online:</b><br>
+					<span>Đơn giản - Tiện ích - Dễ dùng</span>
+				</div>
+				<div class="shop-transfer">
+					<i></i>
+					<b>Ship hàng tận nơi:</b><br>
+					<span>Giao ngay trong ngày</span>
+				</div>
+				<div class="shop-diversity">
+					<i></i>
+					<b>Sản phẩm đa dạng:</b><br>
+					<span>Đủ các mặt hàng gọi là có ngay</span>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
