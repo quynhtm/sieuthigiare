@@ -108,7 +108,6 @@ function Site_init() {
 
 			'View/js/site.js',
 			'View/css/site.css',
-			'View/css/media.css',
 		);
 		Loader::load('Site', $files);
 	}
