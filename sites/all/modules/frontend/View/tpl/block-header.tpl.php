@@ -132,7 +132,7 @@
 				<div class="shop-create">
 					<i></i>
 					<b>Tạo shop online:</b><br>
-					<span>Đơn giản - Tiện ích - Dễ dùng</span>
+					<span>Tiện ích - Đơn giản - Dễ dùng</span>
 				</div>
 				<div class="shop-transfer">
 					<i></i>

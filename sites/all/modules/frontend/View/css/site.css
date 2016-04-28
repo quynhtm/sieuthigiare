@@ -343,7 +343,7 @@ span#logo{
     color: #222;
     cursor: pointer;
     font-weight: bold;
-    padding: 8px 5px 8px 12px;
+    padding: 8px 5px 10px 12px;
     text-transform: uppercase;
 }
 .box-menu-hover.act .title-cat-menu{
@@ -561,11 +561,12 @@ span#logo{
 .right-ultity {
     display: inline-block;
     float: right;
-    height: 32px;
+    height: 35px;
     position: relative;
     top: -8px;
     width: 660px;
     overflow: hidden;
+    color:#9a9a9a;
 }
 .shop-create {
     display: inline-block;
