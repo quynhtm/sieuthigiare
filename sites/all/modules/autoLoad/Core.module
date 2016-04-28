@@ -7,15 +7,15 @@
 */
 function Core_menu() {
     $items["page-403"] = array(
-        "title" => t("page access denied"),
-        "description" => t("page access denied"),
+        "title" => t("403"),
+        "description" => t("403"),
         'page callback' => 'page_403',
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
     $items["page-404"] = array(
-        "title" => t("page not found"),
-        "description" => t("page not found"),
+        "title" => t("404"),
+        "description" => t("404"),
         'page callback' => 'page_404',
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
