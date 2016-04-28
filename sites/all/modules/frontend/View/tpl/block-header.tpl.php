@@ -20,9 +20,9 @@
  	<div class="container">
 	    <div class="top-header">	
 	    	<?php if(drupal_is_front_page()){?>
-      		<h1 id="logo"><a href="<?php echo $base_url ?>"><img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/logo.png" alt="Sản phẩm rẻ đẹp - San pham re dep" /></a></h1>
+      		<h1 id="logo"><a href="<?php echo $base_url ?>"><img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/logo.png" alt="ShopCuaTui" /></a></h1>
       		<?php }else{ ?>
-      		<span id="logo"><a href="<?php echo $base_url ?>"><img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/logo.png" alt="Sản phẩm rẻ đẹp - San pham re dep" /></a></span>
+      		<span id="logo"><a href="<?php echo $base_url ?>"><img src="<?php echo $base_url.'/'.path_to_theme()?>/View/img/logo.png" alt="ShopCuaTui" /></a></span>
       		<?php } ?>
 		    <div class="box-top-header-right">
 		    	<div class="search-top-center">
