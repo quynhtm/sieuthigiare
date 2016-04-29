@@ -1136,3 +1136,7 @@ table.list-pay span.price {
 }
 
 .align_center{text-align: center!important;}
+
+.show-box-paging ul{
+    margin-right: 0!important;
+}
