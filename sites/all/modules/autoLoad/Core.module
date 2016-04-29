@@ -108,7 +108,7 @@ function CoreAjaxAction(){
     $action = FunctionLib::getParam('act', '');
     if($action != ''){
         $AjaxAction = new AjaxAction();
-        $AjaxAction->run();
+        $AjaxAction->run($action);
     }else{
         echo "Access denied!";die;
     }

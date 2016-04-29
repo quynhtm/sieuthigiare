@@ -93,7 +93,13 @@ class OrdersShop{
         }
         return array('data' => array(),'total' => 0,'pager' => array(),);
     }
-
+    public static function getItembyCond($fields = '', $cond=''){
+        $result = array();
+        if($cond != ''){
+           $result = DB::getItembyCond(self::$table_action, $fields, '', self::$primary_key.' ASC', $cond, 1);
+        }
+        return !empty($result)? $result[0]: array();
+    }
     public static function updateId($dataUpdate, $id = 0){
         if($id > 0 && !empty($dataUpdate)){
             return DB::updateId(self::$table_action, self::$primary_key, $dataUpdate, $id);
