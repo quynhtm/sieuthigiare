@@ -28,11 +28,11 @@ class AjaxAction{
         $order_id       = FunctionLib::getParam('order_id',0);
         $order_status   = trim(FunctionLib::getParam('order_status', -1));
         $order_user_shop_id = $user_shop->shop_id;
+        
         if($order_id > 0 && $order_status > 0 && $order_user_shop_id > 0){
             
             $cond = 'order_id='.$order_id.' AND order_user_shop_id='.$order_user_shop_id;
             $check_order = OrdersShop::getItembyCond('order_id', $cond);
-            $check_order = OrdersShop::getItembyCond();
             if(!empty($check_order)){
                 OrdersShop::save(array('order_status'=>$order_status), $order_id);
                 echo 'ok';die;
