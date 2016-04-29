@@ -315,7 +315,7 @@
 										<a class="i-thumb post-thumb" title="<?php echo $h->product_name?>" href="<?php echo FunctionLib:: buildLinkDetail($h->product_id, $h->product_name); ?>">
 											<?php if($h->product_image != ''){?>
 											<img src="<?php echo FunctionLib::getThumbImage($h->product_image, $h->product_id, FOLDER_PRODUCT, 300, 300) ?>" alt="<?php echo $h->product_name?>" 
-											data-other-src="<?php echo FunctionLib::getThumbImage($h->product_image_hover, $h->product_id, FOLDER_PRODUCT, 300, 300) ?>">
+											data-other-src="<?php echo FunctionLib::getThumbImage($h->product_image, $h->product_id, FOLDER_PRODUCT, 300, 300) ?>">
 											<?php }else{ ?>
 											<img src="<?php echo IMAGE_DEFAULT ?>"/>
 											<?php } ?>
