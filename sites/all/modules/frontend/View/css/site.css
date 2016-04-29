@@ -131,7 +131,7 @@ span#logo{
     display: inline-block;
     float: left;
     margin-top: 5px;
-    margin-left: 3px;
+    margin-left: 50px;
     font-size: 14px;
     font-style: italic;
 }
@@ -609,4 +609,9 @@ span#logo{
 }
 .right-ultity span{
     font-style: italic;
+}
+.btnLog i{
+    font-size: 16px;
+    position: relative;
+    top: 1px;
 }

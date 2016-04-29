@@ -7,11 +7,11 @@
 		<div class="box-login">
 			<!-- <a href="" class="link-normal">Hướng dẫn mua hàng</a> -->
 			<?php if(isset($user_shop->shop_id) && $user_shop->shop_id == 0){?>
-			<a href="<?php echo $base_url.'/dang-nhap.html' ?>" class="btnLog" rel="nofollow" >Vào Shop</a>
-			<a href="<?php echo $base_url.'/dang-ky.html' ?>" class="btnLog" rel="nofollow" >Mở Shop</a>
+			<a href="<?php echo $base_url.'/dang-ky.html' ?>" class="btnLog" rel="nofollow"><i class="icon-hand-right"></i> Mở Shop</a>
+			<a href="<?php echo $base_url.'/dang-nhap.html' ?>" class="btnLog" rel="nofollow"><i class="icon-signin"></i> Vào Shop</a>
 			<?php }else{ ?>
-			<a href="<?php echo $base_url.'/quan-ly-gian-hang.html' ?>" rel="nofollow" class="btnLog">Quản lý gian hàng</a>
-			<a href="<?php echo $base_url.'/thoat.html' ?>" rel="nofollow" class="btnLog">Thoát</a>
+			<a href="<?php echo $base_url.'/quan-ly-gian-hang.html' ?>" rel="nofollow" class="btnLog"><i class="icon-cog"></i> Quản lý gian hàng</a>
+			<a href="<?php echo $base_url.'/thoat.html' ?>" rel="nofollow" class="btnLog"><i class="icon-signout"></i> Thoát</a>
 			<?php } ?>
 		</div>
 	</div>
