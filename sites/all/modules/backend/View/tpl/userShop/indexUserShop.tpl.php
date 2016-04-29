@@ -122,7 +122,7 @@
 							<td><?php echo date('d-m-Y h:i:s',$item->shop_created); ?></td>
 							<td>
 								<?php $linkLoginAs = $base_url.'/admincp/techloginas?shop='.$item->user_shop ?>
-								<a href="<?php echo $linkLoginAs; ?>" title="Tech login as"><i class="icon-signin icon-admin green "></i></a>
+								<a target="_blank" href="<?php echo $linkLoginAs; ?>" title="Tech login as"><i class="icon-signin icon-admin green "></i></a>
 
 								<?php $linkEdit = $base_url.'/admincp/usershop/edit/'.$item->shop_id; ?>
 								<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit icon-admin green "></i></a>
