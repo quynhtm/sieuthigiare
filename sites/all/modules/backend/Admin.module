@@ -113,6 +113,16 @@ function Admin_menu() {
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
+    //login to shop by admin
+    $items["admincp/techloginas"] = array(
+        "title" => t('Tech login as'),
+        "description" => "Tech login as",
+        'page callback' => 'menuLoad',
+        'page arguments' => array('TechLoginAsController/techLoginAs'),
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
+
   return $items;
 }
 
@@ -279,6 +289,9 @@ function Admin_init(){
 
         'Model/BuildSql.php',
 		'Controller/BuildSqlController.php',
+        
+        'Model/TechLoginAs.php',
+        'Controller/TechLoginAsController.php',
 	);
 	Loader::load('Admin', $files);
 }
