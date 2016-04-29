@@ -327,14 +327,14 @@ span#logo{
     margin-bottom: 2px;
     width: 100%;
 }
-.title-cat-menu .right-down{
+.title-cat-menu .right-down {
     display: inline-block;
     float: right;
-    font-size: 25px;
+    font-size: 20px;
     height: 20px;
     position: relative;
-    right: 5px;
-    top: -8px;
+    right: 32px;
+    top: -4px;
 }
 .front .title-cat-menu .right-down{
     display: none;
