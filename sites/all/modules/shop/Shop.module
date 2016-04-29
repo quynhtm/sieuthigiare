@@ -305,12 +305,13 @@ function Shop_mail($key, &$message, $params) {
 function _emailHeader(){
 	global $base_url;
     $output = '';
-    $output .= '<div style="height: 48px;margin: 0 auto;width: 100%; margin-bottom: 20px; display: inline-block; color: #fff;">';
+    $output .= '<div style="min-height: 20px;margin: 0 auto;width: 100%; margin-bottom: 2px; display: inline-block; color: #fff;">';
     $output .= '<div style="float: left;margin: 0 auto;width: 25%;">';
         $output .= '<div style="padding-top: 20px;padding-left: 15px;">';
             $output .= '<a href="'.$base_url.'"><img style="margin-top:5px; max-height: 30px; height:30px" id="logo" src="'.$base_url.'/sites/all/modules/frontend/View/img/logo-mail.png" /></a>';
         $output .= '</div>';
     $output .= '</div>';
+    $output .='<div style="display:inline-block;float:right;color:#fff; line-height:90px;padding-right:20px; font-style: italic;">Hỗ trợ: '.PHONE_CARE.'</div>';
     $output .= '</div>';
     return $output;
 }
