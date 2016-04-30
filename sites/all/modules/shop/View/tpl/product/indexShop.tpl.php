@@ -105,7 +105,7 @@
 						<?php } ?>
 					</ul>
 				</div>
-				<div class="show-box-paging">
+				<div class="show-box-paging" style="margin-top:20px; ">
 					<div class="showListPage">
 						<?php print render($pager); ?>
 					</div>

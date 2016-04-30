@@ -144,12 +144,17 @@
 							</div>
 							<div class="content-right-product">
 								<div class="order-number-phone">
-									<p>Quý khách muốn đặt qua điện thoại</p>
+									<p><b>Quý khách muốn đặt qua điện thoại</b></p>
 									<div class="number-phone">
 										<div class="icon-phone"></div>
 										<?php echo $user_shop->shop_phone?>
 									</div>
-									<a href="<?php echo FunctionLib::buildLinkCategory($user_shop->shop_id, $user_shop->shop_name, 0, '') ?>" title><?php echo $user_shop->shop_name ?></a>
+									<p><a href="<?php echo FunctionLib::buildLinkCategory($user_shop->shop_id, $user_shop->shop_name, 0, '') ?>" title="Shop: <?php echo $user_shop->shop_name ?>"><?php echo $user_shop->shop_name ?></a></p>
+									<?php if($user_shop->shop_address !=''){?>
+										<p><b>Thông tin liên hệ: </b></p>
+										<p><?php echo $user_shop->shop_email;?></p>
+										<p><?php echo $user_shop->shop_address;?></p>
+									<?php }?>
 								</div>
 							</div>
 						</div>
@@ -341,8 +346,8 @@
 											<?php } ?>
 										</div>
 										<div class="mgt5 amount-call">
-						                	<a class="link-shop" href="<?php echo FunctionLib::buildLinkCategory($same->user_shop_id, $same->user_shop_name, 0, '') ?>">
-						                		<?php echo $same->user_shop_name ?>
+						                	<a class="link-shop" href="<?php echo FunctionLib::buildLinkCategory($h->user_shop_id, $h->user_shop_name, 0, '') ?>">
+						                		<?php echo $h->user_shop_name ?>
 						                	</a>
 						            	</div>
 									</li>
