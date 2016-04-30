@@ -65,8 +65,10 @@ class SiteController{
 			}	
 		}
 
+		$bannerList = DataCommon::getBannerAdvanced(BANNER_TYPE_HOME_BIG, BANNER_PAGE_HOME,$category_parent_id, 0);
 		return theme('pageCategoryProduct', array(
 											'catParent'=>$catParent,
+											'bannerList'=>$bannerList,
 											'arrCatCurrent' =>$arrCatCurrent,
 											'result'=>$result['data'],
 											'pager' =>$result['pager'],

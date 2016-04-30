@@ -52,6 +52,16 @@
 				</div>
 			</div>
 			<div class="right-show-product-shop body-list-item">
+				<?php if(!empty($bannerList)){ ?>
+					<div class="banner-shop-content">
+						<?php foreach($bannerList as $v){ ?>
+							<a title="<?php echo $v->banner_name ?>" href="<?php echo $v->banner_link ?>" target="_blank">
+								<img src="<?php echo FunctionLib::getThumbImage($v->banner_image, $v->banner_id, FOLDER_BANNER, 1018, 245) ?>" alt="<?php echo $v->banner_name ?>"/>
+							</a>
+						<?php } ?>
+					</div>
+				<?php } ?>
+
 				<?php if(!empty($result)) {?>
 				<div class="content-list-item">
 					<ul>

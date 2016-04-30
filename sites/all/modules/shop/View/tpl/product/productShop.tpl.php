@@ -74,11 +74,11 @@
 						<tr>
 							<th width="5%" class="td_list">Ảnh</th>
 							<th width="23%" class="td_list">[Mã] Tên sản phẩm</th>
+							<th width="15%" class="td_list">Giá bán</th>
 							<th width="12%" class="td_list">Danh mục</th>
 							<th width="30%" class="td_list">Mô tả ngắn</th>
-							<th width="15%" class="td_list">Giá bán</th>
 							<th width="6%" class="td_list">Trạng thái</th>
-							<th width="15%" class="td_list">Thao tác</th>
+							<th width="15%" class="td_list align_center" >Thao tác</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -105,31 +105,30 @@
 										echo '<br/>Ngày tạo: '.date('d/m/Y h:i', $v->time_created);
 									?>
 								</td>
-								<td><?php echo $v->category_name ?></td>
-								<td><?php echo Utility::substring($v->product_content, $length = 200, $replacer='...')?></td>
 								<td>
-									<?php 
-										
-										$price_sell = FunctionLib::numberFormat($v->product_price_sell);
-										if($price_sell == 0){
-											echo "<br/>Liên hệ";
-										}else{
-											echo '<br/>Giá bán: <b class="price_sell">'.$price_sell.'đ</b>';
-										}
+									<?php
 
-										$price_market = FunctionLib::numberFormat($v->product_price_market);
-										if($price_market == 0){
-											echo "<br/>Liên hệ";
-										}else{
-											echo '<br/>Giá thị trường: <b>'.$price_market.'đ</b>';
-										}
-										
-										$product_price_input = FunctionLib::numberFormat($v->product_price_input);
-										if($product_price_input > 0){
-											echo '<br/>Giá nhập: <b>'.$product_price_input.'đ</b>';
-										}
+									$price_sell = FunctionLib::numberFormat($v->product_price_sell);
+									if($price_sell == 0){
+										echo "<br/>Giá liên hệ";
+									}else{
+										echo '<br/>Giá bán: <b class="price_sell">'.$price_sell.'đ</b>';
+									}
+
+									$price_market = FunctionLib::numberFormat($v->product_price_market);
+									if($price_market > 0){
+										echo '<br/>Giá thị trường: <b>'.$price_market.'đ</b>';
+									}
+
+									$product_price_input = FunctionLib::numberFormat($v->product_price_input);
+									if($product_price_input > 0){
+										echo '<br/>Giá nhập: <b>'.$product_price_input.'đ</b>';
+									}
 									?>
 								</td>
+								<td><?php echo $v->category_name ?></td>
+								<td><?php echo Utility::substring($v->product_content, $length = 200, $replacer='...')?></td>
+
 
 								<td class="align_center">
 									<?php
@@ -142,9 +141,10 @@
 										echo $status;
 									?>
 								</td>
-								<td>
+								<td class="align_center">
 									<?php $linkEdit = $base_url.'/sua-san-pham/'.$v->product_id.'/'.Stdio::pregReplaceStringAlias($v->product_name).'.html' ?>
 									<a href="<?php echo $linkEdit; ?>" title="sửa"><i class="icon-edit green font-size-20"></i></a>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<a href="<?php echo $base_url.'/xoa-san-pham?id='.$v->product_id ?>" class="deleteItem" title="Xóa"><i class="icon-trash font-size-20 red"></i></a>
 								</td>
 							</tr>

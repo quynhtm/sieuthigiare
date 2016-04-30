@@ -85,11 +85,11 @@
 						<thead>
 						<tr>
 							<th width="5%" class="align_center">STT</th>
-							<th width="30%">Thông tin sản phẩm</th>
+							<th width="25%">Thông tin sản phẩm</th>
 							<th width="20%">Thông tin khách hàng</th>
 							<th width="25%">Ghi chú của khách</th>
 							<th width="8%" class="align_center">Ngày đặt</th>
-							<th width="15%" class="align_center">Tình trạng ĐH</th>
+							<th width="20%" class="align_center">Tình trạng ĐH</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -97,8 +97,8 @@
 							if(!empty($result)){
 								foreach($result as $k=>$item) {?>
 								<tr>
-									<td class="align_center"><?php echo $k+1 ?></td>
-									<td style="padding: 10px 0px!important;">
+									<td class="align_center" style="padding: 10px 0px!important;"><?php echo $k+1 ?></td>
+									<td>
 										<?php
 											echo '<b>SP: </b>['.$item->order_product_id.'] <a href="'.FunctionLib::buildLinkDetail($item->order_product_id, $item->order_product_name).'" target="_blank" title="Trang chủ shop '.$item->order_product_name.'">'.$item->order_product_name.'</a><br/>';
 											echo $item->order_category_name.'<br/>';

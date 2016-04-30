@@ -370,6 +370,7 @@ class DataCommon{
 				->condition('c.banner_page', $banner_page, '=')
 				->condition('c.banner_category_id', $banner_category_id, '=')
 				->condition('c.banner_shop_id', $banner_shop_id, '=')
+				->orderBy('banner_order', 'ASC')//ORDER BY created
 				->fields('c', $arrField);
 			$data = $query->execute();
 			if (!empty($data)) {

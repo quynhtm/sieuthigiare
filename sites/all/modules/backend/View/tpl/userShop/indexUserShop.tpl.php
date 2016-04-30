@@ -74,9 +74,9 @@
 						<th width="1%">STT</th>
 						<th width="1%"><input type="checkbox" id="checkAll"/></th>
 						<th width="20%">Thông tin shop</th>
-						<th width="20%">Tên shop</th>
-						<th width="25%">Địa chỉ</th>
-						<th width="15%">Loại gian hàng</th>
+						<th width="18%">Tên shop</th>
+						<th width="20%">Địa chỉ</th>
+						<th width="10%">Loại gian hàng</th>
 						<th width="5%">Status</th>
 						<th width="8%">Online</th>
 						<th width="8%">Ngày tạo</th>
@@ -120,12 +120,13 @@
 								?>
 							</td>
 							<td><?php echo date('d-m-Y h:i:s',$item->shop_created); ?></td>
-							<td>
+							<td class="align_center">
 								<?php $linkLoginAs = $base_url.'/admincp/techloginas?shop='.$item->user_shop ?>
 								<a target="_blank" href="<?php echo $linkLoginAs; ?>" title="Tech login as"><i class="icon-signin icon-admin green "></i></a>
-
+								<br/>
 								<?php $linkEdit = $base_url.'/admincp/usershop/edit/'.$item->shop_id; ?>
 								<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit icon-admin green "></i></a>
+								&nbsp;&nbsp;&nbsp;
 								<a id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-trash icon-admin red"></i></a>
 							</td>
 						</tr>
