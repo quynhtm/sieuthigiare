@@ -317,8 +317,15 @@ class ProductShopController{
 			$arrCategoryChildren = DataCommon::buildCacheTreeCategoryWithShop($this->user_shop->shop_id);
 			$treeCategoryShop = self::showTreeCategoryShop($arrCategoryChildren,'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
 		}
-		
-		$bannerList = DataCommon::getBannerAdvanced(BANNER_TYPE_HOME_BIG, BANNER_PAGE_HOME,!empty($arrCateParenId)? array_rand($arrCateParenId,1): 0, 0);
+
+		//lấy ngâu nhiên danh mục shop cha của shop
+		$cate_parent_banner_id = 0;
+		if(!empty($arrCateParenId)){
+			$k_cat = array_rand($arrCateParenId);
+			$cate_parent_banner_id = $arrCateParenId[$k_cat];
+		}
+		$bannerList = DataCommon::getBannerAdvanced(BANNER_TYPE_HOME_BIG, BANNER_PAGE_HOME,$cate_parent_banner_id, 0);
+
 		return theme('indexShop', array(
 										'treeCategoryShop'=>$treeCategoryShop,
 										'arrCateParenId'=>$arrCateParenId,
