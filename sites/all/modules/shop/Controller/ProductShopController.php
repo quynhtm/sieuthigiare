@@ -277,16 +277,11 @@ class ProductShopController{
 		if($user_shop->shop_id == 0){
 			drupal_goto($base_url.'/dang-nhap.html');
 		}
-		$listId =  FunctionLib::getParam('id',array());
-		if(!empty($listId)){
-			foreach($listId as $id){
-				if($id > 0){
-					ProductShop::deleteId($id);
-				}
-			}
+		$id =  FunctionLib::getParam('id',array());
+		if($id > 0){
+			ProductShop::deleteId($id);
 			drupal_set_message('Xóa bài viết thành công.');
 		}
-		drupal_set_message('Xóa sản phẩm thành công!');
 		drupal_goto($base_url.'/quan-ly-gian-hang.html');
 	}
 

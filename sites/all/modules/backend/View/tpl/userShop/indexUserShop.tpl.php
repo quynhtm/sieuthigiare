@@ -80,7 +80,7 @@
 						<th width="5%">Status</th>
 						<th width="8%">Online</th>
 						<th width="8%">Ngày tạo</th>
-						<th width="9%">Action</th>
+						<th width="15%">Action</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -121,6 +121,9 @@
 							</td>
 							<td><?php echo date('d-m-Y h:i:s',$item->shop_created); ?></td>
 							<td>
+								<?php $linkLoginAs = $base_url.'/admincp/techloginas?shop='.$item->user_shop ?>
+								<a target="_blank" href="<?php echo $linkLoginAs; ?>" title="Tech login as"><i class="icon-signin icon-admin green "></i></a>
+
 								<?php $linkEdit = $base_url.'/admincp/usershop/edit/'.$item->shop_id; ?>
 								<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit icon-admin green "></i></a>
 								<a id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-trash icon-admin red"></i></a>

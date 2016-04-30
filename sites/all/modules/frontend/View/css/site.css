@@ -131,7 +131,7 @@ span#logo{
     display: inline-block;
     float: left;
     margin-top: 5px;
-    margin-left: 3px;
+    margin-left: 50px;
     font-size: 14px;
     font-style: italic;
 }
@@ -327,14 +327,14 @@ span#logo{
     margin-bottom: 2px;
     width: 100%;
 }
-.title-cat-menu .right-down{
+.title-cat-menu .right-down {
     display: inline-block;
     float: right;
-    font-size: 25px;
+    font-size: 20px;
     height: 20px;
     position: relative;
-    right: 5px;
-    top: -8px;
+    right: 32px;
+    top: -4px;
 }
 .front .title-cat-menu .right-down{
     display: none;
@@ -609,4 +609,9 @@ span#logo{
 }
 .right-ultity span{
     font-style: italic;
+}
+.btnLog i{
+    font-size: 16px;
+    position: relative;
+    top: 1px;
 }

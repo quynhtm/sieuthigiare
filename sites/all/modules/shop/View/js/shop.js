@@ -10,6 +10,7 @@ jQuery(document).ready(function($){
 	tab_select.click_show_form_comment();
 	hover_img.change_img();
 	hover_img.change_img_detail();
+	order_update_status.update();
 });
 check_valid_form = {
 	check_login:function(){
@@ -399,4 +400,25 @@ hover_img = {
 			jQuery('.left-slider-img .max-thumb-img img').attr('src', img_change);
 		});
 	}
+}
+order_update_status = {
+	update:function(){
+		jQuery('select.order-update-status').change(function(){
+			var order_id = jQuery(this).attr('data-id'),
+				order_status = jQuery(this).val(),
+				act = 'action_order_update_status',
+				url = BASEPARAMS.base_url+'/ajax-action';
+
+			jQuery('.showListItemOrder').append('<div class="loading"></div>');
+			jQuery.ajax({
+				type: "POST",
+				url: url,
+				data: "order_id="+encodeURI(order_id) + "&order_status="+encodeURI(order_status) + "&act="+encodeURI(act),
+				success: function(data){
+					jQuery('.showListItemOrder').find('.loading').remove();
+					return false;
+				}
+			});
+		});
+	},
 }

@@ -67,95 +67,92 @@
 						<?php print render($pager); ?>
 					</div>
 				</div>
-				<form id="formListItem" method="post" action='<?php echo $base_url?>/xoa-san-pham'>
-					<div class="showListItem">
-						<table class="table taicon-adminble-bordered table-hover table-striped" width="100%" cellpadding="5" cellspacing="1" border="1">
-							<thead>
+				
+				<div class="showListItem">
+					<table class="table taicon-adminble-bordered table-hover table-striped" width="100%" cellpadding="5" cellspacing="1" border="1">
+						<thead>
+						<tr>
+							<th width="5%" class="td_list">Ảnh</th>
+							<th width="23%" class="td_list">[Mã] Tên sản phẩm</th>
+							<th width="12%" class="td_list">Danh mục</th>
+							<th width="30%" class="td_list">Mô tả ngắn</th>
+							<th width="15%" class="td_list">Giá bán</th>
+							<th width="6%" class="td_list">Trạng thái</th>
+							<th width="15%" class="td_list">Thao tác</th>
+						</tr>
+						</thead>
+						<tbody>
+							<?php foreach($result as $k=>$v) {?>
 							<tr>
-								<th width="5%" class="td_list">Ảnh</th>
-								<th width="23%" class="td_list">[Mã] Tên sản phẩm</th>
-								<th width="12%" class="td_list">Danh mục</th>
-								<th width="30%" class="td_list">Mô tả ngắn</th>
-								<th width="15%" class="td_list">Giá bán</th>
-								<th width="6%" class="td_list">Trạng thái</th>
-								<th width="2%" class="td_list">Chọn</th>
-								<th width="15%" class="td_list">Thao tác</th>
-							</tr>
-							</thead>
-							<tbody>
-								<?php foreach($result as $k=>$v) {?>
-								<tr>
-									<td style="">
-										<?php if( isset($v->url_image)) {?>
-										<div style="position: relative; margin: 15px 0px">
-											<div style="position: relative; z-index: 10">
-												<img src="<?php echo $v->url_image; ?>" class='imge_hover' id='<?php echo $v->product_id ?>'/>
-											</div>
-											<div id='div_hover_<?php echo $v->product_id ?>'style="position: absolute; bottom: 30px; left: 40px; border: 2px solid #ccc; padding: 5px; background: #F4F9FF; z-index: 1000; display: none">
-												<img src="<?php echo $v->image_big; ?>"/>
-											</div>
+								<td style="">
+									<?php if( isset($v->url_image)) {?>
+									<div style="position: relative; margin: 15px 0px">
+										<div style="position: relative; z-index: 10">
+											<img src="<?php echo $v->url_image; ?>" class='imge_hover' id='<?php echo $v->product_id ?>'/>
 										</div>
-										<?php } else{?>
-											<img src="<?php echo IMAGE_DEFAULT ?>" width="80px"/>
-										<?php }?>
+										<div id='div_hover_<?php echo $v->product_id ?>'style="position: absolute; bottom: 30px; left: 40px; border: 2px solid #ccc; padding: 5px; background: #F4F9FF; z-index: 1000; display: none">
+											<img src="<?php echo $v->image_big; ?>"/>
+										</div>
+									</div>
+									<?php } else{?>
+										<img src="<?php echo IMAGE_DEFAULT ?>" width="80px"/>
+									<?php }?>
 
-									</td>
-									<td>
-										<?php
-											echo '['.$v->product_id.'] <a href="'.FunctionLib::buildLinkDetail($v->product_id,$v->product_name).'" target="_blank" title="Chi tiết sản phẩm">'.$v->product_name.'</a>';
-											echo '<br/>Ngày tạo: '.date('d/m/Y h:i', $v->time_created);
-										?>
-									</td>
-									<td><?php echo $v->category_name ?></td>
-									<td><?php echo Utility::substring($v->product_content, $length = 200, $replacer='...')?></td>
-									<td>
-										<?php 
-											
-											$price_sell = FunctionLib::numberFormat($v->product_price_sell);
-											if($price_sell == 0){
-												echo "<br/>Liên hệ";
-											}else{
-												echo '<br/>Giá bán: <b class="price_sell">'.$price_sell.'đ</b>';
-											}
+								</td>
+								<td>
+									<?php
+										echo '['.$v->product_id.'] <a href="'.FunctionLib::buildLinkDetail($v->product_id,$v->product_name).'" target="_blank" title="Chi tiết sản phẩm">'.$v->product_name.'</a>';
+										echo '<br/>Ngày tạo: '.date('d/m/Y h:i', $v->time_created);
+									?>
+								</td>
+								<td><?php echo $v->category_name ?></td>
+								<td><?php echo Utility::substring($v->product_content, $length = 200, $replacer='...')?></td>
+								<td>
+									<?php 
+										
+										$price_sell = FunctionLib::numberFormat($v->product_price_sell);
+										if($price_sell == 0){
+											echo "<br/>Liên hệ";
+										}else{
+											echo '<br/>Giá bán: <b class="price_sell">'.$price_sell.'đ</b>';
+										}
 
-											$price_market = FunctionLib::numberFormat($v->product_price_market);
-											if($price_market == 0){
-												echo "<br/>Liên hệ";
-											}else{
-												echo '<br/>Giá thị trường: <b>'.$price_market.'đ</b>';
-											}
-											
-											$product_price_input = FunctionLib::numberFormat($v->product_price_input);
-											if($product_price_input > 0){
-												echo '<br/>Giá nhập: <b>'.$product_price_input.'đ</b>';
-											}
-										?>
-									</td>
+										$price_market = FunctionLib::numberFormat($v->product_price_market);
+										if($price_market == 0){
+											echo "<br/>Liên hệ";
+										}else{
+											echo '<br/>Giá thị trường: <b>'.$price_market.'đ</b>';
+										}
+										
+										$product_price_input = FunctionLib::numberFormat($v->product_price_input);
+										if($product_price_input > 0){
+											echo '<br/>Giá nhập: <b>'.$product_price_input.'đ</b>';
+										}
+									?>
+								</td>
 
-									<td class="align_center">
-										<?php
-											$status = '';
-											if($v->product_status == 1){
-												$status ='<i class="icon-ok font-size-20 green "></i>';
-											}else{
-												$status ='<i class="icon-remove font-size-20 red "></i></a>';
-											}
-											echo $status;
-										?>
-									</td>
-
-									<td class="align_center"><input type="checkbox" class="checkItem" name="id[]" value="<?php echo $v->product_id?>"/></td>
-									<td>
-										<?php $linkEdit = $base_url.'/sua-san-pham/'.$v->product_id.'/'.Stdio::pregReplaceStringAlias($v->product_name).'.html' ?>
-										<a href="<?php echo $linkEdit; ?>" title="sửa"><i class="icon-edit green font-size-20"></i></a>
-										<a href="javascript:void(0)" class="deleteItem" title="Xóa"><i class="icon-trash font-size-20 red"></i></a>
-									</td>
-								</tr>
-								<?php } ?>
-							</tbody>
-						</table>
-					</div>
-				</form>
+								<td class="align_center">
+									<?php
+										$status = '';
+										if($v->product_status == 1){
+											$status ='<i class="icon-ok font-size-20 green "></i>';
+										}else{
+											$status ='<i class="icon-remove font-size-20 red "></i></a>';
+										}
+										echo $status;
+									?>
+								</td>
+								<td>
+									<?php $linkEdit = $base_url.'/sua-san-pham/'.$v->product_id.'/'.Stdio::pregReplaceStringAlias($v->product_name).'.html' ?>
+									<a href="<?php echo $linkEdit; ?>" title="sửa"><i class="icon-edit green font-size-20"></i></a>
+									<a href="<?php echo $base_url.'/xoa-san-pham?id='.$v->product_id ?>" class="deleteItem" title="Xóa"><i class="icon-trash font-size-20 red"></i></a>
+								</td>
+							</tr>
+							<?php } ?>
+						</tbody>
+					</table>
+				</div>
+				
 				<div class="show-box-paging">
 					<div class="total-rows"><b><?php echo t('Tổng số: ')?> <?php echo $totalItem ?></b></div>
 					<div class="showListPage">
@@ -179,18 +176,10 @@
 		});
 
 		jQuery('a.deleteItem').click(function(){
-			var total = jQuery( ".showListItem tbody input:checked" ).length;
-			if(total==0){
-				alert('Vui lòng chọn ít nhất 1 bản ghi để xóa!');
-				return false;
-			}else{
-				if (confirm('Bạn muốn xóa [OK]:Đồng ý [Cancel]:Bỏ qua?)')){
-					jQuery('form#formListItem').attr("action", BASEPARAMS.base_url+"/xoa-san-pham");
-					jQuery('form#formListItem').submit();
-					return true;
-				}
-				return false;
+			if (confirm('Bạn muốn xóa [OK]:Đồng ý [Cancel]:Bỏ qua?)')){
+				return true;
 			}
+			return false;
 		});
 		jQuery('.date').datetimepicker({
 			timepicker:false,

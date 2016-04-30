@@ -336,9 +336,11 @@ a.btn-yahoo:hover{
     margin-bottom: 10px;
 }
 .title-category-parent {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: bold;
     margin-bottom: 10px;
+    text-transform: uppercase;
+    padding-bottom: 5px;
 }
 
 .left-category-shop ul li{
@@ -701,7 +703,7 @@ a.btn-yahoo:hover{
     overflow: hidden;
     padding: 5px 15px;
     max-width: 235px;
-    height: 265px;
+    height: 285px;
     overflow: hidden;
     border: none!important;
     width: 228px !important;
@@ -818,6 +820,7 @@ a.btn-yahoo:hover{
 .right-bottom-content-view .title-hot {
     border-bottom: 1px solid #dedede;
     line-height: 35px;
+    margin-bottom: 15px;
 }
 .right-bottom-content-view .title-hot span {
     border-bottom: 2px solid #faa52e;
@@ -830,11 +833,12 @@ a.btn-yahoo:hover{
     text-transform: uppercase;
 }
 .content-right-bottom-content-view ul li{
-    border-bottom: 1px dashed #dadada;
     color: #999;
     font-size: 11px;
     line-height: 20px;
-    padding: 20px 0 25px;
+    padding: 10px;
+    box-shadow: 0 0 2px rgba(87, 87, 87, 0.6);
+    margin-bottom: 20px;
 }
 .content-right-bottom-content-view ul li:last-child {
     border: 0;
@@ -1132,3 +1136,7 @@ table.list-pay span.price {
 }
 
 .align_center{text-align: center!important;}
+
+.show-box-paging ul{
+    margin-right: 0!important;
+}

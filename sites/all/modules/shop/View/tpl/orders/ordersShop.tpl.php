@@ -79,57 +79,61 @@
 						<?php print render($pager); ?>
 					</div>
 				</div>
-				<form id="formListItem" method="post" action='<?php echo $base_url?>/xoa-san-pham'>
-					<div class="showListItem">
-						<table class="table" width="100%" cellpadding="5" cellspacing="1" border="1">
-							<thead>
-							<tr>
-								<th width="5%" class="align_center">STT</th>
-								<th width="30%">Thông tin sản phẩm</th>
-								<th width="20%">Thông tin khách hàng</th>
-								<th width="25%">Ghi chú của khách</th>
-								<th width="8%" class="align_center">Ngày đặt</th>
-								<th width="15%" class="align_center">Tình trạng ĐH</th>
-							</tr>
-							</thead>
-							<tbody>
-								<?php
-								if(!empty($result)){
-									foreach($result as $k=>$item) {?>
-									<tr>
-										<td class="align_center"><?php echo $k+1 ?></td>
-										<td style="padding: 10px 0px!important;">
-											<?php
-												echo '<b>SP: </b>['.$item->order_product_id.'] <a href="'.FunctionLib::buildLinkDetail($item->order_product_id, $item->order_product_name).'" target="_blank" title="Trang chủ shop '.$item->order_product_name.'">'.$item->order_product_name.'</a><br/>';
-												echo $item->order_category_name.'<br/>';
-												if($item->order_product_type_price == TYPE_PRICE_NUMBER && $item->order_product_price_sell > 0){
-													echo 'Giá bán: <b class="price_sell">'.FunctionLib::numberFormat($item->order_product_price_sell). 'đ</b><br/>';
-												}else{
-													echo 'Giá liên hệ với shop<br/>';
-												}
-												echo 'SL:<b> '.$item->order_quality_buy.'</b> sản phẩm';
-											?>
-										</td>
-										<td>
-											<?php
+				
+				<div class="showListItem showListItemOrder">
+					<table class="table" width="100%" cellpadding="5" cellspacing="1" border="1">
+						<thead>
+						<tr>
+							<th width="5%" class="align_center">STT</th>
+							<th width="30%">Thông tin sản phẩm</th>
+							<th width="20%">Thông tin khách hàng</th>
+							<th width="25%">Ghi chú của khách</th>
+							<th width="8%" class="align_center">Ngày đặt</th>
+							<th width="15%" class="align_center">Tình trạng ĐH</th>
+						</tr>
+						</thead>
+						<tbody>
+							<?php
+							if(!empty($result)){
+								foreach($result as $k=>$item) {?>
+								<tr>
+									<td class="align_center"><?php echo $k+1 ?></td>
+									<td style="padding: 10px 0px!important;">
+										<?php
+											echo '<b>SP: </b>['.$item->order_product_id.'] <a href="'.FunctionLib::buildLinkDetail($item->order_product_id, $item->order_product_name).'" target="_blank" title="Trang chủ shop '.$item->order_product_name.'">'.$item->order_product_name.'</a><br/>';
+											echo $item->order_category_name.'<br/>';
+											if($item->order_product_type_price == TYPE_PRICE_NUMBER && $item->order_product_price_sell > 0){
+												echo 'Giá bán: <b class="price_sell">'.FunctionLib::numberFormat($item->order_product_price_sell). 'đ</b><br/>';
+											}else{
+												echo 'Giá liên hệ với shop<br/>';
+											}
+											echo 'SL:<b> '.$item->order_quality_buy.'</b> sản phẩm';
+										?>
+									</td>
+									<td>
+										<?php
 
-												echo 'Name: <b>'.$item->order_customer_name.'</b> <br/>';
-												echo 'Phone: <b>'.$item->order_customer_phone.'</b> <br/>';
-												echo 'Email: <b>'.$item->order_customer_email.'</b> <br/>';
-												echo 'Địa chỉ: '.$item->order_customer_address.'<br/>';
-											?>
-										</td>
-										<td><?php echo $item->order_customer_note ?></td>
-										<td class="align_center"><?php echo date('d-m-Y h:i:s',$item->order_time)?></td>
-										<td class="align_center">
-											<?php echo isset($arrStatus[$item->order_status])?$arrStatus[$item->order_status]:'Đơn hàng mới' ?>
-										</td>
-									</tr>
-								<?php } } ?>
-							</tbody>
-						</table>
-					</div>
-				</form>
+											echo 'Name: <b>'.$item->order_customer_name.'</b> <br/>';
+											echo 'Phone: <b>'.$item->order_customer_phone.'</b> <br/>';
+											echo 'Email: <b>'.$item->order_customer_email.'</b> <br/>';
+											echo 'Địa chỉ: '.$item->order_customer_address.'<br/>';
+										?>
+									</td>
+									<td><?php echo $item->order_customer_note ?></td>
+									<td class="align_center"><?php echo date('d-m-Y h:i:s',$item->order_time)?></td>
+									<td class="align_center">
+										<select name="order_status" class="order-update-status form-control input-sm" data-id="<?php echo $item->order_id ?>">
+										<?php 
+											echo isset($arrStatus[$item->order_status])? FunctionLib::getOption($arrStatus, $item->order_status):'Đơn hàng mới';
+										?>
+										</select>
+									</td>
+								</tr>
+							<?php } } ?>
+						</tbody>
+					</table>
+				</div>
+				
 				<div class="show-box-paging">
 					<div class="total-rows"><b><?php echo t('Tổng số: ')?> <?php echo $totalItem ?></b></div>
 					<div class="showListPage">
