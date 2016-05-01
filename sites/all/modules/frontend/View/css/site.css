@@ -472,9 +472,8 @@ span#logo{
 .w-home .item {
     display: inline-block;
     float: left;
-    height: 380px;
-    margin-bottom: 0;
-    margin-right: 23px;
+    height: 365px;
+    margin: 5px 23px 15px 0px;
     overflow: hidden;
     padding: 10px;
     width: 235px;

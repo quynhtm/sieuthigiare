@@ -6,7 +6,7 @@
 	<div class="w-list-block">
 		<?php foreach($dataShow as $cate_parent_id =>$value){ ?>
 			<?php if($cate_parent_id > 0) {?>
-				<div class="title-list-item"><a href="<?php echo FunctionLib::buildLinkCategory(0,'',$cate_parent_id,$value['category_name'])?>" title="<?php echo $value['category_name'];?>"><?php echo $value['category_name'];?></a></div>
+				<div class="title-list-item"><a href="<?php echo FunctionLib::buildLinkCategory(0,'',$cate_parent_id,$value['category_name'])?>" title="Xem tất cả: <?php echo $value['category_name'];?>"><?php echo $value['category_name'];?></a></div>
 			<?php }else{?>
 				<div class="title-list-item">Sản phẩm mới</div>
 			<?php }?>
