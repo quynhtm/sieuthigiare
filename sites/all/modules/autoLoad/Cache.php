@@ -13,7 +13,7 @@ class Cache {
     const CACHE_TIME_TO_LIVE_ONE_MONTH = 2419200; //Time cache 1 thang
     const CACHE_TIME_TO_LIVE_ONE_YEAR =  29030400; //Time cache 1 nam
 
-    const VERSION_CACHE = 'ver_4_';//dung de thay doi cache tat ca,khong phai remove tung cache
+    const VERSION_CACHE = 'ver_5_';//dung de thay doi cache tat ca,khong phai remove tung cache
 
     //cache Province
     const CACHE_PROVINCE = 'cache_province';
@@ -23,6 +23,7 @@ class Cache {
 
     //cacheProduct
     const CACHE_PRODUCT_ID = 'cache_product_id_';
+    const CACHE_PRODUCTS_HOME_WITH_CATE_PARENT_ID = 'cache_products_home_with_cate_parent_id_';//cache 15 phut ko phai xoa khi sua SP
 
     //cache Shop
     const CACHE_USER_SHOP_ID = 'cache_shop_id_';
@@ -31,6 +32,7 @@ class Cache {
 
     //cache Category
     const CACHE_LIST_CATEGORY_PARENT = 'cache_list_category_parent';
+    const CACHE_LIST_CATEGORY_PARENT_SHOW_HOME = 'cache_list_category_parent_show_home';
     const CACHE_CATEGORY_CHILDREN_PARENT_ID = 'cache_category_children_parent_id_';
     const CACHE_CATEGORY_ID = 'cache_category_id_';
     const CACHE_TREE_MENU_CATEGORY_HEADER = 'cache_tree_menu_category_header';

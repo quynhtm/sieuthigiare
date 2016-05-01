@@ -66,13 +66,44 @@ class DataCommon{
 		return $categoryParent;
 	}
 
+	/**
+	 * Danh m?c cha có hi?n th?
+	 * ngoài trang ch? list s?n ph?m
+	 * @return array
+	 */
+	public static function getCategoryParentShowProductHome(){
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_PARENT_SHOW_HOME;
+		$categoryParent = array();
+		if(Cache::CACHE_ON){
+			$cache = new Cache();
+			$categoryParent = $cache->do_get($key_cache);
+		}
+		if($categoryParent == null || empty($categoryParent)) {
+			$query = db_select(self::$table_category, 'c')
+				->condition('c.category_parent_id', 0, '=')
+				->condition('c.category_status', STASTUS_SHOW, '=')
+				->condition('c.category_content_front', STASTUS_SHOW, '=')
+				->fields('c', array('category_id', 'category_name'));
+			$data = $query->execute();
+			if (!empty($data)) {
+				foreach ($data as $k => $cate) {
+					$categoryParent[$cate->category_id] = $cate->category_name;
+				}
+				if (Cache::CACHE_ON) {
+					$cache->do_put($key_cache, $categoryParent, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+				}
+			}
+		}
+		return $categoryParent;
+	}
+
 	public static function getListCategoryChildren($category_parent_id = 0){
-		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_CATEGORY_CHILDREN_PARENT_ID;
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_CATEGORY_CHILDREN_PARENT_ID.$category_parent_id;
 		$categoryChildren = array();
 		if($category_parent_id > 0){
 			if(Cache::CACHE_ON){
 				$cache = new Cache();
-				$categoryChildren = $cache->do_get($key_cache.$category_parent_id);
+				$categoryChildren = $cache->do_get($key_cache);
 			}
 			if($categoryChildren == null || empty($categoryChildren)) {
 				$query = db_select(self::$table_category, 'c')
@@ -85,7 +116,7 @@ class DataCommon{
 						$categoryChildren[$cate->category_id] = $cate->category_name;
 					}
 					if (Cache::CACHE_ON) {
-						$cache->do_put($key_cache.$category_parent_id, $categoryChildren, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+						$cache->do_put($key_cache, $categoryChildren, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
 					}
 				}
 				return $categoryChildren;
@@ -456,5 +487,49 @@ class DataCommon{
 				}
 			}
 		}
+	}
+
+	/**
+	 * Lay SP theo danh muc cha o trang HOME
+	 * @param int $category_parent_id
+	 * @return array
+	 */
+	public static function getProductsHomeWithCateParentId($category_parent_id = 0){
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_PRODUCTS_HOME_WITH_CATE_PARENT_ID.$category_parent_id;
+		$product = array();
+		if($category_parent_id > 0){
+			if(Cache::CACHE_ON){
+				$cache = new Cache();
+				$product = $cache->do_get($key_cache);
+			}
+			if($product == null || empty($product)) {
+				//lay danh sach id danh muc con
+				$arrCategoryChildren = DataCommon::getListCategoryChildren($category_parent_id);
+				$arrCateId = array();
+				if(!empty($arrCategoryChildren)){
+					$arrCateId = array_keys($arrCategoryChildren);
+					$arrFields = array('product_id', 'category_name','product_name', 'product_price_sell', 'product_price_market', 'product_image',
+						'product_image_hover', 'product_type_price', 'product_selloff', 'user_shop_id', 'user_shop_name');
+					$query = db_select(self::$table_product, 'p')
+						->condition('p.product_status', STASTUS_SHOW, '=')
+						->condition('p.is_block', PRODUCT_NOT_BLOCK, '=')
+						->condition('p.category_id', $arrCateId, 'IN')
+						->orderBy('p.time_update', 'DESC')
+						->range(0,NUMBER_PRODUCT_HOME)
+						->fields('p', $arrFields);
+					$data = $query->execute();
+					if (!empty($data)) {
+						foreach ($data as $k => $pro) {
+							$product[] = $pro;
+						}
+						if (Cache::CACHE_ON) {
+							$cache->do_put($key_cache, $product, Cache::CACHE_TIME_TO_LIVE_15);
+						}
+					}
+					return $product;
+				}
+			}
+		}
+		return $product;
 	}
 }

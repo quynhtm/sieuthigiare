@@ -100,7 +100,7 @@ function Site_block_view($delta='') {
 		  break;
 		case 'block-content':
 		  $block['subject'] = t('Block content');
-		  $block['content'] = block_content();
+		  $block['content'] = block_content_home();
 		  break;
 		case 'block-footer':
 		  $block['subject'] = t('Block footer');
@@ -173,6 +173,30 @@ function block_slide(){
 	$bannerSmall = SiteController::getListBannerSmallSite();
 
 	$view= theme('block-slide', array('bannerLager'=>$bannerLager, 'bannerSmall'=>$bannerSmall, 'arrCategory'=>$arrCategory));
+	return $view;
+}
+
+/**
+ * @return string
+ * @throws Exception
+ * Hiển thị sản phẩm trang chủ theo danh muc cha
+ */
+function block_content_home(){
+	$arrCateParentShowHome = DataCommon::getCategoryParentShowProductHome();
+	$dataShow = array();
+	if(!empty($arrCateParentShowHome)){
+		foreach($arrCateParentShowHome as $cate_parent_id => $name_cate_parent){
+			$dataShow[$cate_parent_id]['category_name'] = $name_cate_parent;
+			$dataShow[$cate_parent_id]['arrProducts'] = DataCommon::getProductsHomeWithCateParentId($cate_parent_id);
+			//FunctionLib::Debug($dataShow);
+		}
+	}
+	//không có danh muc hien thi o Home, thi lay san pham moi nhat ra show
+	else{
+		$dataShow[0]['category_name'] = 'Sản phẩm mới';
+		$dataShow[0]['arrProducts'] = SiteController::getListProductContent(40, false);
+	}
+	$view= theme('block-content', array('dataShow'=>$dataShow));
 	return $view;
 }
 function block_content(){
