@@ -12,7 +12,9 @@
 			<?php }?>
 			<div class="content-list-item w-home">
 				<ul>
-					<?php foreach($value['arrProducts'] as $item){ ?>
+					<?php 
+					if(isset($value['arrProducts']) && !empty($value['arrProducts'])){
+					foreach($value['arrProducts'] as $item){ ?>
 					<li class="item">
 						<div class="post-thumb">
 							<?php if((float)$item->product_price_market > (float)$item->product_price_sell) {?>
@@ -71,7 +73,7 @@
 							<?php } ?>
 						</div>
 					</li>
-					<?php } ?>
+					<?php } }?>
 				</ul>
 			</div>
 		<?php }?>
