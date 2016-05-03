@@ -177,6 +177,7 @@ class ProductShopController{
 					'user_shop_name'=>array('value'=>$user_shop->shop_name, 'require'=>0),
 					'shop_province'=>array('value'=>$user_shop->shop_province, 'require'=>0),
 					'is_shop'=>array('value'=>$user_shop->is_shop, 'require'=>0),
+					'time_update'=>array('value'=>time(), 'require'=>0),
 
 					'product_status'=>array('value'=>FunctionLib::getIntParam('product_status',STASTUS_HIDE), 'require'=>0),
 					'product_is_hot'=>array('value'=>FunctionLib::getIntParam('product_is_hot',PRODUCT_NOMAL), 'require'=>0),
@@ -225,10 +226,12 @@ class ProductShopController{
 					drupal_goto($base_url.'/dang-san-pham.html');
 				}
 			}else{
+				$category_parent_id = 0;
 				if($data['category_id']['value'] > 0 ){
 					$arrCat = DataCommon::getCategoryById($data['category_id']['value']);
 					if(!empty($arrCat)){
 						$data['category_name']['value'] = $arrCat->category_name;
+						$category_parent_id = $arrCat->category_parent_id;
 					}
 				}
 				if(!empty($arrItem)){
@@ -248,6 +251,7 @@ class ProductShopController{
 					$key_cache = Cache::VERSION_CACHE.Cache::CACHE_PRODUCT_ID.$id;
 					$cache = new Cache();
 					$cache->do_remove($key_cache);
+					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_PRODUCTS_HOME_WITH_CATE_PARENT_ID.$category_parent_id);
 				}
 				drupal_goto($base_url.'/quan-ly-gian-hang.html');
 			}
