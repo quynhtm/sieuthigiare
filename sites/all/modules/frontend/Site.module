@@ -22,6 +22,15 @@ function Site_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
+
+	$items["san-pham-moi.html"] = array(
+		"title" => t('Sản phẩm mới'),
+		"description" => "Sản phẩm mới",
+		'page callback' => 'menuLoad',
+		'page arguments' => array('SiteController/getListProductNew'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
   return $items;
 }
 
@@ -84,6 +93,9 @@ function Site_theme() {
 	    ),
 	    'pageCategoryProduct' => array(
 	      'template' => 'View/tpl/pageCategoryProduct'
+	    ),
+	    'pageProductNew' => array(
+	      'template' => 'View/tpl/pageProductNew'
 	    ),
 	);
 }

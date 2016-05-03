@@ -76,6 +76,9 @@ class SiteController{
 											));
 	}
 
+	public static function getListProductNew(){
+		return theme('pageProductNew');
+	}
 	public static function countCartItem(){
 		$numItem = 0;
 		if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])){

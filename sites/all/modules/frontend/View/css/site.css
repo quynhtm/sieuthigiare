@@ -119,6 +119,7 @@ span#logo{
 .box-header-link{
     clear: both;
     width: 100%;
+    position: relative;
 }
 .box-menu-title {
     display: inline-block;
@@ -126,6 +127,18 @@ span#logo{
     position: relative;
     width: 230px;
     z-index: 2;
+}
+.list-product_new{
+    display: inline-block;
+    float: left;
+    margin-top: 5px;
+    margin-left: 50px;
+    font-size: 14px;
+    font-style: italic;
+}
+.list-product_new .icon-list-alt{
+    color: #fe6d00;
+    font-size: 18px;
 }
 .desc-price-day {
     display: inline-block;
@@ -557,14 +570,15 @@ span#logo{
     opacity: 0.1;
 }
 .right-ultity {
+    color: #9a9a9a;
     display: inline-block;
     float: right;
     height: 35px;
-    position: relative;
-    top: -8px;
-    width: 660px;
     overflow: hidden;
-    color:#9a9a9a;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 660px;
 }
 .shop-create {
     display: inline-block;
