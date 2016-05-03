@@ -489,6 +489,7 @@ span#logo{
     overflow: hidden;
     padding: 10px;
     width: 235px;
+    position: relative;
 }
 .w-home .item:hover{
     box-shadow: 0 0 2px rgba(87, 87, 87, 0.6);

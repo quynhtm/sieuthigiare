@@ -77,7 +77,8 @@ class SiteController{
 	}
 
 	public static function getListProductNew(){
-		return theme('pageProductNew');
+		$result = Site::getListProductNew(40);
+		return theme('pageProductNew', array('result'=>$result));
 	}
 	public static function countCartItem(){
 		$numItem = 0;
