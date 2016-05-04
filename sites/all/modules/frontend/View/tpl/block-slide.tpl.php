@@ -44,17 +44,17 @@
 		<div class="slider-box-mid">
 			<div class="nivoSlider" id="slider">
 				<?php foreach($bannerLager as $v){ ?>
-				<a title="<?php echo $v->banner_name ?>" href="<?php echo $v->banner_link ?>" target="_blank" class="nivo-imageLink" style="display: block;">
+				<a title="<?php echo $v->banner_name ?>" href="<?php echo $v->banner_link ?>" <?php if($v->banner_is_target == BANNER_TARGET_BLANK){?>target="_blank"<?php }?> class="nivo-imageLink" style="display: block;">
 					<img src="<?php echo FunctionLib::getThumbImage($v->banner_image, $v->banner_id, FOLDER_BANNER, 0, 0) ?>" alt="<?php echo $v->banner_name ?>"/>
 				</a>
 				<?php } ?>
 			</div>
 		</div>
 		<div class="ads-right-mid">
-			<?php foreach($bannerSmall as $v){ ?>
+			<?php foreach($bannerSmall as $v2){ ?>
 			<div class="item-right-slider">
-				<a href="<?php echo $v->banner_link ?>" title ="<?php echo $v->banner_name ?>">
-					<img src="<?php echo FunctionLib::getThumbImage($v->banner_image, $v->banner_id, FOLDER_BANNER, 300, 210) ?>" alt="<?php echo $v->banner_name ?>"/>
+				<a href="<?php echo $v2->banner_link ?>" title ="<?php echo $v2->banner_name ?>" <?php if($v2->banner_is_target == BANNER_TARGET_BLANK){?>target="_blank"<?php }?>>
+					<img src="<?php echo FunctionLib::getThumbImage($v2->banner_image, $v2->banner_id, FOLDER_BANNER, 300, 210) ?>" alt="<?php echo $v2->banner_name ?>"/>
 				</a>
 			</div>
 			<?php } ?>
