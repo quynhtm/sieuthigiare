@@ -628,3 +628,25 @@ span#logo{
     position: relative;
     top: 1px;
 }
+#back-to-top {
+    background: #ddd none repeat scroll 0 0;
+    border-radius: 100%;
+    bottom: 20px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 25px;
+    height: 40px;
+    line-height: 36px;
+    overflow: hidden;
+    position: fixed;
+    right: 45px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 1s ease 0s;
+    width: 40px;
+    z-index: 99;
+}
+#back-to-top:hover{
+    background: #999;
+}

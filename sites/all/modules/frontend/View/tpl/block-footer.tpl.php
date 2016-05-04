@@ -9,3 +9,6 @@
       Email: support@shopcuatui.com.vn</p>
   </div>
 </div>
+<span id="back-to-top">
+	<i class="icon-caret-up"></i>
+</span>

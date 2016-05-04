@@ -7,12 +7,12 @@ BACK_TOP={
 	init:function(){
 		 jQuery(window).scroll(function() {
             if(jQuery(window).scrollTop() > 0) {
-				jQuery("div#back-top-wrapper").fadeIn();
+				jQuery("#back-to-top").fadeIn();
 			} else {
-				jQuery("div#back-top-wrapper").fadeOut();
+				jQuery("#back-to-top").fadeOut();
 			}
 		});
-		jQuery("div#back-top-wrapper, .gotop").click(function(){
+		jQuery("#back-to-top").click(function(){
 			jQuery("html, body").animate({scrollTop: 0}, 1000);
 			return false;
 		});
