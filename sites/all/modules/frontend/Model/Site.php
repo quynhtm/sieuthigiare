@@ -130,9 +130,9 @@ class Site{
         return array('data' => array(),'total' => 0,'pager' => array(),);
 	}
 
-	public static function getListProductNew($product_limit=0){
+	public static function getListProductNew($recordStart=0, $recordPerPage=0){
 
-		if($product_limit > 0){
+		if($recordPerPage > 0){
 			$sql = db_select(self::$table_action_product, 'i');
 			$sql->addField('i', 'product_id', 'product_id');
 			$sql->addField('i', 'product_name', 'product_name');
@@ -147,10 +147,9 @@ class Site{
 
 			$sql->condition('i.product_status', STASTUS_SHOW,'=');
 			$sql->condition('i.is_block', PRODUCT_NOT_BLOCK,'=');
-			$sql->range(0, $product_limit);
-
-			$sql->orderBy('i.product_id', 'DESC');
 			
+			$sql->range($recordStart,$recordPerPage);
+			$sql->orderBy('i.product_id', 'DESC');
 			$result = $sql->execute()->fetchAll();
 				
 			return $result;

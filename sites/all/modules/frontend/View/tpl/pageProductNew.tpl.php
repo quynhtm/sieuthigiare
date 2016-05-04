@@ -69,6 +69,11 @@
 					</li>
 					<?php } ?>
 				</ul>
+				<div class="loadProductNew">
+					<input type="hidden" name="totalPage" id="totalPage" value="<?php echo $totalPage ?>">
+					<input type="hidden" name="currentPage" id="currentPage" value="<?php echo $currentPage ?>">
+				</div>
+
 			<?php }else{ ?>
 				<div class="not-product"><?php echo NOT_PRODUCT ?></div>
 			<?php } ?>

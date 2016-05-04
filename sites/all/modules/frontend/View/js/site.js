@@ -1,6 +1,7 @@
 jQuery(document).ready(function($){
   BACK_TOP.init();
   HOVER_CATEGORY.init();
+  AJAX_LOAD.product_new();
 });
 
 BACK_TOP={
@@ -30,5 +31,38 @@ HOVER_CATEGORY = {
 				jQuery(this).removeClass('act');
 			}
 		);
+	}
+}
+AJAX_LOAD = {
+	product_new:function(){
+		var check_page = jQuery('body #main-product-new').size();
+		if(check_page > 0){
+			jQuery(window).scroll(function() {
+				if(jQuery(window).scrollTop() >= jQuery(document).height() - jQuery(window).height() - 800 ){
+					var currentPage = parseInt(jQuery('input#currentPage').val()),
+						totalPage = parseInt(jQuery('input#totalPage').val()),
+						url = BASEPARAMS.base_url + '/san-pham-moi.html';
+				
+					if(currentPage <= totalPage){
+						jQuery('input#currentPage').val(currentPage + 1);
+						jQuery('#main-product-new').append('<div class="loading"></div>');
+						
+						jQuery.ajax({
+							type: "POST",
+							url: url,
+							data: "currentPage="+encodeURI(currentPage),
+							success: function(data){
+								jQuery('#main-product-new').find('.loading').remove();
+								if(data != ''){
+									jQuery('#main-product-new ul').append(data);
+								}
+								return false;
+							}
+						});
+
+					}
+	            }
+			});
+		}
 	}
 }

@@ -97,6 +97,10 @@ function Site_theme() {
 	    'pageProductNew' => array(
 	      'template' => 'View/tpl/pageProductNew'
 	    ),
+	    'ajaxPageProductNew' => array(
+	      'template' => 'View/tpl/ajaxPageProductNew'
+	    ),
+	    
 	);
 }
 function Site_block_view($delta='') {

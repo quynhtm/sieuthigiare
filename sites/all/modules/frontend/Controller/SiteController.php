@@ -77,8 +77,24 @@ class SiteController{
 	}
 
 	public static function getListProductNew(){
-		$result = Site::getListProductNew(40);
-		return theme('pageProductNew', array('result'=>$result));
+		
+		$recordPerPage = 40;
+		$currentPage = 1;
+		$totalRecord = 80;
+		$totalPage = $totalRecord/40;
+
+		if(isset($_POST) && !empty($_POST)){
+			$currentPage 	= FunctionLib::getIntParam('currentPage', 1);
+			if($currentPage <= $totalPage){
+				$recordStart = ($recordPerPage * $currentPage) + 1;
+				$result = Site::getListProductNew($recordStart, $recordPerPage);
+				$view = theme('ajaxPageProductNew', array('result'=>$result));
+				echo render($view);die;
+			}
+		}
+
+		$result = Site::getListProductNew(0, $recordPerPage);
+		return theme('pageProductNew', array('result'=>$result, 'totalPage'=>$totalPage, 'currentPage'=>$currentPage));
 	}
 	public static function countCartItem(){
 		$numItem = 0;
