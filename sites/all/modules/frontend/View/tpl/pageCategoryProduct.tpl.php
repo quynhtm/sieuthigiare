@@ -70,7 +70,7 @@
 							<div class="post-thumb">
 								<a href="<?php echo FunctionLib:: buildLinkDetail($v->product_id, $v->product_name); ?>" title="<?php echo $v->product_name?>">
 									<?php if(isset($v->url_image) && $v->url_image != ''){?>
-									<img src="<?php echo $v->url_image ?>" alt="<?php echo $v->product_name?>" data-other-src="<?php echo $v->url_image_hover?>">
+									<img src="<?php echo $v->url_image ?>" alt="<?php echo $v->product_name.' - shopcuatui.com.vn';?>" data-other-src="<?php echo $v->url_image_hover?>">
 									<?php }else{ ?>
 									<img src="<?php echo IMAGE_DEFAULT ?>"/>
 									<?php } ?>

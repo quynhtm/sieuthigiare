@@ -7,7 +7,7 @@
 		<a href="<?php echo FunctionLib:: buildLinkDetail($v->product_id, $v->product_name); ?>" title="<?php echo $v->product_name?>">
 			<?php if(isset($v->product_image) && $v->product_image != ''){?>
 			<img src="<?php echo FunctionLib::getThumbImage($v->product_image,$v->product_id,FOLDER_PRODUCT,300,300) ?>" 
-				 alt="<?php echo FunctionLib::getThumbImage($v->product_image_hover,$v->product_id,FOLDER_PRODUCT,300,300) ?>">
+				 alt="<?php echo $v->product_name.' - shopcuatui.com.vn'; ?>">
 			<?php }else{ ?>
 			<img src="<?php echo IMAGE_DEFAULT ?>"/>
 			<?php } ?>

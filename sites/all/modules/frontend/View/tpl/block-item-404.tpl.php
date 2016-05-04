@@ -19,7 +19,7 @@
 							<?php if($item->product_image != ''){?>
 							<img src="<?php echo FunctionLib::getThumbImage($item->product_image,$item->product_id,FOLDER_PRODUCT,300,300) ?>" 
 							data-other-src="<?php echo FunctionLib::getThumbImage($item->product_image_hover,$item->product_id,FOLDER_PRODUCT,300,300) ?>" 
-							alt="<?php echo $item->product_name ?>"/>
+							alt="<?php echo $item->product_name.' - shopcuatui.com.vn'; ?>"/>
 							<?php }else{ ?>
 							<img src="<?php echo IMAGE_DEFAULT ?>"/>
 							<?php } ?>
