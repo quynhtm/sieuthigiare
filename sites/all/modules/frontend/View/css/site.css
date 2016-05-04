@@ -629,14 +629,14 @@ span#logo{
     top: 1px;
 }
 #back-to-top {
-    background: #ddd none repeat scroll 0 0;
+    background: #fe6d00 none repeat scroll 0 0;
     border-radius: 100%;
     bottom: 20px;
     color: #fff;
     cursor: pointer;
     font-size: 25px;
-    height: 40px;
-    line-height: 36px;
+    height: 34px;
+    line-height: 30px;
     overflow: hidden;
     position: fixed;
     right: 45px;
@@ -644,7 +644,7 @@ span#logo{
     text-decoration: none;
     text-transform: uppercase;
     transition: all 1s ease 0s;
-    width: 40px;
+    width: 34px;
     z-index: 99;
 }
 #back-to-top:hover{
