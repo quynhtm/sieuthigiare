@@ -136,9 +136,13 @@ span#logo{
     font-size: 14px;
     font-style: italic;
 }
-.list-product_new .icon-list-alt{
-    color: #fe6d00;
-    font-size: 18px;
+.list-product_new .icon-list-new {
+    background: rgba(0, 0, 0, 0) url("../img/new.gif") repeat scroll 0 0;
+    display: inline-block;
+    height: 13px;
+    position: relative;
+    top: 1px;
+    width: 25px;
 }
 .desc-price-day {
     display: inline-block;

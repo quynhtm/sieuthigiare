@@ -126,7 +126,7 @@
 				<?php } ?>
 			</div>
 			<div class="list-product_new">
-				<i class="icon-list-alt"></i> <a href="<?php echo $base_url ?>/san-pham-moi.html" title="Sản phẩm mới">Sản phẩm mới</a>
+				<i class="icon-list-new"></i> <a href="<?php echo $base_url ?>/san-pham-moi.html" title="Sản phẩm mới">Sản phẩm mới</a>
 			</div>
 			<!-- <div class="desc-price-day">
 				<i class="icon-star-empty"></i> <a href="#" title="Giảm giá mỗi ngày">Giảm giá mỗi ngày</a>
