@@ -94,7 +94,9 @@ class SiteController{
 		}
 
 		$result = Site::getListProductNew(0, $recordPerPage);
-		return theme('pageProductNew', array('result'=>$result, 'totalPage'=>$totalPage, 'currentPage'=>$currentPage));
+		$bannerList = DataCommon::getBannerAdvanced(BANNER_TYPE_HOME_SMALL, BANNER_PAGE_HOME, 0, 0);
+
+		return theme('pageProductNew', array('result'=>$result, 'totalPage'=>$totalPage, 'currentPage'=>$currentPage, 'bannerList'=>$bannerList));
 	}
 	public static function countCartItem(){
 		$numItem = 0;

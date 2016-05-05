@@ -9,6 +9,10 @@
 	</div>
 	<div class="main-view-post">
 		<div id="main-product-new" class="content-list-item w-home">
+			
+			<?php if(!empty($bannerList)){ ?>
+			<div class="left-product-new">
+			<?php } ?>
 			<?php if(!empty($result)){ ?>
 				<ul>
 					<?php foreach($result as $v){?>
@@ -81,6 +85,29 @@
 			<?php }else{ ?>
 				<div class="not-product"><?php echo NOT_PRODUCT ?></div>
 			<?php } ?>
+			<?php if(!empty($bannerList)){ ?>
+			</div>
+			<?php } ?>
+
+			<?php if(!empty($bannerList)){ ?>
+			<div class="right-product-new">
+				<?php foreach($bannerList as $v){ 
+					if($v->banner_is_rel != 1){
+						$rel = 'rel="nofollow"';
+					}else{
+						$rel = '';
+					}
+				?>
+				<div class="item-right-ads">
+					<a <?php echo $rel ?> href="<?php echo $v->banner_link ?>" title ="<?php echo $v->banner_name ?>" <?php if($v->banner_is_target == BANNER_TARGET_BLANK){?>target="_blank"<?php }?>>
+						<img src="<?php echo FunctionLib::getThumbImage($v->banner_image, $v->banner_id, FOLDER_BANNER, 300, 210) ?>" alt="<?php echo $v->banner_name ?>"/>
+					</a>
+				</div>
+				<?php } ?>
+			</div>
+			<?php } ?>
+
+			
 	</div>
 	</div>
 </div>

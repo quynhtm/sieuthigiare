@@ -654,3 +654,28 @@ span#logo{
 #back-to-top:hover{
     background: #999;
 }
+.left-product-new{
+    display: inline-block;
+    float: left;
+    text-align: justify;
+    width: 1008px;
+}
+.left-product-new > ul {
+    margin-right: -50px;
+}
+.right-product-new{
+    display: inline-block;
+    float: right;
+    width: 235px;
+    margin-top: 5px;
+}
+.item-right-ads {
+    margin-bottom: 10px;
+}
+.item-right-ads:last-child {
+    margin-bottom: 0;
+}
+.item-right-ads img {
+    height: 209px;
+    width: 100%;
+}
