@@ -66,7 +66,7 @@
 						<th width="8%">Ngày gửi</th>
 						<th width="8%">Kiểu gửi</th>
 						<th width="8%">Status</th>
-						<th width="10%">Action</th>
+						<th width="5%">Action</th>
 					</tr>
 					</thead>
 					<tbody>

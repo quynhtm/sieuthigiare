@@ -8,7 +8,7 @@ jQuery(document).ready(function($){
 
 DELETE_ITEM={
 	init:function(path_menu){
-		jQuery('a#deleteMoreItem, a#deleteOneItem').click(function(){
+		jQuery('a#deleteMoreItem').click(function(){
 			var total = jQuery( "input:checked" ).length;
 			if(total==0){
 				alert('Vui lòng chọn ít nhất 1 bản ghi để xóa!');

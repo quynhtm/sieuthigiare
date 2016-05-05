@@ -109,7 +109,6 @@
 								<br/>
 								<?php $linkEdit = $base_url.'/admincp/product/edit/'.$item->product_id; ?>
 								<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit icon-admin green "></i></a>
-								<a id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-trash icon-admin red"></i></a>
 								<?php if($item->product_image_other != ''){?>
 								<a href="javascript:void(0)" title="View ảnh sản phẩm" onclick="Common_admin.showImagesProduct(<?php echo $item->product_id; ?>)"><i class="icon-eye-open icon-admin green"></i></a>
 								<?php } ?>

@@ -126,8 +126,6 @@
 								<br/>
 								<?php $linkEdit = $base_url.'/admincp/usershop/edit/'.$item->shop_id; ?>
 								<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit icon-admin green "></i></a>
-								&nbsp;&nbsp;&nbsp;
-								<a id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-trash icon-admin red"></i></a>
 							</td>
 						</tr>
 					<?php }?>

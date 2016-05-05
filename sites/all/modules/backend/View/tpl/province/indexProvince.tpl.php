@@ -47,7 +47,7 @@
 						<th width="70%">Tên tỉnh thành</th>
 						<th width="10%">Vị trí</th>
 						<th width="5%">Status</th>
-						<th width="20%">Action</th>
+						<th width="5%">Action</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -63,7 +63,6 @@
 						<td>
 							<?php $linkEdit = $base_url.'/admincp/province/edit/'.$item->province_id; ?>
 							<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit icon-admin green "></i></a>
-							<a id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-trash icon-admin red"></i></a>
 						</td>
 					</tr>
 					<?php }?>
