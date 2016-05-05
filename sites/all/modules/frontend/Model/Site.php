@@ -156,4 +156,42 @@ class Site{
 		}
 		return array();
 	}
+
+	public static function getListProductSearch($provices_id=0, $category_id=0, $limit=0){
+		if($limit>0){
+			$sql = db_select(self::$table_action_product, 'i')->extend('PagerDefault');
+			$sql->addField('i', 'product_id', 'product_id');
+			$sql->addField('i', 'product_name', 'product_name');
+			$sql->addField('i', 'product_price_sell', 'product_price_sell');
+			$sql->addField('i', 'product_price_market', 'product_price_market');
+			$sql->addField('i', 'product_type_price', 'product_type_price');
+			$sql->addField('i', 'product_selloff', 'product_selloff');
+			$sql->addField('i', 'product_image', 'product_image');
+			$sql->addField('i', 'product_image_hover', 'product_image_hover');
+			$sql->addField('i', 'user_shop_id', 'user_shop_id');
+			$sql->addField('i', 'user_shop_name', 'user_shop_name');
+
+			$sql->condition('i.product_status', STASTUS_SHOW,'=');
+			$sql->condition('i.is_block', PRODUCT_NOT_BLOCK,'=');
+			
+			if($provices_id>0){
+				$sql->condition('i.shop_province', $provices_id,'=');
+			}
+
+			if($category_id>0){
+				$listCategoryChildren  = DataCommon::getListCategoryChildren($category_id);
+				$listCategoryChildren = array_keys($listCategoryChildren);
+				$sql->condition('i.category_id', $listCategoryChildren,'IN');
+			}
+
+			$result = $sql->limit($limit)->orderBy('i.'.self::$primary_key_product, 'DESC')->execute();
+            $arrItem = (array)$result->fetchAll();
+
+            $pager = array('#theme' => 'pager','#quantity' => 3);
+            $data['data'] = $arrItem;
+            $data['pager'] = $pager;
+            return $data;
+		}
+		return array();
+	}
 }

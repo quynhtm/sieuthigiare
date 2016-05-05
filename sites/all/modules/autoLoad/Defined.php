@@ -15,7 +15,7 @@ if($q == 'user/login' || $q =='user/register' || $q =='search' || $q =='comment'
 
 /*define*/
 define('SITE_VERSION',   '1.0');
-define("SITE_RECORD_PER_PAGE", '30');
+define("SITE_RECORD_PER_PAGE", '32');
 define('SITE_SCROLL_PAGE', '3');
 define('SITE_SAME_RECORD', '5');
 define("SITE_RECORD_PER_PAGE_SHOP_NORMAL", '12');

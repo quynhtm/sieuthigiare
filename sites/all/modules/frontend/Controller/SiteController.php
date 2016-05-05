@@ -99,14 +99,17 @@ class SiteController{
 		return theme('pageProductNew', array('result'=>$result, 'totalPage'=>$totalPage, 'currentPage'=>$currentPage, 'bannerList'=>$bannerList));
 	}
 	public static function getSearchProduct(){
-
+		
 		$bannerList = DataCommon::getBannerAdvanced(BANNER_TYPE_HOME_SMALL, BANNER_PAGE_HOME, 0, 0);
 		
+		$limit = SITE_RECORD_PER_PAGE;
 		$provices_id 	= FunctionLib::getIntParam('provices_id', 0);
 		$category_id 	= FunctionLib::getIntParam('category_id', 0);
-		
-		$result = array();
-		return theme('pageProductSearch', array('result'=>$result, 'bannerList'=>$bannerList));;
+		$result = Site::getListProductSearch($provices_id, $category_id, $limit);
+
+		return theme('pageProductSearch', array('result'=>$result['data'],
+												'pager' =>$result['pager'], 
+												'bannerList'=>$bannerList));;
 	}
 	public static function countCartItem(){
 		$numItem = 0;
