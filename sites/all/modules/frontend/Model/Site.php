@@ -149,7 +149,7 @@ class Site{
 			$sql->condition('i.is_block', PRODUCT_NOT_BLOCK,'=');
 			
 			$sql->range($recordStart,$recordPerPage);
-			$sql->orderBy('i.product_id', 'DESC');
+			$sql->orderBy('i.time_update', 'DESC');
 			$result = $sql->execute()->fetchAll();
 				
 			return $result;
