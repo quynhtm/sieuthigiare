@@ -6,9 +6,9 @@
 ?>
 <div class="container">
 	<div class="link-breadcrumb">
-		<a href="<?php echo $base_url; ?>">Trang chủ</a>
+		<a href="<?php echo $base_url; ?>" title="Trang chủ">Trang chủ</a>
 		<i class="icon-double-angle-right"></i>
-		<a href="<?php echo FunctionLib::buildLinkCategory($user_shop->shop_id,$user_shop->shop_name);?>"><?php echo isset($user_shop->shop_name)? $user_shop->shop_name : 'Trang chủ của shop';?></a>
+		<a href="<?php echo FunctionLib::buildLinkCategory($user_shop->shop_id,$user_shop->shop_name);?>" title="<?php echo isset($user_shop->shop_name)? $user_shop->shop_name : 'Trang chủ của shop';?><?php echo ' - '.WEB_SITE ?>"><?php echo isset($user_shop->shop_name)? $user_shop->shop_name : 'Trang chủ của shop';?></a>
 	</div>
 	<div class="main-view-post">
 		<div class="wrap-main-view shop">
@@ -50,8 +50,14 @@
 			<div class="right-show-product-shop body-list-item ">
 				<?php if(!empty($bannerList)){ ?>
 				<div class="banner-shop-content">
-					<?php foreach($bannerList as $v){ ?>
-					<a title="<?php echo $v->banner_name ?>" href="<?php echo $v->banner_link ?>" target="_blank">
+					<?php foreach($bannerList as $v){ 
+						if($v->banner_is_rel != 1){
+							$rel = 'rel="nofollow"';
+						}else{
+							$rel = '';
+						}
+					?>
+					<a <?php echo $rel ?> title="<?php echo $v->banner_name ?>" href="<?php echo $v->banner_link ?>" target="_blank">
 						<img src="<?php echo FunctionLib::getThumbImage($v->banner_image, $v->banner_id, FOLDER_BANNER, 0, 0) ?>" alt="<?php echo $v->banner_name ?>"/>
 					</a>
 					<?php } ?>
@@ -62,9 +68,9 @@
 						<?php foreach($result as $v){?>
 						<li class="item">
 							<div class="post-thumb">
-								<a href="<?php echo FunctionLib:: buildLinkDetail($v->product_id, $v->product_name); ?>" title="<?php echo $v->product_name?>">
+								<a href="<?php echo FunctionLib:: buildLinkDetail($v->product_id, $v->product_name); ?>" title="<?php echo $v->product_name?><?php echo ' - '.WEB_SITE ?>">
 									<?php if(isset($v->url_image) && $v->url_image != ''){?>
-									<img src="<?php echo $v->url_image ?>" alt="<?php echo $v->product_name?>" data-other-src="<?php echo $v->url_image_hover?>">
+									<img src="<?php echo $v->url_image ?>" alt="<?php echo $v->product_name?><?php echo ' - '.WEB_SITE ?>" data-other-src="<?php echo $v->url_image_hover?>">
 									<?php }else{ ?>
 									<img src="<?php echo IMAGE_DEFAULT ?>"/>
 									<?php } ?>
@@ -73,7 +79,7 @@
 							<div class="item-content">
 								<div class="title-info">
 									<h4 class="post-title">
-										<a title="<?php echo $v->product_name?>" href="<?php echo FunctionLib:: buildLinkDetail($v->product_id, $v->product_name); ?>"><?php echo $v->product_name?></a>
+										<a title="<?php echo $v->product_name?><?php echo ' - '.WEB_SITE ?>" href="<?php echo FunctionLib:: buildLinkDetail($v->product_id, $v->product_name); ?>"><?php echo $v->product_name?></a>
 									</h4>
 									<div class="item-price">
                                 		<?php if($v->product_type_price == 2){?>

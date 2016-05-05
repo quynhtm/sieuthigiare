@@ -48,6 +48,7 @@
 						<th width="6%" class="td_list">Ảnh</th>
 						<th width="30%" class="td_list">Tên banner</th>
 						<th width="15%" class="td_list">Thông tin banner</th>
+						<th width="5%" class="td_list">Follow</th>
 						<th width="15%" class="td_list">Ngày chạy</th>
 						<th width="6%" class="td_list">Action</th>
 					</tr>
@@ -87,6 +88,17 @@
 									echo $item->banner_link;
 								?>
 							</td>
+							
+							<td>
+								<?php
+									if($item->banner_is_rel == 1){
+										echo 'Follow';
+									}else{
+										echo 'Nofollow';
+									}
+								?>
+							</td>
+
 							<td>
 								<?php
 								if($item->banner_is_run_time == BANNER_IS_RUN_TIME){

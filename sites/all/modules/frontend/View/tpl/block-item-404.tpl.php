@@ -15,11 +15,11 @@
 					    	-<?php echo number_format(100 - ((float)$item->product_price_sell/(float)$item->product_price_market)*100, 1) ?>%
 					    </span>
 					    <?php } ?>
-						<a href="<?php echo FunctionLib::buildLinkDetail($item->product_id, $item->product_name); ?>" title="<?php echo $item->product_name?>">
+						<a href="<?php echo FunctionLib::buildLinkDetail($item->product_id, $item->product_name); ?>" title="<?php echo $item->product_name?><?php echo ' - '.WEB_SITE ?>">
 							<?php if($item->product_image != ''){?>
 							<img src="<?php echo FunctionLib::getThumbImage($item->product_image,$item->product_id,FOLDER_PRODUCT,300,300) ?>" 
 							data-other-src="<?php echo FunctionLib::getThumbImage($item->product_image_hover,$item->product_id,FOLDER_PRODUCT,300,300) ?>" 
-							alt="<?php echo $item->product_name.' - shopcuatui.com.vn'; ?>"/>
+							alt="<?php echo $item->product_name ?><?php echo ' - '.WEB_SITE ?>"/>
 							<?php }else{ ?>
 							<img src="<?php echo IMAGE_DEFAULT ?>"/>
 							<?php } ?>
@@ -33,7 +33,7 @@
 							<div class="item-price">
                         		<?php if($item->product_type_price == 2){?>
                         			<span class="amount-call">Liên hệ: 
-                        				<a class="link-shop" href="<?php echo FunctionLib::buildLinkCategory($item->user_shop_id, $item->user_shop_name, 0, '') ?>">
+                        				<a title="<?php echo $item->user_shop_name ?>" class="link-shop" href="<?php echo FunctionLib::buildLinkCategory($item->user_shop_id, $item->user_shop_name, 0, '') ?>">
 					                		<?php echo $item->user_shop_name ?>
 					                	</a>
                         			</span>
@@ -45,7 +45,7 @@
 										<?php } ?>
 							    	<?php }else{ ?>
 								    	<span class="amount-call">Liên hệ: 
-	                        				<a class="link-shop" href="<?php echo FunctionLib::buildLinkCategory($item->user_shop_id, $item->user_shop_name, 0, '') ?>">
+	                        				<a title="<?php echo $item->user_shop_name ?>" class="link-shop" href="<?php echo FunctionLib::buildLinkCategory($item->user_shop_id, $item->user_shop_name, 0, '') ?>">
 						                		<?php echo $item->user_shop_name ?>
 						                	</a>
 	                        			</span>
@@ -59,7 +59,7 @@
 						
 						<?php if($item->product_type_price == 1){?>
 		                <div class="mgt5 amount-call">
-		                	<a class="link-shop" href="<?php echo FunctionLib::buildLinkCategory($item->user_shop_id, $item->user_shop_name, 0, '') ?>">
+		                	<a title="<?php echo $item->user_shop_name ?>" class="link-shop" href="<?php echo FunctionLib::buildLinkCategory($item->user_shop_id, $item->user_shop_name, 0, '') ?>">
 		                		<?php echo $item->user_shop_name ?>
 		                	</a>
 		            	</div>

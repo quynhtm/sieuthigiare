@@ -7,6 +7,8 @@ class BannerController{
 	private $arrTarget = array(-1 => '--Chọn target link--', BANNER_NOT_TARGET_BLANK => 'Link trên site', BANNER_TARGET_BLANK => 'Mở tab mới');
 	private $arrRunTime = array(-1 => '--Chọn thời gian chạy--', BANNER_NOT_RUN_TIME => 'Chạy mãi mãi', BANNER_IS_RUN_TIME => 'Chạy theo thời gian');
 	private $arrIsShop = array(-1 => '--Tất cả--', BANNER_NOT_SHOP => 'Banner của site', BANNER_IS_SHOP => 'Banner của shop');
+	private $arrRel = array(LINK_NOFOLLOW => 'Nofollow', LINK_FOLLOW => 'Follow');
+	
 	private $arrTypeBanner = array(-1 => '---Chọn loại Banner--',
 		BANNER_TYPE_HOME_BIG => 'Banner home to',
 		BANNER_TYPE_HOME_SMALL => 'Banner home nhỏ',
@@ -98,9 +100,9 @@ class BannerController{
 				'banner_name'=>array('value'=>FunctionLib::getParam('banner_name',''), 'require'=>1, 'messages'=>'Tên banner không được bỏ trống!'),
 				'banner_link'=>array('value'=>FunctionLib::getParam('banner_link',''), 'require'=>1, 'messages'=>'Link banner không được bỏ trống!'),
 				'banner_image'=>array('value'=>$banner_image, 'require'=>1, 'messages'=>'Chưa nhập ảnh cho banner quảng cáo!'),
-
 				'banner_order'=>array('value'=>FunctionLib::getParam('banner_order',1)),
 				'banner_is_target'=>array('value'=>FunctionLib::getParam('banner_is_target',BANNER_NOT_TARGET_BLANK)),
+				'banner_is_rel'=>array('value'=>FunctionLib::getParam('banner_is_rel',LINK_NOFOLLOW)),
 				'banner_type'=>array('value'=>FunctionLib::getParam('banner_type',0)),
 				'banner_page'=>array('value'=>FunctionLib::getParam('banner_page',0)),
 				'banner_category_id'=>array('value'=>FunctionLib::getParam('banner_category_id',0)),
@@ -156,6 +158,8 @@ class BannerController{
 		$optionPage = FunctionLib::getOption($this->arrPage, isset($arrItem->banner_page) ? $arrItem->banner_page: -1);
 		$optionTarget = FunctionLib::getOption($this->arrTarget, isset($arrItem->banner_is_target) ? $arrItem->banner_is_target: BANNER_TARGET_BLANK);
 		$optionCategory = FunctionLib::getOption(array(0=>'Chọn danh mục quảng cáo')+$this->arrCategoryParent, isset($arrItem->banner_category_id) ? $arrItem->banner_category_id: 0);
+		$optionRel = FunctionLib::getOption($this->arrRel, isset($arrItem->banner_is_rel) ? $arrItem->banner_is_rel: LINK_NOFOLLOW);
+
 		return $view = theme('addBanner',
 			array('arrItem'=>$arrItem,
 				'item_id'=>$item_id,
@@ -166,7 +170,8 @@ class BannerController{
 				'optionPage'=>$optionPage,
 				'optionTypeBanner'=>$optionTypeBanner,
 				'optionRunTime'=>$optionRunTime,
-				'optionStatus'=>$optionStatus));
+				'optionStatus'=>$optionStatus,
+				'optionRel'=>$optionRel));
 	}
 
 	function deleteBannerAction(){

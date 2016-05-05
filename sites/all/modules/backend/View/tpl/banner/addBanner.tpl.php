@@ -8,22 +8,28 @@
 	<div class="page-content-box paddingTop10">
 		 <form class="form-horizontal" name="txtForm" action="" method="post" enctype="multipart/form-data">
                  <div class="col-lg-6">
-                     <div class="col-lg-12 paddingTop10">
+                    <div class="col-lg-12 paddingTop10">
                          <label class="control-label">Tên quảng cáo<span>*</span></label>
                          <div><input type="text" class="form-control input-sm" name="banner_name" value="<?php if(isset($arrItem->banner_name)){ echo $arrItem->banner_name; } ?>"></div>
-                     </div>
-                     <div class="col-lg-12 paddingTop10">
+                    </div>
+                    <div class="col-lg-12 paddingTop10">
                          <label class="control-label">Link Url<span>*</span></label>
                          <div><input type="text" class="form-control input-sm" name="banner_link" value="<?php if(isset($arrItem->banner_link)){ echo $arrItem->banner_link; } ?>"></div>
-                     </div>
-                     <div class="col-lg-12 paddingTop10">
+                    </div>
+                    <div class="col-lg-12 paddingTop10">
                          <label class="control-label">Thứ tự hiển thị</label>
                          <div><input type="text" class="form-control input-sm" name="banner_order" value="<?php if(isset($arrItem->banner_order)){ echo $arrItem->banner_order; } ?>"></div>
-                     </div>
-                     <div class="col-lg-12 paddingTop10">
+                    </div>
+                    <div class="col-lg-12 paddingTop10">
                          <label class="control-label">Taget bank</label>
                          <select class="form-control input-sm" name="banner_is_target">
                              <?php echo $optionTarget;?>
+                         </select>
+                    </div>
+                    <div class="col-lg-12 paddingTop10">
+                         <label class="control-label">Nofollow</label>
+                         <select class="form-control input-sm" name="banner_is_rel">
+                             <?php echo $optionRel;?>
                          </select>
                      </div>
                      <div class="col-lg-12 paddingTop10">

@@ -26,20 +26,20 @@
 		$product_image_other = unserialize($result->product_image_other);
 	}
 	
-	SeoMeta::SEO($product_name, $product_image, $product_name, $product_name, $product_sort_desc);
+	SeoMeta::SEO($product_name.' - '.WEB_SITE, $product_image, $product_name.' - '.WEB_SITE, $product_name.' - '.WEB_SITE, $product_sort_desc.' - '.WEB_SITE);
 
 ?>
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="link-breadcrumb">
-				<a href="<?php echo $base_url ?>">Trang chủ</a>
+				<a href="<?php echo $base_url; ?>" title="Trang chủ">Trang chủ</a>
 				<i class="icon-double-angle-right"></i>
-				<a href="<?php echo FunctionLib::buildLinkCategory($user_shop->shop_id, $user_shop->shop_name, 0, '') ?>"><?php echo $user_shop->shop_name ?></a>
+				<a href="<?php echo FunctionLib::buildLinkCategory($user_shop->shop_id, $user_shop->shop_name, 0, '') ?>" title="<?php echo $user_shop->shop_name ?>"><?php echo $user_shop->shop_name ?></a>
 				<i class="icon-double-angle-right"></i>
-				<a href="<?php echo FunctionLib::buildLinkCategory($user_shop->shop_id, $user_shop->shop_name, $category_id, $category_name) ?>"><?php echo $category_name ?></a>
+				<a href="<?php echo FunctionLib::buildLinkCategory($user_shop->shop_id, $user_shop->shop_name, $category_id, $category_name) ?>" title="<?php echo $category_name ?>"><?php echo $category_name ?></a>
 				<i class="icon-double-angle-right"></i>
-				<a href="<?php echo FunctionLib::buildLinkDetail($product_id, $product_name) ?>"><?php echo $product_name ?></a>
+				<a href="<?php echo FunctionLib::buildLinkDetail($product_id, $product_name) ?>" title="<?php echo $product_name ?><?php echo ' - '.WEB_SITE ?>"><?php echo $product_name ?></a>
 			</div>
 			<div class="main-view-post box-detail-product">
 				<div class="wrap-main-view">
@@ -54,7 +54,7 @@
 								?>
 								<li>
 									<a href="javascript:void(0)" data-zoom="<?php echo FunctionLib::getThumbImage($img, $product_id, FOLDER_PRODUCT, 400, 500) ?>">
-										<img src="<?php echo FunctionLib::getThumbImage($img, $product_id, FOLDER_PRODUCT, 100, 100) ?>" alt="<?php echo $product_name ?>"/>
+										<img src="<?php echo FunctionLib::getThumbImage($img, $product_id, FOLDER_PRODUCT, 100, 100) ?>" alt="<?php echo $product_name ?><?php echo ' - '.WEB_SITE ?>"/>
 									</a>
 								</li>
 								<?php } ?>
@@ -63,7 +63,7 @@
 							<div class="max-thumb-img">
 								<?php if($product_image != ''){?>
 								<a href="javascript:void(0)" title="">
-									<img src="<?php echo $product_image; ?>" alt="<?php echo $product_name ?>"/>
+									<img src="<?php echo $product_image; ?>" alt="<?php echo $product_name ?><?php echo ' - '.WEB_SITE ?>"/>
 								</a>
 								<?php }else{ ?>
 									<img src="<?php echo IMAGE_DEFAULT ?>"/>
@@ -169,15 +169,15 @@
 										<?php foreach($arrSame as $k=>$same){?>
 										<?php if($k < 10){?>
 										<li class="item">
-											<a class="img-thumb post-thumb" title="<?php echo $same->product_name?>" href="<?php echo FunctionLib:: buildLinkDetail($same->product_id, $same->product_name); ?>">
+											<a class="img-thumb post-thumb" title="<?php echo $same->product_name?><?php echo ' - '.WEB_SITE ?>" href="<?php echo FunctionLib:: buildLinkDetail($same->product_id, $same->product_name); ?>">
 												<?php if($same->product_image != ''){?>
-												<img src="<?php echo FunctionLib::getThumbImage($same->product_image, $same->product_id, FOLDER_PRODUCT, 300, 300) ?>" alt="<?php echo $same->product_name?>" 
+												<img src="<?php echo FunctionLib::getThumbImage($same->product_image, $same->product_id, FOLDER_PRODUCT, 300, 300) ?>" alt="<?php echo $same->product_name?><?php echo ' - '.WEB_SITE ?>" 
 													data-other-src="<?php echo FunctionLib::getThumbImage($same->product_image_hover, $same->product_id, FOLDER_PRODUCT, 300, 300) ?>">
 												<?php }else{ ?>
 												<img src="<?php echo IMAGE_DEFAULT ?>"/>
 												<?php } ?>
 											</a>
-											<a class="item-name" title="<?php echo $same->product_name?>" href="<?php echo FunctionLib:: buildLinkDetail($same->product_id, $same->product_name); ?>"><?php echo $same->product_name?></a>
+											<a class="item-name" title="<?php echo $same->product_name?><?php echo ' - '.WEB_SITE ?>" href="<?php echo FunctionLib:: buildLinkDetail($same->product_id, $same->product_name); ?>"><?php echo $same->product_name?></a>
 											<div class="item-price">
 												<?php if($same->product_type_price == 2){?>
 													<p class="price-sale">Liên hệ</p>
@@ -195,7 +195,7 @@
 												<?php } ?>
 											</div>
 							                <div class="mgt5 amount-call">
-							                	<a class="link-shop" href="<?php echo FunctionLib::buildLinkCategory($same->user_shop_id, $same->user_shop_name, 0, '') ?>">
+							                	<a title="<?php echo $same->user_shop_name ?>" class="link-shop" href="<?php echo FunctionLib::buildLinkCategory($same->user_shop_id, $same->user_shop_name, 0, '') ?>">
 							                		<?php echo $same->user_shop_name ?>
 							                	</a>
 							            	</div>
@@ -317,16 +317,16 @@
 										if($k>=10){
 									?>
 									<li class="item">
-										<a class="i-thumb post-thumb" title="<?php echo $h->product_name?>" href="<?php echo FunctionLib:: buildLinkDetail($h->product_id, $h->product_name); ?>">
+										<a class="i-thumb post-thumb" title="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>" href="<?php echo FunctionLib:: buildLinkDetail($h->product_id, $h->product_name); ?>">
 											<?php if($h->product_image != ''){?>
-											<img src="<?php echo FunctionLib::getThumbImage($h->product_image, $h->product_id, FOLDER_PRODUCT, 300, 300) ?>" alt="<?php echo $h->product_name?>" 
+											<img src="<?php echo FunctionLib::getThumbImage($h->product_image, $h->product_id, FOLDER_PRODUCT, 300, 300) ?>" alt="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>" 
 											data-other-src="<?php echo FunctionLib::getThumbImage($h->product_image, $h->product_id, FOLDER_PRODUCT, 300, 300) ?>">
 											<?php }else{ ?>
 											<img src="<?php echo IMAGE_DEFAULT ?>"/>
 											<?php } ?>
 										</a>
 										
-										<a class="item-name" title="<?php echo $h->product_name?>" href="<?php echo FunctionLib:: buildLinkDetail($h->product_id, $h->product_name); ?>"><?php echo $h->product_name?></a>
+										<a class="item-name" title="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>" href="<?php echo FunctionLib:: buildLinkDetail($h->product_id, $h->product_name); ?>"><?php echo $h->product_name?></a>
 										<div class="item-price">
 											<?php if($h->product_type_price == 2){?>
 												<p class="price-sale">Liên hệ</p>
@@ -346,7 +346,7 @@
 											<?php } ?>
 										</div>
 										<div class="mgt5 amount-call">
-						                	<a class="link-shop" href="<?php echo FunctionLib::buildLinkCategory($h->user_shop_id, $h->user_shop_name, 0, '') ?>">
+						                	<a title="<?php echo $h->user_shop_name ?>" class="link-shop" href="<?php echo FunctionLib::buildLinkCategory($h->user_shop_id, $h->user_shop_name, 0, '') ?>">
 						                		<?php echo $h->user_shop_name ?>
 						                	</a>
 						            	</div>

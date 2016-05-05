@@ -394,7 +394,7 @@ class DataCommon{
 		}
 		if($bannerAdvanced == null || empty($bannerAdvanced)) {
 			$arrField = array('banner_id', 'banner_name', 'banner_image','banner_link', 'banner_order', 'banner_is_target','banner_type','banner_category_id',
-				'banner_page', 'banner_status','banner_is_run_time', 'banner_start_time','banner_end_time', 'banner_is_shop','banner_shop_id');
+				'banner_page', 'banner_status','banner_is_run_time', 'banner_start_time','banner_end_time', 'banner_is_shop','banner_shop_id', 'banner_is_rel');
 			$query = db_select(self::$table_banner, 'c')
 				->condition('c.banner_status', STASTUS_SHOW, '=')
 				->condition('c.banner_type', $banner_type, '=')

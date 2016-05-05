@@ -25,10 +25,11 @@ define("NUMBER_PRODUCT_HOME", 10);
 define("PATH_UPLOAD", DRUPAL_ROOT.'/uploads');
 define('base_url_lang', $base_url .'/'. ((!isset($language->language) || $language->language == 'und' || $language->language == 'vi') ? 'vi/' : $language->language.'/'));
 
-define('AJAX_DOMAIN', '/shopcuatui.com.vn/');
+define('AJAX_DOMAIN', '/shopcuatui.com.vn/');//check preg_match ajax
+define('WEB_SITE', 'Shopcuatui.com.vn');//suffix link and alt
+
 define('IS_DEV', 1);// 0:local, 1:web
 define('PHONE_CARE', '0985.10.10.26 - 0913.922.986');
-define('WEB_SITE', 'Shopcuatui.com.vn');
 define('NOT_PRODUCT', 'Chưa có sản phẩm nào...');
 define('NOT_PRODUCT_CART', 'Chưa có sản phẩm nào trong giỏ hàng...');
 define('SESSION_SHOP_TIME_OUT', 3600);
@@ -120,7 +121,11 @@ define('SHOP_NUMBER_PRODUCT_FREE', 20);//so luong san pham shop dc dang
 define('SHOP_NUMBER_PRODUCT_NOMAL', 100);
 define('SHOP_NUMBER_PRODUCT_VIP',1000);
 
+/*link nofolow*/
+define('LINK_NOFOLLOW', 0);
+define('LINK_FOLLOW',1);
 
+/*img*/
 define('IMAGE_ERROR', 113); // dung sau quet cac item up anh nhung ko cap nhat DB
 define('IMAGE_DEFAULT', $base_url.'/sites/all/modules/autoLoad/img/default.png');
 

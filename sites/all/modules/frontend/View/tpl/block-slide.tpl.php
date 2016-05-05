@@ -13,7 +13,7 @@
 					?>
 					<?php if(isset($cat['category_parent_name']) && $cat['category_parent_name'] != ''){ ?>
 					<li>
-						<a href="<?php echo FunctionLib::buildLinkCategory(0, 0, $cat['category_id'], $cat['category_parent_name']) ?>"><?php echo $cat['category_parent_name'] ?></a>
+						<a href="<?php echo FunctionLib::buildLinkCategory(0, 0, $cat['category_id'], $cat['category_parent_name']) ?>" title="<?php echo $cat['category_parent_name'] ?>"><?php echo $cat['category_parent_name'] ?></a>
 						<?php if(isset($cat['arrSubCategory']) && !empty($cat['arrSubCategory'])) {?>
 						<?php 	
 							$url = '';
@@ -27,7 +27,7 @@
 							<?php foreach($list_ul as $ul){?>
 							<ul>
 								<?php foreach($ul as $sub){ ?>
-								<li><a href="<?php echo FunctionLib::buildLinkCategory(0, 0, $sub['category_id'], $sub['category_name']) ?>"><?php echo $sub['category_name'] ?></a></li>
+								<li><a href="<?php echo FunctionLib::buildLinkCategory(0, 0, $sub['category_id'], $sub['category_name']) ?>" title="<?php echo $sub['category_name'] ?>"><?php echo $sub['category_name'] ?></a></li>
 								<?php } ?>
 							</ul>
 							<?php } ?>
@@ -43,17 +43,29 @@
 		</div>
 		<div class="slider-box-mid">
 			<div class="nivoSlider" id="slider">
-				<?php foreach($bannerLager as $v){ ?>
-				<a title="<?php echo $v->banner_name ?>" href="<?php echo $v->banner_link ?>" <?php if($v->banner_is_target == BANNER_TARGET_BLANK){?>target="_blank"<?php }?> class="nivo-imageLink" style="display: block;">
+				<?php foreach($bannerLager as $v){ 
+					if($v->banner_is_rel != 1){
+						$rel = 'rel="nofollow"';
+					}else{
+						$rel = '';
+					}
+				?>
+				<a <?php echo $rel ?> title="<?php echo $v->banner_name ?>" href="<?php echo $v->banner_link ?>" <?php if($v->banner_is_target == BANNER_TARGET_BLANK){?>target="_blank"<?php }?> class="nivo-imageLink" style="display: block;">
 					<img src="<?php echo FunctionLib::getThumbImage($v->banner_image, $v->banner_id, FOLDER_BANNER, 0, 0) ?>" alt="<?php echo $v->banner_name ?>"/>
 				</a>
 				<?php } ?>
 			</div>
 		</div>
 		<div class="ads-right-mid">
-			<?php foreach($bannerSmall as $v2){ ?>
+			<?php foreach($bannerSmall as $v2){ 
+				if($v2->banner_is_rel != 1){
+					$rel = 'rel="nofollow"';
+				}else{
+					$rel = '';
+				}
+			?>
 			<div class="item-right-slider">
-				<a href="<?php echo $v2->banner_link ?>" title ="<?php echo $v2->banner_name ?>" <?php if($v2->banner_is_target == BANNER_TARGET_BLANK){?>target="_blank"<?php }?>>
+				<a <?php echo $rel ?> href="<?php echo $v2->banner_link ?>" title ="<?php echo $v2->banner_name ?>" <?php if($v2->banner_is_target == BANNER_TARGET_BLANK){?>target="_blank"<?php }?>>
 					<img src="<?php echo FunctionLib::getThumbImage($v2->banner_image, $v2->banner_id, FOLDER_BANNER, 300, 210) ?>" alt="<?php echo $v2->banner_name ?>"/>
 				</a>
 			</div>

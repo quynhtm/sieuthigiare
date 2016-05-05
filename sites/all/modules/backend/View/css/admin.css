@@ -357,6 +357,7 @@ body .region-header .wrapper{
     border-left: none;
     border-right: none;
     width: 100%;
+    display: inline-block;
 }
 .sticky-enabled.tableheader-processed.sticky-table td,
 .sticky-enabled.tableheader-processed.sticky-table th {

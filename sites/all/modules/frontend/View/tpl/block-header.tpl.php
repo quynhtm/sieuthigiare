@@ -5,7 +5,6 @@
 <div class="link-top-head">
 	<div class="container">
 		<div class="box-login">
-			<!-- <a href="" class="link-normal">Hướng dẫn mua hàng</a> -->
 			<?php if(isset($user_shop->shop_id) && $user_shop->shop_id == 0){?>
 			<a href="<?php echo $base_url.'/dang-ky.html' ?>" class="btnLog" rel="nofollow"><i class="icon-hand-right"></i> Mở Shop</a>
 			<a href="<?php echo $base_url.'/dang-nhap.html' ?>" class="btnLog" rel="nofollow"><i class="icon-signin"></i> Vào Shop</a>
@@ -66,7 +65,7 @@
 						</div>
 					</div>
 					<?php if($numCart > 0){?>
-					<a href="<?php echo $base_url ?>/gio-hang.html" title="Giỏ hàng">
+					<a href="<?php echo $base_url ?>/gio-hang.html" title="Giỏ hàng" rel="nofollow">
 			    		<div class="shopping-cart">
 			    			<span class="num-item"><?php echo $numCart ?></span>
 			    		</div>
@@ -97,7 +96,7 @@
 						?>
 						<?php if(isset($cat['category_parent_name']) && $cat['category_parent_name'] != ''){ ?>
 						<li>
-							<a href="<?php echo FunctionLib::buildLinkCategory(0, 0, $cat['category_id'], $cat['category_parent_name']) ?>"><?php echo $cat['category_parent_name'] ?></a>
+							<a href="<?php echo FunctionLib::buildLinkCategory(0, 0, $cat['category_id'], $cat['category_parent_name']) ?>" title="<?php echo $cat['category_parent_name'] ?>"><?php echo $cat['category_parent_name'] ?></a>
 							<?php if(isset($cat['arrSubCategory']) && !empty($cat['arrSubCategory'])) {?>
 							<?php 	
 								$url = '';
@@ -111,7 +110,7 @@
 								<?php foreach($list_ul as $ul){?>
 								<ul>
 									<?php foreach($ul as $sub){ ?>
-									<li><a href="<?php echo FunctionLib::buildLinkCategory(0, 0, $sub['category_id'], $sub['category_name']) ?>"><?php echo $sub['category_name'] ?></a></li>
+									<li><a href="<?php echo FunctionLib::buildLinkCategory(0, 0, $sub['category_id'], $sub['category_name']) ?>" title="<?php echo $sub['category_name'] ?>"><?php echo $sub['category_name'] ?></a></li>
 									<?php } ?>
 								</ul>
 								<?php } ?>
