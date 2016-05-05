@@ -63,7 +63,16 @@ span#logo{
     display: inline-block;
     float: left;
     width: 95%;
-    border: 2px solid #cc0000;
+    border: 2px solid #fe6d01;
+}
+.box-search select.provices_id {
+    height: 29px;
+    margin-right: 5px;
+    width: 160px;
+}
+.box-search select.category_id {
+    height: 29px;
+    width: 385px;
 }
 .keyword {
     border: medium none;
@@ -74,7 +83,7 @@ span#logo{
     font-style: italic;
 }
 .btn-search {
-    background: #cc0000 none repeat scroll 0 0;
+    background: #fe6d01;
     border: medium none;
     color: #fff;
     cursor: pointer;
@@ -84,7 +93,7 @@ span#logo{
     padding: 6px 15px;
 }
 .btn-search:hover{
-    background: #c00000;
+    background: #f16000;
 }
 .box-login {
     display: inline-block;
@@ -678,4 +687,10 @@ span#logo{
 .item-right-ads img {
     height: 209px;
     width: 100%;
+}
+.content-list-item.search .left-product-new {
+    float: right;
+}
+.content-list-item.search .right-product-new {
+    float: left;
 }

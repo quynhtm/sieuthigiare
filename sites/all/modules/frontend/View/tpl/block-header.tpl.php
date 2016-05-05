@@ -1,6 +1,5 @@
 <?php 
 	global $base_url, $user_shop;
-	$keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
 ?>
 <div class="link-top-head">
 	<div class="container">
@@ -26,8 +25,17 @@
 		    <div class="box-top-header-right">
 		    	<div class="search-top-center">
 		    		<div class="box-search">
-						<form name="frmsearch" id="frmsearch" class="frmsearch" method="GET" action="<?php echo $base_url?>/tim-kiem">
-							<input type="text" name="keyword" class="keyword" value="<?php echo $keyword ?>" autocomplete="off"  placeholder="Nhập tên hoặc mã sản phẩm..."/>
+						<form name="frmsearch" id="frmsearch" class="frmsearch" method="GET" action="<?php echo $base_url?>/tim-kiem.html">
+							<select name="provices_id" class="provices_id">
+								<option value="0">Chọn tỉnh thành</option>
+								<?php echo $optionProvices ?>
+							</select>
+							<select name="category_id" class="category_id">
+								<option value="0">Chọn danh mục sản phẩm</option>
+								<?php foreach($listCategory as $key => $cat){?>
+								<option value="<?php echo $key ?>" <?php if($category_id == $key){ ?>selected="selected"<?php } ?>><?php echo $cat ?></option>
+								<?php } ?>
+							</select>
 							<input type="submit" class="btn-search" value="Tìm kiếm"/>
 						</form>
 					</div>

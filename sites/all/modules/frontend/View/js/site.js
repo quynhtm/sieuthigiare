@@ -1,7 +1,8 @@
 jQuery(document).ready(function($){
-  BACK_TOP.init();
-  HOVER_CATEGORY.init();
-  AJAX_LOAD.product_new();
+	BACK_TOP.init();
+	HOVER_CATEGORY.init();
+	AJAX_LOAD.product_new();
+	jQuery('.provices_id, .category_id').fancySelect();
 });
 
 BACK_TOP={

@@ -31,6 +31,15 @@ function Site_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
+
+	$items["tim-kiem.html"] = array(
+		"title" => t('Sản phẩm mới'),
+		"description" => "Sản phẩm mới",
+		'page callback' => 'menuLoad',
+		'page arguments' => array('SiteController/getSearchProduct'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
   return $items;
 }
 
@@ -100,7 +109,9 @@ function Site_theme() {
 	    'ajaxPageProductNew' => array(
 	      'template' => 'View/tpl/ajaxPageProductNew'
 	    ),
-	    
+	    'pageProductSearch' => array(
+	      'template' => 'View/tpl/pageProductSearch'
+	    ), 
 	);
 }
 function Site_block_view($delta='') {
@@ -138,8 +149,14 @@ function Site_init() {
 
 			'View/js/site.js',
 			'View/css/site.css',
+			'View/css/fancySelect.css',
 		);
 		Loader::load('Site', $files);
+
+		$files = array(
+			'View/js/fancySelect.js',
+		);
+		Loader::loadJSExt('Site', $files);
 	}
 }
 
@@ -175,16 +192,20 @@ function block_header(){
 	if(!drupal_is_front_page()){
 		$arrCategory = DataCommon::buildCacheTreeCategory();
 	}
+	$provices_id 	= FunctionLib::getIntParam('provices_id', 0);
+	$listProvices 	= DataCommon::getAllProvices();
+	$optionProvices = FunctionLib::getOption($listProvices, $provices_id);
+	
+	$category_id 	= FunctionLib::getIntParam('category_id', 0);
+	$listCategory = DataCommon::getListCategoryParent();
+
 	$numCart = SiteController::countCartItem();
-	$view= theme('block-header', array('arrCategory'=>$arrCategory, 'numCart'=>$numCart));
+	$view= theme('block-header', array('arrCategory'=>$arrCategory, 'numCart'=>$numCart, 
+				'optionProvices'=>$optionProvices, 'listCategory'=>$listCategory, 'category_id'=>$category_id));
 	return $view;
 }
 function block_slide(){
-	//lay theo cache danh muc
 	$arrCategory = DataCommon::buildCacheTreeCategory();
-	//$cache = new Cache();
-	//$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_TREE_MENU_CATEGORY_HEADER);die;
-
 	$bannerLager = SiteController::getListBannerLagerSite();
 	$bannerSmall = SiteController::getListBannerSmallSite();
 
