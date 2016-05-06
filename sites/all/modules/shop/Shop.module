@@ -181,7 +181,7 @@ function Shop_menu() {
 	);
 
 	//danh sach don hang
-	$items["danh-sach-dơn-hang.html"] = array(
+	$items["danh-sach-don-hang.html"] = array(
 		"title" => t('Quản lý đơn hàng'),
 		"description" => "Quản lý đơn hàng",
 		'page callback' => 'menuLoad',

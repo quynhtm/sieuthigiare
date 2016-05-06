@@ -103,7 +103,7 @@ class RegShop{
 		    	Session::createSessionUserShop($user_shop);
 		    	$data_login = array('shop_time_login'=>time(), 'is_login'=>1);
 		    	DB::updateId(self::$table_action, self::$primary_key_user_shop, $data_login, $user_shop->shop_id);
-		    	drupal_goto($base_url.'/quan-ly-gian-hang.html');
+		    	drupal_goto($base_url.'/danh-sach-don-hang.html');
 		    }else{
 		    	drupal_set_message('Tên đăng nhập hoặc mật khẩu không đúng!', 'error');
 				drupal_goto($base_url.'/dang-nhap.html');
