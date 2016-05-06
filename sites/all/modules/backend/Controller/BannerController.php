@@ -12,8 +12,8 @@ class BannerController{
 	private $arrTypeBanner = array(-1 => '---Chọn loại Banner--',
 		BANNER_TYPE_HOME_BIG => 'Banner home to',
 		BANNER_TYPE_HOME_SMALL => 'Banner home nhỏ',
-		BANNER_TYPE_HOME_LEFT => 'Banner trái',
-		BANNER_TYPE_HOME_LEFT => 'Banner phải',
+		BANNER_TYPE_HOME_LEFT => 'Banner trái-phải',
+		//BANNER_TYPE_HOME_RIGHT => 'Banner phải',
 		BANNER_TYPE_HOME_LIST => 'Banner trang list');
 
 	private $arrPage = array(-1 => '--Chọn page--',

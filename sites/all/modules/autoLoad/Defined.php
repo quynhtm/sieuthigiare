@@ -46,10 +46,11 @@ define('TABLE_PROVINCE',       'web_province');
 define('TABLE_CATEGORY',       'web_category');
 define('TABLE_NEWS',           'web_news');
 define('TABLE_CONTACT',        'web_contact');
-define('TABLE_BUILD_SQL',        'web_build_sql');
+define('TABLE_BUILD_SQL',      'web_build_sql');
 define('TABLE_COMMENT',        'web_comment');
 define('TABLE_ORDER',          'web_order');
 define('TABLE_BANNER',         'web_banner');
+define('TABLE_ADVERTISE_CLICK','web_advertise_click');
 
 //dinh nghia thu muc chua anh
 define('FOLDER_DEFAULT', 'img_other');
