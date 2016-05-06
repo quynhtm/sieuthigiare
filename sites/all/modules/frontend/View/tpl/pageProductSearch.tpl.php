@@ -100,7 +100,7 @@
 				?>
 				<div class="item-right-ads">
 					<a <?php echo $rel ?> href="<?php echo $v->banner_link ?>" title ="<?php echo $v->banner_name ?>" <?php if($v->banner_is_target == BANNER_TARGET_BLANK){?>target="_blank"<?php }?>>
-						<img src="<?php echo FunctionLib::getThumbImage($v->banner_image, $v->banner_id, FOLDER_BANNER, 300, 210) ?>" alt="<?php echo $v->banner_name ?>"/>
+						<img src="<?php echo FunctionLib::getThumbImage($v->banner_image, $v->banner_id, FOLDER_BANNER, 300, 0) ?>" alt="<?php echo $v->banner_name ?>"/>
 					</a>
 				</div>
 				<?php } ?>

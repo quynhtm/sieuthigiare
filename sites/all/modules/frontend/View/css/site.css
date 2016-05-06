@@ -471,7 +471,7 @@ span#logo{
     margin-bottom: 0px;
 }
 .item-right-slider img {
-    height: 209px;
+    max-height: 209px;
     width: 100%;
 }
 /*product*/
@@ -679,13 +679,13 @@ span#logo{
     margin-top: 5px;
 }
 .item-right-ads {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 .item-right-ads:last-child {
     margin-bottom: 0;
 }
 .item-right-ads img {
-    height: 209px;
+    height: auto;
     width: 100%;
 }
 .content-list-item.search .left-product-new {
