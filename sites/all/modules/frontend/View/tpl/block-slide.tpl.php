@@ -66,7 +66,7 @@
 			?>
 			<div class="item-right-slider">
 				<a <?php echo $rel ?> href="<?php echo $v2->banner_link ?>" title ="<?php echo $v2->banner_name ?>" <?php if($v2->banner_is_target == BANNER_TARGET_BLANK){?>target="_blank"<?php }?>>
-					<img src="<?php echo FunctionLib::getThumbImage($v2->banner_image, $v2->banner_id, FOLDER_BANNER, 300, 210) ?>" alt="<?php echo $v2->banner_name ?>"/>
+					<img src="<?php echo FunctionLib::getThumbImage($v2->banner_image, $v2->banner_id, FOLDER_BANNER, 300, 0) ?>" alt="<?php echo $v2->banner_name ?>"/>
 				</a>
 			</div>
 			<?php } ?>

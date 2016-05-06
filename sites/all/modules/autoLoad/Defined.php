@@ -20,7 +20,7 @@ define('SITE_SCROLL_PAGE', '3');
 define('SITE_SAME_RECORD', '5');
 define("SITE_RECORD_PER_PAGE_SHOP_NORMAL", '12');
 define("SITE_RECORD_PER_PAGE_SHOP_VIP", '32');
-define("NUMBER_PRODUCT_HOME", 10);
+define("NUMBER_PRODUCT_HOME", 15);
 
 define("PATH_UPLOAD", DRUPAL_ROOT.'/uploads');
 define('base_url_lang', $base_url .'/'. ((!isset($language->language) || $language->language == 'und' || $language->language == 'vi') ? 'vi/' : $language->language.'/'));
