@@ -60,7 +60,7 @@
 						<th width="25%" class="td_list">Danh mục cha</th>
 						<th width="8%" class="td_list">Vị trí</th>
 						<th width="5%" class="td_list">Status</th>
-						<th width="10%" class="td_list">Action</th>
+						<th width="5%" class="td_list">Action</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -77,7 +77,6 @@
 						<td>
 							<?php $linkEdit = $base_url.'/admincp/category/edit/'.$item['category_id']; ?>
 							<a href="<?php echo $linkEdit; ?>" title="Update Item" target="_blank"><i class="icon-edit icon-admin green "></i></a>
-							<a id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-trash icon-admin red"></i></a>
 						</td>
 					</tr>
 					<?php }?>

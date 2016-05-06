@@ -79,7 +79,6 @@
 							<td><?php echo date('d-m-Y h:i',$item->supplier_created); ?></td>
 							<td>
 								<?php echo ($item->supplier_status == 1)? '<i class="icon-ok icon-admin green"></i>': '<i class="icon-remove icon-admin red"></i>'; ?>
-								<a id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-trash icon-admin red"></i></a>
 							</td>
 						</tr>
 					<?php }?>

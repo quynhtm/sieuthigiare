@@ -51,7 +51,7 @@
 						<th width="10%" class="td_list">Loại tin</th>
 						<th width="10%" class="td_list">Thuộc danh mục</th>
 						<th width="5%" class="td_list">Status</th>
-						<th width="10%" class="td_list">Action</th>
+						<th width="5%" class="td_list">Action</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -83,7 +83,6 @@
 							<td>
 								<?php $linkEdit = $base_url.'/admincp/news/edit/'.$item->news_id; ?>
 								<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit icon-admin green "></i></a>
-								<a id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-trash icon-admin red"></i></a>
 							</td>
 						</tr>
 						<?php }?>

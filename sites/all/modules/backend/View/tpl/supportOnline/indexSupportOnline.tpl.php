@@ -29,7 +29,6 @@
 				?></h5>
 			<span class="menu_tools">
 				<a href="<?php echo $base_url; ?>/admincp/supportonline/add" title="Add" class="icon-plus icon-admin green"></a>
-                <a href="javascript:void(0)" title="Delete" id="deleteMoreItem" class="icon-trash icon-admin red"></a>
            </span>
 		</div>
 	</div>
@@ -85,7 +84,6 @@
 							<td>
 								<?php $linkEdit = $base_url.'/admincp/supportonline/edit/'.$item->id; ?>
 								<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit icon-admin green "></i></a>
-								<a id="deleteOneItem" href="javascript:void(0)" title="Delete Item"><i class="icon-trash icon-admin red"></i></a>
 							</td>
 						</tr>
 						<?php }?>
