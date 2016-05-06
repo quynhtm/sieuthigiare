@@ -11,6 +11,7 @@ class DataCommon{
 	public static $table_user_shop = TABLE_USER_SHOP;
 	public static $table_product = TABLE_PRODUCT;
 	public static $table_banner = TABLE_BANNER;
+	public static $table_advertise_click = TABLE_ADVERTISE_CLICK;
 	public static $primary_key_province = 'province_id';
 
 	/**
@@ -531,5 +532,66 @@ class DataCommon{
 			}
 		}
 		return $product;
+	}
+
+	/**
+	 * c?p nh?t l??t click banner, tin t?c qu?ng cáo
+	 * @param int $banner_id
+	 * @param string $ip_client
+	 * @param int $type_adver: 1: c?a banner, 2: c?a tin t?c qu?ng cáo
+	 * @throws Exception
+	 */
+	public static function updateNumberClickAdvertise($banner_id = 0, $ip_client = '',$type_adver = 1){
+		if($banner_id > 0 && trim($ip_client) != ''){
+			//check xem có t?n t?i ip cua quang cao nay ko
+			$query = db_select(self::$table_advertise_click, 'c')
+				->condition(($type_adver == 1)?'c.click_banner_id':'c.click_new_id', $banner_id, '=')
+				->condition('c.click_type_object', $type_adver, '=')
+				->condition('c.click_host_ip', trim($ip_client), '=')
+				->orderBy('c.click_time', 'DESC')
+				->fields('c', array('click_id'));
+			$data = $query->execute();
+			if (!empty($data)) {
+				$advertise_click = array();
+				foreach ($data as $k => $pro) {
+					$advertise_click[] = $pro;
+				}
+				if(empty($advertise_click)){
+					//thêm vào b?ng click
+					$arrClick = array(
+						'click_banner_id' => $banner_id,
+						'click_type_object' => $type_adver,
+						'click_host_ip' => $ip_client,
+						'click_total' => 1,
+						'click_time' => time());
+					$id_click = db_insert(self::$table_advertise_click)->fields($arrClick)->execute();
+					if($id_click > 0){
+						// l?y t?ng s? l??t click
+						$query = db_select(self::$table_advertise_click, 'c')
+							->condition(($type_adver == 1)?'c.click_banner_id':'c.click_new_id', $banner_id, '=')
+							->condition('c.click_type_object', $type_adver, '=')
+							->orderBy('c.click_time', 'DESC')
+							->fields('c', array('click_id','click_time'));
+						$query->addExpression('COUNT(c.click_id)', 'total_click');
+						$totak_click = $query->execute();
+
+						$result_click = array();
+						foreach ($totak_click as $k => $pro) {
+							$result_click[] = $pro;
+						}
+						//update s? l??ng click vào TABLE_BANNER
+						if(!empty($result_click)){
+							if($type_adver == 1) {
+								$num_updated = db_update(self::$table_banner)
+									->fields(array('banner_total_click' => $result_click[0]->total_click,
+													'banner_time_click' => $result_click[0]->click_time,))
+									->condition(self::$table_banner . '.banner_id', $banner_id, '=')
+									->execute();
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 }

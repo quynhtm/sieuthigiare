@@ -12,8 +12,7 @@ class BannerController{
 	private $arrTypeBanner = array(-1 => '---Chọn loại Banner--',
 		BANNER_TYPE_HOME_BIG => 'Banner home to',
 		BANNER_TYPE_HOME_SMALL => 'Banner home nhỏ',
-		BANNER_TYPE_HOME_LEFT => 'Banner trái',
-		BANNER_TYPE_HOME_LEFT => 'Banner phải',
+		BANNER_TYPE_HOME_LEFT => 'Banner trái-phải',
 		BANNER_TYPE_HOME_LIST => 'Banner trang list');
 
 	private $arrPage = array(-1 => '--Chọn page--',
@@ -45,7 +44,12 @@ class BannerController{
 		$limit = SITE_RECORD_PER_PAGE;
 		//search
 		$dataSearch['banner_status'] = FunctionLib::getParam('banner_status', -1);
-		$dataSearch['banner_id'] = FunctionLib::getParam('banner_id', -1);
+		$dataSearch['banner_name'] = FunctionLib::getParam('banner_name', '');
+		$dataSearch['banner_id'] = FunctionLib::getIntParam('banner_id', -1);
+		$dataSearch['banner_page'] = FunctionLib::getParam('banner_page', -1);
+		$dataSearch['banner_type'] = FunctionLib::getParam('banner_type', -1);
+		$dataSearch['banner_is_shop'] = FunctionLib::getParam('banner_is_shop', -1);
+		//FunctionLib::Debug($dataSearch);
 
 		$result = Banner::getSearchListItems($dataSearch,$limit,array());
 		if(isset($result['data']) && !empty($result['data'])){
@@ -58,14 +62,21 @@ class BannerController{
 		}
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['banner_status']);
+		$optionTypeBanner = FunctionLib::getOption($this->arrTypeBanner, $dataSearch['banner_type']);
+		$optionPage = FunctionLib::getOption($this->arrPage	, $dataSearch['banner_page']);
+		$optionIsShop = FunctionLib::getOption($this->arrIsShop	, $dataSearch['banner_is_shop']);
 		return $view = theme('indexBanner',array(
 									'title'=>'Banner quảng cáo',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,
+									'optionTypeBanner' => $optionTypeBanner,
+									'optionPage' => $optionPage,
+									'optionIsShop' => $optionIsShop,
 									'arrProductStatus' => $this->arrStatus,
 									'arrIsShop' => $this->arrIsShop,
-									'arrIsBlock' => array(),
+									'arrTypeBanner' => $this->arrTypeBanner,
+									'arrPage' => $this->arrPage,
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));
@@ -131,7 +142,7 @@ class BannerController{
 				$dataInput['banner_end_time']['value'] = ($banner_is_run_time == BANNER_IS_RUN_TIME)? $banner_end_time: 0;
 				$dataInput['banner_update_time']['value'] = time();
 
-				//so sánh ảnh cũ và mơi, nếu khách nhau thì xóa ảnh cũ đi
+				//so sánh ảnh cũ và mơi, nếu khác nhau thì xóa ảnh cũ đi
 				if($banner_image_old !== '' && $banner_image !== '' && strcmp ( $banner_image_old , $banner_image ) != 0 && $item_id > 0){
 					//xoa anh cũ
 					$path = PATH_UPLOAD.'/'.FOLDER_BANNER.'/'.$item_id;
