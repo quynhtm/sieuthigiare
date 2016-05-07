@@ -152,7 +152,7 @@ class CategoryController{
 					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_LIST_CATEGORY_PARENT_SHOW_HOME);
 					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_TREE_MENU_CATEGORY_HEADER);
 					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_OPTION_TREE_CATEGORY);
-					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_CATEGORY_CHILDREN_PARENT_ID.$item_id);
+					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_CATEGORY_CHILDREN_PARENT_ID.$dataInput['category_parent_id']['value']);
 				}
 				drupal_goto($base_url.'/admincp/category');
 			}
