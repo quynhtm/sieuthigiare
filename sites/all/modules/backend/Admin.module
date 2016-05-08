@@ -90,8 +90,8 @@ function Admin_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
-    $items["admincp/orders"] = array(
-		"title" => t('Qu?n lý ??n hàng shop'),
+    $items["admincp/order"] = array(
+		"title" => t('Quan ly don hang shop'),
 		"description" => "orders",
 		'page callback' => 'router_page',
 		'access callback' => TRUE,

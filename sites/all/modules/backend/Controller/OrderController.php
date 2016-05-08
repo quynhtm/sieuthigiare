@@ -40,7 +40,7 @@ class OrderController{
 
 		$getFields = array();
 		$result = Order::getSearchListItems($dataSearch,$limit,$getFields);
-		FunctionLib::Debug($result);
+		//FunctionLib::Debug($result);
 
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['order_status']);

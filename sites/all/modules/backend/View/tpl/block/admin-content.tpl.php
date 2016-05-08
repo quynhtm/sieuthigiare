@@ -109,7 +109,7 @@ global $base_url;
 				</a>
 			</div>
 			<div class="col-lg-2 align_center">
-				<a class="a_control" title="Quản lý Đơn hàng" href="<?php echo $base_url ?>/admincp/orders">
+				<a class="a_control" title="Quản lý Đơn hàng" href="<?php echo $base_url ?>/admincp/order">
 					<div class="boder_admin padding10">
 					<i class="icon-shopping-cart icon-4x"></i> <br/>Quản lý Đơn hàng
 					</div>
