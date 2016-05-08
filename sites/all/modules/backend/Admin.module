@@ -90,6 +90,13 @@ function Admin_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
+    $items["admincp/orders"] = array(
+		"title" => t('Qu?n lý ??n hàng shop'),
+		"description" => "orders",
+		'page callback' => 'router_page',
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
     $items["admincp/buildsql"] = array(
 		"title" => t('Quan ly thuc thi SQL'),
 		"description" => "build_sql",
@@ -225,6 +232,9 @@ function Admin_theme() {
         'indexContact' 		=> array('template' => 'View/tpl/contact/indexContact'),
         'addContact' 		=> array('template' => 'View/tpl/contact/addContact'),
 
+        //??n hàng
+        'indexOrder' 		=> array('template' => 'View/tpl/order/indexOrder'),
+
         //lien he
         'indexComments' 		=> array('template' => 'View/tpl/comments/indexComments'),
         'addComments' 		=> array('template' => 'View/tpl/comments/addComments'),
@@ -280,6 +290,9 @@ function Admin_init(){
 
         'Model/Contact.php',
 		'Controller/ContactController.php',
+
+        'Model/Order.php',
+		'Controller/OrderController.php',
 
         'Model/Comments.php',
 		'Controller/CommentsController.php',
