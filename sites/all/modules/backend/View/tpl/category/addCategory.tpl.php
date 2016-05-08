@@ -22,6 +22,22 @@
                      </select>
                  </div>
              </div>
+             <div class="control-group">
+                 <label class="control-label">Vị trí danh mục</label>
+                 <div class="controls">
+                     <input type="text"class="form-control input-sm" name="category_order" value="<?php if(isset($arrItem->category_order)){ echo $arrItem->category_order; } ?>">
+                 </div>
+             </div>
+
+
+             <div class="control-group">
+                 <label class="control-label">Trạng thái</label>
+                 <div class="controls">
+                     <select class="form-control input-sm" name="category_status">
+                         <?php echo $optionStatus;?>
+                     </select>
+                 </div>
+             </div>
 
              <div class="control-group">
                  <label class="control-label">Hiện ở trang chủ</label>
@@ -30,24 +46,14 @@
                          <?php echo $optionShowContent;?>
                      </select>
                  </div>
-             </div>
-
-             <div class="control-group">
-                <label class="control-label">Vị trí</label>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Vị trí trang chủ</label>
                 <div class="controls">
-                    <input type="text"class="form-control input-sm" name="category_order" value="<?php if(isset($arrItem->category_order)){ echo $arrItem->category_order; } ?>">
+                    <input type="text"class="form-control input-sm" name="category_content_front_order" value="<?php if(isset($arrItem->category_content_front_order)){ echo $arrItem->category_content_front_order; } ?>">
                 </div>
             </div>
 
-
-             <div class="control-group">
-                <label class="control-label">Trạng thái</label>
-                <div class="controls">
-                    <select class="form-control input-sm" name="category_status">
-                        <?php echo $optionStatus;?>
-                    </select>
-                </div>
-            </div>
             <div class="form-actions">
                 <input type="hidden" value="txt-form-post" name="txt-form-post">
 				<button type="submit" name="txtSubmit" id="buttonSubmit" class="btn btn-primary">Lưu lại</button>

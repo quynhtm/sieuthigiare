@@ -84,6 +84,7 @@ class DataCommon{
 				->condition('c.category_parent_id', 0, '=')
 				->condition('c.category_status', STASTUS_SHOW, '=')
 				->condition('c.category_content_front', STASTUS_SHOW, '=')
+				->orderBy('c. category_content_front_order', 'ASC')
 				->fields('c', array('category_id', 'category_name'));
 			$data = $query->execute();
 			if (!empty($data)) {

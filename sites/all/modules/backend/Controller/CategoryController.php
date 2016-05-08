@@ -4,9 +4,9 @@
 */
 class CategoryController{
 
-	private $arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
+	private $arrStatus = array(-1 => 'Tất cả', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
 	private $arrCategoryParent = array();
-	private $arrShowContent = array(0 => 'Ẩn', 1 => 'Hiển thị');
+	private $arrShowContent = array(STASTUS_HIDE => 'Ẩn', STASTUS_SHOW => 'Hiển thị');
 
 	public function __construct(){
 		$this->arrCategoryParent = DataCommon::getListCategoryParent();
@@ -50,6 +50,7 @@ class CategoryController{
 									'title'=>'Danh mục sản phẩm',
 									'result' => $treeCategroy,
 									'dataSearch' => $dataSearch,
+									'arrShowContent' => $this->arrShowContent,
 									'optionStatus' => $optionStatus,
 									'optionCategoryParent' => $optionCategoryParent,
 									'optionShowContent' => $optionShowContent,
@@ -74,6 +75,7 @@ class CategoryController{
 					'category_id'=>$value->category_id,
 					'category_parent_id'=>$value->category_parent_id,
 					'category_content_front'=>$value->category_content_front,
+					'category_content_front_order'=>$value->category_content_front_order,
 					'category_order'=>$value->category_order,
 					'category_status'=>$value->category_status,
 					'category_name'=>$value->category_name);
@@ -128,11 +130,10 @@ class CategoryController{
 				'category_name'=>array('value'=>FunctionLib::getParam('category_name',''), 'require'=>1, 'messages'=>'Tên danh mục không được trống!'),
 				'category_parent_id'=>array('value'=>FunctionLib::getParam('category_parent_id',''), 'require'=>1, 'messages'=>'Chưa chọn danh mục cha!'),
 				'category_content_front'=>array('value'=>FunctionLib::getIntParam('category_content_front',0)),
+				'category_content_front_order'=>array('value'=>FunctionLib::getIntParam('category_content_front_order',0)),
 				'category_status'=>array('value'=>FunctionLib::getParam('category_status',0)),
 				'category_order'=>array('value'=>FunctionLib::getParam('category_order',0)),
 			);
-
-
 
 			$errors = ValidForm::validInputData($dataInput);
 			if($errors != ''){
