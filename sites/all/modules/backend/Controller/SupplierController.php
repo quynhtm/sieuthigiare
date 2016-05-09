@@ -71,9 +71,10 @@ class SupplierController{
 				if($v > 0){
 					$result = Supplier::getItemById($arrFields, $v);
 					if(!empty($result)){
-						$supplier_name = $result->supplier_name;
-						$supplier_email = $result->supplier_email;
 						
+						$supplier_name = $result->supplier_name;
+						$supplier_email = trim($result->supplier_email);
+
 						$check_valid_mail = ValidForm::checkRegexEmail($supplier_email);
 						$errors = '';
 						if($check_valid_mail){
@@ -92,9 +93,9 @@ class SupplierController{
 		    				$contentEmail .= '- <b>Chức năng đơn giản, tiện dụng, dễ sử dụng</b><br/>';
 		    				$contentEmail .= '- Quan trọng hơn là <b style="color:#ff0000">Miễn Phí tạo account và up nhiều sản phẩm</b> ngay khi đăng ký<br/><br/>';
 
-		    				$contentEmail .= 'Link demo: http://shopcuatui.com.vn/gian-hang/15/Thoi-trang-nu.html<br/>';
+		    				$contentEmail .= '<a href="http://shopcuatui.com.vn/gian-hang/15/Thoi-trang-nu.html"><img style="max-width:100%; width:100%" src="'.$base_url.'/sites/all/modules/backend/View/img/shop.jpg" /></a><br/>';
 
-		    				$subject = 'Chào: '.$supplier_name;
+		    				$subject = 'Shopcuatui.com.vn - Tạo shop online miễn phí';
 							auto_send_mail('Admin', $contentEmail, $supplier_email, $subject);
 						}
 					}
