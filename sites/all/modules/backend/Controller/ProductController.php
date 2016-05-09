@@ -13,21 +13,10 @@ class ProductController{
 	private $arrUserShop = array();
 	public function __construct(){
 		$files = array(
-			'bootstrap/lib/ckeditor/ckeditor.js',
-			'bootstrap/lib/ckeditor/config.js',
-			'bootstrap/lib/dragsort/jquery.dragsort.js',
-		);
-		Loader::loadJSExt('Core', $files);
-		$files = array(
-			'bootstrap/lib/upload/cssUpload.css',
 			'bootstrap/css/bootstrap.css',
 			'css/font-awesome.css',
 			'css/core.css',
-
-			'bootstrap/js/bootstrap.min.js',
-			'bootstrap/lib/upload/jquery.uploadfile.js',
 			'js/common_admin.js',
-
 		);
 		Loader::load('Core', $files);
 		$files = array(

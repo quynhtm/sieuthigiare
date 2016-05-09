@@ -22,6 +22,7 @@ class UserShopController{
 			'bootstrap/css/bootstrap.css',
 			'css/font-awesome.css',
 			'css/core.css',
+			'js/common_admin.js',
 		);
 		Loader::load('Core', $files);
 

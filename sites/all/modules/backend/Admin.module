@@ -308,3 +308,24 @@ function Admin_init(){
 	);
 	Loader::load('Admin', $files);
 }
+
+
+function Admin_mail($key, &$message, $params) {
+    global $user;
+
+    $options = array(
+    'langcode' => $message['language']->language,
+    );
+    if($key != null){
+        $message['subject'] = $params;
+        $message['body'][] = '<div style=" border: 1px solid #166ead;margin: 0 auto;
+                                min-height: 100%;width: 100%; 
+                                display:inline-block; background:#166ead">';
+        $message['body'][] = _emailHeader();
+        $message['body'][] = '<div style="background: #fff;margin: 0 auto;min-height: 200px;padding: 30px;width: 88%;">'.$key.'</div>';
+       $message['body'][] = _emailFooter();
+        $message['body'][] = '</div>';
+    $message['headers']['Content-Type'] = "text/html; charset=utf-8";
+    $message['headers']['Mime-Version'] = "1.0";
+    }
+}

@@ -13,6 +13,7 @@ class SupplierController{
             'bootstrap/css/bootstrap.css',
             'css/font-awesome.css',
             'css/core.css',
+            'js/common_admin.js',
         );
         Loader::load('Core', $files);
 
@@ -58,5 +59,59 @@ class SupplierController{
 			drupal_set_message('Xóa Item thành công.');
 		}
 		drupal_goto($base_url.'/admincp/supplier');
+	}
+
+	function sendmailSupplierAction(){
+		global $base_url;
+		
+		// $list = DB::getItembyCond('web_supplier', 'supplier_id, supplier_name, supplier_email', '', 'supplier_id ASC', '', '');
+		// foreach($list as $v){
+		// 	$check_valid_mail = ValidForm::checkRegexEmail($v->supplier_email);
+		// 	if(!$check_valid_mail){
+		// 		Supplier::deleteId($v->supplier_id);
+		// 	}
+		// }
+		//die();
+
+		$listId = FunctionLib::getParam('checkItem',array());
+		if(!empty($listId)){
+			$arrFields = array('supplier_name', 'supplier_email');
+			foreach($listId as $v){
+				if($v > 0){
+					$result = Supplier::getItemById($arrFields, $v);
+					if(!empty($result)){
+						$supplier_name = $result->supplier_name;
+						$supplier_email = $result->supplier_email;
+						
+						$check_valid_mail = ValidForm::checkRegexEmail($supplier_email);
+						$errors = '';
+						if($check_valid_mail){
+							//Send mail
+							$contentEmail = 'Chào: '.$supplier_name.'<br/>';
+		    				$contentEmail .= '- Bạn có <b>sản phẩm để bán?</b><br/>';
+		    				$contentEmail .= '- Bạn đã có <b>cửa hàng để trưng bày sản phẩm</b>?<br/>';
+		    				$contentEmail .= '- Bạn có <b>một máy tính kết nối internet</b>, mạng xã hội?<br/>';
+		    				$contentEmail .= '- Nhưng bạn chưa có <b style="color:#ff0000">Website để giới thiệu sản phẩm</b> tới người tiêu dùng..?<br/><br/>';
+
+		    				$contentEmail .= 'Shopcuatui.com.vn sẽ đáp ứng yêu cầu đó:<br/>';
+		    				$contentEmail .= '- <b>Quản lý shop</b><br/>';
+		    				$contentEmail .= '- <b>Quản lý sản phẩm online</b><br/>';
+		    				$contentEmail .= '- <b>Quản lý đơn hàng online</b><br/>';
+		    				$contentEmail .= '- <b>Tiếp cận tới nhiều người tiêu dùng</b><br/>';
+		    				$contentEmail .= '- <b>Chức năng đơn giản, tiện dụng, dễ sử dụng</b><br/>';
+		    				$contentEmail .= '- Quan trọng hơn là <b style="color:#ff0000">Miễn Phí tạo account và up nhiều sản phẩm</b> ngay khi đăng ký<br/><br/>';
+
+		    				$contentEmail .= 'Link demo: http://shopcuatui.com.vn/gian-hang/15/Thoi-trang-nu.html<br/>';
+
+		    				$subject = 'Chào: '.$supplier_name;
+							auto_send_mail('Admin', $contentEmail, $supplier_email, $subject);
+						}
+					}
+				}
+			}
+			drupal_set_message('Gửi mail thành công!');
+			drupal_goto($base_url.'/admincp/supplier');
+		}
+
 	}
 }

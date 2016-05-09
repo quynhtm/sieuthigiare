@@ -2,8 +2,8 @@ jQuery(document).ready(function($){
 	HISTORY_BACK.init();
 	HIDDEN_MENU_ADMIN.init();
 	HIDDEN_MENU_ADMIN.menu_left();
-
 	check_valid_form.post_product();
+	SEND_MAIL_SUPPLIER.send_mail();
 });
 
 DELETE_ITEM={
@@ -210,4 +210,23 @@ check_valid_form = {
 			}
 		});
 	},
+}
+
+SEND_MAIL_SUPPLIER = {
+	send_mail:function(){
+		jQuery('a#sendMailSupplier').click(function(){
+			var total = jQuery( "input:checked" ).length;
+			if(total==0){
+				alert('Vui lòng chọn ít nhất 1 bản ghi để gửi mail!');
+				return false;
+			}else{
+				if (confirm('Bạn muốn gửi mail [OK]:Đồng ý [Cancel]:Bỏ qua?)')){
+					jQuery('form#formListItem').attr("action", BASEPARAMS.base_url+"/admincp/supplier/sendmail");
+					jQuery('form#formListItem').submit();
+					return true;
+				}
+				return false;
+			}
+		});
+	}
 }

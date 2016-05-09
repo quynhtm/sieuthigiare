@@ -32,6 +32,7 @@
 			<h5 class="padding10"><?php echo (isset($title)) ? $title: t('Quản lý bài viết');?></h5>
 			<span class="menu_tools">
                 <a href="javascript:void(0)" title="Xóa item" id="deleteMoreItem" class="icon-trash icon-admin red"></a>
+                <a href="javascript:void(0)" title="Gửi mail nhà cung cấp" id="sendMailSupplier" class="icon-envelope icon-admin red"></a>
            </span>
 		</div>
 	</div>
