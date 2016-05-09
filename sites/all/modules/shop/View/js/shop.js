@@ -217,7 +217,7 @@ check_valid_form = {
 				name.removeClass('error');
 			}
 
-			if(product_content == ''){
+			/*if(product_content == ''){
 				jAlert('Chi tiết sản phẩm không được trống!', 'Cảnh báo');
 				jQuery(".product_content").addClass('error');
 				return false;
@@ -230,7 +230,7 @@ check_valid_form = {
 				return false;
 			}else{
 				jQuery(".product_sort_desc").removeClass('error');
-			}
+			}*/
 		});
 	},
 	ajax_check_shop_reg_exist:function(){

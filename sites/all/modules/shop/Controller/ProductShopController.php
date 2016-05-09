@@ -179,7 +179,7 @@ class ProductShopController{
 					'is_shop'=>array('value'=>$user_shop->is_shop, 'require'=>0),
 					'time_update'=>array('value'=>time(), 'require'=>0),
 
-					'product_status'=>array('value'=>FunctionLib::getIntParam('product_status',STASTUS_HIDE), 'require'=>0),
+					'product_status'=>array('value'=>FunctionLib::getIntParam('product_status',STASTUS_SHOW), 'require'=>0),
 					'product_is_hot'=>array('value'=>FunctionLib::getIntParam('product_is_hot',PRODUCT_NOMAL), 'require'=>0),
 					'product_type_price'=>array('value'=>$product_type_price),
 				);
