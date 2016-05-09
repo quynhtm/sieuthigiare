@@ -64,15 +64,6 @@ class SupplierController{
 	function sendmailSupplierAction(){
 		global $base_url;
 		
-		// $list = DB::getItembyCond('web_supplier', 'supplier_id, supplier_name, supplier_email', '', 'supplier_id ASC', '', '');
-		// foreach($list as $v){
-		// 	$check_valid_mail = ValidForm::checkRegexEmail($v->supplier_email);
-		// 	if(!$check_valid_mail){
-		// 		Supplier::deleteId($v->supplier_id);
-		// 	}
-		// }
-		//die();
-
 		$listId = FunctionLib::getParam('checkItem',array());
 		if(!empty($listId)){
 			$arrFields = array('supplier_name', 'supplier_email');
