@@ -65,24 +65,18 @@ class SupplierController{
 		global $base_url;
 		
 		$listId = FunctionLib::getParam('checkItem',array());
-
 		if(!empty($listId)){
-			
 			$sql = db_select(TABLE_SUPPLIER, 'i');
 			$sql->addField('i', 'supplier_id', 'supplier_id');
 			$sql->addField('i', 'supplier_name', 'supplier_name');
 			$sql->addField('i', 'supplier_email', 'supplier_email');
 			$sql->condition('i.supplier_id', $listId,'IN');
 			$result = $sql->execute()->fetchAll();
-
 			if(!empty($result)){
 				foreach($result as $v){
-
 					$supplier_name = $v->supplier_name;
 					$supplier_email = trim($v->supplier_email);
-
 					$check_valid_mail = ValidForm::checkRegexEmail($supplier_email);
-					$errors = '';
 					if($check_valid_mail){
 						
 						$contentEmail = 'Chào: '.$supplier_name.'<br/>';
