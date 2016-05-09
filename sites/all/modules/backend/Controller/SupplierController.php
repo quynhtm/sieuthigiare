@@ -65,43 +65,51 @@ class SupplierController{
 		global $base_url;
 		
 		$listId = FunctionLib::getParam('checkItem',array());
+
 		if(!empty($listId)){
-			$arrFields = array('supplier_name', 'supplier_email');
-			foreach($listId as $v){
-				if($v > 0){
-					$result = Supplier::getItemById($arrFields, $v);
-					if(!empty($result)){
+			
+			$sql = db_select(TABLE_SUPPLIER, 'i');
+			$sql->addField('i', 'supplier_id', 'supplier_id');
+			$sql->addField('i', 'supplier_name', 'supplier_name');
+			$sql->addField('i', 'supplier_email', 'supplier_email');
+			$sql->condition('i.supplier_id', $listId,'IN');
+			$result = $sql->execute()->fetchAll();
+
+			if(!empty($result)){
+				foreach($result as $v){
+
+					$supplier_name = $v->supplier_name;
+					$supplier_email = trim($v->supplier_email);
+
+					$check_valid_mail = ValidForm::checkRegexEmail($supplier_email);
+					$errors = '';
+					if($check_valid_mail){
 						
-						$supplier_name = $result->supplier_name;
-						$supplier_email = trim($result->supplier_email);
+						$contentEmail = 'Chào: '.$supplier_name.'<br/>';
+	    				$contentEmail .= '- Bạn có <b>sản phẩm để bán?</b><br/>';
+	    				$contentEmail .= '- Bạn đã có <b>cửa hàng để trưng bày sản phẩm</b>?<br/>';
+	    				$contentEmail .= '- Bạn có <b>một máy tính kết nối internet</b>, mạng xã hội?<br/>';
+	    				$contentEmail .= '- Nhưng bạn chưa có <b style="color:#ff0000">Website để giới thiệu sản phẩm</b> tới người tiêu dùng..?<br/><br/>';
 
-						$check_valid_mail = ValidForm::checkRegexEmail($supplier_email);
-						$errors = '';
-						if($check_valid_mail){
-							//Send mail
-							$contentEmail = 'Chào: '.$supplier_name.'<br/>';
-		    				$contentEmail .= '- Bạn có <b>sản phẩm để bán?</b><br/>';
-		    				$contentEmail .= '- Bạn đã có <b>cửa hàng để trưng bày sản phẩm</b>?<br/>';
-		    				$contentEmail .= '- Bạn có <b>một máy tính kết nối internet</b>, mạng xã hội?<br/>';
-		    				$contentEmail .= '- Nhưng bạn chưa có <b style="color:#ff0000">Website để giới thiệu sản phẩm</b> tới người tiêu dùng..?<br/><br/>';
+	    				$contentEmail .= 'Shopcuatui.com.vn sẽ đáp ứng yêu cầu đó:<br/>';
+	    				$contentEmail .= '- <b>Quản lý shop</b><br/>';
+	    				$contentEmail .= '- <b>Quản lý sản phẩm online</b><br/>';
+	    				$contentEmail .= '- <b>Quản lý đơn hàng online</b><br/>';
+	    				$contentEmail .= '- <b>Tiếp cận tới nhiều người tiêu dùng</b><br/>';
+	    				$contentEmail .= '- <b>Chức năng đơn giản, tiện dụng, dễ sử dụng</b><br/>';
+	    				$contentEmail .= '- Quan trọng hơn là <b style="color:#ff0000">Miễn Phí tạo account và up nhiều sản phẩm</b> ngay khi đăng ký<br/><br/>';
 
-		    				$contentEmail .= 'Shopcuatui.com.vn sẽ đáp ứng yêu cầu đó:<br/>';
-		    				$contentEmail .= '- <b>Quản lý shop</b><br/>';
-		    				$contentEmail .= '- <b>Quản lý sản phẩm online</b><br/>';
-		    				$contentEmail .= '- <b>Quản lý đơn hàng online</b><br/>';
-		    				$contentEmail .= '- <b>Tiếp cận tới nhiều người tiêu dùng</b><br/>';
-		    				$contentEmail .= '- <b>Chức năng đơn giản, tiện dụng, dễ sử dụng</b><br/>';
-		    				$contentEmail .= '- Quan trọng hơn là <b style="color:#ff0000">Miễn Phí tạo account và up nhiều sản phẩm</b> ngay khi đăng ký<br/><br/>';
+	    				$contentEmail .= '<a href="http://shopcuatui.com.vn/gian-hang/15/Thoi-trang-nu.html"><img style="max-width:100%; width:100%" src="'.$base_url.'/sites/all/modules/backend/View/img/shop.jpg" /></a><br/>';
 
-		    				$contentEmail .= '<a href="http://shopcuatui.com.vn/gian-hang/15/Thoi-trang-nu.html"><img style="max-width:100%; width:100%" src="'.$base_url.'/sites/all/modules/backend/View/img/shop.jpg" /></a><br/>';
-
-		    				$subject = 'Shopcuatui.com.vn - Tạo shop online miễn phí';
-							auto_send_mail('Admin', $contentEmail, $supplier_email, $subject);
-						}
+	    				$subject = 'Shopcuatui.com.vn - Tạo shop online miễn phí';
+						auto_send_mail('Admin', $contentEmail, $supplier_email, $subject);
 					}
 				}
 			}
 			drupal_set_message('Gửi mail thành công!');
+			drupal_goto($base_url.'/admincp/supplier');
+		}else{
+			drupal_set_message('Danh sách gửi mail rỗng!');
 			drupal_goto($base_url.'/admincp/supplier');
 		}
 
