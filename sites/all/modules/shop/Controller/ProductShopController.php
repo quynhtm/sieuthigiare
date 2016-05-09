@@ -157,12 +157,12 @@ class ProductShopController{
 		
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 			$id = FunctionLib::getParam('id', 0);
-			$product_type_price = FunctionLib::getIntParam('product_type_price',TYPE_PRICE_NUMBER);
+			$product_type_price = FunctionLib::getIntParam('product_type_price',TYPE_PRICE_CONTACT);
 			$data = array(
-					'category_id'=>array('value'=>FunctionLib::getIntParam('category_id',''), 'require'=>1, 'messages'=>'Chưa chọn danh mục sản phẩm'),
+					'category_id'=>array('value'=>FunctionLib::getIntParam('category_id',''), 'require'=>0, 'messages'=>'Chưa chọn danh mục sản phẩm'),
 					'product_name'=>array('value'=>FunctionLib::getParam('product_name',''), 'require'=>1, 'messages'=>'Tên sản phẩm không được trống!'),
-					'product_content'=>array('value'=>FunctionLib::getParam('product_content',''), 'require'=>1, 'messages'=>'Chi tiết sản phẩm không được trống!'),
-					'product_sort_desc'=>array('value'=>FunctionLib::getParam('product_sort_desc',''), 'require'=>1, 'messages'=>'Chi tiết sản phẩm không được trống!'),
+					'product_content'=>array('value'=>FunctionLib::getParam('product_content',''), 'require'=>0, 'messages'=>'Chi tiết sản phẩm không được trống!'),
+					'product_sort_desc'=>array('value'=>FunctionLib::getParam('product_sort_desc',''), 'require'=>0, 'messages'=>'Chi tiết sản phẩm không được trống!'),
 
 					'product_price_sell'=>array('value'=>FunctionLib::getIntParam('product_price_sell_hide',0)),
 					'product_price_market'=>array('value'=>FunctionLib::getIntParam('product_price_market_hide',0)),
