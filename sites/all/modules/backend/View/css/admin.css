@@ -726,6 +726,7 @@ div#load_file_ajax_gift .rowprocess p{
     width: 100%;
 }
 /*media*/
+/*
 @media (max-width: 560px) {
     .contentRegion {
         display: inline-block;
@@ -769,6 +770,7 @@ div#load_file_ajax_gift .rowprocess p{
         margin: 0px;
     }
 }
+*/
 .txtComment{
     clear: both!important;
     margin-bottom: 10px!important;
