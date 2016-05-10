@@ -10,11 +10,13 @@
 				<?php foreach($result as $item){ ?>
 				<li class="item">
 					<div class="post-thumb">
-						<?php if((float)$item->product_price_market > (float)$item->product_price_sell) {?>
-					    <span class="sale-off">
-					    	-<?php echo number_format(100 - ((float)$item->product_price_sell/(float)$item->product_price_market)*100, 1) ?>%
-					    </span>
-					    <?php } ?>
+						<?php if($item->product_type_price == 1){?>
+							<?php if((float)$item->product_price_market > (float)$item->product_price_sell) {?>
+						    <span class="sale-off">
+						    	-<?php echo number_format(100 - ((float)$item->product_price_sell/(float)$item->product_price_market)*100, 1) ?>%
+						    </span>
+						    <?php } ?>
+						 <?php } ?>
 						<a href="<?php echo FunctionLib::buildLinkDetail($item->product_id, $item->product_name); ?>" title="<?php echo $item->product_name?><?php echo ' - '.WEB_SITE ?>">
 							<?php if($item->product_image != ''){?>
 							<img src="<?php echo FunctionLib::getThumbImage($item->product_image,$item->product_id,FOLDER_PRODUCT,300,300) ?>" 

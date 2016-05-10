@@ -47,11 +47,12 @@
 											<?php if($v->product_price_market > 0){?>
 											<span class="amount-2"><?php echo number_format($v->product_price_market) ?>đ</span>
 											<?php } ?>
-											
-											<?php if((float)$v->product_price_market > (float)$v->product_price_sell) {?>
-										    <span class="sale-off">
-										    	-<?php echo number_format(100 - ((float)$v->product_price_sell/(float)$v->product_price_market)*100, 1) ?>%
-										    </span>
+											<?php if($v->product_type_price == 1){?>
+												<?php if((float)$v->product_price_market > (float)$v->product_price_sell) {?>
+											    <span class="sale-off">
+											    	-<?php echo number_format(100 - ((float)$v->product_price_sell/(float)$v->product_price_market)*100, 1) ?>%
+											    </span>
+									    		<?php }?>
 									    	<?php }?>
 								    	<?php }else{ ?>
 									    	<span class="amount-call">Liên hệ: 
