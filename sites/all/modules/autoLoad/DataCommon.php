@@ -506,6 +506,7 @@ class DataCommon{
 			}
 			if($product == null || empty($product)) {
 				//lay danh sach id danh muc con
+				$arrParentShowProduct = array(97);//cho danh muc nay hien thi 20 san pham home
 				$arrCategoryChildren = DataCommon::getListCategoryChildren($category_parent_id);
 				$arrCateId = array();
 				if(!empty($arrCategoryChildren)){
@@ -517,7 +518,7 @@ class DataCommon{
 						->condition('p.is_block', PRODUCT_NOT_BLOCK, '=')
 						->condition('p.category_id', $arrCateId, 'IN')
 						->orderBy('p.time_update', 'DESC')
-						->range(0,NUMBER_PRODUCT_HOME)
+						->range(0,in_array($category_parent_id,$arrParentShowProduct)? 20: NUMBER_PRODUCT_HOME)
 						->fields('p', $arrFields);
 					$data = $query->execute();
 					if (!empty($data)) {
