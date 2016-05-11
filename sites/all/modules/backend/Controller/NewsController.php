@@ -158,6 +158,10 @@ class NewsController{
 			}else{
 				//FunctionLib::Debug($dataInput);
 				News::save($dataInput, $item_id);
+				if(Cache::CACHE_ON) {
+					$cache = new Cache();
+					$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_NEWS_ID.$item_id);
+				}
 				drupal_goto($base_url.'/admincp/news');
 			}
 		}
