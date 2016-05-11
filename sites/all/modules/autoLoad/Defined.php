@@ -103,6 +103,20 @@ define('BANNER_PAGE_LIST', 2);
 define('BANNER_PAGE_DETAIL', 3);
 define('BANNER_PAGE_CATEGORY', 4);
 
+
+define('NEW_CATEGORY_CUSTOMER', 1);
+define('NEW_CATEGORY_SHOP', 2);
+define('NEW_CATEGORY_GIOI_THIEU', 3);
+define('NEW_CATEGORY_GIAI_TRI', 4);
+define('NEW_CATEGORY_THI_TRUONG', 5);
+define('NEW_CATEGORY_GOC_GIA_DINH', 6);
+define('NEW_CATEGORY_TIN_TUC_CHUNG', 7);
+define('NEW_CATEGORY_QUANG_CAO', 8);
+define('NEW_TYPE_DAC_BIET', 1);// di voi danh muc: 1,2,3
+define('NEW_TYPE_NOI_BAT', 2);// di voi danh muc: 4,5,6,7
+define('NEW_TYPE_TIN_TUC', 3);// di voi danh muc: 4,5,6,7
+define('NEW_TYPE_QUANG_CAO', 4);// di voi danh muc: 8
+
 //Trang thái Don hang
 //0:đơn hàng bị xóa1: đơn hàng mới, 2: đơn hàng đã xác nhận, 3:đơn hàng hoàn thành,4: đơn hàng bị hủy
 define('ORDER_STATUS_DELETE', 0);

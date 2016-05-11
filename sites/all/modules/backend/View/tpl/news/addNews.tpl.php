@@ -8,12 +8,28 @@
 	<div class="page-content-box paddingTop30">
 		 <form class="form-horizontal" name="txtForm" action="" method="post" enctype="multipart/form-data">
 		 	
-            <div class="control-group">
+             <div class="control-group">
                 <label class="control-label">Title tin tức<span>*</span></label>
                 <div class="controls">
                     <input type="text" class="form-control input-sm" name="news_title" value="<?php if(isset($arrItem->news_title)){ echo $arrItem->news_title; } ?>">
                 </div>
-            </div>
+             </div>
+             <div class="control-group">
+                 <label class="control-label">Danh mục tin</label>
+                 <div class="controls">
+                     <select class="form-control input-sm" name="news_category">
+                         <?php echo $optionCategory;?>
+                     </select>
+                 </div>
+             </div>
+             <div class="control-group">
+                 <label class="control-label">Loại tin</label>
+                 <div class="controls">
+                     <select class="form-control input-sm" name="news_type">
+                         <?php echo $optionType;?>
+                     </select>
+                 </div>
+             </div>
 
              <div class="control-group">
                  <label for="textName" class="control-label marginTop_15">Ảnh đại diện</label>
@@ -153,7 +169,17 @@
 <!-- chen anh vào noi dung-->
 
 <script>
-    CKEDITOR.replace('news_desc_sort');
+    CKEDITOR.replace(
+        'news_desc_sort',
+        {
+            toolbar: [
+                { name: 'document',    items : [ 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' ] },
+                { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
+                { name: 'colors',      items : [ 'TextColor','BGColor' ] },
+            ],
+        },
+        {height:400}
+    );
     CKEDITOR.replace('news_content', {height:800});
 </script>
 

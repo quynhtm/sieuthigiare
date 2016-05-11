@@ -3,7 +3,24 @@
 * QuynhTM
 */
 class NewsController{
-	private $arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
+	private $arrStatus = array(-1 => 'Tất cả', STASTUS_SHOW => 'Hiển thị', STASTUS_HIDE => 'Ẩn');
+	private $arrCategoryNew = array(-1 => '--- Chọn danh mục ---',
+		NEW_CATEGORY_TIN_TUC_CHUNG => 'Tin tức chung',
+		NEW_CATEGORY_GOC_GIA_DINH => 'Góc gia đinh',
+		NEW_CATEGORY_THI_TRUONG => 'Thị trường',
+		NEW_CATEGORY_GIAI_TRI => 'Giải trí',
+		NEW_CATEGORY_GIOI_THIEU => 'Tin giới thiệu',
+		NEW_CATEGORY_SHOP => 'Tin của Shop',
+		NEW_CATEGORY_CUSTOMER => 'Tin của khách',
+		NEW_CATEGORY_QUANG_CAO => 'Tin quảng cáo',
+	);
+
+	private $arrTypeNew = array(-1 => '--- Chọn kiểu tin ---',
+		NEW_TYPE_TIN_TUC => 'Tin tức chung',
+		NEW_TYPE_NOI_BAT => 'Tin nổi bật',
+		NEW_TYPE_DAC_BIET => 'Tin đặc biệt',
+		NEW_TYPE_QUANG_CAO => 'Tin quảng cáo',
+	);
 
 	public function __construct(){
 		
@@ -41,6 +58,7 @@ class NewsController{
 		$dataSearch['news_title'] = FunctionLib::getParam('news_title','');
 		$dataSearch['news_status'] = FunctionLib::getParam('news_status', -1);
 		$dataSearch['news_category'] = FunctionLib::getParam('news_category', -1);
+		$dataSearch['news_type'] = FunctionLib::getParam('news_type', -1);
 
 		$result = News::getSearchListItems($dataSearch,$limit,array());
 		if(isset($result['data']) && !empty($result['data'])){
@@ -55,12 +73,17 @@ class NewsController{
 		//FunctionLib::Debug($result['data']);
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['news_status']);
-
+		$optionCategory = FunctionLib::getOption($this->arrCategoryNew, $dataSearch['news_category']);
+		$optionType = FunctionLib::getOption($this->arrTypeNew, $dataSearch['news_type']);
 		return $view = theme('indexNews',array(
 									'title'=>'Tin tức',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,
+									'optionType' => $optionType,
+									'optionCategory' => $optionCategory,
+									'arrCategoryNew' => $this->arrCategoryNew,
+									'arrTypeNew' => $this->arrTypeNew,
 									'base_url' => $base_url,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager']));
@@ -138,11 +161,15 @@ class NewsController{
 				drupal_goto($base_url.'/admincp/news');
 			}
 		}
-		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->news_status) ? $arrItem->news_status: 0);
+		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->news_status) ? $arrItem->news_status: STASTUS_HIDE);
+		$optionCategory = FunctionLib::getOption($this->arrCategoryNew, isset($arrItem->news_category) ? $arrItem->news_category: NEW_CATEGORY_TIN_TUC_CHUNG);
+		$optionType = FunctionLib::getOption($this->arrTypeNew, isset($arrItem->news_type) ? $arrItem->news_type: NEW_TYPE_TIN_TUC);
 		return $view = theme('addNews',
 			array('arrItem'=>$arrItem,
 				'item_id'=>$item_id,
 				'arrImageOther'=>$arrImageOther,
+				'optionCategory'=>$optionCategory,
+				'optionType'=>$optionType,
 				'title'=>'tin tức',
 				'optionStatus'=>$optionStatus));
 	}
