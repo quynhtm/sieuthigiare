@@ -10,6 +10,7 @@ class DataCommon{
 	public static $table_province = TABLE_PROVINCE;
 	public static $table_user_shop = TABLE_USER_SHOP;
 	public static $table_product = TABLE_PRODUCT;
+	public static $table_news = TABLE_NEWS;
 	public static $table_banner = TABLE_BANNER;
 	public static $table_advertise_click = TABLE_ADVERTISE_CLICK;
 	public static $primary_key_province = 'province_id';
@@ -305,11 +306,11 @@ class DataCommon{
 	 */
 	public static function getProductById($product_id = 0){
 		$product = array();
-		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_PRODUCT_ID;
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_PRODUCT_ID.$product_id;
 		if($product_id <= 0) return $product;
 		if(Cache::CACHE_ON) {
 			$cache = new Cache();
-			$product = $cache->do_get($key_cache. $product_id);
+			$product = $cache->do_get($key_cache);
 		}
 		if( $product == null || empty($product)){
 			$query = db_select(self::$table_product, 'p')
@@ -321,11 +322,39 @@ class DataCommon{
 					$product = $pro;
 				}
 				if(Cache::CACHE_ON) {
-					$cache->do_put($key_cache.$product_id, $product, Cache::CACHE_TIME_TO_LIVE_ONE_WEEK);
+					$cache->do_put($key_cache, $product, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
 				}
 			}
 		}
 		return $product;
+	}
+	/**
+	 * @param int $news_id
+	 * @return array
+	 */
+	public static function getNewsById($news_id = 0){
+		$news = array();
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_NEWS_ID.$news_id;
+		if($news_id <= 0) return $news;
+		if(Cache::CACHE_ON) {
+			$cache = new Cache();
+			$news = $cache->do_get($key_cache);
+		}
+		if( $news == null || empty($news)){
+			$query = db_select(self::$table_news, 'n')
+				->condition('n.news_id', $news_id, '=')
+				->fields('n');
+			$data = $query->execute();
+			if(!empty($data)){
+				foreach($data as $k=> $new){
+					$news = $new;
+				}
+				if(Cache::CACHE_ON) {
+					$cache->do_put($key_cache, $news, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+				}
+			}
+		}
+		return $news;
 	}
 
 	/**
