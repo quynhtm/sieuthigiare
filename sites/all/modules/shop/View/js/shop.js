@@ -11,6 +11,7 @@ jQuery(document).ready(function($){
 	hover_img.change_img();
 	hover_img.change_img_detail();
 	order_update_status.update();
+	check_height_item_element.desc_view();
 });
 check_valid_form = {
 	check_login:function(){
@@ -401,6 +402,7 @@ hover_img = {
 		});
 	}
 }
+
 order_update_status = {
 	update:function(){
 		jQuery('select.order-update-status').change(function(){
@@ -421,4 +423,21 @@ order_update_status = {
 			});
 		});
 	},
+}
+
+check_height_item_element = {
+	desc_view:function(){
+		var _height = jQuery('.features-point .des-point').height();
+		if(_height > 300){
+			 jQuery('.features-point').append('<div class="view-full">Xem thêm</div>');
+		}
+		jQuery('.features-point .view-full').click(function(){
+			jQuery('.features-point').toggleClass('act');
+			if(jQuery('.features-point').hasClass('act')){
+				jQuery('.view-full').text('Thu gọn');
+			}else{
+				jQuery('.view-full').text('Xem thêm');
+			}
+		});
+	}
 }
