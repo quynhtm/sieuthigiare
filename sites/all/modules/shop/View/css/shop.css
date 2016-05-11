@@ -590,12 +590,14 @@ a.btn-yahoo:hover{
     font-size: 15px;
     padding-bottom: 5px;
 }
-.features-point .des-point{
+.features-point .des-point {
     clear: both;
     display: inline-block;
-    width: 100%;
     font-size: 13px;
     line-height: 20px;
+    max-height: 325px;
+    overflow: hidden;
+    width: 100%;
 }
 .box-promotion {
     border: 1px dashed #3b718d;
