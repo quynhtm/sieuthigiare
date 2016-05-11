@@ -751,3 +751,10 @@ span#logo{
 .right-top-footer .icon-facebook:hover{
     background: #ccc;
 }
+.right-top-footer .icon-google-plus{
+    background: #ddd none repeat scroll 0 0;
+    border-radius: 3px;
+    color: #222;
+    font-size: 20px;
+    padding: 5px 2px 0;
+}

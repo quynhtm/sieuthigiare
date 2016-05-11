@@ -3,6 +3,9 @@
 	<div class="top-footer">
   		<div class="right-top-footer">
   			<span>Kết nối với chúng tôi:</span>
+  			<a href="https://plus.google.com/100693074505743994095" rel="nofollow">
+  				<i class="icon-google-plus"></i>
+  			</a>
   			<a href="https://www.facebook.com/shopcuatuidayroi" rel="nofollow">
   				<i class="icon-facebook"></i>
   			</a>
