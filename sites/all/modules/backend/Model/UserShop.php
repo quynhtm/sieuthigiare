@@ -72,7 +72,11 @@ class UserShop{
 			/*End search*/
 
 			$totalItem = DB::countItem(self::$table_action, self::$primary_key , $cond, '', self::$primary_key.' ASC');
-			$result = $sql->limit($limit)->orderBy('i.'.self::$primary_key, 'DESC')->execute();
+			$result = $sql->limit($limit)
+				->orderBy('i.is_login', 'DESC')
+				->orderBy('i.shop_time_login', 'DESC')
+				->orderBy('i.'.self::$primary_key, 'DESC')
+				->execute();
 			$arrItem = (array)$result->fetchAll();
 
 			$pager = array('#theme' => 'pager','#quantity' => 3);
