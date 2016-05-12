@@ -388,26 +388,27 @@ class DataCommon{
 
 	public static function getAllProvices(){
 		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_PROVINCE;
-		$categoryChildren = array();
+		$province = array();
 		if(Cache::CACHE_ON){
 			$cache = new Cache();
-			$categoryChildren = $cache->do_get($key_cache);
+			$province = $cache->do_get($key_cache);
 		}
-		if($categoryChildren == null || empty($categoryChildren)) {
+		if($province == null || empty($province)) {
 			$query = db_select(self::$table_province, 'p')
 				->condition('p.province_status', STASTUS_SHOW, '=')
+				->orderBy('p.province_position', 'ASC')
 				->fields('p', array('province_id', 'province_name'));
 			$data = $query->execute();
 			if (!empty($data)) {
-				foreach ($data as $k => $province) {
-					$categoryChildren[$province->province_id] = $province->province_name;
+				foreach ($data as $k => $provi) {
+					$province[$provi->province_id] = $provi->province_name;
 				}
 				if (Cache::CACHE_ON) {
-					$cache->do_put($key_cache, $categoryChildren, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+					$cache->do_put($key_cache, $province, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
 				}
 			}
 		}
-		return $categoryChildren;
+		return $province;
 	}
 
 	/**
