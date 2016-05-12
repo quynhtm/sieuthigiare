@@ -129,6 +129,7 @@ span#logo{
     clear: both;
     width: 100%;
     position: relative;
+    padding-bottom: 40px;
 }
 .box-menu-title {
     display: inline-block;
