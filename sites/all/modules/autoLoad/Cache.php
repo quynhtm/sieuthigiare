@@ -22,6 +22,7 @@ class Cache {
     const CACHE_BANNER_ADVANCED = 'cache_banner_advanced_';
 
     //cacheNew
+    const CACHE_NEWS_CATEGORY = 'cache_news_category_';
     const CACHE_NEWS_ID = 'cache_news_id_';
 
     //cacheProduct

@@ -98,6 +98,7 @@ class SiteController{
 
 		return theme('pageProductNew', array('result'=>$result, 'totalPage'=>$totalPage, 'currentPage'=>$currentPage, 'bannerList'=>$bannerList));
 	}
+
 	public static function getSearchProduct(){
 		
 		$bannerList = DataCommon::getBannerAdvanced(BANNER_TYPE_HOME_LEFT, BANNER_PAGE_LIST, 0, 0);
@@ -111,6 +112,7 @@ class SiteController{
 												'pager' =>$result['pager'], 
 												'bannerList'=>$bannerList));;
 	}
+
 	public static function countCartItem(){
 		$numItem = 0;
 		if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])){
@@ -121,5 +123,23 @@ class SiteController{
 		  }
 		}
 		return $numItem;
+	}
+
+	public static function newsDetail(){
+		$param = arg();
+
+		$news_id = 0;
+	    $news_category = 0;
+	    if(isset($param[1]) && $param[1] != ''){
+			$news_id = FunctionLib::cutStr($param[1], 1, 0);
+		}
+		$result = DataCommon::getNewsById($news_id);
+		if(empty($result)){
+	 		drupal_goto($base_url.'/page-404');
+	    }
+		return theme('pageNewsDetail', array(
+									'result'=>$result,
+								)
+							);
 	}
 }

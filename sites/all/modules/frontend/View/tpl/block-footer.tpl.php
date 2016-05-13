@@ -14,21 +14,27 @@
 	<div class="midd-footer">
 	  	<ul>
 			<li><span>Về chúng tôi</span></li>
-			<li><a title="" href="" target="_blank" rel="nofollow">Giới thiệu</a></li>
-			<li><a title="" href="" target="_blank" rel="nofollow">Liên hệ</a></li>
-			<li><a title="" href="" target="_blank" rel="nofollow">Hỏi đáp</a></li>
-			<li><a title="" href="" target="_blank" rel="nofollow">Chính sách bảo mật</a></li>
-			<li><a title="" href="" target="_blank" rel="nofollow">Thông tin thanh toán</a></li>
+			<?php 
+			if(!empty($news_intro)){
+			foreach($news_intro as $v){?>
+			<li><a title="" href="<?php echo FunctionLib::buildLinkNewsDetail($v->news_id, $v->news_title) ?>" target="_blank" rel="nofollow"><?php echo $v->news_title ?></a></li>
+			<?php } } ?>
 		</ul>
 		<ul>
 			<li><span>Dành cho người mua</span></li>
-			<li><a title="" href="" target="_blank" rel="nofollow">Hướng dẫn mua hàng</a></li>
+			<?php 
+			if(!empty($news_customer)){
+			foreach($news_customer as $v){?>
+			<li><a title="" href="<?php echo FunctionLib::buildLinkNewsDetail($v->news_id, $v->news_title) ?>" target="_blank" rel="nofollow"><?php echo $v->news_title ?></a></li>
+			<?php } } ?>
 		</ul>
 		<ul>
 			<li><span>Dành cho người bán</span></li>
-			<li><a title="" href="" target="_blank" rel="nofollow">Hướng dẫn mở gian hàng</a></li>
-			<li><a title="" href="" target="_blank" rel="nofollow">Hướng dẫn đăng ký SHOP VIP</a></li>
-			<li><a title="" href="" target="_blank" rel="nofollow">Các quy định</a></li>
+			<?php 
+			if(!empty($news_shop)){
+			foreach($news_shop as $v){?>
+			<li><a title="" href="<?php echo FunctionLib::buildLinkNewsDetail($v->news_id, $v->news_title) ?>" target="_blank" rel="nofollow"><?php echo $v->news_title ?></a></li>
+			<?php } } ?>
 		</ul>
 		<ul>
 			<li>

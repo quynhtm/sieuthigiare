@@ -40,6 +40,16 @@ function Site_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
+
+	$items["tin-tuc/%/%"] = array(
+		"title" => t('Chi tiết tin tức'),
+		"description" => "Chi tiết tin tức",
+		'page callback' => 'menuLoad',
+		'page arguments' => array('SiteController/newsDetail'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
   return $items;
 }
 
@@ -112,6 +122,14 @@ function Site_theme() {
 	    'pageProductSearch' => array(
 	      'template' => 'View/tpl/pageProductSearch'
 	    ), 
+
+	    'pageNews' => array(
+	      'template' => 'View/tpl/pageNews'
+	    ), 
+	    'pageNewsDetail' => array(
+	      'template' => 'View/tpl/pageNewsDetail'
+	    ), 
+
 	);
 }
 function Site_block_view($delta='') {
@@ -200,17 +218,16 @@ function block_header(){
 	$listCategory = DataCommon::getListCategoryParent();
 
 	$numCart = SiteController::countCartItem();
-	$view= theme('block-header', array('arrCategory'=>$arrCategory, 'numCart'=>$numCart, 
+	
+	return theme('block-header', array('arrCategory'=>$arrCategory, 'numCart'=>$numCart, 
 				'optionProvices'=>$optionProvices, 'listCategory'=>$listCategory, 'category_id'=>$category_id));
-	return $view;
 }
 function block_slide(){
 	$arrCategory = DataCommon::buildCacheTreeCategory();
 	$bannerLager = SiteController::getListBannerLagerSite();
 	$bannerSmall = SiteController::getListBannerSmallSite();
 
-	$view= theme('block-slide', array('bannerLager'=>$bannerLager, 'bannerSmall'=>$bannerSmall, 'arrCategory'=>$arrCategory));
-	return $view;
+	return theme('block-slide', array('bannerLager'=>$bannerLager, 'bannerSmall'=>$bannerSmall, 'arrCategory'=>$arrCategory));
 }
 
 /**
@@ -233,20 +250,21 @@ function block_content_home(){
 		$dataShow[0]['category_name'] = 'Sản phẩm mới';
 		$dataShow[0]['arrProducts'] = SiteController::getListProductContent(40, false);
 	}
-	$view= theme('block-content', array('dataShow'=>$dataShow));
-	return $view;
+
+	return theme('block-content', array('dataShow'=>$dataShow));
 }
 function block_content(){
 	$result = SiteController::getListProductContent(40, false);
-	$view= theme('block-content', array('result'=>$result));
-	return $view;
+	return theme('block-content', array('result'=>$result));
 }
 function block_footer(){
-	$view= theme('block-footer');
-	return $view;
+	$news_intro = DataCommon::getNewsInCategory(NEW_CATEGORY_GIOI_THIEU);
+	$news_shop = DataCommon::getNewsInCategory(NEW_CATEGORY_SHOP);
+	$news_customer = DataCommon::getNewsInCategory(NEW_CATEGORY_CUSTOMER);
+
+	return theme('block-footer', array('news_intro'=>$news_intro, 'news_shop'=>$news_shop,'news_customer'=>$news_customer));;
 }
 function block_item_404(){
 	$result = SiteController::getListProductContent(20, true);
-	$view= theme('block-item-404', array('result'=>$result));
-	return $view;
+	return theme('block-item-404', array('result'=>$result));
 }
