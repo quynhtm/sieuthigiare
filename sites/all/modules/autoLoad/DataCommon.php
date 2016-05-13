@@ -332,6 +332,32 @@ class DataCommon{
 	 * @param int $news_id
 	 * @return array
 	 */
+	
+	public static function getNewsInCategory($news_category = 0){
+		$news = array();
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_NEWS_CATEGORY.$news_category;
+		if($news_category <= 0) return $news;
+		if(Cache::CACHE_ON) {
+			$cache = new Cache();
+			$news = $cache->do_get($key_cache);
+		}
+		if( $news == null || empty($news)){
+			$query = db_select(self::$table_news, 'n')
+				->condition('n.news_category', $news_category, '=')
+				->fields('n');
+			$data = $query->execute();
+			if(!empty($data)){
+				foreach($data as $k=> $new){
+					$news[$new->news_id] = $new;
+				}
+				if(Cache::CACHE_ON) {
+					$cache->do_put($key_cache, $news, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+				}
+			}
+		}
+		return $news;
+	}
+
 	public static function getNewsById($news_id = 0){
 		$news = array();
 		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_NEWS_ID.$news_id;

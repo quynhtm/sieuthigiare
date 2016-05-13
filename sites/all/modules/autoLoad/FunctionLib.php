@@ -472,4 +472,13 @@ class FunctionLib{
 		}
 		return $url;
 	}
+
+	public static function buildLinkNewsDetail($news_id = 0, $news_title = ''){
+		global $base_url;
+		$url = '';
+		if($news_id > 0 && $news_title !=''){
+			$url = $base_url.'/tin-tuc/t'.$news_id.'/'.self::safe_title($news_title).'.html';
+		}
+		return $url;
+	}
 }
