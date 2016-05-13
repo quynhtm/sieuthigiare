@@ -562,7 +562,7 @@ class DataCommon{
 			}
 			if($product == null || empty($product)) {
 				//lay danh sach id danh muc con
-				$arrParentShowProduct = array(97);//cho danh muc nay hien thi 20 san pham home
+				$arrParentShowProduct = array(97,43);//cho danh muc nay hien thi 20 san pham home
 				$arrCategoryChildren = DataCommon::getListCategoryChildren($category_parent_id);
 				$arrCateId = array();
 				if(!empty($arrCategoryChildren)){
