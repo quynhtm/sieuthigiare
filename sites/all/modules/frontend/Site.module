@@ -5,6 +5,7 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0
 */
+//news
 function Site_menu() {
     
 	$items['trang-chu.html'] = array(
@@ -41,14 +42,27 @@ function Site_menu() {
 		'type' => MENU_CALLBACK,
 	);
 
-	$items["tin-tuc/%/%"] = array(
-		"title" => t('Chi tiết tin tức'),
-		"description" => "Chi tiết tin tức",
-		'page callback' => 'menuLoad',
-		'page arguments' => array('SiteController/newsDetail'),
-		'access callback' => TRUE,
-		'type' => MENU_CALLBACK,
-	);
+	//news link
+	$arrCategoryNew = array('tin-tuc-chung' => 'Tin tức chung',
+							'goc-gia-dinh' => 'Góc gia đinh',
+							'thi-truong' => 'Thị trường',
+							'giai-tri' => 'Giải trí',
+							'gioi-thieu' => 'Tin giới thiệu',
+							'tin-cua-shop' => 'Tin của Shop',
+							'tin-cua-khach' => 'Tin của khách',
+							'tin-quang-cao' => 'Tin quảng cáo',
+							);
+	foreach($arrCategoryNew as $key => $val){
+		$items[$key] = array(
+			"title" => $val,
+			"description" => $val,
+			'page callback' => 'menuLoad',
+			'page arguments' => array('SiteController/getSearchNews'),
+			'access callback' => TRUE,
+			'type' => MENU_CALLBACK,
+		);
+	}
+	//end news link
 
   return $items;
 }

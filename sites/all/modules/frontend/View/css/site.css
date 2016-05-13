@@ -18,6 +18,7 @@ a{
     border-top: 1px solid #d8d8d8;
     position: relative;
     padding: 8px 0;
+    min-width: 1300px;
 }
 .top-header {
     clear: both;
@@ -541,6 +542,7 @@ span#logo{
     margin-top: 50px !important;
     padding: 20px 0 10px;
     background: #202020;
+    min-width: 1300px;
 }
 #footer .address {
     color: #fff;
@@ -758,4 +760,170 @@ span#logo{
     color: #222;
     font-size: 20px;
     padding: 5px 2px 0;
+}
+.left-news-view {
+    background: #fafafa ;
+    border-radius: 2px;
+    display: inline-block;
+    float: left;
+    padding: 5px 10px;
+    width: 945px;
+}
+.right-news-view{
+    display: inline-block;
+    float: right;
+    width: 280px;
+}
+.title-news {
+    border-bottom: 1px dotted #ddd;
+    color: #444;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 28px;
+    margin: 2px 0 10px;
+    padding-bottom: 2px;
+    position: relative;
+}
+.intro-news{
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.content-news{
+    color: #222;
+    font-size: 14px;
+    line-height: 20px;
+}
+.content-news p{
+    margin-bottom: 15px;
+    display: inline-block;
+    width: 100%;
+}
+.same-content-news{
+    display: inline-block;
+    width: 100%;
+    margin-top: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+.same-content-news ul {
+    margin-top: 12px;
+}
+.same-content-news a {
+    font-weight: normal;
+    margin-bottom: 5px;
+    text-transform: none;
+    font-size: 15px;
+}
+.same-content-news a:hover{
+    text-decoration: underline;
+}
+.page-tin-tuc #footer{
+    margin-top: 0!important;
+}
+.list-news-post .item-news {
+    margin: 0 0 1.5em;
+    clear: both;
+    display: inline-block;
+    width: 100%;
+     background: #fff;
+}
+.list-news-post .item-news .post-img {
+    float: left;
+    margin: 0;
+    overflow: hidden;
+    width: 300px;
+    display: inline-block;
+    position: relative;
+}
+.list-news-post .item-news .post-img img{
+    width: 100%;
+}
+.post-data {
+    margin-top: 0;
+    overflow: hidden;
+    padding: 10px 10px 0 10px;
+    position: relative;
+}
+.post-title{
+    margin: 0;
+}
+.post-title a {
+    color: #444;
+    display: block;
+    font-size: 21px;
+    line-height: 1.3em;
+    margin: 0;
+    text-transform: uppercase;
+}
+.post-title a:hover{
+    color: #2858a0;
+}
+.post-content{
+    display: inline-block;
+    padding: 0 10px 15px 0;
+    width: 100%;
+    line-height: 18px;
+    font-size: 14px;
+    font-style: normal;
+    color: #333;
+}
+.redmoreNews {
+    background: #2858a0;
+    border-radius: 3px;
+    display: inline-block;
+    margin-top: 10px;
+}
+.redmoreNews:hover{
+    background: #333;
+}
+.redmoreNews a {
+    border-radius: 3px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 20px;
+    margin-bottom: 0;
+    padding: 8px 15px;
+    text-align: center;
+    transition: all 0.1s linear 0s;
+    vertical-align: middle;
+    white-space: nowrap;
+    color: #fff;
+}
+.post-format {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: background 0.5s ease 0s;
+    width: 100%;
+    z-index: 2;
+}
+.post-format:hover {
+    background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
+}
+.post-format .icon-file-text {
+    border: 2px solid #fff;
+    border-radius: 100%;
+    color: #fff;
+    display: block;
+    font-size: 18px;
+    height: 40px;
+    left: 50%;
+    line-height: 35px;
+    margin: -20px 0 0 -20px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: scale(0, 0);
+    transition: all 0.2s ease 0s;
+    width: 40px;
+}
+.post-format:hover .icon-file-text {
+    transform: scale(1, 1);
 }
