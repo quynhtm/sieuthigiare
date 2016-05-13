@@ -6,6 +6,16 @@
 * @Version	 : 1.0
 */
 class SiteController{
+	
+	public static $arrCategoryNew = array('tin-tuc-chung' => 'Tin tức chung',
+											'goc-gia-dinh' => 'Góc gia đinh',
+											'thi-truong' => 'Thị trường',
+											'giai-tri' => 'Giải trí',
+											'gioi-thieu' => 'Tin giới thiệu',
+											'tin-cua-shop' => 'Tin của Shop',
+											'tin-cua-khach' => 'Tin của khách',
+											'tin-quang-cao' => 'Tin quảng cáo',
+										);
 
 	public static function getListBannerLagerSite(){
 		$result = DataCommon::getBannerAdvanced(BANNER_TYPE_HOME_BIG, BANNER_PAGE_HOME, 0, 0);
@@ -125,11 +135,72 @@ class SiteController{
 		return $numItem;
 	}
 
-	public static function newsDetail(){
+	public static function getSearchNews(){
+		global $base_url;
 		$param = arg();
+		
+		if(count($param) == 1 && in_array($param[0], array_keys(self::$arrCategoryNew))){
+			return self::newsList();
+		}elseif(count($param) == 3){
+			return self::newsDetail();
+		}else{
+			drupal_goto($base_url.'/page-404');
+		}
+	}
 
+	public static function newsList(){
+		global $base_url;
+
+		$param = arg();
+		$catName = '';
+	    $catNameAlias = '';
+
+		$news_category = 0;
+		switch($param[0]){
+		    case 'tin-tuc-chung':
+		        $news_category = NEW_CATEGORY_TIN_TUC_CHUNG;break;
+		    case 'goc-gia-dinh':
+		        $news_category = NEW_CATEGORY_GOC_GIA_DINH;break;
+		    case 'thi-truong':
+		        $news_category = NEW_CATEGORY_THI_TRUONG;break;
+		    case 'giai-tri':
+		        $news_category = NEW_CATEGORY_GIAI_TRI;break;
+		    case 'gioi-thieu':
+		        $news_category = NEW_CATEGORY_GIOI_THIEU;break;
+		    case 'tin-cua-shop':
+		        $news_category = NEW_CATEGORY_SHOP;break;
+		    case 'tin-cua-khach':
+		        $news_category = NEW_CATEGORY_CUSTOMER;break;
+		    case 'tin-quang-cao':
+		        $news_category = NEW_CATEGORY_QUANG_CAO;break;
+		    default:
+       			drupal_goto($base_url.'/page-404');
+		}
+
+	    $catName = self::$arrCategoryNew[$param[0]];
+	    $catNameAlias  = $param[0];
+
+	    $arrFields = array('news_id', 'news_title', 'news_image', 'news_desc_sort');
+	    $result = Site::getNewsInCat($news_category, 20, $arrFields);
+
+		return theme('pageNews', array('catName'=>$catName, 'catNameAlias'=>$catNameAlias, 'result'=>$result['data'], 'pager' =>$result['pager'],));
+	}
+	public static function newsDetail(){
+		global $base_url;
+
+		$param = arg();
 		$news_id = 0;
 	    $news_category = 0;
+	    $catName = '';
+	    $catNameAlias = '';
+	    
+	    if(!in_array($param[0], array_keys(self::$arrCategoryNew))){
+	    	drupal_goto($base_url.'/page-404');
+	    }else{
+	    	$catName = self::$arrCategoryNew[$param[0]];
+	    	$catNameAlias  = $param[0];
+	    }
+
 	    if(isset($param[1]) && $param[1] != ''){
 			$news_id = FunctionLib::cutStr($param[1], 1, 0);
 		}
@@ -137,9 +208,14 @@ class SiteController{
 		if(empty($result)){
 	 		drupal_goto($base_url.'/page-404');
 	    }
-		return theme('pageNewsDetail', array(
-									'result'=>$result,
-								)
-							);
+	    $arrFields = array('news_id', 'news_title');
+	   
+	    if($result->news_category == NEW_CATEGORY_GIOI_THIEU || $result->news_category == NEW_CATEGORY_SHOP || $result->news_category == NEW_CATEGORY_CUSTOMER){
+	    	$arrSameNews = Site::getNewsSameCat($news_id, $result->news_category, 10, $arrFields, false);
+	    }else{
+	    	$arrSameNews = Site::getNewsSameCat($news_id, $result->news_category, 10, $arrFields, true);
+	    }
+
+		return theme('pageNewsDetail', array('result'=>$result,'arrSameNews'=>$arrSameNews, 'catName'=>$catName, 'catNameAlias'=>$catNameAlias));
 	}
 }

@@ -17,7 +17,7 @@
 			<?php 
 			if(!empty($news_intro)){
 			foreach($news_intro as $v){?>
-			<li><a title="" href="<?php echo FunctionLib::buildLinkNewsDetail($v->news_id, $v->news_title) ?>" target="_blank" rel="nofollow"><?php echo $v->news_title ?></a></li>
+			<li><a title="" href="<?php echo FunctionLib::buildLinkNewsDetail('gioi-thieu', $v->news_id, $v->news_title) ?>" target="_blank" rel="nofollow"><?php echo $v->news_title ?></a></li>
 			<?php } } ?>
 		</ul>
 		<ul>
@@ -25,7 +25,7 @@
 			<?php 
 			if(!empty($news_customer)){
 			foreach($news_customer as $v){?>
-			<li><a title="" href="<?php echo FunctionLib::buildLinkNewsDetail($v->news_id, $v->news_title) ?>" target="_blank" rel="nofollow"><?php echo $v->news_title ?></a></li>
+			<li><a title="" href="<?php echo FunctionLib::buildLinkNewsDetail('tin-cua-khach', $v->news_id, $v->news_title) ?>" target="_blank" rel="nofollow"><?php echo $v->news_title ?></a></li>
 			<?php } } ?>
 		</ul>
 		<ul>
@@ -33,7 +33,7 @@
 			<?php 
 			if(!empty($news_shop)){
 			foreach($news_shop as $v){?>
-			<li><a title="" href="<?php echo FunctionLib::buildLinkNewsDetail($v->news_id, $v->news_title) ?>" target="_blank" rel="nofollow"><?php echo $v->news_title ?></a></li>
+			<li><a title="" href="<?php echo FunctionLib::buildLinkNewsDetail('tin-cua-shop', $v->news_id, $v->news_title) ?>" target="_blank" rel="nofollow"><?php echo $v->news_title ?></a></li>
 			<?php } } ?>
 		</ul>
 		<ul>

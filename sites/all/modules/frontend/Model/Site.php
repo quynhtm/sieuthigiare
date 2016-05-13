@@ -8,8 +8,9 @@
 class Site{
 	static $table_action_category = TABLE_CATEGORY;
 	static $table_action_product = TABLE_PRODUCT;
+	static $table_action_news = TABLE_NEWS;
 	static $primary_key_product = 'product_id';
-
+	static $primary_key_news = 'news_id';
 	public static function makeListCatid($limit=0){
 		global $base_url;
 
@@ -194,4 +195,56 @@ class Site{
 		}
 		return array();
 	}
+
+	public static function getNewsInCat($news_category = 0, $limit = 30, $arrFields = array()){
+        global $base_url;
+        
+        if(!empty($arrFields) && $news_category > 0){
+       
+            $sql = db_select(self::$table_action_news, 'i')->extend('PagerDefault');
+            foreach($arrFields as $field){
+                $sql->addField('i', $field, $field);
+            }
+            $sql->condition('i.news_status', STASTUS_SHOW, '=');
+            $sql->condition('i.news_category', $news_category, '=');
+            
+            $result = $sql->limit($limit)->orderBy('i.'.self::$primary_key_news, 'DESC')->execute();
+            $arrItem = (array)$result->fetchAll();
+
+            $pager = array('#theme' => 'pager','#quantity' => 3);
+            $data['data'] = $arrItem;
+            $data['pager'] = $pager;
+            
+			return $data;
+
+        }else{
+            drupal_goto($base_url.'/page-404');
+        }
+        
+        return array();
+    }
+
+	public static function getNewsSameCat($news_id=0, $news_category = 0, $limit = 30, $arrFields = array(), $specal=true){
+        global $base_url;
+        if($specal == true){
+	        if(!empty($arrFields) && $news_id > 0 && $news_category > 0){
+	       
+	            $sql = db_select(self::$table_action_news, 'i');
+	            foreach($arrFields as $field){
+	                $sql->addField('i', $field, $field);
+	            }
+	            $sql->condition('i.news_status', STASTUS_SHOW, '=');
+	            $sql->condition('i.news_category', $news_category, '=');
+	            $sql->condition('i.news_id', $news_id, '<>');
+	            
+	            $result = $sql->range(0, $limit)->orderBy('i.'.self::$primary_key_news, 'DESC')->execute();
+	            $arrItem = (array)$result->fetchAll();
+
+	            return $arrItem;
+	        }else{
+	            drupal_goto($base_url.'/page-404');
+	        }
+        }
+        return array();
+    }
 }
