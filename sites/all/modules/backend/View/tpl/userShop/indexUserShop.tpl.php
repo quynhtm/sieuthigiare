@@ -75,12 +75,12 @@
 						<th width="1%"><input type="checkbox" id="checkAll"/></th>
 						<th width="20%">Thông tin shop</th>
 						<th width="18%">Tên shop</th>
-						<th width="20%">Địa chỉ</th>
-						<th width="10%">Loại gian hàng</th>
+						<th width="23%">Địa chỉ</th>
+						<th width="12%">Loại gian hàng</th>
 						<th width="5%">Status</th>
-						<th width="8%">Online</th>
-						<th width="8%">Ngày tạo</th>
-						<th width="15%">Action</th>
+						<th width="8%" class="align_center">Online</th>
+						<th width="8%" class="align_center">Ngày tạo</th>
+						<th width="10%" class="align_center">Action</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -116,10 +116,10 @@
 							</td>
 							<td class="align_center">
 								<?php
-									echo ($item->is_login == SHOP_ONLINE)? '<i class="icon-smile icon-admin green"></i> <br/>'.date('d-m-Y h:i:s',$item->shop_time_login): '<i class="icon-meh icon-admin red"></i><br/>'.date('d-m-Y h:i:s',$item->shop_time_logout);
+									echo ($item->is_login == SHOP_ONLINE)? '<i class="icon-smile icon-admin green"></i> <br/>'.date('H:i:s d-m-Y',$item->shop_time_login): '<i class="icon-meh icon-admin red"></i><br/>'.date('H:i:s d-m-Y',$item->shop_time_logout);
 								?>
 							</td>
-							<td><?php echo date('d-m-Y h:i:s',$item->shop_created); ?></td>
+							<td class="align_center"><?php echo date('H:i:s d-m-Y',$item->shop_created); ?></td>
 							<td class="align_center">
 								<?php $linkLoginAs = $base_url.'/admincp/techloginas?shop='.$item->user_shop ?>
 								<a target="_blank" href="<?php echo $linkLoginAs; ?>" title="Tech login as"><i class="icon-signin icon-admin green "></i></a>
