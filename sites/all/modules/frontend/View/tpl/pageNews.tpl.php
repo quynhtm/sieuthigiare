@@ -16,11 +16,15 @@
 					<div class="item-news">
 						<div class="post-img">
 							<a title="<?php echo $v->news_title ?>" href="<?php echo FunctionLib::buildLinkNewsDetail($catNameAlias, $v->news_id, $v->news_title) ?>">
+								<?php if($v->news_image != ''){?>
 								<img alt="<?php echo $v->news_title ?>"
 								src="<?php echo FunctionLib::getThumbImage($v->news_image,$v->news_id,FOLDER_NEWS,400,400) ?>">
 								<div class="post-format">
 									<i class="icon-file-text"></i>
 								</div>
+								<?php }else{ ?>
+								<img src="<?php echo IMAGE_DEFAULT ?>"/>
+								<?php } ?>
 							</a>
 							
 						</div>
