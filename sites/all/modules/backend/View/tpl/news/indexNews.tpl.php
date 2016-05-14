@@ -82,7 +82,9 @@
 									<img src="<?php echo IMAGE_DEFAULT ?>" width="60px"/>
 								<?php }?>
 							</td>
-							<td><?php echo $item->news_title; ?></td>
+							<td>
+								<a target="_blank" href="<?php echo FunctionLib::buildLinkNewsDetail($item->news_category_alias, $item->news_id, $item->news_title) ?>"><?php echo $item->news_title ?></a>
+							</td>
 							<td><?php echo isset($arrCategoryNew[$item->news_category])?$arrCategoryNew[$item->news_category]:'Chưa rõ'; ?></td>
 							<td><?php echo isset($arrTypeNew[$item->news_type])?$arrTypeNew[$item->news_type]:'Chưa rõ';?></td>
 							<td>

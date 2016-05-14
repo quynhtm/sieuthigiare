@@ -67,6 +67,29 @@ class NewsController{
 					$value->url_image = FunctionLib::getThumbImage($value->news_image,$value->news_id,FOLDER_NEWS,60,60);
 					$value->url_image_hover = FunctionLib::getThumbImage($value->news_image,$value->news_id,FOLDER_NEWS,300,150);
 				}
+				$value->news_category_alias = '';
+				if($value->news_category > 0){
+					switch($value->news_category){
+					    case NEW_CATEGORY_TIN_TUC_CHUNG:
+					        $value->news_category_alias = 'tin-tuc-chung';break;
+					    case NEW_CATEGORY_GOC_GIA_DINH:
+					        $value->news_category_alias = 'goc-gia-dinh';break;
+					    case NEW_CATEGORY_THI_TRUONG:
+					        $value->news_category_alias = 'thi-truong';break;
+					    case NEW_CATEGORY_GIAI_TRI:
+					        $value->news_category_alias = 'giai-tri';break;
+					    case NEW_CATEGORY_GIOI_THIEU:
+					        $value->news_category_alias = 'gioi-thieu';break;
+					    case NEW_CATEGORY_SHOP:
+					        $value->news_category_alias = 'tin-cua-shop';break;
+					    case NEW_CATEGORY_CUSTOMER:
+					        $value->news_category_alias = 'tin-cua-khach';break;
+					    case NEW_CATEGORY_QUANG_CAO:
+					        $value->news_category_alias = 'tin-quang-cao';break;
+					    default:
+			       			$value->news_category_alias = 'tin-tuc-chung';break;
+					}
+				}
 			}
 		}
 
