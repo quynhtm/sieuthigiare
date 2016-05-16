@@ -147,7 +147,7 @@ class NewsController{
 				'news_content'=>array('value'=>FunctionLib::getParam('news_content','')),
 				'news_status'=>array('value'=>FunctionLib::getParam('news_status',0)),
 				'news_category'=>array('value'=>FunctionLib::getParam('news_category',0)),
-				'news_create'=>array('value'=>FunctionLib::getParam('news_create',0)),
+				'news_create'=>array('value'=>time()),
 				'news_type'=>array('value'=>FunctionLib::getParam('news_type',0)),
 			);
 
@@ -209,6 +209,10 @@ class NewsController{
 				foreach($listId as $id){
 					if($id > 0){
 						News::deleteOne($id);
+						if(Cache::CACHE_ON) {
+							$cache = new Cache();
+							$cache->do_remove(Cache::VERSION_CACHE.Cache::CACHE_NEWS_ID.$id);
+						}
 					}
 				}
 				drupal_set_message('Xóa bài viết thành công.');
