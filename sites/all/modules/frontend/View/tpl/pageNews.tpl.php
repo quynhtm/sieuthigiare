@@ -57,6 +57,52 @@
 						data-show-faces="false" data-share="true">
 					</div>
 				</div>
+				<div class="right-bottom-content-view">
+					<div class="title-hot"><span>Sản phẩm nổi bật</span></div>
+					<div class="content-right-bottom-content-view">
+						<ul>
+							<?php 
+								foreach($productNew as $k=>$h){
+							?>
+							<li class="item">
+								<a class="i-thumb post-thumb" title="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>" href="<?php echo FunctionLib:: buildLinkDetail($h->product_id, $h->product_name); ?>">
+									<?php if($h->product_image != ''){?>
+									<img src="<?php echo FunctionLib::getThumbImage($h->product_image, $h->product_id, FOLDER_PRODUCT, 300, 300) ?>" alt="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>" 
+									data-other-src="<?php echo FunctionLib::getThumbImage($h->product_image, $h->product_id, FOLDER_PRODUCT, 300, 300) ?>">
+									<?php }else{ ?>
+									<img src="<?php echo IMAGE_DEFAULT ?>"/>
+									<?php } ?>
+								</a>
+								
+								<a class="item-name" title="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>" href="<?php echo FunctionLib:: buildLinkDetail($h->product_id, $h->product_name); ?>"><?php echo $h->product_name?></a>
+								<div class="item-price">
+									<?php if($h->product_type_price == 2){?>
+										<p class="price-sale">Liên hệ</p>
+									<?php }else{ ?>
+										<p class="price-sale">
+											<?php if($h->product_price_sell > 0){?>
+												
+												<?php echo number_format($h->product_price_sell)?><span>đ</span>
+												<?php if($h->product_price_market > 0){?>
+												<i>(<?php echo number_format($h->product_price_market)?>)</i>
+												<?php } ?>
+
+											<?php }else{ ?>
+												Liên hệ
+											<?php } ?>
+										</p>
+									<?php } ?>
+								</div>
+								<div class="mgt5 amount-call">
+				                	<a title="<?php echo $h->user_shop_name ?>" class="link-shop" href="<?php echo FunctionLib::buildLinkCategory($h->user_shop_id, $h->user_shop_name, 0, '') ?>">
+				                		<?php echo $h->user_shop_name ?>
+				                	</a>
+				            	</div>
+							</li>
+							<?php } ?>
+						</ul>
+					</div>
+				</div>
 			</div>	
 		</div>
 	</div>
