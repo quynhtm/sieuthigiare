@@ -53,7 +53,19 @@ function Site_menu() {
 							'tin-quang-cao' => 'Tin quảng cáo',
 							);
 	foreach($arrCategoryNew as $key => $val){
-		$items[$key] = array(
+		//category
+		$key_cat = $key.'.html';
+		$items[$key_cat] = array(
+			"title" => $val,
+			"description" => $val,
+			'page callback' => 'menuLoad',
+			'page arguments' => array('SiteController/getSearchNews'),
+			'access callback' => TRUE,
+			'type' => MENU_CALLBACK,
+		);
+		//detail
+		$key_detail = $key;
+		$items[$key_detail] = array(
 			"title" => $val,
 			"description" => $val,
 			'page callback' => 'menuLoad',

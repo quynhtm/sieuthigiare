@@ -139,16 +139,23 @@ class SiteController{
 		global $base_url;
 		$param = arg();
 		
-		if(count($param) == 1 && in_array($param[0], array_keys(self::$arrCategoryNew))){
-			return self::newsList();
+		if(count($param) == 1){
+			$param[0] = substr($param[0], 0, -5);
+			if(in_array($param[0], array_keys(self::$arrCategoryNew))){
+				return self::newsList($param[0]);
+			}else{
+				drupal_goto($base_url.'/page-404');
+			}
+			
 		}elseif(count($param) == 3){
+			
 			return self::newsDetail();
 		}else{
 			drupal_goto($base_url.'/page-404');
 		}
 	}
 
-	public static function newsList(){
+	public static function newsList($str=''){
 		global $base_url;
 
 		$param = arg();
@@ -156,7 +163,8 @@ class SiteController{
 	    $catNameAlias = '';
 
 		$news_category = 0;
-		switch($param[0]){
+		
+		switch($str){
 		    case 'tin-tuc-chung':
 		        $news_category = NEW_CATEGORY_TIN_TUC_CHUNG;break;
 		    case 'goc-gia-dinh':
@@ -177,13 +185,15 @@ class SiteController{
        			drupal_goto($base_url.'/page-404');
 		}
 
-	    $catName = self::$arrCategoryNew[$param[0]];
-	    $catNameAlias  = $param[0];
+	    $catName = self::$arrCategoryNew[$str];
+	    $catNameAlias  = $str;
 
 	    $arrFields = array('news_id', 'news_title', 'news_image', 'news_desc_sort');
-	    $result = Site::getNewsInCat($news_category, 20, $arrFields);
+	    $result = Site::getNewsInCat($news_category, 10, $arrFields);
 
-		return theme('pageNews', array('catName'=>$catName, 'catNameAlias'=>$catNameAlias, 'result'=>$result['data'], 'pager' =>$result['pager'],));
+	    $productNew = Site::getListProductNew(0, 5);
+
+		return theme('pageNews', array('catName'=>$catName, 'catNameAlias'=>$catNameAlias, 'result'=>$result['data'], 'pager' =>$result['pager'], 'productNew' =>$productNew));
 	}
 	public static function newsDetail(){
 		global $base_url;
@@ -215,7 +225,8 @@ class SiteController{
 	    }else{
 	    	$arrSameNews = Site::getNewsSameCat($news_id, $result->news_category, 10, $arrFields, true);
 	    }
+	    $productNew = Site::getListProductNew(0, 5);
 
-		return theme('pageNewsDetail', array('result'=>$result,'arrSameNews'=>$arrSameNews, 'catName'=>$catName, 'catNameAlias'=>$catNameAlias));
+		return theme('pageNewsDetail', array('result'=>$result,'arrSameNews'=>$arrSameNews, 'catName'=>$catName, 'catNameAlias'=>$catNameAlias, 'productNew' =>$productNew));
 	}
 }

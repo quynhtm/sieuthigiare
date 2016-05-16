@@ -169,17 +169,6 @@
 <!-- chen anh vào noi dung-->
 
 <script>
-    CKEDITOR.replace(
-        'news_desc_sort',
-        {
-            toolbar: [
-                { name: 'document',    items : [ 'Source','-','Save','NewPage','DocProps','Preview','Print','-','Templates' ] },
-                { name: 'basicstyles', items : [ 'Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat' ] },
-                { name: 'colors',      items : [ 'TextColor','BGColor' ] },
-            ],
-        },
-        {height:400}
-    );
     CKEDITOR.replace('news_content', {height:800});
 </script>
 

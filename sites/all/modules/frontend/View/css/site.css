@@ -762,17 +762,17 @@ span#logo{
     padding: 5px 2px 0;
 }
 .left-news-view {
-    background: #fafafa ;
+    background: #f2f2f2 ;
     border-radius: 2px;
     display: inline-block;
     float: left;
     padding: 5px 10px;
-    width: 945px;
+    width: 1000px;
 }
 .right-news-view{
     display: inline-block;
     float: right;
-    width: 280px;
+    width: 235px;
 }
 .title-news {
     border-bottom: 1px dotted #ddd;
@@ -824,7 +824,7 @@ span#logo{
     margin-top: 0!important;
 }
 .list-news-post .item-news {
-    margin: 0 0 1.5em;
+    margin: 0 0 2em;
     clear: both;
     display: inline-block;
     width: 100%;
@@ -871,7 +871,7 @@ span#logo{
     color: #333;
 }
 .redmoreNews {
-    background: #2858a0;
+    background: #fe6d01;
     border-radius: 3px;
     display: inline-block;
     margin-top: 10px;
