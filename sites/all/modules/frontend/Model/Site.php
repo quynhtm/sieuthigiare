@@ -208,7 +208,7 @@ class Site{
             $sql->condition('i.news_status', STASTUS_SHOW, '=');
             $sql->condition('i.news_category', $news_category, '=');
             
-            $result = $sql->limit($limit)->orderBy('i.'.self::$primary_key_news, 'DESC')->execute();
+            $result = $sql->limit($limit)->orderBy('i.news_create', 'DESC')->execute();
             $arrItem = (array)$result->fetchAll();
 
             $pager = array('#theme' => 'pager','#quantity' => 3);
