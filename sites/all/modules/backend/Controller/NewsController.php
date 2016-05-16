@@ -188,7 +188,7 @@ class NewsController{
 				drupal_goto($base_url.'/admincp/news');
 			}
 		}
-		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->news_status) ? $arrItem->news_status: STASTUS_HIDE);
+		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->news_status) ? $arrItem->news_status: STASTUS_SHOW);
 		$optionCategory = FunctionLib::getOption($this->arrCategoryNew, isset($arrItem->news_category) ? $arrItem->news_category: NEW_CATEGORY_TIN_TUC_CHUNG);
 		$optionType = FunctionLib::getOption($this->arrTypeNew, isset($arrItem->news_type) ? $arrItem->news_type: NEW_TYPE_TIN_TUC);
 		return $view = theme('addNews',
