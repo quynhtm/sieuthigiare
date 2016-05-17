@@ -927,3 +927,7 @@ span#logo{
 .post-format:hover .icon-file-text {
     transform: scale(1, 1);
 }
+.list-product_new .icon-bullhorn {
+    color: #bbbbbb;
+    font-size: 18px;
+}

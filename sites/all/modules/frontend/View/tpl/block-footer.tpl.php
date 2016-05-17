@@ -6,7 +6,7 @@
   			<a href="https://plus.google.com/100693074505743994095" rel="nofollow">
   				<i class="icon-google-plus"></i>
   			</a>
-  			<a href="https://www.facebook.com/shopcuatuidayroi" rel="nofollow">
+  			<a href="https://www.facebook.com/profile.php?id=100012051900214" rel="nofollow">
   				<i class="icon-facebook"></i>
   			</a>
   		</div>

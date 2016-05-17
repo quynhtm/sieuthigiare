@@ -189,9 +189,9 @@ class SiteController{
 	    $catNameAlias  = $str;
 
 	    $arrFields = array('news_id', 'news_title', 'news_image', 'news_desc_sort');
-	    $result = Site::getNewsInCat($news_category, 10, $arrFields);
+	    $result = Site::getNewsInCat($news_category, 12, $arrFields);
 
-	    $productNew = Site::getListProductNew(0, 5);
+	    $productNew = Site::getListProductNew(0, 7);
 
 		return theme('pageNews', array('catName'=>$catName, 'catNameAlias'=>$catNameAlias, 'result'=>$result['data'], 'pager' =>$result['pager'], 'productNew' =>$productNew));
 	}
@@ -225,7 +225,7 @@ class SiteController{
 	    }else{
 	    	$arrSameNews = Site::getNewsSameCat($news_id, $result->news_category, 10, $arrFields, true);
 	    }
-	    $productNew = Site::getListProductNew(0, 5);
+	    $productNew = Site::getListProductNew(0, 7);
 
 		return theme('pageNewsDetail', array('result'=>$result,'arrSameNews'=>$arrSameNews, 'catName'=>$catName, 'catNameAlias'=>$catNameAlias, 'productNew' =>$productNew));
 	}
