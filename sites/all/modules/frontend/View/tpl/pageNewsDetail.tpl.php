@@ -18,7 +18,7 @@
 	<div class="link-breadcrumb">
 		<a href="<?php echo $base_url; ?>" title="Trang chủ">Trang chủ</a>
 		<i class="icon-double-angle-right"></i>
-		<a href="<?php echo $base_url.'/'.$catNameAlias ?>" title="<?php echo $catName ?>"><?php echo $catName ?></a>
+		<a href="<?php echo $base_url.'/'.$catNameAlias ?>.html" title="<?php echo $catName ?>"><?php echo $catName ?></a>
 		<i class="icon-double-angle-right"></i>
 		<a href="<?php echo FunctionLib::buildLinkNewsDetail($news_id, $news_title) ?>" title="<?php echo $news_title ?>"><?php echo $news_title ?></a>
 	</div>

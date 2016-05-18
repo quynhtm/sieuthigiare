@@ -5,7 +5,7 @@
 	<div class="link-breadcrumb">
 		<a href="<?php echo $base_url; ?>" title="Trang chủ">Trang chủ</a>
 		<i class="icon-double-angle-right"></i>
-		<a href="<?php echo $base_url.'/'.$catNameAlias ?>" title="<?php echo $catName ?>"><?php echo $catName ?></a>
+		<a href="<?php echo $base_url.'/'.$catNameAlias ?>.html" title="<?php echo $catName ?>"><?php echo $catName ?></a>
 	</div>
 	<div class="main-view-post">
 		<div class="wrapp-content-news">
