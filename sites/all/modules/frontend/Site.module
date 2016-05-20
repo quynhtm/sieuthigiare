@@ -74,6 +74,14 @@ function Site_menu() {
 			'type' => MENU_CALLBACK,
 		);
 	}
+	$items['tim-kiem-tin-tuc.html'] = array(
+		"title" => 'Tìm kiếm tin tức',
+		"description" => 'Tìm kiếm tin tức',
+		'page callback' => 'menuLoad',
+		'page arguments' => array('SiteController/searchNews'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
 	//end news link
 
   return $items;
@@ -155,7 +163,9 @@ function Site_theme() {
 	    'pageNewsDetail' => array(
 	      'template' => 'View/tpl/pageNewsDetail'
 	    ), 
-
+	    'pageNewsSearch' => array(
+	      'template' => 'View/tpl/pageNewsSearch'
+	    ),
 	);
 }
 function Site_block_view($delta='') {

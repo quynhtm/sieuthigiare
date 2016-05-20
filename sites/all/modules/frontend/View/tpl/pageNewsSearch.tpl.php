@@ -5,12 +5,12 @@
 	<div class="link-breadcrumb">
 		<a href="<?php echo $base_url; ?>" title="Trang chủ">Trang chủ</a>
 		<i class="icon-double-angle-right"></i>
-		<a href="<?php echo $base_url.'/'.$catNameAlias ?>.html" title="<?php echo $catName ?>"><?php echo $catName ?></a>
+		<a href="<?php echo $base_url.'/tim-kiem-tin-tuc.html?keyword='.$keyword.'&catalias='.$catNameAlias ?>" title="Tìm kiếm tin tức">Kết quả tìm kiếm <i>"<?php echo $keyword  ?>"</i></a>
 	</div>
 	<div class="main-view-post">
 		<div class="wrapp-content-news">
 			<div class="left-news-view">
-				<h1 class="title-news"><?php echo $catName ?></h1>
+				<h1 class="title-news">Kết quả tìm kiếm</h1>
 				<div class="list-news-post">
 					<?php foreach($result as $v) {?>
 					<div class="item-news">
@@ -59,7 +59,7 @@
 						  js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6";
 						  fjs.parentNode.insertBefore(js, fjs);
 						}(document, 'script', 'facebook-jssdk'));</script>
-					<div class="fb-like" data-href="<?php echo $base_url.'/'.$catNameAlias ?>" 
+					<div class="fb-like" data-href="<?php echo $base_url.'/tim-kiem-tin-tuc.html?keyword='.$keyword.'&catalias='.$catNameAlias ?>" 
 						data-layout="button_count" data-action="like" 
 						data-show-faces="false" data-share="true">
 					</div>

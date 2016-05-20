@@ -931,3 +931,12 @@ span#logo{
     color: #bbbbbb;
     font-size: 18px;
 }
+.keyword-news {
+    border: 1px solid #ddd;
+    display: inline-block;
+    padding: 4px;
+    width: 131px;
+}
+.content-right-product .btn{
+     padding: 2px 5px;
+}

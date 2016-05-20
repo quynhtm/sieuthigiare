@@ -247,4 +247,35 @@ class Site{
         }
         return array();
     }
+
+    public static function searchNews($keyword = "", $limit = 30, $arrFields = array()){
+        global $base_url;
+        
+        if(!empty($arrFields)){
+       
+            $sql = db_select(self::$table_action_news, 'i')->extend('PagerDefault');
+            foreach($arrFields as $field){
+                $sql->addField('i', $field, $field);
+            }
+            $sql->condition('i.news_status', STASTUS_SHOW, '=');
+            
+            $db_or = db_or();
+			$db_or->condition('i.news_title', '%'.$keyword.'%', 'LIKE');
+			$sql->condition($db_or);
+
+            $result = $sql->limit($limit)->orderBy('i.news_create', 'DESC')->execute();
+            $arrItem = (array)$result->fetchAll();
+
+            $pager = array('#theme' => 'pager','#quantity' => 3);
+            $data['data'] = $arrItem;
+            $data['pager'] = $pager;
+            
+			return $data;
+
+        }else{
+            drupal_goto($base_url.'/page-404');
+        }
+ 
+        return array();
+    }
 }

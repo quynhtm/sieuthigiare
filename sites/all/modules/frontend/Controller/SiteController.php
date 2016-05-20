@@ -5,6 +5,7 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0
 */
+
 class SiteController{
 	
 	public static $arrCategoryNew = array('tin-tuc-chung' => 'Tin tức chung',
@@ -92,6 +93,8 @@ class SiteController{
 		$currentPage = 1;
 		$totalRecord = 80;
 		$totalPage = $totalRecord/40;
+		
+		SeoMeta::SEO('Sản phẩm mới - '.WEB_SITE, '', 'Sản phẩm mới - '.WEB_SITE, 'Sản phẩm mới - '.WEB_SITE, 'Sản phẩm mới - '.WEB_SITE);
 
 		if(isset($_POST) && !empty($_POST)){
 			$currentPage 	= FunctionLib::getIntParam('currentPage', 1);
@@ -117,6 +120,8 @@ class SiteController{
 		$provices_id 	= FunctionLib::getIntParam('provices_id', 0);
 		$category_id 	= FunctionLib::getIntParam('category_id', 0);
 		$result = Site::getListProductSearch($provices_id, $category_id, $limit);
+
+		SeoMeta::SEO('Tìm kiếm sản phẩm - '.WEB_SITE, '', 'Tìm kiếm sản phẩm - '.WEB_SITE, 'Tìm kiếm sản phẩm - '.WEB_SITE, 'Tìm kiếm sản phẩm - '.WEB_SITE);
 
 		return theme('pageProductSearch', array('result'=>$result['data'],
 												'pager' =>$result['pager'], 
@@ -188,6 +193,9 @@ class SiteController{
 	    $catName = self::$arrCategoryNew[$str];
 	    $catNameAlias  = $str;
 
+	    SeoMeta::SEO($catName.' - '.WEB_SITE, '', $catName.' - '.WEB_SITE, $catName.' - '.WEB_SITE, $catName.' - '.WEB_SITE);
+
+
 	    $arrFields = array('news_id', 'news_title', 'news_image', 'news_desc_sort');
 	    $result = Site::getNewsInCat($news_category, 12, $arrFields);
 
@@ -228,5 +236,18 @@ class SiteController{
 	    $productNew = Site::getListProductNew(0, 7);
 
 		return theme('pageNewsDetail', array('result'=>$result,'arrSameNews'=>$arrSameNews, 'catName'=>$catName, 'catNameAlias'=>$catNameAlias, 'productNew' =>$productNew));
+	}
+	public static function searchNews(){
+		
+		$keyword = FunctionLib::getParam('keyword', '');
+		$catNameAlias = FunctionLib::getParam('catalias', '');
+
+		SeoMeta::SEO('Tìm kiếm tin tức - '.WEB_SITE, '', 'Tìm kiếm tin tức - '.WEB_SITE, 'Tìm kiếm tin tức - '.WEB_SITE, 'Tìm kiếm tin tức - '.WEB_SITE);
+
+		$arrFields = array('news_id', 'news_title', 'news_image', 'news_desc_sort');
+		$result = Site::searchNews($keyword, 12, $arrFields);
+		$productNew = Site::getListProductNew(0, 7);
+
+		return theme('pageNewsSearch', array('keyword'=>$keyword, 'result'=>$result['data'], 'pager' =>$result['pager'], 'productNew' =>$productNew, 'catNameAlias'=>$catNameAlias));
 	}
 }
