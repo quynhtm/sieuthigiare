@@ -1155,3 +1155,7 @@ table.list-pay span.price {
 .features-point.act .des-point{
     max-height: none!important;
 }
+.left-category-shop .number-phone {
+    font-size: 15px;
+    font-weight: bold;
+}

@@ -45,7 +45,21 @@
 						data-show-faces="false" data-share="true">
 					</div>
 				</div>
-
+				<div class="content-right-product">
+					<div class="order-number-phone">
+						<p><b>Quý khách muốn đặt qua điện thoại</b></p>
+						<div class="number-phone">
+							<div class="icon-phone"></div>
+							<?php echo $user_shop->shop_phone?>
+						</div>
+						<p><a href="<?php echo FunctionLib::buildLinkCategory($user_shop->shop_id, $user_shop->shop_name, 0, '') ?>" title="Shop: <?php echo $user_shop->shop_name ?>"><?php echo $user_shop->shop_name ?></a></p>
+						<?php if($user_shop->shop_address !=''){?>
+							<p><b>Thông tin liên hệ: </b></p>
+							<p><?php echo $user_shop->shop_email;?></p>
+							<p><?php echo $user_shop->shop_address;?></p>
+						<?php }?>
+					</div>
+				</div>
 			</div>
 			<div class="right-show-product-shop body-list-item ">
 				<?php if(!empty($bannerList)){ ?>

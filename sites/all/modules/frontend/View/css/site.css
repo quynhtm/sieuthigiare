@@ -940,3 +940,6 @@ span#logo{
 .content-right-product .btn{
      padding: 2px 5px;
 }
+.content-right-product.search {
+    background: #f2f2f2;
+}
