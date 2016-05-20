@@ -43,7 +43,7 @@
 				</div>
 			</div>
 			<div class="right-news-view">
-				<div class="content-right-product">
+				<div class="content-right-product search">
 					<form action="<?php echo $base_url.'/tim-kiem-tin-tuc.html' ?>" method="GET">
 						<input type="text" name="keyword" class="keyword-news" />
 						<input type="hidden" name="catalias" value="<?php echo $catNameAlias ?>" />
