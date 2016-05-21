@@ -937,7 +937,7 @@ span#logo{
     padding: 4px;
     width: 131px;
 }
-.content-right-product .btn{
+.content-right-product.search .btn{
      padding: 2px 5px;
 }
 .content-right-product.search {
