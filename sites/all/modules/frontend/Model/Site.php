@@ -236,7 +236,8 @@ class Site{
 	            $sql->condition('i.news_status', STASTUS_SHOW, '=');
 	            $sql->condition('i.news_category', $news_category, '=');
 	            $sql->condition('i.news_id', $news_id, '<>');
-	            
+	            $sql->condition('i.news_id', $news_id, '<');//l?y tin c? h?n tin ?ang xem
+
 	            $result = $sql->range(0, $limit)->orderBy('i.'.self::$primary_key_news, 'DESC')->execute();
 	            $arrItem = (array)$result->fetchAll();
 
