@@ -399,10 +399,13 @@ class ProductShopController{
 	   		$arrSame = array_merge($arrSame, $arrSame1);
 	   	}
 
+		$arrProductHot = DataCommon::getProductDetailHot($category_id);
+
 		return theme('detailShop', array(
 										'result'=>$result,
 										'user_shop'=>$this->user_shop,
 										'arrSame'=>$arrSame,
+										'arrProductHot'=>!empty($arrProductHot)? $arrProductHot: $arrSame,
 									)
 								);
 	}

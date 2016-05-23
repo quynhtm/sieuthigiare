@@ -16,7 +16,7 @@ class DataCommon{
 	public static $primary_key_province = 'province_id';
 
 	/**
-	 * DÙng ?? khóa, m?, ?n toàn b? s?n ph?m c?a shop
+	 * Dï¿½ng ?? khï¿½a, m?, ?n toï¿½n b? s?n ph?m c?a shop
 	 * @param int $shop_id
 	 * @param int $is_block
 	 */
@@ -69,8 +69,8 @@ class DataCommon{
 	}
 
 	/**
-	 * Danh m?c cha có hi?n th?
-	 * ngoài trang ch? list s?n ph?m
+	 * Danh m?c cha cï¿½ hi?n th?
+	 * ngoï¿½i trang ch? list s?n ph?m
 	 * @return array
 	 */
 	public static function getCategoryParentShowProductHome(){
@@ -438,7 +438,7 @@ class DataCommon{
 	}
 
 	/**
-	 * @param int $banner_type: 1:banner home to, 2: banner home nh?,3: banner trái, 4 banner ph?i,5: banner trong list s?n ph?m
+	 * @param int $banner_type: 1:banner home to, 2: banner home nh?,3: banner trï¿½i, 4 banner ph?i,5: banner trong list s?n ph?m
 	 * @param int $banner_page: 1: trang ch?, 2: trang list,3: trang detail, 4: trang list danh m?c
 	 * @param int $banner_category_id
 	 * @param int $banner_shop_id
@@ -475,7 +475,7 @@ class DataCommon{
 	}
 
 	/**
-	 * build cây danh m?c
+	 * build cï¿½y danh m?c
 	 * Tao Option chon danh m?c hien th? theo cay
 	 * @param $data
 	 * @return array
@@ -593,15 +593,15 @@ class DataCommon{
 	}
 
 	/**
-	 * c?p nh?t l??t click banner, tin t?c qu?ng cáo
+	 * c?p nh?t l??t click banner, tin t?c qu?ng cï¿½o
 	 * @param int $banner_id
 	 * @param string $ip_client
-	 * @param int $type_adver: 1: c?a banner, 2: c?a tin t?c qu?ng cáo
+	 * @param int $type_adver: 1: c?a banner, 2: c?a tin t?c qu?ng cï¿½o
 	 * @throws Exception
 	 */
 	public static function updateNumberClickAdvertise($banner_id = 0, $ip_client = '',$type_adver = 1){
 		if($banner_id > 0 && trim($ip_client) != ''){
-			//check xem có t?n t?i ip cua quang cao nay ko
+			//check xem cï¿½ t?n t?i ip cua quang cao nay ko
 			$query = db_select(self::$table_advertise_click, 'c')
 				->condition(($type_adver == 1)?'c.click_banner_id':'c.click_new_id', $banner_id, '=')
 				->condition('c.click_type_object', $type_adver, '=')
@@ -615,7 +615,7 @@ class DataCommon{
 					$advertise_click[] = $pro;
 				}
 				if(empty($advertise_click)){
-					//thêm vào b?ng click
+					//thï¿½m vï¿½o b?ng click
 					$arrClick = array(
 						'click_banner_id' => $banner_id,
 						'click_type_object' => $type_adver,
@@ -637,7 +637,7 @@ class DataCommon{
 						foreach ($totak_click as $k => $pro) {
 							$result_click[] = $pro;
 						}
-						//update s? l??ng click vào TABLE_BANNER
+						//update s? l??ng click vï¿½o TABLE_BANNER
 						if(!empty($result_click)){
 							if($type_adver == 1) {
 								$num_updated = db_update(self::$table_banner)
@@ -651,5 +651,39 @@ class DataCommon{
 				}
 			}
 		}
+	}
+
+	public static function getProductDetailHot($category_id = 0){
+		$product = array();
+		if($category_id > 0){
+			//láº¥y danh muc cha
+			$infor_category = DataCommon::getCategoryById($category_id);
+			if(!empty($infor_category)){
+				$category_parent_id = isset($infor_category->category_parent_id)?$infor_category->category_parent_id: 0;
+				//lay danh sach id danh muc con
+				$arrCategoryChildren = DataCommon::getListCategoryChildren($category_parent_id);
+				if(!empty($arrCategoryChildren)){
+					$i = rand(1,300);
+					$arrCateId = array_keys($arrCategoryChildren);
+					$arrFields = array('product_id', 'category_name','product_name', 'product_price_sell', 'product_price_market', 'product_image',
+						'product_image_hover', 'product_type_price', 'product_selloff', 'user_shop_id', 'user_shop_name');
+					$query = db_select(self::$table_product, 'p')
+						->condition('p.product_status', STASTUS_SHOW, '=')
+						->condition('p.is_block', PRODUCT_NOT_BLOCK, '=')
+						->condition('p.category_id', $arrCateId, 'NOT IN')
+						->orderBy('p.time_update', 'DESC')
+						->range($i,8)
+						->fields('p', $arrFields);
+					$data = $query->execute();
+					if (!empty($data)) {
+						foreach ($data as $k => $pro) {
+							$product[] = $pro;
+						}
+					}
+					return $product;
+				}
+			}
+		}
+		return $product;
 	}
 }
