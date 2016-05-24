@@ -50,16 +50,27 @@
 						data-show-faces="false" data-share="true">
 					</div>
 				</div>
+				<!--Banner quả cáo-->
+				<?php if(!empty($bannerLeft)){ ?>
+					<div class="right-product-new">
+						<?php foreach($bannerLeft as $value){
+							$rel3 = ($value->banner_is_rel != 1)? 'rel="nofollow"' : '';
+							?>
+							<div class="item-right-ads">
+								<a <?php echo $rel3 ?> href="<?php echo $value->banner_link ?>" title ="<?php echo $value->banner_name ?>" <?php if($value->banner_is_target == BANNER_TARGET_BLANK){?>target="_blank"<?php }?>>
+									<img src="<?php echo FunctionLib::getThumbImage($value->banner_image, $value->banner_id, FOLDER_BANNER, 300, 0) ?>" alt="<?php echo $value->banner_name ?>"/>
+								</a>
+							</div>
+						<?php } ?>
+					</div>
+				<?php } ?>
+
 			</div>
 			<div class="right-show-product-shop body-list-item">
-				<?php if(!empty($bannerList)){ ?>
+				<?php if(!empty($bannerCategoryParent)){ ?>
 					<div class="banner-shop-content">
-						<?php foreach($bannerList as $v){ 
-							if($v->banner_is_rel != 1){
-								$rel = 'rel="nofollow"';
-							}else{
-								$rel = '';
-							}
+						<?php foreach($bannerCategoryParent as $v){
+							$rel = ($v->banner_is_rel != 1)? 'rel="nofollow"' : '';
 						?>
 							<a <?php echo $rel ?> title="<?php echo $v->banner_name ?>" href="<?php echo $v->banner_link ?>" target="_blank">
 								<img src="<?php echo FunctionLib::getThumbImage($v->banner_image, $v->banner_id, FOLDER_BANNER, 1018, 245) ?>" alt="<?php echo $v->banner_name ?>"/>
