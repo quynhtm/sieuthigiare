@@ -474,8 +474,8 @@ a.btn-yahoo:hover{
 .item-banner{
     color: #555;
     display: none;
-    height: 35px;
-    margin-top: 8px;
+    height: 20px;
+    margin-top: 5px;
     overflow: hidden;
 }
 .body-list-item .item:hover .item-banner{
@@ -1079,7 +1079,7 @@ table.list-pay span.price {
     width: 305px;
 }
 .mgt5{
-    margin-top: 10px;
+    margin-top: 5px;
 }
 .main-view-post.box-register .formSendRegister{
     position: relative;
