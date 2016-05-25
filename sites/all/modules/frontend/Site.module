@@ -91,7 +91,14 @@ function Site_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
-
+	$items['tim-kiem-video.html'] = array(
+		"title" => 'Tìm kiếm video',
+		"description" => 'Tìm kiếm video',
+		'page callback' => 'menuLoad',
+		'page arguments' => array('SiteController/searchVideo'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
 
   return $items;
 }
@@ -182,6 +189,10 @@ function Site_theme() {
 	    'pageVideoDetail' => array(
 	      'template' => 'View/tpl/pageVideoDetail'
 	    ),
+	    'pageVideoSearch' => array(
+	      'template' => 'View/tpl/pageVideoSearch'
+	    ),
+	    
 	);
 }
 function Site_block_view($delta='') {

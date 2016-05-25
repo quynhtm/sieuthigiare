@@ -270,4 +270,18 @@ class SiteController{
 		$productNew = Site::getListProductNew(0, NUMBER_PRODUCT_NEW);
 		return theme('pageVideoDetail', array('result' =>$result, 'productNew' =>$productNew, 'arrSameVideo' =>$arrSameVideo));
 	}
+
+	public static function searchVideo(){
+
+		$param = arg();
+		$keyword = FunctionLib::getParam('keyword', '');
+
+		SeoMeta::SEO('Tìm kiếm video giải trí - '.WEB_SITE, '', 'Tìm kiếm video giải trí - '.WEB_SITE, 'Tìm kiếm video giải trí - '.WEB_SITE, 'Tìm kiếm video giải trí - '.WEB_SITE);
+
+		$arrFields = array('video_id', 'video_name', 'video_img', 'video_sort_desc', 'video_link');
+		$result = Site::searchVideo($keyword, SITE_RECORD_PER_PAGE, $arrFields);
+
+		$productNew = Site::getListProductNew(0, NUMBER_PRODUCT_NEW);
+		return theme('pageVideoSearch', array('result'=>$result['data'], 'pager' =>$result['pager'], 'productNew' =>$productNew, 'keyword'=>$keyword));
+	}
 }

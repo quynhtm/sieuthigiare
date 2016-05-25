@@ -331,4 +331,35 @@ class Site{
   
         return array();
     }
+
+    public static function searchVideo($keyword = "", $limit = 30, $arrFields = array()){
+        global $base_url;
+        
+        if(!empty($arrFields)){
+       
+            $sql = db_select(self::$table_action_video, 'i')->extend('PagerDefault');
+            foreach($arrFields as $field){
+                $sql->addField('i', $field, $field);
+            }
+            $sql->condition('i.video_status', STASTUS_SHOW, '=');
+            
+            $db_or = db_or();
+			$db_or->condition('i.video_name', '%'.$keyword.'%', 'LIKE');
+			$sql->condition($db_or);
+
+            $result = $sql->limit($limit)->orderBy('i.video_time_update', 'DESC')->execute();
+            $arrItem = (array)$result->fetchAll();
+
+            $pager = array('#theme' => 'pager','#quantity' => 3);
+            $data['data'] = $arrItem;
+            $data['pager'] = $pager;
+            
+			return $data;
+
+        }else{
+            drupal_goto($base_url.'/page-404');
+        }
+ 
+        return array();
+    }
 }
