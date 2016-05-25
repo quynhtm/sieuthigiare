@@ -785,18 +785,21 @@ span#logo{
     padding-bottom: 2px;
     position: relative;
 }
-.intro-news{
+.intro-news,
+.intro-video{
     font-weight: bold;
     font-size: 14px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
-.content-news{
+.content-news,
+.content-video{
     color: #222;
     font-size: 14px;
     line-height: 20px;
 }
-.content-news p{
+.content-news p,
+.content-video p{
     margin-bottom: 15px;
     display: inline-block;
     width: 100%;
@@ -820,6 +823,34 @@ span#logo{
 }
 .same-content-news a:hover{
     text-decoration: underline;
+}
+.link-video{
+    margin:10px auto;
+    width: 550px;
+}
+.link-video iframe{
+    width: 550px!important;
+    height: 413px!important
+}
+.same-content-video{
+    margin-bottom: 20px;
+    clear: both;
+    width: 100%;
+}
+.same-content-video .list-video-post{
+    margin-top: 20px;
+}
+.same-content-video .same-title {
+    color: #333;
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-transform: uppercase;
+}
+.same-content-video .item-video {
+    padding-left: 2px;
+    padding-right: 5px;
+    width: 33.3%;
 }
 .page-tin-tuc #footer{
     margin-top: 0!important;

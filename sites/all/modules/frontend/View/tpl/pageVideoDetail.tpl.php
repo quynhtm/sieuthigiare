@@ -1,6 +1,21 @@
 <?php 
-	global $base_url; 
+	global $base_url;
+
+	$video_id = $result->video_id;
+	$video_name = $result->video_name;
+	$video_link = $result->video_link;
+	$video_sort_desc = $result->video_sort_desc;
+	$video_content = Utility::setNofollow($result->video_content);
+	
+	$video_img = $result->video_img;
+	if($result->video_img != ''){
+		$video_img = FunctionLib::getThumbImage($result->video_img, $video_id, FOLDER_VIDEO,400,500);
+	}
+
+	SeoMeta::SEO($video_name.' - '.WEB_SITE, $video_img, $video_name.' - '.WEB_SITE, $video_name.' - '.WEB_SITE, $video_sort_desc.' - '.WEB_SITE);
+
 ?>
+
 <div class="container">
 	<div class="link-breadcrumb">
 		<a href="<?php echo $base_url; ?>" title="Trang chủ">Trang chủ</a>
@@ -78,10 +93,41 @@
 				</div>
 			</div>
 			<div class="right-video-view">
-				<h1 class="title-video">Video</h1>
 				<div class="list-video-post">
-					
-					
+					<h1 class="title-video"><?php echo $video_name ?></h1>
+					<div class="intro-video"><?php echo $video_sort_desc ?></div>
+					<div class="link-video"><?php echo $video_link ?></div>
+					<div class="content-video"><?php echo $video_content ?></div>
+
+					<?php if(!empty($arrSameVideo)){?>
+					<div class="same-content-video">
+						<div class="same-title">Video khác:</div>
+						<div class="list-video-post">
+							<?php foreach($arrSameVideo as $v) {?>
+							<div class="item-video">
+								<a title="<?php echo $v->video_name ?>" class="thumb" 
+									href="<?php echo FunctionLib::buildLinkVideoDetail('video', $v->video_id, $v->video_name) ?>">
+									<?php if($v->video_img != ''){?>
+									<img alt="<?php echo $v->video_name ?>"
+										src="<?php echo FunctionLib::getThumbImage($v->video_img, $v->video_id,FOLDER_VIDEO,400,400) ?>">
+									<?php }else{?>
+									<img src="<?php echo IMAGE_DEFAULT_VIDEO ?>"/>
+									<?php } ?>
+									<div class="post-format">
+										<i class="icon-play"></i>
+									</div>
+								</a>
+								<div class="description">
+									<h3 class="title-item ellipsis"><a title="<?php echo $v->video_name ?>" 
+										href="<?php echo FunctionLib::buildLinkVideoDetail('video', $v->video_id, $v->video_name) ?>"><?php echo $v->video_name ?></a>
+									</h3>
+									<p class="intro"><?php echo  Utility::substring($v->video_sort_desc, 200, '...')?></p>
+								</div>
+							</div>
+							<?php } ?>
+						</div>
+					</div>
+					<?php } ?>
 				</div>
 			</div>	
 		</div>

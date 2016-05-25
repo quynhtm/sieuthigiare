@@ -249,14 +249,25 @@ class SiteController{
 		SeoMeta::SEO('Video giải trí - '.WEB_SITE, '', 'Video giải trí - '.WEB_SITE, 'Video giải trí - '.WEB_SITE, 'Video giải trí - '.WEB_SITE);
 
 		$arrFields = array('video_id', 'video_name', 'video_img', 'video_sort_desc', 'video_link');
-	    $result = Site::getVideo(12, $arrFields);
+	    $result = Site::getVideo(SITE_RECORD_PER_PAGE, $arrFields);
 
 		$productNew = Site::getListProductNew(0, NUMBER_PRODUCT_NEW);
 		return theme('pageVideo', array('result'=>$result['data'], 'pager' =>$result['pager'], 'productNew' =>$productNew));
 	}
 	public static function videoDetail(){
-		
+		$param = arg();
+		$video_id = 0;
+	    
+	    if(isset($param[1]) && $param[1] != ''){
+			$video_id = FunctionLib::cutStr($param[1], 1, 0);
+		}
+		$result = DataCommon::getVideoById($video_id);
+		if(empty($result)){
+	 		drupal_goto($base_url.'/page-404');
+	    }
+	    $arrFields = array('video_id', 'video_name', 'video_img', 'video_sort_desc', 'video_link');
+	    $arrSameVideo = Site::getVideoSame($video_id, 12, $arrFields);
 		$productNew = Site::getListProductNew(0, NUMBER_PRODUCT_NEW);
-		return theme('pageVideoDetail', array('productNew' =>$productNew));
+		return theme('pageVideoDetail', array('result' =>$result, 'productNew' =>$productNew, 'arrSameVideo' =>$arrSameVideo));
 	}
 }

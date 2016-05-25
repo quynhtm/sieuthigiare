@@ -310,4 +310,25 @@ class Site{
         
         return array();
     }
+    public static function getVideoSame($video_id=0, $limit = 30, $arrFields = array()){
+        global $base_url;
+        
+        if(!empty($arrFields) && $video_id > 0){
+       
+            $sql = db_select(self::$table_action_video, 'i');
+            foreach($arrFields as $field){
+                $sql->addField('i', $field, $field);
+            }
+            $sql->condition('i.video_status', STASTUS_SHOW, '=');
+            $sql->condition('i.video_id', $video_id, '<>');
+            $sql->condition('i.video_id', $video_id, '<');
+
+            $result = $sql->range(0, $limit)->orderBy('i.'.self::$primary_key_video, 'DESC')->execute();
+            $arrItem = (array)$result->fetchAll();
+
+            return $arrItem;
+        }
+  
+        return array();
+    }
 }
