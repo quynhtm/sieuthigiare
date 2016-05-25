@@ -14,7 +14,6 @@ class DataCommon{
 	public static $table_banner = TABLE_BANNER;
 	public static $table_video = TABLE_VIDEO;
 	public static $table_advertise_click = TABLE_ADVERTISE_CLICK;
-	public static $table_video = TABLE_VIDEO;
 	public static $primary_key_province = 'province_id';
 
 	/**
