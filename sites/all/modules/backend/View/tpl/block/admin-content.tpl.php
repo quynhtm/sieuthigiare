@@ -90,6 +90,13 @@ global $base_url;
 					</div>
 				</a>
 			</div>
+			<div class="col-lg-2 align_center">
+				<a class="a_control" title="Quản lý Video" href="<?php echo $base_url ?>/admincp/video">
+					<div class="boder_admin padding10">
+						<i class="icon-facetime-video icon-4x"></i> <br/>Quản lý Video
+					</div>
+				</a>
+			</div>
 
 
 			<!--Dòng 3--->

@@ -12,8 +12,8 @@ class DataCommon{
 	public static $table_product = TABLE_PRODUCT;
 	public static $table_news = TABLE_NEWS;
 	public static $table_banner = TABLE_BANNER;
-	public static $table_advertise_click = TABLE_ADVERTISE_CLICK;
 	public static $table_video = TABLE_VIDEO;
+	public static $table_advertise_click = TABLE_ADVERTISE_CLICK;
 	public static $primary_key_province = 'province_id';
 
 	/**
@@ -595,16 +595,25 @@ class DataCommon{
 
 	/**
 	 * c?p nh?t l??t click banner, tin t?c qu?ng c�o
-	 * @param int $banner_id
+	 * @param int $id_object
 	 * @param string $ip_client
-	 * @param int $type_adver: 1: c?a banner, 2: c?a tin t?c qu?ng c�o
+	 * @param int $type_adver: 1: banner, 2: tin tuc quang cao,3 video giai tri
 	 * @throws Exception
 	 */
-	public static function updateNumberClickAdvertise($banner_id = 0, $ip_client = '',$type_adver = 1){
-		if($banner_id > 0 && trim($ip_client) != ''){
-			//check xem c� t?n t?i ip cua quang cao nay ko
+	public static function updateNumberClickAdvertise($id_object = 0, $ip_client = '',$type_adver = 1){
+		if($id_object > 0 && trim($ip_client) != ''){
+			//check xem co ton tai ip cua quang cao nay ko
+			$string_object = 'click_banner_id';
+			switch($type_adver){
+				case 1: $string_object = 'click_banner_id';
+					break;
+				case 2: $string_object = 'click_new_id';
+					break;
+				case 3: $string_object = 'click_video_id';
+					break;
+			}
 			$query = db_select(self::$table_advertise_click, 'c')
-				->condition(($type_adver == 1)?'c.click_banner_id':'c.click_new_id', $banner_id, '=')
+				->condition('c.'.$string_object, $id_object, '=')
 				->condition('c.click_type_object', $type_adver, '=')
 				->condition('c.click_host_ip', trim($ip_client), '=')
 				->orderBy('c.click_time', 'DESC')
@@ -616,18 +625,18 @@ class DataCommon{
 					$advertise_click[] = $pro;
 				}
 				if(empty($advertise_click)){
-					//th�m v�o b?ng click
+					//them vao bang click
 					$arrClick = array(
-						'click_banner_id' => $banner_id,
+						$string_object => $id_object,
 						'click_type_object' => $type_adver,
 						'click_host_ip' => $ip_client,
 						'click_total' => 1,
 						'click_time' => time());
 					$id_click = db_insert(self::$table_advertise_click)->fields($arrClick)->execute();
 					if($id_click > 0){
-						// l?y t?ng s? l??t click
+						// lay tong luot click
 						$query = db_select(self::$table_advertise_click, 'c')
-							->condition(($type_adver == 1)?'c.click_banner_id':'c.click_new_id', $banner_id, '=')
+							->condition('c.'.$string_object, $id_object, '=')
 							->condition('c.click_type_object', $type_adver, '=')
 							->orderBy('c.click_time', 'DESC')
 							->fields('c', array('click_id','click_time'));
@@ -638,13 +647,20 @@ class DataCommon{
 						foreach ($totak_click as $k => $pro) {
 							$result_click[] = $pro;
 						}
-						//update s? l??ng click v�o TABLE_BANNER
+						//update so luong vao bang doi tuong
 						if(!empty($result_click)){
 							if($type_adver == 1) {
 								$num_updated = db_update(self::$table_banner)
 									->fields(array('banner_total_click' => $result_click[0]->total_click,
 													'banner_time_click' => $result_click[0]->click_time,))
-									->condition(self::$table_banner . '.banner_id', $banner_id, '=')
+									->condition(self::$table_banner . '.banner_id', $id_object, '=')
+									->execute();
+							}
+							if($type_adver == 3) {
+								$num_updated = db_update(self::$table_video)
+									->fields(array('video_view' => $result_click[0]->total_click,
+										'video_time_update' => $result_click[0]->click_time))
+									->condition(self::$table_video . '.video_id', $id_object, '=')
 									->execute();
 							}
 						}
