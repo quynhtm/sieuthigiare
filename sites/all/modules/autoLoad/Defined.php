@@ -21,6 +21,7 @@ define('SITE_SAME_RECORD', '5');
 define("SITE_RECORD_PER_PAGE_SHOP_NORMAL", '12');
 define("SITE_RECORD_PER_PAGE_SHOP_VIP", '32');
 define("NUMBER_PRODUCT_HOME", 15);
+define("NUMBER_PRODUCT_NEW", 7);
 
 define("PATH_UPLOAD", DRUPAL_ROOT.'/uploads');
 define('base_url_lang', $base_url .'/'. ((!isset($language->language) || $language->language == 'und' || $language->language == 'vi') ? 'vi/' : $language->language.'/'));
@@ -145,9 +146,3 @@ define('LINK_FOLLOW',1);
 /*img*/
 define('IMAGE_ERROR', 113); // dung sau quet cac item up anh nhung ko cap nhat DB
 define('IMAGE_DEFAULT', $base_url.'/sites/all/modules/autoLoad/img/default.png');
-
-
-
-
-
-

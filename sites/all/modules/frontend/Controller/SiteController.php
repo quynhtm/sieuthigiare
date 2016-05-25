@@ -143,7 +143,7 @@ class SiteController{
 		}
 		return $numItem;
 	}
-
+	//News
 	public static function getSearchNews(){
 		global $base_url;
 		$param = arg();
@@ -163,7 +163,6 @@ class SiteController{
 			drupal_goto($base_url.'/page-404');
 		}
 	}
-
 	public static function newsList($str=''){
 		global $base_url;
 
@@ -203,7 +202,7 @@ class SiteController{
 	    $arrFields = array('news_id', 'news_title', 'news_image', 'news_desc_sort');
 	    $result = Site::getNewsInCat($news_category, 12, $arrFields);
 
-	    $productNew = Site::getListProductNew(0, 7);
+	    $productNew = Site::getListProductNew(0, NUMBER_PRODUCT_NEW);
 
 		return theme('pageNews', array('catName'=>$catName, 'catNameAlias'=>$catNameAlias, 'result'=>$result['data'], 'pager' =>$result['pager'], 'productNew' =>$productNew));
 	}
@@ -237,7 +236,7 @@ class SiteController{
 	    }else{
 	    	$arrSameNews = Site::getNewsSameCat($news_id, $result->news_category, 10, $arrFields, true);
 	    }
-	    $productNew = Site::getListProductNew(0, 7);
+	    $productNew = Site::getListProductNew(0, NUMBER_PRODUCT_NEW);
 
 		return theme('pageNewsDetail', array('result'=>$result,'arrSameNews'=>$arrSameNews, 'catName'=>$catName, 'catNameAlias'=>$catNameAlias, 'productNew' =>$productNew));
 	}
@@ -250,8 +249,19 @@ class SiteController{
 
 		$arrFields = array('news_id', 'news_title', 'news_image', 'news_desc_sort');
 		$result = Site::searchNews($keyword, 12, $arrFields);
-		$productNew = Site::getListProductNew(0, 7);
+		$productNew = Site::getListProductNew(0, NUMBER_PRODUCT_NEW);
 
 		return theme('pageNewsSearch', array('keyword'=>$keyword, 'result'=>$result['data'], 'pager' =>$result['pager'], 'productNew' =>$productNew, 'catNameAlias'=>$catNameAlias));
+	}
+	//Video
+	public static function getVideo(){
+		
+		$productNew = Site::getListProductNew(0, NUMBER_PRODUCT_NEW);
+		return theme('pageVideo', array('productNew' =>$productNew));
+	}
+	public static function videoDetail(){
+		
+		$productNew = Site::getListProductNew(0, NUMBER_PRODUCT_NEW);
+		return theme('pageVideoDetail', array('productNew' =>$productNew));
 	}
 }

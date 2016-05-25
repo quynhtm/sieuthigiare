@@ -774,7 +774,8 @@ span#logo{
     float: right;
     width: 235px;
 }
-.title-news {
+.title-news,
+.title-video{
     border-bottom: 1px dotted #ddd;
     color: #444;
     font-size: 22px;
@@ -958,4 +959,86 @@ span#logo{
 .list-giai-tri .icon-play-circle{
     color: #bbbbbb;
     font-size: 18px;
+}
+/*video*/
+.left-video-view{
+    display: inline-block;
+    float: left;
+    width: 235px;
+}
+.right-video-view{
+    background: #f2f2f2 none repeat scroll 0 0;
+    border-radius: 2px;
+    display: inline-block;
+    float: right;
+    padding: 5px 10px;
+    width: 1000px;
+}
+.list-video-post .item-video {
+    float: left;
+    height: 220px;
+    margin-bottom: 20px;
+    min-height: 1px;
+    overflow: hidden;
+    padding-left: 6px;
+    padding-right: 6px;
+    position: relative;
+    width: 25%;
+}
+.list-video-post .item-video .thumb {
+    background: #000;
+    display: block;
+    margin-bottom: 8px;
+    position: relative;
+}
+.list-video-post .item-video .thumb img {
+    border: 0 none;
+    max-width: 100%;
+    vertical-align: middle;
+}
+.post-format .icon-play{
+    border: 2px solid #fff;
+    border-radius: 100%;
+    color: #fff;
+    display: block;
+    font-size: 18px;
+    height: 40px;
+    left: 50%;
+    line-height: 35px;
+    margin: -20px 0 0 -20px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: scale(0, 0);
+    transition: all 0.2s ease 0s;
+    width: 40px;
+}
+.post-format:hover .icon-play{
+    transform: scale(1, 1);
+}
+.list-video-post .ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.list-video-post .title-item{
+    font-size: 100%;
+    font-weight: 400;
+    margin-top: 12px;
+    font-size: 14px;
+    height: 18px;
+}
+.list-video-post .title-item a{
+    color: #333;
+    font-weight: bold;
+}
+.list-video-post .title-item a:hover{
+    color: #2850a0;
+}
+.list-video-post .description .intro{
+    font-size: 14px;
+    height: 42px;
+    overflow: hidden;
+    width: 100%;
+    color: #222;
 }
