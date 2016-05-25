@@ -829,8 +829,8 @@ span#logo{
     width: 550px;
 }
 .link-video iframe{
-    width: 550px!important;
-    height: 413px!important
+    width: 560px!important;
+    height: 315px!important
 }
 .same-content-video{
     margin-bottom: 20px;
@@ -1077,4 +1077,10 @@ span#logo{
 }
 .thumb.no-img{
     border: 1px solid #ddd;
+}
+.thumb.no-img .post-format {
+    background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
+}
+.thumb.no-img .post-format .icon-play{
+    transform: scale(1, 1);
 }

@@ -94,17 +94,17 @@
 			</div>
 			<div class="right-video-view">
 				<div class="list-video-post">
-					<h1 class="title-video"><?php echo $video_name ?></h1>
+					<h1 class="title-video"><?php echo $video_name ?> - <i>(Nguồn Youtube.com)</i></h1>
 					<div class="intro-video"><?php echo $video_sort_desc ?></div>
+					<?php if($video_link != ''){?>
 					<div class="link-video" id="link-video">
-						<?php echo $video_link ?>
-						<?php if($v->video_img != ''){?>
-						<img alt="<?php echo $v->video_name ?>"
-							src="<?php echo FunctionLib::getThumbImage($v->video_img, $v->video_id,FOLDER_VIDEO,400,400) ?>">
-						<?php }else{?>
-						<img src="<?php echo IMAGE_DEFAULT_VIDEO ?>"/>
-						<?php } ?>
+						<?php
+							$_video = str_replace('https://www.youtube.com/watch?v=', 'https://www.youtube.com/embed/', $video_link);
+							$embed = '<iframe width="560" height="315" src="'.$_video.'" frameborder="0" allowfullscreen></iframe>';
+							echo $embed;
+						?>
 					</div>
+					<?php } ?>
 					<div class="content-video"><?php echo $video_content ?></div>
 
 					<?php if(!empty($arrSameVideo)){?>

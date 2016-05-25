@@ -78,7 +78,7 @@
 				</div>
 			</div>
 			<div class="right-video-view">
-				<h1 class="title-video">Video</h1>
+				<h1 class="title-video">Video - <i>(Nguồn Youtube.com)</i></h1>
 				<div class="list-video-post">
 					<?php foreach($result as $v) {?>
 					<div class="item-video">
