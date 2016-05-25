@@ -976,23 +976,25 @@ span#logo{
 }
 .list-video-post .item-video {
     float: left;
-    height: 220px;
+    height: 260px;
     margin-bottom: 20px;
     min-height: 1px;
     overflow: hidden;
-    padding-left: 6px;
-    padding-right: 6px;
+    padding-left: 10px;
+    padding-right: 5px;
     position: relative;
-    width: 25%;
+    width: 33.22%;
 }
 .list-video-post .item-video .thumb {
-    background: #000;
     display: block;
+    height: 180px;
     margin-bottom: 8px;
+    overflow: hidden;
     position: relative;
 }
 .list-video-post .item-video .thumb img {
     border: 0 none;
+    width: 100%;
     max-width: 100%;
     vertical-align: middle;
 }
