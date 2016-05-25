@@ -82,7 +82,7 @@
 				<div class="list-video-post">
 					<?php foreach($result as $v) {?>
 					<div class="item-video">
-						<a title="<?php echo $v->video_name ?>" class="thumb" 
+						<a title="<?php echo $v->video_name ?>" class="thumb <?php if($v->video_img == ''){echo 'no-img'}?>" 
 							href="<?php echo FunctionLib::buildLinkVideoDetail('video', $v->video_id, $v->video_name) ?>">
 							<?php if($v->video_img != ''){?>
 							<img alt="<?php echo $v->video_name ?>"
