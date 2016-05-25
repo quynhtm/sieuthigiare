@@ -265,6 +265,10 @@ var Common_admin = {
                     jQuery('#banner_image').val(dataResult.info.name_img);
                     jQuery('#sys_show_image_banner').html(html);
 
+                    var img_new = dataResult.info.name_img;
+                    if(img_new != ''){
+                        jQuery("#img").attr('value', img_new);
+                    }
                     //thanh cong
                     jQuery("#status").html("<font color='green'>Upload is success</font>");
                     setTimeout( "jQuery('.ajax-file-upload-statusbar').hide();",2000 );

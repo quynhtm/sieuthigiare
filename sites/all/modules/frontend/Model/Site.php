@@ -9,8 +9,12 @@ class Site{
 	static $table_action_category = TABLE_CATEGORY;
 	static $table_action_product = TABLE_PRODUCT;
 	static $table_action_news = TABLE_NEWS;
+	static $table_action_video = TABLE_VIDEO;
 	static $primary_key_product = 'product_id';
 	static $primary_key_news = 'news_id';
+	static $primary_key_video = 'video_id';
+
+
 	public static function makeListCatid($limit=0){
 		global $base_url;
 
@@ -277,6 +281,33 @@ class Site{
             drupal_goto($base_url.'/page-404');
         }
  
+        return array();
+    }
+
+    public static function getVideo($limit = 30, $arrFields = array()){
+        global $base_url;
+        
+        if(!empty($arrFields)){
+       
+            $sql = db_select(self::$table_action_video, 'i')->extend('PagerDefault');
+            foreach($arrFields as $field){
+                $sql->addField('i', $field, $field);
+            }
+            $sql->condition('i.video_status', STASTUS_SHOW, '=');
+            
+            $result = $sql->limit($limit)->orderBy('i.video_time_update', 'DESC')->execute();
+            $arrItem = (array)$result->fetchAll();
+
+            $pager = array('#theme' => 'pager','#quantity' => 3);
+            $data['data'] = $arrItem;
+            $data['pager'] = $pager;
+            
+			return $data;
+
+        }else{
+            drupal_goto($base_url.'/page-404');
+        }
+        
         return array();
     }
 }

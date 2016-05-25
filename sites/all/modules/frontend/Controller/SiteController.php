@@ -245,9 +245,14 @@ class SiteController{
 	}
 	//Video
 	public static function getVideo(){
-		
+		$param = arg();
+		SeoMeta::SEO('Video giải trí - '.WEB_SITE, '', 'Video giải trí - '.WEB_SITE, 'Video giải trí - '.WEB_SITE, 'Video giải trí - '.WEB_SITE);
+
+		$arrFields = array('video_id', 'video_name', 'video_img', 'video_sort_desc', 'video_link');
+	    $result = Site::getVideo(12, $arrFields);
+
 		$productNew = Site::getListProductNew(0, NUMBER_PRODUCT_NEW);
-		return theme('pageVideo', array('productNew' =>$productNew));
+		return theme('pageVideo', array('result'=>$result['data'], 'pager' =>$result['pager'], 'productNew' =>$productNew));
 	}
 	public static function videoDetail(){
 		

@@ -133,14 +133,14 @@ class Video{
 	}
 	public static function deleteOne($id=0){
 		if($id > 0){
-			$arrItem = DB::getItemById(self::$table_action, self::$primary_key, array('banner_image'), $id);
+			$arrItem = DB::getItemById(self::$table_action, self::$primary_key, array('video_img'), $id);
 			if(!empty($arrItem)){
-				if(trim($arrItem[0]->banner_image) != ''){
-					$path = PATH_UPLOAD.'/'.FOLDER_BANNER.'/'.$id;
-					if(is_file($path.'/'.$arrItem[0]->banner_image)){
-						@unlink($path.'/'.$arrItem[0]->banner_image);
+				if(trim($arrItem[0]->video_img) != ''){
+					$path = PATH_UPLOAD.'/'.FOLDER_VIDEO.'/'.$id;
+					if(is_file($path.'/'.$arrItem[0]->video_img)){
+						@unlink($path.'/'.$arrItem[0]->video_img);
 					}
-					FunctionLib::delteImageCacheItem(FOLDER_BANNER, $id);
+					FunctionLib::delteImageCacheItem(FOLDER_VIDEO, $id);
 					if(is_dir($path)) {
 						@rmdir($path);
 					}

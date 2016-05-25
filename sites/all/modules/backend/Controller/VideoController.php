@@ -33,15 +33,15 @@ class VideoController{
 		if(isset($result['data']) && !empty($result['data'])){
 			foreach($result['data'] as $k => &$value){
 				if( isset($value->video_img) && trim($value->video_img) != ''){
-					$value->url_image = FunctionLib::getThumbImage($value->video_img,$value->banner_id,FOLDER_VIDEO,80,80);
-					$value->url_image_hover = FunctionLib::getThumbImage($value->video_img,$value->banner_id,FOLDER_VIDEO,450,200);
+					$value->url_image = FunctionLib::getThumbImage($value->video_img,$value->video_id,FOLDER_VIDEO,80,80);
+					$value->url_image_hover = FunctionLib::getThumbImage($value->video_img,$value->video_id,FOLDER_VIDEO,450,200);
 				}
 			}
 		}
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['video_status']);
 		return $view = theme('indexVideo',array(
-									'title'=>'Banner quảng cáo',
+									'title'=>'Video',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
 									'optionStatus' => $optionStatus,
@@ -52,6 +52,8 @@ class VideoController{
 	}
 
 	function formVideoAction(){
+		global $base_url;
+
 		$files = array(
 			'bootstrap/lib/upload/cssUpload.css',
 			'bootstrap/js/bootstrap.min.js',
@@ -63,7 +65,7 @@ class VideoController{
 		);
 		Loader::load('Core', $files);
 
-		global $base_url;
+		
 		$param = arg();
 		$arrItem = $arrImageOther = array();
 		$item_id = 0;
@@ -73,8 +75,8 @@ class VideoController{
 		}
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 			$item_id = FunctionLib::getParam('id', 0);
-			$video_img = trim(FunctionLib::getParam('video_img', ''));
-			$video_img_old = trim(FunctionLib::getParam('video_img_old', ''));
+			$video_img = trim(FunctionLib::getParam('img', ''));
+			$video_img_old = trim(FunctionLib::getParam('img_old', ''));
 			$dataInput = array(
 				'video_name'=>array('value'=>FunctionLib::getParam('video_name',''), 'require'=>1, 'messages'=>'Tên Video không được bỏ trống!'),
 				'video_link'=>array('value'=>FunctionLib::getParam('video_link',''), 'require'=>1, 'messages'=>'Link video không được bỏ trống!'),

@@ -52,11 +52,11 @@ class AjaxUpload{
             case 2 ://img product
                 $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_PRODUCT, FOLDER_PRODUCT, 'product_image_other', self::$primary_key_product);
                 break;
-            case 3 ://img banner qu?ng cáo
-                $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_BANNER, FOLDER_BANNER, 'banner_image_temp', self::$primary_key_banner);
+            case 3 ://img banner quang cao
+                $aryData = $this->uploadImageToFolderOnce($dataImg, $id_hiden, TABLE_BANNER, FOLDER_BANNER, 'banner_image', self::$primary_key_banner);
                 break;
             case 4 ://img video
-                $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_VIDEO, FOLDER_VIDEO, 'video_img_temp', self::$primary_key_video);
+                $aryData = $this->uploadImageToFolderOnce($dataImg, $id_hiden, TABLE_VIDEO, FOLDER_VIDEO, 'video_img', self::$primary_key_video);
                 break;
             default:
                 break;
@@ -84,7 +84,7 @@ class AjaxUpload{
                     $new_row['banner_create_time'] = time();
                     $new_row['banner_status'] = IMAGE_ERROR;
                 }
-                elseif($field_img_other == 'video_img_temp'){
+                elseif($field_img_other == 'video_img'){
                     $new_row['video_time_creater'] = time();
                     $new_row['video_status'] = IMAGE_ERROR;
                 }
@@ -112,6 +112,62 @@ class AjaxUpload{
                    	}
                     $aryTempImages[] = $file_name;
                     $new_row[$field_img_other] = serialize($aryTempImages);
+                    DB::updateId($table_action, $primary_key, $new_row, $item_id);
+                }
+            }
+            $aryData['intIsOK'] = 1;
+            $aryData['id_item'] = $item_id;
+            $aryData['info'] = $tmpImg;
+        }
+        return $aryData;
+    }
+
+    function uploadImageToFolderOnce($dataImg, $id_hiden, $table_action, $folder, $field_img='', $primary_key){
+        global $base_url;
+        $aryData = array();
+        $aryData['intIsOK'] = -1;
+        $aryData['msg'] = "Upload Img!";
+        $item_id = 0;
+        if (!empty($dataImg)) {
+            if($id_hiden == 0){
+                if($field_img == 'banner_image'){
+                    $new_row['banner_create_time'] = time();
+                    $new_row['banner_status'] = IMAGE_ERROR;
+                }
+                elseif($field_img == 'video_img'){
+                    $new_row['video_time_creater'] = time();
+                    $new_row['video_status'] = IMAGE_ERROR;
+                }
+                $item_id = DB::insertOneItem($table_action, $new_row);
+            }elseif($id_hiden > 0){
+                $item_id = $id_hiden;
+            }
+
+            $aryError = $tmpImg = array();
+            $file_name = Upload::uploadFile('multipleFile',
+                               $_file_ext = 'jpg,jpeg,png,gif', 
+                               $_max_file_size = 10*1024*1024, 
+                               $_folder = $folder.'/'.$item_id,
+                               $type_json=0);
+            
+            if ($file_name != '' && empty($aryError)) {
+                $tmpImg['name_img'] = $file_name;
+                $tmpImg['id_key'] = rand(10000, 99999);
+               
+                $tmpImg['src'] = $base_url.'/uploads/'.$folder.'/'.$item_id.'/'.$file_name;
+                if($field_img != ''){
+                    $arrItem = DB::getItemById($table_action, $primary_key, array($field_img), $item_id);
+                    if(!empty($arrItem)){
+                        $path_images = ($arrItem[0]->$field_img != '')? $arrItem[0]->$field_img : '';
+                        //Delte img current in db
+                        if($path_images != ''){
+                            $folder_image = 'uploads/'.$folder;
+                            $this->unlinkFileAndFolder($path_images, $item_id, $folder_image, 0);
+                            FunctionLib::delteImageCacheItem($folder, $item_id);
+                        }
+                    }
+                    $path_images = $file_name;
+                    $new_row[$field_img] = $path_images;
                     DB::updateId($table_action, $primary_key, $new_row, $item_id);
                 }
             }

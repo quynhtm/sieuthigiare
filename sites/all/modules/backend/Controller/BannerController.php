@@ -104,8 +104,8 @@ class BannerController{
 		}
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 			$item_id = FunctionLib::getParam('id', 0);
-			$banner_image = trim(FunctionLib::getParam('banner_image', ''));
-			$banner_image_old = trim(FunctionLib::getParam('banner_image_old', ''));
+			$banner_image = trim(FunctionLib::getParam('img', ''));
+			$banner_image_old = trim(FunctionLib::getParam('img_old', ''));
 			$banner_is_run_time = FunctionLib::getParam('banner_is_run_time',BANNER_NOT_RUN_TIME);
 			$dataInput = array(
 				'banner_name'=>array('value'=>FunctionLib::getParam('banner_name',''), 'require'=>1, 'messages'=>'Tên banner không được bỏ trống!'),

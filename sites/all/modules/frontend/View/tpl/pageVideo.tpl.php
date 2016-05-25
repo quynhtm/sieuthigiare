@@ -80,6 +80,7 @@
 			<div class="right-video-view">
 				<h1 class="title-video">Video</h1>
 				<div class="list-video-post">
+					<?php foreach($result as $v) {?>
 					<div class="item-video">
 						<a title="" class="thumb" href="">
 							<img alt="" src="http://image.mp3.zdn.vn/thumb/240_135/thumb_video/b/0/b006665d1496c0f74fdfa36eebe8746d_1464001935.jpg">
@@ -94,102 +95,10 @@
 							</p>
 						</div>
 					</div>
-					<div class="item-video">
-						<a title="" class="thumb" href="">
-							<img alt="" src="http://image.mp3.zdn.vn/thumb/240_135/thumb_video/b/0/b006665d1496c0f74fdfa36eebe8746d_1464001935.jpg">
-							<div class="post-format">
-								<i class="icon-play"></i>
-							</div>
-						</a>
-						<div class="description">
-							<h3 class="title-item ellipsis"><a title="Video Anh Đang Nơi Đâu - Miu Lê" href="http://mp3.zing.vn/video-clip/Anh-Dang-Noi-Dau-Miu-Le/ZW7UOFIA.html">Anh Đang Nơi Đâu Anh Đang Nơi Đâu</a></h3>
-							<p class="intro">
-								Hầu hết vĩ nhân trên thế giới đều là người dậy sớm. Thức dậy trước 6 giờ sáng mang lại cho bạn những lợi ích tuyệt vời về cả sức khỏe và trí tuệ.
-							</p>
-						</div>
-					</div>
-					<div class="item-video">
-						<a title="" class="thumb" href="">
-							<img alt="" src="http://image.mp3.zdn.vn/thumb/240_135/thumb_video/b/0/b006665d1496c0f74fdfa36eebe8746d_1464001935.jpg">
-							<div class="post-format">
-								<i class="icon-play"></i>
-							</div>
-						</a>
-						<div class="description">
-							<h3 class="title-item ellipsis"><a title="Video Anh Đang Nơi Đâu - Miu Lê" href="http://mp3.zing.vn/video-clip/Anh-Dang-Noi-Dau-Miu-Le/ZW7UOFIA.html">Anh Đang Nơi Đâu Anh Đang Nơi Đâu</a></h3>
-							<p class="intro">
-								Hầu hết vĩ nhân trên thế giới đều là người dậy sớm. Thức dậy trước 6 giờ sáng mang lại cho bạn những lợi ích tuyệt vời về cả sức khỏe và trí tuệ.
-							</p>
-						</div>
-					</div>
-					<div class="item-video">
-						<a title="" class="thumb" href="">
-							<img alt="" src="http://image.mp3.zdn.vn/thumb/240_135/thumb_video/b/0/b006665d1496c0f74fdfa36eebe8746d_1464001935.jpg">
-							<div class="post-format">
-								<i class="icon-play"></i>
-							</div>
-						</a>
-						<div class="description">
-							<h3 class="title-item ellipsis"><a title="Video Anh Đang Nơi Đâu - Miu Lê" href="http://mp3.zing.vn/video-clip/Anh-Dang-Noi-Dau-Miu-Le/ZW7UOFIA.html">Anh Đang Nơi Đâu Anh Đang Nơi Đâu</a></h3>
-							<p class="intro">
-								Hầu hết vĩ nhân trên thế giới đều là người dậy sớm. Thức dậy trước 6 giờ sáng mang lại cho bạn những lợi ích tuyệt vời về cả sức khỏe và trí tuệ.
-							</p>
-						</div>
-					</div>
-					<div class="item-video">
-						<a title="" class="thumb" href="">
-							<img alt="" src="http://image.mp3.zdn.vn/thumb/240_135/thumb_video/b/0/b006665d1496c0f74fdfa36eebe8746d_1464001935.jpg">
-							<div class="post-format">
-								<i class="icon-play"></i>
-							</div>
-						</a>
-						<div class="description">
-							<h3 class="title-item ellipsis"><a title="Video Anh Đang Nơi Đâu - Miu Lê" href="http://mp3.zing.vn/video-clip/Anh-Dang-Noi-Dau-Miu-Le/ZW7UOFIA.html">Anh Đang Nơi Đâu Anh Đang Nơi Đâu</a></h3>
-							<p class="intro">
-								Hầu hết vĩ nhân trên thế giới đều là người dậy sớm. Thức dậy trước 6 giờ sáng mang lại cho bạn những lợi ích tuyệt vời về cả sức khỏe và trí tuệ.
-							</p>
-						</div>
-					</div>
-					<div class="item-video">
-						<a title="" class="thumb" href="">
-							<img alt="" src="http://image.mp3.zdn.vn/thumb/240_135/thumb_video/b/0/b006665d1496c0f74fdfa36eebe8746d_1464001935.jpg">
-							<div class="post-format">
-								<i class="icon-play"></i>
-							</div>
-						</a>
-						<div class="description">
-							<h3 class="title-item ellipsis"><a title="Video Anh Đang Nơi Đâu - Miu Lê" href="http://mp3.zing.vn/video-clip/Anh-Dang-Noi-Dau-Miu-Le/ZW7UOFIA.html">Anh Đang Nơi Đâu Anh Đang Nơi Đâu</a></h3>
-							<p class="intro">
-								Hầu hết vĩ nhân trên thế giới đều là người dậy sớm. Thức dậy trước 6 giờ sáng mang lại cho bạn những lợi ích tuyệt vời về cả sức khỏe và trí tuệ.
-							</p>
-						</div>
-					</div>
-					<div class="item-video">
-						<a title="" class="thumb" href="">
-							<img alt="" src="http://image.mp3.zdn.vn/thumb/240_135/thumb_video/b/0/b006665d1496c0f74fdfa36eebe8746d_1464001935.jpg">
-							<div class="post-format">
-								<i class="icon-play"></i>
-							</div>
-						</a>
-						<div class="description">
-							<h3 class="title-item ellipsis"><a title="Video Anh Đang Nơi Đâu - Miu Lê" href="http://mp3.zing.vn/video-clip/Anh-Dang-Noi-Dau-Miu-Le/ZW7UOFIA.html">Anh Đang Nơi Đâu Anh Đang Nơi Đâu</a></h3>
-							<p class="intro">
-								Hầu hết vĩ nhân trên thế giới đều là người dậy sớm. Thức dậy trước 6 giờ sáng mang lại cho bạn những lợi ích tuyệt vời về cả sức khỏe và trí tuệ.
-							</p>
-						</div>
-					</div>
-					<div class="item-video">
-						<a title="" class="thumb" href="">
-							<img alt="" src="http://image.mp3.zdn.vn/thumb/240_135/thumb_video/b/0/b006665d1496c0f74fdfa36eebe8746d_1464001935.jpg">
-							<div class="post-format">
-								<i class="icon-play"></i>
-							</div>
-						</a>
-						<div class="description">
-							<h3 class="title-item ellipsis"><a title="Video Anh Đang Nơi Đâu - Miu Lê" href="http://mp3.zing.vn/video-clip/Anh-Dang-Noi-Dau-Miu-Le/ZW7UOFIA.html">Anh Đang Nơi Đâu Anh Đang Nơi Đâu</a></h3>
-							<p class="intro">
-								Hầu hết vĩ nhân trên thế giới đều là người dậy sớm. Thức dậy trước 6 giờ sáng mang lại cho bạn những lợi ích tuyệt vời về cả sức khỏe và trí tuệ.
-							</p>
+					<?php } ?>
+					<div class="show-box-paging" style="margin-top:20px; ">
+						<div class="showListPage">
+							<?php print render($pager); ?>
 						</div>
 					</div>
 				</div>

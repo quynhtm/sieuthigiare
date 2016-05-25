@@ -23,8 +23,8 @@
                                  <img height='300' width='400' src='<?php echo FunctionLib::getThumbImage($arrItem->video_img,$arrItem->video_id,FOLDER_VIDEO,400,300)?>'/>
                              <?php }?>
                          </div>
-                         <input name="banner_image" type="hidden" id="banner_image" value="<?php if(isset($arrItem->video_img)){ echo $arrItem->video_img; } ?>">
-                         <input name="banner_image_old" type="hidden" id="banner_image_old" value="<?php if(isset($arrItem->video_img)){ echo $arrItem->video_img; } ?>">
+                         <input name="img" type="hidden" id="img" value="<?php if(isset($arrItem->video_img)){ echo $arrItem->video_img; } ?>">
+                         <input name="img_old" type="hidden" id="img_old" value="<?php if(isset($arrItem->video_img)){ echo $arrItem->video_img; } ?>">
                     </div>
                  </div>
 

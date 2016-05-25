@@ -39,8 +39,8 @@
                                  <img height='300' width='400' src='<?php echo FunctionLib::getThumbImage($arrItem->banner_image,$arrItem->banner_id,FOLDER_BANNER,400,300)?>'/>
                              <?php }?>
                          </div>
-                         <input name="banner_image" type="hidden" id="banner_image" value="<?php if(isset($arrItem->banner_image)){ echo $arrItem->banner_image; } ?>">
-                         <input name="banner_image_old" type="hidden" id="banner_image_old" value="<?php if(isset($arrItem->banner_image)){ echo $arrItem->banner_image; } ?>">
+                         <input name="img" type="hidden" id="img" value="<?php if(isset($arrItem->banner_image)){ echo $arrItem->banner_image; } ?>">
+                         <input name="img_old" type="hidden" id="img_old" value="<?php if(isset($arrItem->banner_image)){ echo $arrItem->banner_image; } ?>">
                      </div>
 
 
