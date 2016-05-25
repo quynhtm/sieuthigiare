@@ -8,16 +8,6 @@
 
 class SiteController{
 	
-	public static $arrCategoryNew = array('tin-tuc-chung' => 'Tin tức chung',
-											'goc-gia-dinh' => 'Góc gia đinh',
-											'thi-truong' => 'Thị trường',
-											'giai-tri' => 'Giải trí',
-											'gioi-thieu' => 'Tin giới thiệu',
-											'tin-cua-shop' => 'Tin của Shop',
-											'tin-cua-khach' => 'Tin của khách',
-											'tin-quang-cao' => 'Tin quảng cáo',
-										);
-
 	public static function getListBannerLagerSite(){
 		$result = DataCommon::getBannerAdvanced(BANNER_TYPE_HOME_BIG, BANNER_PAGE_HOME, 0, 0);
 		return $result;
@@ -147,10 +137,10 @@ class SiteController{
 	public static function getSearchNews(){
 		global $base_url;
 		$param = arg();
-		
+	
 		if(count($param) == 1){
 			$param[0] = substr($param[0], 0, -5);
-			if(in_array($param[0], array_keys(self::$arrCategoryNew))){
+			if(in_array($param[0], array_keys(CGlobal::$aryCatergoryNews))){
 				return self::newsList($param[0]);
 			}else{
 				drupal_goto($base_url.'/page-404');
@@ -193,7 +183,7 @@ class SiteController{
        			drupal_goto($base_url.'/page-404');
 		}
 
-	    $catName = self::$arrCategoryNew[$str];
+	    $catName = CGlobal::$aryCatergoryNews[$str];
 	    $catNameAlias  = $str;
 
 	    SeoMeta::SEO($catName.' - '.WEB_SITE, '', $catName.' - '.WEB_SITE, $catName.' - '.WEB_SITE, $catName.' - '.WEB_SITE);
@@ -215,10 +205,10 @@ class SiteController{
 	    $catName = '';
 	    $catNameAlias = '';
 	    
-	    if(!in_array($param[0], array_keys(self::$arrCategoryNew))){
+	    if(!in_array($param[0], array_keys(CGlobal::$aryCatergoryNews))){
 	    	drupal_goto($base_url.'/page-404');
 	    }else{
-	    	$catName = self::$arrCategoryNew[$param[0]];
+	    	$catName = CGlobal::$aryCatergoryNews[$param[0]];
 	    	$catNameAlias  = $param[0];
 	    }
 

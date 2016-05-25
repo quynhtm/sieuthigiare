@@ -43,15 +43,7 @@ function Site_menu() {
 	);
 
 	//news link
-	$arrCategoryNew = array('tin-tuc-chung' => 'Tin tức chung',
-							'goc-gia-dinh' => 'Góc gia đinh',
-							'thi-truong' => 'Thị trường',
-							'giai-tri' => 'Giải trí',
-							'gioi-thieu' => 'Tin giới thiệu',
-							'tin-cua-shop' => 'Tin của Shop',
-							'tin-cua-khach' => 'Tin của khách',
-							'tin-quang-cao' => 'Tin quảng cáo',
-							);
+	$arrCategoryNew = CGlobal::$aryCatergoryNews;
 	foreach($arrCategoryNew as $key => $val){
 		//category
 		$key_cat = $key.'.html';
