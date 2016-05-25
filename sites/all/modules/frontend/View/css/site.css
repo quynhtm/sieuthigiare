@@ -139,7 +139,7 @@ span#logo{
     width: 230px;
     z-index: 2;
 }
-.list-product_new{
+.list-product-new{
     display: inline-block;
     float: left;
     margin-top: 5px;
@@ -147,7 +147,7 @@ span#logo{
     font-size: 14px;
     font-style: italic;
 }
-.list-product_new .icon-list-new {
+.list-product-new .icon-list-new {
     background: rgba(0, 0, 0, 0) url("../img/new.gif") repeat scroll 0 0;
     display: inline-block;
     height: 13px;
@@ -927,7 +927,7 @@ span#logo{
 .post-format:hover .icon-file-text {
     transform: scale(1, 1);
 }
-.list-product_new .icon-bullhorn {
+.list-giai-tri .icon-bullhorn {
     color: #bbbbbb;
     font-size: 18px;
 }
@@ -945,4 +945,17 @@ span#logo{
 }
 .content-right-product.search form {
     white-space: nowrap;
+}
+
+.list-giai-tri {
+    display: inline-block;
+    float: left;
+    font-size: 14px;
+    font-style: italic;
+    margin-left: 27px;
+    margin-top: 5px;
+}
+.list-giai-tri .icon-play-circle{
+    color: #bbbbbb;
+    font-size: 18px;
 }
