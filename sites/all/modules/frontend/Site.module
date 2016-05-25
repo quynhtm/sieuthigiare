@@ -83,6 +83,23 @@ function Site_menu() {
 		'type' => MENU_CALLBACK,
 	);
 	//end news link
+	$items['video.html'] = array(
+		"title" => 'Video',
+		"description" => 'Video',
+		'page callback' => 'menuLoad',
+		'page arguments' => array('SiteController/getVideo'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+	$items['video/%/%'] = array(
+		"title" => 'Chi tiết video',
+		"description" => 'Chi tiết video',
+		'page callback' => 'menuLoad',
+		'page arguments' => array('SiteController/videoDetail'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
 
   return $items;
 }
@@ -165,6 +182,13 @@ function Site_theme() {
 	    ), 
 	    'pageNewsSearch' => array(
 	      'template' => 'View/tpl/pageNewsSearch'
+	    ),
+
+	    'pageVideo' => array(
+	      'template' => 'View/tpl/pageVideo'
+	    ),
+	    'pageVideoDetail' => array(
+	      'template' => 'View/tpl/pageVideoDetail'
 	    ),
 	);
 }
