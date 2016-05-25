@@ -1075,6 +1075,6 @@ span#logo{
     width: 100%;
     color: #222;
 }
-.same-content-video .list-video-post .thumb{
+.thumb.no-img{
     border: 1px solid #ddd;
 }
