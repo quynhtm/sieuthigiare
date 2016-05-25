@@ -96,7 +96,15 @@
 				<div class="list-video-post">
 					<h1 class="title-video"><?php echo $video_name ?></h1>
 					<div class="intro-video"><?php echo $video_sort_desc ?></div>
-					<div class="link-video"><?php echo $video_link ?></div>
+					<div class="link-video" id="link-video">
+						<?php echo $video_link ?>
+						<?php if($v->video_img != ''){?>
+						<img alt="<?php echo $v->video_name ?>"
+							src="<?php echo FunctionLib::getThumbImage($v->video_img, $v->video_id,FOLDER_VIDEO,400,400) ?>">
+						<?php }else{?>
+						<img src="<?php echo IMAGE_DEFAULT_VIDEO ?>"/>
+						<?php } ?>
+					</div>
 					<div class="content-video"><?php echo $video_content ?></div>
 
 					<?php if(!empty($arrSameVideo)){?>
@@ -105,7 +113,7 @@
 						<div class="list-video-post">
 							<?php foreach($arrSameVideo as $v) {?>
 							<div class="item-video">
-								<a title="<?php echo $v->video_name ?>" class="thumb" 
+								<a title="<?php echo $v->video_name ?>" class="thumb <?php if($v->video_img == ''){ echo 'no-img'; }?>" 
 									href="<?php echo FunctionLib::buildLinkVideoDetail('video', $v->video_id, $v->video_name) ?>">
 									<?php if($v->video_img != ''){?>
 									<img alt="<?php echo $v->video_name ?>"

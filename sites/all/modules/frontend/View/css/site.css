@@ -1075,3 +1075,6 @@ span#logo{
     width: 100%;
     color: #222;
 }
+.thumb.no-img{
+    border: 1px solid #ddd;
+}
