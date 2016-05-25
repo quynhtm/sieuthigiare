@@ -9,10 +9,10 @@ class AjaxUpload{
 	static $primary_key_news = 'news_id';
     static $primary_key_product = 'product_id';
     static $primary_key_banner = 'banner_id';
+    static $primary_key_video = 'video_id';
 
 	function playme(){
 		$code = FunctionLib::getParam('code', '');
-
 		switch( $code ){
             case 'upload_image' :
 				$this->upload_image();
@@ -55,6 +55,9 @@ class AjaxUpload{
             case 3 ://img banner qu?ng cáo
                 $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_BANNER, FOLDER_BANNER, 'banner_image_temp', self::$primary_key_banner);
                 break;
+            case 4 ://img video
+                $aryData = $this->uploadImageToFolder($dataImg, $id_hiden, TABLE_VIDEO, FOLDER_VIDEO, 'video_img_temp', self::$primary_key_video);
+                break;
             default:
                 break;
         }
@@ -67,7 +70,6 @@ class AjaxUpload{
         $aryData['intIsOK'] = -1;
         $aryData['msg'] = "Upload Img!";
         $item_id = 0; // id doi tuong dang upload
-
         if (!empty($dataImg)) {
             if($id_hiden == 0){
                 if($field_img_other == 'news_image_other'){
@@ -81,6 +83,10 @@ class AjaxUpload{
                 elseif($field_img_other == 'banner_image_temp'){
                     $new_row['banner_create_time'] = time();
                     $new_row['banner_status'] = IMAGE_ERROR;
+                }
+                elseif($field_img_other == 'video_img_temp'){
+                    $new_row['video_time_creater'] = time();
+                    $new_row['video_status'] = IMAGE_ERROR;
                 }
                 $item_id = DB::insertOneItem($table_action, $new_row);
             }elseif($id_hiden > 0){

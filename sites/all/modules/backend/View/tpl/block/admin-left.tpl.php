@@ -35,10 +35,11 @@
             </ul>
         </li>
 
-        <li <?php if($param[1]=='news'){?> class="active" <?php } ?>>
+        <li <?php if($param[1]=='news' || $param[1]=='video'){?> class="active" <?php } ?>>
             <a title="" href="javascript:void(0)"><i class="icon-cogs"></i> Quản lý nội dung<i class="icon-arrow"></i></a>
             <ul class="sub">
                 <li <?php if($param[1]=='news'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/news"><i class="icon-minus"></i> Quản lý Tin tức</a></li>
+                <li <?php if($param[1]=='video'){?> class="active" <?php } ?>><a class="" title="" href="<?php echo $base_url ?>/admincp/video"><i class="icon-minus"></i> Quản lý Video</a></li>
             </ul>
         </li>
 

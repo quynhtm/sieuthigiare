@@ -25,6 +25,9 @@ class Cache {
     const CACHE_NEWS_CATEGORY = 'cache_news_category_';
     const CACHE_NEWS_ID = 'cache_news_id_';
 
+    //cache video
+    const CACHE_VIDEO_ID = 'cache_video_id_';
+
     //cacheProduct
     const CACHE_PRODUCT_ID = 'cache_product_id_';
     const CACHE_PRODUCTS_HOME_WITH_CATE_PARENT_ID = 'cache_products_home_with_cate_parent_id_';//cache 15 phut ko phai xoa khi sua SP

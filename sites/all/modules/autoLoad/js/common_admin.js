@@ -236,7 +236,7 @@ var Common_admin = {
     /**
      * Upload banner quảng cáo
      */
-    uploadBannerAdvanced: function() {
+    uploadBannerAdvanced: function(type) {
         jQuery('#sys_PopupUploadImgOtherPro').modal('show');
         jQuery('.ajax-upload-dragdrop').remove();
         var urlAjaxUpload = BASEPARAMS.base_url+'/ajax?act=upload_image&code=upload_image';
@@ -247,7 +247,7 @@ var Common_admin = {
             method: "POST",
             allowedTypes:"jpg,png,jpeg",
             fileName: "multipleFile",
-            formData: {id: id_hiden,type: 3},
+            formData: {id: id_hiden,type: type},
             multiple: false,
             onSubmit:function(){
                 jQuery( "#sys_show_button_upload").hide();

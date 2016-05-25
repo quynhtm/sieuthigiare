@@ -33,7 +33,7 @@
                          </select>
                      </div>
                      <div class="col-lg-12 paddingTop10">
-                         <a href="javascript:;"class="btn btn-primary" onclick="Common_admin.uploadBannerAdvanced();">Upload ảnh quảng cáo</a>
+                         <a href="javascript:;"class="btn btn-primary" onclick="Common_admin.uploadBannerAdvanced(3);">Upload ảnh quảng cáo</a>
                          <div id="sys_show_image_banner">
                              <?php if(isset($arrItem->banner_image) && $arrItem->banner_image !=''){?>
                                  <img height='300' width='400' src='<?php echo FunctionLib::getThumbImage($arrItem->banner_image,$arrItem->banner_id,FOLDER_BANNER,400,300)?>'/>

@@ -120,6 +120,13 @@ function Admin_menu() {
         'access callback' => TRUE,
         'type' => MENU_CALLBACK,
     );
+    $items["admincp/video"] = array(
+        "title" => t('Video giai tri'),
+        "description" => "banner",
+        'page callback' => 'router_page',
+        'access callback' => TRUE,
+        'type' => MENU_CALLBACK,
+    );
     //login to shop by admin
     $items["admincp/techloginas"] = array(
         "title" => t('Tech login as'),
@@ -243,6 +250,10 @@ function Admin_theme() {
         'indexBanner' 		=> array('template' => 'View/tpl/banner/indexBanner'),
         'addBanner' 		=> array('template' => 'View/tpl/banner/addBanner'),
 
+        //video
+        'indexVideo' 		=> array('template' => 'View/tpl/video/indexVideo'),
+        'addVideo' 		=> array('template' => 'View/tpl/video/addVideo'),
+
         //build SQL
         'indexBuildSql' 		=> array('template' => 'View/tpl/buildSql/indexBuildSql'),
         'addBuildSql' 		=> array('template' => 'View/tpl/buildSql/addBuildSql'),
@@ -299,6 +310,9 @@ function Admin_init(){
 
         'Model/Banner.php',
 		'Controller/BannerController.php',
+
+        'Model/Video.php',
+		'Controller/VideoController.php',
 
         'Model/BuildSql.php',
 		'Controller/BuildSqlController.php',
