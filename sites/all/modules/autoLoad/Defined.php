@@ -146,3 +146,4 @@ define('LINK_FOLLOW',1);
 /*img*/
 define('IMAGE_ERROR', 113); // dung sau quet cac item up anh nhung ko cap nhat DB
 define('IMAGE_DEFAULT', $base_url.'/sites/all/modules/autoLoad/img/default.png');
+define('IMAGE_DEFAULT_VIDEO', $base_url.'/sites/all/modules/autoLoad/img/default-video.png');

@@ -481,4 +481,13 @@ class FunctionLib{
 		}
 		return $url;
 	}
+
+	public static function buildLinkVideoDetail($cat_alias='', $video_id = 0, $video_name = ''){
+		global $base_url;
+		$url = '';
+		if($cat_alias !='' && $video_id > 0 && $video_name !=''){
+			$url = $base_url.'/'.$cat_alias.'/v'.$video_id.'/'.self::safe_title($video_name).'.html';
+		}
+		return $url;
+	}
 }

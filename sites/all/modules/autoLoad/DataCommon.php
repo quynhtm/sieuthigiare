@@ -14,6 +14,7 @@ class DataCommon{
 	public static $table_banner = TABLE_BANNER;
 	public static $table_video = TABLE_VIDEO;
 	public static $table_advertise_click = TABLE_ADVERTISE_CLICK;
+	public static $table_video = TABLE_VIDEO;
 	public static $primary_key_province = 'province_id';
 
 	/**
@@ -702,5 +703,30 @@ class DataCommon{
 			}
 		}
 		return $product;
+	}
+
+	public static function getVideoById($video_id = 0){
+		$video = array();
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_VIDEO_ID.$video_id;
+		if($video_id <= 0) return $video;
+		if(Cache::CACHE_ON) {
+			$cache = new Cache();
+			$video = $cache->do_get($key_cache);
+		}
+		if( $video == null || empty($video)){
+			$query = db_select(self::$table_video, 'n')
+				->condition('n.video_id', $video_id, '=')
+				->fields('n');
+			$data = $query->execute();
+			if(!empty($data)){
+				foreach($data as $k=> $new){
+					$video = $new;
+				}
+				if(Cache::CACHE_ON) {
+					$cache->do_put($key_cache, $video, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+				}
+			}
+		}
+		return $video;
 	}
 }

@@ -8,7 +8,7 @@
 	
 	$news_image = $result->news_image;
 	if($result->news_image != ''){
-		$news_image = FunctionLib::getThumbImage($result->news_image, $news_id, FOLDER_PRODUCT,400,500);
+		$news_image = FunctionLib::getThumbImage($result->news_image, $news_id, FOLDER_NEWS,400,500);
 	}
 
 	SeoMeta::SEO($news_title.' - '.WEB_SITE, $news_image, $news_title.' - '.WEB_SITE, $news_title.' - '.WEB_SITE, $news_desc_sort.' - '.WEB_SITE);

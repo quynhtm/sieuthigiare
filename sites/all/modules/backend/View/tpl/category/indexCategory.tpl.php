@@ -86,7 +86,7 @@
 						</td>
 						<td>
 							<?php $linkEdit = $base_url.'/admincp/category/edit/'.$item['category_id']; ?>
-							<a href="<?php echo $linkEdit; ?>" title="Update Item" target="_blank"><i class="icon-edit icon-admin green "></i></a>
+							<a href="<?php echo $linkEdit; ?>" title="Update Item"><i class="icon-edit icon-admin green "></i></a>
 						</td>
 					</tr>
 					<?php }?>

@@ -82,17 +82,23 @@
 				<div class="list-video-post">
 					<?php foreach($result as $v) {?>
 					<div class="item-video">
-						<a title="" class="thumb" href="">
-							<img alt="" src="http://image.mp3.zdn.vn/thumb/240_135/thumb_video/b/0/b006665d1496c0f74fdfa36eebe8746d_1464001935.jpg">
+						<a title="<?php echo $v->video_name ?>" class="thumb" 
+							href="<?php echo FunctionLib::buildLinkVideoDetail('video', $v->video_id, $v->video_name) ?>">
+							<?php if($v->video_img != ''){?>
+							<img alt="<?php echo $v->video_name ?>"
+								src="<?php echo FunctionLib::getThumbImage($v->video_img, $v->video_id,FOLDER_VIDEO,400,400) ?>">
+							<?php }else{?>
+							<img src="<?php echo IMAGE_DEFAULT_VIDEO ?>"/>
+							<?php } ?>
 							<div class="post-format">
 								<i class="icon-play"></i>
 							</div>
 						</a>
 						<div class="description">
-							<h3 class="title-item ellipsis"><a title="Video Anh Đang Nơi Đâu - Miu Lê" href="http://mp3.zing.vn/video-clip/Anh-Dang-Noi-Dau-Miu-Le/ZW7UOFIA.html">Anh Đang Nơi Đâu Anh Đang Nơi Đâu</a></h3>
-							<p class="intro">
-								Hầu hết vĩ nhân trên thế giới đều là người dậy sớm. Thức dậy trước 6 giờ sáng mang lại cho bạn những lợi ích tuyệt vời về cả sức khỏe và trí tuệ.
-							</p>
+							<h3 class="title-item ellipsis"><a title="<?php echo $v->video_name ?>" 
+								href="<?php echo FunctionLib::buildLinkVideoDetail('video', $v->video_id, $v->video_name) ?>"><?php echo $v->video_name ?></a>
+							</h3>
+							<p class="intro"><?php echo  Utility::substring($v->video_sort_desc, 200, '...')?></p>
 						</div>
 					</div>
 					<?php } ?>
