@@ -27,7 +27,7 @@
 			<div class="wrapp-content-news">
 				<h1 class="title-news"><?php echo $news_title ?></h1>
 				<div class="intro-news"><?php echo $news_desc_sort ?></div>
-				<div class="content-news"><?php echo $news_content ?></div>
+				<div class="content-news special"><?php echo $news_content ?></div>
 			</div>
 			<?php if(!empty($arrSameNews)){?>
 			<div class="same-content-news">

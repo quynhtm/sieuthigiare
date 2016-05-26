@@ -1084,3 +1084,6 @@ span#logo{
 .thumb.no-img .post-format .icon-play{
     transform: scale(1, 1);
 }
+.content-news.special li {
+    list-style: outside none disc;
+}
