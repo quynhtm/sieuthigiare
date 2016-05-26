@@ -33,20 +33,6 @@
 						<button class="btn btn-primary" name="submit" value="s">Tìm kiếm</button>
 					</form>
 				</div>
-				<div class="content-right-product">
-					<div id="fb-root"></div>
-						<script>(function(d, s, id) {
-						  var js, fjs = d.getElementsByTagName(s)[0];
-						  if (d.getElementById(id)) return;
-						  js = d.createElement(s); js.id = id;
-						  js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6";
-						  fjs.parentNode.insertBefore(js, fjs);
-						}(document, 'script', 'facebook-jssdk'));</script>
-					<div class="fb-like" data-href="<?php echo FunctionLib::buildLinkVideoDetail('video', $video_id, $video_name) ?>" 
-						data-layout="button_count" data-action="like" 
-						data-show-faces="false" data-share="true">
-					</div>
-				</div>
 				<div class="right-bottom-content-view">
 					<div class="title-hot"><span>Sản phẩm nổi bật</span></div>
 					<div class="content-right-bottom-content-view">
@@ -102,11 +88,27 @@
 					<div class="link-video" id="link-video">
 						<?php
 							$_video = str_replace('https://www.youtube.com/watch?v=', 'https://www.youtube.com/embed/', $video_link);
-							$embed = '<iframe width="560" height="315" src="'.$_video.'" frameborder="0" allowfullscreen></iframe>';
+							$embed = '<iframe width="900" height="506" src="'.$_video.'" frameborder="0" allowfullscreen></iframe>';
 							echo $embed;
 						?>
 					</div>
 					<?php } ?>
+					
+					<div class="content-like-video">
+						<div id="fb-root"></div>
+							<script>(function(d, s, id) {
+							  var js, fjs = d.getElementsByTagName(s)[0];
+							  if (d.getElementById(id)) return;
+							  js = d.createElement(s); js.id = id;
+							  js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6";
+							  fjs.parentNode.insertBefore(js, fjs);
+							}(document, 'script', 'facebook-jssdk'));</script>
+						<div class="fb-like" data-href="<?php echo FunctionLib::buildLinkVideoDetail('video', $video_id, $video_name) ?>" 
+							data-layout="button_count" data-action="like" 
+							data-show-faces="false" data-share="true">
+						</div>
+					</div>
+
 					<div class="content-video"><?php echo $video_content ?></div>
 
 					<?php if(!empty($arrSameVideo)){?>

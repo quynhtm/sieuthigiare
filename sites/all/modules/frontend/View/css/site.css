@@ -826,11 +826,11 @@ span#logo{
 }
 .link-video{
     margin:10px auto;
-    width: 550px;
+    width: 900px;
 }
 .link-video iframe{
-    width: 560px!important;
-    height: 315px!important
+    max-width: 900px!important;
+    max-height: 506px!important
 }
 .same-content-video{
     margin-bottom: 20px;
@@ -1080,4 +1080,9 @@ span#logo{
 }
 .content-news.special li {
     list-style: outside none disc;
+}
+.content-like-video {
+    clear: both;
+    margin: 0 auto 10px;
+    width: 900px;
 }
