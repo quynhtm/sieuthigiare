@@ -45,7 +45,7 @@ class BannerController{
 		//search
 		$dataSearch['banner_status'] = FunctionLib::getParam('banner_status', -1);
 		$dataSearch['banner_name'] = FunctionLib::getParam('banner_name', '');
-		$dataSearch['banner_id'] = FunctionLib::getIntParam('banner_id', -1);
+		$dataSearch['banner_id'] = FunctionLib::getIntParam('banner_id', 0);
 		$dataSearch['banner_page'] = FunctionLib::getParam('banner_page', -1);
 		$dataSearch['banner_type'] = FunctionLib::getParam('banner_type', -1);
 		$dataSearch['banner_is_shop'] = FunctionLib::getParam('banner_is_shop', -1);

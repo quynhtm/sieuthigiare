@@ -28,7 +28,7 @@ class Banner{
 			$update_start = $update_end = '';
 			if(!empty($dataSearch)){
 				foreach($dataSearch as $field =>$value){
-					if($field === 'banner_id' && $value != -1){
+					if($field === 'banner_id' && $value != 0){
 						$sql->condition('i.'.$field, $value, '=');
 						array_push($arrCond, $field.' = '.$value);
 					}
