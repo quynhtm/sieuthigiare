@@ -219,8 +219,11 @@ class SiteController{
 		if(empty($result)){
 	 		drupal_goto($base_url.'/page-404');
 	    }
+
+	    $ip = FunctionLib::getClientIp();
+	    DataCommon::updateNumberClickAdvertise($news_id, $ip, 2);
+
 	    $arrFields = array('news_id', 'news_title');
-	   
 	    if($result->news_category == NEW_CATEGORY_GIOI_THIEU || $result->news_category == NEW_CATEGORY_SHOP || $result->news_category == NEW_CATEGORY_CUSTOMER){
 	    	$arrSameNews = Site::getNewsSameCat($news_id, $result->news_category, 10, $arrFields, false);
 	    }else{
@@ -266,6 +269,9 @@ class SiteController{
 		if(empty($result)){
 	 		drupal_goto($base_url.'/page-404');
 	    }
+	    $ip = FunctionLib::getClientIp();
+	    DataCommon::updateNumberClickAdvertise($video_id, $ip, 3);
+
 	    $arrFields = array('video_id', 'video_name', 'video_img', 'video_sort_desc', 'video_link');
 	    $arrSameVideo = Site::getVideoSame($video_id, 12, $arrFields);
 		$productNew = Site::getListProductNew(0, NUMBER_PRODUCT_NEW);
