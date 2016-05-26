@@ -220,9 +220,6 @@ class SiteController{
 	 		drupal_goto($base_url.'/page-404');
 	    }
 
-	    $ip = FunctionLib::getClientIp();
-	    DataCommon::updateNumberClickAdvertise($news_id, $ip, 2);
-
 	    $arrFields = array('news_id', 'news_title');
 	    if($result->news_category == NEW_CATEGORY_GIOI_THIEU || $result->news_category == NEW_CATEGORY_SHOP || $result->news_category == NEW_CATEGORY_CUSTOMER){
 	    	$arrSameNews = Site::getNewsSameCat($news_id, $result->news_category, 10, $arrFields, false);
