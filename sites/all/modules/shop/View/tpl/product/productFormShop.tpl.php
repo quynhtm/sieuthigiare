@@ -88,7 +88,7 @@
 									<div class="control-group">
 						                <label class="control-label">Giá nhập</label>
 						                <div class="controls">
-											<input type="text" placeholder="Giá nhập" name="product_price_input" id="product_price_input" class="formatMoney text-right form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="<?php if(isset($arrItem->product_price_sell)) { echo $arrItem->product_price_sell; } ?>">
+											<input type="text" placeholder="Giá nhập" name="product_price_input" id="product_price_input" class="formatMoney text-right form-control" data-v-max="999999999999999" data-v-min="0" data-a-sep="." data-a-dec="," data-a-sign=" đ" data-p-sign="s" value="<?php if(isset($arrItem->product_price_input)) { echo $arrItem->product_price_input; } ?>">
 											<input type="hidden" id="product_price_input_hide" name="product_price_input_hide" value="0">
 						                </div>
 						            </div>
