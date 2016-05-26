@@ -1079,7 +1079,7 @@ span#logo{
     border: 1px solid #ddd;
 }
 .content-news.special li {
-    list-style: outside none disc;
+    list-style: disc;
 }
 .content-like-video {
     clear: both;
