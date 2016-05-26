@@ -1,7 +1,8 @@
 <?php 
 	global $base_url;
 	if(isset($user_shop->shop_name) && $user_shop->shop_name != ''){
-		SeoMeta::SEO($user_shop->shop_name, '', $user_shop->shop_name, $user_shop->shop_name, $user_shop->shop_name);
+		$meta_img = IMAGE_DEFAULT_SHOP;
+		SeoMeta::SEO($user_shop->shop_name, $meta_img, $user_shop->shop_name, $user_shop->shop_name, $user_shop->shop_name);
 	}
 ?>
 <div class="container">
