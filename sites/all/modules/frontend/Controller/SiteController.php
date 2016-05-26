@@ -227,8 +227,8 @@ class SiteController{
 	    	$arrSameNews = Site::getNewsSameCat($news_id, $result->news_category, 10, $arrFields, true);
 	    }
 	    $productNew = Site::getListProductNew(0, NUMBER_PRODUCT_NEW);
-
-		return theme('pageNewsDetail', array('result'=>$result,'arrSameNews'=>$arrSameNews, 'catName'=>$catName, 'catNameAlias'=>$catNameAlias, 'productNew' =>$productNew));
+	    $videoViewMax =  DataCommon::getVideoViewMax();
+		return theme('pageNewsDetail', array('result'=>$result,'arrSameNews'=>$arrSameNews, 'catName'=>$catName, 'catNameAlias'=>$catNameAlias, 'productNew' =>$productNew, 'videoViewMax'=>$videoViewMax));
 	}
 	public static function searchNews(){
 		

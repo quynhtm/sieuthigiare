@@ -1086,3 +1086,21 @@ span#logo{
     margin: 0 auto 10px;
     width: 900px;
 }
+.video-view-max{
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fe6d00;
+}
+.title-video-view-max{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    clear: both;
+}
+.title-video-view-max a{
+    color: #444;
+    display: block;
+    font-size: 17px;
+    line-height: 18px;
+    margin: 0;
+}
