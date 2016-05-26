@@ -187,13 +187,13 @@ check_valid_form = {
 					var price_sell = jQuery('#product_price_sell_hide').val(),
 						price_market = jQuery('#product_price_market_hide').val();
 
-					if (price_market < price_sell) {
+					/*if (price_sell > price_market) {
 						jAlert('Giá thị trường phải LỚN hơn giá bán', 'Cảnh báo');
 						product_price_market.addClass('error').focus();
 						return false;
 					} else {
 						product_price_market.removeClass('error');
-					}
+					}*/
 				}
 				//giá nhập
 				if (parseInt(product_price_input.val()) > 0) {
