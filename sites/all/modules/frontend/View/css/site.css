@@ -1078,12 +1078,6 @@ span#logo{
 .thumb.no-img{
     border: 1px solid #ddd;
 }
-.thumb.no-img .post-format {
-    background: rgba(0, 0, 0, 0.5) none repeat scroll 0 0;
-}
-.thumb.no-img .post-format .icon-play{
-    transform: scale(1, 1);
-}
 .content-news.special li {
     list-style: outside none disc;
 }

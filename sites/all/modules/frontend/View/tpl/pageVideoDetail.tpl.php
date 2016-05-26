@@ -40,7 +40,7 @@
 						  js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.6";
 						  fjs.parentNode.insertBefore(js, fjs);
 						}(document, 'script', 'facebook-jssdk'));</script>
-					<div class="fb-like" data-href="<?php echo $base_url?>/video.html" 
+					<div class="fb-like" data-href="<?php echo FunctionLib::buildLinkVideoDetail('video', $video_id, $video_name) ?>" 
 						data-layout="button_count" data-action="like" 
 						data-show-faces="false" data-share="true">
 					</div>
