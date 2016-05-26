@@ -10,6 +10,8 @@
 	$video_img = $result->video_img;
 	if($result->video_img != ''){
 		$video_img = FunctionLib::getThumbImage($result->video_img, $video_id, FOLDER_VIDEO,400,500);
+	}else{
+		$video_img = IMAGE_DEFAULT_VIDEO;
 	}
 
 	SeoMeta::SEO($video_name.' - '.WEB_SITE, $video_img, $video_name.' - '.WEB_SITE, $video_name.' - '.WEB_SITE, $video_sort_desc.' - '.WEB_SITE);

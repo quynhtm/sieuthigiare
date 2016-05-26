@@ -13,8 +13,12 @@ class SeoMeta{
 		$url = $base_url.request_uri();
 
 		//set link img
-		if($img==''){
-			$img = $base_url.'/uploads/images/default.jpg';
+		if($img == ''){
+			if(defined(IMAGE_DEFAULT)){
+				$img = IMAGE_DEFAULT;
+			}else{
+				$img = $base_url.'/uploads/default.png';
+			}
 		}
 
 		//set text meta

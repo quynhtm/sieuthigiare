@@ -246,7 +246,8 @@ class SiteController{
 	//Video
 	public static function getVideo(){
 		$param = arg();
-		SeoMeta::SEO('Video giải trí - '.WEB_SITE, '', 'Video giải trí - '.WEB_SITE, 'Video giải trí - '.WEB_SITE, 'Video giải trí - '.WEB_SITE);
+		$video_img = IMAGE_DEFAULT_VIDEO;
+		SeoMeta::SEO('Video giải trí - '.WEB_SITE, $video_img, 'Video giải trí - '.WEB_SITE, 'Video giải trí - '.WEB_SITE, 'Video giải trí - '.WEB_SITE);
 
 		$arrFields = array('video_id', 'video_name', 'video_img', 'video_sort_desc', 'video_link');
 	    $result = Site::getVideo(SITE_RECORD_PER_PAGE, $arrFields);
@@ -276,7 +277,8 @@ class SiteController{
 		$param = arg();
 		$keyword = FunctionLib::getParam('keyword', '');
 
-		SeoMeta::SEO('Tìm kiếm video giải trí - '.WEB_SITE, '', 'Tìm kiếm video giải trí - '.WEB_SITE, 'Tìm kiếm video giải trí - '.WEB_SITE, 'Tìm kiếm video giải trí - '.WEB_SITE);
+		$video_img = IMAGE_DEFAULT_VIDEO;
+		SeoMeta::SEO('Tìm kiếm video giải trí - '.WEB_SITE, $video_img, 'Tìm kiếm video giải trí - '.WEB_SITE, 'Tìm kiếm video giải trí - '.WEB_SITE, 'Tìm kiếm video giải trí - '.WEB_SITE);
 
 		$arrFields = array('video_id', 'video_name', 'video_img', 'video_sort_desc', 'video_link');
 		$result = Site::searchVideo($keyword, SITE_RECORD_PER_PAGE, $arrFields);
