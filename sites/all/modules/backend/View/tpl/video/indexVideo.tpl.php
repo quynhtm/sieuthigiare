@@ -27,7 +27,7 @@
 <div class="inner-box">
 	<div class="page-title-box">
 		<div class="wrapper">
-			<h5 class="padding10"><?php echo (isset($title)) ? $title: t('Quản lý sản phẩm');?></h5>
+			<h5 class="padding10"><?php echo (isset($title)) ? $title: t('Quản lý Video');?></h5>
 			<span class="menu_tools">
 				<a href="<?php echo $base_url; ?>/admincp/video/add" title="Thêm mới" class="icon-plus icon-admin green"></a>
                 <a href="javascript:void(0)" title="Xóa item" id="deleteMoreItem" class="icon-trash icon-admin red"></a>
@@ -82,7 +82,7 @@
 
 							<td>
 								<?php
-									echo '<b>Video: </b>['.$item->video_id.'] '.$item->video_name.'<br/>';
+									echo '<b>Video: </b>['.$item->video_id.'] <a target="_blank" href="'.FunctionLib::buildLinkVideoDetail('video', $item->video_id, $item->video_name).'">'.$item->video_name.'</a><br/>';
 								?>
 							</td>
 							<td>
