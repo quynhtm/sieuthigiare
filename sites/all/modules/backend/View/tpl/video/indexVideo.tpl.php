@@ -50,8 +50,9 @@
 					<tr>
 						<th width="2%"class="td_list">STT <input type="checkbox" id="checkAll"/></th>
 						<th width="6%" class="td_list">Ảnh</th>
-						<th width="25%" class="td_list">Tên Video</th>
-						<th width="25%" class="td_list">Link video</th>
+						<th width="20%" class="td_list">Tên Video</th>
+						<th width="30%" class="td_list">Link video</th>
+						<th width="10%" class="td_list">Lượt view</th>
 						<th width="20%" class="td_list">Ngày tạo</th>
 						<th width="6%" class="td_list">Action</th>
 					</tr>
@@ -81,12 +82,17 @@
 
 							<td>
 								<?php
-									echo '<b>B: </b>['.$item->video_id.'] '.$item->video_name.'<br/>';
+									echo '<b>Video: </b>['.$item->video_id.'] '.$item->video_name.'<br/>';
 								?>
 							</td>
 							<td>
 								<?php
 									echo $item->video_link;
+								?>
+							</td>
+							<td>
+								<?php
+									echo $item->video_view;
 								?>
 							</td>
 							<td>
