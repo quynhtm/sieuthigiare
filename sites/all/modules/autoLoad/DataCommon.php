@@ -728,4 +728,18 @@ class DataCommon{
 		}
 		return $video;
 	}
+
+	public static function getVideoViewMax(){
+		$sql = db_select(self::$table_video, 'i');
+    	$sql->addField('i', 'video_id', 'video_id');
+    	$sql->addField('i', 'video_name', 'video_name');
+    	$sql->addField('i', 'video_img', 'video_img');
+    	$sql->addField('i', 'video_sort_desc', 'video_sort_desc');
+    	$sql->addField('i', 'video_link', 'video_link');
+    	$sql->condition('i.video_status', STASTUS_SHOW, '=');
+		$result = $sql->range(0, 1)->orderBy('i.video_view', 'DESC')->execute();
+        $arrItem = (array)$result->fetchAll();
+
+        return $arrItem;
+	}
 }
