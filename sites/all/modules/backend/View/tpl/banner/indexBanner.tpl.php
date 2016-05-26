@@ -64,7 +64,7 @@
 						<th width="6%" class="td_list">Ảnh</th>
 						<th width="15%" class="td_list">Tên banner</th>
 						<th width="15%" class="td_list">Thông tin banner</th>
-						<th width="15%" class="td_list">Url link</th>
+						<th width="15%" class="td_list">Thông tin banner</th>
 						<th width="5%" class="td_list">Follow</th>
 						<th width="10%" class="td_list">Ngày chạy</th>
 						<th width="6%" class="td_list">Action</th>
@@ -104,8 +104,6 @@
 								<?php
 									echo '<b>Loại:</b> '.(isset($arrTypeBanner[$item->banner_type])?$arrTypeBanner[$item->banner_type].'<br/>': 'Chưa chọn loại <br/>');
 									echo '<b>Page:</b> '.(isset($arrPage[$item->banner_page])?$arrPage[$item->banner_page].'<br/>': 'Chưa chọn page <br/>');
-									echo '<b>Shop:</b> '.(isset($arrIsShop[$item->banner_is_shop])?$arrIsShop[$item->banner_is_shop].'<br/>': 'Chưa chọn shop <br/>');
-									echo '<b>Danh mục id:</b> '.$item->banner_category_id;
 									echo ($item->banner_total_click > 0)?'<br/><b class="price_sell">'.$item->banner_total_click.' lượt click </b>': '';
 									echo ($item->banner_time_click > 0)?'<span class="font_9"> '. date('d-m-Y h:i:s',$item->banner_time_click).'</span>':'';
 								?>
@@ -113,7 +111,8 @@
 
 							<td>
 								<?php
-									echo $item->banner_link;
+									echo '<b>Shop:</b> '.(isset($arrIsShop[$item->banner_is_shop])?$arrIsShop[$item->banner_is_shop].'<br/>': 'Chưa chọn shop <br/>');
+									echo '<b>Danh mục id:</b> '.$item->banner_category_id;
 								?>
 							</td>
 							
