@@ -10,7 +10,7 @@
 	<div class="main-view-post">
 		<div class="wrapp-content-news">
 			<div class="left-news-view">
-				<h1 class="title-news">Kết quả tìm kiếm</h1>
+				<h1 class="title-news">Kết quả tìm kiếm <i>"<?php echo $keyword ?>"</i></h1>
 				<div class="list-news-post">
 					<?php foreach($result as $v) {?>
 					<div class="item-news">

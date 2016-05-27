@@ -5,13 +5,27 @@
 	<div class="link-breadcrumb">
 		<a href="<?php echo $base_url; ?>" title="Trang chủ">Trang chủ</a>
 		<i class="icon-double-angle-right"></i>
-		<a href="<?php echo $base_url ?>/tim-kiem.html" title="Sản phẩm mới">Kết quả tìm kiếm</a>
+		<a href="<?php echo $base_url ?>/tim-kiem.html?provices_id=<?php echo $provices_id ?>&category_id=<?php echo $category_id ?>" title="Sản phẩm mới">Kết quả tìm kiếm</a>
 	</div>
 	<div class="main-view-post">
 		<div class="content-list-item w-home search">
 			
 			<?php if(!empty($bannerList)){ ?>
 			<div class="left-product-new">
+			<h1 class="title-video">
+				<?php 
+					if($catName != '' && $proviceName == ''){
+						echo 'Kết quả tìm kiếm theo danh mục: '.$catName;
+					}elseif($catName == '' && $proviceName != ''){
+						echo 'Kết quả tìm kiếm theo tỉnh/thành: '.$proviceName;
+					}elseif($catName != '' && $proviceName != ''){
+						echo 'Kết quả tìm kiếm theo danh mục: '.$catName.', tỉnh/thành: '.$proviceName;
+					}else{
+						echo 'Kết quả tìm kiếm';
+					}
+				?>
+
+			</h1>
 			<?php } ?>
 			<?php if(!empty($result)){ ?>
 				<ul>

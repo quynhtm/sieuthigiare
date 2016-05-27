@@ -115,11 +115,31 @@ class SiteController{
 		$category_id 	= FunctionLib::getIntParam('category_id', 0);
 		$result = Site::getListProductSearch($provices_id, $category_id, $limit);
 
+		$catName = '';
+		if($category_id > 0){
+			$category = DataCommon::getCategoryById($category_id);
+			if(!empty($category)){
+				$catName = $category->category_name;
+			}
+		}
+		$proviceName = '';
+		if($provices_id > 0){
+			$allProvice = DataCommon::getAllProvices();
+			$arrKey = array_keys($allProvice);
+			if(in_array($provices_id, $arrKey)){
+				$proviceName = $allProvice[$provices_id];
+			}
+		}
 		SeoMeta::SEO('Tìm kiếm sản phẩm - '.WEB_SITE, '', 'Tìm kiếm sản phẩm - '.WEB_SITE, 'Tìm kiếm sản phẩm - '.WEB_SITE, 'Tìm kiếm sản phẩm - '.WEB_SITE);
 
 		return theme('pageProductSearch', array('result'=>$result['data'],
 												'pager' =>$result['pager'], 
-												'bannerList'=>$bannerList));;
+												'bannerList'=>$bannerList,
+												'provices_id'=>$provices_id,
+												'category_id'=>$category_id,
+												'catName'=>$catName,
+												'proviceName'=>$proviceName,
+												));;
 	}
 
 	public static function countCartItem(){
@@ -227,8 +247,14 @@ class SiteController{
 	    	$arrSameNews = Site::getNewsSameCat($news_id, $result->news_category, 10, $arrFields, true);
 	    }
 	    $productNew = Site::getListProductNew(0, NUMBER_PRODUCT_NEW);
-	    $videoViewMax =  DataCommon::getVideoViewMax();
-		return theme('pageNewsDetail', array('result'=>$result,'arrSameNews'=>$arrSameNews, 'catName'=>$catName, 'catNameAlias'=>$catNameAlias, 'productNew' =>$productNew, 'videoViewMax'=>$videoViewMax));
+	    if($param[0] != 'gioi-thieu' && $param[0] != 'tin-cua-khach' && $param[0] != 'tin-cua-shop'){
+	    	$videoViewMax =  DataCommon::getVideoViewMax();
+	    	$noCat = 1;
+		}else{
+			$videoViewMax = array();
+			$noCat = 0;
+		}
+		return theme('pageNewsDetail', array('result'=>$result,'arrSameNews'=>$arrSameNews, 'catName'=>$catName, 'catNameAlias'=>$catNameAlias, 'productNew' =>$productNew, 'videoViewMax'=>$videoViewMax, 'noCat'=>$noCat));
 	}
 	public static function searchNews(){
 		
