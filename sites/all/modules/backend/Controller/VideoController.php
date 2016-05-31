@@ -23,8 +23,6 @@ class VideoController{
 		global $base_url;
 		$limit = SITE_RECORD_PER_PAGE;
 		//search
-
-
 		$dataSearch['video_id'] = FunctionLib::getParam('video_id', -1);
 		$dataSearch['video_name'] = FunctionLib::getParam('video_name', '');
 		$dataSearch['video_status'] = FunctionLib::getIntParam('video_status', -1);
@@ -55,6 +53,12 @@ class VideoController{
 		global $base_url;
 
 		$files = array(
+			'bootstrap/lib/ckeditor/ckeditor.js',
+			'bootstrap/lib/ckeditor/config.js',
+		);
+		Loader::loadJSExt('Core', $files);
+		
+		$files = array(
 			'bootstrap/lib/upload/cssUpload.css',
 			'bootstrap/js/bootstrap.min.js',
 			'bootstrap/lib/upload/jquery.uploadfile.js',
@@ -65,7 +69,6 @@ class VideoController{
 		);
 		Loader::load('Core', $files);
 
-		
 		$param = arg();
 		$arrItem = $arrImageOther = array();
 		$item_id = 0;
