@@ -158,15 +158,19 @@ class ProductShopController{
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 			$id = FunctionLib::getParam('id', 0);
 			$product_type_price = FunctionLib::getIntParam('product_type_price',TYPE_PRICE_CONTACT);
+
+			$product_price_sell = (int)str_replace('.','',FunctionLib::getParam('product_price_sell'));//giá bán
+			$product_price_market = (int)str_replace('.','',FunctionLib::getParam('product_price_market'));//giá thị trường
+			$product_price_input = (int)str_replace('.','',FunctionLib::getParam('product_price_input'));//giá nhập
 			$data = array(
 					'category_id'=>array('value'=>FunctionLib::getIntParam('category_id',''), 'require'=>0, 'messages'=>'Chưa chọn danh mục sản phẩm'),
 					'product_name'=>array('value'=>FunctionLib::getParam('product_name',''), 'require'=>1, 'messages'=>'Tên sản phẩm không được trống!'),
 					'product_content'=>array('value'=>FunctionLib::getParam('product_content',''), 'require'=>0, 'messages'=>'Chi tiết sản phẩm không được trống!'),
 					'product_sort_desc'=>array('value'=>FunctionLib::getParam('product_sort_desc',''), 'require'=>0, 'messages'=>'Chi tiết sản phẩm không được trống!'),
 
-					'product_price_sell'=>array('value'=>FunctionLib::getIntParam('product_price_sell_hide',0)),
-					'product_price_market'=>array('value'=>FunctionLib::getIntParam('product_price_market_hide',0)),
-					'product_price_input'=>array('value'=>FunctionLib::getIntParam('product_price_input_hide',0)),
+					'product_price_sell'=>array('value'=>$product_price_sell),
+					'product_price_market'=>array('value'=>$product_price_market),
+					'product_price_input'=>array('value'=>$product_price_input),
 
 					'product_selloff'=>array('value'=>FunctionLib::getParam('product_selloff','')),
 					'product_image'=>array('value'=>FunctionLib::getParam('image_primary','')),
@@ -183,7 +187,7 @@ class ProductShopController{
 					'product_is_hot'=>array('value'=>FunctionLib::getIntParam('product_is_hot',PRODUCT_NOMAL), 'require'=>0),
 					'product_type_price'=>array('value'=>$product_type_price),
 				);
-			
+			//FunctionLib::Debug($data);
 			if(!empty($arrItem)){
 				$data['time_update']['value'] = time();
 			}else{

@@ -47,9 +47,10 @@
 					<tr>
 						<th width="2%"class="td_list">STT <input type="checkbox" id="checkAll"/></th>
 						<th width="6%" class="td_list">Ảnh</th>
-						<th width="30%" class="td_list">Tên sản phẩm</th>
-						<th width="15%" class="td_list">Thông tin giá</th>
-						<th width="15%" class="td_list">Danh mục</th>
+						<th width="20%" class="td_list">Tên sản phẩm</th>
+						<th width="12%" class="td_list">Thông tin giá</th>
+						<th width="12%" class="td_list">Danh mục</th>
+						<th width="15%" class="td_list">Ngày</th>
 						<th width="6%" class="td_list">Action</th>
 					</tr>
 					</thead>
@@ -81,14 +82,13 @@
 								echo '<b>P: </b>['.$item->product_id.'] '.$item->product_name.'<br/>';
 								echo ($item->user_shop_id > 0)?'<b>S: </b>['.$item->user_shop_id.'] '.$item->user_shop_name.'<br/>': '';
 								echo isset($arrIsShop[$item->is_shop])? $arrIsShop[$item->is_shop].'<br/>':'';
-								echo '<span class="font_9">Ngày tạo:'. date('d-m-Y h:i:s',$item->time_created).'</span>';
 								?>
 							</td>
 
 							<td>
 								<?php
 									if($item->product_type_price == TYPE_PRICE_NUMBER){
-										echo ($item->product_price_sell > 0)?'Giá bán: <b class="price_sell">'.FunctionLib::numberFormat($item->product_price_sell).'đ</b><br/>': '';
+										echo ($item->product_price_sell > 0)?'Bán: <b class="price_sell">'.FunctionLib::numberFormat($item->product_price_sell).'đ</b><br/>': '';
 										echo ($item->product_price_market > 0)?'Giá TT: <b>'.FunctionLib::numberFormat($item->product_price_market).'đ</b><br/>': '';
 										echo ($item->product_price_input > 0)?'Nhập: <b>'.FunctionLib::numberFormat($item->product_price_input).'đ</b><br/>': '';
 									}else{
@@ -99,6 +99,14 @@
 							<td>
 								<?php
 								echo ($item->category_id > 0)?'['.$item->category_id.'] '.$item->category_name.'<br/>': '';
+								?>
+							</td>
+							<td>
+								<?php
+									echo '<span>Ngày tạo: '. date('d-m-Y H:i:s',$item->time_created).'</span>';
+									if($item->time_update > 0){
+										echo '<br/><span>Cập nhật: '. date('d-m-Y H:i:s',$item->time_update).'</span>';
+									}
 								?>
 							</td>
 							<td>
