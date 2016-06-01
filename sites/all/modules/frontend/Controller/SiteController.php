@@ -247,8 +247,12 @@ class SiteController{
 	    	$arrSameNews = Site::getNewsSameCat($news_id, $result->news_category, 10, $arrFields, true);
 	    }
 	    $productNew = Site::getListProductNew(0, NUMBER_PRODUCT_NEW);
-	    
-		return theme('pageNewsDetail', array('result'=>$result,'arrSameNews'=>$arrSameNews, 'catName'=>$catName, 'catNameAlias'=>$catNameAlias, 'productNew' =>$productNew));
+	     if($param[0] != 'gioi-thieu' && $param[0] != 'tin-cua-khach' && $param[0] != 'tin-cua-shop'){
+	    	$noCat = 1;
+		}else{
+			$noCat = 0;
+		}
+		return theme('pageNewsDetail', array('result'=>$result,'arrSameNews'=>$arrSameNews, 'catName'=>$catName, 'catNameAlias'=>$catNameAlias, 'productNew' =>$productNew, 'noCat'=>$noCat));
 	}
 	public static function searchNews(){
 		

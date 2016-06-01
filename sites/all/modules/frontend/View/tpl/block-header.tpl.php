@@ -138,9 +138,9 @@
 			<div class="list-giai-tri">
 				<i class="icon-bullhorn"></i> <a href="<?php echo $base_url ?>/tin-tuc-chung.html" title="Tin tức">Tin tức</a>
 			</div>
-			<div class="list-giai-tri">
+			<!-- <div class="list-giai-tri">
 				<i class="icon-play-circle"></i> <a href="<?php echo $base_url ?>/video.html" title="Video">Video</a>
-			</div>
+			</div> -->
 			<!-- <div class="desc-price-day">
 				<i class="icon-star-empty"></i> <a href="#" title="Giảm giá mỗi ngày">Giảm giá mỗi ngày</a>
 			</div> -->
