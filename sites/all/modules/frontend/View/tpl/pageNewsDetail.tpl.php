@@ -41,21 +41,6 @@
 				</ul>
 			</div>
 			<?php } ?>
-			<?php if(!empty($videoViewMax)){?>
-			<div class="video-view-max">Video đang được xem nhiều nhất</div>
-			<div class="title-video-view-max">
-				<a title="<?php echo $videoViewMax[0]->video_name ?>" class="thumb" href="<?php echo FunctionLib::buildLinkVideoDetail('video', $videoViewMax[0]->video_id, $videoViewMax[0]->video_name) ?>"><?php echo $videoViewMax[0]->video_name?></a>
-			</div>
-			<div class="content-video-view-max">
-			<?php
-				if($videoViewMax[0]->video_link != ''){
-					$_video = str_replace('https://www.youtube.com/watch?v=', 'https://www.youtube.com/embed/', $videoViewMax[0]->video_link);
-					$embed = '<iframe width="900" height="506" src="'.$_video.'?rel=0" frameborder="0" allowfullscreen></iframe>';
-					echo $embed;
-				}
-			?>
-			</div>
-			<?php } ?>
 		</div>
 		<div class="right-news-view">
 			<div class="content-right-product search">

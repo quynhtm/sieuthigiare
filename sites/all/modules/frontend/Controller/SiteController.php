@@ -247,14 +247,8 @@ class SiteController{
 	    	$arrSameNews = Site::getNewsSameCat($news_id, $result->news_category, 10, $arrFields, true);
 	    }
 	    $productNew = Site::getListProductNew(0, NUMBER_PRODUCT_NEW);
-	    if($param[0] != 'gioi-thieu' && $param[0] != 'tin-cua-khach' && $param[0] != 'tin-cua-shop'){
-	    	$videoViewMax =  DataCommon::getVideoViewMax();
-	    	$noCat = 1;
-		}else{
-			$videoViewMax = array();
-			$noCat = 0;
-		}
-		return theme('pageNewsDetail', array('result'=>$result,'arrSameNews'=>$arrSameNews, 'catName'=>$catName, 'catNameAlias'=>$catNameAlias, 'productNew' =>$productNew, 'videoViewMax'=>$videoViewMax, 'noCat'=>$noCat));
+	    
+		return theme('pageNewsDetail', array('result'=>$result,'arrSameNews'=>$arrSameNews, 'catName'=>$catName, 'catNameAlias'=>$catNameAlias, 'productNew' =>$productNew));
 	}
 	public static function searchNews(){
 		
