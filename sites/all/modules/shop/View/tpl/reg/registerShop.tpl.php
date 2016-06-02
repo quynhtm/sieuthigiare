@@ -20,11 +20,11 @@
 			</div>
 			<div class="form-right-reg">
 				<div class="form-group">
-					<label class="control-label">Số điện thoại<span>(*)</span></label>
+					<label class="control-label">Số điện thoại</label>
 					<input type="text" id="shop_phone" name="shop_phone" class="form-control" maxlength="255" value="<?php echo isset($shop_phone)?$shop_phone :''?>">
 				</div>
 				<div class="form-group">
-					<label class="control-label">Email<span>(*)</span></label>
+					<label class="control-label">Email</label>
 					<input type="text" id="shop_email" name="shop_email" class="form-control" maxlength="255" value="<?php echo isset($shop_email)?$shop_email :''?>">
 				</div>
 				<div class="form-group">

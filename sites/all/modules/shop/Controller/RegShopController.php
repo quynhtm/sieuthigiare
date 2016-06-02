@@ -29,8 +29,8 @@ class RegShopController{
 							'user_shop'=>array('value'=>trim($user_shop), 'require'=>1, 'messages'=>'Tên đăng nhập không được trống!'),
 							'user_password'=>array('value'=>trim($user_password), 'require'=>1, 'messages'=>'Mật khẩu không được trống!'),
 							'rep_user_password'=>array('value'=>trim($rep_user_password), 'require'=>1, 'messages'=>'Nhập lại mật khẩu không được trống!'),
-							'shop_phone'=>array('value'=>trim($shop_phone), 'require'=>1, 'messages'=>'Số điện thoại không được trống!'),
-							'shop_email'=>array('value'=>trim($shop_email), 'require'=>1, 'messages'=>'Email không được trống!'),
+							'shop_phone'=>array('value'=>array(trim($shop_phone))),
+							'shop_email'=>array('value'=>array(trim($shop_email))),
 							'shop_province'=>array('value'=>trim($shop_province), 'require'=>1, 'messages'=>'Chọn 1 tỉnh thành!'),
 							'agree'=>array('value'=>FunctionLib::getParam('agree',''), 'require'=>1, 'messages'=>'Bạn chưa đồng ý với điều khoản của chúng tôi!'),
 							'shop_created'=>array('value'=>time(), 'require'=>0, 'messages'=>''),
@@ -41,10 +41,32 @@ class RegShopController{
 			if(!$check_valid_name){
 				$errors .= 'Tên đăng nhập không được có dấu!<br/>';
 			}
-			$check_valid_mail = ValidForm::checkRegexEmail($dataInput ['shop_email']['value']);
-			if(!$check_valid_mail){
-				$errors .= 'Email không đúng định dạng!<br/>';
+
+
+			$arrPhone = $dataInput['shop_phone']['value'];
+			$arrMail = $dataInput['shop_email']['value'];
+			
+			$i=0;
+			foreach($arrPhone as $key=>$val){
+				if($val == ''){
+					unset($arrPhone[$key]);
+				}
 			}
+			if(empty($arrPhone)){
+				$arrPhone = array();
+			}
+
+			$i=0;
+			foreach($arrMail as $key=>$val){
+				$check_valid_mail = ValidForm::checkRegexEmail($val);
+				if(!$check_valid_mail){
+					unset($arrMail[$key]);
+				}
+			}
+			if(empty($arrMail)){
+				$arrMail = array();
+			}
+
 			if($errors != ''){
 				drupal_set_message($errors, 'error');
 				$optionProvices = FunctionLib::getOption($listProvices, $shop_province);
@@ -59,7 +81,7 @@ class RegShopController{
 			}
 
 			//check shop and hash pass
-			$check_shop_exists = RegShop::checkNamePhoneMail($dataInput['user_shop']['value'], $dataInput['shop_phone']['value'], $dataInput['shop_email']['value']);
+			$check_shop_exists = RegShop::checkNamePhoneMail($dataInput['user_shop']['value'], '', '');
 			if(!empty($check_shop_exists)){
 				$arrError = implode('<br/>', $check_shop_exists);
 				drupal_set_message($arrError, 'error');
@@ -73,8 +95,8 @@ class RegShopController{
 						$data_post = array(
 							'user_shop'=>$dataInput ['user_shop']['value'],
 							'user_password'=>$hash_pass,
-							'shop_phone'=>$dataInput ['shop_phone']['value'],
-							'shop_email'=>$dataInput ['shop_email']['value'],
+							'shop_phone' => serialize($arrPhone),
+							'shop_email' => serialize($arrMail),
 							'shop_province'=>$dataInput ['shop_province']['value'],
 							'is_shop'=>SHOP_FREE,
 							'shop_status'=>STASTUS_SHOW,
@@ -395,10 +417,10 @@ class RegShopController{
 		if(!$check_valid_name){
 			$err['check_name'] = 'Tên đăng nhập không được có dấu!<br/>';
 		}
-		$check_valid_mail = ValidForm::checkRegexEmail($shop_email);
-		if(!$check_valid_mail){
-			$err['check_mail'] = 'Email không đúng định dạng!<br/>';
-		}
+		// $check_valid_mail = ValidForm::checkRegexEmail($shop_email);
+		// if(!$check_valid_mail){
+		// 	$err['check_mail'] = 'Email không đúng định dạng!<br/>';
+		// }
 		$check_valid_pass = ValidForm::checkRegexPass($user_pass, 6);
 		if(!$check_valid_pass){
 			$err['check_pass'] = 'Mật khẩu không được có dấu!<br/>';

@@ -32,8 +32,10 @@
 												<?php } ?>
 											</div>
 											<?php } ?>
+										<?php }elseif(is_array($arrPhone) && empty($arrPhone)){ ?>
+											<div><input type="text" class="form-control input-sm" placeholder ="Số điện thoại" name="shop_phone[]"  maxlength="255"/></div>
 										<?php }else{ ?>
-										<div><input type="text" class="form-control input-sm" placeholder ="Số điện thoại" name="shop_phone[]"  maxlength="255" value="<?php echo $user_shop->shop_phone ?>"/></div>
+											<div><input type="text" class="form-control input-sm" placeholder ="Số điện thoại" name="shop_phone[]"  maxlength="255" value="<?php echo $user_shop->shop_phone ?>"/></div>
 										<?php } ?>
 					
 									<?php }else{ ?>
@@ -59,8 +61,10 @@
 												<?php } ?>
 											</div>
 											<?php } ?>
+										<?php }elseif(is_array($arrMail) && empty($arrMail)){ ?>
+											<div><input type="text" class="form-control input-sm" placeholder ="Email" name="shop_email[]"  maxlength="255"/></div>
 										<?php }else{ ?>
-										<div><input type="text" class="form-control input-sm" placeholder ="Email" name="shop_email[]"  maxlength="255" value="<?php echo $user_shop->shop_email ?>"/></div>
+											<div><input type="text" class="form-control input-sm" placeholder ="Email" name="shop_email[]"  maxlength="255" value="<?php echo $user_shop->shop_email ?>"/></div>
 										<?php } ?>
 					
 									<?php }else{ ?>
