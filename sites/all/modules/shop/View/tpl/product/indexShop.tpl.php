@@ -1,7 +1,17 @@
 <?php 
 	global $base_url;
 	if(isset($user_shop->shop_name) && $user_shop->shop_name != ''){
-		$meta_img = IMAGE_DEFAULT_SHOP;
+		
+		if($user_shop->is_shop == SHOP_VIP){
+			$path = PATH_UPLOAD.'/shop/'.$user_shop->shop_id.'/'.$user_shop->shop_logo;
+			if($user_shop->shop_logo != '' && is_file($path)){
+				$meta_img = $base_url.'/uploads/shop/'.$user_shop->shop_id.'/'.$user_shop->shop_logo;
+			}else{
+				$meta_img = IMAGE_DEFAULT_SHOP;
+			}
+		}else{
+			$meta_img = IMAGE_DEFAULT_SHOP;
+		}
 		SeoMeta::SEO($user_shop->shop_name, $meta_img, $user_shop->shop_name, $user_shop->shop_name, $user_shop->shop_name);
 	}
 ?>
