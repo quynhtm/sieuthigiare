@@ -59,6 +59,21 @@
 										</select>
 									</div>
 								</div>
+
+								<?php if($user_shop->is_shop == SHOP_VIP){?>
+								<div class="form-group">
+			                         <a href="javascript:;"class="btn btn-primary" onclick="Common_admin.uploadBannerAdvanced(5);">Upload ảnh logo</a>
+			                         <div id="sys_show_image_banner">
+			                             <?php if(isset($user_shop->shop_logo) && $user_shop->shop_logo !=''){?>
+			                                 <img height='300' width='400' src='<?php echo FunctionLib::getThumbImage($user_shop->shop_logo,$user_shop->shop_id,FOLDER_SHOP,400,300)?>'/>
+			                             <?php }?>
+			                         </div>
+			                         <input name="img" type="hidden" id="img" value="<?php if(isset($user_shop->shop_logo)){ echo $user_shop->shop_logo; } ?>">
+			                         <input name="img_old" type="hidden" id="img_old" value="<?php if(isset($user_shop->shop_logo)){ echo $user_shop->shop_logo; } ?>">
+			                         <input type="hidden" id="id_hiden" name="id" value="<?php if(isset($user_shop->shop_id)){ echo $user_shop->shop_id; } ?>"/>
+			                    </div>
+								<?php } ?>
+
 								<div class="form-group">
 									<label class="control-label">&nbsp;</label>
 									<div>
@@ -85,7 +100,35 @@
 		</div>
 	</div>
 </div>
+<?php if($user_shop->is_shop == SHOP_VIP){?>
+<!--Popup upload ảnh-->
+<div class="modal fade" id="sys_PopupUploadImgOtherPro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Upload ảnh</h4>
+            </div>
+            <div class="modal-body">
+                <form name="uploadImage" method="post" action="#" enctype="multipart/form-data">
+                    <div class="form_group">
+                        <div id="sys_show_button_upload">
+                            <div id="sys_mulitplefileuploader" class="btn btn-primary">Upload ảnh</div>
+                        </div>
+                        <div id="status"></div>
 
+                        <div class="clearfix"></div>
+                        <div class="clearfix" style='margin: 5px 10px; width:100%;'>
+                            <div id="div_image"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Popup upload ảnh-->
+<?php } ?>
 <script type="text/javascript">
 	CKEDITOR.replace(
 		'shop_about',

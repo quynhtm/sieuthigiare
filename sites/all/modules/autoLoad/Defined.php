@@ -61,7 +61,7 @@ define('FOLDER_BANNER', 'banner');
 define('FOLDER_VIDEO', 'video');
 define('FOLDER_NEWS', 'news');
 define('FOLDER_CATEGORY', 'category');
-
+define('FOLDER_SHOP', 'shop');
 //common
 define('STASTUS_HIDE', 0);
 define('STASTUS_SHOW', 1);

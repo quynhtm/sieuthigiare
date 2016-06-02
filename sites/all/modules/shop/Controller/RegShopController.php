@@ -164,6 +164,14 @@ class RegShopController{
 	    );
 	    Loader::loadJSExt('Core', $files);
 
+	    $files = array(
+			'bootstrap/lib/upload/cssUpload.css',
+			'bootstrap/js/bootstrap.min.js',
+			'bootstrap/lib/upload/jquery.uploadfile.js',
+			'js/common_admin.js',
+		);
+		Loader::load('Core', $files);
+
 		if(!empty($_POST['frmChangeInfo'])){
 			$selectCateParent = FunctionLib::getParam('shop_category',array());
 			$arrCateParent = (count($selectCateParent) > 2)? array_rand($selectCateParent,2): $selectCateParent;//lay 2 danh muc cha

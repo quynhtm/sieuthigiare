@@ -10,6 +10,7 @@ class AjaxUpload{
     static $primary_key_product = 'product_id';
     static $primary_key_banner = 'banner_id';
     static $primary_key_video = 'video_id';
+    static $primary_key_shop = 'shop_id';
 
 	function playme(){
 		$code = FunctionLib::getParam('code', '');
@@ -57,6 +58,9 @@ class AjaxUpload{
                 break;
             case 4 ://img video
                 $aryData = $this->uploadImageToFolderOnce($dataImg, $id_hiden, TABLE_VIDEO, FOLDER_VIDEO, 'video_img', self::$primary_key_video);
+                break;
+            case 5 ://img shop
+                $aryData = $this->uploadImageToFolderOnce($dataImg, $id_hiden, TABLE_USER_SHOP, FOLDER_SHOP, 'shop_logo', self::$primary_key_shop);
                 break;
             default:
                 break;
@@ -137,6 +141,10 @@ class AjaxUpload{
                 elseif($field_img == 'video_img'){
                     $new_row['video_time_creater'] = time();
                     $new_row['video_status'] = IMAGE_ERROR;
+                }
+                elseif($field_img == 'shop_logo'){
+                    $new_row['shop_created'] = time();
+                    $new_row['shop_status'] = IMAGE_ERROR;
                 }
                 $item_id = DB::insertOneItem($table_action, $new_row);
             }elseif($id_hiden > 0){
