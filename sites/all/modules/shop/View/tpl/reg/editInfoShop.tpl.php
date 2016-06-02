@@ -17,17 +17,55 @@
 									<label class="control-label">Tên gian hàng<span>(*)</span></label>
 									<div><input type="text" class="form-control input-sm" placeholder ="Tên gian hàng" name="shop_name"  maxlength="255" value="<?php echo $user_shop->shop_name?>"/></div>
 								</div>
-								<div class="form-group">
-									<label class="control-label">Số điện thoại<span>(*)</span></label>
-									<div><input type="text" class="form-control input-sm" placeholder ="Số điện thoại" name="shop_phone"  maxlength="255" value="<?php echo $user_shop->shop_phone?>"/></div>
+								<div class="form-group shop-phone">
+									<label class="control-label">Số điện thoại <?php if($user_shop->is_shop == SHOP_VIP){?><i class="cursor add-phone">(Click để thêm)</i><?php } ?></label>
+									<?php 
+										if($user_shop->shop_phone != ''){
+										$arrPhone = unserialize($user_shop->shop_phone);
+									?>
+										<?php if(is_array($arrPhone) && !empty($arrPhone)){ ?>
+											<?php foreach($arrPhone as $key=>$phone){?>
+											<div>
+												<input type="text" class="form-control input-sm" placeholder ="Số điện thoại" name="shop_phone[]"  maxlength="255" value="<?php echo $phone ?>"/>
+												<?php if($user_shop->is_shop == SHOP_VIP){?>
+													<?php if($key > 0){?><i class="icon-remove"></i><?php } ?>
+												<?php } ?>
+											</div>
+											<?php } ?>
+										<?php }else{ ?>
+										<div><input type="text" class="form-control input-sm" placeholder ="Số điện thoại" name="shop_phone[]"  maxlength="255" value="<?php echo $user_shop->shop_phone ?>"/></div>
+										<?php } ?>
+					
+									<?php }else{ ?>
+									<div><input type="text" class="form-control input-sm" placeholder ="Số điện thoại" name="shop_phone[]"  maxlength="255"/></div>
+									<?php } ?>
 								</div>
 								<div class="form-group">
 									<label class="control-label">Địa chỉ<span>(*)</span></label>
 									<div><input type="text" class="form-control input-sm" placeholder ="Địa chỉ" name="shop_address"  maxlength="255" value="<?php echo $user_shop->shop_address?>"/></div>
 								</div>
-								<div class="form-group">
-									<label class="control-label">Email<span>(*)</span></label>
-									<div><input type="text" class="form-control input-sm" placeholder ="Email" name="shop_email"  maxlength="255" value="<?php echo $user_shop->shop_email?>"/></div>
+								<div class="form-group shop-mail">
+									<label class="control-label">Email <?php if($user_shop->is_shop == SHOP_VIP){?><i class="cursor add-email">(Click để thêm)</i><?php } ?></label>
+									<?php 
+										if($user_shop->shop_email != ''){
+										$arrMail = unserialize($user_shop->shop_email);
+									?>
+										<?php if(is_array($arrMail) && !empty($arrMail)){ ?>
+											<?php foreach($arrMail as $key=>$mail){?>
+											<div>
+												<input type="text" class="form-control input-sm" placeholder ="Email" name="shop_email[]"  maxlength="255" value="<?php echo $mail ?>"/>
+												<?php if($user_shop->is_shop == SHOP_VIP){?>
+													<?php if($key > 0){?><i class="icon-remove"></i><?php } ?>
+												<?php } ?>
+											</div>
+											<?php } ?>
+										<?php }else{ ?>
+										<div><input type="text" class="form-control input-sm" placeholder ="Email" name="shop_email[]"  maxlength="255" value="<?php echo $user_shop->shop_email ?>"/></div>
+										<?php } ?>
+					
+									<?php }else{ ?>
+									<div><input type="text" class="form-control input-sm" placeholder ="Email" name="shop_email[]"  maxlength="255"/></div>
+									<?php } ?>
 								</div>
 								<div class="form-group">
 									<label class="control-label">Chọn 1 hay 2 danh mục sản phẩm đăng bán<span>(*)</span></label>

@@ -1159,3 +1159,21 @@ table.list-pay span.price {
     font-size: 15px;
     font-weight: bold;
 }
+.form-group.shop-phone > div,
+.form-group.shop-mail > div {
+    margin-bottom: 5px;
+    position: relative;
+}
+.cursor{
+    cursor: pointer;
+    color: #ff0000; 
+}
+.form-group.shop-phone > div .icon-remove,
+.form-group.shop-mail > div .icon-remove {
+    cursor: pointer;
+    position: absolute;
+    right: -3px;
+    top: 6px;
+    z-index: 9;
+    color: #ff0000; 
+}

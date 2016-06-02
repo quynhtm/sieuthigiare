@@ -179,24 +179,49 @@ class RegShopController{
 			$dataInput = array(
 						'shop_category'=>array('value'=>$shop_category, 'require'=>1, 'messages'=>'Chọn danh mục sản phẩm!'),
 						'shop_name'=>array('value'=>FunctionLib::getParam('shop_name',''), 'require'=>1, 'messages'=>'Tên gian hàng không được trống!'),
-						'shop_phone'=>array('value'=>FunctionLib::getParam('shop_phone',''), 'require'=>1, 'messages'=>'Số điện thoại không được trống!'),
+						'shop_phone'=>array('value'=>FunctionLib::getParam('shop_phone','')),
 						'shop_address'=>array('value'=>FunctionLib::getParam('shop_address',''), 'require'=>0, 'messages'=>''),
 						'shop_email'=>array('value'=>FunctionLib::getParam('shop_email',''), 'require'=>1, 'messages'=>'Email không được trống!'),
 						'shop_about'=>array('value'=>FunctionLib::getParam('shop_about',''), 'require'=>0, 'messages'=>''),
 						'shop_province'=>array('value'=>FunctionLib::getIntParam('shop_province',''), 'require'=>0, 'messages'=>'Chọn tỉnh thành!'),
 						'shop_transfer'=>array('value'=>FunctionLib::getParam('shop_transfer',''), 'require'=>0, 'messages'=>''),
 					);
-
+			
+			$arrPhone = $dataInput['shop_phone']['value'];
+			$arrMail = $dataInput['shop_email']['value'];
 			$errors = ValidForm::validInputData($dataInput);
-			$check_valid_mail = ValidForm::checkRegexEmail($dataInput ['shop_email']['value']);
-			if(!$check_valid_mail){
-				$errors .= 'Email không đúng định dạng!<br/>';
+			
+			$i=0;
+			foreach($arrPhone as $key=>$val){
+				if($val == ''){
+					unset($arrPhone[$key]);
+				}else{
+					$i++;
+				}
+				if($i>3){
+					unset($arrPhone[$key]);
+				}
 			}
-			//check phone, mail
-			$check_valid_mail_phone = RegShop::checkMailPhoneOfShop($user_shop->shop_id, $dataInput ['shop_email']['value'], $dataInput ['shop_phone']['value']);
-			if($check_valid_mail_phone != ''){
-				$errors .= $check_valid_mail_phone;
+			if(empty($arrPhone)){
+				$arrPhone = array();
 			}
+
+			$i=0;
+			foreach($arrMail as $key=>$val){
+				$check_valid_mail = ValidForm::checkRegexEmail($val);
+				if(!$check_valid_mail){
+					unset($arrMail[$key]);
+				}else{
+					$i++;	
+				}
+				if($i>3){
+					unset($arrMail[$key]);
+				}
+			}
+			if(empty($arrMail)){
+				$arrMail = array();
+			}
+
 			if($errors != ''){
 				drupal_set_message($errors, 'error');
 				drupal_goto($base_url.'/sua-thong-tin-gian-hang.html');
@@ -204,9 +229,9 @@ class RegShopController{
 			$data_post = array(
 				'shop_category'=>$dataInput ['shop_category']['value'],
 				'shop_name'=>$dataInput ['shop_name']['value'],
-				'shop_phone'=>$dataInput ['shop_phone']['value'],
+				'shop_phone'=>serialize($arrPhone),
 				'shop_address'=>$dataInput ['shop_address']['value'],
-				'shop_email'=>$dataInput ['shop_email']['value'],
+				'shop_email'=>serialize($arrMail),
 				'shop_about'=>$dataInput ['shop_about']['value'],
 				'shop_province'=>$dataInput ['shop_province']['value'],
 				'shop_transfer'=>$dataInput ['shop_transfer']['value'],

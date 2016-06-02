@@ -5,7 +5,7 @@ jQuery(document).ready(function($){
 	check_valid_form.change_info();
 	check_valid_form.forgot_pass();
 	check_valid_form.post_product();
-
+	add_input_form.add_item_input();
 	tab_select.detail_tab();
 	tab_select.click_show_form_comment();
 	hover_img.change_img();
@@ -74,8 +74,6 @@ check_valid_form = {
 	change_info:function(){
 		jQuery("#btnChangeInfo").click(function(){
 			var name = jQuery('#frmChangeInfo input[name="shop_name"]'),
-				phone = jQuery('#frmChangeInfo input[name="shop_phone"]'),
-				email = jQuery('#frmChangeInfo input[name="shop_email"]'),
 				category = jQuery('#frmChangeInfo select[name="category_id"]'),
 				province = jQuery('#frmChangeInfo select[name="shop_province"]');
 
@@ -85,30 +83,6 @@ check_valid_form = {
 				return false;
 			}else{
 				name.removeClass('error');
-			}
-
-			if(phone.val() == ''){
-				jAlert('Điện thoại không được trống!', 'Cảnh báo');
-				phone.addClass('error').focus();
-				return false;
-			}else{
-				phone.removeClass('error');
-			}
-
-			if(email.val() == ''){
-				jAlert('Email không được trống!', 'Cảnh báo');
-				email.addClass('error').focus();
-				return false;
-			}else{
-				var regex = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
-				var check_mail = regex.test(email.val());
-				if(!check_mail){
-					valid = false;
-					jAlert('Email không đúng định dạng!', 'Cảnh báo');
-					email.addClass('error').focus();
-				}else{
-					email.removeClass('error');
-				}
 			}
 
 			if(category.val() <= 0){
@@ -358,7 +332,26 @@ check_valid_form = {
 		});
 	}
 }
+add_input_form = {
+	remove_parent:function(_icon, _parent){
+		jQuery(_icon).click(function(){
+			jQuery(this).parent(_parent).remove();
+		});
+	},
+	add_item_input:function(){
+		jQuery('.form-group.shop-phone .add-phone').click(function(){
+			jQuery('.form-group.shop-phone').append('<div><input type="text" class="form-control input-sm" placeholder ="Số điện thoại" name="shop_phone[]"  maxlength="255"/><i class="icon-remove"></i></div>');
+			add_input_form.remove_parent('.form-group.shop-phone .icon-remove', 'div');
+		});
+		add_input_form.remove_parent('.form-group.shop-phone .icon-remove', 'div');
 
+		jQuery('.form-group.shop-mail .add-email').click(function(){
+			jQuery('.form-group.shop-mail').append('<div><input type="text" class="form-control input-sm" placeholder ="Email" name="shop_email[]"  maxlength="255"/><i class="icon-remove"></i></div>');
+			add_input_form.remove_parent('.form-group.shop-mail .icon-remove', 'div');
+		});
+		add_input_form.remove_parent('.form-group.shop-mail .icon-remove', 'div');
+	}
+}
 tab_select= {
 	detail_tab:function(){
 		jQuery(".left-bottom-content-view .tab li").click(function(){
