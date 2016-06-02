@@ -174,7 +174,13 @@ class RegShopController{
 
 		if(!empty($_POST['frmChangeInfo'])){
 			$selectCateParent = FunctionLib::getParam('shop_category',array());
-			$arrCateParent = (count($selectCateParent) > 2)? array_rand($selectCateParent,2): $selectCateParent;//lay 2 danh muc cha
+			
+			if($user_shop->is_shop != SHOP_VIP){
+				$arrCateParent = (count($selectCateParent) > 2)? array_rand($selectCateParent,2): $selectCateParent;//lay 2 danh muc cha
+			}else{
+				$arrCateParent = $selectCateParent;
+			}
+			
 			$shop_category = !empty($arrCateParent)? implode(',',$arrCateParent): '';
 			$dataInput = array(
 						'shop_category'=>array('value'=>$shop_category, 'require'=>1, 'messages'=>'Chọn danh mục sản phẩm!'),

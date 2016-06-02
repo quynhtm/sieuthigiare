@@ -90,9 +90,28 @@
 							<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item->shop_id ?>" /></td>
 							<td>
 								<?php
-									echo '['.$item->shop_id.'] <a href="'.FunctionLib::buildLinkCategory($item->shop_id, $item->shop_name, 0, '').'" target="_blank" title="Trang chủ shop '.$item->shop_name.'"><b>'.$item->user_shop.'</b></a>';
-									echo '<br/>'.$item->shop_phone;
-									echo '<br/>'.$item->shop_email;
+									echo '['.$item->shop_id.'] <a href="'.FunctionLib::buildLinkCategory($item->shop_id, $item->shop_name, 0, '').'" target="_blank" title="Trang chủ shop '.$item->shop_name.'"><b>'.$item->user_shop.'</b></a><br/>';
+									if($item->shop_phone != ''){
+										$arrPhone = @unserialize($item->shop_phone);
+										if(is_array($arrPhone) && !empty($arrPhone)){
+											foreach($arrPhone as $phone){
+												echo $phone.'<br/>';
+											}
+										}else{
+											echo $item->shop_phone.'<br/>';
+										}
+									}
+									if($item->shop_email != ''){
+										$arrMail = @unserialize($item->shop_email);
+										if(is_array($arrMail) && !empty($arrMail)){
+											foreach($arrMail as $mail){
+												echo $mail.'<br/>';
+											}
+										}else{
+											echo $item->shop_email.'<br/>';
+										}
+									}
+									
 								?>
 							</td>
 							<td>
