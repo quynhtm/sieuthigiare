@@ -12,7 +12,14 @@
 		}else{
 			$meta_img = IMAGE_DEFAULT_SHOP;
 		}
-		SeoMeta::SEO($user_shop->shop_name, $meta_img, $user_shop->shop_name, $user_shop->shop_name, $user_shop->shop_name);
+
+		if($user_shop->shop_about != ''){
+			$des_sort = strip_tags($user_shop->shop_about);
+		}else{
+			$des_sort = $user_shop->shop_name;
+		}
+
+		SeoMeta::SEO($user_shop->shop_name, $meta_img, $user_shop->shop_name, $user_shop->shop_name, $des_sort);
 	}
 ?>
 <div class="container">
