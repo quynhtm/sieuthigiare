@@ -4,7 +4,10 @@
 	$product_id = $result->product_id;
 	$product_name = $result->product_name;
 	$product_sort_desc = $result->product_sort_desc;
-	$product_content = Utility::setNofollow($result->product_content);
+	$product_content = trim(Utility::setNofollow($result->product_content));
+	if($product_content == ''){
+		$product_content = $product_sort_desc;
+	}
 	$product_selloff = $result->product_selloff;
 	$price_market = number_format($result->product_price_market);
 	$price_sell = number_format($result->product_price_sell);

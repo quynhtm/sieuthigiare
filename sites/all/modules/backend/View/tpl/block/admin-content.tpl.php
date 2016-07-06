@@ -13,7 +13,7 @@ global $base_url;
 	</div>
 	<div class="content-global">
 		<div class="wrapp-content-global">
-			<!--Dòng 1--->
+			<!--Dòng 1-->
 			<div class="col-lg-2 align_center">
 				<a class="a_control" target="_blank" title="Home Site" href="<?php echo $base_url ?>">
 					<div class="boder_admin padding10">
@@ -60,7 +60,7 @@ global $base_url;
 
 
 
-			<!--Dòng 2--->
+			<!--Dòng 2-->
 			<div class="clear paddingTop30"></div>
 			<div class="col-lg-2 align_center">
 				<a class="a_control" title="Danh sách Shop" href="<?php echo $base_url ?>/admincp/usershop">
@@ -99,7 +99,7 @@ global $base_url;
 			</div>
 
 
-			<!--Dòng 3--->
+			<!--Dòng 3-->
 			<div class="clear paddingTop30"></div>
 			<div class="col-lg-2 align_center">
 				<a class="a_control" title="Quản lý Sản phẩm" href="<?php echo $base_url ?>/admincp/product">
