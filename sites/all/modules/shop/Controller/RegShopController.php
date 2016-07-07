@@ -42,30 +42,8 @@ class RegShopController{
 				$errors .= 'Tên đăng nhập không được có dấu!<br/>';
 			}
 
-
 			$arrPhone = $dataInput['shop_phone']['value'];
 			$arrMail = $dataInput['shop_email']['value'];
-			
-			$i=0;
-			foreach($arrPhone as $key=>$val){
-				if($val == ''){
-					unset($arrPhone[$key]);
-				}
-			}
-			if(empty($arrPhone)){
-				$arrPhone = array();
-			}
-
-			$i=0;
-			foreach($arrMail as $key=>$val){
-				$check_valid_mail = ValidForm::checkRegexEmail($val);
-				if(!$check_valid_mail){
-					unset($arrMail[$key]);
-				}
-			}
-			if(empty($arrMail)){
-				$arrMail = array();
-			}
 
 			if($errors != ''){
 				drupal_set_message($errors, 'error');
@@ -140,11 +118,9 @@ class RegShopController{
 		}
 
 		if(isset($_POST['txtFormNameLogin'])){
-			
 			$dataInput = array(
 							'user_shop_login'=>array('value'=>FunctionLib::getParam('user_shop_login',''), 'require'=>1, 'messages'=>'Tên đăng nhập không được trống!'),
-							'password_shop_login'=>array('value'=>FunctionLib::getParam('password_shop_login',''), 'require'=>1, 'messages'=>'Mật khẩu không được trống!'),
-						);
+							'password_shop_login'=>array('value'=>FunctionLib::getParam('password_shop_login',''), 'require'=>1, 'messages'=>'Mật khẩu không được trống!'),);
 			
 			$errors = ValidForm::validInputData($dataInput);
 			if($errors != ''){
