@@ -83,7 +83,8 @@ class UserShopController{
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 			$user_password = FunctionLib::getParam('user_password','');
 			$selectCateParent = FunctionLib::getParam('shop_category',array());
-			$arrCateParent = (count($selectCateParent) > 2)? array_rand($selectCateParent,2): $selectCateParent;//lay 2 danh muc cha
+			//$arrCateParent = (count($selectCateParent) > 2)? array_rand($selectCateParent,2): $selectCateParent;//lay 2 danh muc cha
+			$arrCateParent = $selectCateParent;
 			$shop_category = !empty($arrCateParent)? implode(',',$arrCateParent): '';
 			$data = array(
 						'shop_name'=>array('value'=>FunctionLib::getParam('shop_name',''), 'require'=>1, 'messages'=>'Tiêu đề không được trống!'),
