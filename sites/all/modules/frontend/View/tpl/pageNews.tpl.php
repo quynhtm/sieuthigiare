@@ -18,7 +18,7 @@
 							<a title="<?php echo $v->news_title ?>" href="<?php echo FunctionLib::buildLinkNewsDetail($catNameAlias, $v->news_id, $v->news_title) ?>">
 								<?php if($v->news_image != ''){?>
 								<img alt="<?php echo $v->news_title ?>"
-								src="<?php echo FunctionLib::getThumbImage($v->news_image,$v->news_id,FOLDER_NEWS,400,400) ?>">
+								src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_NEWS, $v->news_id, $v->news_image, 400, 400, '', true, true) ?>">
 								<div class="post-format">
 									<i class="icon-file-text"></i>
 								</div>
@@ -26,7 +26,6 @@
 								<img src="<?php echo IMAGE_DEFAULT ?>"/>
 								<?php } ?>
 							</a>
-							
 						</div>
 						<div class="post-data">
 							<h2 class="post-title"><a  href="<?php echo FunctionLib::buildLinkNewsDetail($catNameAlias, $v->news_id, $v->news_title) ?>"><?php echo $v->news_title ?></a></h2>
@@ -74,8 +73,8 @@
 							<li class="item">
 								<a class="i-thumb post-thumb" title="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>" href="<?php echo FunctionLib:: buildLinkDetail($h->product_id, $h->product_name); ?>">
 									<?php if($h->product_image != ''){?>
-									<img src="<?php echo FunctionLib::getThumbImage($h->product_image, $h->product_id, FOLDER_PRODUCT, 300, 300) ?>" alt="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>" 
-									data-other-src="<?php echo FunctionLib::getThumbImage($h->product_image, $h->product_id, FOLDER_PRODUCT, 300, 300) ?>">
+									<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $h->product_id, $h->product_image, 300, 300, '', true, true) ?>" alt="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>" 
+									data-other-src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $h->product_id, $h->product_image_hover, 300, 300, '', true, true) ?>">
 									<?php }else{ ?>
 									<img src="<?php echo IMAGE_DEFAULT ?>"/>
 									<?php } ?>

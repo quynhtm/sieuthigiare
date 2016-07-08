@@ -58,7 +58,7 @@
 							?>
 							<div class="item-right-ads">
 								<a <?php echo $rel3 ?> href="<?php echo $value->banner_link ?>" title ="<?php echo $value->banner_name ?>" <?php if($value->banner_is_target == BANNER_TARGET_BLANK){?>target="_blank"<?php }?>>
-									<img src="<?php echo FunctionLib::getThumbImage($value->banner_image, $value->banner_id, FOLDER_BANNER, 300, 0) ?>" alt="<?php echo $value->banner_name ?>"/>
+									<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_BANNER, $value->banner_id, $value->banner_image, 300, 0, '', true, true) ?>" alt="<?php echo $value->banner_name ?>"/>
 								</a>
 							</div>
 						<?php } ?>
@@ -73,7 +73,7 @@
 							$rel = ($v->banner_is_rel != 1)? 'rel="nofollow"' : '';
 						?>
 							<a <?php echo $rel ?> title="<?php echo $v->banner_name ?>" href="<?php echo $v->banner_link ?>" target="_blank">
-								<img src="<?php echo FunctionLib::getThumbImage($v->banner_image, $v->banner_id, FOLDER_BANNER, 1018, 245) ?>" alt="<?php echo $v->banner_name ?>"/>
+								<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_BANNER, $v->banner_id, $v->banner_image, 1018, 245, '', true, true) ?>" alt="<?php echo $v->banner_name ?>"/>
 							</a>
 						<?php } ?>
 					</div>
@@ -86,8 +86,10 @@
 						<li class="item">
 							<div class="post-thumb">
 								<a href="<?php echo FunctionLib:: buildLinkDetail($v->product_id, $v->product_name); ?>" title="<?php echo $v->product_name?><?php echo ' - '.WEB_SITE ?>">
-									<?php if(isset($v->url_image) && $v->url_image != ''){?>
-									<img src="<?php echo $v->url_image ?>" alt="<?php echo $v->product_name ?><?php echo ' - '.WEB_SITE ?>" data-other-src="<?php echo $v->url_image_hover?>">
+									<?php if(isset($v->product_image) && $v->product_image != ''){?>
+									<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $v->product_id, $v->product_image, 300, 300, '', true, true) ?>" 
+									alt="<?php echo $v->product_name ?><?php echo ' - '.WEB_SITE ?>" 
+									data-other-src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $v->product_id, $v->product_image_hover, 300, 300, '', true, true) ?>">
 									<?php }else{ ?>
 									<img src="<?php echo IMAGE_DEFAULT ?>"/>
 									<?php } ?>

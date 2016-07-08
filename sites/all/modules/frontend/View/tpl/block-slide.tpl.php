@@ -51,7 +51,7 @@
 					}
 				?>
 				<a <?php echo $rel ?> title="<?php echo $v->banner_name ?>" href="<?php echo $v->banner_link ?>" <?php if($v->banner_is_target == BANNER_TARGET_BLANK){?>target="_blank"<?php }?> class="nivo-imageLink" style="display: block;">
-					<img src="<?php echo FunctionLib::getThumbImage($v->banner_image, $v->banner_id, FOLDER_BANNER, 0, 0) ?>" alt="<?php echo $v->banner_name ?>"/>
+					<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_BANNER, $v->banner_id, $v->banner_image, 730, 428, '', true, true) ?>" alt="<?php echo $v->banner_name ?>"/>
 				</a>
 				<?php } ?>
 			</div>
@@ -66,7 +66,7 @@
 			?>
 			<div class="item-right-slider">
 				<a <?php echo $rel ?> href="<?php echo $v2->banner_link ?>" title ="<?php echo $v2->banner_name ?>" <?php if($v2->banner_is_target == BANNER_TARGET_BLANK){?>target="_blank"<?php }?>>
-					<img src="<?php echo FunctionLib::getThumbImage($v2->banner_image, $v2->banner_id, FOLDER_BANNER, 300, 0) ?>" alt="<?php echo $v2->banner_name ?>"/>
+					<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_BANNER, $v2->banner_id, $v2->banner_image, 300, 210, '', true, true) ?>" alt="<?php echo $v2->banner_name ?>"/>
 				</a>
 			</div>
 			<?php } ?>

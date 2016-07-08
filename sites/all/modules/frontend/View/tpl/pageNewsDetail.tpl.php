@@ -74,8 +74,8 @@
 						<li class="item">
 							<a class="i-thumb post-thumb" title="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>" href="<?php echo FunctionLib:: buildLinkDetail($h->product_id, $h->product_name); ?>">
 								<?php if($h->product_image != ''){?>
-								<img src="<?php echo FunctionLib::getThumbImage($h->product_image, $h->product_id, FOLDER_PRODUCT, 300, 300) ?>" alt="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>" 
-								data-other-src="<?php echo FunctionLib::getThumbImage($h->product_image, $h->product_id, FOLDER_PRODUCT, 300, 300) ?>">
+								<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $h->product_id, $h->product_image, 300, 300, '', true, true) ?>" alt="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>" 
+								data-other-src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $h->product_id, $h->product_image_hover, 300, 300, '', true, true) ?>">
 								<?php }else{ ?>
 								<img src="<?php echo IMAGE_DEFAULT ?>"/>
 								<?php } ?>

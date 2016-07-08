@@ -29,7 +29,7 @@ define('base_url_lang', $base_url .'/'. ((!isset($language->language) || $langua
 define('AJAX_DOMAIN', '/shopcuatui.com.vn/');//check preg_match ajax
 define('WEB_SITE', 'Shopcuatui.com.vn');//suffix link and alt
 
-define('IS_DEV', 1);// 0:local, 1:web
+define('IS_DEV', 0);// 0:local, 1:web
 define('PHONE_CARE', '0985.10.10.26 - 0913.922.986');
 define('NOT_PRODUCT', 'Chưa có sản phẩm nào...');
 define('NOT_PRODUCT_CART', 'Chưa có sản phẩm nào trong giỏ hàng...');
