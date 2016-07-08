@@ -69,13 +69,13 @@
 							<td><?php echo $key+1 ?></td>
 							<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item->news_id ?>" /></td>
 							<td>
-								<?php if( isset($item->url_image) && isset($item->url_image_hover)) {?>
+								<?php if( isset($item->news_image) && isset($item->news_image)) {?>
 								<div style="position: relative;">
 									<div style="position: relative; z-index: 10">
-										<img src="<?php echo $item->url_image ?>" class='imge_hover' id='<?php echo $item->news_id ?>'/>
+										<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_NEWS, $item->news_id, $item->news_image, 80, 80, '', true, true) ?>" class='imge_hover' id='<?php echo $item->news_id ?>'/>
 									</div>
 									<div id='div_hover_<?php echo $item->news_id ?>'style="position: absolute; bottom: 30px; left: 40px; border: 2px solid #ccc; padding: 5px; background: #F4F9FF; z-index: 1000; display: none">
-										<img src="<?php echo $item->url_image_hover ?>"/>
+										<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_NEWS, $item->news_id, $item->news_image, 300, 300, '', true, true) ?>"/>
 									</div>
 								</div>
 								<?php } else{?>

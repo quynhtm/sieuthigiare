@@ -63,10 +63,6 @@ class NewsController{
 		$result = News::getSearchListItems($dataSearch,$limit,array());
 		if(isset($result['data']) && !empty($result['data'])){
 			foreach($result['data'] as $k => &$value){
-				if( isset($value->news_image) && trim($value->news_image) != ''){
-					$value->url_image = FunctionLib::getThumbImage($value->news_image,$value->news_id,FOLDER_NEWS,60,60);
-					$value->url_image_hover = FunctionLib::getThumbImage($value->news_image,$value->news_id,FOLDER_NEWS,300,150);
-				}
 				$value->news_category_alias = '';
 				if($value->news_category > 0){
 					switch($value->news_category){

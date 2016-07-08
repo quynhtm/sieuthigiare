@@ -28,14 +28,7 @@ class VideoController{
 		$dataSearch['video_status'] = FunctionLib::getIntParam('video_status', -1);
 
 		$result = Video::getSearchListItems($dataSearch,$limit,array());
-		if(isset($result['data']) && !empty($result['data'])){
-			foreach($result['data'] as $k => &$value){
-				if( isset($value->video_img) && trim($value->video_img) != ''){
-					$value->url_image = FunctionLib::getThumbImage($value->video_img,$value->video_id,FOLDER_VIDEO,80,80);
-					$value->url_image_hover = FunctionLib::getThumbImage($value->video_img,$value->video_id,FOLDER_VIDEO,450,200);
-				}
-			}
-		}
+		
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['video_status']);
 		return $view = theme('indexVideo',array(

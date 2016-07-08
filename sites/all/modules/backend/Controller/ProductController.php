@@ -36,15 +36,7 @@ class ProductController{
 		$dataSearch['product_status'] = FunctionLib::getParam('product_status', -1);
 		$dataSearch['product_id'] = FunctionLib::getParam('product_id', -1);
 		$result = Product::getSearchListItems($dataSearch,$limit,array());
-		if(isset($result['data']) && !empty($result['data'])){
-			foreach($result['data'] as $k => &$value){
-				if( isset($value->product_image) && trim($value->product_image) != ''){
-					$value->url_image = FunctionLib::getThumbImage($value->product_image,$value->product_id,FOLDER_PRODUCT,80,80);
-					$value->url_image_hover = FunctionLib::getThumbImage($value->product_image,$value->product_id,FOLDER_PRODUCT,300,300);
-				}
-			}
-		}
-
+		
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrProductStatus, $dataSearch['product_status']);
 		return $view = theme('indexProduct',array(
@@ -72,8 +64,6 @@ class ProductController{
 			'bootstrap/lib/upload/cssUpload.css',
 			'bootstrap/js/bootstrap.min.js',
 			'bootstrap/lib/upload/jquery.uploadfile.js',
-			'js/common_admin.js',
-
 			'bootstrap/lib/datetimepicker/datetimepicker.css',
 			'bootstrap/lib/datetimepicker/jquery.datetimepicker.js',
 		);
@@ -93,14 +83,14 @@ class ProductController{
 					$arrOther = unserialize($arrItem->product_image_other);
 					foreach($arrOther as $k =>$val_other){
 						$arrImageOther[] = array(
-							'image_small'=> FunctionLib::getThumbImage($val_other,$arrItem->product_id,FOLDER_PRODUCT,80,80),
-							'image_big'=> FunctionLib::getThumbImage($val_other,$arrItem->product_id,FOLDER_PRODUCT,700,700),
+							'image_small'=> ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $arrItem->product_id, $val_other, 80, 80, '', true, true),
+							'image_big'=> ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $arrItem->product_id, $val_other, 700, 700, '', true, true),
 						);
 					}
 				}
 			}
-			//FunctionLib::Debug($arrImageOther);
 		}
+
 
 		if(!empty($_POST) && $_POST['txt-form-post']=='txt-form-post'){
 			$item_id = FunctionLib::getParam('id', 0);

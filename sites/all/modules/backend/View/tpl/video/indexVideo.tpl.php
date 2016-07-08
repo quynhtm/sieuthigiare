@@ -66,13 +66,13 @@
 								<input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item->video_id ?>" />
 							</td>
 							<td>
-								<?php if( isset($item->url_image)) {?>
+								<?php if(isset($item->video_img) && $item->video_img != '') {?>
 								<div style="position: relative;">
 									<div style="position: relative; z-index: 10">
-										<img src="<?php echo $item->url_image ?>" class='imge_hover' id='<?php echo $item->video_id ?>' height="80" width="80" style="margin: 10px 0;"/>
+										<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_VIDEO, $item->video_id, $item->video_img, 80, 80, '', true, true) ?>" class='imge_hover' id='<?php echo $item->video_id ?>' height="80" width="80" style="margin: 10px 0;"/>
 									</div>
 									<div id='div_hover_<?php echo $item->video_id ?>'style="position: absolute; bottom: 30px; left: 40px; border: 2px solid #ccc; padding: 5px; background: #F4F9FF; z-index: 1000; display: none">
-										<img src="<?php echo $item->url_image_hover ?>"/>
+										<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_VIDEO, $item->video_id, $item->video_img, 300, 300, '', true, true) ?>"/>
 									</div>
 								</div>
 								<?php } else{?>

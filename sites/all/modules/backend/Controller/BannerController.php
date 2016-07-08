@@ -49,17 +49,9 @@ class BannerController{
 		$dataSearch['banner_page'] = FunctionLib::getParam('banner_page', -1);
 		$dataSearch['banner_type'] = FunctionLib::getParam('banner_type', -1);
 		$dataSearch['banner_is_shop'] = FunctionLib::getParam('banner_is_shop', -1);
-		//FunctionLib::Debug($dataSearch);
-
+		
 		$result = Banner::getSearchListItems($dataSearch,$limit,array());
-		if(isset($result['data']) && !empty($result['data'])){
-			foreach($result['data'] as $k => &$value){
-				if( isset($value->banner_image) && trim($value->banner_image) != ''){
-					$value->url_image = FunctionLib::getThumbImage($value->banner_image,$value->banner_id,FOLDER_BANNER,80,80);
-					$value->url_image_hover = FunctionLib::getThumbImage($value->banner_image,$value->banner_id,FOLDER_BANNER,450,200);
-				}
-			}
-		}
+		
 		//build option
 		$optionStatus = FunctionLib::getOption($this->arrStatus, $dataSearch['banner_status']);
 		$optionTypeBanner = FunctionLib::getOption($this->arrTypeBanner, $dataSearch['banner_type']);
