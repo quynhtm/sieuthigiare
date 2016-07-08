@@ -23,7 +23,8 @@
 
 	$product_image = $result->product_image;
 	if($result->product_image != ''){
-		$product_image = FunctionLib::getThumbImage($result->product_image, $product_id, FOLDER_PRODUCT,400,500);
+		$product_image = ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $product_id, $product_image, 400, 500, '', true, true);
+
 	}
 	if($result->product_image_other != ''){
 		$product_image_other = unserialize($result->product_image_other);
@@ -56,7 +57,7 @@
 								foreach($product_image_other as $img){
 								?>
 								<li>
-									<a href="javascript:void(0)" data-zoom="<?php echo FunctionLib::getThumbImage($img, $product_id, FOLDER_PRODUCT, 400, 500) ?>">
+									<a href="javascript:void(0)" data-zoom="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $product_id, $img, 400, 500, '', true, true) ?>">
 										<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $product_id, $img, 100, 100, '', true, true) ?>" alt="<?php echo $product_name ?><?php echo ' - '.WEB_SITE ?>"/>
 									</a>
 								</li>
