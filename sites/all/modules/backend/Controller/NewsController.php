@@ -125,8 +125,8 @@ class NewsController{
 					$arrOther = unserialize($arrItem->news_image_other);
 					foreach($arrOther as $k =>$val_other){
 						$arrImageOther[] = array(
-							'image_small'=> FunctionLib::getThumbImage($val_other,$arrItem->news_id,FOLDER_NEWS,80,80),
-							'image_big'=> FunctionLib::getThumbImage($val_other,$arrItem->news_id,FOLDER_NEWS,700,700),
+							'image_small'=> ThumbImg::thumbBaseNormal(FOLDER_NEWS, $arrItem->news_id, $val_other, 80, 80, '', true, true),
+							'image_big'=> ThumbImg::thumbBaseNormal(FOLDER_NEWS, $arrItem->news_id, $val_other, 700, 700, '', true, true),
 						);
 					}
 				}

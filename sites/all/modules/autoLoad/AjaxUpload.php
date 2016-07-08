@@ -313,7 +313,7 @@ class AjaxUpload{
             $aryData = array();
             if(!empty($aryTempImages)){
                 foreach($aryTempImages as $k => $item){
-                    $aryData['item'][$k] = FunctionLib::getThumbImage($item,$id_hiden,$folder,700,700);
+                    $aryData['item'][$k] = ThumbImg::thumbBaseNormal($folder, $id_hiden, $item, 700, 700, '', true, true);
                 }
             }
             $aryData['intIsOK'] = 1;
