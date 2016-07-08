@@ -55,17 +55,6 @@ class SiteController{
 		$arrFields = array('product_id', 'category_name','product_name', 'product_price_sell', 'product_price_market', 'product_image', 'product_image_hover', 'product_type_price', 'product_selloff', 'user_shop_id', 'user_shop_name');
 		$result = Site::getProductInCategory($category_id, $arrFields, $limit);
 		
-		if(isset($result['data']) && !empty($result['data'])){
-			foreach($result['data'] as $k => &$value){
-				if( isset($value->product_image) && trim($value->product_image) != ''){
-					$value->url_image = $value->url_image_hover = FunctionLib::getThumbImage($value->product_image,$value->product_id,FOLDER_PRODUCT,300,300);
-					if($value->product_image_hover != ''){
-						$value->url_image_hover = FunctionLib::getThumbImage($value->product_image_hover,$value->product_id,FOLDER_PRODUCT,300,300);
-					}
-				}
-			}	
-		}
-
 		$bannerLeft = DataCommon::getBannerAdvanced(BANNER_TYPE_HOME_LEFT, BANNER_PAGE_LIST,0, 0);
 
 		//lấy banner theo danh mục cha
@@ -247,10 +236,11 @@ class SiteController{
 	    	$arrSameNews = Site::getNewsSameCat($news_id, $result->news_category, 10, $arrFields, true);
 	    }
 	    $productNew = Site::getListProductNew(0, NUMBER_PRODUCT_NEW);
-	     if($param[0] != 'gioi-thieu' && $param[0] != 'tin-cua-khach' && $param[0] != 'tin-cua-shop'){
-	    	$noCat = 1;
+	    $noCat =0;
+	    if($param[0] != 'gioi-thieu' && $param[0] != 'tin-cua-khach' && $param[0] != 'tin-cua-shop'){
+	    	$noCat  = 1;
 		}else{
-			$noCat = 0;
+			$noCat  = 0;
 		}
 		return theme('pageNewsDetail', array('result'=>$result,'arrSameNews'=>$arrSameNews, 'catName'=>$catName, 'catNameAlias'=>$catNameAlias, 'productNew' =>$productNew, 'noCat'=>$noCat));
 	}

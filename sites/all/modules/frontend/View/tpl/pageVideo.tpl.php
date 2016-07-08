@@ -40,8 +40,8 @@
 							<li class="item">
 								<a class="i-thumb post-thumb" title="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>" href="<?php echo FunctionLib:: buildLinkDetail($h->product_id, $h->product_name); ?>">
 									<?php if($h->product_image != ''){?>
-									<img src="<?php echo FunctionLib::getThumbImage($h->product_image, $h->product_id, FOLDER_PRODUCT, 300, 300) ?>" alt="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>" 
-									data-other-src="<?php echo FunctionLib::getThumbImage($h->product_image, $h->product_id, FOLDER_PRODUCT, 300, 300) ?>">
+									<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $h->product_id, $h->product_image, 300, 300, '', true, true) ?>" alt="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>" 
+									data-other-src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $h->product_id, $h->product_image_hover, 300, 300, '', true, true) ?>">
 									<?php }else{ ?>
 									<img src="<?php echo IMAGE_DEFAULT ?>"/>
 									<?php } ?>
@@ -86,7 +86,7 @@
 							href="<?php echo FunctionLib::buildLinkVideoDetail('video', $v->video_id, $v->video_name) ?>">
 							<?php if($v->video_img != ''){?>
 							<img alt="<?php echo $v->video_name ?>"
-								src="<?php echo FunctionLib::getThumbImage($v->video_img, $v->video_id,FOLDER_VIDEO,400,400) ?>">
+								src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_VIDEO, $v->video_id, $v->video_img, 400, 400, '', true, true) ?>">
 							<?php }else{?>
 							<img src="<?php echo IMAGE_DEFAULT_VIDEO ?>"/>
 							<?php } ?>

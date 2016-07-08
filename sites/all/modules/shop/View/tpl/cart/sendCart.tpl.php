@@ -13,7 +13,7 @@
 					                <td width="10%">
 						                <a class="img" href="<?php echo FunctionLib::buildLinkDetail($item->product_id, $item->product_name); ?>" title="<?php echo $item->product_name?>">
 						                    <?php if($item->product_image != ''){?>
-											<img width="60" src="<?php echo FunctionLib::getThumbImage($item->product_image,$item->product_id,FOLDER_PRODUCT,300,300) ?>" 
+											<img width="60" src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $item->product_id, $item->product_image, 300, 300, '', true, true) ?>" 
 												 alt="<?php echo $item->product_name ?>"/>
 											<?php }else{ ?>
 											<img width="60" src="<?php echo IMAGE_DEFAULT ?>"/>

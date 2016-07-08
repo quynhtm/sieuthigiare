@@ -5,7 +5,7 @@
 * @Date 	 : 06/2014
 * @Version	 : 1.0
 */
-//news
+
 function Site_menu() {
     
 	$items['trang-chu.html'] = array(

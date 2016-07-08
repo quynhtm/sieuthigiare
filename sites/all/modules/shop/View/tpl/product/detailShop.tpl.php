@@ -57,7 +57,7 @@
 								?>
 								<li>
 									<a href="javascript:void(0)" data-zoom="<?php echo FunctionLib::getThumbImage($img, $product_id, FOLDER_PRODUCT, 400, 500) ?>">
-										<img src="<?php echo FunctionLib::getThumbImage($img, $product_id, FOLDER_PRODUCT, 100, 100) ?>" alt="<?php echo $product_name ?><?php echo ' - '.WEB_SITE ?>"/>
+										<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $product_id, $img, 100, 100, '', true, true) ?>" alt="<?php echo $product_name ?><?php echo ' - '.WEB_SITE ?>"/>
 									</a>
 								</li>
 								<?php } ?>
@@ -175,8 +175,8 @@
 										<li class="item">
 											<a class="img-thumb post-thumb" title="<?php echo $same->product_name?><?php echo ' - '.WEB_SITE ?>" href="<?php echo FunctionLib:: buildLinkDetail($same->product_id, $same->product_name); ?>">
 												<?php if($same->product_image != ''){?>
-												<img src="<?php echo FunctionLib::getThumbImage($same->product_image, $same->product_id, FOLDER_PRODUCT, 300, 300) ?>" alt="<?php echo $same->product_name?><?php echo ' - '.WEB_SITE ?>" 
-													data-other-src="<?php echo FunctionLib::getThumbImage($same->product_image_hover, $same->product_id, FOLDER_PRODUCT, 300, 300) ?>">
+												<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $same->product_id, $same->product_image, 300, 300, '', true, true) ?>" alt="<?php echo $same->product_name?><?php echo ' - '.WEB_SITE ?>" 
+													data-other-src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $same->product_id, $same->product_image_hover, 300, 300, '', true, true) ?>">
 												<?php }else{ ?>
 												<img src="<?php echo IMAGE_DEFAULT ?>"/>
 												<?php } ?>
@@ -323,8 +323,8 @@
 										<li class="item">
 											<a class="i-thumb post-thumb" title="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>" href="<?php echo FunctionLib:: buildLinkDetail($h->product_id, $h->product_name); ?>">
 												<?php if($h->product_image != ''){?>
-												<img src="<?php echo FunctionLib::getThumbImage($h->product_image, $h->product_id, FOLDER_PRODUCT, 300, 300) ?>" alt="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>"
-												data-other-src="<?php echo FunctionLib::getThumbImage($h->product_image, $h->product_id, FOLDER_PRODUCT, 300, 300) ?>">
+												<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $h->product_id, $h->product_image, 300, 300, '', true, true) ?>" alt="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>" 
+												data-other-src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $h->product_id, $h->product_image_hover, 300, 300, '', true, true) ?>">
 												<?php }else{ ?>
 												<img src="<?php echo IMAGE_DEFAULT ?>"/>
 												<?php } ?>

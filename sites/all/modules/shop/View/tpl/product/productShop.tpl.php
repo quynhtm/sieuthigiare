@@ -88,10 +88,10 @@
 									<?php if( isset($v->url_image)) {?>
 									<div style="position: relative; margin: 15px 0px">
 										<div style="position: relative; z-index: 10">
-											<img src="<?php echo $v->url_image; ?>" class='imge_hover' id='<?php echo $v->product_id ?>'/>
+											<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $v->product_id, $v2->product_image, 300, 300, '', true, true) ?>" class='imge_hover' id='<?php echo $v->product_id ?>'/>
 										</div>
 										<div id='div_hover_<?php echo $v->product_id ?>'style="position: absolute; bottom: 30px; left: 40px; border: 2px solid #ccc; padding: 5px; background: #F4F9FF; z-index: 1000; display: none">
-											<img src="<?php echo $v->image_big; ?>"/>
+											<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $v->product_id, $v2->product_image_hover, 300, 300, '', true, true) ?>"/>
 										</div>
 									</div>
 									<?php } else{?>

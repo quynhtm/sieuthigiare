@@ -86,7 +86,7 @@
 							href="<?php echo FunctionLib::buildLinkVideoDetail('video', $v->video_id, $v->video_name) ?>">
 							<?php if($v->video_img != ''){?>
 							<img alt="<?php echo $v->video_name ?>"
-								src="<?php echo FunctionLib::getThumbImage($v->video_img, $v->video_id,FOLDER_VIDEO,400,400) ?>">
+								src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_VIDEO, $v->video_id, $v->video_img, 400, 400, '', true, true) ?>">
 							<?php }else{?>
 							<img src="<?php echo IMAGE_DEFAULT_VIDEO ?>"/>
 							<?php } ?>

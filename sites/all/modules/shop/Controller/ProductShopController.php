@@ -57,16 +57,7 @@ class ProductShopController{
 		
 		$arrFields = array('product_id', 'category_name', 'product_code','product_name', 'product_price_sell', 'product_price_market', 'product_price_input', 'product_content', 'product_image', 'product_image_hover', 'time_created', 'product_status');
 		$result = ProductShop::getSearchListItems($dataSearch, $limit, $arrFields);
-		//FunctionLib::Debug($result);
-		if(isset($result['data']) && !empty($result['data'])){
-			foreach($result['data'] as $k => &$value){
-				if( isset($value->product_image) && trim($value->product_image) != ''){
-					$value->url_image = FunctionLib::getThumbImage($value->product_image,$value->product_id,FOLDER_PRODUCT,80,80);
-					$value->image_big = FunctionLib::getThumbImage($value->product_image,$value->product_id,FOLDER_PRODUCT,300,400);
-				}
-			}
-		}
-		//FunctionLib::Debug($result);
+		
 		$arrCategoryChildren = DataCommon::buildCacheTreeCategoryWithShop($user_shop->shop_id);
 		$treeCategoryShop = self::showTreeCategoryShop($arrCategoryChildren);
 
@@ -302,16 +293,6 @@ class ProductShopController{
 		$result = ProductShop::getIndexShop($this->shop_id,$this->category_id, $limit, $arrFields);
 		$phone = '';
 		$treeCategoryShop = array();
-		if(isset($result['data']) && !empty($result['data'])){
-			foreach($result['data'] as $k => &$value){
-				if( isset($value->product_image) && trim($value->product_image) != ''){
-					$value->url_image = $value->url_image_hover = FunctionLib::getThumbImage($value->product_image,$value->product_id,FOLDER_PRODUCT,300,300);
-					if($value->product_image_hover != ''){
-						$value->url_image_hover = FunctionLib::getThumbImage($value->product_image_hover,$value->product_id,FOLDER_PRODUCT,300,300);
-					}
-				}
-			}	
-		}
 		$arrCateParenId = array();
 		if(!empty($this->user_shop)){
 			$phone = $this->user_shop->shop_phone;

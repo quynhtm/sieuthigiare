@@ -101,8 +101,9 @@
 						<li class="item">
 							<div class="post-thumb">
 								<a href="<?php echo FunctionLib:: buildLinkDetail($v->product_id, $v->product_name); ?>" title="<?php echo $v->product_name?><?php echo ' - '.WEB_SITE ?>">
-									<?php if(isset($v->url_image) && $v->url_image != ''){?>
-									<img src="<?php echo $v->url_image ?>" alt="<?php echo $v->product_name?><?php echo ' - '.WEB_SITE ?>" data-other-src="<?php echo $v->url_image_hover?>">
+									<?php if($v->product_image != ''){?>
+									<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $v->product_id, $v2->product_image, 300, 300, '', true, true) ?>" alt="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>" 
+									data-other-src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $v->product_id, $v->product_image_hover, 300, 300, '', true, true) ?>">
 									<?php }else{ ?>
 									<img src="<?php echo IMAGE_DEFAULT ?>"/>
 									<?php } ?>

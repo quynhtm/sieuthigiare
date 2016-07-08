@@ -34,8 +34,8 @@
 						<div class="post-thumb">
 							<a href="<?php echo FunctionLib:: buildLinkDetail($v->product_id, $v->product_name); ?>" title="<?php echo $v->product_name?><?php echo ' - '.WEB_SITE ?>">
 								<?php if(isset($v->product_image) && $v->product_image != ''){?>
-								<img src="<?php echo FunctionLib::getThumbImage($v->product_image,$v->product_id,FOLDER_PRODUCT,300,300) ?>"
-									 data-other-src="<?php echo FunctionLib::getThumbImage($v->product_image_hover,$v->product_id,FOLDER_PRODUCT,300,300) ?>"
+								<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $v->product_id, $v->product_image, 300, 300, '', true, true) ?>"
+									 data-other-src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $v->product_id, $v->product_image_hover, 300, 300, '', true, true) ?>"
 									 alt="<?php echo $v->product_name ?><?php echo ' - '.WEB_SITE ?>">
 								<?php }else{ ?>
 								<img src="<?php echo IMAGE_DEFAULT ?>"/>
