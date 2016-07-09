@@ -1143,6 +1143,24 @@ span#logo{
 .slider-box-mid .bx-wrapper .bx-pager, .bx-wrapper .bx-controls-auto {
     bottom: 10px!important;
 }
-.bx-wrapper .bx-controls-direction a{
-    background: url(../);
+.bx-wrapper .bx-controls-direction a.bx-prev{
+    background: rgba(0, 0, 0, 0) url("../img/icon.png") no-repeat scroll 0 -24px;
+    left: 5px;
+}
+.bx-wrapper .bx-controls-direction a.bx-next {
+    background: rgba(0, 0, 0, 0) url("../img/icon.png") no-repeat scroll -24px -24px;
+    right: 5px;
+    
+}
+.slider-box-mid .bx-controls-direction{
+    display: none;
+}
+.slider-box-mid .bx-wrapper:hover .bx-controls-direction{
+    display: block;
+}
+.slider-box-mid .bx-wrapper .bx-controls-direction a {
+    height: 64px;
+    margin-top: -28px;
+    width: 24px !important;
+    display: inline-block;
 }
