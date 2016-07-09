@@ -34,7 +34,7 @@ class RegShop{
 
 	public static function getShopByCondMail($name='', $mail=''){
 		if($name !='' && $mail != ''){
-			return DB:: getItembyCond(self::$table_action, '', '', self::$primary_key_user_shop.' ASC', "user_shop='".$name."' AND shop_email='".$mail."'", 1);
+			return DB:: getItembyCond(self::$table_action, '', '', self::$primary_key_user_shop.' ASC', "user_shop='".$name."'", 1);
 		}
 		return false;
 	}

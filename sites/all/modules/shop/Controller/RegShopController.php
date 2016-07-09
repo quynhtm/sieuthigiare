@@ -347,25 +347,39 @@ class RegShopController{
 				if(!empty($userExist)){
 					$shop_id = $userExist[0]->shop_id;
 					$pass = self::randomString(5);
-
-					require_once DRUPAL_ROOT . '/' . variable_get('password_inc', 'includes/password.inc');
-					$hash_pass = user_hash_password($pass);
+					$shop_email = $userExist[0]->shop_email;
 					
-					$data_post = array('user_password'=>$hash_pass);
-					RegShop::updateId($data_post, $shop_id);
+					$arrMail = array();
+					if($shop_email != ''){
+						$arrMail = @unserialize($userExist[0]->shop_email);
+						if(!is_array($arrMail)){
+							$arrMail[] = $userExist[0]->shop_email;
+						}
+					}
 
-					$linkpath = $base_url.'/dang-nhap.html';
-					$contentEmail = '<b>Thay đổi mật khẩu tại ShopCuaTui.COM.VN</b><br/>';
-					$contentEmail .= 'Chào: '.$userExist[0]->user_shop.'<br/>';
-					$contentEmail .= 'Dưới đây là thông tin đăng nhập<br/><br/>';
-					$contentEmail .= '<b>Tên đăng nhập:</b> '.$userExist[0]->user_shop.'<br/>';
-					$contentEmail .= '<b>Mật khẩu:</b> '.$pass.'<br/><br/>';
-					$contentEmail .= '<a href="'.$linkpath.'">Bấm vào để đăng nhập</a><br/><br/>';
-					$contentEmail .= 'Ghi chú: Bạn hay đăng nhập và thay đổi mật khẩu cho bảo mật lần đăng nhập sau.';
-					
-    				$subject = 'Khôi phục mật khẩu:';
-					auto_send_mail('Shop', $contentEmail, $email_shop, $subject);
-					drupal_set_message('Hệ thống đã gửi một thư tới địa chỉ email này!');
+					if(in_array($email_shop, $arrMail)){
+						require_once DRUPAL_ROOT . '/' . variable_get('password_inc', 'includes/password.inc');
+						$hash_pass = user_hash_password($pass);
+						
+						$data_post = array('user_password'=>$hash_pass);
+						RegShop::updateId($data_post, $shop_id);
+
+						$linkpath = $base_url.'/dang-nhap.html';
+						$contentEmail = '<b>Thay đổi mật khẩu tại ShopCuaTui.COM.VN</b><br/>';
+						$contentEmail .= 'Chào: '.$userExist[0]->user_shop.'<br/>';
+						$contentEmail .= 'Dưới đây là thông tin đăng nhập<br/><br/>';
+						$contentEmail .= '<b>Tên đăng nhập:</b> '.$userExist[0]->user_shop.'<br/>';
+						$contentEmail .= '<b>Mật khẩu:</b> '.$pass.'<br/><br/>';
+						$contentEmail .= '<a href="'.$linkpath.'">Bấm vào để đăng nhập</a><br/><br/>';
+						$contentEmail .= 'Ghi chú: Bạn hay đăng nhập và thay đổi mật khẩu cho bảo mật lần đăng nhập sau.';
+						
+	    				$subject = 'Khôi phục mật khẩu:';
+						auto_send_mail('Shop', $contentEmail, $email_shop, $subject);
+						drupal_set_message('Hệ thống đã gửi một thư tới địa chỉ email này!');
+					}else{
+						drupal_set_message('Không đúng tên đăng nhập hoặc email đăng ký shop!', 'error');
+						return theme('forgotPass', array('shop_email' => $email_shop));
+					}
 				}else{
 					drupal_set_message('Không đúng tên đăng nhập hoặc email đăng ký shop!', 'error');
 					return theme('forgotPass', array('shop_email' => $email_shop));
