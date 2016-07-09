@@ -42,7 +42,7 @@
 			</div>
 		</div>
 		<div class="slider-box-mid">
-			<div class="nivoSlider" id="slider">
+			<div id="sliderMid">
 				<?php foreach($bannerLager as $v){ 
 					if($v->banner_is_rel != 1){
 						$rel = 'rel="nofollow"';
@@ -50,9 +50,11 @@
 						$rel = '';
 					}
 				?>
-				<a <?php echo $rel ?> title="<?php echo $v->banner_name ?>" href="<?php echo $v->banner_link ?>" <?php if($v->banner_is_target == BANNER_TARGET_BLANK){?>target="_blank"<?php }?> class="nivo-imageLink" style="display: block;">
-					<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_BANNER, $v->banner_id, $v->banner_image, 730, 428, '', true, true) ?>" alt="<?php echo $v->banner_name ?>"/>
-				</a>
+				<div class="slide ">
+					<a <?php echo $rel ?> title="<?php echo $v->banner_name ?>" href="<?php echo $v->banner_link ?>" <?php if($v->banner_is_target == BANNER_TARGET_BLANK){?>target="_blank"<?php }?>>
+						<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_BANNER, $v->banner_id, $v->banner_image, 730, 428, '', true, true) ?>" alt="<?php echo $v->banner_name ?>"/>
+					</a>
+				</div>
 				<?php } ?>
 			</div>
 		</div>
@@ -75,6 +77,15 @@
 </div>
 <script type="text/javascript">
 	jQuery(document).ready(function() {
-		jQuery('#slider').nivoSlider();
+		var bxSider = jQuery('#sliderMid').bxSlider({
+			slideWidth: 610,
+			slideHeight: 340,
+			minSlides: 1,
+			maxSlides: 2,
+			slideMargin: 10,
+			mode: 'fade',
+			pager: true,
+			auto: true,
+		});
     });
 </script>

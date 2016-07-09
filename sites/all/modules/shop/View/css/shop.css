@@ -309,7 +309,7 @@ a.btn-yahoo:hover{
     border-bottom: 1px solid #ddd;
 }
 .link-breadcrumb {
-    background: #f2f2f2;
+    background: #fff;
     border: 1px solid #ddd;
     margin: 10px 0;
     padding: 5px 8px;
@@ -333,7 +333,7 @@ a.btn-yahoo:hover{
 }
 .wrapp-category-menu{
     border-radius: 2px;
-    background: #f3f3f3;
+    background: #fff;
     border: 1px solid #eee;
     padding: 12px 15px 15px;
     margin-bottom: 10px;
@@ -369,14 +369,14 @@ a.btn-yahoo:hover{
 .right-show-product-shop.body-list-item {
     display: inline-block;
     float: right;
-    width: 1018px;
+    width: 870px;
 }
 .body-list-item .banner-shop-content {
     display: inline-block;
     height: 245px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     overflow: hidden;
-    width: 1018px;
+    width: 100%;
 }
 .body-list-item .banner-shop-content  img{
     width: 100%;
@@ -392,27 +392,30 @@ a.btn-yahoo:hover{
 .body-list-item .item {
     display: inline-block;
     float: left;
-    height: 370px;
-    margin-bottom: 0;
-    margin-right: 23px;
+    height: 350px;
+    margin-right: 13px;
     overflow: hidden;
-    padding: 10px;
-    width: 235px;
+    padding: 5px;
     position: relative;
+    width: 205px;
+    background: #fff;
+    margin-bottom: 15px;
 }
 .body-list-item .item:hover{
     box-shadow: 0 0 2px rgba(87, 87, 87, 0.6); 
 }
-.body-list-item  .post-thumb {
+.body-list-item .post-thumb {
     display: block;
-    text-align: center;
+    height: 220px;
+    line-height: 220px;
     margin-bottom: 8px;
-    position: relative;
-    height: 240px;
-    line-height: 240px;
     overflow: hidden;
+    position: relative;
+    text-align: center;
 }
 .body-list-item .post-thumb img {
+    max-height: 100%;
+    max-width: 100%;
     width: 100%;
 }
 .body-list-item .title-info {
@@ -494,9 +497,9 @@ a.btn-yahoo:hover{
 }
 /*detail*/
 .box-detail-product .top-content-view {
+    background: #fff;
     display: inline-block;
-    margin-top: 5px;
-    width: 100%;
+    padding: 10px;
 }
 .left-slider-img {
     display: inline-block;
@@ -544,7 +547,8 @@ a.btn-yahoo:hover{
 .center-des-product {
     display: inline-block;
     float: left;
-    width: 520px;
+    margin-right: 15px;
+    width: 380px;
 }
 .center-des-product h1 {
     color: #444;
@@ -619,6 +623,7 @@ a.btn-yahoo:hover{
     border-radius: 2px;
     margin-bottom: 8px;
     padding: 15px;
+    background: #fff;
 }
 .right-des-product .order-number{
     margin-bottom: 10px;
@@ -662,15 +667,17 @@ a.btn-yahoo:hover{
     color: #222;
     font-size: 18px;
 }
-.icon-phone:before {
+.icon-phone::before {
     color: #999;
+    float: left;
     font-size: 25px;
+    margin-right: 5px;
     position: relative;
     top: 2px;
 }
 .order-number-phone a {
     display: inline-block;
-    margin-left: 25px;
+    color: #247bbd;
     margin-top: 10px;
     color: #247bbd;
 }
@@ -683,8 +690,9 @@ a.btn-yahoo:hover{
     clear: both;
     display: inline-block;
     margin-bottom: 10px;
-    margin-top: 30px;
+    margin-top: 10px;
     width: 100%;
+    background: #fff;
 }
 .title-center-content-view{
     color: #666;
@@ -701,18 +709,17 @@ a.btn-yahoo:hover{
 }
 .content-center-content-view ul{
     margin: 2px 1px!important;
- }
-.content-center-content-view li{
+}
+.content-center-content-view li {
+    border: medium none !important;
+    height: 285px;
     line-height: 24px;
     margin: 0 0 20px;
+    max-width: 202px;
     overflow: hidden;
     padding: 5px 15px;
-    max-width: 235px;
-    height: 285px;
-    overflow: hidden;
-    border: none!important;
-    width: 228px !important;
- }
+    width: 199px !important;
+}
  .jcarousel li.item:hover{
      box-shadow: 0 0 2px rgba(87, 87, 87, 0.6);
  }
@@ -757,17 +764,19 @@ a.btn-yahoo:hover{
     font-style: normal;
     text-decoration: line-through;
 }
-.bottom-content-view{
+.bottom-content-view {
+    background: #fff none repeat scroll 0 0;
     clear: both;
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 5px;
+    padding: 10px;
     width: 100%;
 }
 .left-bottom-content-view {
     display: inline-block;
     float: left;
     text-align: justify;
-    width: 995px;
+    width: 850px;
 }
 .bottom-content-view .tab{
     border-bottom: 1px solid #ddd;

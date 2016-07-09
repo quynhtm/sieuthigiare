@@ -68,12 +68,31 @@
 						<p><b>Quý khách muốn đặt qua điện thoại</b></p>
 						<div class="number-phone">
 							<div class="icon-phone"></div>
-							<?php echo $user_shop->shop_phone?>
+							<?php 
+								if($user_shop->shop_phone != ''){
+								$arrPhone = @unserialize($user_shop->shop_phone);
+							?>
+								<?php if(is_array($arrPhone) && !empty($arrPhone)){ ?>
+									<?php foreach($arrPhone as $key=>$phone){?>
+										<span><?php echo $phone ?></span><br/>
+									<?php } ?>
+								<?php } ?>
+							<?php } ?>
 						</div>
 						<p><a href="<?php echo FunctionLib::buildLinkCategory($user_shop->shop_id, $user_shop->shop_name, 0, '') ?>" title="Shop: <?php echo $user_shop->shop_name ?>"><?php echo $user_shop->shop_name ?></a></p>
 						<?php if($user_shop->shop_address !=''){?>
 							<p><b>Thông tin liên hệ: </b></p>
-							<p><?php echo $user_shop->shop_email;?></p>
+							
+							<?php 
+								if($user_shop->shop_email != ''){
+								$arrMail = @unserialize($user_shop->shop_email);
+							?>
+								<?php if(is_array($arrMail) && !empty($arrMail)){ ?>
+									<?php foreach($arrMail as $key=>$mail){?>
+										<p><?php echo $mail ?></p>
+									<?php } ?>
+								<?php } ?>
+							<?php } ?>
 							<p><?php echo $user_shop->shop_address;?></p>
 						<?php }?>
 					</div>
@@ -102,8 +121,8 @@
 							<div class="post-thumb">
 								<a href="<?php echo FunctionLib:: buildLinkDetail($v->product_id, $v->product_name); ?>" title="<?php echo $v->product_name?><?php echo ' - '.WEB_SITE ?>">
 									<?php if($v->product_image != ''){?>
-									<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $v->product_id, $v->product_image, 300, 300, '', true, true) ?>" alt="<?php echo $h->product_name?><?php echo ' - '.WEB_SITE ?>" 
-									data-other-src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $v->product_id, $v->product_image_hover, 300, 300, '', true, true) ?>">
+									<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $v->product_id, $v->product_image, 300, 400, '', true, true) ?>" alt="<?php echo $v->product_name?><?php echo ' - '.WEB_SITE ?>" 
+									data-other-src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $v->product_id, $v->product_image_hover, 400, 300, '', true, true) ?>">
 									<?php }else{ ?>
 									<img src="<?php echo IMAGE_DEFAULT ?>"/>
 									<?php } ?>
@@ -145,7 +164,7 @@
 						<?php } ?>
 					</ul>
 				</div>
-				<div class="show-box-paging" style="margin-top:20px; ">
+				<div class="show-box-paging" style="margin-top: 5px;">
 					<div class="showListPage">
 						<?php print render($pager); ?>
 					</div>

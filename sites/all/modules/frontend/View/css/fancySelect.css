@@ -26,7 +26,7 @@ div.fancy-select div.trigger {
     position: relative;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 280px;
+    width: 220px;
 	font-weight: normal;
 	transition: all 240ms ease-out;
 	-webkit-transition: all 240ms ease-out;

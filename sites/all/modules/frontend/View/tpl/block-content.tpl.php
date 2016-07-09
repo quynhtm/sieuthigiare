@@ -26,8 +26,8 @@
 							<?php } ?>
 							<a href="<?php echo FunctionLib::buildLinkDetail($item->product_id, $item->product_name); ?>" title="<?php echo $item->product_name?><?php echo ' - '.WEB_SITE ?>">
 								<?php if($item->product_image != ''){?>
-								<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $item->product_id, $item->product_image, 300, 300, '', true, true) ?>"
-								data-other-src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $item->product_id, $item->product_image_hover, 300, 300, '', true, true) ?>"
+								<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $item->product_id, $item->product_image, 300, 400, '', true, true) ?>"
+								data-other-src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $item->product_id, $item->product_image_hover, 300, 400, '', true, true) ?>"
 								alt="<?php echo $item->product_name ?><?php echo ' - '.WEB_SITE ?>"/>
 								<?php }else{ ?>
 								<img src="<?php echo IMAGE_DEFAULT ?>"/>

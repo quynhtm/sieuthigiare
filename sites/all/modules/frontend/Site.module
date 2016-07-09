@@ -286,6 +286,12 @@ function block_header(){
 				'optionProvices'=>$optionProvices, 'listCategory'=>$listCategory, 'category_id'=>$category_id));
 }
 function block_slide(){
+	$files = array(
+			'bootstrap/lib/bxslider/bxslider.css',
+			'bootstrap/lib/bxslider/bxslider.js',
+		);
+	Loader::load('Core', $files);
+
 	$arrCategory = DataCommon::buildCacheTreeCategory();
 	$bannerLager = SiteController::getListBannerLagerSite();
 	$bannerSmall = SiteController::getListBannerSmallSite();
