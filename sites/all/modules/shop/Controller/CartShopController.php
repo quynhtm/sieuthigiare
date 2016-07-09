@@ -156,56 +156,67 @@ class CartShopController{
 					$arrMailShop[$v->user_shop_id][] = $v;
 
 				}
-
 				//Send Mail Cart To Shop
-				foreach($arrMailShop as $key=>$mail){
+				foreach($arrMailShop as $key=>$val){
 					$get_user_shop = DataCommon::getShopById($key);
 					$email_shop = $get_user_shop->shop_email;
-					$subject = 'Shopcuatui.com.vn - Khách đã đặt mua sản phẩm của shop';
-					$str = '';
-					$total = 0;
-
-					$contentEmail = '<b style="color:#ff6600">Xác nhận đặt hàng thành công!</b><br/><br/>';
-					$contentEmail .= 'Chào: '.$get_user_shop->user_shop.'<br/>';
-					$contentEmail .= 'Bạn nhận được email này do khách hàng đã đặt mua sản phẩm từ shop của bạn trên website ShopCuaTui.com.vn<br/><br/>';
-					$contentEmail .= '<a href="'.$base_url.'/danh-sach-don-hang.html">Bấm vào đây để xem tình trạng đơn hàng.</a><br/><br/>';
-					$contentEmail .= '<b>Thông tin sản phẩm</b><br/><br/>';					
-
-					$contentEmail .= '<table width="100%" style="border-collapse:collapse">';
-					$contentEmail.= '<tr class="first">
-										<th style="border:1px solid #c8c8c8; padding:5px; text-align:center">STT</th>
-										<th style="border:1px solid #c8c8c8; padding:5px; text-align:left">Tên sản phẩm</th>
-										<th style="border:1px solid #c8c8c8; padding:5px; text-align:center">Số lượng</th>
-										<th style="border:1px solid #c8c8c8; padding:5px; text-align:right">Thành tiền</th>
-									</tr>';
-					$stt = 0;
-					foreach($mail as $item){
-						$stt++;
-						if($item->product_price_sell > 0){
-							$total = number_format($item->num * floatval($item->product_price_sell)).'đ';
-						}else{
-							$total = 'Liên hệ';
+					
+					$arrMail = array();
+					if($email_shop != ''){
+						$arrMail = @unserialize($email_shop);
+						if(!is_array($arrMail)){
+							$arrMail[] = $email_shop;
 						}
-						$contentEmail .= '<tr>
-											<td style="border:1px solid #c8c8c8; padding:5px; text-align:center">'.$stt.'</td>
-											<td style="border:1px solid #c8c8c8; padding:5px; text-align:left"><a href="'.FunctionLib:: buildLinkDetail($item->product_id, $item->product_name).'">'.$item->product_name.'</a></td>
-											<td style="border:1px solid #c8c8c8; padding:5px; text-align:center">'.$item->num.'</td>
-											<td style="border:1px solid #c8c8c8; padding:5px; text-align:right">'.$total.'</td>
-										</tr>';
 					}
-					$contentEmail .= '</table><br/><br/>';
+					
+					if(is_array($arrMail) && !empty($arrMail)){
+						foreach($arrMail as $mail){
+							$subject = 'Shopcuatui.com.vn - Khách đã đặt mua sản phẩm của shop';
+							$str = '';
+							$total = 0;
+							$contentEmail = '';
 
-					$contentEmail .= '<b>Thông tin khách hàng</b><br/><br/>';
-					$contentEmail .= 'Họ và tên: '.$name.'<br/>';
-					$contentEmail .= 'Di động: '.$phone.'<br/>';
-					$contentEmail .= 'Email: '.$email.'<br/>';
-					$contentEmail .= 'Địa chỉ: '.$address.'<br/>';
+							$contentEmail .= '<b style="color:#ff6600">Xác nhận đặt hàng thành công!</b><br/><br/>';
+							$contentEmail .= 'Chào: '.$get_user_shop->user_shop.'<br/>';
+							$contentEmail .= 'Bạn nhận được email này do khách hàng đã đặt mua sản phẩm từ shop của bạn trên website ShopCuaTui.com.vn<br/><br/>';
+							$contentEmail .= '<a href="'.$base_url.'/danh-sach-don-hang.html">Bấm vào đây để xem tình trạng đơn hàng.</a><br/><br/>';
+							$contentEmail .= '<b>Thông tin sản phẩm</b><br/><br/>';					
 
-					auto_send_mail('Shop', $contentEmail, $email_shop, $subject);
-		
+							$contentEmail .= '<table width="100%" style="border-collapse:collapse">';
+							$contentEmail.= '<tr class="first">
+												<th style="border:1px solid #c8c8c8; padding:5px; text-align:center">STT</th>
+												<th style="border:1px solid #c8c8c8; padding:5px; text-align:left">Tên sản phẩm</th>
+												<th style="border:1px solid #c8c8c8; padding:5px; text-align:center">Số lượng</th>
+												<th style="border:1px solid #c8c8c8; padding:5px; text-align:right">Thành tiền</th>
+											</tr>';
+							$stt = 0;
+							foreach($val as $item){
+								$stt++;
+								if($item->product_price_sell > 0){
+									$total = number_format($item->num * floatval($item->product_price_sell)).'đ';
+								}else{
+									$total = 'Liên hệ';
+								}
+								$contentEmail .= '<tr>
+													<td style="border:1px solid #c8c8c8; padding:5px; text-align:center">'.$stt.'</td>
+													<td style="border:1px solid #c8c8c8; padding:5px; text-align:left"><a href="'.FunctionLib:: buildLinkDetail($item->product_id, $item->product_name).'">'.$item->product_name.'</a></td>
+													<td style="border:1px solid #c8c8c8; padding:5px; text-align:center">'.$item->num.'</td>
+													<td style="border:1px solid #c8c8c8; padding:5px; text-align:right">'.$total.'</td>
+												</tr>';
+							}
+							$contentEmail .= '</table><br/><br/>';
+
+							$contentEmail .= '<b>Thông tin khách hàng</b><br/><br/>';
+							$contentEmail .= 'Họ và tên: '.$name.'<br/>';
+							$contentEmail .= 'Di động: '.$phone.'<br/>';
+							$contentEmail .= 'Email: '.$email.'<br/>';
+							$contentEmail .= 'Địa chỉ: '.$address.'<br/>';
+
+							auto_send_mail('Shop', $contentEmail, $mail, $subject);
+						}
+					}
 				}
 				//Send Mail Cart To Shop
-
 				unset($_SESSION['cart']);
 				drupal_goto($base_url.'/cam-on-da-mua-hang.html');
 			}

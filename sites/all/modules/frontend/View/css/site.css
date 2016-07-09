@@ -386,9 +386,10 @@ span#logo{
 .content-box-menu{
     background: #fff;
 }
-.content-box-menu.header-menu-other {
+.content-box-menu.header-menu-other{
     border: 1px solid #ddd;
     display: none;
+    height: 344px;
     position: absolute;
     width: 230px;
     z-index: 999;

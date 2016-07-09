@@ -71,6 +71,9 @@
 							<?php 
 								if($user_shop->shop_phone != ''){
 								$arrPhone = @unserialize($user_shop->shop_phone);
+								if(!is_array($arrPhone)){
+									$arrPhone[] = $user_shop->shop_phone;
+								}
 							?>
 								<?php if(is_array($arrPhone) && !empty($arrPhone)){ ?>
 									<?php foreach($arrPhone as $key=>$phone){?>
@@ -86,6 +89,9 @@
 							<?php 
 								if($user_shop->shop_email != ''){
 								$arrMail = @unserialize($user_shop->shop_email);
+								if(!is_array($arrMail)){
+									$arrMail[] = $user_shop->shop_email;
+								}
 							?>
 								<?php if(is_array($arrMail) && !empty($arrMail)){ ?>
 									<?php foreach($arrMail as $key=>$mail){?>
