@@ -293,10 +293,12 @@ function block_slide(){
 	Loader::load('Core', $files);
 
 	$arrCategory = DataCommon::buildCacheTreeCategory();
-	$bannerLager = SiteController::getListBannerLagerSite();
-	$bannerSmall = SiteController::getListBannerSmallSite();
+	
+	$bannerSliderLager = SiteController::getListBannerSliderLagerSite();
+	$bannerRightSliderSmall_1 = SiteController::getListBannerRightSliderSite1();
+	$bannerRightSliderSmall_2 = SiteController::getListBannerRightSliderSite2();
 
-	return theme('block-slide', array('bannerLager'=>$bannerLager, 'bannerSmall'=>$bannerSmall, 'arrCategory'=>$arrCategory));
+	return theme('block-slide', array('bannerSliderLager'=>$bannerSliderLager, 'bannerRightSliderSmall_1'=>$bannerRightSliderSmall_1, 'bannerRightSliderSmall_2'=>$bannerRightSliderSmall_2,  'arrCategory'=>$arrCategory));
 }
 
 /**

@@ -43,7 +43,9 @@
 		</div>
 		<div class="slider-box-mid">
 			<div id="sliderMid">
-				<?php foreach($bannerLager as $v){ 
+				<?php 
+				if(!empty($bannerSliderLager)){
+				foreach($bannerSliderLager as $v){ 
 					if($v->banner_is_rel != 1){
 						$rel = 'rel="nofollow"';
 					}else{
@@ -55,29 +57,54 @@
 						<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_BANNER, $v->banner_id, $v->banner_image, 730, 428, '', true, true) ?>" alt="<?php echo $v->banner_name ?>"/>
 					</a>
 				</div>
-				<?php } ?>
+				<?php } } ?>
 			</div>
 		</div>
 		<div class="ads-right-mid">
-			<?php foreach($bannerSmall as $v2){ 
-				if($v2->banner_is_rel != 1){
-					$rel = 'rel="nofollow"';
-				}else{
-					$rel = '';
-				}
-			?>
 			<div class="item-right-slider">
-				<a <?php echo $rel ?> href="<?php echo $v2->banner_link ?>" title ="<?php echo $v2->banner_name ?>" <?php if($v2->banner_is_target == BANNER_TARGET_BLANK){?>target="_blank"<?php }?>>
-					<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_BANNER, $v2->banner_id, $v2->banner_image, 300, 210, '', true, true) ?>" alt="<?php echo $v2->banner_name ?>"/>
-				</a>
+				<div id="sliderRight1">
+					<?php 
+					if(!empty($bannerRightSliderSmall_1)){
+					foreach($bannerRightSliderSmall_1 as $v2){ 
+						if($v2->banner_is_rel != 1){
+							$rel = 'rel="nofollow"';
+						}else{
+							$rel = '';
+						}
+					?>
+					<div class="slide">
+						<a <?php echo $rel ?> href="<?php echo $v2->banner_link ?>" title ="<?php echo $v2->banner_name ?>" <?php if($v2->banner_is_target == BANNER_TARGET_BLANK){?>target="_blank"<?php }?>>
+							<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_BANNER, $v2->banner_id, $v2->banner_image, 300, 210, '', true, true) ?>" alt="<?php echo $v2->banner_name ?>"/>
+						</a>
+					</div>
+					<?php } } ?>
+				</div>
 			</div>
-			<?php } ?>
+			<div class="item-right-slider">
+				<div id="sliderRight2">
+					<?php 
+					if(!empty($bannerRightSliderSmall_2)){
+					foreach($bannerRightSliderSmall_2 as $v2){ 
+						if($v2->banner_is_rel != 1){
+							$rel = 'rel="nofollow"';
+						}else{
+							$rel = '';
+						}
+					?>
+					<div class="slide">
+						<a <?php echo $rel ?> href="<?php echo $v2->banner_link ?>" title ="<?php echo $v2->banner_name ?>" <?php if($v2->banner_is_target == BANNER_TARGET_BLANK){?>target="_blank"<?php }?>>
+							<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_BANNER, $v2->banner_id, $v2->banner_image, 300, 210, '', true, true) ?>" alt="<?php echo $v2->banner_name ?>"/>
+						</a>
+					</div>
+					<?php } } ?>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
 <script type="text/javascript">
 	jQuery(document).ready(function() {
-		var bxSider = jQuery('#sliderMid').bxSlider({
+		jQuery('#sliderMid').bxSlider({
 			slideWidth: 610,
 			slideHeight: 340,
 			minSlides: 1,
@@ -85,6 +112,17 @@
 			slideMargin: 10,
 			mode: 'fade',
 			pager: true,
+			auto: true,
+		});
+
+		jQuery('#sliderRight1, #sliderRight2').bxSlider({
+			slideWidth: 268,
+			slideHeight: 170,
+			minSlides: 1,
+			maxSlides: 2,
+			slideMargin: 10,
+			mode: 'fade',
+			pager: false,
 			auto: true,
 		});
     });

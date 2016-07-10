@@ -1119,6 +1119,7 @@ span#logo{
     line-height: 18px;
     margin: 0;
 }
+/*Slider mid*/
 .slider-box-mid .bx-viewport {
     height: 350px !important;
     overflow: hidden;
@@ -1140,8 +1141,29 @@ span#logo{
 .slider-box-mid .bx-wrapper .bx-controls .bx-pager-item a.active{
     background: #fe6d01;
 }
-.slider-box-mid .bx-wrapper .bx-pager, .bx-wrapper .bx-controls-auto {
+.slider-box-mid .bx-wrapper .bx-pager, .bx-wrapper .bx-controls-auto{
     bottom: 10px!important;
+}
+/*Slider Right*/
+.ads-right-mid .bx-viewport {
+    height: 170px!important;
+}
+.ads-right-mid .bx-viewport img{
+    height: 170px!important;
+}
+/*Slider Same Config*/
+.bx-wrapper .bx-controls-direction{
+    display: none;
+}
+.bx-wrapper:hover .bx-controls-direction{
+    display: block;
+}
+.bx-wrapper .bx-controls-direction a {
+    height: 64px!important;
+    margin-top: -28px;
+    width: 24px !important;
+    display: inline-block;
+    top: 43%!important;
 }
 .bx-wrapper .bx-controls-direction a.bx-prev{
     background: rgba(0, 0, 0, 0) url("../img/icon.png") no-repeat scroll 0 -24px;
@@ -1151,16 +1173,4 @@ span#logo{
     background: rgba(0, 0, 0, 0) url("../img/icon.png") no-repeat scroll -24px -24px;
     right: 5px;
     
-}
-.slider-box-mid .bx-controls-direction{
-    display: none;
-}
-.slider-box-mid .bx-wrapper:hover .bx-controls-direction{
-    display: block;
-}
-.slider-box-mid .bx-wrapper .bx-controls-direction a {
-    height: 64px;
-    margin-top: -28px;
-    width: 24px !important;
-    display: inline-block;
 }

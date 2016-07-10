@@ -10,7 +10,9 @@ class BannerController{
 	private $arrRel = array(LINK_NOFOLLOW => 'Nofollow', LINK_FOLLOW => 'Follow');
 	
 	private $arrTypeBanner = array(-1 => '---Chọn loại Banner--',
-		BANNER_TYPE_HOME_BIG => 'Banner home to',
+		BANNER_TYPE_HOME_BIG => 'Banner home slider to',
+		BANNER_TYPE_HOME_RIGHT_1 => 'Banner home phải slider 1',
+		BANNER_TYPE_HOME_RIGHT_2 => 'Banner home phải slider 2',
 		BANNER_TYPE_HOME_SMALL => 'Banner home nhỏ',
 		BANNER_TYPE_HOME_LEFT => 'Banner trái-phải',
 		BANNER_TYPE_HOME_LIST => 'Banner trang list');

@@ -106,6 +106,9 @@ define('BANNER_PAGE_LIST', 2);
 define('BANNER_PAGE_DETAIL', 3);
 define('BANNER_PAGE_CATEGORY', 4);
 
+define('BANNER_TYPE_HOME_RIGHT_1', 6);
+define('BANNER_TYPE_HOME_RIGHT_2', 7);
+
 
 define('NEW_CATEGORY_CUSTOMER', 1);
 define('NEW_CATEGORY_SHOP', 2);
