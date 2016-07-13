@@ -88,6 +88,33 @@ function Shop_menu() {
 		'access callback' => TRUE,
 		'type' => MENU_CALLBACK,
 	);
+
+	//provider shop
+	$items["quan-ly-nha-cung-cap.html"] = array(
+		"title" => t('Quản lý nhà cung cấp'),
+		"description" => "Quản lý nhà cung cấp",
+		'page callback' => 'menuLoad',
+		'page arguments' => array('ProviderShopController/providerShop'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+	$items["them-nha-cung-cap.html"] = array(
+		"title" => t('Thêm nhà cung cấp'),
+		"description" => "Thêm nhà cung cấp",
+		'page callback' => 'menuLoad',
+		'page arguments' => array('ProviderShopController/providerFormShop'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+	$items["sua-nha-cung-cap/%/%"] = array(
+		"title" => t('Sửa nhà cung cấp'),
+		"description" => "Sửa nhà cung cấp",
+		'page callback' => 'menuLoad',
+		'page arguments' => array('ProviderShopController/providerFormShop'),
+		'access callback' => TRUE,
+		'type' => MENU_CALLBACK,
+	);
+
 	$items["xoa-san-pham"] = array(
 		"title" => t('xóa sản phẩm'),
 		"description" => "Xóa sản phẩm",
@@ -218,6 +245,13 @@ function Shop_theme() {
 	    'productFormShop' => array(
 	      'template' => 'View/tpl/product/productFormShop'
 	    ),
+	    //provider shop: NCC của shop
+	    'providerShop' => array(
+	      'template' => 'View/tpl/provider/providerShop'
+	    ),
+	    'providerFormShop' => array(
+	      'template' => 'View/tpl/provider/providerFormShop'
+	    ),
 	    //index shop
 	    'indexShop' => array(
 	      'template' => 'View/tpl/product/indexShop'
@@ -260,6 +294,9 @@ function Shop_init() {
 			
 			'Model/ProductShop.php',
 			'Controller/ProductShopController.php',
+
+			'Model/ProviderShop.php',
+			'Controller/ProviderShopController.php',
 
 			'Model/ContactShop.php',
 			'Controller/ContactShopController.php',

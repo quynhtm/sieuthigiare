@@ -53,6 +53,7 @@ define('TABLE_ORDER',          'web_order');
 define('TABLE_BANNER',         'web_banner');
 define('TABLE_ADVERTISE_CLICK','web_advertise_click');
 define('TABLE_VIDEO','web_video');
+define('TABLE_PROVIDER','web_provider');
 
 //dinh nghia thu muc chua anh
 define('FOLDER_DEFAULT', 'img_other');
