@@ -27,29 +27,27 @@ class ProviderShop{
 
             if(!empty($dataSearch)){
                 foreach($dataSearch as $field =>$value){
-                    
-                    if($field === 'category_id' && $value != -1){
+                    if($field === 'provider_status' && $value != -1){
                         $sql->condition('i.'.$field, $value, '=');
                         array_push($arrCond, $field.' = '.$value);
                     }
-
-                    if($field === 'product_status' && $value != -1){
-                        $sql->condition('i.'.$field, $value, '=');
-                        array_push($arrCond, $field.' = '.$value);
-                    }
-
-                    if($field === 'product_id' && $value != 0){
-                        $sql->condition('i.'.$field, $value, '=');
-                        array_push($arrCond, $field.' = '.$value);
-                    }
-
-                    if($field === 'product_name' && $value != ''){
+                    if($field === 'provider_name' && $value != ''){
                         $db_or = db_or();
                         $db_or->condition('i.'.$field, '%'.$value.'%', 'LIKE');
                         $sql->condition($db_or);
                         array_push($arrCond, "(".$field." LIKE '%". $value ."%')");
                     }
-
+                    if($field === 'provider_phone' && $value != ''){
+                        $db_or = db_or();
+                        $db_or->condition('i.'.$field, '%'.$value.'%', 'LIKE');
+                        $sql->condition($db_or);
+                        array_push($arrCond, "(".$field." LIKE '%". $value ."%')");
+                    }if($field === 'provider_email' && $value != ''){
+                        $db_or = db_or();
+                        $db_or->condition('i.'.$field, '%'.$value.'%', 'LIKE');
+                        $sql->condition($db_or);
+                        array_push($arrCond, "(".$field." LIKE '%". $value ."%')");
+                    }
                     if($field == 'date_start' && $value != ''){
                         $date_start = CDate::convertDate($value.' 00:00:00');
                     }
@@ -60,12 +58,12 @@ class ProviderShop{
 
                 if($date_start != '' && $date_end != ''){
                     if($date_end >= $date_start){
-                        $sql->condition('i.time_created', array($date_start, $date_end), 'BETWEEN');
-                        array_push($arrCond, ' (time_created BETWEEN '.$date_start.' AND '.$date_end.')');
+                        $sql->condition('i.provider_time_creater', array($date_start, $date_end), 'BETWEEN');
+                        array_push($arrCond, ' (provider_time_creater BETWEEN '.$date_start.' AND '.$date_end.')');
 
                     }else{
                         drupal_set_message("Thời gian chọn chưa hợp lý!");
-                        drupal_goto($base_url.'/quan-ly-gian-hang.html');
+                        drupal_goto($base_url.'/quan-ly-nha-cung-cap.html');
                     }
                 }
 

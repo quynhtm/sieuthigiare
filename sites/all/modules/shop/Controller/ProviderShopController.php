@@ -45,30 +45,25 @@ class ProviderShopController{
 
 		$limit = SITE_RECORD_PER_PAGE;
 		//search
-		$dataSearch['product_id'] = FunctionLib::getParam('product_id',0);
-		$dataSearch['product_name'] = trim(FunctionLib::getParam('product_name',''));
-		$dataSearch['category_id'] = FunctionLib::getParam('category_id', -1);
-		$dataSearch['product_status'] = FunctionLib::getParam('product_status', -1);
+		$dataSearch['provider_name'] = trim(FunctionLib::getParam('provider_name',''));
+		$dataSearch['provider_phone'] = trim(FunctionLib::getParam('provider_phone',''));
+		$dataSearch['provider_email'] = trim(FunctionLib::getParam('provider_email',''));
+		$dataSearch['provider_status'] = FunctionLib::getParam('provider_status', -1);
 		$dataSearch['date_start'] = FunctionLib::getParam('date_start', '');
 		$dataSearch['date_end'] = FunctionLib::getParam('date_end', '');
 		
-		$arrFields = array('product_id', 'category_name', 'product_code','product_name', 'product_price_sell', 'product_price_market', 'product_price_input', 'product_content', 'product_image', 'product_image_hover', 'time_created', 'product_status');
+		$arrFields = array('provider_id', 'provider_name', 'provider_phone','provider_address',
+			'provider_email', 'provider_shop_id', 'provider_shop_name', 'provider_status', 'provider_note', 'provider_time_creater');
 		$result = ProviderShop::getSearchListItems($dataSearch, $limit, $arrFields);
-		
-		$arrCategoryChildren = DataCommon::buildCacheTreeCategoryWithShop($user_shop->shop_id);
-		$treeCategoryShop = self::showTreeCategoryShop($arrCategoryChildren);
 
-		$optionCategoryChildren = FunctionLib::getOption(array(-1=>'Chọn danh mục sản phẩm') + $treeCategoryShop, $dataSearch['category_id']);
-		$arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
-		$optionStatus = FunctionLib::getOption(array(-1=>'Chọn trạng thái') + $arrStatus, $dataSearch['product_status']);
-		return theme('productShop',array(
-									'title'=>'Cấu hình chung',
+		$optionStatus = FunctionLib::getOption(array(-1=>'Chọn trạng thái') + $this->arrStatus, $dataSearch['provider_status']);
+		return theme('providerShop',array(
+									'title'=>'Quản lý NCC',
 									'result' => $result['data'],
 									'dataSearch' => $dataSearch,
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager'],
-									'optionStatus' =>$optionStatus,
-									'optionCategoryChildren'=>$optionCategoryChildren));
+									'optionStatus' =>$optionStatus));
 	}
 	public function providerFormShop(){
 		global $base_url, $user_shop;
@@ -244,7 +239,7 @@ class ProviderShopController{
 		$optionStatus = FunctionLib::getOption($this->arrStatus, isset($arrItem->product_status)? $arrItem->product_status : -1);
 		$optionTypeProduct = FunctionLib::getOption($this->arrTypeProduct, isset($arrItem->product_is_hot)? $arrItem->product_is_hot : -1);
 		$optionTypePrice = FunctionLib::getOption($this->arrTypePrice, isset($arrItem->product_type_price)? $arrItem->product_type_price : TYPE_PRICE_NUMBER);
-		return theme('productFormShop',
+		return theme('providerFormShop',
 			array('optionCategoryChildren'=>$optionCategoryChildren,
 				'optionStatus'=>$optionStatus,
 				'optionTypeProduct'=>$optionTypeProduct,
