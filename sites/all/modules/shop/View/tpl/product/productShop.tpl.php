@@ -74,9 +74,12 @@
 						<tr>
 							<th width="5%" class="td_list">Ảnh</th>
 							<th width="23%" class="td_list">[Mã] Tên sản phẩm</th>
+							<?php if($is_shop_vip){?>
+							<th width="20%" class="td_list">Nhà cung cấp</th>
+							<?php }?>
 							<th width="15%" class="td_list">Giá bán</th>
 							<th width="12%" class="td_list">Danh mục</th>
-							<th width="30%" class="td_list">Mô tả ngắn</th>
+							<th width="10%" class="td_list">Mô tả ngắn</th>
 							<th width="6%" class="td_list">Trạng thái</th>
 							<th width="15%" class="td_list align_center" >Thao tác</th>
 						</tr>
@@ -88,7 +91,7 @@
 									<?php if( isset($v->product_image) && $v->product_image != '') {?>
 									<div style="position: relative; margin: 15px 0px">
 										<div style="position: relative; z-index: 10">
-											<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $v->product_id, $v->product_image, 80, 80, '', true, true) ?>" class='imge_hover' id='<?php echo $v->product_id ?>'/>
+											<img height="80" width="80" src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $v->product_id, $v->product_image, 80, 80, '', true, true) ?>" class='imge_hover' id='<?php echo $v->product_id ?>'/>
 										</div>
 										<div id='div_hover_<?php echo $v->product_id ?>'style="position: absolute; bottom: 30px; left: 40px; border: 2px solid #ccc; padding: 5px; background: #F4F9FF; z-index: 1000; display: none">
 											<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_PRODUCT, $v->product_id, $v->product_image_hover, 300, 300, '', true, true) ?>"/>
@@ -105,6 +108,20 @@
 										echo '<br/>Ngày tạo: '.date('d/m/Y h:i', $v->time_created);
 									?>
 								</td>
+								<?php if($is_shop_vip){
+										$inforNcc = DataCommon::getProviderById($v->provider_id); ?>
+									<td>
+										<?php
+										if($inforNcc){
+											echo $inforNcc->provider_name;
+											echo '<br/>'.$inforNcc->provider_phone;
+											echo '<br/>'.$inforNcc->provider_email;
+											echo '<br/>'.$inforNcc->provider_address;
+										}
+										?>
+									</td>
+								<?php }?>
+
 								<td>
 									<?php
 

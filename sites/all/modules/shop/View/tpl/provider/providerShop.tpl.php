@@ -92,7 +92,6 @@
 									?>
 								</td>
 								<td>
-								<td>
 									<?php
 										echo 'Email: '.$v->provider_email;
 										echo '<br/>Phone: '.$v->provider_phone;

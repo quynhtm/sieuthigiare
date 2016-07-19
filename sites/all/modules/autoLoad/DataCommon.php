@@ -9,6 +9,7 @@ class DataCommon{
 	public static $table_category = TABLE_CATEGORY;
 	public static $table_province = TABLE_PROVINCE;
 	public static $table_user_shop = TABLE_USER_SHOP;
+	public static $table_provider = TABLE_PROVIDER;
 	public static $table_product = TABLE_PRODUCT;
 	public static $table_news = TABLE_NEWS;
 	public static $table_banner = TABLE_BANNER;
@@ -727,5 +728,57 @@ class DataCommon{
 			}
 		}
 		return $video;
+	}
+
+	/*
+	 * Get Provider: thong tin NCC
+	 * */
+	public static function getProviderById($provider_id = 0){
+		$provider = array();
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_PROVIDER_ID.$provider_id;
+		if($provider_id <= 0) return $provider;
+		if(Cache::CACHE_ON) {
+			$cache = new Cache();
+			$provider = $cache->do_get($key_cache);
+		}
+		if( $provider == null || empty($provider)){
+			$query = db_select(self::$table_provider, 'n')
+				->condition('n.provider_id', $provider_id, '=')
+				->fields('n');
+			$data = $query->execute();
+			if(!empty($data)){
+				foreach($data as $k => $infor){
+					$provider = $infor;
+				}
+				if(Cache::CACHE_ON) {
+					$cache->do_put($key_cache, $provider, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+				}
+			}
+		}
+		return $provider;
+	}
+	public static function getListProviderByShopId($provider_shop_id = 0){
+		$provider = array();
+		$key_cache = Cache::VERSION_CACHE.Cache::CACHE_PROVIDER_WITH_SHOP_ID.$provider_shop_id;
+		if($provider_shop_id <= 0) return $provider;
+		if(Cache::CACHE_ON) {
+			$cache = new Cache();
+			$provider = $cache->do_get($key_cache);
+		}
+		if( $provider == null || empty($provider)){
+			$query = db_select(self::$table_provider, 'n')
+				->condition('n.provider_shop_id', $provider_shop_id, '=')
+				->fields('n');
+			$data = $query->execute();
+			if(!empty($data)){
+				foreach($data as $k=> $infor){
+					$provider[$infor->provider_id] = $infor->provider_name;
+				}
+				if(Cache::CACHE_ON) {
+					$cache->do_put($key_cache, $provider, Cache::CACHE_TIME_TO_LIVE_ONE_MONTH);
+				}
+			}
+		}
+		return $provider;
 	}
 }

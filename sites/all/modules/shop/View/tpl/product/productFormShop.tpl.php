@@ -35,6 +35,16 @@
 						                    </select>
 						                </div>
 						            </div>
+									<?php if($is_shop_vip){?>
+									<div class="control-group">
+						                <label class="control-label">Chọn nhà cung cấp</label>
+						                <div class="controls">
+						                    <select class="form-control input-sm" name="provider_id" id="provider_id">
+						                    	<?php echo $optionProvider ?>
+						                    </select>
+						                </div>
+						            </div>
+									<?php }?>
 
 									<div class="control-group">
 										<label class="control-label">Loại sản phẩm</label>

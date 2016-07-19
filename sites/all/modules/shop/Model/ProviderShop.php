@@ -9,10 +9,12 @@ class ProviderShop{
 	static $table_action = TABLE_PROVIDER;
     static $primary_key = 'provider_id';
     static $foreign_key_user_shop = 'provider_shop_id';
+    static  $arrFields = array('provider_id', 'provider_name', 'provider_phone','provider_address',
+        'provider_email', 'provider_shop_id', 'provider_shop_name', 'provider_status', 'provider_note', 'provider_time_creater');
     //admin
 	public static function getSearchListItems($dataSearch = array(), $limit = 30, $arrFields = array()){
         global $base_url, $user_shop;
-
+        $arrFields = (sizeof($arrFields)>0)? $arrFields : self::$arrFields;
         if(!empty($arrFields)){
              $sql = db_select(self::$table_action, 'i')->extend('PagerDefault');
             foreach($arrFields as $field){

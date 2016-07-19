@@ -55,7 +55,7 @@ class ProductShopController{
 		$dataSearch['date_start'] = FunctionLib::getParam('date_start', '');
 		$dataSearch['date_end'] = FunctionLib::getParam('date_end', '');
 		
-		$arrFields = array('product_id', 'category_name', 'product_code','product_name', 'product_price_sell', 'product_price_market', 'product_price_input', 'product_content', 'product_image', 'product_image_hover', 'time_created', 'product_status');
+		$arrFields = array('product_id', 'provider_id', 'category_name', 'product_code','product_name', 'product_price_sell', 'product_price_market', 'product_price_input', 'product_content', 'product_image', 'product_image_hover', 'time_created', 'product_status');
 		$result = ProductShop::getSearchListItems($dataSearch, $limit, $arrFields);
 		
 		$arrCategoryChildren = DataCommon::buildCacheTreeCategoryWithShop($user_shop->shop_id);
@@ -63,6 +63,9 @@ class ProductShopController{
 
 		$optionCategoryChildren = FunctionLib::getOption(array(-1=>'Chọn danh mục sản phẩm') + $treeCategoryShop, $dataSearch['category_id']);
 		$arrStatus = array(-1 => 'Tất cả', 1 => 'Hiển thị', 0 => 'Ẩn');
+
+
+
 		$optionStatus = FunctionLib::getOption(array(-1=>'Chọn trạng thái') + $arrStatus, $dataSearch['product_status']);
 		return theme('productShop',array(
 									'title'=>'Cấu hình chung',
@@ -71,6 +74,7 @@ class ProductShopController{
 									'totalItem' =>$result['total'],
 									'pager' =>$result['pager'],
 									'optionStatus' =>$optionStatus,
+									'is_shop_vip' =>($user_shop->is_shop == SHOP_VIP)? 1:0,
 									'optionCategoryChildren'=>$optionCategoryChildren));
 	}
 
@@ -166,7 +170,8 @@ class ProductShopController{
 					'product_selloff'=>array('value'=>FunctionLib::getParam('product_selloff','')),
 					'product_image'=>array('value'=>FunctionLib::getParam('image_primary','')),
 					'product_image_hover'=>array('value'=>FunctionLib::getParam('image_primary_hover','')),
-					'product_order'=>array('value'=>FunctionLib::getIntParam('product_order','')),
+					'product_order'=>array('value'=>FunctionLib::getIntParam('product_order',100)),
+					'provider_id'=>array('value'=>FunctionLib::getIntParam('provider_id',0)),//thuoc NCC nao
 
 					'user_shop_id'=>array('value'=>$user_shop->shop_id, 'require'=>0),
 					'user_shop_name'=>array('value'=>$user_shop->shop_name, 'require'=>0),
@@ -252,6 +257,14 @@ class ProductShopController{
 			}
 		}
 
+		//thông tin các nhà cung cấp của shop
+		$listProvider = array();
+		if($user_shop->is_shop == SHOP_VIP){
+			$listProvider = DataCommon::getListProviderByShopId($user_shop->shop_id);
+		}
+		$optionProvider = FunctionLib::getOption(array(-1=>'----Chọn nhà cung cấp----') + $listProvider, isset($arrItem->provider_id)? $arrItem->provider_id : -1);
+
+		//danh mục sản phẩm
 		$arrCategoryChildren = DataCommon::buildCacheTreeCategoryWithShop($user_shop->shop_id);
 		$treeCategoryShop = self::showTreeCategoryShop($arrCategoryChildren);
 		$arrCateParenId = ($user_shop->shop_category != '')? explode(',',$user_shop->shop_category): array();
@@ -265,6 +278,8 @@ class ProductShopController{
 				'optionStatus'=>$optionStatus,
 				'optionTypeProduct'=>$optionTypeProduct,
 				'optionTypePrice'=>$optionTypePrice,
+				'optionProvider'=>$optionProvider,
+				'is_shop_vip'=>(($user_shop->is_shop == SHOP_VIP))? 1 : 0,
 				'arrItem'=>$arrItem,
 				'title'=>$title,
 				'arrImageOther'=>$arrImageOther,));
@@ -287,7 +302,6 @@ class ProductShopController{
 	public function indexShop(){
 		
 		$this->cacheShop();
-
 		$limit = (isset($this->user_shop->is_shop) && $this->user_shop->is_shop = SHOP_VIP) ? SITE_RECORD_PER_PAGE_SHOP_VIP: SITE_RECORD_PER_PAGE_SHOP_NORMAL;
 		$arrFields = array('product_id', 'category_name','product_name', 'product_price_sell', 'product_price_market', 'product_image', 'product_image_hover', 'product_type_price', 'product_selloff', 'user_shop_id', 'user_shop_name');
 		$result = ProductShop::getIndexShop($this->shop_id,$this->category_id, $limit, $arrFields);
@@ -309,7 +323,6 @@ class ProductShopController{
 			$cate_parent_banner_id = $arrCateParenId[$k_cat];
 		}
 		$bannerList = DataCommon::getBannerAdvanced(BANNER_TYPE_HOME_BIG, BANNER_PAGE_HOME,$cate_parent_banner_id, 0);
-
 		return theme('indexShop', array(
 										'treeCategoryShop'=>$treeCategoryShop,
 										'arrCateParenId'=>$arrCateParenId,
@@ -325,9 +338,7 @@ class ProductShopController{
 
 	public function detailShop(){
 		global $base_url;
-
 		$param = arg();
-
 		$files = array(
 	            'bootstrap/lib/jcarousel/jquery.jcarousel.min.js',
 	            'bootstrap/lib/jcarousel/jcarousel.responsive.js',
@@ -347,7 +358,6 @@ class ProductShopController{
 		}
 		
 		$result = DataCommon::getProductById($product_id);
-		
 	    if(!empty($result)){
 	   	 	
 	   	 	if(isset($result->product_status) && $result->product_status != STASTUS_SHOW){
@@ -367,7 +377,6 @@ class ProductShopController{
 					drupal_goto($base_url.'/page-404');
 				}
 	   	 	}
-
 	    }else{
 	    	drupal_goto($base_url.'/page-404');
 	    }
@@ -385,7 +394,6 @@ class ProductShopController{
 	   	}
 
 		$arrProductHot = DataCommon::getProductDetailHot($category_id);
-
 		return theme('detailShop', array(
 										'result'=>$result,
 										'user_shop'=>$this->user_shop,

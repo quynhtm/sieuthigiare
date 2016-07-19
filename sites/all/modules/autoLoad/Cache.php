@@ -28,6 +28,10 @@ class Cache {
     //cache video
     const CACHE_VIDEO_ID = 'cache_video_id_';
 
+    //cacheProvider
+    const CACHE_PROVIDER_ID = 'cache_provider_id_';
+    const CACHE_PROVIDER_WITH_SHOP_ID = 'cache_provider_with_shop_id_';
+
     //cacheProduct
     const CACHE_PRODUCT_ID = 'cache_product_id_';
     const CACHE_PRODUCTS_HOME_WITH_CATE_PARENT_ID = 'cache_products_home_with_cate_parent_id_';//cache 15 phut ko phai xoa khi sua SP

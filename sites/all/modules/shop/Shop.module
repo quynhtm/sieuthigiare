@@ -123,14 +123,7 @@ function Shop_menu() {
 		'type' => MENU_CALLBACK,
 	);
 
-	$items["xoa-san-pham"] = array(
-		"title" => t('xóa sản phẩm'),
-		"description" => "Xóa sản phẩm",
-		'page callback' => 'menuLoad',
-		'page arguments' => array('ProductShopController/productDeleteShop'),
-		'access callback' => TRUE,
-		'type' => MENU_CALLBACK,
-	);
+
 	//index shop
 	$items["gian-hang/%/%"] = array(
 		"title" => t('Gian hàng'),
