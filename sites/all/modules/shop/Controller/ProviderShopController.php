@@ -15,6 +15,10 @@ class ProviderShopController{
 		if($user_shop->shop_id == 0){
 			drupal_goto($base_url.'/dang-nhap.html');
 		}
+		// khong phai shop vip ko cho vao
+		if($user_shop->is_shop != SHOP_VIP){
+			drupal_goto($base_url.'/quan-ly-gian-hang.html');
+		}
 		//check full infomation
 		if($user_shop->shop_name == '' || $user_shop->shop_phone == '' || $user_shop->shop_email == '' || $user_shop->shop_category =='' || $user_shop->shop_province <= 0){
 			drupal_set_message('Bạn vui lòng nhập đầy đủ thông tin. Các trường có dấu (*) là bắt buộc!');
@@ -65,6 +69,10 @@ class ProviderShopController{
 		global $base_url, $user_shop;
 		if($user_shop->shop_id == 0){
 			drupal_goto($base_url.'/dang-nhap.html');
+		}
+		// khong phai shop vip ko cho vao
+		if($user_shop->is_shop != SHOP_VIP){
+			drupal_goto($base_url.'/quan-ly-gian-hang.html');
 		}
 		//check full infomation
 		if($user_shop->shop_name == '' || $user_shop->shop_phone == '' || $user_shop->shop_email == '' || $user_shop->shop_category <=0 || $user_shop->shop_province <= 0){
