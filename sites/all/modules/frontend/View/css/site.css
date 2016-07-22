@@ -1,8 +1,9 @@
 /*site*/
 body{
     overflow-x: hidden;
-    background: #fff;
+    background: #f2f2f2;
     position: relative;
+    min-height: 100%;
 }
 a{
     color: #333;
@@ -11,9 +12,6 @@ a{
 }
 .container {
     width: 1150px;
-}
-#content {
-    background: #f2f2f2;
 }
 .link-top-head{
     background-color: #f7f7f7;
