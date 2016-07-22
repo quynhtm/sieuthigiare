@@ -166,24 +166,16 @@
 										<?php } ?>
 									</div>
 									<p><a href="<?php echo FunctionLib::buildLinkCategory($user_shop->shop_id, $user_shop->shop_name, 0, '') ?>" title="Shop: <?php echo $user_shop->shop_name ?>"><?php echo $user_shop->shop_name ?></a></p>
-									<?php if($user_shop->shop_address !=''){?>
-										<p><b>Thông tin liên hệ: </b></p>
-										
-										<?php 
-											if($user_shop->shop_email != ''){
-											$arrMail = @unserialize($user_shop->shop_email);
-											if(!is_array($arrMail)){
-												$arrMail[] = $user_shop->shop_email;
-											}
-										?>
-											<?php if(is_array($arrMail) && !empty($arrMail)){ ?>
-												<?php foreach($arrMail as $key=>$mail){?>
-													<p><?php echo $mail ?></p>
-												<?php } ?>
-											<?php } ?>
-										<?php } ?>
-										<p><?php echo $user_shop->shop_address;?></p>
-									<?php }?>
+									
+									<p><b>Thông tin liên hệ: </b></p>
+									<?php if($user_shop->shop_email != ''){?>
+									<p><?php echo  $user_shop->shop_email ?></p>
+									<?php } ?>
+
+									<?php if($user_shop->shop_address != ''){?>
+									<p><?php echo  $user_shop->shop_address ?></p>
+									<?php } ?>
+
 								</div>
 							</div>
 						</div>

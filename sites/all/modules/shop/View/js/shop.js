@@ -282,12 +282,6 @@ add_input_form = {
 			add_input_form.remove_parent('.form-group.shop-phone .icon-remove', 'div');
 		});
 		add_input_form.remove_parent('.form-group.shop-phone .icon-remove', 'div');
-
-		jQuery('.form-group.shop-mail .add-email').click(function(){
-			jQuery('.form-group.shop-mail').append('<div><input type="text" class="form-control input-sm" placeholder ="Email" name="shop_email[]"  maxlength="255"/><i class="icon-remove"></i></div>');
-			add_input_form.remove_parent('.form-group.shop-mail .icon-remove', 'div');
-		});
-		add_input_form.remove_parent('.form-group.shop-mail .icon-remove', 'div');
 	}
 }
 tab_select= {

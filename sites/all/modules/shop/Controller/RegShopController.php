@@ -43,7 +43,6 @@ class RegShopController{
 			}
 
 			$arrPhone = $dataInput['shop_phone']['value'];
-			$arrMail = $dataInput['shop_email']['value'];
 
 			if($errors != ''){
 				drupal_set_message($errors, 'error');
@@ -74,7 +73,7 @@ class RegShopController{
 							'user_shop'=>$dataInput ['user_shop']['value'],
 							'user_password'=>$hash_pass,
 							'shop_phone' => serialize($arrPhone),
-							'shop_email' => serialize($arrMail),
+							'shop_email' => $shop_email,
 							'shop_province'=>$dataInput ['shop_province']['value'],
 							'is_shop'=>SHOP_FREE,
 							'shop_status'=>STASTUS_SHOW,
@@ -192,7 +191,8 @@ class RegShopController{
 					);
 			
 			$arrPhone = $dataInput['shop_phone']['value'];
-			$arrMail = $dataInput['shop_email']['value'];
+			$shop_email = $dataInput['shop_email']['value'];
+
 			$errors = ValidForm::validInputData($dataInput);
 			
 			$i=0;
@@ -210,22 +210,6 @@ class RegShopController{
 				$arrPhone = array();
 			}
 
-			$i=0;
-			foreach($arrMail as $key=>$val){
-				$check_valid_mail = ValidForm::checkRegexEmail($val);
-				if(!$check_valid_mail){
-					unset($arrMail[$key]);
-				}else{
-					$i++;	
-				}
-				if($i>3){
-					unset($arrMail[$key]);
-				}
-			}
-			if(empty($arrMail)){
-				$arrMail = array();
-			}
-
 			if($errors != ''){
 				drupal_set_message($errors, 'error');
 				drupal_goto($base_url.'/sua-thong-tin-gian-hang.html');
@@ -235,7 +219,7 @@ class RegShopController{
 				'shop_name'=>$dataInput ['shop_name']['value'],
 				'shop_phone'=>serialize($arrPhone),
 				'shop_address'=>$dataInput ['shop_address']['value'],
-				'shop_email'=>serialize($arrMail),
+				'shop_email'=>$shop_email,
 				'shop_about'=>$dataInput ['shop_about']['value'],
 				'shop_province'=>$dataInput ['shop_province']['value'],
 				'shop_transfer'=>$dataInput ['shop_transfer']['value'],
@@ -349,15 +333,8 @@ class RegShopController{
 					$pass = self::randomString(5);
 					$shop_email = $userExist[0]->shop_email;
 					
-					$arrMail = array();
 					if($shop_email != ''){
-						$arrMail = @unserialize($userExist[0]->shop_email);
-						if(!is_array($arrMail)){
-							$arrMail[] = $userExist[0]->shop_email;
-						}
-					}
-
-					if(in_array($email_shop, $arrMail)){
+						
 						require_once DRUPAL_ROOT . '/' . variable_get('password_inc', 'includes/password.inc');
 						$hash_pass = user_hash_password($pass);
 						
@@ -407,10 +384,10 @@ class RegShopController{
 		if(!$check_valid_name){
 			$err['check_name'] = 'Tên đăng nhập không được có dấu!<br/>';
 		}
-		// $check_valid_mail = ValidForm::checkRegexEmail($shop_email);
-		// if(!$check_valid_mail){
-		// 	$err['check_mail'] = 'Email không đúng định dạng!<br/>';
-		// }
+		$check_valid_mail = ValidForm::checkRegexEmail($shop_email);
+		if(!$check_valid_mail){
+			$err['check_mail'] = 'Email không đúng định dạng!<br/>';
+		}
 		$check_valid_pass = ValidForm::checkRegexPass($user_pass, 6);
 		if(!$check_valid_pass){
 			$err['check_pass'] = 'Mật khẩu không được có dấu!<br/>';

@@ -1082,10 +1082,11 @@ table.list-pay span.price {
     margin: 0 auto;
     width: 620px;
 }
-.main-view-post{
+.main-view-post {
     display: inline-block;
-    width: 100%;
     min-height: 300px;
+    padding-bottom: 50px;
+    width: 100%;
 }
 .box-register .formSendLogin{
     width: 305px;

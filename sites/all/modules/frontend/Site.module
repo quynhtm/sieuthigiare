@@ -251,11 +251,7 @@ function page_default(){
             $meta_title = $v->meta_title;
             $meta_keywords  = $v->meta_keywords;
             $meta_description = $v->meta_description;
-            if($v->img != ''){
-                $img = $base_url.'/uploads/images/info/'.$v->img;
-            }else{
-                 $img = '';
-            }
+            $img = '';
         }
     }else{
             $meta_title = 'Home';

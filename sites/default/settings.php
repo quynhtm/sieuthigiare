@@ -22,8 +22,8 @@ $drupal_hash_salt = 'mtuGBn8X3o-W9GziOYlC05ik0POBae_8H-hjB7qR5rI';
 
 ini_set('session.gc_probability', 1);
 ini_set('session.gc_divisor', 100);
-ini_set('session.gc_maxlifetime', 3600);//qua 1h thi logout
-ini_set('session.cookie_lifetime', 3600);//qua 1h thi logout
+ini_set('session.gc_maxlifetime', 200000);//qua 1h thi logout
+ini_set('session.cookie_lifetime', 2000000);//qua 1h thi logout
 
 $conf['404_fast_paths_exclude'] = '/\/(?:styles)|(?:system\/files)\//';
 $conf['404_fast_paths'] = '/\.(?:txt|png|gif|jpe?g|css|js|ico|swf|flv|cgi|bat|pl|dll|exe|asp)$/i';

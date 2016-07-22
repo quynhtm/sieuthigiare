@@ -50,32 +50,8 @@
 									<div><input type="text" class="form-control input-sm" placeholder ="Địa chỉ" name="shop_address"  maxlength="255" value="<?php echo $user_shop->shop_address?>"/></div>
 								</div>
 								<div class="form-group shop-mail">
-									<label class="control-label">Email <?php if($user_shop->is_shop == SHOP_VIP){?><i class="cursor add-email">(Click để thêm)</i><?php } ?></label>
-									<?php 
-										if($user_shop->shop_email != ''){
-										$arrMail = @unserialize($user_shop->shop_email);
-										if(!is_array($arrMail)){
-											$arrMail[] = $user_shop->shop_email;
-										}
-									?>
-										<?php if(is_array($arrMail) && !empty($arrMail)){ ?>
-											<?php foreach($arrMail as $key=>$mail){?>
-											<div>
-												<input type="text" class="form-control input-sm" placeholder ="Email" name="shop_email[]"  maxlength="255" value="<?php echo $mail ?>"/>
-												<?php if($user_shop->is_shop == SHOP_VIP){?>
-													<?php if($key > 0){?><i class="icon-remove"></i><?php } ?>
-												<?php } ?>
-											</div>
-											<?php } ?>
-										<?php }elseif(is_array($arrMail) && empty($arrMail)){ ?>
-											<div><input type="text" class="form-control input-sm" placeholder ="Email" name="shop_email[]"  maxlength="255"/></div>
-										<?php }else{ ?>
-											<div><input type="text" class="form-control input-sm" placeholder ="Email" name="shop_email[]"  maxlength="255" value="<?php echo $user_shop->shop_email ?>"/></div>
-										<?php } ?>
-					
-									<?php }else{ ?>
-									<div><input type="text" class="form-control input-sm" placeholder ="Email" name="shop_email[]"  maxlength="255"/></div>
-									<?php } ?>
+									<label class="control-label">Email</label>
+									<div><input type="text" class="form-control input-sm" placeholder ="Email" name="shop_email"  maxlength="255" value="<?php echo $user_shop->shop_email?>"/></div>
 								</div>
 								<div class="form-group">
 									<label class="control-label">Chọn 1 hay 2 danh mục sản phẩm đăng bán<span>(*)</span></label>
