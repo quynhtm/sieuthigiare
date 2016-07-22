@@ -30,7 +30,7 @@ class RegShopController{
 							'user_password'=>array('value'=>trim($user_password), 'require'=>1, 'messages'=>'Mật khẩu không được trống!'),
 							'rep_user_password'=>array('value'=>trim($rep_user_password), 'require'=>1, 'messages'=>'Nhập lại mật khẩu không được trống!'),
 							'shop_phone'=>array('value'=>array(trim($shop_phone))),
-							'shop_email'=>array('value'=>array(trim($shop_email))),
+							'shop_email'=>array('value'=>trim($shop_email)),
 							'shop_province'=>array('value'=>trim($shop_province), 'require'=>1, 'messages'=>'Chọn 1 tỉnh thành!'),
 							'agree'=>array('value'=>FunctionLib::getParam('agree',''), 'require'=>1, 'messages'=>'Bạn chưa đồng ý với điều khoản của chúng tôi!'),
 							'shop_created'=>array('value'=>time(), 'require'=>0, 'messages'=>''),
@@ -58,7 +58,7 @@ class RegShopController{
 			}
 
 			//check shop and hash pass
-			$check_shop_exists = RegShop::checkNamePhoneMail($dataInput['user_shop']['value'], '', '');
+			$check_shop_exists = RegShop::checkNamePhoneMail($dataInput['user_shop']['value'], '', $dataInput['shop_email']['value']);
 			if(!empty($check_shop_exists)){
 				$arrError = implode('<br/>', $check_shop_exists);
 				drupal_set_message($arrError, 'error');
@@ -377,7 +377,6 @@ class RegShopController{
 		
 		$user_shop = FunctionLib::getParam('user_shop','');
     	$user_pass = FunctionLib::getParam('user_pass','');
-    	$shop_phone = FunctionLib::getParam('shop_phone','');
     	$shop_email = FunctionLib::getParam('shop_email','');
     	
     	$check_valid_name = ValidForm::checkRegexName($user_shop);
@@ -395,7 +394,7 @@ class RegShopController{
 		if(!empty($err)){
     		echo json_encode($err);die;
     	}
-    	$err = RegShop::checkNamePhoneMail($user_shop, $shop_phone, $shop_email);
+    	$err = RegShop::checkNamePhoneMail($user_shop, '', $shop_email);
     	if(!empty($err)){
     		echo json_encode($err);die;
     	}else{

@@ -192,11 +192,13 @@ check_valid_form = {
 		var name = jQuery('.formSendRegister input[name="user_shop"]'),
 			pass = jQuery('.formSendRegister input[name="user_password"]'),
 			re_pass = jQuery('.formSendRegister input[name="rep_user_password"]'),
+			email = jQuery('.formSendRegister input[name="shop_email"]'),
 			province = jQuery('.formSendRegister select[name="shop_province"]'),
 			agree = jQuery('.formSendRegister input[name="agree"]'),
 
 			user_shop 	= name.val(),
 			user_pass 	= pass.val();
+			shop_email 	= email.val();
 
 		//begin check null
 		if(name.val() == ''){
@@ -223,6 +225,22 @@ check_valid_form = {
 			}
 		}
 
+		if(email.val() == ''){
+			jAlert('Email không được trống!', 'Cảnh báo');
+			email.addClass('error').focus();
+			return false;
+		}else{
+			var regex = new RegExp(/^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
+			var check_mail = regex.test(email.val());
+			if(!check_mail){
+				valid = false;
+				jAlert('Email không đúng định dạng!', 'Cảnh báo');
+				email.addClass('error').focus();
+			}else{
+				email.removeClass('error');
+			}
+		}
+
 		if(province.val() <= 0){
 			jAlert('Tỉnh/thành không được trống!', 'Cảnh báo');
 			province.addClass('error').focus();
@@ -243,7 +261,7 @@ check_valid_form = {
 		jQuery.ajax({
 			type: "POST",
 			url: url,
-			data: "user_shop="+encodeURI(user_shop) + "&user_pass="+encodeURI(user_pass)/* + "&shop_phone="+encodeURI(shop_phone)+ "&shop_email="+encodeURI(shop_email)*/,
+			data: "user_shop="+encodeURI(user_shop) + "&user_pass="+encodeURI(user_pass) + "&shop_email="+encodeURI(shop_email),
 			success: function(data){
 				jQuery('.formSendRegister').find('.loading').remove();
 				if(data != ''){
@@ -257,6 +275,13 @@ check_valid_form = {
   						jQuery('.formSendRegister input[name="user_password"]').addClass('error').after('<span class="show-error">'+obj.check_pass+'</span>');
 					}else{
 						jQuery('.formSendRegister input[name="user_password"]').removeClass('error').nextAll('span.show-error').remove();
+					}
+
+					if(typeof obj.check_mail != 'undefined') {
+  						jQuery('.formSendRegister input[name="shop_email"]').addClass('error').after('<span class="show-error">'+obj.check_mail+'</span>');
+
+					}else{
+						jQuery('.formSendRegister input[name="shop_email"]').removeClass('error').nextAll('span.show-error').remove();
 					}
 
 					var num_error = jQuery('.show-error').size();
@@ -306,7 +331,6 @@ tab_select= {
 			}
 		});
 	},
-
 }
 
 hover_img = {
