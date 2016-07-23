@@ -18,7 +18,7 @@ a{
     border-bottom: 1px solid #d8d8d8;
     border-top: 1px solid #d8d8d8;
     position: relative;
-    padding: 8px 0;
+    padding: 5px 0;
     min-width: 1300px;
 }
 .top-header {
@@ -104,7 +104,7 @@ span#logo{
 .btnLog {
     color: #666;
     display: inline-block;
-    font-size: 12px;
+    font-size: 11px;
     padding-left: 20px;
 }
 .btnLog:hover,
@@ -118,7 +118,7 @@ span#logo{
     padding-left: 10px;
 }
 .box-login .link-normal:hover{
-     color: #ff7300;
+    color: #ff7300;
 }
 .search-top-center{
     display: inline-block;
@@ -551,11 +551,19 @@ span#logo{
     display: block;
 }
 /*footer*/
-#footer {
-    border-top: 1px solid #fff;
-    padding: 20px 0 10px;
+.top-bg-footer{
     background: #202020;
+    border-top: 1px solid #fff;
     min-width: 1300px;
+    padding: 20px 0 10px;
+}
+.bottom-footer{
+    background: #121212;
+    color: #6a6a6a;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    overflow: hidden;
 }
 #footer .address {
     color: #fff;
@@ -564,6 +572,12 @@ span#logo{
 }
 #footer .address * {
     font-size: 14px;
+}
+#footer .bottom-footer a{
+    color: #2196f3;
+}
+#footer .bottom-footer a:hover{
+    text-decoration: underline;
 }
 .link-shop {
     color: #c63829;
@@ -1171,4 +1185,36 @@ span#logo{
     background: rgba(0, 0, 0, 0) url("../img/icon.png") no-repeat scroll -24px -24px;
     right: 5px;
     
+}
+.bg-icon-temviewer{
+    background: url(../img/icon-temviewer.png) no-repeat 0 0;
+    height: 60px;
+    width: 120px;
+    display: inline-block;
+    margin-top: 10px;
+    color: #fff;
+    font-size: 10px;
+}
+.bg-icon-temviewer span {
+    float: right;
+    font-size: 10px !important;
+    font-weight: normal !important;
+    line-height: 12px !important;
+    margin-right: 5px;
+    margin-top: 27px;
+    text-align: center;
+    text-transform: none !important;
+    width: 65px;
+}
+.bg-icon-temviewer a{
+    color: #fff;
+}
+.midd-footer  .address .phone {
+    background: #fff none repeat scroll 0 0;
+    border-radius: 2px;
+    color: #fe6d00;
+    display: inline-block;
+    font-style: italic;
+    margin-top: 5px;
+    padding: 5px;
 }

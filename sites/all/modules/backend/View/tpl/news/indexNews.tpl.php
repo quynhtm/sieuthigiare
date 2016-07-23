@@ -69,7 +69,7 @@
 							<td><?php echo $key+1 ?></td>
 							<td><input type="checkbox" class="checkItem" name="checkItem[]" value="<?php echo $item->news_id ?>" /></td>
 							<td>
-								<?php if( isset($item->news_image) && isset($item->news_image)) {?>
+								<?php if( isset($item->news_image) && $item->news_image != '') {?>
 								<div style="position: relative;">
 									<div style="position: relative; z-index: 10">
 										<img src="<?php echo ThumbImg::thumbBaseNormal(FOLDER_NEWS, $item->news_id, $item->news_image, 80, 80, '', true, true) ?>" class='imge_hover' id='<?php echo $item->news_id ?>'/>
